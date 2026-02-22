@@ -1,0 +1,45 @@
+{
+  "name": "specialist-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "AI agents for Claude Code — any framework, any stack",
+  "bin": {
+    "specialist-agent": "cli/index.mjs"
+  },
+  "files": [
+    "cli",
+    "agents",
+    "packs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.4.2",
+    "@commitlint/config-conventional": "^20.4.2",
+    "husky": "^9.1.7",
+    "mermaid": "^11.12.3",
+    "vitepress": "^1.6.3",
+    "vitepress-plugin-mermaid": "^2.0.17"
+  },
+  "keywords": [
+    "claude-code",
+    "ai-agents",
+    "vue",
+    "react",
+    "nextjs",
+    "svelte",
+    "developer-tools",
+    "code-generation"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HerbertJulio/specialist-agent"
+  }
+}

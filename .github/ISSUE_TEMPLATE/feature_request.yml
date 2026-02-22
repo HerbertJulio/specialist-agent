@@ -1,0 +1,60 @@
+name: Feature Request
+description: Suggest a new agent, skill, pack, or improvement
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement! Please describe your idea below.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      description: What kind of feature is this?
+      options:
+        - New agent
+        - New skill
+        - New framework pack
+        - Improvement to existing agent/skill
+        - CLI improvement
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem does this solve? What's the use case?
+      placeholder: "I often need to... but currently there's no agent/skill for..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How should this work? Include examples if possible.
+      placeholder: |
+        A new @analytics agent that:
+        - Sets up analytics tracking (GA, Mixpanel, etc.)
+        - Creates event tracking patterns
+        - Generates dashboard configurations
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any other approaches you've thought about?
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Would you like to help implement this?
+      options:
+        - label: I'd be willing to submit a PR for this feature

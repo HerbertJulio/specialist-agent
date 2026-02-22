@@ -1,0 +1,159 @@
+# Creating Agents
+
+You can extend Specialist Agent by creating your own agents tailored to your project's needs.
+
+## Agent File Structure
+
+Create a file at `.claude/agents/agent-name.md`:
+
+```markdown
+---
+name: my-agent
+description: "MUST BE USED to [do X] whenever [condition]."
+tools: Read, Write, Edit, Bash, Glob, Grep
+---
+
+# Agent Title
+
+## Mission
+One sentence describing what this agent does.
+
+## Context
+Read the following files before starting:
+- `docs/ARCHITECTURE.md`
+
+## Workflow
+1. Step one
+2. Step two
+3. ...
+
+## Rules
+- Rule one
+- Rule two
+
+## Output
+What the agent produces.
+```
+
+## Key Fields
+
+### Frontmatter
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `name` | Yes | Agent identifier (used with `@name`) |
+| `description` | Yes | When Claude should delegate to this agent |
+| `tools` | Yes | Tools the agent can use |
+| `model` | No | Model override (`haiku` for lower cost) |
+
+::: tip Description Matters
+The `description` field determines **when Claude automatically delegates** to your agent. Use strong language like "MUST BE USED" to ensure delegation.
+:::
+
+::: tip Model Override
+Add `model: haiku` to the frontmatter to run the agent on the Haiku model — significantly cheaper per token. Use this for simpler tasks that don't need the full Sonnet/Opus capabilities.
+:::
+
+### Available Tools
+
+| Tool | Purpose |
+|------|---------|
+| `Read` | Read files |
+| `Write` | Create new files |
+| `Edit` | Edit existing files |
+| `Bash` | Run shell commands |
+| `Glob` | Find files by pattern |
+| `Grep` | Search file contents |
+
+## Examples
+
+### Testing Agent
+
+```markdown
+---
+name: test-writer
+description: "MUST BE USED to create tests whenever the user asks for tests or testing."
+tools: Read, Write, Edit, Bash, Glob, Grep
+---
+
+# Test Writer
+
+## Mission
+Create comprehensive tests following project conventions.
+
+## Context
+- Read `docs/ARCHITECTURE.md` section 10 (checklists)
+- Read existing tests in `__tests__/` for patterns
+
+## Workflow
+1. Read the target file
+2. Identify what needs testing
+3. Create test file in `__tests__/`
+4. Run tests with `vitest run [file]`
+5. Fix any failures
+
+## Rules
+- Adapters: test all transformations (highest priority)
+- Composables: mock services, test reactive behavior
+- Components: use @vue/test-utils, test user interactions
+- Name: `[OriginalName].spec.ts`
+```
+
+### Deployment Agent
+
+```markdown
+---
+name: deploy-checker
+description: "MUST BE USED to validate before deployment whenever the user mentions deploy or release."
+tools: Read, Bash, Glob, Grep
+---
+
+# Deploy Checker
+
+## Mission
+Validate the project is ready for deployment.
+
+## Workflow
+1. Run `npm run type-check`
+2. Run `npm run lint`
+3. Run `npm run test -- --run`
+4. Run `npm run build`
+5. Check for console.log / debugger statements
+6. Report results
+
+## Output
+✅ Ready to deploy or ❌ Issues found (with details)
+```
+
+### Lite Agent (Haiku)
+
+```markdown
+---
+name: quick-scaffold
+description: "MUST BE USED for quick component scaffolding."
+model: haiku
+tools: Read, Write, Edit, Glob, Grep
+---
+
+# Quick Scaffold
+
+## Mission
+Quickly scaffold components with minimal token usage.
+
+## Rules (inline — no ARCHITECTURE.md read)
+- `<script setup lang="ts">`
+- defineProps<T>() and defineEmits<T>()
+- < 200 lines
+
+## Workflow
+1. Create component at the right location
+2. Apply script setup template
+```
+
+## Tips
+
+- Keep agents focused on **one responsibility**
+- Always reference `ARCHITECTURE.md` for consistency
+- Use `Bash` sparingly — prefer `Read`/`Write`/`Edit`
+- Use `model: haiku` for simpler tasks to save tokens
+- Test your agent by asking Claude to use it: `"Use @my-agent to..."`

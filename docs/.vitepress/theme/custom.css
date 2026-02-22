@@ -1,0 +1,216 @@
+/* Specialist Agent — Ravenclaw-inspired Theme */
+/* Color system: Midnight blue (wisdom) + Bronze (intelligence) */
+
+:root {
+  /* Brand — Royal Blue */
+  --vp-c-brand-1: #2B5EA7;
+  --vp-c-brand-2: #1E4D8C;
+  --vp-c-brand-3: #163D70;
+  --vp-c-brand-soft: rgba(43, 94, 167, 0.14);
+
+  /* Ravenclaw palette tokens */
+  --as-midnight: #0A1628;
+  --as-navy: #0F2240;
+  --as-royal: #1E3A5F;
+  --as-blue: #2B5EA7;
+  --as-sky: #4A7FCF;
+  --as-bronze: #CD7F32;
+  --as-bronze-light: #D4943F;
+  --as-bronze-soft: rgba(205, 127, 50, 0.14);
+  --as-silver: #C0C7D6;
+
+  /* Hero gradient — blue to bronze */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(
+    135deg,
+    #4A7FCF 0%,
+    #CD7F32 40%,
+    #2B5EA7 70%,
+    #CD7F32 100%
+  );
+  --vp-home-hero-image-background-image: linear-gradient(
+    135deg,
+    rgba(43, 94, 167, 0.25) 0%,
+    rgba(205, 127, 50, 0.15) 50%,
+    rgba(30, 58, 95, 0.25) 100%
+  );
+  --vp-home-hero-image-filter: blur(44px);
+}
+
+/* Dark mode overrides */
+.dark {
+  --vp-c-brand-1: #4A7FCF;
+  --vp-c-brand-2: #5B93E0;
+  --vp-c-brand-3: #6DA7F0;
+  --vp-c-brand-soft: rgba(74, 127, 207, 0.16);
+
+  --vp-home-hero-name-background: linear-gradient(
+    135deg,
+    #6DA7F0 0%,
+    #D4943F 40%,
+    #4A7FCF 70%,
+    #D4943F 100%
+  );
+  --vp-home-hero-image-background-image: linear-gradient(
+    135deg,
+    rgba(74, 127, 207, 0.2) 0%,
+    rgba(212, 148, 63, 0.12) 50%,
+    rgba(15, 34, 64, 0.3) 100%
+  );
+}
+
+/* Animated hero gradient */
+.VPHero .name .clip {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Bronze accent on hero tagline */
+.VPHero .tagline {
+  background: linear-gradient(90deg, var(--vp-c-text-1) 60%, var(--as-bronze) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Feature cards — bronze border accent on hover */
+.VPFeature {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.VPFeature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(10, 22, 40, 0.15);
+  border-color: var(--as-bronze);
+}
+
+.dark .VPFeature:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Feature icon — bronze glow on hover */
+.VPFeature .icon {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.VPFeature:hover .icon {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 6px rgba(205, 127, 50, 0.4));
+}
+
+/* Button brand — blue with bronze hover */
+.VPButton.brand {
+  border-color: var(--vp-c-brand-1) !important;
+  background-color: var(--vp-c-brand-1) !important;
+}
+
+.VPButton.brand:hover {
+  border-color: var(--as-bronze) !important;
+  background-color: var(--as-bronze) !important;
+}
+
+/* Nav & sidebar active link — blue accent */
+.VPNavBarMenuLink.active,
+.VPSidebarItem .is-active > .indicator {
+  color: var(--vp-c-brand-1);
+}
+
+/* Smooth page transitions */
+.VPContent {
+  transition: opacity 0.3s ease;
+}
+
+/* Code block enhancement */
+div[class*='language-'] {
+  transition: box-shadow 0.3s ease;
+}
+
+div[class*='language-']:hover {
+  box-shadow: 0 4px 16px rgba(10, 22, 40, 0.1);
+}
+
+.dark div[class*='language-']:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Mermaid diagram styling */
+.mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+/* Badges — blue & bronze variants */
+.vp-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+.vp-badge.tip {
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+.vp-badge.warning {
+  background-color: var(--as-bronze-soft);
+  color: var(--as-bronze);
+}
+
+/* Scrollbar — subtle Ravenclaw accent */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--as-royal);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--as-blue);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(74, 127, 207, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 127, 207, 0.5);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(43, 94, 167, 0.25);
+  color: inherit;
+}
+
+.dark ::selection {
+  background: rgba(74, 127, 207, 0.3);
+}
+
+/* Accessibility — respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .VPHero .name .clip {
+    animation: none;
+  }
+
+  .VPFeature,
+  .VPFeature .icon,
+  div[class*='language-'] {
+    transition: none;
+  }
+}

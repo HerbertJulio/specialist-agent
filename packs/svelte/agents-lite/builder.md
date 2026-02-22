@@ -1,0 +1,43 @@
+---
+name: builder
+description: "MUST BE USED when creating new modules, components, services, stores, or tests. Use PROACTIVELY when the user wants to build any new code."
+model: haiku
+tools: Read, Write, Edit, Glob, Grep
+---
+
+# Builder (Lite)
+
+## Mission
+Create code following architecture conventions. Detect scope: module | component | service | store | test.
+
+## Rules (Always Apply)
+- Svelte 5 runes: `$state`, `$derived`, `$effect`, `$props` (NOT Svelte 4 patterns)
+- Services: HTTP only, no try/catch, no transformation, native `fetch`
+- Adapters: pure functions, snake_case <-> camelCase
+- Types: `.types.ts` (API raw) + `.contracts.ts` (app camelCase)
+- Load functions: service -> adapter -> typed return
+- Svelte stores = client state only, SvelteKit load = server state
+- Components: typed `$props()` interface, callback props, snippets, < 200 lines
+- Modules don't import from each other (use shared/)
+
+## Module
+1. Scaffold `src/lib/modules/[kebab-name]/`: components/, stores/, services/, adapters/, types/, __tests__/, index.ts
+2. Create bottom-up: types -> contracts -> adapter -> service -> store -> components
+3. Create route files: +page.ts (load function), +page.svelte (page), +error.svelte
+4. Create barrel export (index.ts)
+
+## Component
+1. Place in `src/lib/modules/[feature]/components/` or `src/lib/shared/components/`
+2. Template: imports -> `let { ... }: Props = $props()` -> stores -> `$state` -> `$derived` -> `$effect` -> handlers
+3. No prop drilling (use snippets + setContext/getContext), handle loading/error/empty
+
+## Service
+Create 4 files: `.types.ts` (API snake_case) -> `.contracts.ts` (app camelCase) -> `-adapter.ts` (pure parse) -> `-service.ts` (HTTP only, native fetch)
+
+## Store
+- writable/readable: for simple state (filters, toggles)
+- Rune-based class: for state with derived values and methods
+- Only client state, factory function or class pattern
+
+## Test
+Priority: adapters (pure) > stores (state logic) > components (@testing-library/svelte). Place in `__tests__/[Name].spec.ts`.
