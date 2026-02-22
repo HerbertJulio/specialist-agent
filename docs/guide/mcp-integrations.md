@@ -73,16 +73,17 @@ Context7 is pre-configured in Specialist Agent's `.mcp.json`. No setup needed.
   "mcpServers": {
     "github": {
       "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/"
+      "url": "https://api.githubcopilot.com/mcp",
+      "headers": {
+        "Authorization": "Bearer <your-github-pat>"
+      }
     }
   }
 }
 ```
 
-After adding, authenticate via `/mcp` inside Claude Code — it uses OAuth, no token needed in the config.
-
-::: tip
-This is the official GitHub Copilot MCP endpoint. Authentication is handled automatically via browser-based OAuth when you run `/mcp` in Claude Code.
+::: warning Authentication Required
+You need a [GitHub Personal Access Token](https://github.com/settings/personal-access-tokens/new). Store it as an environment variable — never commit tokens to your repository.
 :::
 
 ---
@@ -176,7 +177,10 @@ Here's a complete `.mcp.json` with all recommended servers:
     },
     "github": {
       "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/"
+      "url": "https://api.githubcopilot.com/mcp",
+      "headers": {
+        "Authorization": "Bearer <your-github-pat>"
+      }
     },
     "sequential-thinking": {
       "command": "npx",
