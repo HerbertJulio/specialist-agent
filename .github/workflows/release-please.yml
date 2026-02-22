@@ -31,6 +31,9 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org
 
+      - run: npm ci
+        if: ${{ steps.release.outputs.release_created }}
+
       - run: npm publish
         if: ${{ steps.release.outputs.release_created }}
         env:
