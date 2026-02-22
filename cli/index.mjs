@@ -55,6 +55,32 @@ function ask(question, options, stepInfo) {
   })
 }
 
+function confirm(question, defaultYes, stepInfo) {
+  return new Promise((resolve) => {
+    const prefix = stepInfo ? `${BLUE}[${stepInfo}]${NC} ` : ''
+    const hint = defaultYes ? `${DIM}(Y/n)${NC}` : `${DIM}(y/N)${NC}`
+    console.log()
+    console.log(`  ${prefix}${question} ${hint}`)
+    console.log()
+    const doPrompt = () => {
+      rl.question(`  ${BLUE}›${NC} `, (answer) => {
+        const val = answer.trim().toLowerCase()
+        if (val === '' ) {
+          resolve(defaultYes)
+        } else if (val === 'y' || val === 'yes') {
+          resolve(true)
+        } else if (val === 'n' || val === 'no') {
+          resolve(false)
+        } else {
+          console.log(`       ${YELLOW}Enter Y or N${NC}`)
+          doPrompt()
+        }
+      })
+    }
+    doPrompt()
+  })
+}
+
 function copyDir(src, dest) {
   if (!existsSync(src)) return 0
   cpSync(src, dest, { recursive: true })
@@ -100,10 +126,7 @@ async function main() {
   const cwd = process.cwd()
   if (!existsSync(join(cwd, 'package.json'))) {
     console.log(`  ${YELLOW}⚠${NC}  No package.json found in current directory.`)
-    const createPkg = await ask('Create a package.json to initialize this project?', [
-      { label: 'Yes', value: true, hint: '(recommended)' },
-      { label: 'No', value: false, hint: '(exit)' },
-    ])
+    const createPkg = await confirm('Create a package.json to initialize this project?', true)
     if (!createPkg) {
       console.log(`  Run this command from the root of your project.`)
       console.log()
@@ -137,16 +160,10 @@ async function main() {
   ], '2/4')
 
   // 3. Starter agent
-  const installStarter = await ask('Install @starter agent?', [
-    { label: 'Yes', value: true, hint: '(recommended)' },
-    { label: 'No', value: false, hint: '' },
-  ], '3/4')
+  const installStarter = await confirm('Install @starter agent?', true, '3/4')
 
   // 4. Specialist agents
-  const installSpecialists = await ask('Install specialist agents?', [
-    { label: 'Yes', value: true, hint: '(recommended)' },
-    { label: 'No', value: false, hint: '' },
-  ], '4/4')
+  const installSpecialists = await confirm('Install specialist agents?', true, '4/4')
 
   // Summary
   const packLabel = packLabels[framework] || framework
