@@ -151,4 +151,4 @@ Para resultados ainda melhores, adicione o [servidor MCP Context7](https://githu
 
 - [Inicio Rapido](/pt-BR/guide/quick-start) — Construa algo com os agentes
 - [Visao Geral da Arquitetura](/pt-BR/guide/architecture) — Entenda os padroes
-- [Personalizacao](/customization/creating-agents) — Adapte o kit ao seu projeto
+- [Personalizacao](/pt-BR/customization/creating-agents) — Adapte o kit ao seu projeto

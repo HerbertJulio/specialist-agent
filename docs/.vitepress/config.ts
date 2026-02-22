@@ -62,6 +62,13 @@ export default withMermaid(defineConfig({
                 { text: 'Componentes', link: '/pt-BR/guide/components' },
               ],
             },
+            {
+              text: 'Extras',
+              items: [
+                { text: 'Integrações MCP', link: '/pt-BR/guide/mcp-integrations' },
+                { text: 'FAQ', link: '/pt-BR/guide/faq' },
+              ],
+            },
           ],
           '/pt-BR/tutorials/': [
             {
@@ -79,6 +86,13 @@ export default withMermaid(defineConfig({
               collapsed: false,
               items: [
                 { text: 'Migrar seu Projeto', link: '/pt-BR/tutorials/migrate-project' },
+              ],
+            },
+            {
+              text: 'Showcase',
+              collapsed: false,
+              items: [
+                { text: 'Demo: NuFinance', link: '/pt-BR/tutorials/demo-nufinance' },
               ],
             },
           ],
@@ -152,6 +166,13 @@ export default withMermaid(defineConfig({
             { text: 'Components', link: '/guide/components' },
           ],
         },
+        {
+          text: 'Extras',
+          items: [
+            { text: 'MCP Integrations', link: '/guide/mcp-integrations' },
+            { text: 'FAQ', link: '/guide/faq' },
+          ],
+        },
       ],
       '/tutorials/': [
         {
@@ -169,6 +190,13 @@ export default withMermaid(defineConfig({
           collapsed: false,
           items: [
             { text: 'Migrate Your Project', link: '/tutorials/migrate-project' },
+          ],
+        },
+        {
+          text: 'Showcase',
+          collapsed: false,
+          items: [
+            { text: 'Demo: NuFinance', link: '/tutorials/demo-nufinance' },
           ],
         },
       ],
