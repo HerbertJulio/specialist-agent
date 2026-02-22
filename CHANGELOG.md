@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.2.2...specialist-agent-v1.3.0) (2026-02-22)
+
+
+### Features
+
+* **cli:** redesign setup wizard with Claude Code-inspired UI ([#16](https://github.com/HerbertJulio/specialist-agent/issues/16)) ([f613db4](https://github.com/HerbertJulio/specialist-agent/commit/f613db4b502f65bea11d2078724c7085b40ca1b3))
+
 ## [1.2.2](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.2.1...specialist-agent-v1.2.2) (2026-02-22)
 
 
