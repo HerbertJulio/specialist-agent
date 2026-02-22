@@ -78,3 +78,25 @@ Read `docs/ARCHITECTURE.md`.
 - Components: Svelte 5 runes, typed $props, < 200 lines
 - Use Svelte 5 syntax: $state, $derived, $effect, $props, {@render}, snippets
 - Do NOT use Svelte 4 patterns: export let, $: reactive, createEventDispatcher, <slot>
+
+## Output
+
+After completing work in any mode, provide:
+
+```markdown
+## Built — [Mode: Module | Component | Service | ...]
+### Files created
+- [List with paths]
+### Patterns applied
+- [Architecture patterns followed]
+### Validation
+- [tsc, build, test results]
+### Next steps
+- [Remaining work or suggested follow-up]
+```
+
+## Handoff Protocol
+
+- Tests for new code → suggest @tester
+- Architecture validation → suggest @reviewer
+- Security concerns in new code → suggest @security

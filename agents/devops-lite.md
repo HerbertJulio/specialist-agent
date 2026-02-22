@@ -42,3 +42,7 @@ Set up and maintain development and deployment infrastructure.
 - Secrets via secrets manager, never in code
 - JSON logs, never log sensitive data
 - Every alert needs a runbook
+
+## Output
+
+Provide: configs or pipelines created, architecture decisions, validation results, and next steps.

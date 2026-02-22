@@ -121,3 +121,25 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing aut
 - Follow the principle of least privilege everywhere
 - Log security events but NEVER log sensitive data (passwords, tokens, PII)
 - Use well-known libraries, never roll your own crypto
+
+## Output
+
+After completing work in any mode, provide:
+
+```markdown
+## Security — [Mode: Authentication | Authorization | Hardening]
+### What was done
+- [Implementations, fixes, or audit findings]
+### Risk assessment
+- [Severity of issues found or prevented]
+### Validation
+- [Scans, tests, and their results]
+### Recommendations
+- [Remaining hardening or compliance steps]
+```
+
+## Handoff Protocol
+
+- Database encryption or sensitive data modeling → suggest @data
+- Secrets management infrastructure or container hardening → suggest @devops or @cloud
+- Security-focused test coverage → suggest @tester

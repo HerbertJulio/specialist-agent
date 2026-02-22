@@ -143,3 +143,25 @@ export function XxxComponent({ items, onSelect }: XxxComponentProps) {
 - Client Components: `'use client'` directive, hooks allowed
 - Server Actions: `'use server'` directive, revalidatePath after mutations
 - Components: typed props, < 200 lines
+
+## Output
+
+After completing work in any mode, provide:
+
+```markdown
+## Built — [Mode: Module | Component | Service | ...]
+### Files created
+- [List with paths]
+### Patterns applied
+- [Architecture patterns followed]
+### Validation
+- [tsc, build, test results]
+### Next steps
+- [Remaining work or suggested follow-up]
+```
+
+## Handoff Protocol
+
+- Tests for new code → suggest @tester
+- Architecture validation → suggest @reviewer
+- Security concerns in new code → suggest @security

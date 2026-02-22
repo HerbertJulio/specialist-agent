@@ -26,7 +26,9 @@ Check these patterns:
 - 🟢 **Compliant** — correct
 - ✨ **Highlight** — above expectations
 
-### Output: `## Review — [Scope]` with violations, attention items, highlights, and verdict (✅/⚠️/❌)
+### Output
+
+Include a scorecard (Architecture, Type Safety, Security, Maintainability — grades A-F), then violations, attention items, highlights, and verdict (✅/⚠️/❌).
 
 ## Explore Mode
 1. Inventory files by type (components, services, composables, stores, views)
@@ -42,5 +44,6 @@ Check these patterns:
 
 ## Rules
 - Read-only. Never modify files.
-- Always include positive highlights.
+- Always include positive highlights — good code deserves recognition.
 - Reference file:line in findings.
+- Scorecard grades: A (excellent) B (good) C (adequate) D (needs work) F (critical).

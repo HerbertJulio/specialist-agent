@@ -41,3 +41,7 @@ Create 4 files: `.types.ts` (API snake_case) -> `.contracts.ts` (app camelCase) 
 
 ## Test
 Priority: adapters (pure) > stores (state logic) > components (@testing-library/svelte). Place in `__tests__/[Name].spec.ts`.
+
+## Output
+
+Provide: files created, patterns applied, validation results, and suggested next steps.

@@ -72,3 +72,25 @@ Read `docs/ARCHITECTURE.md`.
 - Adapters: pure functions, no side effects
 - Components: functional TSX, typed props, < 200 lines
 - useCallback for handlers passed to children, useMemo for expensive derivations
+
+## Output
+
+After completing work in any mode, provide:
+
+```markdown
+## Built — [Mode: Module | Component | Service | ...]
+### Files created
+- [List with paths]
+### Patterns applied
+- [Architecture patterns followed]
+### Validation
+- [tsc, build, test results]
+### Next steps
+- [Remaining work or suggested follow-up]
+```
+
+## Handoff Protocol
+
+- Tests for new code → suggest @tester
+- Architecture validation → suggest @reviewer
+- Security concerns in new code → suggest @security

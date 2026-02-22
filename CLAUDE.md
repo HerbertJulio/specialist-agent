@@ -17,6 +17,7 @@ AI agents for Claude Code — any framework, any stack. Includes specialized age
 | Agent       | When to Use                                                           |
 |-------------|-----------------------------------------------------------------------|
 | `@starter`  | Create a new project from scratch (any frontend + backend + database) |
+| `@explorer` | Explore unfamiliar codebases, onboarding, technical assessments       |
 | `@finance`  | Financial systems: payments, billing, invoicing, reporting            |
 | `@cloud`    | Cloud architecture: IaC, serverless, containers, CI/CD               |
 | `@security` | Auth flows, OWASP compliance, RBAC/ABAC, encryption                  |
@@ -33,6 +34,13 @@ AI agents for Claude Code — any framework, any stack. Includes specialized age
 | `@reviewer` | Review code, check architecture, explore modules, analyze performance |
 | `@migrator` | Migrate legacy code to target architecture                            |
 | `@doctor`   | Investigate bugs, trace errors through architecture layers            |
+
+### Security Rules
+
+- **NEVER** include tokens, secrets, API keys, or credentials inline in shell commands
+- **NEVER** use patterns like `TOKEN=xxx command` — always use environment variables already set in the system or CI secrets
+- For npm publish, always rely on the CI workflow (`secrets.NPM_TOKEN`) or pre-configured `npm config`
+- If a command requires authentication, ask the user to set the env var first, then reference it as `$VAR_NAME`
 
 ### Architecture
 

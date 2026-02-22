@@ -42,3 +42,7 @@ Design and implement cloud infrastructure for scalability, security, and cost ef
 - NEVER hardcode credentials
 - Pin action/image versions, don't use `latest`
 - `.env.example` for required env vars
+
+## Output
+
+Provide: resources created, architecture decisions, validation results, and next steps.

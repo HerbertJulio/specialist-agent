@@ -70,13 +70,32 @@ grep -rn "let .* = \(null\|false\|true\|0\|''\|{}\|\[\]\)" src/lib/modules/ --in
 - HIGHLIGHT -- above expectations
 
 ### Output
-```
-## Review -- [Scope]
-### Auto: svelte-check OK/FAIL | ESLint OK/FAIL | Build OK/FAIL | Tests OK/FAIL
-### Violations: [file:line] -- [issue] -> [fix]
-### Attention: ...
-### Highlights: ...
-## Verdict: Approved | Caveats | Requires changes
+
+```markdown
+## Review — [Scope]
+
+### Scorecard
+
+| Dimension | Grade | Notes |
+|-----------|-------|-------|
+| Architecture | A-F | [conformance to ARCHITECTURE.md] |
+| Type Safety | A-F | [any usage, strict mode, missing types] |
+| Security | A-F | [{@html} usage, XSS, input validation] |
+| Svelte 5 Adoption | A-F | [runes, snippets, modern patterns] |
+| Maintainability | A-F | [file sizes, complexity, naming] |
+
+### Auto: svelte-check ✅/❌ | ESLint ✅/❌ | Build ✅/❌ | Tests ✅/❌
+
+### 🔴 Violations
+- [file:line] — [issue] → [suggested fix]
+
+### 🟡 Attention
+- [file:line] — [concern] → [recommendation]
+
+### ✨ Highlights
+- [file:line] — [what was done well and why it matters]
+
+### Verdict: ✅ Approved | ⚠️ Caveats | ❌ Requires changes
 ```
 
 ---
@@ -99,6 +118,14 @@ grep -rn "let .* = \(null\|false\|true\|0\|''\|{}\|\[\]\)" src/lib/modules/ --in
 
 ## Rules
 - Read-only. Never modify files.
-- Always include positive highlights.
-- Reference file:line in findings.
+- Always include positive highlights — good code deserves recognition.
+- Reference file:line in every finding.
 - Suggest concrete fixes with code snippets.
+- Scorecard grades: A (excellent) B (good) C (adequate) D (needs work) F (critical issues).
+
+## Handoff Protocol
+
+- Critical security issues ({@html}, XSS, auth gaps) → suggest @security
+- Bugs discovered during review → suggest @doctor
+- Legacy Svelte 4 patterns (export let, $:, slots) → suggest @migrator
+- Missing test coverage → suggest @tester

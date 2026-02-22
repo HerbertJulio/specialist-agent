@@ -41,3 +41,7 @@ Build financial systems following best practices for accuracy and compliance.
 - All calculations MUST have unit tests
 - Audit logging for all financial state changes
 - `.env.example` for keys, NEVER commit real credentials
+
+## Output
+
+Provide: integrations created, financial decisions, validation results, and remaining steps.
