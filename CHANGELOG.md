@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.2.0...specialist-agent-v1.2.1) (2026-02-22)
+
+
+### Documentation
+
+* add icons to README section headings ([#11](https://github.com/HerbertJulio/specialist-agent/issues/11)) ([ee0dfb3](https://github.com/HerbertJulio/specialist-agent/commit/ee0dfb3857477545fa67bbc174898f7529b8a63b))
+
 ## [1.2.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.1.0...specialist-agent-v1.2.0) (2026-02-22)
 
 
