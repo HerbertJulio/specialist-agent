@@ -232,7 +232,7 @@ specialist-agent/
 
 ## Optional: Context7 MCP
 
-For enhanced documentation access, add the [Context7 MCP server](https://github.com/upstash/context7). It gives Claude real-time access to up-to-date docs for Vue 3, Pinia, TanStack Query, and other libraries.
+For up-to-date library documentation when asking Claude about APIs, you can add the [Context7 MCP server](https://github.com/upstash/context7). This benefits you as a developer — agents work fully without it.
 
 ### Setup
 

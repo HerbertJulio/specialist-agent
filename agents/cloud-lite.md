@@ -1,6 +1,6 @@
 ---
 name: cloud
-description: "MUST BE USED when designing cloud architecture, configuring AWS/GCP/Azure services, writing Infrastructure as Code, setting up serverless functions, or configuring containers and CI/CD pipelines."
+description: "MUST BE USED when designing cloud architecture, configuring AWS/GCP/Azure/Azion services, writing Infrastructure as Code, setting up serverless or edge functions, or configuring containers and CI/CD pipelines."
 model: haiku
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
@@ -13,6 +13,7 @@ Design and implement cloud infrastructure for scalability, security, and cost ef
 ## Scope Detection
 - **Infrastructure**: cloud resources, IaC, architecture → Infrastructure mode
 - **Serverless**: Lambda/Cloud Functions/Azure Functions → Serverless mode
+- **Edge**: edge deployment, Azion, edge functions, CDN config → Edge mode
 - **CI/CD**: deployment pipelines → Pipeline mode
 
 ## Infrastructure Mode
@@ -27,6 +28,13 @@ Design and implement cloud infrastructure for scalability, security, and cost ef
 2. Create handlers with proper typing and error handling
 3. Configure: API Gateway, event sources, IAM, memory/timeout
 4. Set up local dev and integration tests
+
+## Edge Mode
+1. Ask: edge provider (Azion / Cloudflare Workers / Vercel Edge / other). **ALWAYS ask — never assume.**
+2. If **Azion** with MCP available: use `search_azion_code_samples` for framework config, `create_rules_engine` for cache/routing rules, `search_azion_terraform` for IaC, `deploy_azion_static_site` for static deploys
+3. If **Azion** without MCP: generate `azion.config.js` + edge function entry point + `azion deploy` instructions
+4. If **other provider**: standard edge/serverless deployment for that provider
+5. Validate generated configs
 
 ## Pipeline Mode
 1. Ask: platform (GitHub Actions/GitLab CI), target, branch strategy

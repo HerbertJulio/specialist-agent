@@ -1,42 +1,33 @@
 # MCP Integrations
 
-[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers extend Claude Code's capabilities by giving agents access to external tools and data sources. Specialist Agent works out of the box without any MCP, but adding the right servers can significantly improve agent quality.
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers extend Claude Code's capabilities by giving access to external tools and data sources. **Specialist Agent works fully without any MCP** — all agents operate using local files and built-in tools. MCPs are optional enhancements.
 
-## How MCP Enhances Agents
+## What MCPs Add
 
-Without MCP, agents rely on Claude's training data and what they can read from your local files. With MCP servers, agents can:
-
-- Query **up-to-date documentation** for any library
-- Access **GitHub PRs and issues** directly
-- **Deploy and manage** edge applications directly from the chat
-- Use **structured reasoning** for complex multi-step tasks
+| MCP | What it does | Who benefits |
+|-----|-------------|--------------|
+| **Context7** | Fetches up-to-date library documentation | You (the developer) when asking about APIs |
+| **Azion** | Generates edge configs, deploys static sites | `@starter` and `@cloud` agents (Edge Mode) |
 
 ```mermaid
 graph LR
     A["Agent"] --> B["Local Files"]
     A --> C["MCP Servers"]
     C --> D["Context7<br/>(Library Docs)"]
-    C --> E["GitHub<br/>(PRs, Issues)"]
-    C --> F["Azion<br/>(Edge Deploy)"]
-    C --> G["Sequential Thinking<br/>(Complex Reasoning)"]
+    C --> E["Azion<br/>(Edge Deploy)"]
 
     style A fill:#7c3aed,color:#fff
     style D fill:#42b883,color:#fff
-    style E fill:#42b883,color:#fff
-    style F fill:#F26522,color:#fff
-    style G fill:#42b883,color:#fff
+    style E fill:#F26522,color:#fff
 ```
 
-## Recommended MCP Servers
+---
 
-### Context7 — Library Documentation
+## Context7 — Library Documentation
 
-**What it does:** Fetches up-to-date documentation and code examples for any programming library.
+**What it does:** Fetches up-to-date documentation and code examples for any programming library (Vue 3, React, Pinia, TanStack Query, etc.).
 
-**Which agents benefit:**
-- `@starter` — Queries latest framework versions when scaffolding projects
-- `@builder` — References library APIs when generating code
-- `@doctor` — Checks docs for known issues and correct usage patterns
+**Who benefits:** Primarily **you, the developer**. When you ask Claude Code about a library API, Context7 provides current docs instead of relying on training data. Agents don't query Context7 automatically — they follow your project's `ARCHITECTURE.md` and local conventions.
 
 **Configuration:**
 
@@ -57,54 +48,36 @@ Context7 is pre-configured in Specialist Agent's `.mcp.json`. No setup needed.
 
 ---
 
-### GitHub — PRs, Issues, and Repositories
+## Azion — Edge Deployment & Configuration
 
-**What it does:** Reads and interacts with GitHub repositories, pull requests, issues, and code.
+**What it does:** Connects Claude Code to the [Azion Edge Platform](https://www.azion.com/en/documentation/devtools/mcp/), giving agents access to Azion's documentation, code samples, CLI commands, API specs, Terraform configs, and a static site deployment tool.
 
-**Which agents benefit:**
-- `@reviewer` — Reads PR diffs and comments directly instead of relying on `gh` CLI
-- `@explorer` — Analyzes remote repositories for onboarding assessments
-- `@security` — Checks for security advisories on dependencies
+**Which agents use it:**
 
-**Configuration:**
+- `@starter` — After scaffolding, can generate Azion edge configs and deploy static sites
+- `@cloud` — Edge Mode uses Azion MCP tools to generate rules engine configs, Terraform resources, and observability queries
 
-```json
-{
-  "mcpServers": {
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp",
-      "headers": {
-        "Authorization": "Bearer <your-github-pat>"
-      }
-    }
-  }
-}
-```
+### Available MCP Tools
 
-::: warning Authentication Required
-You need a [GitHub Personal Access Token](https://github.com/settings/personal-access-tokens/new). Store it as an environment variable — never commit tokens to your repository.
+The Azion MCP exposes **9 tools** — 7 for search/generation and 1 for deployment:
+
+| Tool | Category | What it does |
+|------|----------|-------------|
+| `search_azion_docs_and_site` | Search | Full-text search across Azion documentation |
+| `search_azion_code_samples` | Search | Code samples for edge functions and frameworks |
+| `search_azion_cli_commands` | Search | CLI syntax and usage for any operation |
+| `search_azion_api_v3_commands` | Search | API v3 endpoints, payloads, examples |
+| `search_azion_api_v4_commands` | Search | API v4 endpoints (latest) |
+| `search_azion_terraform` | Search | Terraform provider resources and HCL examples |
+| `create_rules_engine` | Generator | Generates Rules Engine configs (cache, routing, redirects) |
+| `create_graphql_query` | Generator | Builds GraphQL queries for analytics and observability |
+| `deploy_azion_static_site` | Deploy | Deploys a static site to Azion Edge |
+
+::: info How it works in practice
+For **static sites** (SSG output from Vite, Nuxt, Next.js, SvelteKit), the agent can deploy directly via `deploy_azion_static_site`.
+
+For **dynamic apps** (edge functions, SSR), the agent generates the correct `azion.config.js`, CLI commands, and infrastructure configs — you run `azion deploy` yourself.
 :::
-
----
-
-### Azion — Edge Deployment & Management
-
-**What it does:** Connects Claude Code directly to the [Azion Edge Platform](https://www.azion.com/en/documentation/devtools/mcp/), enabling deployment, configuration, and management of edge applications through natural language. Azion processes requests at edge locations worldwide using WebAssembly-powered serverless functions — making it the ideal choice when **performance and low latency** are critical.
-
-**Why Azion for edge:**
-
-- **Global edge network** — Requests are processed at the location closest to the user, not in a centralized cloud
-- **WebAssembly runtime** — Edge Functions execute with near-native speed
-- **Sub-millisecond cold starts** — No container spin-up delays
-- **Built-in security** — WAF, DDoS protection, and network lists at the edge
-
-**Which agents benefit:**
-
-- `@cloud` — Deploys edge applications, configures domains and certificates
-- `@devops` — Manages edge functions, sets up routing rules and caching
-- `@security` — Configures WAF rules, network lists, and access policies at the edge
-- `@starter` — Scaffolds projects pre-configured for edge deployment
 
 **Configuration:**
 
@@ -135,28 +108,6 @@ You need an Azion Personal Token. Create one in the [Azion Console](https://cons
 
 ---
 
-### Sequential Thinking — Complex Reasoning
-
-**What it does:** Provides a structured thinking tool that helps Claude break down complex problems into sequential steps, with the ability to revise and branch.
-
-**Which agents benefit:**
-- `@doctor` — Traces bugs through multiple architecture layers systematically
-- `@migrator` — Plans multi-phase migration strategies with dependency analysis
-- `@reviewer` — Evaluates complex architectural trade-offs
-
-**Configuration:**
-
-```json
-{
-  "mcpServers": {
-    "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
-    }
-  }
-}
-```
-
 ## Full Configuration Example
 
 Here's a complete `.mcp.json` with all recommended servers:
@@ -174,17 +125,6 @@ Here's a complete `.mcp.json` with all recommended servers:
       "headers": {
         "Authorization": "Bearer <your-azion-personal-token>"
       }
-    },
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp",
-      "headers": {
-        "Authorization": "Bearer <your-github-pat>"
-      }
-    },
-    "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
     }
   }
 }
@@ -194,34 +134,26 @@ Place this file at your project root as `.mcp.json`. Claude Code loads it automa
 
 ## Agent + MCP Interaction Examples
 
-### @reviewer reading a PR with GitHub MCP
+### @starter deploying to Azion Edge
 
 ```bash
-"Use @reviewer to review PR #42"
+"Use @starter to create a Vue 3 app and deploy it to Azion Edge"
 ```
 
-With GitHub MCP, the reviewer can read the PR diff, existing comments, and CI status directly — producing a more informed review.
+After scaffolding, the starter asks where you want to deploy. If you choose Azion and the MCP is available, it queries `search_azion_code_samples` for the correct Vite bundler config, generates `azion.config.js`, and deploys the static build via `deploy_azion_static_site`.
 
-### @doctor debugging with Sequential Thinking
+### @cloud configuring edge infrastructure
 
 ```bash
-"Use @doctor to investigate why the checkout total is wrong"
+"Use @cloud to set up edge caching and routing rules for my API on Azion"
 ```
 
-With Sequential Thinking, the doctor breaks the investigation into explicit steps — checking component props, composable logic, adapter transformations, and service calls — revising the hypothesis at each layer.
+In Edge Mode, the cloud agent uses `create_rules_engine` to generate cache rules and routing behaviors, `search_azion_terraform` for IaC resources, and `create_graphql_query` for observability dashboards.
 
-### @cloud deploying with Azion MCP
+### Using Context7 for library lookups
 
 ```bash
-"Use @cloud to deploy this application as an Azion edge function"
+"How do I configure staleTime in TanStack Vue Query v5?"
 ```
 
-With Azion MCP, the cloud agent can create edge applications, configure domains, set up caching rules, and deploy edge functions — all from the chat, with requests processed at the edge for maximum performance.
-
-### @starter with Context7
-
-```bash
-"Use @starter to create a SvelteKit app with Drizzle ORM and Lucia auth"
-```
-
-With Context7, the starter queries the latest SvelteKit, Drizzle, and Lucia documentation to ensure the scaffold uses current APIs and configuration patterns.
+With Context7 available, Claude fetches the latest TanStack Query docs instead of relying on training data — ensuring you get current API signatures and examples.

@@ -131,9 +131,9 @@ claude
 
 Voce devera ver seus agentes instalados (ex: `@starter`, `@builder`, `@reviewer`, `@migrator`, `@doctor`, alem dos agentes especialistas se instalados).
 
-## Recomendado: Context7 MCP
+## Opcional: Context7 MCP
 
-Para resultados ainda melhores, adicione o [servidor MCP Context7](https://github.com/upstash/context7) para dar ao Claude acesso em tempo real a documentacao do Vue 3, Pinia e TanStack Query:
+Para documentacao atualizada de bibliotecas ao perguntar ao Claude sobre APIs, voce pode adicionar o [servidor MCP Context7](https://github.com/upstash/context7). Isso beneficia voce como desenvolvedor — os agentes funcionam completamente sem ele:
 
 ```json
 // ~/.claude/mcp.json

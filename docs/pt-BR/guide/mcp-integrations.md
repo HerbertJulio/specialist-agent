@@ -1,43 +1,33 @@
 # Integracoes MCP
 
-Servidores [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) estendem as capacidades do Claude Code dando aos agentes acesso a ferramentas e fontes de dados externas. O Specialist Agent funciona sem nenhum MCP, mas adicionar os servidores certos pode melhorar significativamente a qualidade dos agentes.
+Servidores [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) estendem as capacidades do Claude Code dando acesso a ferramentas e fontes de dados externas. **O Specialist Agent funciona completamente sem nenhum MCP** — todos os agentes operam usando arquivos locais e ferramentas nativas. MCPs sao melhorias opcionais.
 
-## Como o MCP Melhora os Agentes
+## O que os MCPs Adicionam
 
-Sem MCP, os agentes dependem dos dados de treinamento do Claude e do que conseguem ler dos seus arquivos locais. Com servidores MCP, os agentes podem:
-
-- Consultar **documentacao atualizada** de qualquer biblioteca
-- Acessar **PRs e issues do GitHub** diretamente
-- **Fazer deploy e gerenciar** aplicacoes edge diretamente do chat
-- Usar **raciocinio estruturado** para tarefas complexas de multiplas etapas
+| MCP | O que faz | Quem se beneficia |
+|-----|-----------|-------------------|
+| **Context7** | Busca documentacao atualizada de bibliotecas | Voce (o dev) ao perguntar sobre APIs |
+| **Azion** | Gera configs de edge, faz deploy de sites estaticos | Agentes `@starter` e `@cloud` (Edge Mode) |
 
 ```mermaid
 graph LR
     A["Agente"] --> B["Arquivos Locais"]
     A --> C["Servidores MCP"]
     C --> D["Context7<br/>(Docs de Libs)"]
-    C --> E["GitHub<br/>(PRs, Issues)"]
-    C --> F["Azion<br/>(Edge Deploy)"]
-    C --> G["Sequential Thinking<br/>(Raciocinio Complexo)"]
+    C --> E["Azion<br/>(Edge Deploy)"]
 
     style A fill:#7c3aed,color:#fff
     style D fill:#42b883,color:#fff
-    style E fill:#42b883,color:#fff
-    style F fill:#F26522,color:#fff
-    style G fill:#42b883,color:#fff
+    style E fill:#F26522,color:#fff
 ```
 
-## Servidores MCP Recomendados
+---
 
-### Context7 — Documentacao de Bibliotecas
+## Context7 — Documentacao de Bibliotecas
 
-**O que faz:** Busca documentacao atualizada e exemplos de codigo para qualquer biblioteca de programacao.
+**O que faz:** Busca documentacao atualizada e exemplos de codigo para qualquer biblioteca (Vue 3, React, Pinia, TanStack Query, etc.).
 
-**Quais agentes se beneficiam:**
-
-- `@starter` — Consulta versoes mais recentes de frameworks ao criar projetos
-- `@builder` — Referencia APIs de bibliotecas ao gerar codigo
-- `@doctor` — Verifica docs por problemas conhecidos e padroes corretos de uso
+**Quem se beneficia:** Principalmente **voce, o desenvolvedor**. Quando voce pergunta ao Claude Code sobre uma API de biblioteca, o Context7 fornece docs atuais em vez de depender dos dados de treinamento. Os agentes nao consultam o Context7 automaticamente — eles seguem o `ARCHITECTURE.md` do seu projeto e convencoes locais.
 
 **Configuracao:**
 
@@ -58,55 +48,36 @@ O Context7 vem pre-configurado no `.mcp.json` do Specialist Agent. Nenhuma confi
 
 ---
 
-### GitHub — PRs, Issues e Repositorios
+## Azion — Deploy e Configuracao na Edge
 
-**O que faz:** Le e interage com repositorios, pull requests, issues e codigo do GitHub.
+**O que faz:** Conecta o Claude Code a [Plataforma Edge da Azion](https://www.azion.com/en/documentation/devtools/mcp/), dando aos agentes acesso a documentacao, exemplos de codigo, comandos CLI, specs de API, configs Terraform e uma ferramenta de deploy de sites estaticos.
 
-**Quais agentes se beneficiam:**
+**Quais agentes usam:**
 
-- `@reviewer` — Le diffs e comentarios de PRs diretamente em vez de depender do `gh` CLI
-- `@explorer` — Analisa repositorios remotos para avaliacoes de onboarding
-- `@security` — Verifica advisories de seguranca em dependencias
+- `@starter` — Apos o scaffold, pode gerar configs de edge Azion e fazer deploy de sites estaticos
+- `@cloud` — O Edge Mode usa as ferramentas do Azion MCP para gerar configs de rules engine, recursos Terraform e queries de observabilidade
 
-**Configuracao:**
+### Ferramentas MCP Disponiveis
 
-```json
-{
-  "mcpServers": {
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp",
-      "headers": {
-        "Authorization": "Bearer <your-github-pat>"
-      }
-    }
-  }
-}
-```
+O Azion MCP expoe **9 ferramentas** — 7 de busca/geracao e 1 de deploy:
 
-::: warning Autenticacao Necessaria
-Voce precisa de um [GitHub Personal Access Token](https://github.com/settings/personal-access-tokens/new). Armazene como variavel de ambiente — nunca faça commit de tokens no seu repositorio.
+| Ferramenta | Categoria | O que faz |
+|------------|-----------|-----------|
+| `search_azion_docs_and_site` | Busca | Busca full-text na documentacao Azion |
+| `search_azion_code_samples` | Busca | Exemplos de codigo para edge functions e frameworks |
+| `search_azion_cli_commands` | Busca | Sintaxe e uso do CLI para qualquer operacao |
+| `search_azion_api_v3_commands` | Busca | Endpoints, payloads e exemplos da API v3 |
+| `search_azion_api_v4_commands` | Busca | Endpoints da API v4 (mais recente) |
+| `search_azion_terraform` | Busca | Recursos do provider Terraform e exemplos HCL |
+| `create_rules_engine` | Gerador | Gera configs de Rules Engine (cache, routing, redirects) |
+| `create_graphql_query` | Gerador | Constroi queries GraphQL para analytics e observabilidade |
+| `deploy_azion_static_site` | Deploy | Faz deploy de site estatico na Azion Edge |
+
+::: info Como funciona na pratica
+Para **sites estaticos** (output SSG de Vite, Nuxt, Next.js, SvelteKit), o agente pode fazer deploy direto via `deploy_azion_static_site`.
+
+Para **apps dinamicos** (edge functions, SSR), o agente gera o `azion.config.js`, comandos CLI e configs de infraestrutura corretos — voce executa `azion deploy` manualmente.
 :::
-
----
-
-### Azion — Deploy e Gerenciamento na Edge
-
-**O que faz:** Conecta o Claude Code diretamente a [Plataforma Edge da Azion](https://www.azion.com/en/documentation/devtools/mcp/), permitindo deploy, configuracao e gerenciamento de aplicacoes edge por linguagem natural. A Azion processa requisicoes em locais de edge no mundo todo usando funcoes serverless com WebAssembly — tornando-a a escolha ideal quando **performance e baixa latencia** sao criticos.
-
-**Por que Azion para edge:**
-
-- **Rede global de edge** — Requisicoes sao processadas no local mais proximo do usuario, nao em uma cloud centralizada
-- **Runtime WebAssembly** — Edge Functions executam com velocidade quase nativa
-- **Cold starts sub-milissegundo** — Sem delays de spin-up de containers
-- **Seguranca integrada** — WAF, protecao DDoS e network lists na edge
-
-**Quais agentes se beneficiam:**
-
-- `@cloud` — Faz deploy de aplicacoes edge, configura dominios e certificados
-- `@devops` — Gerencia edge functions, configura regras de roteamento e cache
-- `@security` — Configura regras WAF, network lists e politicas de acesso na edge
-- `@starter` — Cria projetos pre-configurados para deploy na edge
 
 **Configuracao:**
 
@@ -132,33 +103,10 @@ claude mcp add --transport http azion https://mcp.azion.com \
 ```
 
 ::: warning Autenticacao Necessaria
-Voce precisa de um Azion Personal Token. Crie um no [Azion Console](https://console.azion.com/) em **Menu da Conta > Personal Tokens**. Armazene como variavel de ambiente — nunca faça commit de tokens no seu repositorio.
+Voce precisa de um Azion Personal Token. Crie um no [Azion Console](https://console.azion.com/) em **Menu da Conta > Personal Tokens**. Armazene como variavel de ambiente — nunca faca commit de tokens no seu repositorio.
 :::
 
 ---
-
-### Sequential Thinking — Raciocinio Complexo
-
-**O que faz:** Fornece uma ferramenta de pensamento estruturado que ajuda o Claude a dividir problemas complexos em etapas sequenciais, com capacidade de revisao e ramificacao.
-
-**Quais agentes se beneficiam:**
-
-- `@doctor` — Rastreia bugs atraves de multiplas camadas de arquitetura sistematicamente
-- `@migrator` — Planeja estrategias de migracao multi-fase com analise de dependencias
-- `@reviewer` — Avalia trade-offs arquiteturais complexos
-
-**Configuracao:**
-
-```json
-{
-  "mcpServers": {
-    "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
-    }
-  }
-}
-```
 
 ## Exemplo de Configuracao Completa
 
@@ -177,17 +125,6 @@ Aqui esta um `.mcp.json` completo com todos os servidores recomendados:
       "headers": {
         "Authorization": "Bearer <your-azion-personal-token>"
       }
-    },
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp",
-      "headers": {
-        "Authorization": "Bearer <your-github-pat>"
-      }
-    },
-    "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
     }
   }
 }
@@ -197,34 +134,26 @@ Coloque este arquivo na raiz do seu projeto como `.mcp.json`. O Claude Code o ca
 
 ## Exemplos de Interacao Agente + MCP
 
-### @reviewer lendo um PR com GitHub MCP
+### @starter fazendo deploy na Azion Edge
 
 ```bash
-"Use @reviewer to review PR #42"
+"Use @starter to create a Vue 3 app and deploy it to Azion Edge"
 ```
 
-Com o GitHub MCP, o reviewer consegue ler o diff do PR, comentarios existentes e status do CI diretamente — produzindo uma revisao mais informada.
+Apos o scaffold, o starter pergunta onde voce quer fazer deploy. Se voce escolher Azion e o MCP estiver disponivel, ele consulta `search_azion_code_samples` para a config correta do bundler Vite, gera o `azion.config.js` e faz deploy do build estatico via `deploy_azion_static_site`.
 
-### @cloud fazendo deploy com Azion MCP
+### @cloud configurando infraestrutura edge
 
 ```bash
-"Use @cloud to deploy this application as an Azion edge function"
+"Use @cloud to set up edge caching and routing rules for my API on Azion"
 ```
 
-Com o Azion MCP, o agente cloud consegue criar aplicacoes edge, configurar dominios, definir regras de cache e fazer deploy de edge functions — tudo pelo chat, com requisicoes processadas na edge para maxima performance.
+No Edge Mode, o agente cloud usa `create_rules_engine` para gerar regras de cache e routing, `search_azion_terraform` para recursos IaC e `create_graphql_query` para dashboards de observabilidade.
 
-### @doctor debugando com Sequential Thinking
+### Usando Context7 para consultas de bibliotecas
 
 ```bash
-"Use @doctor to investigate why the checkout total is wrong"
+"How do I configure staleTime in TanStack Vue Query v5?"
 ```
 
-Com Sequential Thinking, o doctor divide a investigacao em etapas explicitas — verificando props do componente, logica do composable, transformacoes do adapter e chamadas do service — revisando a hipotese em cada camada.
-
-### @starter com Context7
-
-```bash
-"Use @starter to create a SvelteKit app with Drizzle ORM and Lucia auth"
-```
-
-Com Context7, o starter consulta a documentacao mais recente do SvelteKit, Drizzle e Lucia para garantir que o scaffold use APIs e padroes de configuracao atuais.
+Com o Context7 disponivel, o Claude busca as docs mais recentes do TanStack Query em vez de depender dos dados de treinamento — garantindo assinaturas de API e exemplos atuais.

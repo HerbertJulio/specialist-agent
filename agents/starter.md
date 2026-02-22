@@ -187,6 +187,39 @@ git commit -m "feat: initial project setup"
 - `npm run test` passes (if testing configured)
 - Specialist Agent agents are accessible via `/agents`
 
+### 10. Deploy (Optional)
+
+Ask the user: **"Do you want to deploy this project?"**
+
+Options:
+- **No** — skip deployment
+- **Azion Edge** — edge deployment with global CDN
+- **Vercel** — serverless deployment
+- **Netlify** — JAMstack deployment
+- **Other** — ask which provider
+
+**ALWAYS ask — never assume a deploy provider.**
+
+#### If Azion Edge selected:
+
+If the **Azion MCP** is available (check for `search_azion_code_samples` tool):
+1. Use `search_azion_code_samples` to find the correct bundler config for the chosen framework (Vue/React/Svelte/Next.js)
+2. Use `search_azion_cli_commands` to get the correct `azion init` template and deploy syntax
+3. Generate `azion.config.js` with the correct bundler and entry point
+4. For **static sites** (SPA/SSG): use `deploy_azion_static_site` to deploy directly
+5. For **dynamic apps** (SSR/edge functions): generate config + provide `azion deploy` command for the user to run
+
+If the Azion MCP is **not available**:
+- Generate `azion.config.js` based on best practices for the framework
+- Provide manual `azion deploy` instructions
+
+#### If other provider selected:
+
+Generate the appropriate config file:
+- Vercel: `vercel.json`
+- Netlify: `netlify.toml`
+- Other: ask and generate accordingly
+
 ## Rules
 
 - ALWAYS ask requirements before scaffolding — don't assume the stack
@@ -222,5 +255,6 @@ After scaffolding, provide:
 ## Handoff Protocol
 
 - Feature development after scaffold → suggest @builder
-- Deployment and CI/CD setup → suggest @devops
+- Deployment and CI/CD setup → suggest @devops or @cloud
 - Auth implementation → suggest @security
+- Edge infrastructure or advanced deployment → suggest @cloud (Edge Mode)
