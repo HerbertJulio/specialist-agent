@@ -127,13 +127,13 @@ sequenceDiagram
 
 Use `@builder`, `@reviewer` e `@doctor` para o trabalho cotidiano:
 
-- [Construir um Modulo CRUD](/tutorials/crud-module) — Modulo completo de Pedidos do zero
-- [Criar uma Camada de Servico](/tutorials/service-layer) — Integrar um novo endpoint de API
-- [Construir Formularios com Validacao](/tutorials/forms) — Zod + useMutation + tratamento de erros
-- [Paginacao + Filtros](/tutorials/pagination-filters) — Listas com busca, filtros e paginacao
+- [Construir um Modulo CRUD](/pt-BR/tutorials/crud-module) — Modulo completo de Pedidos do zero
+- [Criar uma Camada de Servico](/pt-BR/tutorials/service-layer) — Integrar um novo endpoint de API
+- [Construir Formularios com Validacao](/pt-BR/tutorials/forms) — Zod + useMutation + tratamento de erros
+- [Paginacao + Filtros](/pt-BR/tutorials/pagination-filters) — Listas com busca, filtros e paginacao
 
 ### Migracao de Arquitetura
 
 Use `@migrator` e `@reviewer` para modernizar projetos legados:
 
-- [Migre Seu Projeto](/tutorials/migrate-project) — Guia de 6 fases de legado para a arquitetura alvo
+- [Migre Seu Projeto](/pt-BR/tutorials/migrate-project) — Guia de 6 fases de legado para a arquitetura alvo

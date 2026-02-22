@@ -512,4 +512,4 @@ Ou use os skills:
 
 - [Tutorial de Modulo CRUD](/pt-BR/tutorials/crud-module) — Veja a arquitetura alvo em acao
 - [Tutorial da Camada de Service](/pt-BR/tutorials/service-layer) — Mergulho profundo na camada de dados
-- [Visao Geral da Arquitetura](/guide/architecture) — Referencia completa da arquitetura
+- [Visao Geral da Arquitetura](/pt-BR/guide/architecture) — Referencia completa da arquitetura

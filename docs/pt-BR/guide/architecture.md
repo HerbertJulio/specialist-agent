@@ -128,5 +128,5 @@ sequenceDiagram
 ## Mergulho Profundo
 
 - [Camadas](/pt-BR/guide/layers) — Exemplos detalhados de cada camada
-- [Componentes](/guide/components) — Padroes e composicao de componentes
+- [Componentes](/pt-BR/guide/components) — Padroes e composicao de componentes
 - Referencia completa: `docs/ARCHITECTURE.md` no seu projeto

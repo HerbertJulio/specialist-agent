@@ -28,7 +28,7 @@ Use `@starter` para criar um projeto full-stack do zero — qualquer framework, 
 
 O assistente do starter pergunta sobre nome do projeto, stack frontend/backend, banco de dados, autenticacao e estrutura — e entao gera tudo incluindo Docker compose e README.
 
-> **Saiba mais:** [Referencia do @starter](/reference/agents#starter-create-projects-from-scratch)
+> **Saiba mais:** [Referencia do @starter](/pt-BR/reference/agents#starter-create-projects-from-scratch)
 
 ---
 
@@ -60,7 +60,7 @@ src/modules/products/
 └── index.ts         ← Barrel export
 ```
 
-> **Saiba mais:** [Construir um Modulo CRUD](/tutorials/crud-module) -- [Criar uma Camada de Servico](/tutorials/service-layer)
+> **Saiba mais:** [Construir um Modulo CRUD](/pt-BR/tutorials/crud-module) -- [Criar uma Camada de Servico](/pt-BR/tutorials/service-layer)
 
 ---
 
@@ -90,7 +90,7 @@ Exemplo de saida:
 ## Verdict: ✅ Approved
 ```
 
-> **Saiba mais:** [Referencia do @reviewer](/reference/agents#reviewer-review-analyze)
+> **Saiba mais:** [Referencia do @reviewer](/pt-BR/reference/agents#reviewer-review-analyze)
 
 ---
 
@@ -117,7 +117,7 @@ sequenceDiagram
     D-->>D: Root cause fixed ✅
 ```
 
-> **Saiba mais:** [Referencia do @doctor](/reference/agents#doctor-investigate-bugs)
+> **Saiba mais:** [Referencia do @doctor](/pt-BR/reference/agents#doctor-investigate-bugs)
 
 ---
 
@@ -155,7 +155,7 @@ const { items, isLoading } = useProductsList()
 </script>
 ```
 
-> **Saiba mais:** [Migre Seu Projeto](/tutorials/migrate-project)
+> **Saiba mais:** [Migre Seu Projeto](/pt-BR/tutorials/migrate-project)
 
 ---
 
@@ -178,7 +178,7 @@ Skills sao atalhos que voce invoca com `/skill-name`:
 | `/migration-migrate-module [path]` | Migracao completa de modulo |
 | `/docs-onboard [module]` | Visao geral do modulo em 2 minutos |
 
-> **Saiba mais:** [Referencia de Skills](/reference/skills)
+> **Saiba mais:** [Referencia de Skills](/pt-BR/reference/skills)
 
 ---
 
@@ -186,7 +186,7 @@ Skills sao atalhos que voce invoca com `/skill-name`:
 
 - [Visao Geral da Arquitetura](/pt-BR/guide/architecture) — Entenda os padroes que seu codigo segue
 - [Camadas](/pt-BR/guide/layers) — Mergulho profundo nas camadas Service, Adapter, Composable
-- [Referencia de Agentes](/reference/agents) — Guia detalhado para cada agente
-- [Referencia de Skills](/reference/skills) — Todas as skills disponiveis
-- [Construir Formularios com Validacao](/tutorials/forms) — Zod + useMutation + tratamento de erros
-- [Paginacao + Filtros](/tutorials/pagination-filters) — Listas com busca, filtros e paginacao
+- [Referencia de Agentes](/pt-BR/reference/agents) — Guia detalhado para cada agente
+- [Referencia de Skills](/pt-BR/reference/skills) — Todas as skills disponiveis
+- [Construir Formularios com Validacao](/pt-BR/tutorials/forms) — Zod + useMutation + tratamento de erros
+- [Paginacao + Filtros](/pt-BR/tutorials/pagination-filters) — Listas com busca, filtros e paginacao
