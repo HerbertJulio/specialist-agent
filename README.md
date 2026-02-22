@@ -1,10 +1,11 @@
 <p align="center">
-  <img src="docs/public/logo.svg" alt="Specialist Agent" width="80" height="80" />
+  <img src="docs/public/social-preview-banner.svg" alt="Specialist Agent — AI agents for Claude Code" />
 </p>
 
-# Specialist Agent — AI Development Team for Claude Code
-
-**Supercharge [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with specialized AI agents for any framework.** Scaffold projects, build features, review architecture, migrate legacy code, and hunt bugs — all following your project's conventions automatically.
+<p align="center">
+  <b>Supercharge <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> with specialized AI agents for any framework.</b><br/>
+  Scaffold projects, build features, review architecture, migrate legacy code, and hunt bugs — all following your project's conventions automatically.
+</p>
 
 [![CI](https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/HerbertJulio/specialist-agent?label=Release)](https://github.com/HerbertJulio/specialist-agent/releases/latest)
