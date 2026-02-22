@@ -15,6 +15,24 @@
 
 ---
 
+## 📖 Table of Contents
+
+- [💡 What is Specialist Agent?](#-what-is-specialist-agent)
+- [🪙 Token Consumption Notice](#-token-consumption-notice)
+- [🚀 Quick Start](#-quick-start)
+- [🤖 Meet Your AI Team](#-meet-your-ai-team)
+- [⚡ Skills](#-skills)
+- [🏛️ Architecture](#️-architecture)
+- [🪶 Lite Mode](#-lite-mode--lower-token-usage)
+- [📁 Project Structure](#-project-structure)
+- [🔌 Optional: Context7 MCP](#-optional-context7-mcp)
+- [🔧 Customization](#-customization)
+- [📚 Documentation](#-documentation)
+- [📫 Contributing](#-contributing)
+- [📝 License](#-license)
+
+---
+
 ## 💡 What is Specialist Agent?
 
 Specialist Agent is a collection of **AI agents**, **skills**, and **architectural conventions** for Claude Code. It's not a library — it's a set of markdown instructions that make Claude Code work like a senior developer who knows your codebase.
