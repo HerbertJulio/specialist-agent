@@ -16,37 +16,68 @@ const BOLD = '\x1b[1m'
 const DIM = '\x1b[2m'
 const NC = '\x1b[0m'
 
+const W = 50
+
 const rl = createInterface({ input: process.stdin, output: process.stdout })
 rl.on('close', () => {
   console.log()
   process.exit(0)
 })
 
-function ask(question, options) {
+function ask(question, options, stepInfo) {
   return new Promise((resolve) => {
-    const prompt = () => {
-      if (options) {
-        console.log()
-        options.forEach((opt, i) => {
-          console.log(`  ${BOLD}${i + 1}${NC}) ${opt.label}${opt.hint ? ` ${DIM}${opt.hint}${NC}` : ''}`)
-        })
-        console.log()
-      }
-      rl.question(`${BLUE}${question}${NC} `, (answer) => {
+    const prefix = stepInfo ? `${BLUE}[${stepInfo}]${NC} ` : ''
+    console.log()
+    console.log(`  ${prefix}${question}`)
+    if (options) {
+      console.log()
+      options.forEach((opt, i) => {
+        console.log(`       ${BOLD}${i + 1}${NC}) ${opt.label}${opt.hint ? `  ${DIM}${opt.hint}${NC}` : ''}`)
+      })
+      console.log()
+    }
+    const doPrompt = () => {
+      rl.question(`  ${BLUE}\u203a${NC} `, (answer) => {
         if (options) {
           const idx = parseInt(answer, 10) - 1
           if (idx >= 0 && idx < options.length) {
             resolve(options[idx].value)
           } else {
-            console.log(`  ${YELLOW}Invalid choice. Please enter a number between 1 and ${options.length}.${NC}`)
-            prompt()
+            console.log(`       ${YELLOW}Enter a number between 1 and ${options.length}${NC}`)
+            doPrompt()
           }
         } else {
           resolve(answer.trim())
         }
       })
     }
-    prompt()
+    doPrompt()
+  })
+}
+
+function confirm(question, defaultYes, stepInfo) {
+  return new Promise((resolve) => {
+    const prefix = stepInfo ? `${BLUE}[${stepInfo}]${NC} ` : ''
+    const hint = defaultYes ? `${DIM}(Y/n)${NC}` : `${DIM}(y/N)${NC}`
+    console.log()
+    console.log(`  ${prefix}${question} ${hint}`)
+    console.log()
+    const doPrompt = () => {
+      rl.question(`  ${BLUE}\u203a${NC} `, (answer) => {
+        const val = answer.trim().toLowerCase()
+        if (val === '') {
+          resolve(defaultYes)
+        } else if (val === 'y' || val === 'yes') {
+          resolve(true)
+        } else if (val === 'n' || val === 'no') {
+          resolve(false)
+        } else {
+          console.log(`       ${YELLOW}Enter Y or N${NC}`)
+          doPrompt()
+        }
+      })
+    }
+    doPrompt()
   })
 }
 
@@ -79,24 +110,23 @@ function getAgentNames(dir) {
 
 async function main() {
   const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf-8'))
+  const ver = `v${pkg.version}`
 
+  // Header
   console.log()
-  console.log(`${BOLD}${BLUE}  ╔═══════════════════════════════════════════════╗${NC}`)
-  console.log(`${BOLD}${BLUE}  ║        Specialist Agent — Setup Wizard        ║${NC}`)
-  console.log(`${BOLD}${BLUE}  ╚═══════════════════════════════════════════════╝${NC}`)
-  console.log()
-  console.log(`  ${DIM}AI agents for Claude Code — any framework, any stack  v${pkg.version}${NC}`)
+  console.log(`  ${BLUE}\u256d${'─'.repeat(W)}\u256e${NC}`)
+  console.log(`  ${BLUE}\u2502${NC}${' '.repeat(W)}${BLUE}\u2502${NC}`)
+  console.log(`  ${BLUE}\u2502${NC}   ${BOLD}Specialist Agent${NC}${' '.repeat(W - 22 - ver.length)}${DIM}${ver}${NC}   ${BLUE}\u2502${NC}`)
+  console.log(`  ${BLUE}\u2502${NC}   ${DIM}AI agents for Claude Code${NC}${' '.repeat(W - 28)}${BLUE}\u2502${NC}`)
+  console.log(`  ${BLUE}\u2502${NC}${' '.repeat(W)}${BLUE}\u2502${NC}`)
+  console.log(`  ${BLUE}\u2570${'─'.repeat(W)}\u256f${NC}`)
   console.log()
 
   // Check we're in a project
   const cwd = process.cwd()
   if (!existsSync(join(cwd, 'package.json'))) {
-    console.log(`${YELLOW}  ⚠  No package.json found in current directory.${NC}`)
-    console.log()
-    const createPkg = await ask('Create a package.json to initialize this project?', [
-      { label: 'Yes', value: true, hint: '(recommended)' },
-      { label: 'No', value: false, hint: '(exit)' },
-    ])
+    console.log(`  ${YELLOW}\u26a0${NC}  No package.json found in current directory.`)
+    const createPkg = await confirm('Create a package.json to initialize this project?', true)
     if (!createPkg) {
       console.log(`  Run this command from the root of your project.`)
       console.log()
@@ -104,7 +134,7 @@ async function main() {
     }
     const dirName = cwd.split(/[\\/]/).pop() || 'my-project'
     writeFileSync(join(cwd, 'package.json'), JSON.stringify({ name: dirName, version: '0.1.0', private: true }, null, 2) + '\n')
-    console.log(`  ${GREEN}✅${NC} package.json created`)
+    console.log(`  ${GREEN}\u2713${NC} package.json created`)
     console.log()
   }
 
@@ -121,32 +151,26 @@ async function main() {
     hint: ''
   }))
 
-  const framework = await ask('Which framework?', packOptions)
+  const framework = await ask('Which framework?', packOptions, '1/4')
 
   // 2. Mode
   const mode = await ask('Agent mode?', [
-    { label: 'Full', value: 'full', hint: '(Sonnet/Opus — detailed output, validation)' },
-    { label: 'Lite', value: 'lite', hint: '(Haiku — lower cost, faster)' },
-  ])
+    { label: 'Full', value: 'full', hint: '(Sonnet/Opus)' },
+    { label: 'Lite', value: 'lite', hint: '(Haiku \u2014 lower cost)' },
+  ], '2/4')
 
   // 3. Starter agent
-  const installStarter = await ask('Install @starter agent? (creates projects from scratch)', [
-    { label: 'Yes', value: true, hint: '(recommended)' },
-    { label: 'No', value: false, hint: '' },
-  ])
+  const installStarter = await confirm('Install @starter agent?', true, '3/4')
 
   // 4. Specialist agents
-  const installSpecialists = await ask('Install specialist agents? (@explorer, @finance, @cloud, @security, @designer, @data, @devops, @tester)', [
-    { label: 'Yes', value: true, hint: '(recommended)' },
-    { label: 'No', value: false, hint: '' },
-  ])
+  const installSpecialists = await confirm('Install specialist agents?', true, '4/4')
 
-  console.log()
-  console.log(`${BLUE}  ───────────────────────────────────────────────${NC}`)
-  console.log(`  ${BOLD}Installing Specialist Agent${NC}`)
+  // Summary
   const packLabel = packLabels[framework] || framework
-  console.log(`  ${DIM}Pack: ${packLabel} | Mode: ${mode} | Starter: ${installStarter ? 'yes' : 'no'} | Specialists: ${installSpecialists ? 'yes' : 'no'}${NC}`)
-  console.log(`${BLUE}  ───────────────────────────────────────────────${NC}`)
+  console.log()
+  console.log(`  ${BLUE}${'─'.repeat(W)}${NC}`)
+  console.log()
+  console.log(`  ${packLabel} ${DIM}\u00b7${NC} ${mode === 'full' ? 'Full' : 'Lite'} ${DIM}\u00b7${NC} Starter: ${installStarter ? 'yes' : 'no'} ${DIM}\u00b7${NC} Specialists: ${installSpecialists ? 'yes' : 'no'}`)
   console.log()
 
   const packDir = join(ROOT, 'packs', framework)
@@ -155,16 +179,15 @@ async function main() {
   const archSource = join(packDir, 'ARCHITECTURE.md')
   const claudeSource = join(packDir, 'CLAUDE.md')
 
-  // Install agents
+  // Install pack agents
   const agentsDest = join(cwd, '.claude', 'agents')
   mkdirSync(agentsDest, { recursive: true })
   const agentCount = copyDir(agentsSource, agentsDest)
   const agentNames = getAgentNames(agentsDest)
 
   agentNames.forEach(name => {
-    console.log(`  ${GREEN}✅${NC} @${name}`)
+    console.log(`  ${GREEN}\u2713${NC} @${name}`)
   })
-  console.log(`  ${GREEN}${agentCount} agents installed${NC}`)
 
   // Install starter agent
   if (installStarter) {
@@ -174,7 +197,7 @@ async function main() {
 
     if (existsSync(starterSource)) {
       cpSync(starterSource, starterDest)
-      console.log(`  ${GREEN}✅${NC} @starter`)
+      console.log(`  ${GREEN}\u2713${NC} @starter`)
     }
   }
 
@@ -188,10 +211,12 @@ async function main() {
 
       if (existsSync(source)) {
         cpSync(source, dest)
-        console.log(`  ${GREEN}✅${NC} @${name}`)
+        console.log(`  ${GREEN}\u2713${NC} @${name}`)
       }
     }
   }
+
+  console.log(`  ${DIM}${agentCount} pack agents + extras installed${NC}`)
 
   // Install skills
   console.log()
@@ -199,24 +224,23 @@ async function main() {
   mkdirSync(skillsDest, { recursive: true })
   const skillCount = copyDir(skillsSource, skillsDest)
   if (skillCount > 0) {
-    console.log(`  ${GREEN}${skillCount} skills installed${NC}`)
+    console.log(`  ${GREEN}\u2713${NC} ${skillCount} skills installed`)
   } else {
     console.log(`  ${DIM}  No skills available for this pack${NC}`)
   }
 
   // Install ARCHITECTURE.md
-  console.log()
   const archDest = join(cwd, 'docs', 'ARCHITECTURE.md')
   if (!existsSync(archDest)) {
     if (existsSync(archSource)) {
       mkdirSync(dirname(archDest), { recursive: true })
       cpSync(archSource, archDest)
-      console.log(`  ${GREEN}✅${NC} docs/ARCHITECTURE.md`)
+      console.log(`  ${GREEN}\u2713${NC} docs/ARCHITECTURE.md`)
     } else {
-      console.log(`  ${YELLOW}⚠${NC}  ARCHITECTURE.md not found in pack (skipped)`)
+      console.log(`  ${YELLOW}\u26a0${NC}  ARCHITECTURE.md not found in pack ${DIM}(skipped)${NC}`)
     }
   } else {
-    console.log(`  ${YELLOW}⚠${NC}  docs/ARCHITECTURE.md already exists (not overwritten)`)
+    console.log(`  ${DIM}  docs/ARCHITECTURE.md already exists${NC}`)
   }
 
   // Install CLAUDE.md
@@ -224,24 +248,24 @@ async function main() {
   if (!existsSync(claudeDest)) {
     if (existsSync(claudeSource)) {
       cpSync(claudeSource, claudeDest)
-      console.log(`  ${GREEN}✅${NC} CLAUDE.md`)
+      console.log(`  ${GREEN}\u2713${NC} CLAUDE.md`)
     } else {
-      console.log(`  ${YELLOW}⚠${NC}  CLAUDE.md not found in pack (skipped)`)
+      console.log(`  ${YELLOW}\u26a0${NC}  CLAUDE.md not found in pack ${DIM}(skipped)${NC}`)
     }
   } else {
-    console.log(`  ${YELLOW}⚠${NC}  CLAUDE.md already exists (not overwritten)`)
+    console.log(`  ${DIM}  CLAUDE.md already exists${NC}`)
   }
 
   // Done
   console.log()
-  console.log(`${GREEN}  ═══════════════════════════════════════════════${NC}`)
-  console.log(`${GREEN}  🎉  Specialist Agent installed successfully!${NC}`)
-  console.log(`${GREEN}  ═══════════════════════════════════════════════${NC}`)
+  console.log(`  ${BLUE}${'─'.repeat(W)}${NC}`)
+  console.log()
+  console.log(`  ${GREEN}${BOLD}Setup complete!${NC}`)
   console.log()
 
   if (mode === 'lite') {
-    console.log(`  ${YELLOW}Lite mode: agents run on Haiku model (lower cost, faster).${NC}`)
-    console.log(`  ${YELLOW}To switch to Full agents: npx specialist-agent init${NC}`)
+    console.log(`  ${DIM}Lite mode: agents run on Haiku (lower cost, faster).${NC}`)
+    console.log(`  ${DIM}Switch to Full: npx specialist-agent init${NC}`)
     console.log()
   }
 
@@ -250,14 +274,13 @@ async function main() {
     ? readdirSync(skillsDest, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => '/' + d.name)
     : []
 
-  console.log(`  Open Claude Code and try:`)
+  console.log(`  Get started:`)
   console.log()
-  console.log(`    claude`)
-  console.log(`    /agents                                 ${DIM}# list agents${NC}`)
+  console.log(`    ${DIM}$${NC} claude`)
+  console.log(`    ${DIM}$${NC} /agents                  ${DIM}# list installed agents${NC}`)
   if (installedSkills.length > 0) {
-    const examples = installedSkills.slice(0, 2)
-    examples.forEach(skill => {
-      console.log(`    ${skill}`)
+    installedSkills.slice(0, 2).forEach(skill => {
+      console.log(`    ${DIM}$${NC} ${skill}`)
     })
   }
   console.log()
@@ -271,6 +294,7 @@ async function main() {
   rl.close()
 }
 
+// CLI argument handling
 const args = process.argv.slice(2)
 
 const validCommands = ['init']
@@ -284,16 +308,16 @@ if (command && !validCommands.includes(command)) {
 if (args.includes('--help') || args.includes('-h')) {
   const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf-8'))
   console.log()
-  console.log(`  ${BOLD}specialist-agent${NC} v${pkg.version}`)
+  console.log(`  ${BOLD}specialist-agent${NC} ${DIM}v${pkg.version}${NC}`)
   console.log()
   console.log('  Usage: specialist-agent [init] [options]')
   console.log()
   console.log('  Options:')
-  console.log('    -h, --help      Show this help message')
-  console.log('    -v, --version   Show version number')
+  console.log(`    -h, --help      ${DIM}Show this help message${NC}`)
+  console.log(`    -v, --version   ${DIM}Show version number${NC}`)
   console.log()
-  console.log('  Run the setup wizard to install AI agents for Claude Code.')
-  console.log('  Can be executed from any directory (creates package.json if needed).')
+  console.log(`  ${DIM}Run the setup wizard to install AI agents for Claude Code.${NC}`)
+  console.log(`  ${DIM}Can be executed from any directory (creates package.json if needed).${NC}`)
   console.log()
   process.exit(0)
 }
