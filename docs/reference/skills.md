@@ -9,10 +9,27 @@ Skills are shortcuts you invoke with `/skill-name` inside Claude Code. Each skil
 Creates a complete module scaffold.
 
 ```bash
-/dev-create-module domains
+/dev-create-module orders
 ```
 
 Asks about endpoints and UI type, then delegates to specialized agents to create the full structure.
+
+**Example output:**
+
+```text
+src/modules/orders/
+├── types/orders.types.ts
+├── contracts/orders.contracts.ts
+├── adapters/order-adapter.ts
+├── services/order-service.ts
+├── stores/useOrdersStore.ts
+├── composables/useOrdersList.ts
+├── composables/useOrderMutations.ts
+├── components/OrderCard.vue
+├── components/OrderForm.vue
+├── views/OrdersView.vue
+└── __tests__/order-adapter.spec.ts
+```
 
 ---
 
@@ -21,7 +38,7 @@ Asks about endpoints and UI type, then delegates to specialized agents to create
 Creates a Vue component with the standard script setup template.
 
 ```bash
-/dev-create-component DomainsTable
+/dev-create-component OrderCard
 ```
 
 Determines location (module vs shared), applies type-based props/emits, enforces < 200 lines.
@@ -33,7 +50,7 @@ Determines location (module vs shared), applies type-based props/emits, enforces
 Creates the complete data layer for a resource.
 
 ```bash
-/dev-create-service domains
+/dev-create-service orders
 ```
 
 Creates 4 files: `.types.ts` + `.contracts.ts` + `-adapter.ts` + `-service.ts`
@@ -45,7 +62,7 @@ Creates 4 files: `.types.ts` + `.contracts.ts` + `-adapter.ts` + `-service.ts`
 Creates a composable with Vue Query integration.
 
 ```bash
-/dev-create-composable useDomainsList
+/dev-create-composable useOrdersList
 ```
 
 Templates for queries, mutations, and shared logic.
@@ -57,7 +74,7 @@ Templates for queries, mutations, and shared logic.
 Creates tests for a specified file.
 
 ```bash
-/dev-create-test src/modules/domains/adapters/domains-adapter.ts
+/dev-create-test src/modules/orders/adapters/order-adapter.ts
 ```
 
 **Test priority:**
@@ -72,7 +89,7 @@ Creates tests for a specified file.
 Generates types, contracts, and adapter from an endpoint or JSON response.
 
 ```bash
-/dev-generate-types /v4/domains
+/dev-generate-types /v2/orders
 ```
 
 Handles snake_case → camelCase conversion and creates both inbound and outbound adapters.
@@ -88,12 +105,34 @@ Full code review against `ARCHITECTURE.md`.
 ```bash
 /review-review
 # Or scoped:
-/review-review src/modules/marketplace/
+/review-review src/modules/orders/
 ```
 
 Runs automated checks (`tsc`, `eslint`, `vitest`, `build`) and manual review. Produces a report with severity levels.
 
-**Verdict:** ✅ Approved | ⚠️ With caveats | ❌ Requires changes
+**Example output:**
+
+```markdown
+## Review — src/modules/orders/
+
+### Scorecard
+| Dimension | Grade | Notes |
+|-----------|-------|-------|
+| Architecture | A | All layers follow ARCHITECTURE.md |
+| Type Safety | B | Missing return type on useOrdersList |
+| Security | A | No v-html, inputs sanitized |
+| Maintainability | A | Small files, clear naming |
+
+### Auto: tsc ✅ | ESLint ✅ | Build ✅ | Tests ✅
+
+### Violations
+- order-service.ts:12 — try/catch wrapping HTTP call → remove, let error boundary handle
+
+### Highlights
+- order-adapter.ts:5 — Clean bidirectional parsing with full type coverage
+
+### Verdict: ⚠️ With caveats — fix the type annotation before merging
+```
 
 ---
 
@@ -102,7 +141,7 @@ Runs automated checks (`tsc`, `eslint`, `vitest`, `build`) and manual review. Pr
 Runs 14 automated conformance checks:
 
 ```bash
-/review-check-architecture marketplace
+/review-check-architecture orders
 ```
 
 | # | Check |
@@ -129,7 +168,7 @@ Runs 14 automated conformance checks:
 Finds and auto-fixes architecture violations.
 
 ```bash
-/review-fix-violations marketplace
+/review-fix-violations orders
 ```
 
 Fixes by priority: 🔴 Critical → 🟡 Important → 🟢 Improvements. Validates after each fix.
@@ -155,7 +194,7 @@ Analyzes current structure, maps consumers, converts to full TypeScript, decompo
 Migrates an entire module through 6 phases.
 
 ```bash
-/migration-migrate-module src/views/marketplace/
+/migration-migrate-module src/modules/legacy-orders/
 ```
 
 Delegates to `@migrator`. Includes approval gates between phases.
@@ -169,7 +208,7 @@ Delegates to `@migrator`. Includes approval gates between phases.
 Quick module summary for developer onboarding.
 
 ```bash
-/docs-onboard marketplace
+/docs-onboard orders
 ```
 
 Lists endpoints, main components, shows Pinia vs Vue Query separation, flags non-standard patterns. Target: understand a module in 2 minutes.

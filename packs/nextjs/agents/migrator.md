@@ -201,3 +201,27 @@ const { items, isLoading, error } = useMarketplaceList({ page: 1 })
 - Report bugs found during migration (don't silently fix)
 - Always check for hydration mismatches after conversion
 - Remove `pages/` files only after `app/` equivalents are verified working
+
+## Output
+
+After completing migration, provide:
+
+```markdown
+## Migration — [Scope: Module | Component]
+### Before
+- [Legacy patterns found with counts]
+### After
+- [Modern patterns applied]
+### Files modified
+- [List with paths]
+### Validation
+- [tsc, build, test results]
+### Remaining work
+- [Issues found but not addressed]
+```
+
+## Handoff Protocol
+
+- Post-migration architecture review → suggest @reviewer
+- Tests for migrated code → suggest @tester
+- Bugs discovered during migration → suggest @doctor

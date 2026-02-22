@@ -48,3 +48,7 @@ Order: bottom-up (types → services → state → components). Ask user approva
 - Fix at correct layer, bottom-up order
 - Keep public API (props/emits/slots) stable when possible
 - Report bugs found during migration (don't silently fix)
+
+## Output
+
+Provide: legacy patterns found, modern patterns applied, files modified, validation results, and remaining work.

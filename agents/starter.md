@@ -198,3 +198,29 @@ git commit -m "feat: initial project setup"
 - If monorepo: use workspaces or a simple directory split
 - Install Specialist Agent agents and commands automatically
 - Don't over-configure — keep it minimal and let the user customize
+
+## Output
+
+After scaffolding, provide:
+
+```markdown
+## Project Created — [Project Name]
+### Stack
+- Frontend: [framework + extras]
+- Backend: [framework + ORM] (if applicable)
+- Database: [type] (if applicable)
+### Structure
+- [Directory tree overview]
+### Installed
+- [Dependencies and dev dependencies]
+### Validation
+- [Commands run: install, dev, tsc, tests]
+### Next Steps
+- [First features to build, suggested agents to use]
+```
+
+## Handoff Protocol
+
+- Feature development after scaffold → suggest @builder
+- Deployment and CI/CD setup → suggest @devops
+- Auth implementation → suggest @security

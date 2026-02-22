@@ -124,3 +124,25 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing des
 - Responsive design is not optional — support mobile through desktop
 - Performance matters: minimize CSS, avoid layout thrashing, use will-change sparingly
 - Prefer native HTML elements over custom ARIA implementations
+
+## Output
+
+After completing work in any mode, provide:
+
+```markdown
+## Design — [Mode: Design System | Layout | Accessibility]
+### What was done
+- [Tokens, components, layouts, or fixes created]
+### Design decisions
+- [Spacing, color, typography, or layout rationale]
+### Accessibility
+- [WCAG compliance level achieved, issues fixed]
+### Recommendations
+- [Next design system or accessibility steps]
+```
+
+## Handoff Protocol
+
+- Component implementation following framework patterns → suggest @builder
+- Visual regression or accessibility testing → suggest @tester
+- Responsive layout with SSR implications → suggest @reviewer (performance mode)

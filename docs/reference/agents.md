@@ -2,7 +2,7 @@
 
 Agents are specialized AIs that Claude delegates to automatically or that you invoke with `@name`.
 
-Specialist Agent includes **12 agents** organized into four categories:
+Specialist Agent includes **13 agents** organized into five categories:
 
 ```mermaid
 graph TB
@@ -10,6 +10,7 @@ graph TB
 
     subgraph agnostic["Framework-Agnostic"]
         Starter["@starter<br/><i>create project from scratch</i>"]
+        Explorer["@explorer<br/><i>assess, map, audit</i>"]
     end
 
     subgraph specialists["Specialist Agents"]
@@ -44,6 +45,7 @@ graph TB
     style daily fill:#f0faf5,stroke:#42b883
     style migration fill:#f0f4fa,stroke:#35495e
     style Starter fill:#7c3aed,color:#fff
+    style Explorer fill:#7c3aed,color:#fff
     style Finance fill:#e67e22,color:#fff
     style Cloud fill:#e67e22,color:#fff
     style Security fill:#e67e22,color:#fff
@@ -85,6 +87,50 @@ The starter wizard asks about:
 - **Structure** — Monorepo, separate dirs, frontend only
 
 Then scaffolds everything: frontend + backend + database config + Docker compose + README + git init.
+
+---
+
+### @explorer — Assess & Map Codebases
+
+**When to use:** Explore unfamiliar codebases, onboard on a new project, assess technical health, or audit dependencies.
+
+```bash
+# Full project assessment (new team member onboarding)
+"Use @explorer to assess this project — I just joined the team"
+
+# Map a specific module's structure
+"Use @explorer to map the orders module and its dependencies"
+
+# Audit dependencies for outdated or vulnerable packages
+"Use @explorer to audit the project dependencies"
+```
+
+The explorer works in three modes:
+
+**Assessment mode** — Full project health check:
+
+- Surveys project structure, tech stack, and configuration
+- Maps architecture layers and module boundaries
+- Analyzes code quality patterns (TypeScript strictness, test coverage, linting)
+- Produces a **Health Score (0–10)** with breakdown by dimension
+
+**Module Map mode** — Deep-dive into a specific module:
+
+- Inventories all files by type (components, services, composables, stores)
+- Maps internal dependencies (fan-in / fan-out)
+- Identifies coupling points with other modules
+- Reports non-standard patterns or architecture deviations
+
+**Dependency Audit mode** — Package analysis:
+
+- Lists outdated packages with available updates
+- Flags known vulnerabilities
+- Identifies unused dependencies
+- Reports bundle size impact of major packages
+
+::: tip Read-only
+The explorer never modifies files. It produces assessment reports with facts and actionable recommendations.
+:::
 
 ---
 
@@ -491,9 +537,67 @@ These agents are **framework-agnostic** — they work with any stack and are ins
 
 ---
 
+## Agent Chaining — Handoff Protocol
+
+Agents can recommend other agents when they detect work outside their scope. This is called the **Handoff Protocol** — each agent has rules for when to suggest delegation.
+
+### Common chains
+
+```text
+@explorer → @reviewer → @migrator → @builder
+  assess      diagnose     migrate     build new features
+```
+
+### Real-world scenarios
+
+**New team member onboarding:**
+
+```bash
+# 1. Assess the project
+"Use @explorer to assess this project"
+
+# 2. Explorer suggests: "Security configuration needs attention → suggest @security"
+"Use @security to audit the project for OWASP top 10 vulnerabilities"
+```
+
+**Building a new feature end-to-end:**
+
+```bash
+# 1. Design the database
+"Use @data to design the schema for an orders module with Prisma"
+
+# 2. Data suggests: "Schema ready → suggest @builder for the application layer"
+"Use @builder to create the orders module with CRUD for /v2/orders"
+
+# 3. Builder suggests: "Module created → suggest @tester for test coverage"
+"Use @tester to create tests for src/modules/orders/"
+
+# 4. Tester suggests: "Tests passing → suggest @reviewer for final check"
+"Use @reviewer to review src/modules/orders/"
+```
+
+**Modernizing legacy code:**
+
+```bash
+# 1. Diagnose current state
+"Use @reviewer to explore src/legacy/billing/"
+
+# 2. Reviewer suggests: "Legacy patterns found → suggest @migrator"
+"Use @migrator to migrate the billing module to modern architecture"
+
+# 3. Migrator suggests: "Migration done → suggest @tester for validation"
+"Use @tester to create tests for the migrated billing module"
+```
+
+::: tip Handoff is a suggestion, not automatic
+Agents suggest the next agent — they don't auto-delegate. You decide whether to follow the recommendation or take a different path.
+:::
+
+---
+
 ## Full vs Lite Agents
 
-All 12 agents have Lite versions that use `model: haiku` for lower cost.
+All 13 agents have Lite versions that use `model: haiku` for lower cost.
 
 | Aspect | Full | Lite |
 |--------|------|------|

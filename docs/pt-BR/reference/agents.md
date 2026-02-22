@@ -2,7 +2,7 @@
 
 Agentes sao IAs especializadas para as quais o Claude delega automaticamente ou que voce invoca com `@nome`.
 
-O Specialist Agent inclui **12 agentes** organizados em quatro categorias:
+O Specialist Agent inclui **13 agentes** organizados em cinco categorias:
 
 ```mermaid
 graph TB
@@ -10,6 +10,7 @@ graph TB
 
     subgraph agnostic["Agnóstico de Framework"]
         Starter["@starter<br/><i>criar projeto do zero</i>"]
+        Explorer["@explorer<br/><i>avaliar, mapear, auditar</i>"]
     end
 
     subgraph specialists["Agentes Especialistas"]
@@ -44,6 +45,7 @@ graph TB
     style daily fill:#f0faf5,stroke:#42b883
     style migration fill:#f0f4fa,stroke:#35495e
     style Starter fill:#7c3aed,color:#fff
+    style Explorer fill:#7c3aed,color:#fff
     style Finance fill:#e67e22,color:#fff
     style Cloud fill:#e67e22,color:#fff
     style Security fill:#e67e22,color:#fff
@@ -85,6 +87,50 @@ O assistente de inicializacao pergunta sobre:
 - **Estrutura** — Monorepo, diretorios separados, apenas frontend
 
 Entao gera tudo: frontend + backend + configuracao do banco + Docker compose + README + git init.
+
+---
+
+### @explorer — Avaliar e Mapear Codebases
+
+**Quando usar:** Explorar codebases desconhecidas, onboarding em novo projeto, avaliar saude tecnica ou auditar dependencias.
+
+```bash
+# Avaliacao completa do projeto (onboarding de novo membro)
+"Use @explorer to assess this project — I just joined the team"
+
+# Mapear a estrutura de um modulo especifico
+"Use @explorer to map the orders module and its dependencies"
+
+# Auditar dependencias por pacotes desatualizados ou vulneraveis
+"Use @explorer to audit the project dependencies"
+```
+
+O explorer funciona em tres modos:
+
+**Modo avaliacao** — Verificacao completa de saude do projeto:
+
+- Examina estrutura do projeto, stack tecnologica e configuracao
+- Mapeia camadas de arquitetura e limites de modulos
+- Analisa padroes de qualidade de codigo (TypeScript strictness, cobertura de testes, linting)
+- Produz um **Health Score (0–10)** com detalhamento por dimensao
+
+**Modo mapa de modulo** — Mergulho profundo em um modulo especifico:
+
+- Inventaria todos os arquivos por tipo (componentes, servicos, composables, stores)
+- Mapeia dependencias internas (fan-in / fan-out)
+- Identifica pontos de acoplamento com outros modulos
+- Reporta padroes fora do padrao ou desvios de arquitetura
+
+**Modo auditoria de dependencias** — Analise de pacotes:
+
+- Lista pacotes desatualizados com atualizacoes disponiveis
+- Sinaliza vulnerabilidades conhecidas
+- Identifica dependencias nao utilizadas
+- Reporta impacto no tamanho do bundle dos principais pacotes
+
+::: tip Somente leitura
+O explorer nunca modifica arquivos. Ele produz relatorios de avaliacao com fatos e recomendacoes acionaveis.
+:::
 
 ---
 
@@ -491,9 +537,67 @@ Esses agentes sao **agnosticos de framework** — funcionam com qualquer stack e
 
 ---
 
+## Encadeamento de Agentes — Protocolo de Handoff
+
+Agentes podem recomendar outros agentes quando detectam trabalho fora do seu escopo. Isso se chama **Protocolo de Handoff** — cada agente possui regras de quando sugerir delegacao.
+
+### Cadeias comuns
+
+```text
+@explorer → @reviewer → @migrator → @builder
+  avaliar      diagnosticar   migrar      construir novas features
+```
+
+### Cenarios do mundo real
+
+**Onboarding de novo membro da equipe:**
+
+```bash
+# 1. Avaliar o projeto
+"Use @explorer to assess this project"
+
+# 2. Explorer sugere: "Configuracao de seguranca precisa de atencao → sugerir @security"
+"Use @security to audit the project for OWASP top 10 vulnerabilities"
+```
+
+**Construindo uma nova feature de ponta a ponta:**
+
+```bash
+# 1. Projetar o banco de dados
+"Use @data to design the schema for an orders module with Prisma"
+
+# 2. Data sugere: "Schema pronto → sugerir @builder para a camada de aplicacao"
+"Use @builder to create the orders module with CRUD for /v2/orders"
+
+# 3. Builder sugere: "Modulo criado → sugerir @tester para cobertura de testes"
+"Use @tester to create tests for src/modules/orders/"
+
+# 4. Tester sugere: "Testes passando → sugerir @reviewer para verificacao final"
+"Use @reviewer to review src/modules/orders/"
+```
+
+**Modernizando codigo legado:**
+
+```bash
+# 1. Diagnosticar estado atual
+"Use @reviewer to explore src/legacy/billing/"
+
+# 2. Reviewer sugere: "Padroes legados encontrados → sugerir @migrator"
+"Use @migrator to migrate the billing module to modern architecture"
+
+# 3. Migrator sugere: "Migracao concluida → sugerir @tester para validacao"
+"Use @tester to create tests for the migrated billing module"
+```
+
+::: tip Handoff e uma sugestao, nao automatico
+Agentes sugerem o proximo agente — eles nao delegam automaticamente. Voce decide se segue a recomendacao ou toma um caminho diferente.
+:::
+
+---
+
 ## Agentes Full vs Lite
 
-Todos os 12 agentes possuem versoes Lite que usam `model: haiku` para menor custo.
+Todos os 13 agentes possuem versoes Lite que usam `model: haiku` para menor custo.
 
 | Aspecto | Full | Lite |
 |---------|------|------|

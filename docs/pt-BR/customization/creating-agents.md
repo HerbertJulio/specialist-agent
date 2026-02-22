@@ -2,6 +2,10 @@
 
 Voce pode estender o Specialist Agent criando seus proprios agentes adaptados as necessidades do seu projeto.
 
+## O Padrao Blueprint
+
+Todo agente segue um **blueprint de 5 partes**: Mission, Workflow, Output, Rules e Handoff. Essa estrutura garante que os agentes se comportem de forma previsivel — eles sabem o que fazer, como fazer, o que produzir, quais restricoes respeitar e quando delegar para outro agente. Seguir esse padrao torna os agentes composiveis e confiaveis em qualquer projeto.
+
 ## Estrutura do Arquivo de Agente
 
 Crie um arquivo em `.claude/agents/nome-do-agente.md`:
@@ -9,7 +13,7 @@ Crie um arquivo em `.claude/agents/nome-do-agente.md`:
 ```markdown
 ---
 name: my-agent
-description: "MUST BE USED to [do X] whenever [condition]."
+description: "MUST BE USED to [do X] when [trigger]. Use PROACTIVELY when [condition]."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -27,12 +31,21 @@ Read the following files before starting:
 2. Step two
 3. ...
 
+## Output
+After completing work, provide:
+
+- What was done (files created/modified)
+- Key decisions and rationale
+- Validation results
+- Recommendations for next steps
+
 ## Rules
 - Rule one
 - Rule two
 
-## Output
-What the agent produces.
+## Handoff Protocol
+- If [condition A] → suggest @agent-x
+- If [condition B] → suggest @agent-y
 ```
 
 ## Campos Principais
@@ -97,6 +110,13 @@ Create comprehensive tests following project conventions.
 - Composables: mock services, test reactive behavior
 - Components: use @vue/test-utils, test user interactions
 - Name: `[OriginalName].spec.ts`
+
+## Output
+Provide: test file created (with path), test results (pass/fail), coverage summary, and recommendations.
+
+## Handoff Protocol
+- Security-sensitive code needs testing → suggest @security
+- Component needs accessibility testing → suggest @designer
 ```
 
 ### Agente de Deploy
@@ -123,6 +143,11 @@ Validate the project is ready for deployment.
 
 ## Output
 ✅ Ready to deploy or ❌ Issues found (with details)
+
+## Handoff Protocol
+- Security concerns found → suggest @security
+- Test failures detected → suggest @tester
+- Infrastructure or CI issues → suggest @devops
 ```
 
 ### Agente Lite (Haiku)

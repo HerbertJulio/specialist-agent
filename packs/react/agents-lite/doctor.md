@@ -39,3 +39,7 @@ Investigate bugs by tracing through architecture layers. Find root causes, not w
 - Fix at the root layer, not at the symptom layer
 - No hacks or workarounds
 - If fix requires architecture changes, report to user first
+
+## Output
+
+Provide: symptoms, root cause (file:line), fix applied, validation results, and prevention tips.

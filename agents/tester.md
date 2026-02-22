@@ -140,3 +140,25 @@ API routes (with database):           Test database or mock repository layer
 - Deterministic: no random data, no time dependencies, no network calls in unit tests
 - Tests must run in CI without manual setup
 - Coverage is a guide, not a goal — 100% coverage doesn't mean 100% correct
+
+## Output
+
+After completing work in any mode, provide:
+
+```markdown
+## Tests — [Mode: Strategy | Unit/Integration | E2E]
+### What was done
+- [Test files created or strategy defined]
+### Coverage
+- [Areas covered and remaining gaps]
+### Results
+- [Pass/fail summary with output]
+### Recommendations
+- [Priority areas for additional tests]
+```
+
+## Handoff Protocol
+
+- Security vulnerabilities discovered during testing → suggest @security
+- CI/CD pipeline for test automation → suggest @devops
+- Performance bottlenecks discovered → suggest @reviewer (performance mode)

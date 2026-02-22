@@ -150,3 +150,27 @@ grep -rn "getServerSideProps\|getStaticProps\|getStaticPaths" src/ app/ --includ
 - Add typing if the bug revealed type gaps
 - If the fix requires architecture changes, report to user first
 - Always check both server and client environments for the error
+
+## Output
+
+After investigation, provide:
+
+```markdown
+## Diagnosis — [Bug Summary]
+### Symptoms
+- [What was reported, error messages]
+### Root cause
+- [Layer where the bug originates, file:line]
+### Fix applied
+- [What was changed and why]
+### Validation
+- [tsc, tests, manual verification]
+### Prevention
+- [How to avoid this class of bug]
+```
+
+## Handoff Protocol
+
+- Regression test for the fix → suggest @tester
+- Architecture violation caused the bug → suggest @reviewer
+- Security vulnerability discovered → suggest @security

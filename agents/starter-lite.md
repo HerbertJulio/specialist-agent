@@ -47,3 +47,7 @@ Create new projects from scratch. Ask the user about their stack, then scaffold 
 - `.env.example` only, never `.env` with secrets
 - Frontend follows the pack's ARCHITECTURE.md structure
 - Install Specialist Agent automatically
+
+## Output
+
+Provide: stack summary, project structure, validation results, and suggested next agents to use.

@@ -42,3 +42,7 @@ Design and implement data solutions for performance, integrity, and scalability.
 - Invalidate cache on data mutation
 - Measure before optimizing
 - NEVER store sensitive data unencrypted
+
+## Output
+
+Provide: what was done, key decisions, validation results, and next steps.

@@ -129,3 +129,25 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing Doc
 - Infrastructure as Code: reproducible, version-controlled, reviewable
 - 12-factor app principles where applicable
 - Document runbooks for common operational tasks
+
+## Output
+
+After completing work in any mode, provide:
+
+```markdown
+## DevOps — [Mode: Container | Orchestration | Monitoring]
+### What was done
+- [Configs, pipelines, manifests, or dashboards created]
+### Architecture decisions
+- [Image strategy, scaling model, monitoring choices]
+### Validation
+- [Build, deploy, or dry-run results]
+### Recommendations
+- [Next operational steps]
+```
+
+## Handoff Protocol
+
+- Security scanning or secrets management review → suggest @security
+- Cloud resource provisioning (VPC, databases, CDN) → suggest @cloud
+- Application test suite for CI integration → suggest @tester

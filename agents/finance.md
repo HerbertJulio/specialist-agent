@@ -106,3 +106,25 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing fin
 - PCI compliance: never store raw card data, use tokenization
 - All financial operations must be idempotent where possible
 - Audit logging for all financial state changes
+
+## Output
+
+After completing work in any mode, provide:
+
+```markdown
+## Finance — [Mode: Payment | Billing | Reporting]
+### What was done
+- [Integrations, billing models, or reports created]
+### Financial decisions
+- [Currency handling, tax strategy, compliance choices]
+### Validation
+- [Type checking, calculation tests, idempotency verification]
+### Recommendations
+- [Remaining compliance or integration steps]
+```
+
+## Handoff Protocol
+
+- PCI compliance or payment security audit → suggest @security
+- Financial data modeling or migration strategy → suggest @data
+- Financial calculation test coverage → suggest @tester

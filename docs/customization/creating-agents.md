@@ -2,6 +2,10 @@
 
 You can extend Specialist Agent by creating your own agents tailored to your project's needs.
 
+## The Blueprint Pattern
+
+Every agent follows a **5-part blueprint**: Mission, Workflow, Output, Rules, and Handoff. This structure ensures agents behave predictably — they know what to do, how to do it, what to produce, what constraints to respect, and when to delegate to another agent. Following this pattern makes agents composable and reliable across any project.
+
 ## Agent File Structure
 
 Create a file at `.claude/agents/agent-name.md`:
@@ -9,7 +13,7 @@ Create a file at `.claude/agents/agent-name.md`:
 ```markdown
 ---
 name: my-agent
-description: "MUST BE USED to [do X] whenever [condition]."
+description: "MUST BE USED to [do X] when [trigger]. Use PROACTIVELY when [condition]."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -27,12 +31,21 @@ Read the following files before starting:
 2. Step two
 3. ...
 
+## Output
+After completing work, provide:
+
+- What was done (files created/modified)
+- Key decisions and rationale
+- Validation results
+- Recommendations for next steps
+
 ## Rules
 - Rule one
 - Rule two
 
-## Output
-What the agent produces.
+## Handoff Protocol
+- If [condition A] → suggest @agent-x
+- If [condition B] → suggest @agent-y
 ```
 
 ## Key Fields
@@ -97,6 +110,13 @@ Create comprehensive tests following project conventions.
 - Composables: mock services, test reactive behavior
 - Components: use @vue/test-utils, test user interactions
 - Name: `[OriginalName].spec.ts`
+
+## Output
+Provide: test file created (with path), test results (pass/fail), coverage summary, and recommendations.
+
+## Handoff Protocol
+- Security-sensitive code needs testing → suggest @security
+- Component needs accessibility testing → suggest @designer
 ```
 
 ### Deployment Agent
@@ -123,6 +143,11 @@ Validate the project is ready for deployment.
 
 ## Output
 ✅ Ready to deploy or ❌ Issues found (with details)
+
+## Handoff Protocol
+- Security concerns found → suggest @security
+- Test failures detected → suggest @tester
+- Infrastructure or CI issues → suggest @devops
 ```
 
 ### Lite Agent (Haiku)

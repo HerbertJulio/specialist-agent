@@ -112,3 +112,27 @@ Read `docs/ARCHITECTURE.md`.
 - If API changes, update all consumers
 - One component per commit
 - Report bugs found during migration (don't silently fix)
+
+## Output
+
+After completing migration, provide:
+
+```markdown
+## Migration — [Scope: Module | Component]
+### Before
+- [Legacy patterns found with counts]
+### After
+- [Modern patterns applied]
+### Files modified
+- [List with paths]
+### Validation
+- [tsc, build, test results]
+### Remaining work
+- [Issues found but not addressed]
+```
+
+## Handoff Protocol
+
+- Post-migration architecture review → suggest @reviewer
+- Tests for migrated code → suggest @tester
+- Bugs discovered during migration → suggest @doctor

@@ -71,3 +71,25 @@ Read `docs/ARCHITECTURE.md`.
 - Services: no try/catch, no transformation
 - Adapters: pure functions, no side effects
 - Components: script setup, typed props/emits, < 200 lines
+
+## Output
+
+After completing work in any mode, provide:
+
+```markdown
+## Built — [Mode: Module | Component | Service | ...]
+### Files created
+- [List with paths]
+### Patterns applied
+- [Architecture patterns followed]
+### Validation
+- [tsc, build, test results]
+### Next steps
+- [Remaining work or suggested follow-up]
+```
+
+## Handoff Protocol
+
+- Tests for new code → suggest @tester
+- Architecture validation → suggest @reviewer
+- Security concerns in new code → suggest @security

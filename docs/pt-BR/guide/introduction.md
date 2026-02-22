@@ -23,19 +23,20 @@ O Specialist Agent organiza agentes e padroes em **framework packs**. Cada pack 
 
 | Recurso | Quantidade | Descricao |
 |---------|------------|-----------|
-| Agentes de IA | 12 | Starter, builder, reviewer, migrator, doctor + 7 especialistas |
-| Agentes Lite | 12 | Mesmos agentes rodando no modelo Haiku (custo menor) |
+| Agentes de IA | 13 | Starter, explorer, builder, reviewer, migrator, doctor + 7 especialistas |
+| Agentes Lite | 13 | Mesmos agentes rodando no modelo Haiku (custo menor) |
 | Skills | 12 | Atalhos para gerar e validar codigo |
 | Guia de Arquitetura | 1 | Fonte de verdade abrangente para todos os padroes |
 
 ## Seu Time de IA
 
-O Specialist Agent possui **12 agentes** organizados por cenario:
+O Specialist Agent possui **13 agentes** organizados por cenario:
 
 ```mermaid
 graph TB
     subgraph agnostic["Framework-Agnostic"]
         Starter["@starter<br/><i>Create projects from scratch</i>"]
+        Explorer["@explorer<br/><i>Assess codebases, health score</i>"]
         Finance["@finance<br/><i>Payments, billing, reporting</i>"]
         Cloud["@cloud<br/><i>IaC, serverless, CI/CD</i>"]
         Security["@security<br/><i>Auth, OWASP, RBAC</i>"]
@@ -59,6 +60,7 @@ graph TB
     style daily fill:#f0faf5,stroke:#42b883
     style migration fill:#f0f4fa,stroke:#35495e
     style Starter fill:#7c3aed,color:#fff
+    style Explorer fill:#7c3aed,color:#fff
     style Finance fill:#7c3aed,color:#fff
     style Cloud fill:#7c3aed,color:#fff
     style Security fill:#7c3aed,color:#fff
@@ -74,7 +76,7 @@ graph TB
 
 | Cenario | Agentes | Quando |
 |---------|---------|--------|
-| **Criacao de Projeto** | `@starter` | Iniciando um novo projeto do zero |
+| **Criacao de Projeto** | `@starter` `@explorer` | Iniciando um novo projeto ou avaliando um codebase existente |
 | **Dia a Dia** | `@builder` `@reviewer` `@doctor` | Construindo funcionalidades, revisando codigo, corrigindo bugs |
 | **Migracao** | `@migrator` `@reviewer` | Modernizando projetos legados para a arquitetura alvo |
 | **Especialistas** | `@finance` `@cloud` `@security` `@designer` `@data` `@devops` `@tester` | Expertise especifica de dominio em qualquer framework |

@@ -134,3 +134,25 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing dat
 - NEVER store sensitive data unencrypted
 - Always plan for scale: pagination, indexing, connection pooling
 - Test with realistic data volumes, not just a few rows
+
+## Output
+
+After completing work in any mode, provide:
+
+```markdown
+## Data — [Mode: Modeling | Caching | Optimization]
+### What was done
+- [Files created or modified with brief description]
+### Decisions
+- [Key design choices and rationale]
+### Validation
+- [Commands run and results]
+### Recommendations
+- [Next steps or improvements]
+```
+
+## Handoff Protocol
+
+- Sensitive data or encryption needs → suggest @security
+- Infrastructure setup (Redis, replicas, cloud database) → suggest @cloud or @devops
+- Data layer test coverage → suggest @tester

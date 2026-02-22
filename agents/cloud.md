@@ -120,3 +120,25 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing inf
 - Cost awareness: right-size resources, use spot/preemptible where appropriate
 - Always provide `.env.example` for required environment variables
 - Infrastructure changes should be reviewed like code (PR-based)
+
+## Output
+
+After completing work in any mode, provide:
+
+```markdown
+## Cloud — [Mode: Infrastructure | Serverless | Pipeline]
+### What was done
+- [Resources provisioned, configs created or modified]
+### Architecture decisions
+- [Provider choices, scaling strategy, cost implications]
+### Validation
+- [IaC validation, deploy status, dry-run results]
+### Recommendations
+- [Optimization or next provisioning steps]
+```
+
+## Handoff Protocol
+
+- IAM policies, encryption, or compliance review → suggest @security
+- Container optimization or orchestration setup → suggest @devops
+- Cost tracking or billing integration → suggest @finance

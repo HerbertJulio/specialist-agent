@@ -42,3 +42,7 @@ Implement UI/UX following design system principles, accessibility standards, and
 - Every form input MUST have a label
 - Color must not be the only way to convey information
 - WCAG AA compliance minimum
+
+## Output
+
+Provide: components or tokens created, design decisions, accessibility status, and next steps.

@@ -50,3 +50,7 @@ Order: bottom-up (types -> services -> state -> components -> pages). Ask user a
 - Keep public API (props/children) stable when possible
 - Report bugs found during migration (don't silently fix)
 - Remove pages/ files only after app/ equivalents verified
+
+## Output
+
+Provide: legacy patterns found, modern patterns applied, files modified, validation results, and remaining work.

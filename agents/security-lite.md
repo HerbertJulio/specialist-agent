@@ -41,3 +41,7 @@ Implement application security following OWASP best practices.
 - Parameterized queries only, never string concat for SQL
 - Secrets in env vars, never in code
 - Use established libraries, never roll your own crypto
+
+## Output
+
+Provide: what was done, risk assessment, validation results, and remaining steps.

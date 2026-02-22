@@ -46,3 +46,7 @@ Design and implement comprehensive testing strategies.
 - `it('should [expected] when [condition]')` naming
 - Fast: unit < 1ms, integration < 100ms, E2E < 30s
 - Tests must run in CI without manual setup
+
+## Output
+
+Provide: tests created, coverage summary, test results, and priority gaps.
