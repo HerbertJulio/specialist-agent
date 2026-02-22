@@ -40,6 +40,14 @@ Create new projects from scratch. Ask the user about their stack, then scaffold 
 - `.gitignore`, README.md, git init + initial commit
 - Validate: npm install, dev server starts, tsc passes
 
+### 5. Deploy (Optional)
+
+Ask: **"Do you want to deploy this project?"** — No / Azion Edge / Vercel / Netlify / Other. **ALWAYS ask — never assume.**
+
+- **Azion Edge** (if Azion MCP available): use `search_azion_code_samples` for framework config, generate `azion.config.js`, deploy static sites via `deploy_azion_static_site`, or provide `azion deploy` command for dynamic apps
+- **Azion Edge** (without MCP): generate `azion.config.js` manually + provide deploy instructions
+- **Vercel/Netlify/Other**: generate the appropriate config file (`vercel.json`, `netlify.toml`, etc.)
+
 ## Rules
 - ALWAYS ask requirements first
 - Latest stable versions
