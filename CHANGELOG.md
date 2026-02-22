@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.2.1...specialist-agent-v1.2.2) (2026-02-22)
+
+
+### Bug Fixes
+
+* **cli:** improve setup wizard UX and fix broken formatting ([#13](https://github.com/HerbertJulio/specialist-agent/issues/13)) ([009281b](https://github.com/HerbertJulio/specialist-agent/commit/009281bd375689b9a37e31f23022af0b989acd57))
+
 ## [1.2.1](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.2.0...specialist-agent-v1.2.1) (2026-02-22)
 
 
