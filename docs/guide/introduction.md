@@ -23,19 +23,20 @@ Specialist Agent organizes agents and patterns into **framework packs**. Each pa
 
 | Feature | Count | Description |
 |---------|-------|-------------|
-| AI Agents | 12 | Starter, builder, reviewer, migrator, doctor + 7 specialists |
-| Lite Agents | 12 | Same agents running on Haiku model (lower cost) |
+| AI Agents | 13 | Starter, explorer, builder, reviewer, migrator, doctor + 7 specialists |
+| Lite Agents | 13 | Same agents running on Haiku model (lower cost) |
 | Skills | 12 | Shortcuts to scaffold and validate code |
 | Architecture Guide | 1 | Comprehensive source of truth for all patterns |
 
 ## Your AI Team
 
-Specialist Agent has **12 agents** organized by scenario:
+Specialist Agent has **13 agents** organized by scenario:
 
 ```mermaid
 graph TB
     subgraph agnostic["Framework-Agnostic"]
         Starter["@starter<br/><i>Create projects from scratch</i>"]
+        Explorer["@explorer<br/><i>Assess codebases, health score</i>"]
         Finance["@finance<br/><i>Payments, billing, reporting</i>"]
         Cloud["@cloud<br/><i>IaC, serverless, CI/CD</i>"]
         Security["@security<br/><i>Auth, OWASP, RBAC</i>"]
@@ -59,6 +60,7 @@ graph TB
     style daily fill:#f0faf5,stroke:#42b883
     style migration fill:#f0f4fa,stroke:#35495e
     style Starter fill:#7c3aed,color:#fff
+    style Explorer fill:#7c3aed,color:#fff
     style Finance fill:#7c3aed,color:#fff
     style Cloud fill:#7c3aed,color:#fff
     style Security fill:#7c3aed,color:#fff
@@ -74,7 +76,7 @@ graph TB
 
 | Scenario | Agents | When |
 |----------|--------|------|
-| **Project Creation** | `@starter` | Starting a new project from scratch |
+| **Project Creation** | `@starter` `@explorer` | Starting a new project or assessing an existing codebase |
 | **Day-to-Day** | `@builder` `@reviewer` `@doctor` | Building features, reviewing code, fixing bugs |
 | **Migration** | `@migrator` `@reviewer` | Modernizing legacy projects to the target architecture |
 | **Specialists** | `@finance` `@cloud` `@security` `@designer` `@data` `@devops` `@tester` | Domain-specific expertise across any framework |

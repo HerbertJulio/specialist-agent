@@ -9,10 +9,27 @@ Skills sao atalhos que voce invoca com `/nome-da-skill` dentro do Claude Code. C
 Cria um scaffold completo de modulo.
 
 ```bash
-/dev-create-module domains
+/dev-create-module orders
 ```
 
 Pergunta sobre endpoints e tipo de UI, depois delega para agentes especializados para criar a estrutura completa.
+
+**Exemplo de saida:**
+
+```text
+src/modules/orders/
+├── types/orders.types.ts
+├── contracts/orders.contracts.ts
+├── adapters/order-adapter.ts
+├── services/order-service.ts
+├── stores/useOrdersStore.ts
+├── composables/useOrdersList.ts
+├── composables/useOrderMutations.ts
+├── components/OrderCard.vue
+├── components/OrderForm.vue
+├── views/OrdersView.vue
+└── __tests__/order-adapter.spec.ts
+```
 
 ---
 
@@ -21,7 +38,7 @@ Pergunta sobre endpoints e tipo de UI, depois delega para agentes especializados
 Cria um componente Vue com o template padrao de script setup.
 
 ```bash
-/dev-create-component DomainsTable
+/dev-create-component OrderCard
 ```
 
 Determina a localizacao (modulo vs compartilhado), aplica props/emits baseados em tipo, impoe < 200 linhas.
@@ -33,7 +50,7 @@ Determina a localizacao (modulo vs compartilhado), aplica props/emits baseados e
 Cria a camada de dados completa para um recurso.
 
 ```bash
-/dev-create-service domains
+/dev-create-service orders
 ```
 
 Cria 4 arquivos: `.types.ts` + `.contracts.ts` + `-adapter.ts` + `-service.ts`
@@ -45,7 +62,7 @@ Cria 4 arquivos: `.types.ts` + `.contracts.ts` + `-adapter.ts` + `-service.ts`
 Cria um composable com integracao Vue Query.
 
 ```bash
-/dev-create-composable useDomainsList
+/dev-create-composable useOrdersList
 ```
 
 Templates para queries, mutations e logica compartilhada.
@@ -57,7 +74,7 @@ Templates para queries, mutations e logica compartilhada.
 Cria testes para um arquivo especificado.
 
 ```bash
-/dev-create-test src/modules/domains/adapters/domains-adapter.ts
+/dev-create-test src/modules/orders/adapters/order-adapter.ts
 ```
 
 **Prioridade de testes:**
@@ -72,7 +89,7 @@ Cria testes para um arquivo especificado.
 Gera tipos, contratos e adapter a partir de um endpoint ou resposta JSON.
 
 ```bash
-/dev-generate-types /v4/domains
+/dev-generate-types /v2/orders
 ```
 
 Trata a conversao snake_case → camelCase e cria adapters tanto de entrada quanto de saida.
@@ -88,12 +105,34 @@ Revisao completa de codigo contra `ARCHITECTURE.md`.
 ```bash
 /review-review
 # Ou com escopo:
-/review-review src/modules/marketplace/
+/review-review src/modules/orders/
 ```
 
 Executa verificacoes automatizadas (`tsc`, `eslint`, `vitest`, `build`) e revisao manual. Produz um relatorio com niveis de severidade.
 
-**Veredito:** ✅ Aprovado | ⚠️ Com ressalvas | ❌ Requer alteracoes
+**Exemplo de saida:**
+
+```markdown
+## Review — src/modules/orders/
+
+### Scorecard
+| Dimensao | Nota | Observacoes |
+|----------|------|-------------|
+| Arquitetura | A | Todas as camadas seguem ARCHITECTURE.md |
+| Type Safety | B | Falta tipo de retorno em useOrdersList |
+| Seguranca | A | Sem v-html, inputs sanitizados |
+| Manutenibilidade | A | Arquivos pequenos, nomes claros |
+
+### Auto: tsc ✅ | ESLint ✅ | Build ✅ | Tests ✅
+
+### Violacoes
+- order-service.ts:12 — try/catch envolvendo chamada HTTP → remover, deixar error boundary tratar
+
+### Destaques
+- order-adapter.ts:5 — Parsing bidirecional limpo com cobertura total de tipos
+
+### Veredito: ⚠️ Com ressalvas — corrija a anotacao de tipo antes do merge
+```
 
 ---
 
@@ -102,7 +141,7 @@ Executa verificacoes automatizadas (`tsc`, `eslint`, `vitest`, `build`) e revisa
 Executa 14 verificacoes automatizadas de conformidade:
 
 ```bash
-/review-check-architecture marketplace
+/review-check-architecture orders
 ```
 
 | # | Verificacao |
@@ -129,7 +168,7 @@ Executa 14 verificacoes automatizadas de conformidade:
 Encontra e corrige automaticamente violacoes de arquitetura.
 
 ```bash
-/review-fix-violations marketplace
+/review-fix-violations orders
 ```
 
 Corrige por prioridade: 🔴 Critico → 🟡 Importante → 🟢 Melhorias. Valida apos cada correcao.
@@ -155,7 +194,7 @@ Analisa a estrutura atual, mapeia consumidores, converte para TypeScript complet
 Migra um modulo inteiro atraves de 6 fases.
 
 ```bash
-/migration-migrate-module src/views/marketplace/
+/migration-migrate-module src/modules/legacy-orders/
 ```
 
 Delega para `@migrator`. Inclui pontos de aprovacao entre as fases.
@@ -169,7 +208,7 @@ Delega para `@migrator`. Inclui pontos de aprovacao entre as fases.
 Resumo rapido de modulo para onboarding de desenvolvedores.
 
 ```bash
-/docs-onboard marketplace
+/docs-onboard orders
 ```
 
 Lista endpoints, componentes principais, mostra a separacao Pinia vs Vue Query, sinaliza padroes fora do padrao. Objetivo: entender um modulo em 2 minutos.

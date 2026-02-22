@@ -63,7 +63,7 @@ claude
 "Use @starter to create a task-manager app with Vue + Express + PostgreSQL"
 
 # Build a feature inside an existing project
-"Use @builder to create a domains module with CRUD"
+"Use @builder to create an orders module with CRUD for GET/POST/PATCH/DELETE /v2/orders"
 ```
 
 ---
@@ -75,6 +75,7 @@ claude
 | Agent | What it does |
 |-------|--------------|
 | **@starter** | Create a new project from scratch — any frontend + backend + database |
+| **@explorer** | Explore unfamiliar codebases — onboarding, technical assessments, health score |
 
 ### Specialist Agents
 
@@ -107,17 +108,20 @@ claude
 # Start a new full-stack project
 "Use @starter to create an e-commerce app with Vue + Fastify + PostgreSQL"
 
+# Explore an unfamiliar codebase
+"Use @explorer to assess this project — I just joined the team"
+
 # Build features
-"Use @builder to create the products module with CRUD"
+"Use @builder to create the orders module with CRUD for /v2/orders"
 
 # Review before merging
-"Use @reviewer to review my last commit"
+"Use @reviewer to review the changes in the payments module"
 
 # Debug issues
 "Use @doctor to investigate the 500 error on login"
 
 # Migrate legacy code (6 phases with approval gates)
-"Use @migrator to migrate the billing module"
+"Use @migrator to migrate the billing module from Options API to script setup"
 ```
 
 ---
@@ -214,7 +218,7 @@ specialist-agent/
 │       ├── ARCHITECTURE.md   ← Architecture patterns
 │       └── CLAUDE.md         ← Pack-specific config
 │
-├── agents/                   ← Framework-agnostic agents (8 + 8 lite)
+├── agents/                   ← Framework-agnostic agents (9 + 9 lite)
 │
 ├── cli/                      ← CLI installer
 │   └── index.mjs             ← npx specialist-agent init
@@ -250,25 +254,37 @@ Add to your Claude Code MCP config (`~/.claude/mcp.json`):
 
 ### Add an Agent
 
-Create `.claude/agents/my-agent.md`:
+Create `.claude/agents/my-agent.md` following the **5-part blueprint** (Mission, Workflow, Output, Rules, Handoff):
 
 ```markdown
 ---
 name: my-agent
-description: "MUST BE USED to [do X] whenever [condition]."
+description: "MUST BE USED to [do X] when [trigger]. Use PROACTIVELY when [condition]."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Title
 
 ## Mission
-One sentence.
+One sentence describing what this agent does.
 
 ## Workflow
-1. ...
+1. Step one
+2. Step two
+
+## Output
+After completing work, provide:
+- What was done (files created/modified)
+- Key decisions and rationale
+- Validation results
+- Recommendations for next steps
 
 ## Rules
-- ...
+- Rule one
+- Rule two
+
+## Handoff Protocol
+- If [condition] → suggest @agent-name
 ```
 
 ### Add a Skill
