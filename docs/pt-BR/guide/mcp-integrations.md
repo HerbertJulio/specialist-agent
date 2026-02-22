@@ -74,10 +74,10 @@ O Context7 vem pre-configurado no `.mcp.json` do Specialist Agent. Nenhuma confi
 {
   "mcpServers": {
     "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "<your-token>"
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp",
+      "headers": {
+        "Authorization": "Bearer <your-github-pat>"
       }
     }
   }
@@ -85,7 +85,7 @@ O Context7 vem pre-configurado no `.mcp.json` do Specialist Agent. Nenhuma confi
 ```
 
 ::: warning Autenticacao Necessaria
-Voce precisa de um GitHub Personal Access Token. Crie um em [github.com/settings/tokens](https://github.com/settings/tokens) com escopo `repo`.
+Voce precisa de um [GitHub Personal Access Token](https://github.com/settings/personal-access-tokens/new). Armazene como variavel de ambiente — nunca faça commit de tokens no seu repositorio.
 :::
 
 ---
@@ -127,8 +127,8 @@ Voce precisa de um GitHub Personal Access Token. Crie um em [github.com/settings
 Ou via Claude Code CLI:
 
 ```bash
-claude mcp add "azion" "https://mcp.azion.com" -t http \
-  -H "Authorization: Bearer $AZION_PERSONAL_TOKEN"
+claude mcp add --transport http azion https://mcp.azion.com \
+  --header "Authorization: Bearer $AZION_PERSONAL_TOKEN"
 ```
 
 ::: warning Autenticacao Necessaria
@@ -179,10 +179,10 @@ Aqui esta um `.mcp.json` completo com todos os servidores recomendados:
       }
     },
     "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "<your-github-token>"
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp",
+      "headers": {
+        "Authorization": "Bearer <your-github-pat>"
       }
     },
     "sequential-thinking": {
