@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.1.0...specialist-agent-v1.2.0) (2026-02-22)
+
+
+### Features
+
+* revise MCP integrations and add Azion Edge Mode ([#9](https://github.com/HerbertJulio/specialist-agent/issues/9)) ([4043322](https://github.com/HerbertJulio/specialist-agent/commit/40433226e6dfe6af393af711903287625bc3a0c0))
+
 ## [1.1.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.0.1...specialist-agent-v1.1.0) (2026-02-22)
 
 
