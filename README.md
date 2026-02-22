@@ -15,7 +15,7 @@
 
 ---
 
-## What is Specialist Agent?
+## 💡 What is Specialist Agent?
 
 Specialist Agent is a collection of **AI agents**, **skills**, and **architectural conventions** for Claude Code. It's not a library — it's a set of markdown instructions that make Claude Code work like a senior developer who knows your codebase.
 
@@ -30,7 +30,7 @@ Specialist Agent is a collection of **AI agents**, **skills**, and **architectur
 
 ---
 
-## Token Consumption Notice
+## 🪙 Token Consumption Notice
 
 Agents consume tokens proportional to their complexity. Specialist Agent ships with **Lite agents** that use `model: haiku` — significantly cheaper per token.
 
@@ -41,7 +41,7 @@ Agents consume tokens proportional to their complexity. Specialist Agent ships w
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 **1. Install into your project**
 
@@ -69,7 +69,7 @@ claude
 
 ---
 
-## Meet Your AI Team
+## 🤖 Meet Your AI Team
 
 ### Framework-Agnostic
 
@@ -127,7 +127,7 @@ claude
 
 ---
 
-## Skills
+## ⚡ Skills
 
 Quick shortcuts you invoke with `/skill-name` in Claude Code.
 
@@ -165,7 +165,7 @@ Quick shortcuts you invoke with `/skill-name` in Claude Code.
 
 ---
 
-## Architecture
+## 🏛️ Architecture
 
 All agents enforce the four-layer architecture defined in each pack:
 
@@ -186,7 +186,7 @@ Each pack adapts the orchestration layer:
 
 ---
 
-## Lite Mode — Lower Token Usage
+## 🪶 Lite Mode — Lower Token Usage
 
 For cost-conscious usage or simpler tasks:
 
@@ -204,7 +204,7 @@ npx specialist-agent init    # select "Lite" mode in wizard
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```text
 specialist-agent/
@@ -230,7 +230,7 @@ specialist-agent/
 
 ---
 
-## Optional: Context7 MCP
+## 🔌 Optional: Context7 MCP
 
 For enhanced documentation access, add the [Context7 MCP server](https://github.com/upstash/context7). It gives Claude real-time access to up-to-date docs for Vue 3, Pinia, TanStack Query, and other libraries.
 
@@ -251,7 +251,7 @@ Add to your Claude Code MCP config (`~/.claude/mcp.json`):
 
 ---
 
-## Customization
+## 🔧 Customization
 
 ### Add an Agent
 
@@ -315,7 +315,7 @@ Edit `docs/ARCHITECTURE.md` — all agents read this file before acting. Changes
 
 ---
 
-## Documentation
+## 📚 Documentation
 
 Full docs are available via VitePress:
 
@@ -333,7 +333,7 @@ npm install && npm run docs:dev
 
 ---
 
-## Contributing
+## 📫 Contributing
 
 Contributions are welcome!
 
@@ -351,7 +351,7 @@ git push origin feature/my-feature
 
 ---
 
-## License
+## 📝 License
 
 MIT — Use freely. See [LICENSE](LICENSE).
 
