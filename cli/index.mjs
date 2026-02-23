@@ -48,84 +48,45 @@ function handleCancel() {
   process.exit(0)
 }
 
-// ── Scenario guidance ────────────────────────────────
+// ── Guidance texts ───────────────────────────────────
 
-const scenarioGuidance = {
-  'new-project': {
-    title: 'New project from scratch',
-    text: `Use @starter to scaffold your entire project step by step:
+function buildGettingStarted(agentNames, installedSkills) {
+  const lines = []
 
-  $ claude
-  > "Use @starter to create my project"
+  lines.push('Agents enforce the architecture defined in docs/ARCHITECTURE.md.')
+  lines.push('They ensure consistency across modules \u2014 the more you use them,')
+  lines.push('the more value they deliver.')
+  lines.push('')
+  lines.push('Examples:')
+  lines.push('')
+  lines.push('  $ claude')
 
-  @starter will guide you through:
-  \u2022 Frontend framework & UI library
-  \u2022 Backend & API layer
-  \u2022 Database & ORM
-  \u2022 Authentication
-  \u2022 Docker & CI/CD`
-  },
-  'early-stage': {
-    title: 'Early-stage project',
-    text: `Your project exists but needs structure. Start with:
-
-  $ claude
-  > "Use @reviewer to analyze my project architecture"
-  > "Use @builder to create the users module with CRUD"
-
-  Recommended flow:
-  1. @reviewer  \u2014 audit current code and suggest architecture
-  2. @builder   \u2014 create modules following the architecture
-  3. @tester    \u2014 add test coverage for new modules`
-  },
-  'daily': {
-    title: 'Day-to-day development',
-    text: `Your agents are ready. Here are some examples:
-
-  $ claude
-  > "Use @builder to create a products component"
-  > "Use @doctor to investigate the login error"
-  > "Use @reviewer to review src/modules/auth/"
-
-  Skills (slash commands):
-  > /dev-create-module
-  > /review-check-architecture`
-  },
-  'daily-migrate': {
-    title: 'Day-to-day + migration',
-    text: `Combine daily development with gradual migration:
-
-  $ claude
-  > "Use @builder to create new features"
-  > "Use @migrator to migrate src/legacy/users/"
-
-  Suggested approach:
-  1. @reviewer   \u2014 map current architecture
-  2. @migrator   \u2014 migrate modules one at a time
-  3. @builder    \u2014 build new features with target architecture
-  4. @tester     \u2014 ensure nothing breaks during migration`
-  },
-  'migrate': {
-    title: 'Migration only',
-    text: `Focus on migrating to the target architecture:
-
-  $ claude
-  > "Use @reviewer to analyze the current architecture"
-  > "Use @migrator to migrate src/modules/users/"
-
-  Migration flow:
-  1. @reviewer  \u2014 full audit and migration plan
-  2. @migrator  \u2014 migrate module by module
-  3. @tester    \u2014 validate each migration step`
-  },
-  'just-install': {
-    title: 'Just install',
-    text: `Agents and skills are installed. You're good to go!
-
-  $ claude
-  > /agents                  # list installed agents
-  > "Use @builder to ..."    # start building`
+  if (agentNames.includes('builder')) {
+    lines.push('  > "Use @builder to create the products module with CRUD"')
   }
+  if (agentNames.includes('reviewer')) {
+    lines.push('  > "Use @reviewer to review src/modules/auth/"')
+  }
+  if (agentNames.includes('doctor')) {
+    lines.push('  > "Use @doctor to investigate the dashboard error"')
+  }
+
+  if (installedSkills.length > 0) {
+    lines.push('')
+    lines.push('Skills (slash commands):')
+    installedSkills.slice(0, 3).forEach(skill => {
+      lines.push(`  > ${skill}`)
+    })
+  }
+
+  if (agentNames.includes('starter')) {
+    lines.push('')
+    lines.push('If you need to scaffold a new project from scratch, @starter')
+    lines.push('can help with the initial setup (stack, backend, database).')
+    lines.push('  > "Use @starter to create my project"')
+  }
+
+  return lines.join('\n')
 }
 
 // ── CLI argument handling ────────────────────────────
@@ -315,26 +276,12 @@ async function main() {
 
   clack.note(summaryLines.join('\n'), `${packLabel} \u00b7 ${mode === 'full' ? 'Full' : 'Lite'}`)
 
-  // 5. Scenario
-  const scenario = await clack.select({
-    message: 'What best describes your situation?',
-    options: [
-      { value: 'new-project', label: 'New project from scratch', hint: "I'm starting from zero" },
-      { value: 'early-stage', label: 'Early-stage project', hint: 'needs architecture & structure' },
-      { value: 'daily', label: 'Day-to-day development', hint: 'project is running, need help' },
-      { value: 'daily-migrate', label: 'Day-to-day + migration', hint: 'help + improve architecture' },
-      { value: 'migrate', label: 'Migration only', hint: 'migrate to better architecture' },
-      { value: 'just-install', label: 'Just install agents', hint: 'skip guidance' },
-    ],
-  })
+  // Getting started
+  const installedSkills = existsSync(skillsDest)
+    ? readdirSync(skillsDest, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => '/' + d.name)
+    : []
 
-  if (clack.isCancel(scenario)) handleCancel()
-
-  // 6. Guidance
-  const guidance = scenarioGuidance[scenario]
-  if (guidance && scenario !== 'just-install') {
-    clack.note(guidance.text, guidance.title)
-  }
+  clack.note(buildGettingStarted(agentNames, installedSkills), 'Getting started')
 
   if (mode === 'lite') {
     clack.log.info(`${DIM}Lite mode: agents run on Haiku (lower cost, faster).${NC}`)
