@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.3.0...specialist-agent-v1.4.0) (2026-02-23)
+
+
+### Features
+
+* **cli:** auto-detect framework from package.json ([#20](https://github.com/HerbertJulio/specialist-agent/issues/20)) ([6d4026e](https://github.com/HerbertJulio/specialist-agent/commit/6d4026e5f1e7b7a6d84d12a2e282f444f808f2b2))
+* **cli:** migrate to @clack/prompts and add scenario selector ([#18](https://github.com/HerbertJulio/specialist-agent/issues/18)) ([9473c65](https://github.com/HerbertJulio/specialist-agent/commit/9473c65b3654fc0b4746eacc07a22dd9a9a75867))
+
 ## [1.3.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.2.2...specialist-agent-v1.3.0) (2026-02-22)
 
 
