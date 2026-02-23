@@ -23,12 +23,12 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing tes
 
 ### Workflow
 1. Analyze project structure:
-   - Identify all testable layers (services, adapters, composables, components, API routes)
+   - Identify all testable layers (services, adapters, hooks/composables, components, API routes)
    - Check existing test coverage
    - Identify test gaps and high-risk untested code
 2. Design testing pyramid:
    - **Unit tests** (70%): pure functions, adapters, utilities, validators
-   - **Integration tests** (20%): composables + services, API endpoints, database queries
+   - **Integration tests** (20%): hooks/composables + services, API endpoints, database queries
    - **E2E tests** (10%): critical user flows (login, checkout, CRUD operations)
 3. Define testing conventions:
    - File naming: `[OriginalName].spec.ts` or `[OriginalName].test.ts`
@@ -62,7 +62,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing tes
 2. Determine test type:
    - **Pure functions** (adapters, utils): direct input/output testing, no mocks needed
    - **Services** (HTTP calls): mock HTTP client, test request building and response handling
-   - **Composables**: mock services, test reactive behavior and state transitions
+   - **Hooks/Composables**: mock services, test reactive behavior and state transitions
    - **Components**: render with test-utils, test user interactions and rendered output
    - **API routes**: supertest/integration test with test database
 3. Create test file:
@@ -83,8 +83,8 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing tes
 ```
 Pure functions (adapters, utils):     No mocks — test directly
 Services (HTTP):                      Mock axios/fetch, verify URL + params
-Composables (with service):           Mock service module, test reactive state
-Components (with composable):         Mock composable return values, test UI
+Hooks/Composables (with service):     Mock service module, test reactive state
+Components (with hook/composable):    Mock hook/composable return values, test UI
 API routes (with database):           Test database or mock repository layer
 ```
 

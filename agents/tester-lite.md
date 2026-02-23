@@ -26,7 +26,7 @@ Design and implement comprehensive testing strategies.
 2. Determine type:
    - Pure functions: direct I/O, no mocks
    - Services: mock HTTP, test request/response
-   - Composables: mock services, test reactivity
+   - Hooks/Composables: mock services, test reactivity
    - Components: render, test interactions
 3. Write: happy path + edge cases + error cases
 4. Use AAA: Arrange → Act → Assert
