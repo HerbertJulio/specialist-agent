@@ -15,10 +15,13 @@ cd /path/to/your-project
 npx specialist-agent init
 ```
 
-The wizard asks:
-1. **Framework** — Vue 3, React (coming soon)
+The wizard will:
+
+1. **Framework** — Auto-detects from `package.json` (Vue 3, React, Next.js, SvelteKit) or asks
 2. **Mode** — Full (Sonnet/Opus) or Lite (Haiku)
 3. **Starter agent** — Install @starter for project creation?
+4. **Specialist agents** — Install @finance, @cloud, @security, @designer, @data, @devops, @tester, @explorer?
+5. **Global install** — Install generic agents to `~/.claude/agents` (available across all projects)?
 
 ## What Gets Installed
 
@@ -26,9 +29,11 @@ The wizard asks:
 graph TB
     setup["npx specialist-agent init"] --> wizard{"Setup Wizard"}
 
-    wizard -->|"1. Framework"| pack["Vue 3 · React ..."]
+    wizard -->|"1. Framework"| pack["Auto-detect or select"]
     wizard -->|"2. Mode"| mode["Full · Lite"]
     wizard -->|"3. Starter?"| starter["Yes · No"]
+    wizard -->|"4. Specialists?"| specialists["Yes · No"]
+    wizard -->|"5. Global?"| global["~/.claude/agents"]
 
     subgraph installed["  What Gets Installed  "]
         direction LR
@@ -40,6 +45,7 @@ graph TB
             a3["@reviewer"]
             a4["@migrator"]
             a5["@doctor"]
+            a6["@finance, @cloud, ..."]
         end
 
         subgraph sk[" Skills "]
@@ -60,6 +66,8 @@ graph TB
     pack --> installed
     mode --> installed
     starter --> installed
+    specialists --> installed
+    global --> installed
 
     style setup fill:#42b883,color:#fff,font-weight:bold
     style wizard fill:#35495e,color:#fff
@@ -72,6 +80,7 @@ graph TB
     style a3 fill:#42b883,color:#fff
     style a4 fill:#35495e,color:#fff
     style a5 fill:#42b883,color:#fff
+    style a6 fill:#35495e,color:#fff
 ```
 
 The installer copies these files into your project:
@@ -79,12 +88,15 @@ The installer copies these files into your project:
 ```text
 your-project/
 ├── .claude/
-│   ├── agents/              ← 5 AI subagents
+│   ├── agents/              ← Pack agents + optional specialists
 │   │   ├── starter.md
 │   │   ├── builder.md
 │   │   ├── reviewer.md
 │   │   ├── migrator.md
-│   │   └── doctor.md
+│   │   ├── doctor.md
+│   │   ├── finance.md       ← specialist (if selected)
+│   │   ├── cloud.md
+│   │   └── ...
 │   └── skills/              ← 12 skills
 │       ├── dev-create-module/
 │       ├── review-review/
