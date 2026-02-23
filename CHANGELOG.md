@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.4.0...specialist-agent-v1.4.1) (2026-02-23)
+
+
+### Bug Fixes
+
+* **cli:** add overwrite protection and framework-neutral agents ([#21](https://github.com/HerbertJulio/specialist-agent/issues/21)) ([0ea2055](https://github.com/HerbertJulio/specialist-agent/commit/0ea2055ecbf717f50907d327d8fe1b5a71abf6c5))
+
 ## [1.4.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.3.0...specialist-agent-v1.4.0) (2026-02-23)
 
 
