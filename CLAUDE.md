@@ -8,7 +8,27 @@ AI agents for Claude Code — any framework, any stack. Includes specialized age
 
 ## AI Team Configuration
 
-**Important: YOU MUST USE subagents when available for the task.**
+### Auto-Dispatch Rules
+
+You **MUST** automatically delegate to the correct agent based on the user's intent. Do NOT ask which agent to use — detect it from the request:
+
+| User intent | Agent |
+|-------------|-------|
+| Create modules, components, services, or any new code | `@builder` |
+| Review code, check architecture, analyze performance | `@reviewer` |
+| Investigate bugs, trace errors, debug issues | `@doctor` |
+| Migrate legacy code, modernize modules | `@migrator` |
+| Scaffold a new project from scratch | `@starter` |
+| Payments, billing, invoicing, financial reporting | `@finance` |
+| Cloud infra, IaC, serverless, containers | `@cloud` |
+| Auth flows, security audit, RBAC, encryption | `@security` |
+| Design systems, responsive layouts, accessibility, theming | `@designer` |
+| Database modeling, migrations, caching, query optimization | `@data` |
+| Docker, Kubernetes, CI/CD pipelines, monitoring | `@devops` |
+| Test strategies, test suites, coverage, mocking | `@tester` |
+| Explore unfamiliar codebase, onboarding, technical assessment | `@explorer` |
+
+If a task spans multiple agents, invoke them in sequence (e.g., @builder then @reviewer).
 
 ### Available Agents
 
