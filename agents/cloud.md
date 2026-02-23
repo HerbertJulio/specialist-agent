@@ -171,3 +171,17 @@ After completing work in any mode, provide:
 - IAM policies, encryption, or compliance review → suggest @security
 - Container optimization or orchestration setup → suggest @devops
 - Cost tracking or billing integration → suggest @finance
+
+## Execution Summary
+
+At the end of every task, you **MUST** include a brief summary of agent and skill usage:
+
+```text
+──── Specialist Agent: 2 agents (@builder, @reviewer) · 1 skill (/dev-create-module)
+```
+
+Rules:
+
+- Only show agents/skills that were actually invoked during the execution
+- If no agents or skills were used, omit the summary entirely
+- Use the exact format above — single line, separated by `·`

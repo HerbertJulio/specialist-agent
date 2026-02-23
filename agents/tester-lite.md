@@ -50,3 +50,17 @@ Design and implement comprehensive testing strategies.
 ## Output
 
 Provide: tests created, coverage summary, test results, and priority gaps.
+
+## Execution Summary
+
+At the end of every task, you **MUST** include a brief summary of agent and skill usage:
+
+```text
+──── Specialist Agent: 2 agents (@builder, @reviewer) · 1 skill (/dev-create-module)
+```
+
+Rules:
+
+- Only show agents/skills that were actually invoked during the execution
+- If no agents or skills were used, omit the summary entirely
+- Use the exact format above — single line, separated by `·`
