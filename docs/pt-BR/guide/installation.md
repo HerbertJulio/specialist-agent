@@ -15,10 +15,13 @@ cd /path/to/your-project
 npx specialist-agent init
 ```
 
-O assistente pergunta:
-1. **Framework** — Vue 3, React (em breve)
+O assistente ira:
+
+1. **Framework** — Detecta automaticamente pelo `package.json` (Vue 3, React, Next.js, SvelteKit) ou pergunta
 2. **Modo** — Full (Sonnet/Opus) ou Lite (Haiku)
 3. **Agente starter** — Instalar @starter para criacao de projetos?
+4. **Agentes especialistas** — Instalar @finance, @cloud, @security, @designer, @data, @devops, @tester, @explorer?
+5. **Instalacao global** — Instalar agentes genericos em `~/.claude/agents` (disponiveis em todos os projetos)?
 
 ## O Que e Instalado
 
@@ -26,9 +29,11 @@ O assistente pergunta:
 graph TB
     setup["npx specialist-agent init"] --> wizard{"Setup Wizard"}
 
-    wizard -->|"1. Framework"| pack["Vue 3 · React ..."]
+    wizard -->|"1. Framework"| pack["Auto-detect ou selecionar"]
     wizard -->|"2. Mode"| mode["Full · Lite"]
     wizard -->|"3. Starter?"| starter["Yes · No"]
+    wizard -->|"4. Especialistas?"| specialists["Yes · No"]
+    wizard -->|"5. Global?"| global["~/.claude/agents"]
 
     subgraph installed["  O Que e Instalado  "]
         direction LR
@@ -40,6 +45,7 @@ graph TB
             a3["@reviewer"]
             a4["@migrator"]
             a5["@doctor"]
+            a6["@finance, @cloud, ..."]
         end
 
         subgraph sk[" Skills "]
@@ -60,6 +66,8 @@ graph TB
     pack --> installed
     mode --> installed
     starter --> installed
+    specialists --> installed
+    global --> installed
 
     style setup fill:#42b883,color:#fff,font-weight:bold
     style wizard fill:#35495e,color:#fff
@@ -72,6 +80,7 @@ graph TB
     style a3 fill:#42b883,color:#fff
     style a4 fill:#35495e,color:#fff
     style a5 fill:#42b883,color:#fff
+    style a6 fill:#35495e,color:#fff
 ```
 
 O instalador copia estes arquivos para o seu projeto:
@@ -79,12 +88,15 @@ O instalador copia estes arquivos para o seu projeto:
 ```text
 your-project/
 ├── .claude/
-│   ├── agents/              ← 5 subagentes de IA
+│   ├── agents/              ← Agentes do pack + especialistas opcionais
 │   │   ├── starter.md
 │   │   ├── builder.md
 │   │   ├── reviewer.md
 │   │   ├── migrator.md
-│   │   └── doctor.md
+│   │   ├── doctor.md
+│   │   ├── finance.md       ← especialista (se selecionado)
+│   │   ├── cloud.md
+│   │   └── ...
 │   └── skills/              ← 12 skills
 │       ├── dev-create-module/
 │       ├── review-review/

@@ -68,10 +68,13 @@ cd /path/to/your-project
 npx specialist-agent init
 ```
 
-The wizard asks:
-1. Which framework? (Vue 3, React...)
-2. Full or Lite mode?
-3. Install @starter agent?
+The wizard will:
+
+1. **Auto-detect** your framework from `package.json` (or ask)
+2. Choose **Full** or **Lite** mode
+3. Install **@starter** agent (optional)
+4. Install **specialist agents** — @finance, @cloud, @security, etc. (optional)
+5. Install generic agents **globally** to `~/.claude/agents` (optional)
 
 **2. Start using**
 

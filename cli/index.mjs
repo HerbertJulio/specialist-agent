@@ -4,6 +4,7 @@ import * as clack from '@clack/prompts'
 import { existsSync, mkdirSync, cpSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import { join, dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
+import { homedir } from 'os'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -46,6 +47,35 @@ function getAgentNames(dir) {
 function handleCancel() {
   clack.cancel('Setup cancelled.')
   process.exit(0)
+}
+
+async function checkForUpdates(currentVersion) {
+  try {
+    const res = await fetch('https://registry.npmjs.org/specialist-agent/latest', {
+      signal: AbortSignal.timeout(3000),
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    const latest = data.version
+    if (latest && latest !== currentVersion) return latest
+    return null
+  } catch {
+    return null
+  }
+}
+
+function detectFramework(pkgPath, availablePacks) {
+  if (!existsSync(pkgPath)) return null
+  const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'))
+  const deps = { ...pkg.dependencies, ...pkg.devDependencies }
+
+  // Order matters: next includes react, so check next first
+  if (deps['next'] && availablePacks.includes('nextjs')) return 'nextjs'
+  if ((deps['@sveltejs/kit'] || deps['svelte']) && availablePacks.includes('svelte')) return 'svelte'
+  if (deps['vue'] && availablePacks.includes('vue')) return 'vue'
+  if (deps['react'] && availablePacks.includes('react')) return 'react'
+
+  return null
 }
 
 // ── Guidance texts ───────────────────────────────────
@@ -131,6 +161,13 @@ async function main() {
 
   clack.intro(`Specialist Agent ${DIM}v${pkg.version}${NC}`)
 
+  // Check for updates
+  const latestVersion = await checkForUpdates(pkg.version)
+  if (latestVersion) {
+    clack.log.warn(`Update available: v${pkg.version} → v${latestVersion}`)
+    clack.log.info(`${DIM}Run: npm i -g specialist-agent@latest${NC}`)
+  }
+
   // Check we're in a project
   const cwd = process.cwd()
   if (!existsSync(join(cwd, 'package.json'))) {
@@ -163,15 +200,43 @@ async function main() {
 
   const packLabels = { vue: 'Vue 3', react: 'React', nextjs: 'Next.js', svelte: 'SvelteKit' }
 
-  const framework = await clack.select({
-    message: 'Which framework?',
-    options: packs.map(p => ({
-      value: p,
-      label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
-    })),
-  })
+  const detected = detectFramework(join(cwd, 'package.json'), packs)
+  let framework
 
-  if (clack.isCancel(framework)) handleCancel()
+  if (detected) {
+    clack.log.success(`Detected ${packLabels[detected] || detected} from package.json`)
+
+    const useDetected = await clack.confirm({
+      message: `Use ${packLabels[detected] || detected} pack?`,
+      initialValue: true,
+    })
+
+    if (clack.isCancel(useDetected)) handleCancel()
+
+    if (useDetected) {
+      framework = detected
+    } else {
+      framework = await clack.select({
+        message: 'Which framework?',
+        options: packs.map(p => ({
+          value: p,
+          label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
+        })),
+      })
+
+      if (clack.isCancel(framework)) handleCancel()
+    }
+  } else {
+    framework = await clack.select({
+      message: 'Which framework?',
+      options: packs.map(p => ({
+        value: p,
+        label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
+      })),
+    })
+
+    if (clack.isCancel(framework)) handleCancel()
+  }
 
   // 2. Mode
   const mode = await clack.select({
@@ -199,6 +264,17 @@ async function main() {
   })
 
   if (clack.isCancel(installSpecialists)) handleCancel()
+
+  // 5. Global install
+  let installGlobal = false
+  if (installStarter || installSpecialists) {
+    installGlobal = await clack.confirm({
+      message: 'Install generic agents globally (~/.claude/agents)?',
+      initialValue: false,
+    })
+
+    if (clack.isCancel(installGlobal)) handleCancel()
+  }
 
   // ── Install files ──────────────────────────────────
 
@@ -239,6 +315,36 @@ async function main() {
     }
   }
 
+  // Install agents globally
+  let globalAgentCount = 0
+  if (installGlobal) {
+    const globalAgentsDest = join(homedir(), '.claude', 'agents')
+    mkdirSync(globalAgentsDest, { recursive: true })
+
+    if (installStarter) {
+      const starterFile = mode === 'lite' ? 'starter-lite.md' : 'starter.md'
+      const starterSource = join(ROOT, 'agents', starterFile)
+      const starterGlobalDest = join(globalAgentsDest, 'starter.md')
+      if (existsSync(starterSource)) {
+        cpSync(starterSource, starterGlobalDest)
+        globalAgentCount++
+      }
+    }
+
+    if (installSpecialists) {
+      const specialistNames = ['explorer', 'finance', 'cloud', 'security', 'designer', 'data', 'devops', 'tester']
+      for (const name of specialistNames) {
+        const suffix = mode === 'lite' ? '-lite.md' : '.md'
+        const source = join(ROOT, 'agents', `${name}${suffix}`)
+        const dest = join(globalAgentsDest, `${name}.md`)
+        if (existsSync(source)) {
+          cpSync(source, dest)
+          globalAgentCount++
+        }
+      }
+    }
+  }
+
   // Install skills
   const skillsDest = join(cwd, '.claude', 'skills')
   mkdirSync(skillsDest, { recursive: true })
@@ -273,6 +379,8 @@ async function main() {
   if (skillCount > 0) summaryLines.push(`\u2713 ${skillCount} skills`)
   if (archInstalled) summaryLines.push('\u2713 docs/ARCHITECTURE.md')
   if (claudeInstalled) summaryLines.push('\u2713 CLAUDE.md')
+
+  if (globalAgentCount > 0) summaryLines.push(`\u2713 ${globalAgentCount} global agents (~/.claude/agents)`)
 
   clack.note(summaryLines.join('\n'), `${packLabel} \u00b7 ${mode === 'full' ? 'Full' : 'Lite'}`)
 
