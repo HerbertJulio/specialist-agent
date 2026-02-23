@@ -48,6 +48,21 @@ function handleCancel() {
   process.exit(0)
 }
 
+async function checkForUpdates(currentVersion) {
+  try {
+    const res = await fetch('https://registry.npmjs.org/specialist-agent/latest', {
+      signal: AbortSignal.timeout(3000),
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    const latest = data.version
+    if (latest && latest !== currentVersion) return latest
+    return null
+  } catch {
+    return null
+  }
+}
+
 function detectFramework(pkgPath, availablePacks) {
   if (!existsSync(pkgPath)) return null
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'))
@@ -144,6 +159,13 @@ async function main() {
   const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf-8'))
 
   clack.intro(`Specialist Agent ${DIM}v${pkg.version}${NC}`)
+
+  // Check for updates
+  const latestVersion = await checkForUpdates(pkg.version)
+  if (latestVersion) {
+    clack.log.warn(`Update available: v${pkg.version} → v${latestVersion}`)
+    clack.log.info(`${DIM}Run: npm i -g specialist-agent@latest${NC}`)
+  }
 
   // Check we're in a project
   const cwd = process.cwd()
