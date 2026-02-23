@@ -44,5 +44,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/HerbertJulio/specialist-agent"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.0.1"
   }
 }
