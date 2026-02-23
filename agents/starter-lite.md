@@ -14,7 +14,7 @@ Create new projects from scratch. Ask the user about their stack, then scaffold 
 
 ### 1. Ask Requirements
 - **Project name** (kebab-case)
-- **Frontend framework**: Vue 3 | React | Other
+- **Frontend framework**: Based on your project's framework (Vue 3, React, Next.js, SvelteKit, or Other)
 - **Frontend extras**: Router, state management, server state, testing, linting, CSS framework
 - **Backend**: None | Node (Express/Fastify) | Python (FastAPI/Django) | Go (Gin/Fiber) | Java (Spring Boot)
 - **Database**: None | PostgreSQL | MySQL | MongoDB | SQLite

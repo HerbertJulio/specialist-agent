@@ -16,7 +16,7 @@ Create new projects from scratch. Ask the user about their desired stack, then s
 Ask the user:
 
 1. **Project name** — kebab-case (e.g. `my-ecommerce-app`)
-2. **Frontend framework** — Vue 3 (default) | React | Other
+2. **Frontend framework** — Based on your project's framework (Vue 3, React, Next.js, SvelteKit, or Other)
 3. **Frontend extras** — Which additions?
    - Router (default: yes)
    - State management: Pinia / Zustand / None (default: yes)

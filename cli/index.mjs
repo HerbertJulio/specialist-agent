@@ -23,6 +23,28 @@ function copyDir(src, dest) {
   return countFiles(dest)
 }
 
+function copyNewOnly(src, dest) {
+  if (!existsSync(src)) return 0
+  let count = 0
+  for (const entry of readdirSync(src, { withFileTypes: true })) {
+    const srcPath = join(src, entry.name)
+    const destPath = join(dest, entry.name)
+    if (entry.isDirectory()) {
+      mkdirSync(destPath, { recursive: true })
+      count += copyNewOnly(srcPath, destPath)
+    } else if (entry.name.endsWith('.md') && !existsSync(destPath)) {
+      cpSync(srcPath, destPath)
+      count++
+    }
+  }
+  return count
+}
+
+function detectExistingAgents(agentsDir) {
+  if (!existsSync(agentsDir)) return []
+  return readdirSync(agentsDir).filter(f => f.endsWith('.md'))
+}
+
 function countFiles(dir) {
   if (!existsSync(dir)) return 0
   let count = 0
@@ -141,6 +163,7 @@ if (args.includes('--help') || args.includes('-h')) {
   console.log('  Options:')
   console.log(`    -h, --help      ${DIM}Show this help message${NC}`)
   console.log(`    -v, --version   ${DIM}Show version number${NC}`)
+  console.log(`    -f, --force     ${DIM}Overwrite existing agents without asking${NC}`)
   console.log()
   console.log(`  ${DIM}Run the setup wizard to install AI agents for Claude Code.${NC}`)
   console.log(`  ${DIM}Can be executed from any directory (creates package.json if needed).${NC}`)
@@ -153,6 +176,8 @@ if (args.includes('--version') || args.includes('-v')) {
   console.log(pkg.version)
   process.exit(0)
 }
+
+const forceMode = args.includes('--force') || args.includes('-f')
 
 // ── Main ─────────────────────────────────────────────
 
@@ -259,7 +284,7 @@ async function main() {
 
   // 4. Specialist agents
   const installSpecialists = await clack.confirm({
-    message: 'Install specialist agents?',
+    message: `Install specialist agents? ${DIM}(@finance, @cloud, @security, @designer, @data, @devops, @tester, @explorer)${NC}`,
     initialValue: true,
   })
 
@@ -278,26 +303,47 @@ async function main() {
 
   // ── Install files ──────────────────────────────────
 
-  const s = clack.spinner()
-  s.start('Installing agents and skills...')
-
   const packDir = join(ROOT, 'packs', framework)
   const agentsSource = mode === 'lite' ? join(packDir, 'agents-lite') : join(packDir, 'agents')
   const skillsSource = join(packDir, 'skills')
   const archSource = join(packDir, 'ARCHITECTURE.md')
   const claudeSource = join(packDir, 'CLAUDE.md')
 
-  // Install pack agents
   const agentsDest = join(cwd, '.claude', 'agents')
   mkdirSync(agentsDest, { recursive: true })
-  const agentCount = copyDir(agentsSource, agentsDest)
+
+  // Detect existing agents
+  const existingAgents = detectExistingAgents(agentsDest)
+  let shouldOverwrite = forceMode
+
+  if (existingAgents.length > 0 && !forceMode) {
+    clack.log.warn(`Existing agents detected in .claude/agents/ (${existingAgents.length} files)`)
+    const overwriteChoice = await clack.confirm({
+      message: 'Overwrite existing agent files?',
+      initialValue: false,
+    })
+    if (clack.isCancel(overwriteChoice)) handleCancel()
+    shouldOverwrite = overwriteChoice
+  }
+
+  const s = clack.spinner()
+  if (existingAgents.length > 0 && !shouldOverwrite) {
+    s.start('Installing new agents and skills (preserving existing)...')
+  } else {
+    s.start('Installing agents and skills...')
+  }
+
+  // Install pack agents
+  const agentCount = shouldOverwrite
+    ? copyDir(agentsSource, agentsDest)
+    : copyNewOnly(agentsSource, agentsDest)
 
   // Install starter agent
   if (installStarter) {
     const starterFile = mode === 'lite' ? 'starter-lite.md' : 'starter.md'
     const starterSource = join(ROOT, 'agents', starterFile)
     const starterDest = join(agentsDest, 'starter.md')
-    if (existsSync(starterSource)) {
+    if (existsSync(starterSource) && (shouldOverwrite || !existsSync(starterDest))) {
       cpSync(starterSource, starterDest)
     }
   }
@@ -309,7 +355,7 @@ async function main() {
       const suffix = mode === 'lite' ? '-lite.md' : '.md'
       const source = join(ROOT, 'agents', `${name}${suffix}`)
       const dest = join(agentsDest, `${name}.md`)
-      if (existsSync(source)) {
+      if (existsSync(source) && (shouldOverwrite || !existsSync(dest))) {
         cpSync(source, dest)
       }
     }
@@ -325,7 +371,7 @@ async function main() {
       const starterFile = mode === 'lite' ? 'starter-lite.md' : 'starter.md'
       const starterSource = join(ROOT, 'agents', starterFile)
       const starterGlobalDest = join(globalAgentsDest, 'starter.md')
-      if (existsSync(starterSource)) {
+      if (existsSync(starterSource) && (shouldOverwrite || !existsSync(starterGlobalDest))) {
         cpSync(starterSource, starterGlobalDest)
         globalAgentCount++
       }
@@ -337,7 +383,7 @@ async function main() {
         const suffix = mode === 'lite' ? '-lite.md' : '.md'
         const source = join(ROOT, 'agents', `${name}${suffix}`)
         const dest = join(globalAgentsDest, `${name}.md`)
-        if (existsSync(source)) {
+        if (existsSync(source) && (shouldOverwrite || !existsSync(dest))) {
           cpSync(source, dest)
           globalAgentCount++
         }
@@ -348,7 +394,9 @@ async function main() {
   // Install skills
   const skillsDest = join(cwd, '.claude', 'skills')
   mkdirSync(skillsDest, { recursive: true })
-  const skillCount = copyDir(skillsSource, skillsDest)
+  const skillCount = shouldOverwrite
+    ? copyDir(skillsSource, skillsDest)
+    : copyNewOnly(skillsSource, skillsDest)
 
   // Install ARCHITECTURE.md
   const archDest = join(cwd, 'docs', 'ARCHITECTURE.md')
@@ -383,6 +431,10 @@ async function main() {
   if (globalAgentCount > 0) summaryLines.push(`\u2713 ${globalAgentCount} global agents (~/.claude/agents)`)
 
   clack.note(summaryLines.join('\n'), `${packLabel} \u00b7 ${mode === 'full' ? 'Full' : 'Lite'}`)
+
+  if (existingAgents.length > 0 && !shouldOverwrite) {
+    clack.log.info(`${DIM}${existingAgents.length} existing agent(s) preserved. Use --force to overwrite.${NC}`)
+  }
 
   // Getting started
   const installedSkills = existsSync(skillsDest)
