@@ -4,6 +4,7 @@ import * as clack from '@clack/prompts'
 import { existsSync, mkdirSync, cpSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import { join, dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
+import { homedir } from 'os'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -264,6 +265,17 @@ async function main() {
 
   if (clack.isCancel(installSpecialists)) handleCancel()
 
+  // 5. Global install
+  let installGlobal = false
+  if (installStarter || installSpecialists) {
+    installGlobal = await clack.confirm({
+      message: 'Install generic agents globally (~/.claude/agents)?',
+      initialValue: false,
+    })
+
+    if (clack.isCancel(installGlobal)) handleCancel()
+  }
+
   // ── Install files ──────────────────────────────────
 
   const s = clack.spinner()
@@ -303,6 +315,36 @@ async function main() {
     }
   }
 
+  // Install agents globally
+  let globalAgentCount = 0
+  if (installGlobal) {
+    const globalAgentsDest = join(homedir(), '.claude', 'agents')
+    mkdirSync(globalAgentsDest, { recursive: true })
+
+    if (installStarter) {
+      const starterFile = mode === 'lite' ? 'starter-lite.md' : 'starter.md'
+      const starterSource = join(ROOT, 'agents', starterFile)
+      const starterGlobalDest = join(globalAgentsDest, 'starter.md')
+      if (existsSync(starterSource)) {
+        cpSync(starterSource, starterGlobalDest)
+        globalAgentCount++
+      }
+    }
+
+    if (installSpecialists) {
+      const specialistNames = ['explorer', 'finance', 'cloud', 'security', 'designer', 'data', 'devops', 'tester']
+      for (const name of specialistNames) {
+        const suffix = mode === 'lite' ? '-lite.md' : '.md'
+        const source = join(ROOT, 'agents', `${name}${suffix}`)
+        const dest = join(globalAgentsDest, `${name}.md`)
+        if (existsSync(source)) {
+          cpSync(source, dest)
+          globalAgentCount++
+        }
+      }
+    }
+  }
+
   // Install skills
   const skillsDest = join(cwd, '.claude', 'skills')
   mkdirSync(skillsDest, { recursive: true })
@@ -337,6 +379,8 @@ async function main() {
   if (skillCount > 0) summaryLines.push(`\u2713 ${skillCount} skills`)
   if (archInstalled) summaryLines.push('\u2713 docs/ARCHITECTURE.md')
   if (claudeInstalled) summaryLines.push('\u2713 CLAUDE.md')
+
+  if (globalAgentCount > 0) summaryLines.push(`\u2713 ${globalAgentCount} global agents (~/.claude/agents)`)
 
   clack.note(summaryLines.join('\n'), `${packLabel} \u00b7 ${mode === 'full' ? 'Full' : 'Lite'}`)
 
