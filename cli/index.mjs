@@ -48,6 +48,20 @@ function handleCancel() {
   process.exit(0)
 }
 
+function detectFramework(pkgPath, availablePacks) {
+  if (!existsSync(pkgPath)) return null
+  const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'))
+  const deps = { ...pkg.dependencies, ...pkg.devDependencies }
+
+  // Order matters: next includes react, so check next first
+  if (deps['next'] && availablePacks.includes('nextjs')) return 'nextjs'
+  if ((deps['@sveltejs/kit'] || deps['svelte']) && availablePacks.includes('svelte')) return 'svelte'
+  if (deps['vue'] && availablePacks.includes('vue')) return 'vue'
+  if (deps['react'] && availablePacks.includes('react')) return 'react'
+
+  return null
+}
+
 // ── Guidance texts ───────────────────────────────────
 
 function buildGettingStarted(agentNames, installedSkills) {
@@ -163,15 +177,43 @@ async function main() {
 
   const packLabels = { vue: 'Vue 3', react: 'React', nextjs: 'Next.js', svelte: 'SvelteKit' }
 
-  const framework = await clack.select({
-    message: 'Which framework?',
-    options: packs.map(p => ({
-      value: p,
-      label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
-    })),
-  })
+  const detected = detectFramework(join(cwd, 'package.json'), packs)
+  let framework
 
-  if (clack.isCancel(framework)) handleCancel()
+  if (detected) {
+    clack.log.success(`Detected ${packLabels[detected] || detected} from package.json`)
+
+    const useDetected = await clack.confirm({
+      message: `Use ${packLabels[detected] || detected} pack?`,
+      initialValue: true,
+    })
+
+    if (clack.isCancel(useDetected)) handleCancel()
+
+    if (useDetected) {
+      framework = detected
+    } else {
+      framework = await clack.select({
+        message: 'Which framework?',
+        options: packs.map(p => ({
+          value: p,
+          label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
+        })),
+      })
+
+      if (clack.isCancel(framework)) handleCancel()
+    }
+  } else {
+    framework = await clack.select({
+      message: 'Which framework?',
+      options: packs.map(p => ({
+        value: p,
+        label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
+      })),
+    })
+
+    if (clack.isCancel(framework)) handleCancel()
+  }
 
   // 2. Mode
   const mode = await clack.select({
