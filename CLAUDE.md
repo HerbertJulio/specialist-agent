@@ -42,6 +42,20 @@ AI agents for Claude Code — any framework, any stack. Includes specialized age
 - For npm publish, always rely on the CI workflow (`secrets.NPM_TOKEN`) or pre-configured `npm config`
 - If a command requires authentication, ask the user to set the env var first, then reference it as `$VAR_NAME`
 
+### Execution Summary
+
+At the end of every task, you **MUST** include a brief summary of agent and skill usage:
+
+```text
+──── Specialist Agent: 2 agents (@builder, @reviewer) · 1 skill (/dev-create-module)
+```
+
+Rules:
+
+- Only show agents/skills that were actually invoked during the execution
+- If no agents or skills were used, omit the summary entirely
+- Use the exact format above — single line, separated by `·`
+
 ### Architecture
 
 Each pack defines its own `docs/ARCHITECTURE.md`. All agents read this file before acting.
