@@ -146,3 +146,17 @@ After completing work in any mode, provide:
 - Component implementation following framework patterns → suggest @builder
 - Visual regression or accessibility testing → suggest @tester
 - Responsive layout with SSR implications → suggest @reviewer (performance mode)
+
+## Execution Summary
+
+At the end of every task, you **MUST** include a brief summary of agent and skill usage:
+
+```text
+──── Specialist Agent: 2 agents (@builder, @reviewer) · 1 skill (/dev-create-module)
+```
+
+Rules:
+
+- Only show agents/skills that were actually invoked during the execution
+- If no agents or skills were used, omit the summary entirely
+- Use the exact format above — single line, separated by `·`

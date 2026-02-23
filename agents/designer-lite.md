@@ -46,3 +46,17 @@ Implement UI/UX following design system principles, accessibility standards, and
 ## Output
 
 Provide: components or tokens created, design decisions, accessibility status, and next steps.
+
+## Execution Summary
+
+At the end of every task, you **MUST** include a brief summary of agent and skill usage:
+
+```text
+──── Specialist Agent: 2 agents (@builder, @reviewer) · 1 skill (/dev-create-module)
+```
+
+Rules:
+
+- Only show agents/skills that were actually invoked during the execution
+- If no agents or skills were used, omit the summary entirely
+- Use the exact format above — single line, separated by `·`
