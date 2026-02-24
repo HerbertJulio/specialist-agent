@@ -115,7 +115,7 @@ claude
 
 | Agent | What it does |
 |-------|--------------|
-| **@builder** | Create modules, components, services, hooks/composables/stores, and tests |
+| **@builder** | Create modules, components, services, state logic, and tests |
 | **@reviewer** | Review PRs, explore modules, check performance |
 | **@doctor** | Investigate bugs by tracing through architecture layers |
 

@@ -28,7 +28,7 @@ features:
     details: Migre padroes legados para arquitetura moderna em 6 fases com aprovacao em cada etapa.
   - icon: 🔍
     title: "@doctor"
-    details: Rastreie bugs atraves de Component → Hook/Composable → Adapter → Service → API para encontrar causas raiz.
+    details: Rastreie bugs atraves de Component → State Logic → Adapter → Service → API para encontrar causas raiz.
   - icon: 💼
     title: Agentes Especialistas
     details: "@finance, @cloud, @security, @designer, @data, @devops, @tester — especialistas de dominio para qualquer projeto."

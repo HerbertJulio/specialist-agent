@@ -28,7 +28,7 @@ features:
     details: Migrate legacy patterns to modern architecture in 6 phases with approval gates.
   - icon: 🔬
     title: "@doctor"
-    details: Trace bugs through Component → Hook/Composable → Adapter → Service → API to find root causes.
+    details: Trace bugs through Component → State Logic → Adapter → Service → API to find root causes.
   - icon: 📚
     title: Specialist Agents
     details: "@finance, @cloud, @security, @designer, @data, @devops, @tester — domain experts for any project."

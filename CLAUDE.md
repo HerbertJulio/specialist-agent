@@ -50,7 +50,7 @@ If a task spans multiple agents, invoke them in sequence (e.g., @builder then @r
 
 | Agent       | When to Use                                                              |
 |-------------|--------------------------------------------------------------------------|
-| `@builder`  | Create modules, components, services, hooks/composables/stores, or tests |
+| `@builder`  | Create modules, components, services, state logic, or tests              |
 | `@reviewer` | Review code, check architecture, explore modules, analyze performance    |
 | `@migrator` | Migrate legacy code to target architecture                               |
 | `@doctor`   | Investigate bugs, trace errors through architecture layers               |
