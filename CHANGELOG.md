@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.4.1...specialist-agent-v1.5.0) (2026-02-24)
+
+
+### Features
+
+* **cli:** add overwrite protection and improve docs ([#23](https://github.com/HerbertJulio/specialist-agent/issues/23)) ([3957ed2](https://github.com/HerbertJulio/specialist-agent/commit/3957ed2ca6721d96af3cc5bef0dcda69ebd11c08))
+
 ## [1.4.1](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.4.0...specialist-agent-v1.4.1) (2026-02-23)
 
 
