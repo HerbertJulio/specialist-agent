@@ -6,7 +6,7 @@ Os agentes de pack (@builder, @reviewer, @doctor, @migrator) sao adaptados ao fr
 
 Agentes sao IAs especializadas para as quais o Claude delega automaticamente ou que voce invoca com `@nome`.
 
-O Specialist Agent inclui **13 agentes** organizados em cinco categorias:
+O Specialist Agent inclui **14 agentes** organizados em cinco categorias:
 
 ```mermaid
 graph TB
@@ -25,6 +25,7 @@ graph TB
         Data["@data"]
         DevOps["@devops"]
         Tester["@tester"]
+        Legal["@legal"]
     end
 
     subgraph daily["Dia a Dia"]
@@ -57,6 +58,7 @@ graph TB
     style Data fill:#e67e22,color:#fff
     style DevOps fill:#e67e22,color:#fff
     style Tester fill:#e67e22,color:#fff
+    style Legal fill:#e67e22,color:#fff
     style Builder fill:#42b883,color:#fff
     style Reviewer fill:#42b883,color:#fff
     style Doctor fill:#42b883,color:#fff
@@ -541,6 +543,31 @@ Esses agentes sao **agnosticos de framework** — funcionam com qualquer stack e
 
 ---
 
+### @legal — Privacidade de Dados e Conformidade
+
+**Quando usar:** Privacidade de dados (LGPD, GDPR, CCPA), gestao de consentimento, auditorias de conformidade, direitos dos titulares de dados.
+
+```bash
+# Revisao de conformidade de privacidade
+"Use @legal to review the user registration flow for LGPD/GDPR compliance"
+
+# Gestao de consentimento
+"Use @legal to implement a cookie consent banner with opt-in/opt-out flows"
+
+# Auditoria de mapeamento de dados
+"Use @legal to audit what personal data we collect and where it's stored"
+```
+
+**Modos:** Privacidade (inventario de dados, base legal, politicas de retencao) | Consentimento (banners de cookies, opt-in de marketing, aceite de termos) | Auditoria (checklist de conformidade, avaliacao de riscos, mapeamento de dados)
+
+**Regras principais:** Consentimento explicito obrigatorio, minimizacao de dados, limites de retencao, direitos do usuario (acesso, retificacao, exclusao, portabilidade), nunca armazenar dados sensiveis sem criptografia.
+
+::: warning Nao e Aconselhamento Juridico
+O agente @legal ajuda a identificar preocupacoes de conformidade e sugere boas praticas, mas nao substitui consultoria juridica profissional. Sempre consulte um advogado qualificado para decisoes juridicas vinculantes.
+:::
+
+---
+
 ## Encadeamento de Agentes — Protocolo de Handoff
 
 Agentes podem recomendar outros agentes quando detectam trabalho fora do seu escopo. Isso se chama **Protocolo de Handoff** — cada agente possui regras de quando sugerir delegacao.
@@ -601,7 +628,7 @@ Agentes sugerem o proximo agente — eles nao delegam automaticamente. Voce deci
 
 ## Agentes Full vs Lite
 
-Todos os 13 agentes possuem versoes Lite que usam `model: haiku` para menor custo.
+Todos os 14 agentes possuem versoes Lite que usam `model: haiku` para menor custo.
 
 | Aspecto | Full | Lite |
 |---------|------|------|

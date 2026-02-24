@@ -6,7 +6,7 @@ Pack-specific agents (@builder, @reviewer, @doctor, @migrator) are adapted to yo
 
 Agents are specialized AIs that Claude delegates to automatically or that you invoke with `@name`.
 
-Specialist Agent includes **13 agents** organized into five categories:
+Specialist Agent includes **14 agents** organized into five categories:
 
 ```mermaid
 graph TB
@@ -25,6 +25,7 @@ graph TB
         Data["@data"]
         DevOps["@devops"]
         Tester["@tester"]
+        Legal["@legal"]
     end
 
     subgraph daily["Day-to-Day"]
@@ -57,6 +58,7 @@ graph TB
     style Data fill:#e67e22,color:#fff
     style DevOps fill:#e67e22,color:#fff
     style Tester fill:#e67e22,color:#fff
+    style Legal fill:#e67e22,color:#fff
     style Builder fill:#42b883,color:#fff
     style Reviewer fill:#42b883,color:#fff
     style Doctor fill:#42b883,color:#fff
@@ -541,6 +543,31 @@ These agents are **framework-agnostic** — they work with any stack and are ins
 
 ---
 
+### @legal — Data Privacy & Compliance
+
+**When to use:** Data privacy (LGPD, GDPR, CCPA), consent management, compliance audits, data subject rights.
+
+```bash
+# Privacy compliance review
+"Use @legal to review the user registration flow for LGPD/GDPR compliance"
+
+# Consent management
+"Use @legal to implement a cookie consent banner with opt-in/opt-out flows"
+
+# Data mapping audit
+"Use @legal to audit what personal data we collect and where it's stored"
+```
+
+**Modes:** Privacy (data inventory, legal basis, retention policies) | Consent (cookie banners, marketing opt-in, terms acceptance) | Audit (compliance checklist, risk assessment, data mapping)
+
+**Key rules:** Explicit consent required, data minimization, retention limits, user rights (access, rectification, erasure, portability), never store sensitive data without encryption.
+
+::: warning Not Legal Advice
+The @legal agent helps identify compliance concerns and suggests best practices, but does not replace professional legal counsel. Always consult a qualified attorney for binding legal decisions.
+:::
+
+---
+
 ## Agent Chaining — Handoff Protocol
 
 Agents can recommend other agents when they detect work outside their scope. This is called the **Handoff Protocol** — each agent has rules for when to suggest delegation.
@@ -601,7 +628,7 @@ Agents suggest the next agent — they don't auto-delegate. You decide whether t
 
 ## Full vs Lite Agents
 
-All 13 agents have Lite versions that use `model: haiku` for lower cost.
+All 14 agents have Lite versions that use `model: haiku` for lower cost.
 
 | Aspect | Full | Lite |
 |--------|------|------|
