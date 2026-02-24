@@ -1,5 +1,9 @@
 # Agents
 
+::: info Framework Note
+Pack-specific agents (@builder, @reviewer, @doctor, @migrator) are adapted to your chosen framework. The examples below use the **Vue 3 pack** patterns. See [Framework Packs](/guide/introduction#how-packs-work) for details.
+:::
+
 Agents are specialized AIs that Claude delegates to automatically or that you invoke with `@name`.
 
 Specialist Agent includes **13 agents** organized into five categories:

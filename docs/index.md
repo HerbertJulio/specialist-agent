@@ -19,7 +19,7 @@ features:
     details: Create new projects from scratch — any frontend + any backend + any database, fully configured.
   - icon: 🏛️
     title: "@builder"
-    details: Create modules, components, services, composables, and tests — auto-detects what you need.
+    details: Create modules, components, services, and tests — auto-detects what you need from your framework pack.
   - icon: 🔭
     title: "@reviewer"
     details: Review PRs, explore modules, and detect performance issues against your architecture.
@@ -34,5 +34,5 @@ features:
     details: "@finance, @cloud, @security, @designer, @data, @devops, @tester — domain experts for any project."
   - icon: 🪶
     title: Framework Packs
-    details: "Vue 3, React, Next.js, SvelteKit — stack-specific agents, skills, and architecture patterns."
+    details: "Next.js, React, SvelteKit, Vue 3 — stack-specific agents, skills, and architecture patterns."
 ---

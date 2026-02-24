@@ -14,10 +14,10 @@ O Specialist Agent organiza agentes e padroes em **framework packs**. Cada pack 
 
 | Pack | Stack |
 |------|-------|
-| **Vue 3** | Vue 3 + TypeScript + Pinia + TanStack Vue Query |
-| **React** | React 18 + TypeScript + Zustand + TanStack React Query |
 | **Next.js** | Next.js 14+ (App Router) + TypeScript + Zustand + Server Components |
+| **React** | React 18 + TypeScript + Zustand + TanStack React Query |
 | **SvelteKit** | SvelteKit 2 + TypeScript + Svelte stores + load functions |
+| **Vue 3** | Vue 3 + TypeScript + Pinia + TanStack Vue Query |
 
 ## O Que Voce Recebe
 
@@ -95,15 +95,16 @@ graph TB
 | **Migracao** | `@migrator` `@reviewer` | Modernizando projetos legados para a arquitetura alvo |
 | **Especialistas** | `@finance` `@cloud` `@security` `@designer` `@data` `@devops` `@tester` | Expertise especifica de dominio em qualquer framework |
 
-## Stack Alvo (Vue Pack)
+## Como os Packs Funcionam
 
-O Vue pack e projetado para projetos que utilizam:
+Cada pack define sua propria **camada de orquestracao** adaptada ao framework:
 
-- Vue 3 + `<script setup lang="ts">`
-- Pinia (estado do cliente) + TanStack Vue Query (estado do servidor)
-- Vite + TypeScript (strict) + Zod
-- Vue Router 4
-- Vitest + @vue/test-utils
+| Pack | Orquestracao | Estado do Cliente |
+| ---- | ------------ | ----------------- |
+| Next.js | Hooks + Server Actions | Zustand |
+| React | Hooks + React Query | Zustand |
+| SvelteKit | Stores + load functions | Svelte stores |
+| Vue 3 | Composables + Vue Query | Pinia |
 
 ::: tip Flexivel
 Voce pode adaptar os padroes para sua propria stack editando `docs/ARCHITECTURE.md`. Todos os agentes leem este arquivo antes de agir.
@@ -125,7 +126,7 @@ sequenceDiagram
     You->>Claude: "Create a products module with CRUD"
     Claude->>Agent: Delegates to @builder
     Agent->>Arch: Reads architecture conventions
-    Agent->>Agent: Scaffolds types → adapter → service → composable → components
+    Agent->>Agent: Scaffolds types → adapter → service → orchestration → components
     Agent-->>You: Complete module ready ✅
 ```
 

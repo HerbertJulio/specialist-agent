@@ -14,10 +14,10 @@ Specialist Agent organizes agents and patterns into **framework packs**. Each pa
 
 | Pack | Stack |
 |------|-------|
-| **Vue 3** | Vue 3 + TypeScript + Pinia + TanStack Vue Query |
-| **React** | React 18 + TypeScript + Zustand + TanStack React Query |
 | **Next.js** | Next.js 14+ (App Router) + TypeScript + Zustand + Server Components |
+| **React** | React 18 + TypeScript + Zustand + TanStack React Query |
 | **SvelteKit** | SvelteKit 2 + TypeScript + Svelte stores + load functions |
+| **Vue 3** | Vue 3 + TypeScript + Pinia + TanStack Vue Query |
 
 ## What You Get
 
@@ -95,15 +95,16 @@ graph TB
 | **Migration** | `@migrator` `@reviewer` | Modernizing legacy projects to the target architecture |
 | **Specialists** | `@finance` `@cloud` `@security` `@designer` `@data` `@devops` `@tester` | Domain-specific expertise across any framework |
 
-## Target Stack (Vue Pack)
+## How Packs Work
 
-The Vue pack is designed for projects using:
+Each pack defines its own **orchestration layer** adapted to the framework:
 
-- Vue 3 + `<script setup lang="ts">`
-- Pinia (client state) + TanStack Vue Query (server state)
-- Vite + TypeScript (strict) + Zod
-- Vue Router 4
-- Vitest + @vue/test-utils
+| Pack | Orchestration | Client State |
+| ---- | ------------- | ------------ |
+| Next.js | Hooks + Server Actions | Zustand |
+| React | Hooks + React Query | Zustand |
+| SvelteKit | Stores + load functions | Svelte stores |
+| Vue 3 | Composables + Vue Query | Pinia |
 
 ::: tip Flexible
 You can adapt the patterns to your own stack by editing `docs/ARCHITECTURE.md`. All agents read this file before acting.
@@ -125,7 +126,7 @@ sequenceDiagram
     You->>Claude: "Create a products module with CRUD"
     Claude->>Agent: Delegates to @builder
     Agent->>Arch: Reads architecture conventions
-    Agent->>Agent: Scaffolds types → adapter → service → composable → components
+    Agent->>Agent: Scaffolds types → adapter → service → orchestration → components
     Agent-->>You: Complete module ready ✅
 ```
 

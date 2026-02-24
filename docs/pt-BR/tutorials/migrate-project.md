@@ -1,5 +1,9 @@
 # Como Migrar a Arquitetura do Seu Projeto
 
+::: info Nota sobre Framework
+Este tutorial usa o **pack Vue 3** como exemplo. O fluxo de migracao (`@migrator` processo de 6 fases) funciona com qualquer framework pack.
+:::
+
 Este guia acompanha voce na migracao de um **projeto Vue legado** para a arquitetura Specialist Agent. Ele cobre o cenario realista de um projeto com tudo em `views/`, Options API, JavaScript, sem tipagem, Vuex e mixins.
 
 ## Antes vs Depois

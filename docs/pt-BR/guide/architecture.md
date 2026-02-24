@@ -1,5 +1,9 @@
 # Visao Geral da Arquitetura
 
+::: info Nota sobre Framework
+Os exemplos abaixo utilizam os padroes do **pack Vue 3**. Cada framework pack (React, Next.js, SvelteKit) fornece padroes equivalentes adaptados ao seu ecossistema. Veja [Framework Packs](/pt-BR/guide/introduction#como-os-packs-funcionam) para detalhes.
+:::
+
 O `docs/ARCHITECTURE.md` no seu projeto e a **fonte de verdade** que todos os agentes seguem. Esta pagina resume os padroes principais.
 
 ## Estrutura Modular

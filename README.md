@@ -41,10 +41,10 @@ Specialist Agent is a collection of **AI agents**, **skills**, and **architectur
 
 | Pack | Stack |
 |------|-------|
-| **Vue 3** | Vue 3 + TypeScript + Pinia + TanStack Vue Query |
-| **React** | React 18 + TypeScript + Zustand + TanStack React Query |
 | **Next.js** | Next.js 14+ (App Router) + TypeScript + Zustand + Server Components |
+| **React** | React 18 + TypeScript + Zustand + TanStack React Query |
 | **SvelteKit** | SvelteKit 2 + TypeScript + Svelte stores + load functions |
+| **Vue 3** | Vue 3 + TypeScript + Pinia + TanStack Vue Query |
 
 ---
 
@@ -82,7 +82,7 @@ The wizard will:
 claude
 
 # Create a new project from scratch
-"Use @starter to create a task-manager app with Vue + Express + PostgreSQL"
+"Use @starter to create a task-manager app with React + Express + PostgreSQL"
 
 # Build a feature inside an existing project
 "Use @builder to create an orders module with CRUD for GET/POST/PATCH/DELETE /v2/orders"
@@ -115,7 +115,7 @@ claude
 
 | Agent | What it does |
 |-------|--------------|
-| **@builder** | Create modules, components, services, hooks/composables, and tests |
+| **@builder** | Create modules, components, services, hooks/composables/stores, and tests |
 | **@reviewer** | Review PRs, explore modules, check performance |
 | **@doctor** | Investigate bugs by tracing through architecture layers |
 
@@ -128,7 +128,7 @@ claude
 
 ```bash
 # Start a new full-stack project
-"Use @starter to create an e-commerce app with Vue + Fastify + PostgreSQL"
+"Use @starter to create an e-commerce app with Next.js + Fastify + PostgreSQL"
 
 # Explore an unfamiliar codebase
 "Use @explorer to assess this project — I just joined the team"
@@ -143,7 +143,7 @@ claude
 "Use @doctor to investigate the 500 error on login"
 
 # Migrate legacy code (6 phases with approval gates)
-"Use @migrator to migrate the billing module from Options API to script setup"
+"Use @migrator to migrate the billing module to the target architecture"
 ```
 
 ---
@@ -157,10 +157,10 @@ Quick shortcuts you invoke with `/skill-name` in Claude Code.
 | Skill | What it does |
 |-------|--------------|
 | `/dev-create-module [name]` | Full module scaffold (delegates to agents) |
-| `/dev-create-component [name]` | Component with script setup template |
+| `/dev-create-component [name]` | Component from framework-specific template |
 | `/dev-create-service [resource]` | Types + contracts + adapter + service |
-| `/dev-create-composable [name]` | Composable with server state integration |
-| `/dev-create-test [file]` | Tests for adapter, composable, or component |
+| `/dev-create-hook` or `/dev-create-composable` | Hook/composable/store with server state integration |
+| `/dev-create-test [file]` | Tests for adapter, hook/composable, or component |
 | `/dev-generate-types [endpoint]` | Types + contracts + adapter from endpoint/JSON |
 
 ### Quality
@@ -175,7 +175,7 @@ Quick shortcuts you invoke with `/skill-name` in Claude Code.
 
 | Skill | What it does |
 |-------|--------------|
-| `/migration-migrate-component [file]` | Options API → script setup |
+| `/migration-migrate-component [file]` | Migrate component to target architecture |
 | `/migration-migrate-module [path]` | Full module migration (6 phases) |
 
 ### Documentation
@@ -198,10 +198,10 @@ Each pack adapts the orchestration layer:
 
 | Pack | Orchestration | Client State | File Extension |
 |------|---------------|--------------|----------------|
-| Vue 3 | Composables + Vue Query | Pinia | `.vue` |
-| React | Hooks + React Query | Zustand | `.tsx` |
 | Next.js | Hooks + Server Actions | Zustand | `.tsx` |
+| React | Hooks + React Query | Zustand | `.tsx` |
 | SvelteKit | Stores + load functions | Svelte stores | `.svelte` |
+| Vue 3 | Composables + Vue Query | Pinia | `.vue` |
 
 > Full guide: `docs/ARCHITECTURE.md` — the source of truth that all agents read.
 

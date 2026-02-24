@@ -1,6 +1,10 @@
 # Como Construir Paginacao com Filtros
 
-Este tutorial mostra como construir uma **lista paginada com busca e filtros**, combinando queries reativas do Vue Query com estado do cliente no Pinia.
+::: info Nota sobre Framework
+Os exemplos abaixo utilizam os padroes do **pack Vue 3**. Cada framework pack (React, Next.js, SvelteKit) fornece padroes equivalentes adaptados ao seu ecossistema. Veja [Framework Packs](/pt-BR/guide/introduction#como-os-packs-funcionam) para detalhes.
+:::
+
+Este tutorial mostra como construir uma **lista paginada com busca e filtros**, utilizando queries reativas com gerenciamento de estado do cliente.
 
 ## Cenario
 
