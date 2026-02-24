@@ -145,11 +145,28 @@ div[class*='language-']:hover {
   margin: 1.5rem 0;
   overflow-x: auto;
   text-align: center;
+  cursor: zoom-in;
+  position: relative;
+}
+
+.mermaid::after {
+  content: '🔍 Click to expand';
+  position: absolute;
+  bottom: 4px;
+  right: 8px;
+  font-size: 0.7rem;
+  color: var(--vp-c-text-3);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.mermaid:hover::after {
+  opacity: 1;
 }
 
 .mermaid svg {
   display: inline-block;
-  max-width: 100%;
   height: auto;
 }
 
