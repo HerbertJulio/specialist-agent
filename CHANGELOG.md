@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.5.0...specialist-agent-v1.6.0) (2026-02-24)
+
+
+### Features
+
+* **agents:** add Core Principles and [@legal](https://github.com/legal) agent ([#25](https://github.com/HerbertJulio/specialist-agent/issues/25)) ([063e312](https://github.com/HerbertJulio/specialist-agent/commit/063e312b543d7ecd4d6215f976a6a69c21ee3049))
+
+
+### Documentation
+
+* add [@legal](https://github.com/legal) agent to documentation ([95fca57](https://github.com/HerbertJulio/specialist-agent/commit/95fca57e6c52bf5cce8ff737e5d5220ffc06ebe6))
+
 ## [1.5.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.4.1...specialist-agent-v1.5.0) (2026-02-24)
 
 
