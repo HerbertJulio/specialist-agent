@@ -98,7 +98,7 @@ onUnmounted(() => {
 }
 
 .mermaid-zoom-content {
-  max-width: 95vw;
+  width: 90vw;
   max-height: 90vh;
   overflow: auto;
   background: #fff;
