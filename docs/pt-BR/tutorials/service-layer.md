@@ -1,5 +1,9 @@
 # Como Criar uma Camada de Service
 
+::: info Nota sobre Framework
+Os exemplos abaixo utilizam os padroes do **pack Vue 3**. Cada framework pack (React, Next.js, SvelteKit) fornece padroes equivalentes adaptados ao seu ecossistema. Veja [Framework Packs](/pt-BR/guide/introduction#como-os-packs-funcionam) para detalhes.
+:::
+
 Este tutorial mostra como integrar um novo endpoint de API, passo a passo. Voce construira a camada de dados completa: **types → contracts → adapter → service**.
 
 ## Cenario

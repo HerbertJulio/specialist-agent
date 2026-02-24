@@ -1,5 +1,9 @@
 # How to Create a Service Layer
 
+::: info Framework Note
+This tutorial uses the **Vue 3 pack** patterns. Each framework pack (React, Next.js, SvelteKit) provides equivalent patterns adapted to its ecosystem. See [Framework Packs](/guide/introduction#how-packs-work) for details.
+:::
+
 This tutorial shows how to integrate a new API endpoint, step by step. You'll build the complete data layer: **types → contracts → adapter → service**.
 
 ## Scenario

@@ -1,5 +1,9 @@
 # Skills
 
+::: info Framework Note
+Skills are installed from your chosen framework pack. The examples below use the **Vue 3 pack** patterns. Each pack provides equivalent skills adapted to its ecosystem (e.g., `/dev-create-hook` in React, `/dev-create-store` in SvelteKit). See [Framework Packs](/guide/introduction#how-packs-work) for details.
+:::
+
 Skills are shortcuts you invoke with `/skill-name` inside Claude Code. Each skill is a directory with a `SKILL.md` file inside `.claude/skills/`.
 
 ## Development Skills

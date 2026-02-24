@@ -1,5 +1,9 @@
 # Como Construir um Modulo CRUD
 
+::: info Nota sobre Framework
+Os exemplos abaixo utilizam os padroes do **pack Vue 3**. Cada framework pack (React, Next.js, SvelteKit) fornece padroes equivalentes adaptados ao seu ecossistema. Veja [Framework Packs](/pt-BR/guide/introduction#como-os-packs-funcionam) para detalhes.
+:::
+
 Este tutorial guia voce na construcao de um modulo completo de **Pedidos** para um app de e-commerce — do zero ate uma funcionalidade totalmente funcional com listagem, criacao, edicao e exclusao.
 
 ## O Que Voce Vai Construir

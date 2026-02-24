@@ -1,5 +1,9 @@
 # Agentes
 
+::: info Nota sobre Framework
+Os agentes de pack (@builder, @reviewer, @doctor, @migrator) sao adaptados ao framework escolhido. Os exemplos abaixo utilizam os padroes do **pack Vue 3**.
+:::
+
 Agentes sao IAs especializadas para as quais o Claude delega automaticamente ou que voce invoca com `@nome`.
 
 O Specialist Agent inclui **13 agentes** organizados em cinco categorias:

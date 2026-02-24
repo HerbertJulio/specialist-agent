@@ -14,10 +14,10 @@ Specialist Agent organizes agents and patterns into **framework packs**. Each pa
 
 | Pack | Stack |
 |------|-------|
-| **Vue 3** | Vue 3 + TypeScript + Pinia + TanStack Vue Query |
-| **React** | React 18 + TypeScript + Zustand + TanStack React Query |
 | **Next.js** | Next.js 14+ (App Router) + TypeScript + Zustand + Server Components |
+| **React** | React 18 + TypeScript + Zustand + TanStack React Query |
 | **SvelteKit** | SvelteKit 2 + TypeScript + Svelte stores + load functions |
+| **Vue 3** | Vue 3 + TypeScript + Pinia + TanStack Vue Query |
 
 ## What You Get
 
@@ -34,40 +34,54 @@ Specialist Agent has **13 agents** organized by scenario:
 
 ```mermaid
 graph TB
-    subgraph agnostic["Framework-Agnostic"]
+    Claude{"What do you need?"} -->|"new project"| setup
+    Claude -->|"build & review"| daily
+    Claude -->|"modernize"| migration
+    Claude -->|"domain expertise"| specialists
+
+    subgraph setup["Project Setup"]
         Starter["@starter<br/><i>Create projects from scratch</i>"]
         Explorer["@explorer<br/><i>Assess codebases, health score</i>"]
-        Finance["@finance<br/><i>Payments, billing, reporting</i>"]
-        Cloud["@cloud<br/><i>IaC, serverless, CI/CD</i>"]
-        Security["@security<br/><i>Auth, OWASP, RBAC</i>"]
-        Designer["@designer<br/><i>Design systems, a11y</i>"]
-        Data["@data<br/><i>DB modeling, caching</i>"]
-        DevOps["@devops<br/><i>Docker, K8s, monitoring</i>"]
-        Tester["@tester<br/><i>Test strategy, coverage</i>"]
     end
 
     subgraph daily["Day-to-Day Development"]
-        Builder["@builder<br/><i>Create modules, components,<br/>services, composables, tests</i>"]
-        Reviewer["@reviewer<br/><i>Review PRs, explore modules,<br/>check performance</i>"]
-        Doctor["@doctor<br/><i>Investigate bugs, trace errors<br/>through architecture layers</i>"]
+        Builder["@builder<br/><i>Build features, components</i>"]
+        Reviewer["@reviewer<br/><i>Review code, performance</i>"]
+        Doctor["@doctor<br/><i>Investigate bugs, trace errors</i>"]
     end
 
     subgraph migration["Architecture Migration"]
-        Migrator["@migrator<br/><i>Options → setup, JS → TS,<br/>Vuex → Pinia + Vue Query</i>"]
+        Migrator["@migrator<br/><i>Modernize legacy code</i>"]
     end
 
-    style agnostic fill:#f5f0fa,stroke:#7c3aed
+    subgraph specialists["Specialist Agents"]
+        Finance["@finance<br/><i>Payments, billing</i>"]
+        Cloud["@cloud<br/><i>IaC, serverless</i>"]
+        Security["@security<br/><i>Auth, OWASP</i>"]
+        Designer["@designer<br/><i>Design systems</i>"]
+        Data["@data<br/><i>DB modeling</i>"]
+        DevOps["@devops<br/><i>Docker, K8s</i>"]
+        Tester["@tester<br/><i>Test strategy</i>"]
+        Finance ~~~ Designer
+        Cloud ~~~ Data
+        Security ~~~ DevOps
+        Designer ~~~ Tester
+    end
+
+    style Claude fill:#35495e,color:#fff
+    style setup fill:#f5f0fa,stroke:#7c3aed
     style daily fill:#f0faf5,stroke:#42b883
     style migration fill:#f0f4fa,stroke:#35495e
+    style specialists fill:#faf5f0,stroke:#e67e22
     style Starter fill:#7c3aed,color:#fff
     style Explorer fill:#7c3aed,color:#fff
-    style Finance fill:#7c3aed,color:#fff
-    style Cloud fill:#7c3aed,color:#fff
-    style Security fill:#7c3aed,color:#fff
-    style Designer fill:#7c3aed,color:#fff
-    style Data fill:#7c3aed,color:#fff
-    style DevOps fill:#7c3aed,color:#fff
-    style Tester fill:#7c3aed,color:#fff
+    style Finance fill:#e67e22,color:#fff
+    style Cloud fill:#e67e22,color:#fff
+    style Security fill:#e67e22,color:#fff
+    style Designer fill:#e67e22,color:#fff
+    style Data fill:#e67e22,color:#fff
+    style DevOps fill:#e67e22,color:#fff
+    style Tester fill:#e67e22,color:#fff
     style Builder fill:#42b883,color:#fff
     style Reviewer fill:#42b883,color:#fff
     style Doctor fill:#42b883,color:#fff
@@ -81,15 +95,16 @@ graph TB
 | **Migration** | `@migrator` `@reviewer` | Modernizing legacy projects to the target architecture |
 | **Specialists** | `@finance` `@cloud` `@security` `@designer` `@data` `@devops` `@tester` | Domain-specific expertise across any framework |
 
-## Target Stack (Vue Pack)
+## How Packs Work
 
-The Vue pack is designed for projects using:
+Each pack defines its own **orchestration layer** adapted to the framework:
 
-- Vue 3 + `<script setup lang="ts">`
-- Pinia (client state) + TanStack Vue Query (server state)
-- Vite + TypeScript (strict) + Zod
-- Vue Router 4
-- Vitest + @vue/test-utils
+| Pack | Orchestration | Client State |
+| ---- | ------------- | ------------ |
+| Next.js | Hooks + Server Actions | Zustand |
+| React | Hooks + React Query | Zustand |
+| SvelteKit | Stores + load functions | Svelte stores |
+| Vue 3 | Composables + Vue Query | Pinia |
 
 ::: tip Flexible
 You can adapt the patterns to your own stack by editing `docs/ARCHITECTURE.md`. All agents read this file before acting.
@@ -111,7 +126,7 @@ sequenceDiagram
     You->>Claude: "Create a products module with CRUD"
     Claude->>Agent: Delegates to @builder
     Agent->>Arch: Reads architecture conventions
-    Agent->>Agent: Scaffolds types → adapter → service → composable → components
+    Agent->>Agent: Scaffolds types → adapter → service → orchestration → components
     Agent-->>You: Complete module ready ✅
 ```
 

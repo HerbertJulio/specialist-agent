@@ -1,5 +1,9 @@
 # Camadas de Responsabilidade
 
+::: info Nota sobre Framework
+Os exemplos abaixo utilizam os padroes do **pack Vue 3**. Cada framework pack (React, Next.js, SvelteKit) fornece padroes equivalentes adaptados ao seu ecossistema. Veja [Framework Packs](/pt-BR/guide/introduction#como-os-packs-funcionam) para detalhes.
+:::
+
 Cada camada na arquitetura tem uma responsabilidade unica e bem definida.
 
 ## Fluxo Completo de Requisicao

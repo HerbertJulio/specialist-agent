@@ -1,5 +1,9 @@
 # Quick Start
 
+::: info Framework Note
+The examples below use the **Vue 3 pack** patterns. Each framework pack (React, Next.js, SvelteKit) provides equivalent patterns adapted to its ecosystem. See [Framework Packs](/guide/introduction#how-packs-work) for details.
+:::
+
 After [installing](/guide/installation) Specialist Agent, open Claude Code in your project. Here are the most common workflows.
 
 ```mermaid

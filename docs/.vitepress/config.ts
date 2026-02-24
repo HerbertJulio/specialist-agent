@@ -273,6 +273,15 @@ export default withMermaid(defineConfig({
       lineColor: '#4A7FCF',
       secondaryColor: '#CD7F32',
       tertiaryColor: '#F5F0E8',
+      fontSize: '14px',
+    },
+    flowchart: {
+      useMaxWidth: true,
+      htmlLabels: true,
+      wrappingWidth: 200,
+    },
+    sequence: {
+      useMaxWidth: true,
     },
   },
 }))
