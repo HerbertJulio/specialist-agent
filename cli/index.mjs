@@ -291,15 +291,12 @@ async function main() {
   if (clack.isCancel(installSpecialists)) handleCancel()
 
   // 5. Global install
-  let installGlobal = false
-  if (installStarter || installSpecialists) {
-    installGlobal = await clack.confirm({
-      message: 'Install generic agents globally (~/.claude/agents)?',
-      initialValue: false,
-    })
+  const installGlobal = await clack.confirm({
+    message: `Also install agents globally? ${DIM}(~/.claude/agents — available in all projects)${NC}`,
+    initialValue: false,
+  })
 
-    if (clack.isCancel(installGlobal)) handleCancel()
-  }
+  if (clack.isCancel(installGlobal)) handleCancel()
 
   // ── Install files ──────────────────────────────────
 
@@ -367,6 +364,12 @@ async function main() {
     const globalAgentsDest = join(homedir(), '.claude', 'agents')
     mkdirSync(globalAgentsDest, { recursive: true })
 
+    // Copy pack agents (@builder, @reviewer, @doctor, @migrator)
+    globalAgentCount += shouldOverwrite
+      ? copyDir(agentsSource, globalAgentsDest)
+      : copyNewOnly(agentsSource, globalAgentsDest)
+
+    // Copy @starter
     if (installStarter) {
       const starterFile = mode === 'lite' ? 'starter-lite.md' : 'starter.md'
       const starterSource = join(ROOT, 'agents', starterFile)
@@ -377,6 +380,7 @@ async function main() {
       }
     }
 
+    // Copy specialist agents
     if (installSpecialists) {
       const specialistNames = ['explorer', 'finance', 'cloud', 'security', 'designer', 'data', 'devops', 'tester']
       for (const name of specialistNames) {
