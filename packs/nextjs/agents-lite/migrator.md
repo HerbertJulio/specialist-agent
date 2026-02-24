@@ -10,6 +10,11 @@ tools: Read, Write, Edit, Glob, Grep
 ## Mission
 Migrate legacy Next.js code to target architecture. Detect scope: module | component.
 
+## Core Principles
+- **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
+- **Performance**: Use TanStack Query for caching (staleTime, invalidateQueries), lazy loading, avoid N+1
+- **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
+
 ## Module Mode (6 Phases)
 1. **Analysis** -- Map files, count Pages Router vs App Router, JS vs TS, getServerSideProps usage, cross-module imports
 2. **Structure** -- Create target dirs: `src/modules/[name]/` (components/, hooks/, services/, adapters/, stores/, actions/, types/, __tests__/) + `app/[name]/` (page, layout, loading, error)

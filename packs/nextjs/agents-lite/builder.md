@@ -10,6 +10,11 @@ tools: Read, Write, Edit, Glob, Grep
 ## Mission
 Create code following architecture conventions. Detect scope: module | component | service | hook | page | test.
 
+## Core Principles
+- **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
+- **Performance**: Use TanStack Query for caching (staleTime, invalidateQueries), lazy loading, avoid N+1
+- **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
+
 ## Rules (Always Apply)
 - Server Components: default, no `'use client'`, no hooks, can be async
 - Client Components: `'use client'` directive, hooks/events/browser APIs allowed

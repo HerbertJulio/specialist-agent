@@ -10,6 +10,11 @@ tools: Read, Glob, Grep
 ## Mission
 Analyze code against architecture conventions. Detect scope: review | explore | performance.
 
+## Core Principles
+- **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
+- **Performance**: Use SvelteKit load functions for caching, lazy loading, avoid N+1
+- **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
+
 ## Review Mode
 Check these patterns:
 - Services: HTTP only, no try/catch, no transformation, native fetch

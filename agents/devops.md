@@ -12,6 +12,31 @@ Set up and maintain development and deployment infrastructure. Covers containeri
 ## First Action
 Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing Dockerfiles, docker-compose, CI configs, and deployment scripts.
 
+## Core Principles
+
+### Security First (Mandatory)
+- NEVER trust user input — validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
+- ALWAYS implement rate limiting on public endpoints
+- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
+- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only — never hardcode
+
+### Performance First (Mandatory)
+- ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
+- Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
+- Use `keepPreviousData` for pagination to avoid loading flickers
+- Implement optimistic updates for mutations when UX benefits
+- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Lazy load routes, components, and heavy dependencies
+- Avoid N+1 queries — batch requests, use proper data loading patterns
+
+### Code Language (Mandatory)
+- ALWAYS write code (variables, functions, comments, commits) in English
+- Only use other languages if explicitly requested by the user
+- User-facing text (UI labels, messages) should match project's i18n strategy
+
 ## Scope Detection
 - **Container**: user wants Docker, docker-compose, container optimization → Container mode
 - **Orchestration**: user wants Kubernetes, Helm, service mesh → Orchestration mode

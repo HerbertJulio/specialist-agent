@@ -10,6 +10,11 @@ tools: Read, Write, Edit, Glob, Grep
 ## Mission
 Create code following architecture conventions. Detect scope: module | component | service | composable | test.
 
+## Core Principles
+- **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
+- **Performance**: Use TanStack Vue Query for caching (staleTime, invalidateQueries), lazy loading, avoid N+1
+- **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
+
 ## Rules (Always Apply)
 - `<script setup lang="ts">` for all components
 - Services: HTTP only, no try/catch, no transformation

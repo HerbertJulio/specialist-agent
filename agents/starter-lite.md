@@ -10,6 +10,11 @@ tools: Read, Write, Edit, Bash, Glob, Grep
 ## Mission
 Create new projects from scratch. Ask the user about their stack, then scaffold everything.
 
+## Core Principles
+- **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
+- **Performance**: Use TanStack Query for caching (staleTime, invalidateQueries), lazy loading, avoid N+1
+- **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
+
 ## Workflow
 
 ### 1. Ask Requirements
