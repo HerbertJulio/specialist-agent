@@ -27,6 +27,7 @@ You **MUST** automatically delegate to the correct agent based on the user's int
 | Docker, Kubernetes, CI/CD pipelines, monitoring | `@devops` |
 | Test strategies, test suites, coverage, mocking | `@tester` |
 | Explore unfamiliar codebase, onboarding, technical assessment | `@explorer` |
+| Data privacy (LGPD, GDPR), consent flows, compliance review | `@legal` |
 
 If a task spans multiple agents, invoke them in sequence (e.g., @builder then @reviewer).
 
@@ -45,6 +46,7 @@ If a task spans multiple agents, invoke them in sequence (e.g., @builder then @r
 | `@data`     | Database modeling, migrations, caching, query optimization            |
 | `@devops`   | Docker, Kubernetes, CI/CD pipelines, monitoring, logging              |
 | `@tester`   | Test strategies, test suites, coverage, mocking patterns              |
+| `@legal`    | Data privacy (LGPD, GDPR, CCPA), consent flows, compliance audits     |
 
 **Pack-Specific (installed from your chosen pack):**
 
