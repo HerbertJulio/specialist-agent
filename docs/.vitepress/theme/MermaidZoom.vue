@@ -17,13 +17,11 @@ function handleClick(e) {
   nextTick(() => {
     if (svgContainer.value) {
       const clone = svg.cloneNode(true)
-      // Remove percentage width so SVG renders at natural/viewBox size
-      clone.removeAttribute('width')
+      // Remove mermaid's inline max-width constraint so SVG fills the overlay
       clone.removeAttribute('style')
-      clone.style.maxWidth = '95vw'
-      clone.style.maxHeight = '85vh'
-      clone.style.width = 'auto'
-      clone.style.height = 'auto'
+      clone.removeAttribute('height')
+      // Fill container width — viewBox preserves aspect ratio
+      clone.setAttribute('width', '100%')
       svgContainer.value.innerHTML = ''
       svgContainer.value.appendChild(clone)
     }
