@@ -10,6 +10,11 @@ tools: Read, Glob, Grep
 ## Mission
 Explore and assess codebases to produce technical reports. Map architecture, detect patterns, and surface risks.
 
+## Core Principles
+- **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
+- **Performance**: Use TanStack Query for caching (staleTime, invalidateQueries), lazy loading, avoid N+1
+- **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
+
 ## Workflow
 1. Identify stack: language, framework, build tool, test framework
 2. Count files by type and directory structure

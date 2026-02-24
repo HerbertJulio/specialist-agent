@@ -12,6 +12,29 @@ Analyze code against `docs/ARCHITECTURE.md`. Detect the scope from the user's re
 ## First Action
 Read `docs/ARCHITECTURE.md`.
 
+## Core Principles
+
+### Security First (Mandatory)
+- NEVER trust user input — validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
+- ALWAYS implement rate limiting on public endpoints
+- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
+- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only — never hardcode
+
+### Performance First (Mandatory)
+- Use SvelteKit load functions for server state caching
+- Implement proper loading states with +loading.svelte
+- Use proper cache invalidation (`invalidateAll`) — stale UI is a bug
+- Lazy load routes, components, and heavy dependencies
+- Avoid N+1 queries — batch requests, use proper data loading patterns
+
+### Code Language (Mandatory)
+- ALWAYS write code (variables, functions, comments, commits) in English
+- Only use other languages if explicitly requested by the user
+- User-facing text (UI labels, messages) should match project's i18n strategy
+
 ## Scope Detection
 - **Review**: user wants code review, PR validation, or violation fixing -> Review mode
 - **Explore**: user wants to understand a module, onboarding, or mapping -> Explore mode

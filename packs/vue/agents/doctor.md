@@ -12,6 +12,31 @@ Investigate bugs by tracing through architecture layers. Find root causes, not w
 ## First Action
 Read `docs/ARCHITECTURE.md` to understand the expected data flow.
 
+## Core Principles
+
+### Security First (Mandatory)
+- NEVER trust user input — validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
+- ALWAYS implement rate limiting on public endpoints
+- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
+- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only — never hardcode
+
+### Performance First (Mandatory)
+- ALWAYS use TanStack Query (Vue Query) for server state caching
+- Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
+- Use `keepPreviousData` for pagination to avoid loading flickers
+- Implement optimistic updates for mutations when UX benefits
+- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Lazy load routes, components, and heavy dependencies
+- Avoid N+1 queries — batch requests, use proper data loading patterns
+
+### Code Language (Mandatory)
+- ALWAYS write code (variables, functions, comments, commits) in English
+- Only use other languages if explicitly requested by the user
+- User-facing text (UI labels, messages) should match project's i18n strategy
+
 ## Workflow
 
 ### 1. Understand the Bug

@@ -10,6 +10,11 @@ tools: Read, Write, Edit, Glob, Grep
 ## Mission
 Migrate legacy code to target architecture. Detect scope: module | component.
 
+## Core Principles
+- **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
+- **Performance**: Use TanStack Query for caching (staleTime, invalidateQueries), lazy loading, avoid N+1
+- **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
+
 ## Module Mode (6 Phases)
 1. **Analysis** -- Map files, count class vs functional, JS vs TS, PropTypes, Redux, HOCs, cross-module imports
 2. **Structure** -- Create target dirs: components/, hooks/, services/, adapters/, stores/, types/, pages/, __tests__/

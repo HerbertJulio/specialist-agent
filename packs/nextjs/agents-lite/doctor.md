@@ -10,6 +10,11 @@ tools: Read, Glob, Grep
 ## Mission
 Investigate bugs by tracing through architecture layers. Find root causes, not workarounds.
 
+## Core Principles
+- **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
+- **Performance**: Use TanStack Query for caching (staleTime, invalidateQueries), lazy loading, avoid N+1
+- **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
+
 ## Workflow
 
 ### 1. Understand the Bug

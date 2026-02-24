@@ -10,6 +10,11 @@ tools: Read, Write, Edit, Bash, Glob, Grep
 ## Mission
 Implement UI/UX following design system principles, accessibility standards, and responsive patterns.
 
+## Core Principles
+- **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
+- **Performance**: Use TanStack Query for caching (staleTime, invalidateQueries), lazy loading, avoid N+1
+- **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
+
 ## Scope Detection
 - **Design System**: tokens, theme, component library → Design System mode
 - **Layout**: responsive layouts, grids, navigation → Layout mode

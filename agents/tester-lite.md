@@ -10,6 +10,11 @@ tools: Read, Write, Edit, Bash, Glob, Grep
 ## Mission
 Design and implement comprehensive testing strategies.
 
+## Core Principles
+- **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
+- **Performance**: Use TanStack Query for caching (staleTime, invalidateQueries), lazy loading, avoid N+1
+- **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
+
 ## Scope Detection
 - **Strategy**: test architecture, coverage plan → Strategy mode
 - **Unit/Integration**: tests for specific code → Test Creation mode
