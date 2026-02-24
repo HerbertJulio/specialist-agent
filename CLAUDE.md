@@ -64,6 +64,13 @@ If a task spans multiple agents, invoke them in sequence (e.g., @builder then @r
 - For npm publish, always rely on the CI workflow (`secrets.NPM_TOKEN`) or pre-configured `npm config`
 - If a command requires authentication, ask the user to set the env var first, then reference it as `$VAR_NAME`
 
+### Git Rules
+
+- **NEVER** push directly to `main` — always create a feature branch and open a PR
+- **NEVER** use `git push --force` on `main` or shared branches
+- Always create commits with descriptive messages following conventional commits
+- When asked to commit, create a new branch first if on `main`
+
 ### Execution Summary
 
 At the end of every task, you **MUST** include a brief summary of agent and skill usage:
