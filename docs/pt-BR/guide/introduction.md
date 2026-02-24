@@ -34,40 +34,54 @@ O Specialist Agent possui **13 agentes** organizados por cenario:
 
 ```mermaid
 graph TB
-    subgraph agnostic["Framework-Agnostic"]
-        Starter["@starter<br/><i>Create projects from scratch</i>"]
-        Explorer["@explorer<br/><i>Assess codebases, health score</i>"]
-        Finance["@finance<br/><i>Payments, billing, reporting</i>"]
-        Cloud["@cloud<br/><i>IaC, serverless, CI/CD</i>"]
-        Security["@security<br/><i>Auth, OWASP, RBAC</i>"]
-        Designer["@designer<br/><i>Design systems, a11y</i>"]
-        Data["@data<br/><i>DB modeling, caching</i>"]
-        DevOps["@devops<br/><i>Docker, K8s, monitoring</i>"]
-        Tester["@tester<br/><i>Test strategy, coverage</i>"]
+    Claude{"O que voce precisa?"} -->|"novo projeto"| setup
+    Claude -->|"construir & revisar"| daily
+    Claude -->|"modernizar"| migration
+    Claude -->|"expertise de dominio"| specialists
+
+    subgraph setup["Criacao de Projeto"]
+        Starter["@starter<br/><i>Criar projetos do zero</i>"]
+        Explorer["@explorer<br/><i>Avaliar codebases</i>"]
     end
 
-    subgraph daily["Day-to-Day Development"]
-        Builder["@builder<br/><i>Create modules, components,<br/>services, composables, tests</i>"]
-        Reviewer["@reviewer<br/><i>Review PRs, explore modules,<br/>check performance</i>"]
-        Doctor["@doctor<br/><i>Investigate bugs, trace errors<br/>through architecture layers</i>"]
+    subgraph daily["Desenvolvimento Dia a Dia"]
+        Builder["@builder<br/><i>Construir features, componentes</i>"]
+        Reviewer["@reviewer<br/><i>Revisar codigo, performance</i>"]
+        Doctor["@doctor<br/><i>Investigar bugs, rastrear erros</i>"]
     end
 
-    subgraph migration["Architecture Migration"]
-        Migrator["@migrator<br/><i>Options → setup, JS → TS,<br/>Vuex → Pinia + Vue Query</i>"]
+    subgraph migration["Migracao de Arquitetura"]
+        Migrator["@migrator<br/><i>Modernizar codigo legado</i>"]
     end
 
-    style agnostic fill:#f5f0fa,stroke:#7c3aed
+    subgraph specialists["Agentes Especialistas"]
+        Finance["@finance<br/><i>Pagamentos, billing</i>"]
+        Cloud["@cloud<br/><i>IaC, serverless</i>"]
+        Security["@security<br/><i>Auth, OWASP</i>"]
+        Designer["@designer<br/><i>Design systems</i>"]
+        Data["@data<br/><i>Modelagem de dados</i>"]
+        DevOps["@devops<br/><i>Docker, K8s</i>"]
+        Tester["@tester<br/><i>Estrategia de testes</i>"]
+        Finance ~~~ Designer
+        Cloud ~~~ Data
+        Security ~~~ DevOps
+        Designer ~~~ Tester
+    end
+
+    style Claude fill:#35495e,color:#fff
+    style setup fill:#f5f0fa,stroke:#7c3aed
     style daily fill:#f0faf5,stroke:#42b883
     style migration fill:#f0f4fa,stroke:#35495e
+    style specialists fill:#faf5f0,stroke:#e67e22
     style Starter fill:#7c3aed,color:#fff
     style Explorer fill:#7c3aed,color:#fff
-    style Finance fill:#7c3aed,color:#fff
-    style Cloud fill:#7c3aed,color:#fff
-    style Security fill:#7c3aed,color:#fff
-    style Designer fill:#7c3aed,color:#fff
-    style Data fill:#7c3aed,color:#fff
-    style DevOps fill:#7c3aed,color:#fff
-    style Tester fill:#7c3aed,color:#fff
+    style Finance fill:#e67e22,color:#fff
+    style Cloud fill:#e67e22,color:#fff
+    style Security fill:#e67e22,color:#fff
+    style Designer fill:#e67e22,color:#fff
+    style Data fill:#e67e22,color:#fff
+    style DevOps fill:#e67e22,color:#fff
+    style Tester fill:#e67e22,color:#fff
     style Builder fill:#42b883,color:#fff
     style Reviewer fill:#42b883,color:#fff
     style Doctor fill:#42b883,color:#fff
