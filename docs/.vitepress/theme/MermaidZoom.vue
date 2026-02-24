@@ -1,22 +1,40 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, nextTick } from 'vue'
 
-const overlay = ref(null)
 const isOpen = ref(false)
-const svgContent = ref('')
+const svgContainer = ref(null)
 
 function handleClick(e) {
+  // Ignore clicks inside the overlay itself
+  if (e.target.closest('.mermaid-overlay')) return
+
   const mermaid = e.target.closest('.mermaid')
   if (!mermaid) return
   const svg = mermaid.querySelector('svg')
   if (!svg) return
-  svgContent.value = svg.outerHTML
+
   isOpen.value = true
+  nextTick(() => {
+    if (svgContainer.value) {
+      const clone = svg.cloneNode(true)
+      // Remove percentage width so SVG renders at natural/viewBox size
+      clone.removeAttribute('width')
+      clone.removeAttribute('style')
+      clone.style.maxWidth = '95vw'
+      clone.style.maxHeight = '85vh'
+      clone.style.width = 'auto'
+      clone.style.height = 'auto'
+      svgContainer.value.innerHTML = ''
+      svgContainer.value.appendChild(clone)
+    }
+  })
 }
 
 function close() {
   isOpen.value = false
-  svgContent.value = ''
+  if (svgContainer.value) {
+    svgContainer.value.innerHTML = ''
+  }
 }
 
 function handleKeydown(e) {
@@ -39,12 +57,11 @@ onUnmounted(() => {
     <Transition name="mermaid-zoom">
       <div
         v-if="isOpen"
-        ref="overlay"
         class="mermaid-overlay"
         @click.self="close"
       >
-        <button class="mermaid-close" @click="close" aria-label="Close">✕</button>
-        <div class="mermaid-zoom-content" v-html="svgContent" />
+        <button class="mermaid-close" @click="close" aria-label="Close">&#x2715;</button>
+        <div ref="svgContainer" class="mermaid-zoom-content" />
       </div>
     </Transition>
   </Teleport>
@@ -55,7 +72,7 @@ onUnmounted(() => {
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: rgba(10, 22, 40, 0.85);
+  background: rgba(10, 22, 40, 0.9);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -86,13 +103,9 @@ onUnmounted(() => {
   max-width: 95vw;
   max-height: 90vh;
   overflow: auto;
-}
-
-.mermaid-zoom-content :deep(svg) {
-  width: auto !important;
-  max-width: 95vw;
-  max-height: 85vh;
-  height: auto;
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
 }
 
 .mermaid-zoom-enter-active,
