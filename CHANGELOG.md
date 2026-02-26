@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.6.0...specialist-agent-v1.7.0) (2026-02-26)
+
+
+### Features
+
+* v2.0 — 25+ agents, native hooks, security guard, 6 platforms ([#30](https://github.com/HerbertJulio/specialist-agent/issues/30)) ([37f4555](https://github.com/HerbertJulio/specialist-agent/commit/37f45555d8a48cbbd7fbc1a58621e9fb066ba600))
+
 ## [1.6.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v1.5.0...specialist-agent-v1.6.0) (2026-02-24)
 
 
