@@ -145,7 +145,7 @@ function buildGettingStarted(agentNames, installedSkills) {
 
 const args = process.argv.slice(2)
 
-const validCommands = ['init']
+const validCommands = ['init', 'create-agent', 'list', 'profiles']
 const command = args.find(a => !a.startsWith('-'))
 if (command && !validCommands.includes(command)) {
   console.error(`  ${YELLOW}Unknown command: ${command}${NC}`)
@@ -158,15 +158,23 @@ if (args.includes('--help') || args.includes('-h')) {
   console.log()
   console.log(`  ${BOLD}specialist-agent${NC} ${DIM}v${pkg.version}${NC}`)
   console.log()
-  console.log('  Usage: specialist-agent [init] [options]')
+  console.log('  Usage: specialist-agent <command> [options]')
+  console.log()
+  console.log('  Commands:')
+  console.log(`    init                    ${DIM}Install agents and skills in your project${NC}`)
+  console.log(`    create-agent <name>     ${DIM}Create a custom agent from template${NC}`)
+  console.log(`    list                    ${DIM}List installed agents and skills${NC}`)
+  console.log(`    profiles                ${DIM}Manage AI team profiles${NC}`)
   console.log()
   console.log('  Options:')
   console.log(`    -h, --help      ${DIM}Show this help message${NC}`)
   console.log(`    -v, --version   ${DIM}Show version number${NC}`)
   console.log(`    -f, --force     ${DIM}Overwrite existing agents without asking${NC}`)
   console.log()
-  console.log(`  ${DIM}Run the setup wizard to install AI agents for Claude Code.${NC}`)
-  console.log(`  ${DIM}Can be executed from any directory (creates package.json if needed).${NC}`)
+  console.log('  Examples:')
+  console.log(`    ${DIM}$ specialist-agent init${NC}`)
+  console.log(`    ${DIM}$ specialist-agent create-agent @my-custom-agent${NC}`)
+  console.log(`    ${DIM}$ specialist-agent profiles set startup-fast${NC}`)
   console.log()
   process.exit(0)
 }
@@ -178,6 +186,347 @@ if (args.includes('--version') || args.includes('-v')) {
 }
 
 const forceMode = args.includes('--force') || args.includes('-f')
+
+// ── Agent Template ───────────────────────────────────
+
+const AGENT_TEMPLATE = `---
+name: {{name}}
+description: "{{description}}"
+model: {{model}}
+tools: Read, Write, Edit, Bash, Glob, Grep
+---
+
+# @{{name}} — {{title}}
+
+## Mission
+
+{{mission}}
+
+## Workflow
+
+### Step 1: Understand Context
+1. Read relevant files
+2. Understand existing patterns
+3. Plan approach
+
+### Step 2: Execute
+1. Implement changes
+2. Validate results
+3. Report completion
+
+## Output
+
+After completing work, provide:
+- What was done
+- Files created/modified
+- Validation results
+- Next steps
+
+## Rules
+
+1. Follow ARCHITECTURE.md patterns
+2. Write clean, readable code
+3. Add appropriate tests
+4. Document changes
+
+## Handoff Protocol
+
+- If code review needed → suggest @reviewer
+- If bugs found → suggest @doctor
+- If tests needed → suggest @tester
+`
+
+// ── Create Agent Command ─────────────────────────────
+
+async function createAgent() {
+  const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf-8'))
+  clack.intro(`Create Custom Agent ${DIM}v${pkg.version}${NC}`)
+
+  // Get agent name from args or prompt
+  let agentName = args.find(a => a.startsWith('@'))?.replace('@', '') || args[args.indexOf('create-agent') + 1]
+
+  if (!agentName || agentName.startsWith('-')) {
+    const nameInput = await clack.text({
+      message: 'Agent name (without @):',
+      placeholder: 'my-agent',
+      validate: (value) => {
+        if (!value) return 'Name is required'
+        if (!/^[a-z][a-z0-9-]*$/.test(value)) return 'Use lowercase letters, numbers, and hyphens'
+      }
+    })
+    if (clack.isCancel(nameInput)) handleCancel()
+    agentName = nameInput
+  }
+
+  agentName = agentName.replace('@', '')
+
+  const description = await clack.text({
+    message: 'What does this agent do?',
+    placeholder: 'Handles X when Y happens',
+    validate: (value) => !value ? 'Description is required' : undefined
+  })
+  if (clack.isCancel(description)) handleCancel()
+
+  const title = await clack.text({
+    message: 'Agent title (short):',
+    placeholder: 'Custom Agent',
+    initialValue: agentName.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+  })
+  if (clack.isCancel(title)) handleCancel()
+
+  const mission = await clack.text({
+    message: 'Mission statement (one sentence):',
+    placeholder: 'Help developers with X by doing Y.'
+  })
+  if (clack.isCancel(mission)) handleCancel()
+
+  const model = await clack.select({
+    message: 'Default model:',
+    options: [
+      { value: 'sonnet', label: 'Sonnet', hint: 'Balanced (default)' },
+      { value: 'haiku', label: 'Haiku', hint: 'Faster, cheaper' },
+      { value: 'opus', label: 'Opus', hint: 'Most capable' },
+    ]
+  })
+  if (clack.isCancel(model)) handleCancel()
+
+  const installScope = await clack.select({
+    message: 'Where to create?',
+    options: [
+      { value: 'project', label: 'This project', hint: '.claude/agents/' },
+      { value: 'global', label: 'Global', hint: '~/.claude/agents/' },
+    ]
+  })
+  if (clack.isCancel(installScope)) handleCancel()
+
+  // Generate agent content
+  const content = AGENT_TEMPLATE
+    .replace(/\{\{name\}\}/g, agentName)
+    .replace(/\{\{description\}\}/g, description)
+    .replace(/\{\{title\}\}/g, title)
+    .replace(/\{\{mission\}\}/g, mission || 'Help with specific tasks.')
+    .replace(/\{\{model\}\}/g, model === 'sonnet' ? '' : `\nmodel: ${model}`)
+    .replace(/\nmodel: \n/, '\n')
+
+  // Determine destination
+  const agentsDest = installScope === 'global'
+    ? join(homedir(), '.claude', 'agents')
+    : join(process.cwd(), '.claude', 'agents')
+
+  mkdirSync(agentsDest, { recursive: true })
+
+  const filePath = join(agentsDest, `${agentName}.md`)
+
+  if (existsSync(filePath) && !forceMode) {
+    const overwrite = await clack.confirm({
+      message: `Agent @${agentName} already exists. Overwrite?`,
+      initialValue: false
+    })
+    if (clack.isCancel(overwrite)) handleCancel()
+    if (!overwrite) {
+      clack.cancel('Agent creation cancelled.')
+      process.exit(0)
+    }
+  }
+
+  writeFileSync(filePath, content)
+
+  clack.note([
+    `File: ${filePath}`,
+    '',
+    'Next steps:',
+    `1. Edit the agent file to customize behavior`,
+    `2. Use in Claude Code: "Use @${agentName} to..."`,
+  ].join('\n'), `@${agentName} created!`)
+
+  clack.outro('Agent ready to use!')
+}
+
+// ── List Command ─────────────────────────────────────
+
+async function listAgents() {
+  const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf-8'))
+  console.log()
+  console.log(`  ${BOLD}Specialist Agent${NC} ${DIM}v${pkg.version}${NC}`)
+  console.log()
+
+  const cwd = process.cwd()
+  const projectAgents = join(cwd, '.claude', 'agents')
+  const globalAgents = join(homedir(), '.claude', 'agents')
+  const projectSkills = join(cwd, '.claude', 'skills')
+
+  console.log(`  ${BOLD}Agents${NC}`)
+  console.log()
+
+  // Project agents
+  if (existsSync(projectAgents)) {
+    const agents = getAgentNames(projectAgents)
+    if (agents.length > 0) {
+      console.log(`  ${DIM}Project (.claude/agents/):${NC}`)
+      agents.forEach(a => console.log(`    @${a}`))
+      console.log()
+    }
+  }
+
+  // Global agents
+  if (existsSync(globalAgents)) {
+    const agents = getAgentNames(globalAgents)
+    if (agents.length > 0) {
+      console.log(`  ${DIM}Global (~/.claude/agents/):${NC}`)
+      agents.forEach(a => console.log(`    @${a}`))
+      console.log()
+    }
+  }
+
+  // Skills
+  if (existsSync(projectSkills)) {
+    const skills = readdirSync(projectSkills, { withFileTypes: true })
+      .filter(d => d.isDirectory())
+      .map(d => d.name)
+
+    if (skills.length > 0) {
+      console.log(`  ${BOLD}Skills${NC}`)
+      console.log()
+      console.log(`  ${DIM}Project (.claude/skills/):${NC}`)
+      skills.forEach(s => console.log(`    /${s}`))
+      console.log()
+    }
+  }
+
+  // Check for session memory
+  const memoryFile = join(cwd, '.claude', 'session-memory.json')
+  if (existsSync(memoryFile)) {
+    console.log(`  ${BOLD}Session Memory${NC}`)
+    console.log(`  ${DIM}Active: .claude/session-memory.json${NC}`)
+    console.log()
+  }
+
+  // Check for profile
+  const configFile = join(cwd, '.claude', 'config.json')
+  if (existsSync(configFile)) {
+    try {
+      const config = JSON.parse(readFileSync(configFile, 'utf-8'))
+      if (config.profile) {
+        console.log(`  ${BOLD}Profile${NC}`)
+        console.log(`  ${DIM}Active: ${config.profile}${NC}`)
+        console.log()
+      }
+    } catch {}
+  }
+}
+
+// ── Profiles Command ─────────────────────────────────
+
+async function manageProfiles() {
+  const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf-8'))
+  clack.intro(`AI Team Profiles ${DIM}v${pkg.version}${NC}`)
+
+  const profiles = {
+    'startup-fast': {
+      description: 'Move fast, ship quickly. Minimal validation, Haiku model.',
+      settings: { model: 'haiku', validation: 'minimal', checkpoints: false }
+    },
+    'enterprise-strict': {
+      description: 'Strict quality gates. Full validation, detailed reviews.',
+      settings: { model: 'sonnet', validation: 'full', checkpoints: true }
+    },
+    'learning-mode': {
+      description: 'Explain everything. Learning-focused, verbose output.',
+      settings: { model: 'sonnet', validation: 'full', explain: true }
+    },
+    'cost-optimized': {
+      description: 'Minimize token usage. Haiku where possible, skip extras.',
+      settings: { model: 'haiku', validation: 'minimal', checkpoints: false }
+    }
+  }
+
+  const subcommand = args[args.indexOf('profiles') + 1]
+
+  if (subcommand === 'list' || !subcommand) {
+    console.log()
+    console.log(`  ${BOLD}Available Profiles${NC}`)
+    console.log()
+    Object.entries(profiles).forEach(([name, info]) => {
+      console.log(`  ${BOLD}${name}${NC}`)
+      console.log(`  ${DIM}${info.description}${NC}`)
+      console.log()
+    })
+
+    const configFile = join(process.cwd(), '.claude', 'config.json')
+    if (existsSync(configFile)) {
+      try {
+        const config = JSON.parse(readFileSync(configFile, 'utf-8'))
+        if (config.profile) {
+          console.log(`  ${BOLD}Current:${NC} ${config.profile}`)
+        }
+      } catch {}
+    }
+    return
+  }
+
+  if (subcommand === 'set') {
+    const profileName = args[args.indexOf('set') + 1]
+
+    if (!profileName || !profiles[profileName]) {
+      const selected = await clack.select({
+        message: 'Select profile:',
+        options: Object.entries(profiles).map(([name, info]) => ({
+          value: name,
+          label: name,
+          hint: info.description.substring(0, 50)
+        }))
+      })
+      if (clack.isCancel(selected)) handleCancel()
+
+      const configDir = join(process.cwd(), '.claude')
+      mkdirSync(configDir, { recursive: true })
+
+      const configFile = join(configDir, 'config.json')
+      let config = {}
+      if (existsSync(configFile)) {
+        try { config = JSON.parse(readFileSync(configFile, 'utf-8')) } catch {}
+      }
+
+      config.profile = selected
+      config.profileSettings = profiles[selected].settings
+
+      writeFileSync(configFile, JSON.stringify(config, null, 2))
+      clack.outro(`Profile set to: ${selected}`)
+    } else {
+      const configDir = join(process.cwd(), '.claude')
+      mkdirSync(configDir, { recursive: true })
+
+      const configFile = join(configDir, 'config.json')
+      let config = {}
+      if (existsSync(configFile)) {
+        try { config = JSON.parse(readFileSync(configFile, 'utf-8')) } catch {}
+      }
+
+      config.profile = profileName
+      config.profileSettings = profiles[profileName].settings
+
+      writeFileSync(configFile, JSON.stringify(config, null, 2))
+      console.log(`  Profile set to: ${profileName}`)
+    }
+  }
+}
+
+// ── Command Router ───────────────────────────────────
+
+if (command === 'create-agent') {
+  createAgent().catch(err => {
+    clack.log.error(err.message)
+    process.exit(1)
+  })
+} else if (command === 'list') {
+  listAgents()
+} else if (command === 'profiles') {
+  manageProfiles().catch(err => {
+    clack.log.error(err.message)
+    process.exit(1)
+  })
+} else {
+  // Default to init
 
 // ── Main ─────────────────────────────────────────────
 
@@ -282,15 +631,23 @@ async function main() {
 
   if (clack.isCancel(installStarter)) handleCancel()
 
-  // 4. Specialist agents
+  // 4. Workflow agents
+  const installWorkflow = await clack.confirm({
+    message: `Install workflow agents? ${DIM}(@planner, @executor, @tdd, @debugger, @pair)${NC}`,
+    initialValue: true,
+  })
+
+  if (clack.isCancel(installWorkflow)) handleCancel()
+
+  // 5. Specialist agents
   const installSpecialists = await clack.confirm({
-    message: `Install specialist agents? ${DIM}(@finance, @cloud, @security, @designer, @data, @devops, @tester, @explorer)${NC}`,
+    message: `Install specialist agents? ${DIM}(@api, @perf, @security, @finance, @data, @i18n, @docs, @deps, @legal, ...)${NC}`,
     initialValue: true,
   })
 
   if (clack.isCancel(installSpecialists)) handleCancel()
 
-  // 5. Install scope
+  // 6. Install scope
   const installScope = await clack.select({
     message: 'Where to install agents?',
     options: [
@@ -352,9 +709,25 @@ async function main() {
     }
   }
 
+  // Install workflow agents
+  if (installWorkflow) {
+    const workflowNames = ['planner', 'executor', 'tdd', 'debugger', 'pair', 'analyst', 'orchestrator', 'scout', 'memory']
+    for (const name of workflowNames) {
+      const suffix = mode === 'lite' ? '-lite.md' : '.md'
+      const source = join(ROOT, 'agents', `${name}${suffix}`)
+      const dest = join(agentsDest, `${name}.md`)
+      if (existsSync(source) && (shouldOverwrite || !existsSync(dest))) {
+        cpSync(source, dest)
+      }
+    }
+  }
+
   // Install specialist agents
   if (installSpecialists) {
-    const specialistNames = ['explorer', 'finance', 'cloud', 'security', 'designer', 'data', 'devops', 'tester']
+    const specialistNames = [
+      'api', 'perf', 'i18n', 'docs', 'refactor', 'deps',  // New agents
+      'explorer', 'finance', 'cloud', 'security', 'designer', 'data', 'devops', 'tester', 'legal'  // Existing
+    ]
     for (const name of specialistNames) {
       const suffix = mode === 'lite' ? '-lite.md' : '.md'
       const source = join(ROOT, 'agents', `${name}${suffix}`)
@@ -365,12 +738,21 @@ async function main() {
     }
   }
 
-  // Install skills
+  // Install skills (pack-specific)
   const skillsDest = join(cwd, '.claude', 'skills')
   mkdirSync(skillsDest, { recursive: true })
-  const skillCount = shouldOverwrite
+  let skillCount = shouldOverwrite
     ? copyDir(skillsSource, skillsDest)
     : copyNewOnly(skillsSource, skillsDest)
+
+  // Install generic skills
+  const genericSkillsSource = join(ROOT, 'skills')
+  if (existsSync(genericSkillsSource)) {
+    const genericSkillCount = shouldOverwrite
+      ? copyDir(genericSkillsSource, skillsDest)
+      : copyNewOnly(genericSkillsSource, skillsDest)
+    skillCount += genericSkillCount
+  }
 
   // Install ARCHITECTURE.md
   const archDest = join(cwd, 'docs', 'ARCHITECTURE.md')
@@ -428,7 +810,8 @@ async function main() {
   clack.outro('Setup complete! Run claude to get started.')
 }
 
-main().catch((err) => {
-  clack.log.error(err.message)
-  process.exit(1)
-})
+  main().catch((err) => {
+    clack.log.error(err.message)
+    process.exit(1)
+  })
+}

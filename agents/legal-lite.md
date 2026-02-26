@@ -1,6 +1,6 @@
 ---
 name: legal
-description: "MUST BE USED when reviewing data privacy compliance (LGPD, GDPR), terms of service, cookie policies, consent flows, data retention, or legal risk assessment. Use PROACTIVELY when the user builds features that handle personal data."
+description: "Use when implementing GDPR, LGPD, or privacy compliance — consent management, data retention, audit trails, or cookie policies."
 model: haiku
 tools: Read, Glob, Grep
 ---

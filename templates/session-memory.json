@@ -1,0 +1,48 @@
+{
+  "$schema": "https://specialist-agent.dev/schemas/session-memory-v1.json",
+  "version": "1.0",
+  "projectId": "",
+  "created": "",
+  "updated": "",
+
+  "decisions": [],
+
+  "preferences": {
+    "codeStyle": {
+      "quotes": "single",
+      "semicolons": false,
+      "indent": 2,
+      "trailingComma": "es5"
+    },
+    "naming": {
+      "components": "PascalCase",
+      "functions": "camelCase",
+      "constants": "UPPER_SNAKE_CASE",
+      "files": "kebab-case"
+    },
+    "testing": {
+      "framework": "",
+      "coverageTarget": 80
+    },
+    "documentation": {
+      "language": "english",
+      "style": "jsdoc"
+    }
+  },
+
+  "context": {
+    "team": "",
+    "stage": "",
+    "deadline": null,
+    "notes": ""
+  },
+
+  "patterns": {
+    "avoided": [],
+    "preferred": []
+  },
+
+  "lessons": [],
+
+  "agentHistory": []
+}

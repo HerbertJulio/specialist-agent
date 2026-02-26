@@ -1,6 +1,6 @@
 ---
 name: migration-migrate-component
-description: "Migrate a Vue component from Options API to script setup with TypeScript"
+description: "Use when a component needs migration to the target architecture or framework version."
 user-invocable: true
 argument-hint: "[component-file]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

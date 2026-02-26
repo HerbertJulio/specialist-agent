@@ -1,0 +1,81 @@
+{
+  "$schema": "https://specialist-agent.dev/schemas/hooks-v1.json",
+  "version": "1.0.0",
+  "description": "Specialist Agent hooks configuration",
+  "hooks": {
+    "session-start": {
+      "description": "Runs when a new Claude Code session starts",
+      "scripts": [
+        "./hooks/session-start.mjs"
+      ],
+      "enabled": true
+    },
+    "before-plan": {
+      "description": "Runs before @planner creates a plan",
+      "scripts": [
+        "./hooks/before-plan.mjs"
+      ],
+      "enabled": true
+    },
+    "after-task": {
+      "description": "Runs after each task completes (from @executor)",
+      "scripts": [
+        "./hooks/after-task.mjs"
+      ],
+      "enabled": true
+    },
+    "on-error": {
+      "description": "Runs when an agent encounters an error",
+      "scripts": [
+        "./hooks/on-error.mjs"
+      ],
+      "enabled": true
+    },
+    "before-review": {
+      "description": "Runs before @reviewer starts review",
+      "scripts": [
+        "./hooks/before-review.mjs"
+      ],
+      "enabled": true
+    },
+    "after-review": {
+      "description": "Runs after @reviewer completes review",
+      "scripts": [
+        "./hooks/after-review.mjs"
+      ],
+      "enabled": true
+    },
+    "session-end": {
+      "description": "Runs when session ends (if detectable)",
+      "scripts": [
+        "./hooks/session-end.mjs"
+      ],
+      "enabled": true
+    }
+  },
+  "metrics": {
+    "enabled": true,
+    "outputDir": ".claude/metrics",
+    "track": {
+      "tokens": true,
+      "duration": true,
+      "agents": true,
+      "skills": true,
+      "files": true,
+      "checkpoints": true
+    }
+  },
+  "notifications": {
+    "enabled": false,
+    "channels": {
+      "slack": {
+        "webhook": "",
+        "events": ["on-error", "session-end"]
+      },
+      "discord": {
+        "webhook": "",
+        "events": ["on-error"]
+      }
+    }
+  }
+}

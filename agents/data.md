@@ -1,6 +1,6 @@
 ---
 name: data
-description: "MUST BE USED when designing database schemas, writing migrations, building ETL pipelines, implementing caching strategies, or optimizing queries. Use PROACTIVELY when the user needs data engineering help."
+description: "Use when designing database schemas, writing migrations, optimizing queries, or planning caching strategies."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

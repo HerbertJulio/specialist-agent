@@ -1,6 +1,6 @@
 ---
 name: dev-create-component
-description: "Create a Vue component with script setup following ARCHITECTURE.md"
+description: "Use when adding a new UI component to an existing module — handles templates, props, and test scaffolding."
 user-invocable: true
 argument-hint: "[ComponentName]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

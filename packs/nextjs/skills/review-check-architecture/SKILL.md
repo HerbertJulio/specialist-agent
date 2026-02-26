@@ -1,6 +1,6 @@
 ---
 name: review-check-architecture
-description: "Validate project conformance against ARCHITECTURE.md with automated checks (Next.js-specific)"
+description: "Use when checking if code follows ARCHITECTURE.md patterns — runs automated conformance checks."
 user-invocable: true
 argument-hint: "[module]"
 allowed-tools: Read, Bash, Glob, Grep

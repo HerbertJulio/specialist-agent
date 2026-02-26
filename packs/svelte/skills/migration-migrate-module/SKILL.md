@@ -1,6 +1,6 @@
 ---
 name: migration-migrate-module
-description: "Migrate an entire module to the target architecture in 6 phases"
+description: "Use when a complete module needs migration to the target architecture — runs 6 phases with approval gates."
 user-invocable: true
 argument-hint: "[module-path]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

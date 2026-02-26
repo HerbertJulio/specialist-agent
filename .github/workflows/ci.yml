@@ -24,3 +24,60 @@ jobs:
 
       - name: Validate package
         run: npm pack --dry-run
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate agent frontmatter
+        run: |
+          echo "Validating agents..."
+          error=0
+          for f in agents/*.md packs/*/agents/*.md; do
+            if [ -f "$f" ]; then
+              if ! head -5 "$f" | grep -q "^---"; then
+                echo "ERROR: $f missing frontmatter"
+                error=1
+              fi
+            fi
+          done
+          exit $error
+
+      - name: Validate skill files
+        run: |
+          echo "Validating skills..."
+          error=0
+          for f in skills/*/SKILL.md packs/*/skills/*/SKILL.md; do
+            if [ -f "$f" ]; then
+              if ! head -5 "$f" | grep -q "^---"; then
+                echo "ERROR: $f missing frontmatter"
+                error=1
+              fi
+            fi
+          done
+          exit $error
+
+      - name: Validate JSON files
+        run: |
+          echo "Validating JSON..."
+          for f in $(find . -name "*.json" -not -path "./node_modules/*"); do
+            node -e "JSON.parse(require('fs').readFileSync('$f'))" || exit 1
+          done
+
+  cli-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Test CLI
+        run: |
+          node cli/index.mjs list
+          node cli/index.mjs --help || true

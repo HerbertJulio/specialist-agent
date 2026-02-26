@@ -1,6 +1,6 @@
 {
   "name": "specialist-agent",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "type": "module",
   "description": "AI agents for Claude Code — any framework, any stack",
   "bin": {
@@ -10,6 +10,11 @@
     "cli",
     "agents",
     "packs",
+    "skills",
+    "hooks",
+    ".claude-plugin",
+    ".cursor-plugin",
+    ".codex",
     "README.md",
     "LICENSE"
   ],
@@ -35,7 +40,12 @@
     "nextjs",
     "svelte",
     "developer-tools",
-    "code-generation"
+    "code-generation",
+    "tdd",
+    "code-review",
+    "debugging",
+    "cursor",
+    "codex"
   ],
   "engines": {
     "node": ">=18"

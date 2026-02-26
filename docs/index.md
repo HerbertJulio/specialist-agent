@@ -3,36 +3,47 @@ layout: home
 
 hero:
   name: Specialist Agent
-  text: AI Agents for Claude Code
-  tagline: 13 specialized agents, 12 skills, and framework packs — build, review, migrate, debug, and more with any stack.
+  text: Your AI Development Team
+  tagline: Build production code faster with 25+ specialized AI agents.
   actions:
     - theme: brand
-      text: Get Started →
-      link: /guide/introduction
+      text: Install
+      link: /guide/installation
     - theme: alt
-      text: View on GitHub
-      link: https://github.com/HerbertJulio/specialist-agent
+      text: Get Started
+      link: /guide/introduction
 
 features:
+  - icon: 🏗️
+    title: Build Features
+    details: Create modules, components, APIs. @builder scaffolds production code following your architecture.
+    link: /scenarios/build-feature
+  - icon: 🔍
+    title: Review Code
+    details: Unified 3-in-1 review checks spec compliance, code quality, and architecture in one pass.
+    link: /scenarios/code-review
+  - icon: 🐛
+    title: Debug Issues
+    details: Systematic 4-phase debugging traces through layers to find root causes.
+    link: /scenarios/debug-issue
+  - icon: 🛡️
+    title: Audit & Verify
+    details: Multi-domain code audit (security, performance, architecture, dependencies) with proof-based verification.
+    link: /reference/skills
+  - icon: 🔒
+    title: Security & Compliance
+    details: Auth flows, OWASP audit, GDPR/LGPD compliance, encryption.
+    link: /scenarios/security
   - icon: 🧠
-    title: "@starter"
-    details: Create new projects from scratch — any frontend + any backend + any database, fully configured.
-  - icon: 🏛️
-    title: "@builder"
-    details: Create modules, components, services, and tests — auto-detects what you need from your framework pack.
-  - icon: 🔭
-    title: "@reviewer"
-    details: Review PRs, explore modules, and detect performance issues against your architecture.
-  - icon: 📐
-    title: "@migrator"
-    details: Migrate legacy patterns to modern architecture in 6 phases with approval gates.
-  - icon: 🔬
-    title: "@doctor"
-    details: Trace bugs through Component → State Logic → Adapter → Service → API to find root causes.
-  - icon: 📚
-    title: Specialist Agents
-    details: "@finance, @cloud, @security, @designer, @data, @devops, @tester — domain experts for any project."
-  - icon: 🪶
-    title: Framework Packs
-    details: "Next.js, React, SvelteKit, Vue 3 — stack-specific agents, skills, and architecture patterns."
+    title: Memory & Onboarding
+    details: Cross-session memory, codebase onboarding, and interactive tutorials for new developers.
+    link: /reference/skills
+  - icon: ⚡
+    title: Hooks & Lifecycle
+    details: 7 lifecycle hooks for session start, planning, reviews, errors, and more.
+    link: /reference/hooks
+  - icon: 💰
+    title: Cost Optimization
+    details: Lite mode (60-80% cheaper), cost estimation, adaptive planning by complexity.
+    link: /guide/benchmark
 ---

@@ -1,6 +1,6 @@
 ---
 name: builder
-description: "MUST BE USED when creating new modules, components, services, stores, or tests. Use PROACTIVELY when the user wants to build any new code."
+description: "Use when creating new modules, components, services, hooks, or pages in an existing project."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -92,6 +92,28 @@ Read `docs/ARCHITECTURE.md`.
 3. Create in `__tests__/[OriginalName].spec.ts`
 4. Run: `npx vitest run [file]`
 
+## Verification Protocol
+
+**Before claiming ANY module/component is complete:**
+
+```
+1. RUN `npx tsc --noEmit` — No TypeScript errors
+2. RUN `npm test` — All tests pass
+3. RUN `npm run lint` — No lint errors
+4. VERIFY files exist as specified
+5. ONLY THEN claim "complete" WITH evidence
+```
+
+## Anti-Rationalization
+
+| Excuse | Reality |
+|--------|---------|
+| "It compiles, so it works" | Compiling is not testing. Run the tests. |
+| "I'll add tests later" | Later never comes. Tests are part of "complete." |
+| "It's just boilerplate" | Boilerplate has typos. Verify. |
+| "The pattern is proven" | Proven patterns with wrong inputs still fail. |
+| "Types are enough validation" | Types catch type errors, not logic errors. Test. |
+
 ## Rules
 - Follow ARCHITECTURE.md strictly
 - Modules don't import from each other (use shared/)
@@ -101,6 +123,7 @@ Read `docs/ARCHITECTURE.md`.
 - Components: Svelte 5 runes, typed $props, < 200 lines
 - Use Svelte 5 syntax: $state, $derived, $effect, $props, {@render}, snippets
 - Do NOT use Svelte 4 patterns: export let, $: reactive, createEventDispatcher, <slot>
+- **Verify before claiming complete** — Tests pass = complete
 
 ## Output
 

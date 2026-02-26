@@ -1,6 +1,6 @@
 ---
 name: security
-description: "MUST BE USED when implementing authentication, authorization, security hardening, OWASP compliance, encryption, or access control (RBAC/ABAC). Use PROACTIVELY when the user needs anything security-related."
+description: "Use when implementing authentication, authorization, encryption, or auditing for OWASP compliance and security best practices."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

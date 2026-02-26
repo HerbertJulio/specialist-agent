@@ -1,166 +1,99 @@
 # Installation
 
-## Prerequisites
+## Option 1: Marketplace (Easiest)
 
-- A project with `package.json`
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed
+**Claude Code:**
+```
+/plugin install specialist-agent
+```
 
-## Install
+**Cursor:**
+```
+Cmd+Shift+P → Install Plugin → specialist-agent
+```
+
+---
+
+## Option 2: CLI
 
 ```bash
-# 1. Go to your project
-cd /path/to/your-project
-
-# 2. Run the wizard
+cd your-project
 npx specialist-agent init
 ```
 
-The wizard will:
+Works on any platform.
 
-1. **Framework** — Auto-detects from `package.json` (Vue 3, React, Next.js, SvelteKit) or asks
-2. **Mode** — Full (Sonnet/Opus) or Lite (Haiku)
-3. **Starter agent** — Install @starter for project creation?
-4. **Specialist agents** — Install @finance, @cloud, @security, @designer, @data, @devops, @tester, @explorer?
-5. **Global install** — Install generic agents to `~/.claude/agents` (available across all projects)?
+---
 
-## What Gets Installed
+## What Happens
 
-```mermaid
-graph TB
-    setup["npx specialist-agent init"] --> wizard{"Setup Wizard"}
-
-    wizard -->|"1. Framework"| pack["Auto-detect or select"]
-    wizard -->|"2. Mode"| mode["Full · Lite"]
-    wizard -->|"3. Starter?"| starter["Yes · No"]
-    wizard -->|"4. Specialists?"| specialists["Yes · No"]
-    wizard -->|"5. Global?"| global["~/.claude/agents"]
-
-    subgraph installed["  What Gets Installed  "]
-        direction LR
-
-        subgraph ag[" Agents "]
-            direction TB
-            a1["@starter"]
-            a2["@builder"]
-            a3["@reviewer"]
-            a4["@migrator"]
-            a5["@doctor"]
-            a6["@finance, @cloud, ..."]
-        end
-
-        subgraph sk[" Skills "]
-            direction TB
-            s1["6 dev skills"]
-            s2["3 review skills"]
-            s3["2 migration skills"]
-            s4["1 docs skill"]
-        end
-
-        subgraph dc[" Docs "]
-            direction TB
-            d1["ARCHITECTURE.md"]
-            d2["CLAUDE.md"]
-        end
-    end
-
-    pack --> installed
-    mode --> installed
-    starter --> installed
-    specialists --> installed
-    global --> installed
-
-    style setup fill:#42b883,color:#fff,font-weight:bold
-    style wizard fill:#35495e,color:#fff
-    style installed fill:#f8f8f8,stroke:#42b883,stroke-width:2px
-    style ag fill:#f0faf5,stroke:#42b883
-    style sk fill:#f0faf5,stroke:#42b883
-    style dc fill:#f0faf5,stroke:#42b883
-    style a1 fill:#7c3aed,color:#fff
-    style a2 fill:#42b883,color:#fff
-    style a3 fill:#42b883,color:#fff
-    style a4 fill:#35495e,color:#fff
-    style a5 fill:#42b883,color:#fff
-    style a6 fill:#35495e,color:#fff
-```
-
-The installer copies these files into your project:
+1. Detects your framework (React, Vue, Next.js, SvelteKit)
+2. Asks Full or Lite mode
+3. Installs agents and skills to `.claude/`
 
 ```text
 your-project/
 ├── .claude/
-│   ├── agents/              ← Pack agents + optional specialists
-│   │   ├── starter.md
-│   │   ├── builder.md
-│   │   ├── reviewer.md
-│   │   ├── migrator.md
-│   │   ├── doctor.md
-│   │   ├── finance.md       ← specialist (if selected)
-│   │   ├── cloud.md
-│   │   └── ...
-│   └── skills/              ← 12 skills
-│       ├── dev-create-module/
-│       ├── review-review/
-│       ├── migration-migrate-module/
-│       └── docs-onboard/
+│   ├── agents/           # AI agents
+│   └── skills/           # Slash commands
 ├── docs/
-│   └── ARCHITECTURE.md      ← Source of truth for patterns
-└── CLAUDE.md                 ← Project config for Claude
+│   └── ARCHITECTURE.md   # Your conventions
+└── CLAUDE.md             # Project config
 ```
 
-::: warning Non-destructive
-The installer **never overwrites** existing `ARCHITECTURE.md` or `CLAUDE.md` files. If they already exist, they are skipped.
-:::
+---
 
-## Lite Mode (Lower Cost)
+## Verify
 
-For budget-conscious usage, install Lite agents that run on the **Haiku model**:
+```
+"Use @scout to analyze this project"
+```
+
+---
+
+## Modes
+
+| Mode | Model | Cost |
+|------|-------|------|
+| Full | Sonnet/Opus | Standard |
+| Lite | Haiku | 60-80% less |
+
+---
+
+## CLI Commands
 
 ```bash
-npx specialist-agent init    # select "Lite" in wizard
+npx specialist-agent init              # Install
+npx specialist-agent list              # List installed
+npx specialist-agent create-agent @x   # Create custom agent
+npx specialist-agent profiles set x    # Set team profile
 ```
 
-| Aspect | Full | Lite |
-|--------|------|------|
-| **Model** | Sonnet/Opus | Haiku |
-| **Cost** | ~5-25k tokens | ~2-10k tokens |
-| **Validation** | tsc + build + vitest | Skipped |
-| **First action** | Reads ARCHITECTURE.md | Rules inline |
+---
 
-Same agent names, same capabilities — just cheaper per invocation.
+## Team Profiles
 
-## Verify Installation
+| Profile | Description |
+|---------|-------------|
+| `startup-fast` | Move fast, Haiku |
+| `enterprise-strict` | Full validation |
+| `learning-mode` | Explain everything |
+| `cost-optimized` | Minimize tokens |
 
-```bash
-# Open Claude Code
-claude
+---
 
-# Check agents are loaded
-/agents
+## Platform Guides
 
-# Try a quick skill
-/review-check-architecture
-```
+Need manual setup? See platform-specific guides:
 
-You should see your installed agents listed (e.g., `@starter`, `@builder`, `@reviewer`, `@migrator`, `@doctor`, plus specialist agents if installed).
+- [Cursor](/guide/install-cursor)
+- [VS Code](/guide/install-vscode)
+- [Windsurf](/guide/install-windsurf)
+- [Codex](/guide/install-codex)
 
-## Optional: Context7 MCP
+---
 
-For up-to-date library documentation when asking Claude about APIs, you can add the [Context7 MCP server](https://github.com/upstash/context7). This benefits you as a developer — agents work fully without it:
+## Next
 
-```json
-// ~/.claude/mcp.json
-{
-  "mcpServers": {
-    "context7": {
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@latest"]
-    }
-  }
-}
-```
-
-## Next Steps
-
-- [Quick Start](/guide/quick-start) — Build something with the agents
-- [Architecture Overview](/guide/architecture) — Understand the patterns
-- [Customization](/customization/creating-agents) — Adapt the kit to your project
+- [Quick Start](/guide/quick-start) — Build your first feature
+- [Agents](/reference/agents) — All 25+ agents

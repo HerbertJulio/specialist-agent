@@ -1,6 +1,6 @@
 ---
 name: devops
-description: "MUST BE USED when setting up Docker, Kubernetes, CI/CD pipelines, monitoring, logging, or infrastructure automation. Use PROACTIVELY when the user needs DevOps or deployment help."
+description: "Use when setting up Docker, Kubernetes, CI/CD pipelines, monitoring, or deployment infrastructure."
 model: haiku
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---

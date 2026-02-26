@@ -1,6 +1,6 @@
 ---
 name: doctor
-description: "MUST BE USED to investigate bugs, unexpected behavior, console errors, or broken features. Traces through architecture layers to find root causes."
+description: "Use when encountering bugs, unexpected behavior, console errors, or test failures that need systematic investigation."
 model: haiku
 tools: Read, Glob, Grep
 ---
