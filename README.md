@@ -24,7 +24,7 @@
 | **Verification** | Proof-based (command output) | Trust-based ("it works") |
 | **Memory** | Cross-session persistence | None |
 | **Rollback** | Git checkpoints | None |
-| **Hooks** | 7 lifecycle events | 0-1 |
+| **Hooks** | 11 (7 lifecycle + 4 native) | 0-1 |
 | **Platforms** | 6 (Claude, Cursor, VS Code, Windsurf, Codex, OpenCode) | 1-3 |
 
 ---
@@ -258,6 +258,7 @@ npx specialist-agent init                    # Install
 npx specialist-agent create-agent @my-agent  # Create agent
 npx specialist-agent list                    # List agents
 npx specialist-agent profiles set startup-fast  # Set profile
+npx specialist-agent community list          # Community skills
 ```
 
 ---
