@@ -156,6 +156,25 @@ Assess the task and classify it:
 [How to rollback if something goes wrong]
 ```
 
+## Integration with /brainstorm
+
+For COMPLEX tasks, Socratic brainstorming refines requirements before planning:
+
+```
+IF complexity == COMPLEX:
+  → Suggest: "This is a complex task. Run /brainstorm first?"
+  → If user agrees: INVOKE /brainstorm, use output as design foundation
+  → If user declines: Proceed with standard COMPLEX planning
+
+IF /brainstorm output already exists:
+  → USE it as foundation for the design doc
+  → DON'T re-ask questions already answered
+  → REFERENCE brainstorm decisions in the plan
+
+IF user says "skip brainstorming" or "just plan":
+  → Skip /brainstorm, proceed directly to planning
+```
+
 ## Smart Optimizations
 
 ### Skip Brainstorming When:

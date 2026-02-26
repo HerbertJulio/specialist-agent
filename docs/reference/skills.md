@@ -6,6 +6,7 @@ Skills are shortcuts. Type `/skill-name` in Claude Code.
 
 | Skill | What it Does |
 |-------|--------------|
+| `/brainstorm` | Socratic brainstorming before planning |
 | `/plan` | Plan a feature |
 | `/tdd` | Test-driven development |
 | `/debug` | Debug an issue |
@@ -27,6 +28,20 @@ Skills are shortcuts. Type `/skill-name` in Claude Code.
 ---
 
 ## Workflow Skills
+
+### /brainstorm
+
+Socratic brainstorming before planning.
+
+```bash
+/brainstorm add real-time notifications
+```
+
+Refines ideas through 5 phases: Discovery, Clarification, Assumption Testing, Alternative Generation, and Convergence. Presents design in digestible sections for user approval.
+
+**Output:** Design document with tested assumptions, 3+ alternatives compared, and approved direction ready for `/plan`.
+
+---
 
 ### /plan
 

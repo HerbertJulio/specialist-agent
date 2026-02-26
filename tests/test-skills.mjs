@@ -172,6 +172,15 @@ function testBehavior(name, content) {
   console.log(`\n── Behavior: ${name} ──`);
 
   switch (name) {
+    case 'brainstorm':
+      assert(containsPhrase(content, 'socratic') || containsPhrase(content, 'questioning'),
+        'Uses Socratic methodology');
+      assert(containsPhrase(content, 'assumption'), 'Tests assumptions');
+      assert(containsPhrase(content, 'alternative'), 'Generates alternatives');
+      assert(containsPhrase(content, 'approval') || containsPhrase(content, 'approve'),
+        'Requires user approval');
+      break;
+
     case 'plan':
       assert(containsPhrase(content, 'complexity'), 'Mentions complexity detection');
       assert(containsPhrase(content, 'trivial') || containsPhrase(content, 'simple'),

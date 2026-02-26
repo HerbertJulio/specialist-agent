@@ -32,6 +32,8 @@
   ],
   "agents": "./agents",
   "skills": "./skills",
+  "hooks": "./hooks",
+  "templates": "./templates",
   "rules": "./packs",
   "readme": "./README.md",
   "install": {

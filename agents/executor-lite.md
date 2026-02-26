@@ -40,7 +40,22 @@ Summary:
 - Restore: restore-point/[timestamp]
 ```
 
+## Autonomous Mode
+
+For 5+ task plans, execute without constant interaction:
+
+- Auto-fix compilation and test errors (max 2 retries per task)
+- Report progress every 3 completed tasks
+- Batch small tasks in same module for efficiency
+- Continue with independent tasks if one fails
+
+**Agent decides:** File creation within scope, lint fixes, retry 1x, devDeps install.
+**Must ask user:** Schema changes, API changes, deleting files, out-of-scope changes.
+
+If self-healing fails twice → Rollback to checkpoint → Ask user → Continue independent tasks.
+
 ## Rules
+
 - Always create checkpoints
-- Stop on errors
+- Stop on errors (or self-heal in autonomous mode)
 - Track costs

@@ -95,6 +95,7 @@ Automatically delegate based on user intent:
 
 | Skill | What it Does |
 |-------|--------------|
+| `/brainstorm` | Socratic brainstorming before planning |
 | `/plan` | Plan a feature |
 | `/tdd` | Test-driven development |
 | `/debug` | Debug an issue |
@@ -147,6 +148,7 @@ packs/[framework]/
 | VS Code | `.vscode/extension.json` |
 | Windsurf | `.windsurf/plugin.json` |
 | Codex | `.codex/INSTALL.md` |
+| OpenCode | `.opencode/INSTALL.md` |
 
 ## Hooks
 
@@ -159,6 +161,15 @@ packs/[framework]/
 | before-review | Before @reviewer starts |
 | after-review | After @reviewer finishes |
 | session-end | Session ends |
+
+### Native Hooks (Claude Code)
+
+| Hook | Event | What it Does |
+|------|-------|-------------|
+| Security Guard | `PreToolUse` | Blocks dangerous Bash commands |
+| Auto-Dispatch | `UserPromptSubmit` | Suggests agents based on intent |
+| Session Context | `SessionStart` | Injects project state |
+| Auto-Format | `PostToolUse` | Formats files after Write/Edit |
 
 Configure in `hooks/hooks.json`.
 

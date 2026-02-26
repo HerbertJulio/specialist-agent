@@ -232,6 +232,91 @@ ALWAYS pass to a subagent:
   ✓ Verification command
 ```
 
+## Autonomous Mode
+
+For extended execution sessions without constant user interaction.
+
+### Activation
+
+Autonomous mode activates when:
+
+- Plan has 5+ tasks
+- User says "run autonomously", "execute all", or "run everything"
+- @orchestrator delegates with `autonomous: true`
+
+### Decision Authority Matrix
+
+| Decision Type | Agent Decides | Must Ask User |
+|---------------|:------------:|:------------:|
+| Create files within plan scope | YES | - |
+| Fix lint/format issues | YES | - |
+| Install dev dependencies | YES | - |
+| Retry failed task (1st attempt) | YES | - |
+| Retry failed task (2nd attempt) | - | YES |
+| Modify files outside plan scope | - | YES |
+| Install production dependencies | - | YES |
+| Change database schema | - | YES |
+| Change API contracts | - | YES |
+| Delete files | - | YES |
+| Skip a planned task | - | YES |
+
+**Rule of thumb:** If the action is reversible and within scope, proceed. If destructive or out of scope, ask.
+
+### Self-Healing Protocol
+
+When a task fails during autonomous execution:
+
+```
+1. ANALYZE error type:
+   - Compilation error → Auto-fix (missing imports, types, syntax)
+   - Test failure → Read test, understand expectation, fix implementation
+   - Dependency error → Install missing package (devDeps only)
+   - Runtime error → Analyze stack trace, attempt targeted fix
+
+2. ATTEMPT recovery (max 2 attempts):
+   Attempt 1: Direct fix based on error message
+   Attempt 2: Broader analysis (check related files, trace dependencies)
+
+3. IF still failing after 2 attempts:
+   - ROLLBACK to last checkpoint
+   - LOG detailed error report with evidence
+   - ASK user for guidance
+   - CONTINUE with remaining independent tasks (don't block everything)
+```
+
+### Progress Reporting
+
+Report status periodically without blocking execution:
+
+```
+Every 3 completed tasks OR every 5 minutes:
+
+──── @executor Progress ────
+Tasks: 4/10 completed
+Current: Task 5 — Creating order service
+Tokens used: ~8,200 / ~25,000 estimated
+Self-healed: 1 (missing import in task 3)
+Blocked: 0
+Next checkpoint at: Task 6
+```
+
+### Batch Execution
+
+Group small related tasks for efficiency:
+
+```
+IF consecutive tasks are:
+  - Same file type (e.g., all .ts)
+  - Same module (e.g., all in src/orders/)
+  - < 50 lines each
+  - No inter-dependencies
+
+THEN batch them:
+  [Task 5 + Task 6 + Task 7] → Single execution unit
+  Checkpoint at batch boundary only
+  Cost tracked for the batch, not per-micro-task
+```
+
 ## Error Handling
 
 ### On Task Failure:

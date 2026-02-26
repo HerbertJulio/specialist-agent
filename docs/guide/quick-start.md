@@ -130,6 +130,7 @@ Maps architecture, detects conventions, generates developer guide.
 
 | Skill | What it Does |
 |-------|--------------|
+| `/brainstorm` | Socratic brainstorming |
 | `/plan` | Plan a feature |
 | `/tdd` | Test-driven development |
 | `/debug` | Debug an issue |
@@ -147,6 +148,19 @@ Maps architecture, detects conventions, generates developer guide.
 | `/write-skill` | Create custom skills |
 | `/tutorial` | Interactive tutorial |
 | `/migrate-framework` | Migrate between frameworks |
+
+## Native Hooks
+
+Specialist Agent includes 4 native Claude Code hooks that run automatically:
+
+| Hook | What it Does |
+|------|-------------|
+| Security Guard | Blocks dangerous commands before execution |
+| Auto-Dispatch | Suggests the best agent for your prompt |
+| Session Context | Injects project state on session start |
+| Auto-Format | Formats files after Write/Edit |
+
+Installed during `npx specialist-agent init`. See [Hooks Reference](/reference/hooks) for details.
 
 ## Next
 

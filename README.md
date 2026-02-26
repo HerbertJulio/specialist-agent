@@ -25,7 +25,7 @@
 | **Memory** | Cross-session persistence | None |
 | **Rollback** | Git checkpoints | None |
 | **Hooks** | 7 lifecycle events | 0-1 |
-| **Platforms** | 5 (Claude, Cursor, VS Code, Windsurf, Codex) | 1-3 |
+| **Platforms** | 6 (Claude, Cursor, VS Code, Windsurf, Codex, OpenCode) | 1-3 |
 
 ---
 
@@ -102,6 +102,7 @@ Done. Start building.
 
 | Skill | What it Does |
 |-------|--------------|
+| `/brainstorm` | Socratic brainstorming — refine ideas before planning |
 | `/plan` | Plan a feature adaptively |
 | `/tdd` | Test-driven development cycle |
 | `/debug` | 4-phase systematic debugging |
@@ -189,7 +190,7 @@ No "should work" — run the command, show the output.
 
 ## Hooks
 
-7 lifecycle hooks for customization:
+7 lifecycle hooks + 4 native Claude Code hooks:
 
 | Hook | When |
 |------|------|
@@ -201,7 +202,28 @@ No "should work" — run the command, show the output.
 | `on-error` | When an error occurs |
 | `session-end` | Session ends |
 
-Configure in `hooks/hooks.json`.
+### Native Hooks (Claude Code)
+
+| Hook | Event | What it Does |
+|------|-------|-------------|
+| Security Guard | `PreToolUse` | Blocks dangerous commands (`rm -rf /`, force push, `DROP TABLE`) |
+| Auto-Dispatch | `UserPromptSubmit` | Suggests the best agent for your prompt |
+| Session Context | `SessionStart` | Injects project state (branch, agents, memory) |
+| Auto-Format | `PostToolUse` | Auto-formats files after Write/Edit |
+
+Configure lifecycle hooks in `hooks/hooks.json`. Native hooks in `.claude/settings.json`.
+
+---
+
+## Security
+
+The Security Guard hook blocks dangerous commands **before** they execute:
+
+- **CRITICAL:** `rm -rf /`, fork bombs, disk wipe commands
+- **HIGH:** Force push to main, `git reset --hard`, `DROP TABLE`, `curl | bash`
+- **MEDIUM:** Reading `.env` files, inline secrets in commands
+
+Customize rules in `hooks/native/security-config.json`.
 
 ---
 
@@ -225,6 +247,7 @@ Choose during installation. All 25+ agents have lite variants.
 | VS Code | `.vscode/extension.json` |
 | Windsurf | `.windsurf/plugin.json` |
 | Codex | `.codex/INSTALL.md` |
+| OpenCode | `.opencode/INSTALL.md` |
 
 ---
 

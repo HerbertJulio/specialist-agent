@@ -575,3 +575,143 @@ main().catch(console.error);
 - **Write to `.claude/metrics/`.** Keep all generated data in the metrics directory for consistency.
 - **Disable, don't delete.** Set `"enabled": false` to skip a hook without losing the configuration.
 - **Keep output concise.** Use clear section headers (`────`) and status icons (`✓`, `⚠`, `✗`) for readability.
+
+---
+
+## Native Claude Code Hooks
+
+In addition to the lifecycle hooks above, Specialist Agent provides **4 native hooks** that integrate directly with Claude Code's hook system. These execute automatically via `.claude/settings.json` — no manual triggering needed.
+
+### Quick Reference
+
+| Hook | Event | What it Does |
+|------|-------|-------------|
+| Security Guard | `PreToolUse` | Blocks dangerous Bash commands before execution |
+| Auto-Dispatch | `UserPromptSubmit` | Suggests the best agent based on your prompt |
+| Session Context | `SessionStart` | Injects project state when session starts |
+| Auto-Format | `PostToolUse` | Formats files after Write/Edit operations |
+
+### Installation
+
+Native hooks are installed during `npx specialist-agent init`. You can choose which hooks to enable.
+
+They are configured in `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [{ "type": "command", "command": "node hooks/native/security-guard.mjs", "timeout": 5 }]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [{ "type": "command", "command": "node hooks/native/auto-dispatch.mjs", "timeout": 5 }]
+      }
+    ]
+  }
+}
+```
+
+---
+
+### Security Guard
+
+**Event:** `PreToolUse` (matcher: `Bash`)
+
+Evaluates every Bash command against security rules **before** it executes. Designed fail-closed: if the hook crashes, it blocks the command.
+
+**Rules by severity:**
+
+| Severity | Patterns | Action |
+|----------|----------|--------|
+| CRITICAL | `rm -rf /`, `rm -rf ~`, fork bombs, disk wipe | Always block |
+| HIGH | `git push --force` to main/master, `git reset --hard`, `DROP TABLE`, `curl \| bash`, `chmod 777` | Block with guidance |
+| MEDIUM | Reading `.env` files, inline secrets, writing to `.env` | Block with alternatives |
+
+**Safe patterns (allowed):**
+- `rm -rf node_modules/`, `rm -rf dist/`, `rm -rf build/`, `rm -rf .next/`
+- `git push --force-with-lease` (safer alternative)
+- `git reset --soft`
+- `cat .env.example`, `cat .env.template`
+
+**Customization:**
+
+Edit `hooks/native/security-config.json` to:
+- Disable specific rules: `"hard-reset": { "enabled": false }`
+- Add safe patterns to allowlist
+- Configure protected branches
+
+```json
+{
+  "rules": {
+    "hard-reset": { "enabled": false }
+  },
+  "allowlist": ["rm -rf my-custom-dir"],
+  "protectedBranches": ["main", "master", "staging"]
+}
+```
+
+---
+
+### Auto-Dispatch
+
+**Event:** `UserPromptSubmit`
+
+Analyzes your prompt and suggests the best specialist agent. Never forces — only provides context.
+
+**How it works:**
+1. Tokenizes your prompt and matches against keyword groups for each agent
+2. Multi-word phrases score higher (e.g., "code review" scores more than just "review")
+3. Only suggests when confidence is above threshold (2+ keyword matches)
+4. Skips entirely if you already mention an `@agent` in your prompt
+
+**Example:** When you type "there's a bug in the login page, error 500", the hook adds context suggesting `@doctor` for systematic diagnosis.
+
+---
+
+### Session Context
+
+**Event:** `SessionStart`
+
+Injects a one-line project state summary when your session starts:
+
+```
+[Specialist Agent] Branch: feat/auth | Uncommitted files: 3 | Last commit: feat: add login | Installed: 25 agents, 18 skills | Session memory: 5 saved decisions
+```
+
+**Data collected (all read-only):**
+- Git branch and dirty file count
+- Last commit message
+- Installed agents and skills count
+- Session memory decisions count
+- Active profile
+
+---
+
+### Auto-Format
+
+**Event:** `PostToolUse` (matcher: `Write|Edit`)
+
+Automatically formats files after Claude writes or edits them.
+
+**Supported formatters (detected by config):**
+1. Prettier (`.prettierrc`, `prettier.config.js`, etc.)
+2. Biome (`biome.json`)
+
+**Supported extensions:** `.ts`, `.tsx`, `.js`, `.jsx`, `.vue`, `.svelte`, `.css`, `.json`, `.md`, `.html`, `.yaml`
+
+**Security:** Validates file paths are within the project directory (anti-path-traversal). If no formatter is configured, silently does nothing.
+
+---
+
+### Security Design Principles
+
+1. **Fail-closed:** Security Guard blocks on crash (exit code 2)
+2. **No eval/exec:** Hooks never use `eval()` or execute user-controlled input
+3. **No network:** No HTTP requests from any hook
+4. **Path traversal protection:** Auto-Format validates paths within project
+5. **Read-only config:** `security-config.json` is read, never written by hooks
+6. **Short timeouts:** 5s (security, dispatch), 10s (context), 15s (format)

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import * as clack from '@clack/prompts'
-import { existsSync, mkdirSync, cpSync, readdirSync, readFileSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync, cpSync, rmSync, readdirSync, readFileSync, writeFileSync } from 'fs'
+import { execSync } from 'child_process'
 import { join, dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 import { homedir } from 'os'
@@ -11,6 +12,8 @@ const __dirname = dirname(__filename)
 const ROOT = resolve(__dirname, '..')
 
 const YELLOW = '\x1b[33m'
+const RED = '\x1b[31m'
+const GREEN = '\x1b[32m'
 const BOLD = '\x1b[1m'
 const DIM = '\x1b[2m'
 const NC = '\x1b[0m'
@@ -69,6 +72,89 @@ function getAgentNames(dir) {
 function handleCancel() {
   clack.cancel('Setup cancelled.')
   process.exit(0)
+}
+
+// ── Native Hooks Setup ──────────────────────────────────
+
+const HOOK_EVENT_MAP = {
+  'security-guard': 'PreToolUse',
+  'auto-dispatch': 'UserPromptSubmit',
+  'session-context': 'SessionStart',
+  'auto-format': 'PostToolUse',
+}
+
+function setupNativeHooks(cwd, selectedHooks) {
+  // 1. Copy hook scripts to project
+  const nativeSource = join(ROOT, 'hooks', 'native')
+  const nativeDest = join(cwd, 'hooks', 'native')
+  mkdirSync(nativeDest, { recursive: true })
+
+  const filesToCopy = [
+    'utils.mjs',
+    'security-guard.mjs',
+    'security-config.json',
+    'auto-dispatch.mjs',
+    'session-context.mjs',
+    'auto-format.mjs',
+  ]
+  for (const file of filesToCopy) {
+    const src = join(nativeSource, file)
+    if (existsSync(src)) cpSync(src, join(nativeDest, file))
+  }
+
+  // 2. Load settings template
+  const templatePath = join(nativeSource, 'settings-template.json')
+  const template = JSON.parse(readFileSync(templatePath, 'utf-8'))
+
+  // 3. Filter template to only selected hooks
+  const filteredHooks = {}
+  for (const hookName of selectedHooks) {
+    const eventName = HOOK_EVENT_MAP[hookName]
+    if (eventName && template.hooks[eventName]) {
+      filteredHooks[eventName] = template.hooks[eventName]
+    }
+  }
+
+  // 4. Read existing settings or start fresh
+  const settingsDir = join(cwd, '.claude')
+  mkdirSync(settingsDir, { recursive: true })
+  const settingsPath = join(settingsDir, 'settings.json')
+
+  let existing = {}
+  if (existsSync(settingsPath)) {
+    try {
+      existing = JSON.parse(readFileSync(settingsPath, 'utf-8'))
+      // Create backup
+      writeFileSync(settingsPath + '.bak', JSON.stringify(existing, null, 2))
+    } catch {
+      existing = {}
+    }
+  }
+
+  // 5. Deep-merge hooks (idempotent — skip if command already exists)
+  if (!existing.hooks) existing.hooks = {}
+
+  for (const [eventName, entries] of Object.entries(filteredHooks)) {
+    if (!existing.hooks[eventName]) {
+      existing.hooks[eventName] = entries
+    } else {
+      // Check for duplicates by command
+      for (const newEntry of entries) {
+        const newCommand = newEntry.hooks?.[0]?.command || ''
+        const isDuplicate = existing.hooks[eventName].some(existingEntry =>
+          existingEntry.hooks?.some(h => h.command === newCommand)
+        )
+        if (!isDuplicate) {
+          existing.hooks[eventName].push(newEntry)
+        }
+      }
+    }
+  }
+
+  // 6. Write merged settings
+  writeFileSync(settingsPath, JSON.stringify(existing, null, 2))
+
+  return selectedHooks.length
 }
 
 async function checkForUpdates(currentVersion) {
@@ -145,7 +231,7 @@ function buildGettingStarted(agentNames, installedSkills) {
 
 const args = process.argv.slice(2)
 
-const validCommands = ['init', 'create-agent', 'list', 'profiles']
+const validCommands = ['init', 'create-agent', 'list', 'profiles', 'community']
 const command = args.find(a => !a.startsWith('-'))
 if (command && !validCommands.includes(command)) {
   console.error(`  ${YELLOW}Unknown command: ${command}${NC}`)
@@ -165,6 +251,7 @@ if (args.includes('--help') || args.includes('-h')) {
   console.log(`    create-agent <name>     ${DIM}Create a custom agent from template${NC}`)
   console.log(`    list                    ${DIM}List installed agents and skills${NC}`)
   console.log(`    profiles                ${DIM}Manage AI team profiles${NC}`)
+  console.log(`    community               ${DIM}Manage community skills${NC}`)
   console.log()
   console.log('  Options:')
   console.log(`    -h, --help      ${DIM}Show this help message${NC}`)
@@ -511,6 +598,124 @@ async function manageProfiles() {
   }
 }
 
+// ── Community Skills ─────────────────────────────────
+
+async function manageCommunity() {
+  const subCmd = args[1] || 'list'
+  const homeDir = homedir()
+  const communityDir = join(homeDir, '.claude', 'community-skills')
+
+  if (subCmd === 'list') {
+    console.log()
+    console.log(`  ${BOLD}Community Skills${NC}`)
+    console.log()
+
+    if (!existsSync(communityDir)) {
+      console.log(`  ${DIM}No community skills installed.${NC}`)
+      console.log(`  ${DIM}Install with: specialist-agent community install <git-url>${NC}`)
+      return
+    }
+
+    const entries = readdirSync(communityDir, { withFileTypes: true })
+    let count = 0
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue
+      const skillFile = join(communityDir, entry.name, 'SKILL.md')
+      if (existsSync(skillFile)) {
+        const content = readFileSync(skillFile, 'utf-8')
+        const nameMatch = content.match(/^name:\s*(.+)$/m)
+        const descMatch = content.match(/^description:\s*"?([^"]*)"?$/m)
+        const name = nameMatch ? nameMatch[1].trim() : entry.name
+        const desc = descMatch ? descMatch[1].trim() : ''
+        console.log(`  ${GREEN}/${name}${NC} ${DIM}— ${desc}${NC}`)
+        count++
+      }
+    }
+
+    if (count === 0) {
+      console.log(`  ${DIM}No community skills found in ${communityDir}${NC}`)
+    } else {
+      console.log()
+      console.log(`  ${DIM}${count} community skill(s) installed${NC}`)
+    }
+    console.log()
+
+  } else if (subCmd === 'install') {
+    const source = args[2]
+    if (!source) {
+      console.error(`  ${RED}Usage: specialist-agent community install <git-url|path>${NC}`)
+      process.exit(1)
+    }
+
+    if (!existsSync(join(homeDir, '.claude'))) {
+      mkdirSync(join(homeDir, '.claude'), { recursive: true })
+    }
+    if (!existsSync(communityDir)) {
+      mkdirSync(communityDir, { recursive: true })
+    }
+
+    if (source.startsWith('http') || source.startsWith('git@')) {
+      // Git clone
+      const repoName = source.split('/').pop().replace('.git', '')
+      const targetDir = join(communityDir, repoName)
+
+      if (existsSync(targetDir)) {
+        console.error(`  ${YELLOW}Skill "${repoName}" already installed. Use --force to overwrite.${NC}`)
+        if (!args.includes('--force')) process.exit(1)
+        rmSync(targetDir, { recursive: true })
+      }
+
+      console.log(`  Cloning ${source}...`)
+      try {
+        execSync(`git clone --depth 1 "${source}" "${targetDir}"`, { stdio: 'pipe' })
+        console.log(`  ${GREEN}✓${NC} Installed "${repoName}" to community skills`)
+      } catch (err) {
+        console.error(`  ${RED}Failed to clone: ${err.message}${NC}`)
+        process.exit(1)
+      }
+    } else {
+      // Local path copy
+      const skillName = source.split('/').pop().split('\\').pop()
+      const targetDir = join(communityDir, skillName)
+
+      if (!existsSync(source)) {
+        console.error(`  ${RED}Source not found: ${source}${NC}`)
+        process.exit(1)
+      }
+
+      if (existsSync(targetDir)) {
+        console.error(`  ${YELLOW}Skill "${skillName}" already installed. Use --force to overwrite.${NC}`)
+        if (!args.includes('--force')) process.exit(1)
+        rmSync(targetDir, { recursive: true })
+      }
+
+      cpSync(source, targetDir, { recursive: true })
+      console.log(`  ${GREEN}✓${NC} Installed "${skillName}" to community skills`)
+    }
+
+  } else if (subCmd === 'remove') {
+    const skillName = args[2]
+    if (!skillName) {
+      console.error(`  ${RED}Usage: specialist-agent community remove <skill-name>${NC}`)
+      process.exit(1)
+    }
+
+    const targetDir = join(communityDir, skillName)
+    if (!existsSync(targetDir)) {
+      console.error(`  ${RED}Skill "${skillName}" not found in community skills${NC}`)
+      process.exit(1)
+    }
+
+    rmSync(targetDir, { recursive: true })
+    console.log(`  ${GREEN}✓${NC} Removed "${skillName}" from community skills`)
+
+  } else {
+    console.error(`  ${YELLOW}Unknown subcommand: ${subCmd}${NC}`)
+    console.log(`  Usage: specialist-agent community [list|install|remove]`)
+    process.exit(1)
+  }
+}
+
 // ── Command Router ───────────────────────────────────
 
 if (command === 'create-agent') {
@@ -522,6 +727,11 @@ if (command === 'create-agent') {
   listAgents()
 } else if (command === 'profiles') {
   manageProfiles().catch(err => {
+    clack.log.error(err.message)
+    process.exit(1)
+  })
+} else if (command === 'community') {
+  manageCommunity().catch(err => {
     clack.log.error(err.message)
     process.exit(1)
   })
@@ -754,6 +964,33 @@ async function main() {
     skillCount += genericSkillCount
   }
 
+  // ── Native Claude Code Hooks ───────────────────────
+  let nativeHooksInstalled = 0
+
+  const installNativeHooks = await clack.confirm({
+    message: `Install native Claude Code hooks? ${DIM}(security guard, auto-dispatch, session context, auto-format)${NC}`,
+    initialValue: true,
+  })
+
+  if (clack.isCancel(installNativeHooks)) handleCancel()
+
+  if (installNativeHooks) {
+    const hookChoices = await clack.multiselect({
+      message: 'Which hooks to enable?',
+      options: [
+        { value: 'security-guard', label: 'Security Guard', hint: 'Block dangerous commands (recommended)', selected: true },
+        { value: 'auto-dispatch', label: 'Auto-Dispatch', hint: 'Suggest agents based on your prompt', selected: true },
+        { value: 'session-context', label: 'Session Context', hint: 'Inject project state on session start', selected: true },
+        { value: 'auto-format', label: 'Auto-Format', hint: 'Format files after Write/Edit', selected: false },
+      ],
+      required: false,
+    })
+
+    if (!clack.isCancel(hookChoices) && hookChoices.length > 0) {
+      nativeHooksInstalled = setupNativeHooks(cwd, hookChoices)
+    }
+  }
+
   // Install ARCHITECTURE.md
   const archDest = join(cwd, 'docs', 'ARCHITECTURE.md')
   let archInstalled = false
@@ -781,6 +1018,7 @@ async function main() {
   const summaryLines = []
   agentNames.forEach(name => summaryLines.push(`\u2713 @${name}`))
   if (skillCount > 0) summaryLines.push(`\u2713 ${skillCount} skills`)
+  if (nativeHooksInstalled > 0) summaryLines.push(`\u2713 ${nativeHooksInstalled} native hooks`)
   if (archInstalled) summaryLines.push('\u2713 docs/ARCHITECTURE.md')
   if (claudeInstalled) summaryLines.push('\u2713 CLAUDE.md')
 

@@ -48,6 +48,7 @@ export default withMermaid(defineConfig({
             { text: 'VS Code', link: '/guide/install-vscode' },
             { text: 'Windsurf', link: '/guide/install-windsurf' },
             { text: 'Codex', link: '/guide/install-codex' },
+            { text: 'OpenCode', link: '/guide/install-opencode' },
           ],
         },
         {

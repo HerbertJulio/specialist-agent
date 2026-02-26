@@ -40,7 +40,7 @@ features:
     link: /reference/skills
   - icon: ⚡
     title: Hooks & Lifecycle
-    details: 7 lifecycle hooks for session start, planning, reviews, errors, and more.
+    details: 7 lifecycle hooks + 4 native Claude Code hooks (security guard, auto-dispatch, session context, auto-format).
     link: /reference/hooks
   - icon: 💰
     title: Cost Optimization

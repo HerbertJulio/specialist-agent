@@ -42,8 +42,28 @@
       "description": "Remembers decisions across sessions"
     },
     {
-      "title": "12+ Skills",
-      "description": "/plan, /tdd, /debug, /checkpoint, /health, and more"
+      "title": "18 Skills",
+      "description": "/brainstorm, /plan, /tdd, /debug, /audit, /onboard, /verify, /checkpoint, and more"
+    },
+    {
+      "title": "Autonomous Execution",
+      "description": "Self-healing execution with progress reports and batch optimization"
+    },
+    {
+      "title": "Community Skills",
+      "description": "Install and manage community-contributed skills"
+    },
+    {
+      "title": "6 Platforms",
+      "description": "Claude Code, Cursor, VS Code, Windsurf, Codex, OpenCode"
+    },
+    {
+      "title": "Native Claude Code Hooks",
+      "description": "Security guard, auto-dispatch, session context, auto-format — real automation"
+    },
+    {
+      "title": "Security Guard",
+      "description": "Blocks dangerous commands (rm -rf /, force push, DROP TABLE) before execution"
     }
   ],
   "requirements": {
