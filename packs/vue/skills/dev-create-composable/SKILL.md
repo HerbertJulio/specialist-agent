@@ -1,6 +1,6 @@
 ---
 name: dev-create-composable
-description: "Create a Vue composable with Vue Query integration following ARCHITECTURE.md"
+description: "Use when adding server state management to a module — creates Vue Query composable with caching and error handling."
 user-invocable: true
 argument-hint: "[composable-name]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

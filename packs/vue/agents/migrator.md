@@ -1,6 +1,6 @@
 ---
 name: migrator
-description: "MUST BE USED when migrating legacy code to the target architecture. Use for Options API → script setup conversion, JS → TS migration, or full module modernization."
+description: "Use when legacy code needs modernization to the target architecture — components, modules, or full codebase migration."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -85,11 +85,33 @@ Read `docs/ARCHITECTURE.md`.
 - Report remaining issues
 - Get user approval
 
+## Verification Protocol
+
+**Before claiming ANY migration phase is complete:**
+
+```
+1. RUN `npx tsc --noEmit` — No TypeScript errors
+2. RUN `npm test` — All tests pass
+3. RUN `npm run build` — Build succeeds
+4. VERIFY migrated code matches target architecture
+5. ONLY THEN claim "phase complete" WITH evidence
+```
+
+## Anti-Rationalization
+
+| Excuse | Reality |
+|--------|---------|
+| "Old tests still pass" | Old tests may not cover new patterns. Add new tests. |
+| "It looks correct" | Looking is not running. Verify with commands. |
+| "Partial migration is fine" | Partial migration = two patterns = confusion. Complete it. |
+| "I'll fix the edge cases later" | Edge cases in migration = production bugs. Fix now. |
+
 ### Rules
 - Order matters: bottom-up (types → services → state → components)
 - Validate build/tsc after each phase
 - One module at a time
 - Ask user approval between phases
+- **Verify each phase** — Partial migration is worse than none
 
 ---
 
@@ -124,6 +146,7 @@ Read `docs/ARCHITECTURE.md`.
 - If API changes, update all consumers
 - One component per commit
 - Report bugs found during migration (don't silently fix)
+- **Verify each phase** — Partial migration is worse than none
 
 ## Output
 

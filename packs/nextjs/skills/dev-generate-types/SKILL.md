@@ -1,6 +1,6 @@
 ---
 name: dev-generate-types
-description: "Generate types, contracts and adapter from an API endpoint or JSON example"
+description: "Use when integrating with an API endpoint and need TypeScript types, contracts, and adapters generated automatically."
 user-invocable: true
 argument-hint: "[endpoint-or-json]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

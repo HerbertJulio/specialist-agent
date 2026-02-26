@@ -1,6 +1,6 @@
 ---
 name: docs-onboard
-description: "Create a quick module summary for onboarding new developers"
+description: "Use when onboarding onto a module and need a quick summary of its structure, patterns, and key files."
 user-invocable: true
 argument-hint: "[module-name]"
 allowed-tools: Read, Bash, Glob, Grep

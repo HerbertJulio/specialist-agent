@@ -1,6 +1,6 @@
 ---
 name: migrator
-description: "MUST BE USED when migrating legacy code to the target architecture. Use for Options API → script setup conversion, JS → TS migration, or full module modernization."
+description: "Use when legacy code needs modernization to the target architecture — components, modules, or full codebase migration."
 model: haiku
 tools: Read, Write, Edit, Glob, Grep
 ---

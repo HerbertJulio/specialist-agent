@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: "MUST BE USED to review code, check architecture conformance, explore modules, or analyze performance. Use PROACTIVELY before merging PRs."
+description: "Use when code changes need review before merge — validates architecture conformance, code quality, and spec compliance."
 model: haiku
 tools: Read, Glob, Grep
 ---

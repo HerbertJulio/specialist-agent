@@ -1,6 +1,6 @@
 ---
 name: tester
-description: "MUST BE USED when designing test strategies, creating test suites, improving coverage, or setting up testing infrastructure. Use PROACTIVELY when the user needs comprehensive testing help."
+description: "Use when defining test strategy, improving coverage, setting up test infrastructure, or choosing testing patterns."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: dev-create-component
-description: "Create a Svelte component with Svelte 5 runes following ARCHITECTURE.md"
+description: "Use when adding a new UI component to an existing module — handles templates, props, and test scaffolding."
 user-invocable: true
 argument-hint: "[ComponentName]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

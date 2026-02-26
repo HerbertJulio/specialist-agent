@@ -1,6 +1,6 @@
 ---
 name: starter
-description: "MUST BE USED when creating a new project from scratch, initializing a new app, or scaffolding a full-stack project. Use PROACTIVELY when the user wants to start a new project."
+description: "Use when creating a new project from scratch — any frontend, backend, and database combination."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

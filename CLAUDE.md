@@ -2,93 +2,205 @@
 
 ## About
 
-AI agents for Claude Code — any framework, any stack. Includes specialized agents, skills, and architectural patterns organized in framework packs.
+Your AI development team. 25+ specialized agents that build, review, debug, and ship production code.
 
 **Available packs:** Vue 3, React, Next.js, SvelteKit
 
-## AI Team Configuration
+## Auto-Dispatch Rules
 
-### Auto-Dispatch Rules
+Automatically delegate based on user intent:
 
-You **MUST** automatically delegate to the correct agent based on the user's intent. Do NOT ask which agent to use — detect it from the request:
+| Intent | Agent |
+|--------|-------|
+| Create modules, components, services | `@builder` |
+| Review code, check architecture | `@reviewer` |
+| Investigate bugs, trace errors | `@doctor` or `@debugger` |
+| Migrate legacy code | `@migrator` |
+| New project from scratch | `@starter` |
+| Plan features | `@planner` |
+| Execute with checkpoints | `@executor` |
+| Test-first development | `@tdd` |
+| Pair programming | `@pair` |
+| Requirements to specs | `@analyst` |
+| Coordinate agents | `@orchestrator` |
+| Project analysis | `@scout` |
+| API design | `@api` |
+| Performance optimization | `@perf` |
+| Internationalization | `@i18n` |
+| Generate documentation | `@docs` |
+| Refactoring | `@refactor` |
+| Dependency management | `@deps` |
+| Payments, billing | `@finance` |
+| Cloud, IaC, serverless | `@cloud` |
+| Auth, security audit | `@security` |
+| Design systems, accessibility | `@designer` |
+| Database design | `@data` |
+| Docker, K8s, CI/CD | `@devops` |
+| Test strategies | `@tester` |
+| Codebase exploration | `@explorer` |
+| GDPR, LGPD compliance | `@legal` |
 
-| User intent | Agent |
-|-------------|-------|
-| Create modules, components, services, or any new code | `@builder` |
-| Review code, check architecture, analyze performance | `@reviewer` |
-| Investigate bugs, trace errors, debug issues | `@doctor` |
-| Migrate legacy code, modernize modules | `@migrator` |
-| Scaffold a new project from scratch | `@starter` |
-| Payments, billing, invoicing, financial reporting | `@finance` |
-| Cloud infra, IaC, serverless, containers | `@cloud` |
-| Auth flows, security audit, RBAC, encryption | `@security` |
-| Design systems, responsive layouts, accessibility, theming | `@designer` |
-| Database modeling, migrations, caching, query optimization | `@data` |
-| Docker, Kubernetes, CI/CD pipelines, monitoring | `@devops` |
-| Test strategies, test suites, coverage, mocking | `@tester` |
-| Explore unfamiliar codebase, onboarding, technical assessment | `@explorer` |
-| Data privacy (LGPD, GDPR), consent flows, compliance review | `@legal` |
+## Available Agents
 
-If a task spans multiple agents, invoke them in sequence (e.g., @builder then @reviewer).
+### Core Agents
 
-### Available Agents
+| Agent | When to Use |
+|-------|-------------|
+| `@starter` | Create projects from scratch |
+| `@builder` | Build modules, components, services |
+| `@reviewer` | Unified 3-in-1 review |
+| `@doctor` | 4-phase debugging |
+| `@migrator` | Modernize legacy code |
 
-**Framework-Agnostic:**
+### Workflow Agents
 
-| Agent       | When to Use                                                           |
-|-------------|-----------------------------------------------------------------------|
-| `@starter`  | Create a new project from scratch (any frontend + backend + database) |
-| `@explorer` | Explore unfamiliar codebases, onboarding, technical assessments       |
-| `@finance`  | Financial systems: payments, billing, invoicing, reporting            |
-| `@cloud`    | Cloud architecture: IaC, serverless, containers, CI/CD               |
-| `@security` | Auth flows, OWASP compliance, RBAC/ABAC, encryption                  |
-| `@designer` | Design systems, responsive layouts, accessibility (WCAG), theming    |
-| `@data`     | Database modeling, migrations, caching, query optimization            |
-| `@devops`   | Docker, Kubernetes, CI/CD pipelines, monitoring, logging              |
-| `@tester`   | Test strategies, test suites, coverage, mocking patterns              |
-| `@legal`    | Data privacy (LGPD, GDPR, CCPA), consent flows, compliance audits     |
+| Agent | When to Use |
+|-------|-------------|
+| `@planner` | Adaptive planning |
+| `@executor` | Execute with checkpoints |
+| `@tdd` | Test-Driven Development |
+| `@debugger` | Systematic debugging |
+| `@pair` | Pair programming |
+| `@analyst` | Requirements to specs |
+| `@orchestrator` | Coordinate agents |
 
-**Pack-Specific (installed from your chosen pack):**
+### Specialist Agents
 
-| Agent       | When to Use                                                              |
-|-------------|--------------------------------------------------------------------------|
-| `@builder`  | Create modules, components, services, state logic, or tests              |
-| `@reviewer` | Review code, check architecture, explore modules, analyze performance    |
-| `@migrator` | Migrate legacy code to target architecture                               |
-| `@doctor`   | Investigate bugs, trace errors through architecture layers               |
+| Agent | When to Use |
+|-------|-------------|
+| `@api` | REST/GraphQL API design |
+| `@perf` | Performance optimization |
+| `@i18n` | Internationalization |
+| `@docs` | Documentation generation |
+| `@refactor` | Code refactoring |
+| `@deps` | Dependency management |
+| `@finance` | Payments, billing |
+| `@cloud` | Cloud architecture |
+| `@security` | Auth, OWASP |
+| `@designer` | Design systems |
+| `@data` | Database design |
+| `@devops` | Docker, K8s |
+| `@tester` | Test strategies |
+| `@legal` | GDPR, LGPD |
 
-### Security Rules
+### Support Agents
 
-- **NEVER** include tokens, secrets, API keys, or credentials inline in shell commands
-- **NEVER** use patterns like `TOKEN=xxx command` — always use environment variables already set in the system or CI secrets
-- For npm publish, always rely on the CI workflow (`secrets.NPM_TOKEN`) or pre-configured `npm config`
-- If a command requires authentication, ask the user to set the env var first, then reference it as `$VAR_NAME`
+| Agent | When to Use |
+|-------|-------------|
+| `@scout` | Project analysis |
+| `@explorer` | Codebase exploration |
+| `@memory` | Session memory |
 
-### Execution Summary
+## Available Skills
 
-At the end of every task, you **MUST** include a brief summary of agent and skill usage:
+| Skill | What it Does |
+|-------|--------------|
+| `/brainstorm` | Socratic brainstorming before planning |
+| `/plan` | Plan a feature |
+| `/tdd` | Test-driven development |
+| `/debug` | Debug an issue |
+| `/verify` | Verify before claiming complete |
+| `/audit` | Multi-domain code audit |
+| `/onboard` | Codebase onboarding |
+| `/checkpoint` | Save/restore progress |
+| `/estimate` | Estimate cost |
+| `/finish` | Finalize branch |
+| `/learn` | Learn while building |
+| `/health` | Project health score |
+| `/remember` | Save decisions |
+| `/recall` | Recall decisions |
+| `/worktree` | Git worktree isolation |
+| `/write-skill` | Create or improve skills |
+| `/tutorial` | Interactive tutorial |
+| `/migrate-framework` | Migrate between frameworks |
+
+## Security Rules
+
+- **NEVER** include secrets in shell commands
+- Use environment variables for auth
+- Reference CI secrets for npm publish
+
+## Execution Summary
+
+After each task:
 
 ```text
-──── Specialist Agent: 2 agents (@builder, @reviewer) · 1 skill (/dev-create-module)
+──── Specialist Agent: 2 agents (@builder, @reviewer) · 1 skill (/plan)
 ```
 
-Rules:
-
-- Only show agents/skills that were actually invoked during the execution
-- If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
-
-### Architecture
-
-Each pack defines its own `docs/ARCHITECTURE.md`. All agents read this file before acting.
-
-### Pack Structure
+## Pack Structure
 
 ```text
 packs/[framework]/
-├── agents/           ← Full agents (Sonnet/Opus)
-├── agents-lite/      ← Lite agents (Haiku, lower cost)
-├── skills/           ← Skills (slash commands)
-├── ARCHITECTURE.md   ← Framework patterns
-└── CLAUDE.md         ← Framework-specific CLAUDE.md
+├── agents/           # Full agents
+├── agents-lite/      # Lite agents
+├── skills/           # Skills
+├── ARCHITECTURE.md   # Patterns
+└── CLAUDE.md         # Config
+```
+
+## Platforms
+
+| Platform | Installation |
+|----------|--------------|
+| Claude Code | `npx specialist-agent init` |
+| Cursor | `.cursor-plugin/` |
+| VS Code | `.vscode/extension.json` |
+| Windsurf | `.windsurf/plugin.json` |
+| Codex | `.codex/INSTALL.md` |
+| OpenCode | `.opencode/INSTALL.md` |
+
+## Hooks
+
+| Hook | When |
+|------|------|
+| session-start | Session starts |
+| before-plan | Before @planner creates a plan |
+| after-task | Task completes |
+| on-error | Error occurs |
+| before-review | Before @reviewer starts |
+| after-review | After @reviewer finishes |
+| session-end | Session ends |
+
+### Native Hooks (Claude Code)
+
+| Hook | Event | What it Does |
+|------|-------|-------------|
+| Security Guard | `PreToolUse` | Blocks dangerous Bash commands |
+| Auto-Dispatch | `UserPromptSubmit` | Suggests agents based on intent |
+| Session Context | `SessionStart` | Injects project state |
+| Auto-Format | `PostToolUse` | Formats files after Write/Edit |
+
+Configure in `hooks/hooks.json`.
+
+## Cross-Cutting Concerns
+
+### Verification Protocol
+
+All agents MUST verify claims with evidence before marking work as complete. No "should work" — run the command, show the output, then claim success. See `/verify` skill.
+
+### Anti-Rationalization
+
+Key agents include rationalization tables that prevent shortcuts. If you catch yourself thinking "just this once" or "it's obvious" — stop and follow the process.
+
+### Context Isolation
+
+`@orchestrator` and `@executor` use fresh context per subagent. Each task gets a self-contained prompt — no accumulated context pollution.
+
+### Anti-Sycophancy
+
+`@reviewer` agents push back on bad code. No "LGTM" or "Looks good!". Technical evaluation with evidence, YAGNI checks on suggestions.
+
+### Persuasion-Backed Enforcement
+
+Discipline agents (`@tdd`, `@debugger`, `@planner`, `@executor`, `@pair`) use science-backed enforcement: Authority (IEEE, NASA, Kent Beck), Commitment (contract-based), Social Proof (industry practice).
+
+## Quality Validation
+
+```bash
+node tests/validate-agents.mjs           # Validate all agents and skills
+node tests/validate-agents.mjs --strict  # Treat warnings as errors
+node tests/validate-skills-core.mjs      # Test runtime library
+node tests/test-skills.mjs               # Behavioral skill tests
+node tests/test-skills.mjs --verbose     # With details
 ```

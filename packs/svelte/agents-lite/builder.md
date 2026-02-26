@@ -1,6 +1,6 @@
 ---
 name: builder
-description: "MUST BE USED when creating new modules, components, services, stores, or tests. Use PROACTIVELY when the user wants to build any new code."
+description: "Use when creating new modules, components, services, hooks, or pages in an existing project."
 model: haiku
 tools: Read, Write, Edit, Glob, Grep
 ---

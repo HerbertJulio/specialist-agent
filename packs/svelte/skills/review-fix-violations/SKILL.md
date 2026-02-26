@@ -1,6 +1,6 @@
 ---
 name: review-fix-violations
-description: "Find and auto-fix ARCHITECTURE.md violations in a module"
+description: "Use when architecture violations were found and need automated fixing by priority."
 user-invocable: true
 argument-hint: "[module]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

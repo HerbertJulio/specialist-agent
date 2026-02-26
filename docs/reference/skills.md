@@ -1,102 +1,348 @@
-# Skills
+# Skills Reference
 
-::: info Framework Note
-Skills are installed from your chosen framework pack. The examples below use the **Vue 3 pack** patterns. Each pack provides equivalent skills adapted to its ecosystem (e.g., `/dev-create-hook` in React, `/dev-create-store` in SvelteKit). See [Framework Packs](/guide/introduction#how-packs-work) for details.
-:::
+Skills are shortcuts. Type `/skill-name` in Claude Code.
 
-Skills are shortcuts you invoke with `/skill-name` inside Claude Code. Each skill is a directory with a `SKILL.md` file inside `.claude/skills/`.
+## Quick Reference
+
+| Skill | What it Does |
+|-------|--------------|
+| `/brainstorm` | Socratic brainstorming before planning |
+| `/plan` | Plan a feature |
+| `/tdd` | Test-driven development |
+| `/debug` | Debug an issue |
+| `/checkpoint` | Save/restore progress |
+| `/estimate` | Estimate token cost |
+| `/finish` | Finalize branch |
+| `/health` | Project health score |
+| `/remember` | Save a decision |
+| `/recall` | Recall decisions |
+| `/learn` | Learn while building |
+| `/tutorial` | Interactive tutorial |
+| `/migrate-framework` | Migrate between frameworks |
+| `/verify` | Verification before completion (proof-based) |
+| `/write-skill` | Create or improve skills with TDD |
+| `/audit` | Multi-domain code audit |
+| `/onboard` | Codebase onboarding for new developers |
+| `/worktree` | Git worktree isolation for parallel tasks |
+
+---
+
+## Workflow Skills
+
+### /brainstorm
+
+Socratic brainstorming before planning.
+
+```bash
+/brainstorm add real-time notifications
+```
+
+Refines ideas through 5 phases: Discovery, Clarification, Assumption Testing, Alternative Generation, and Convergence. Presents design in digestible sections for user approval.
+
+**Output:** Design document with tested assumptions, 3+ alternatives compared, and approved direction ready for `/plan`.
+
+---
+
+### /plan
+
+Plan a feature adaptively.
+
+```bash
+/plan add user authentication
+```
+
+**Output:** Task list with complexity assessment.
+
+---
+
+### /tdd
+
+Test-Driven Development workflow.
+
+```bash
+/tdd implement calculateDiscount
+```
+
+**Process:**
+1. RED — Write failing test
+2. GREEN — Make it pass
+3. REFACTOR — Improve code
+
+No code without failing test first.
+
+---
+
+### /debug
+
+4-phase systematic debugging.
+
+```bash
+/debug the login shows 500 error
+```
+
+**Phases:** Gather → Analyze → Test → Fix
+
+---
+
+### /checkpoint
+
+Git checkpoint management.
+
+```bash
+/checkpoint create before-refactor
+/checkpoint list
+/checkpoint restore before-refactor
+```
+
+Never lose work.
+
+---
+
+### /estimate
+
+Estimate token cost before starting.
+
+```bash
+/estimate add payment integration
+```
+
+Know the cost upfront.
+
+---
+
+### /finish
+
+Finalize branch with metrics.
+
+```bash
+/finish feature/auth
+```
+
+**Output:** Token usage, files changed, tests status.
+
+---
+
+### /learn
+
+Learning mode — explains while building.
+
+```bash
+/learn create a products module
+```
+
+Great for onboarding.
+
+---
+
+### /verify
+
+Verification before claiming work is complete.
+
+```bash
+/verify
+```
+
+Forces proof-based verification — requires command output, not just "it works." Use after completing any task to ensure correctness with evidence.
+
+**Output:** Verification report with proof artifacts (test results, build output, runtime checks).
+
+---
+
+### /write-skill
+
+Create or improve skills using TDD methodology.
+
+```bash
+/write-skill my-new-skill
+```
+
+**Process:**
+
+1. RED — Define what the skill should do (failing spec)
+2. GREEN — Write the skill to meet the spec
+3. REFACTOR — Improve clarity and structure
+
+RED-GREEN-REFACTOR applied to documentation and skill design.
+
+---
+
+## Project Skills
+
+### /health
+
+Project health score (0-100).
+
+```bash
+/health
+/health quick
+/health detailed
+```
+
+**Checks:** Architecture, tests, types, security, performance.
+
+---
+
+### /remember
+
+Save a decision to session memory.
+
+```bash
+/remember use Zustand for state management
+```
+
+Persists across sessions.
+
+---
+
+### /recall
+
+Query session memory.
+
+```bash
+/recall state management
+/recall all
+```
+
+---
+
+### /tutorial
+
+Interactive tutorial.
+
+```bash
+/tutorial beginner
+/tutorial intermediate
+/tutorial advanced
+```
+
+---
+
+### /onboard
+
+Codebase onboarding for new developers.
+
+```bash
+/onboard
+```
+
+Maps architecture, detects conventions, and analyzes key modules. Generates a developer guide with getting-started instructions.
+
+**Output:** Developer onboarding guide with architecture map, conventions, and setup instructions.
+
+---
+
+### /worktree
+
+Git worktree isolation for parallel tasks.
+
+```bash
+/worktree auth-refactor
+```
+
+Creates isolated workspaces so you can work on multiple features simultaneously. No branch switching, no stashing, no conflicts.
+
+**Commands:**
+
+- `/worktree [name]` — Create isolated workspace
+- `git worktree list` — List active worktrees
+- `git worktree remove [path]` — Remove worktree
+
+**Output:** Worktree created with dependencies installed and baseline tests passing.
+
+---
+
+## Migration Skills
+
+### /migrate-framework
+
+Migrate between frameworks.
+
+```bash
+/migrate-framework react to vue src/components/Button.tsx
+```
+
+**Supports:**
+- React → Vue
+- React → Svelte
+- Vue → React
+- Vue → Svelte
+- Vue 2 → Vue 3
+
+---
 
 ## Development Skills
 
 ### /dev-create-module
 
-Creates a complete module scaffold.
+Full module scaffold.
 
 ```bash
 /dev-create-module orders
 ```
 
-Asks about endpoints and UI type, then delegates to specialized agents to create the full structure.
-
-**Example output:**
-
-```text
-src/modules/orders/
-├── types/orders.types.ts
-├── contracts/orders.contracts.ts
-├── adapters/order-adapter.ts
-├── services/order-service.ts
-├── stores/useOrdersStore.ts
-├── composables/useOrdersList.ts
-├── composables/useOrderMutations.ts
-├── components/OrderCard.vue
-├── components/OrderForm.vue
-├── views/OrdersView.vue
-└── __tests__/order-adapter.spec.ts
-```
+Creates: types, service, adapter, components, tests.
 
 ---
 
 ### /dev-create-component
 
-Creates a Vue component with the standard script setup template.
+Create a component.
 
 ```bash
 /dev-create-component OrderCard
 ```
 
-Determines location (module vs shared), applies type-based props/emits, enforces < 200 lines.
-
 ---
 
 ### /dev-create-service
 
-Creates the complete data layer for a resource.
+Create service layer.
 
 ```bash
 /dev-create-service orders
 ```
 
-Creates 4 files: `.types.ts` + `.contracts.ts` + `-adapter.ts` + `-service.ts`
+Creates: types, contracts, adapter, service.
+
+---
+
+### /dev-create-hook
+
+Create a hook (React/Next.js).
+
+```bash
+/dev-create-hook useOrders
+```
 
 ---
 
 ### /dev-create-composable
 
-Creates a composable with Vue Query integration.
+Create a composable (Vue).
 
 ```bash
 /dev-create-composable useOrdersList
 ```
 
-Templates for queries, mutations, and shared logic.
-
 ---
 
 ### /dev-create-test
 
-Creates tests for a specified file.
+Create tests for a file.
 
 ```bash
 /dev-create-test src/modules/orders/adapters/order-adapter.ts
 ```
 
-**Test priority:**
-1. Adapters (highest — pure functions, easy to test)
-2. Composables (mock service approach)
-3. Components (@vue/test-utils)
-
 ---
 
 ### /dev-generate-types
 
-Generates types, contracts, and adapter from an endpoint or JSON response.
+Generate types from endpoint or JSON.
 
 ```bash
 /dev-generate-types /v2/orders
 ```
-
-Handles snake_case → camelCase conversion and creates both inbound and outbound adapters.
 
 ---
 
@@ -104,104 +350,49 @@ Handles snake_case → camelCase conversion and creates both inbound and outboun
 
 ### /review-review
 
-Full code review against `ARCHITECTURE.md`.
+Code review with verdict.
 
 ```bash
-/review-review
-# Or scoped:
 /review-review src/modules/orders/
 ```
 
-Runs automated checks (`tsc`, `eslint`, `vitest`, `build`) and manual review. Produces a report with severity levels.
-
-**Example output:**
-
-```markdown
-## Review — src/modules/orders/
-
-### Scorecard
-| Dimension | Grade | Notes |
-|-----------|-------|-------|
-| Architecture | A | All layers follow ARCHITECTURE.md |
-| Type Safety | B | Missing return type on useOrdersList |
-| Security | A | No v-html, inputs sanitized |
-| Maintainability | A | Small files, clear naming |
-
-### Auto: tsc ✅ | ESLint ✅ | Build ✅ | Tests ✅
-
-### Violations
-- order-service.ts:12 — try/catch wrapping HTTP call → remove, let error boundary handle
-
-### Highlights
-- order-adapter.ts:5 — Clean bidirectional parsing with full type coverage
-
-### Verdict: ⚠️ With caveats — fix the type annotation before merging
-```
+**Checks:** Spec compliance, code quality, architecture.
 
 ---
 
 ### /review-check-architecture
 
-Runs 14 automated conformance checks:
+Architecture conformance checks.
 
 ```bash
 /review-check-architecture orders
 ```
 
-| # | Check |
-|---|-------|
-| 1 | Services without try/catch |
-| 2 | Services without transformations |
-| 3 | Components with script setup |
-| 4 | Components with TypeScript |
-| 5 | No Options API |
-| 6 | No Mixins |
-| 7 | No server state in Pinia |
-| 8 | storeToRefs usage |
-| 9 | No `any` types |
-| 10 | No cross-module imports |
-| 11 | No v-html |
-| 12 | No debug artifacts (console.log, debugger) |
-| 13 | Queries have staleTime |
-| 14 | Components ≤ 200 lines |
+14 automated checks.
 
 ---
 
 ### /review-fix-violations
 
-Finds and auto-fixes architecture violations.
+Auto-fix violations.
 
 ```bash
 /review-fix-violations orders
 ```
 
-Fixes by priority: 🔴 Critical → 🟡 Important → 🟢 Improvements. Validates after each fix.
-
 ---
 
-## Migration Skills
+### /audit
 
-### /migration-migrate-component
-
-Migrates a component from Options API to script setup.
+Multi-domain code audit in one pass.
 
 ```bash
-/migration-migrate-component src/views/OldPage.vue
+/audit src/modules/auth
 ```
 
-Analyzes current structure, maps consumers, converts to full TypeScript, decomposes if > 200 lines.
+**Covers:** Security (OWASP), performance, architecture, dependencies. Outputs severity-rated findings with remediation steps.
 
----
-
-### /migration-migrate-module
-
-Migrates an entire module through 6 phases.
-
-```bash
-/migration-migrate-module src/modules/legacy-orders/
-```
-
-Delegates to `@migrator`. Includes approval gates between phases.
+**Output:** Audit report with categorized findings, severity levels, and actionable remediation.
 
 ---
 
@@ -209,10 +400,10 @@ Delegates to `@migrator`. Includes approval gates between phases.
 
 ### /docs-onboard
 
-Quick module summary for developer onboarding.
+Quick module summary.
 
 ```bash
 /docs-onboard orders
 ```
 
-Lists endpoints, main components, shows Pinia vs Vue Query separation, flags non-standard patterns. Target: understand a module in 2 minutes.
+Understand any module in 2 minutes.

@@ -1,6 +1,6 @@
 ---
 name: review-review
-description: "Perform a full code review validating against ARCHITECTURE.md (RSC + Client checks)"
+description: "Use when code changes need review before merge — validates architecture, types, security, and test coverage."
 user-invocable: true
 argument-hint: "[scope]"
 allowed-tools: Read, Bash, Glob, Grep

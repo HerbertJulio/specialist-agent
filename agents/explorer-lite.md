@@ -1,6 +1,6 @@
 ---
 name: explorer
-description: "MUST BE USED when exploring unfamiliar codebases, onboarding onto projects, performing technical assessments, or mapping system architecture. Use PROACTIVELY when the user needs to understand a codebase."
+description: "Use when onboarding onto an unfamiliar codebase, mapping project structure, or understanding how modules connect."
 model: haiku
 tools: Read, Glob, Grep
 ---

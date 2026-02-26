@@ -1,6 +1,6 @@
 ---
 name: dev-create-store
-description: "Create a Svelte store (writable/readable or rune-based class) following ARCHITECTURE.md"
+description: "Use when adding state management to a module — creates Svelte store with server state integration."
 user-invocable: true
 argument-hint: "[store-name]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

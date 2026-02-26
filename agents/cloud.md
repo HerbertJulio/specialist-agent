@@ -1,6 +1,6 @@
 ---
 name: cloud
-description: "MUST BE USED when designing cloud architecture, configuring AWS/GCP/Azure/Azion services, writing Infrastructure as Code, setting up serverless or edge functions, or configuring containers and CI/CD pipelines."
+description: "Use when designing cloud infrastructure, setting up IaC, configuring serverless functions, or planning cloud architecture."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

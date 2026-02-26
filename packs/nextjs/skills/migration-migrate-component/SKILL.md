@@ -1,6 +1,6 @@
 ---
 name: migration-migrate-component
-description: "Migrate a Pages Router component/page to App Router following ARCHITECTURE.md"
+description: "Use when a component needs migration to the target architecture or framework version."
 user-invocable: true
 argument-hint: "[component-file]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

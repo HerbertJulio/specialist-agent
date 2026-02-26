@@ -1,6 +1,6 @@
 ---
 name: designer
-description: "MUST BE USED when implementing design systems, responsive layouts, accessibility (WCAG), animations, theming, or UI/UX patterns. Use PROACTIVELY when the user needs UI/UX implementation help."
+description: "Use when building design systems, improving UI/UX, ensuring WCAG accessibility, or creating responsive layouts."
 model: haiku
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---

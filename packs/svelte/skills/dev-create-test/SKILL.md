@@ -1,6 +1,6 @@
 ---
 name: dev-create-test
-description: "Create tests for adapters, stores, or components using Vitest and @testing-library/svelte"
+description: "Use when a module needs test coverage — creates tests for adapters, hooks/composables/stores, and components."
 user-invocable: true
 argument-hint: "[file-path]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

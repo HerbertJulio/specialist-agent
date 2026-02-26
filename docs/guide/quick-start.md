@@ -1,196 +1,169 @@
 # Quick Start
 
-::: info Framework Note
-The examples below use the **Vue 3 pack** patterns. Each framework pack (React, Next.js, SvelteKit) provides equivalent patterns adapted to its ecosystem. See [Framework Packs](/guide/introduction#how-packs-work) for details.
-:::
+Install first:
 
-After [installing](/guide/installation) Specialist Agent, open Claude Code in your project. Here are the most common workflows.
-
-```mermaid
-graph LR
-    A["1. New Project"] --> B["2. Build Features"]
-    B --> C["3. Review Code"]
-    C --> D["4. Debug Issues"]
-    D --> E["5. Migrate Legacy"]
-
-    style A fill:#7c3aed,color:#fff
-    style B fill:#42b883,color:#fff
-    style C fill:#42b883,color:#fff
-    style D fill:#42b883,color:#fff
-    style E fill:#35495e,color:#fff
+```
+/plugin install specialist-agent
 ```
 
----
+Or via CLI: `npx specialist-agent init`
 
-## 1. Start a New Project
+Then start using agents:
 
-Use `@starter` to scaffold a full-stack project from scratch — any framework, backend, and database.
+## 1. Analyze Your Project
 
 ```bash
-"Use @starter to create a task-manager app with Vue + Express + PostgreSQL"
+"Use @scout to analyze this project"
 ```
 
-The starter wizard asks about project name, frontend/backend stack, database, auth, and structure — then scaffolds everything including Docker compose and README.
+Get recommendations for which agents to use.
 
-> **Learn more:** [@starter reference](/reference/agents#starter-create-projects-from-scratch)
-
----
-
-## 2. Build a Feature Module
-
-Use `@builder` to create modules, components, services, composables, or tests. It reads your `ARCHITECTURE.md` and follows all conventions automatically.
+## 2. Build a Feature
 
 ```bash
-# Full module with CRUD
-"Use @builder to create a products module with CRUD for /v2/products"
-
-# Single component
-"Use @builder to create a ProductCard component with name, price, and image props"
-
-# Service layer only
-"Use @builder to create the service layer for /v3/orders"
+"Use @builder to create a products module with CRUD"
 ```
 
-Generated structure:
+Creates: types, service, adapter, components, tests.
 
-```text
-src/modules/products/
-├── types/           ← API types + app contracts
-├── adapters/        ← API ↔ App transformation
-├── services/        ← Pure HTTP calls
-├── composables/     ← useProductsList, useProductDetail
-├── components/      ← ProductsTable, ProductForm, ProductCard
-├── views/           ← ProductsView
-└── index.ts         ← Barrel export
-```
-
-> **Learn more:** [Build a CRUD Module](/tutorials/crud-module) · [Create a Service Layer](/tutorials/service-layer)
-
----
-
-## 3. Review Before PR
-
-Use `@reviewer` to validate code against your architecture before merging.
+## 3. Review Before Merge
 
 ```bash
-# Full review with automated checks
 "Use @reviewer to review the products module"
-
-# Quick architecture check
-/review-check-architecture products
 ```
 
-Output example:
-
-```text
-## Review — src/modules/products/
-
-### Auto: tsc ✅ | ESLint ✅ | Build ✅ | Tests ✅
-
-### 🟢 Compliant
-  - services/products-service.ts: HTTP only, no try/catch ✅
-  - adapters/products-adapter.ts: Pure functions, bidirectional ✅
-
-## Verdict: ✅ Approved
-```
-
-> **Learn more:** [@reviewer reference](/reference/agents#reviewer-review-analyze)
-
----
+Checks: spec compliance, code quality, architecture.
 
 ## 4. Debug an Issue
 
-Use `@doctor` to trace bugs through architecture layers — from Component down to API.
+```bash
+"Use @doctor to investigate the 500 error on login"
+```
+
+Traces through: Component → State → Adapter → Service → API
+
+## 5. Plan a Complex Feature
 
 ```bash
-"Use @doctor to investigate why products aren't loading after search"
+/plan add user authentication with JWT
 ```
 
-```mermaid
-sequenceDiagram
-    participant D as @doctor
-    participant C as Component
-    participant Q as Composable
-    participant A as Adapter
-    participant S as Service
+Creates adaptive plan based on complexity.
 
-    D->>C: Check props & reactive bindings
-    D->>Q: Check queryKey reactivity & staleTime
-    Note right of D: Found! queryKey not reactive to search param
-    D->>Q: Fix: add search to queryKey computed
-    D-->>D: Root cause fixed ✅
-```
-
-> **Learn more:** [@doctor reference](/reference/agents#doctor-investigate-bugs)
-
----
-
-## 5. Migrate Legacy Code
-
-Use `@migrator` to convert Options API to script setup, JS to TS, or modernize full modules in 6 phases.
+## 6. Test-Driven Development
 
 ```bash
-# Single component
-"Use @migrator to convert OldProductsPage.vue to script setup"
-
-# Full module (6 phases with approval gates)
-"Use @migrator to migrate src/legacy/billing/ to the new architecture"
+/tdd implement calculateDiscount function
 ```
 
-Before → After:
+RED → GREEN → REFACTOR with proof.
 
-```vue
-<!-- Before: Options API -->
-<script>
-export default {
-  data() { return { products: [], loading: false } },
-  methods: { async fetchProducts() { ... } },
-  mounted() { this.fetchProducts() }
-}
-</script>
+## 7. Save Progress
+
+```bash
+/checkpoint create before-refactor
 ```
 
-```vue
-<!-- After: Script Setup + Composable -->
-<script setup lang="ts">
-import { useProductsList } from '../composables/useProductsList'
+Rollback if needed.
 
-const { items, isLoading } = useProductsList()
-</script>
+## Common Workflows
+
+### New Project
+
+```bash
+"Use @starter to create an app with Next.js + PostgreSQL"
 ```
 
-> **Learn more:** [Migrate Your Project](/tutorials/migrate-project)
+### API Design
 
----
+```bash
+"Use @api to design the orders API with OpenAPI spec"
+```
 
-## Quick Skills Reference
+### Performance
 
-Skills are shortcuts you invoke with `/skill-name`:
+```bash
+"Use @perf to optimize the dashboard"
+```
 
-| Skill | What it does |
+### Security
+
+```bash
+"Use @security to audit for vulnerabilities"
+```
+
+### Database
+
+```bash
+"Use @data to design the schema with Prisma"
+```
+
+### Payments
+
+```bash
+"Use @finance to integrate Stripe"
+```
+
+### Migrations
+
+```bash
+"Use @migrator to modernize src/legacy/"
+```
+
+## 8. Audit Before Release
+
+```bash
+/audit src/modules/auth
+```
+
+Security + performance + architecture + dependency check in one pass.
+
+## 9. Onboard to a Codebase
+
+```bash
+/onboard
+```
+
+Maps architecture, detects conventions, generates developer guide.
+
+## Skills
+
+| Skill | What it Does |
 |-------|--------------|
-| `/dev-create-module [name]` | Full module scaffold |
-| `/dev-create-component [name]` | Component with script setup |
-| `/dev-create-service [resource]` | Types + adapter + service |
-| `/dev-create-composable [name]` | Composable with Vue Query |
-| `/dev-create-test [file]` | Tests for any file |
-| `/dev-generate-types [endpoint]` | Types from endpoint/JSON |
-| `/review-review [scope]` | Full code review |
-| `/review-check-architecture [module]` | Architecture conformance |
-| `/review-fix-violations [module]` | Auto-fix violations |
-| `/migration-migrate-component [file]` | Options → setup |
-| `/migration-migrate-module [path]` | Full module migration |
-| `/docs-onboard [module]` | 2-minute module overview |
+| `/brainstorm` | Socratic brainstorming |
+| `/plan` | Plan a feature |
+| `/tdd` | Test-driven development |
+| `/debug` | Debug an issue |
+| `/audit` | Multi-domain code audit |
+| `/onboard` | Codebase onboarding |
+| `/verify` | Verification before completion |
+| `/checkpoint` | Save/restore progress |
+| `/health` | Project health score |
+| `/estimate` | Estimate token cost |
+| `/remember` | Save a decision |
+| `/recall` | Recall decisions |
+| `/finish` | Finalize branch |
+| `/learn` | Learn while building |
+| `/worktree` | Git worktree isolation |
+| `/write-skill` | Create custom skills |
+| `/tutorial` | Interactive tutorial |
+| `/migrate-framework` | Migrate between frameworks |
 
-> **Learn more:** [Skills Reference](/reference/skills)
+## Native Hooks
 
----
+Specialist Agent includes 4 native Claude Code hooks that run automatically:
 
-## What's Next
+| Hook | What it Does |
+|------|-------------|
+| Security Guard | Blocks dangerous commands before execution |
+| Auto-Dispatch | Suggests the best agent for your prompt |
+| Session Context | Injects project state on session start |
+| Auto-Format | Formats files after Write/Edit |
 
-- [Architecture Overview](/guide/architecture) — Understand the patterns your code follows
-- [Layers](/guide/layers) — Deep dive into Service, Adapter, Composable layers
-- [Agents Reference](/reference/agents) — Detailed guide for each agent
-- [Skills Reference](/reference/skills) — All available skills
-- [Build Forms with Validation](/tutorials/forms) — Zod + useMutation + error handling
-- [Pagination + Filters](/tutorials/pagination-filters) — Lists with search, filters, and pagination
+Installed during `npx specialist-agent init`. See [Hooks Reference](/reference/hooks) for details.
+
+## Next
+
+- [Agents](/reference/agents) — All 25+ agents
+- [Skills](/reference/skills) — All skills
+- [Architecture](/guide/architecture) — Understand the patterns

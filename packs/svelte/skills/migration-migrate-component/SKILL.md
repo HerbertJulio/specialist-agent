@@ -1,6 +1,6 @@
 ---
 name: migration-migrate-component
-description: "Migrate a Svelte component from Svelte 4 to Svelte 5 runes"
+description: "Use when a component needs migration to the target architecture or framework version."
 user-invocable: true
 argument-hint: "[component-file]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

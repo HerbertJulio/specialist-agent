@@ -1,6 +1,6 @@
 ---
 name: finance
-description: "MUST BE USED when building financial systems, payment integrations, billing, invoicing, tax calculations, or financial reporting. Use PROACTIVELY when the user needs anything finance-related."
+description: "Use when implementing payment processing, billing systems, invoicing, tax calculation, or financial reporting features."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

@@ -1,6 +1,6 @@
 {
   "name": "specialist-agent",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "type": "module",
   "description": "AI agents for Claude Code — any framework, any stack",
   "bin": {
@@ -10,6 +10,13 @@
     "cli",
     "agents",
     "packs",
+    "skills",
+    "hooks",
+    ".claude-plugin",
+    ".cursor-plugin",
+    ".codex",
+    ".opencode",
+    "templates",
     "README.md",
     "LICENSE"
   ],
@@ -17,7 +24,8 @@
     "prepare": "husky",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "test:hooks": "node tests/test-native-hooks.mjs"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.4.2",
@@ -35,7 +43,12 @@
     "nextjs",
     "svelte",
     "developer-tools",
-    "code-generation"
+    "code-generation",
+    "tdd",
+    "code-review",
+    "debugging",
+    "cursor",
+    "codex"
   ],
   "engines": {
     "node": ">=18"
