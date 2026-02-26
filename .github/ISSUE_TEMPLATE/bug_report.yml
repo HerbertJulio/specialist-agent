@@ -1,0 +1,79 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill out the information below.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened? What did you expect to happen?
+      placeholder: "When I run @builder to create a module, it..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this?
+      placeholder: |
+        1. Run `npx specialist-agent init` and select Vue + Full mode
+        2. Ask Claude to "Use @builder to create a users module"
+        3. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should have happened instead?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which part of Specialist Agent is affected?
+      options:
+        - Agent (@starter, @builder, @reviewer, etc.)
+        - Skill (/dev-create-*, /review-*, etc.)
+        - CLI (npx specialist-agent init)
+        - Documentation
+        - Architecture patterns
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: agent
+    attributes:
+      label: Agent/Skill name
+      description: If applicable, which agent or skill?
+      placeholder: "@builder"
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Your setup details
+      value: |
+        - OS:
+        - Node version:
+        - Claude Code version:
+        - Specialist Agent version:
+        - Framework pack:
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other information (screenshots, logs, etc.)

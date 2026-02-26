@@ -1,0 +1,25 @@
+# Claude Code config
+.claude/
+
+# GitHub
+.github/
+
+# Husky
+.husky/
+
+# Documentation source
+docs/
+
+# Config files
+.gitignore
+.commitlintrc.json
+.mcp.json
+.release-please-manifest.json
+release-please-config.json
+
+# Community files
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+CLAUDE.md
+CHANGELOG.md

@@ -1,0 +1,35 @@
+{
+  "name": "specialist-agent",
+  "version": "2.0.0",
+  "displayName": "Specialist Agent",
+  "description": "Your AI development team. 25+ specialized agents for building, reviewing, debugging, and shipping production code.",
+  "author": {
+    "name": "Herbert Julio",
+    "url": "https://github.com/HerbertJulio"
+  },
+  "repository": "https://github.com/HerbertJulio/specialist-agent",
+  "homepage": "https://herbertjulio.github.io/specialist-agent/",
+  "license": "MIT",
+  "logo": "docs/public/logo.svg",
+  "keywords": [
+    "agents",
+    "ai-agents",
+    "vue",
+    "react",
+    "nextjs",
+    "svelte",
+    "code-generation",
+    "code-review",
+    "tdd",
+    "debugging"
+  ],
+  "categories": [
+    "AI",
+    "Development",
+    "Code Generation",
+    "Testing"
+  ],
+  "agents": "./agents",
+  "skills": "./skills",
+  "rules": "./packs"
+}

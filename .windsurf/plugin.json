@@ -1,0 +1,256 @@
+{
+  "$schema": "https://windsurf.io/schemas/plugin-v1.json",
+  "id": "specialist-agent",
+  "name": "Specialist Agent",
+  "version": "2.0.0",
+  "description": "Your AI development team. 25+ specialized agents that build, review, debug, and ship production code.",
+  "author": {
+    "name": "Herbert Julio",
+    "email": "herbertjulio@gmail.com",
+    "url": "https://github.com/HerbertJulio"
+  },
+  "repository": "https://github.com/HerbertJulio/specialist-agent",
+  "documentation": "https://herbertjulio.github.io/specialist-agent/",
+  "license": "MIT",
+  "keywords": [
+    "ai-agents",
+    "vue",
+    "react",
+    "nextjs",
+    "svelte",
+    "code-generation",
+    "tdd",
+    "code-review",
+    "debugging",
+    "performance"
+  ],
+  "engines": {
+    "windsurf": ">=1.0.0"
+  },
+  "categories": [
+    "AI",
+    "Code Generation",
+    "Developer Tools"
+  ],
+  "capabilities": {
+    "prompts": true,
+    "agents": true,
+    "skills": true
+  },
+  "agents": [
+    {
+      "id": "scout",
+      "name": "@scout",
+      "description": "Project analyzer. Recommends which agents to use.",
+      "file": "agents/scout.md"
+    },
+    {
+      "id": "builder",
+      "name": "@builder",
+      "description": "Build modules, components, services.",
+      "file": "packs/{framework}/agents/builder.md"
+    },
+    {
+      "id": "reviewer",
+      "name": "@reviewer",
+      "description": "Unified 3-in-1 code review.",
+      "file": "packs/{framework}/agents/reviewer.md"
+    },
+    {
+      "id": "tdd",
+      "name": "@tdd",
+      "description": "Test-Driven Development.",
+      "file": "agents/tdd.md"
+    },
+    {
+      "id": "debugger",
+      "name": "@debugger",
+      "description": "4-phase systematic debugging.",
+      "file": "agents/debugger.md"
+    },
+    {
+      "id": "planner",
+      "name": "@planner",
+      "description": "Adaptive planning.",
+      "file": "agents/planner.md"
+    },
+    {
+      "id": "executor",
+      "name": "@executor",
+      "description": "Execute with checkpoints.",
+      "file": "agents/executor.md"
+    },
+    {
+      "id": "pair",
+      "name": "@pair",
+      "description": "Pair programming.",
+      "file": "agents/pair.md"
+    },
+    {
+      "id": "api",
+      "name": "@api",
+      "description": "REST/GraphQL API design.",
+      "file": "agents/api.md"
+    },
+    {
+      "id": "perf",
+      "name": "@perf",
+      "description": "Performance optimization.",
+      "file": "agents/perf.md"
+    },
+    {
+      "id": "i18n",
+      "name": "@i18n",
+      "description": "Internationalization.",
+      "file": "agents/i18n.md"
+    },
+    {
+      "id": "docs",
+      "name": "@docs",
+      "description": "Documentation generation.",
+      "file": "agents/docs.md"
+    },
+    {
+      "id": "refactor",
+      "name": "@refactor",
+      "description": "Code refactoring.",
+      "file": "agents/refactor.md"
+    },
+    {
+      "id": "deps",
+      "name": "@deps",
+      "description": "Dependency management.",
+      "file": "agents/deps.md"
+    },
+    {
+      "id": "security",
+      "name": "@security",
+      "description": "Auth, OWASP, encryption.",
+      "file": "agents/security.md"
+    },
+    {
+      "id": "finance",
+      "name": "@finance",
+      "description": "Payments, billing.",
+      "file": "agents/finance.md"
+    },
+    {
+      "id": "cloud",
+      "name": "@cloud",
+      "description": "Cloud architecture.",
+      "file": "agents/cloud.md"
+    },
+    {
+      "id": "data",
+      "name": "@data",
+      "description": "Database design.",
+      "file": "agents/data.md"
+    },
+    {
+      "id": "devops",
+      "name": "@devops",
+      "description": "Docker, K8s, CI/CD.",
+      "file": "agents/devops.md"
+    },
+    {
+      "id": "designer",
+      "name": "@designer",
+      "description": "Design systems.",
+      "file": "agents/designer.md"
+    },
+    {
+      "id": "tester",
+      "name": "@tester",
+      "description": "Test strategies.",
+      "file": "agents/tester.md"
+    },
+    {
+      "id": "legal",
+      "name": "@legal",
+      "description": "GDPR, LGPD compliance.",
+      "file": "agents/legal.md"
+    }
+  ],
+  "skills": [
+    {
+      "id": "plan",
+      "name": "/plan",
+      "description": "Plan a feature",
+      "file": "skills/plan/SKILL.md"
+    },
+    {
+      "id": "tdd",
+      "name": "/tdd",
+      "description": "Test-driven development",
+      "file": "skills/tdd/SKILL.md"
+    },
+    {
+      "id": "debug",
+      "name": "/debug",
+      "description": "Debug an issue",
+      "file": "skills/debug/SKILL.md"
+    },
+    {
+      "id": "checkpoint",
+      "name": "/checkpoint",
+      "description": "Save/restore progress",
+      "file": "skills/checkpoint/SKILL.md"
+    },
+    {
+      "id": "health",
+      "name": "/health",
+      "description": "Project health score",
+      "file": "skills/health/SKILL.md"
+    },
+    {
+      "id": "remember",
+      "name": "/remember",
+      "description": "Save decisions",
+      "file": "skills/remember/SKILL.md"
+    },
+    {
+      "id": "recall",
+      "name": "/recall",
+      "description": "Recall decisions",
+      "file": "skills/recall/SKILL.md"
+    },
+    {
+      "id": "tutorial",
+      "name": "/tutorial",
+      "description": "Interactive tutorial",
+      "file": "skills/tutorial/SKILL.md"
+    },
+    {
+      "id": "migrate-framework",
+      "name": "/migrate-framework",
+      "description": "Migrate between frameworks",
+      "file": "skills/migrate-framework/SKILL.md"
+    }
+  ],
+  "profiles": {
+    "startup-fast": {
+      "description": "Move fast, Haiku model",
+      "model": "haiku",
+      "validation": "minimal"
+    },
+    "enterprise-strict": {
+      "description": "Full validation",
+      "model": "sonnet",
+      "validation": "full"
+    },
+    "learning-mode": {
+      "description": "Explain everything",
+      "model": "sonnet",
+      "explain": true
+    },
+    "cost-optimized": {
+      "description": "Minimize tokens",
+      "model": "haiku",
+      "validation": "minimal"
+    }
+  },
+  "install": {
+    "cli": "npx specialist-agent init",
+    "manual": "Copy files to .claude/ directory"
+  }
+}
