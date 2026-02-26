@@ -79,6 +79,14 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'Code Review', link: '/scenarios/code-review' },
             { text: 'Debug Issues', link: '/scenarios/debug-issue' },
+            { text: 'Performance', link: '/scenarios/performance' },
+          ],
+        },
+        {
+          text: 'Workflow',
+          items: [
+            { text: 'Planning', link: '/scenarios/planning' },
+            { text: 'Migration', link: '/scenarios/migration' },
           ],
         },
         {
