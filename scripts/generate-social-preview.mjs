@@ -165,29 +165,28 @@ function generateSocialPreview() {
 }
 
 function generateBanner() {
-  // README banner: 960 x 200
+  // README banner: 960 x 200, two-row layout
   const W = 960, H = 200;
+  const tagH = 24, tagR = 12, fontSize = 11, gap = 8;
 
-  // Compact tags — stats + frameworks in one row
-  const tags = [
-    ...stats.map(s => ({ label: s.label, color: '#2B5EA7', textColor: '#8BADD4', bgOpacity: 0.4 })),
-    ...frameworks.map(fw => ({ label: fw.name, color: fw.color, textColor: fw.color, bgOpacity: fw.bgOpacity || 0.3 })),
-  ];
-
-  const tagGap = 8;
-  const tagPadding = 20;
-  // Estimate tag widths from label length
-  const tagWidths = tags.map(t => Math.max(60, t.label.length * 7.5 + tagPadding));
-
-  let tagsSvg = '';
-  let x = 0;
-  for (let i = 0; i < tags.length; i++) {
-    const w = tagWidths[i];
-    tagsSvg += `
-    <rect x="${x}" y="-14" width="${w}" height="28" rx="14" fill="${tags[i].color}" opacity="${tags[i].bgOpacity}"/>
-    <text x="${x + w / 2}" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="${tags[i].textColor}">${tags[i].label}</text>`;
-    x += w + tagGap;
+  function renderRow(items, startX, y) {
+    let svg = '';
+    let x = 0;
+    for (const item of items) {
+      const w = Math.max(52, item.label.length * 7 + 18);
+      svg += `
+    <rect x="${x}" y="-12" width="${w}" height="${tagH}" rx="${tagR}" fill="${item.color}" opacity="${item.bgOpacity}"/>
+    <text x="${x + w / 2}" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="${fontSize}" fill="${item.textColor}">${item.label}</text>`;
+      x += w + gap;
+    }
+    return `<g transform="translate(${startX}, ${y})">${svg}\n  </g>`;
   }
+
+  const statsItems = stats.map(s => ({ label: s.label, color: '#2B5EA7', textColor: '#8BADD4', bgOpacity: 0.4 }));
+  const fwItems = frameworks.map(fw => ({ label: fw.name, color: fw.color, textColor: fw.color, bgOpacity: fw.bgOpacity || 0.3 }));
+
+  const row1 = renderRow(statsItems, 180, 132);
+  const row2 = renderRow(fwItems, 180, 164);
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
@@ -221,7 +220,7 @@ function generateBanner() {
   </g>
 
   <!-- Logo (left side) -->
-  <g transform="translate(60, 58) scale(2.6)">
+  <g transform="translate(60, 48) scale(2.6)">
     <path d="M16 26 L2 19 L16 12 L30 19 Z" fill="url(#g1)" opacity="0.9"/>
     <path d="M16 21 L2 14 L16 7 L30 14 Z" fill="url(#g2)" opacity="0.9"/>
     <path d="M16 16 L2 9 L16 2 L30 9 Z" fill="url(#g3)" opacity="0.95"/>
@@ -229,14 +228,16 @@ function generateBanner() {
   </g>
 
   <!-- Title -->
-  <text x="180" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="700" fill="#FFFFFF">Specialist Agent</text>
+  <text x="180" y="72" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="700" fill="#FFFFFF">Specialist Agent</text>
 
   <!-- Subtitle -->
-  <text x="180" y="112" font-family="system-ui, -apple-system, sans-serif" font-size="17" fill="#8BADD4">AI agents for Claude Code — any framework, any stack</text>
+  <text x="180" y="100" font-family="system-ui, -apple-system, sans-serif" font-size="17" fill="#8BADD4">AI agents for Claude Code — any framework, any stack</text>
 
-  <!-- Tags -->
-  <g transform="translate(180, 148)">${tagsSvg}
-  </g>
+  <!-- Row 1: Stats -->
+  ${row1}
+
+  <!-- Row 2: Framework packs -->
+  ${row2}
 </svg>
 `;
 }
