@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node hooks/native/security-guard.mjs",
+            "command": "node .specialist-agent/hooks/native/security-guard.mjs",
             "timeout": 5
           }
         ]
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node hooks/native/auto-dispatch.mjs",
+            "command": "node .specialist-agent/hooks/native/auto-dispatch.mjs",
             "timeout": 5
           }
         ]
@@ -28,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node hooks/native/session-context.mjs",
+            "command": "node .specialist-agent/hooks/native/session-context.mjs",
             "timeout": 10
           }
         ]
@@ -40,7 +40,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node hooks/native/auto-format.mjs",
+            "command": "node .specialist-agent/hooks/native/auto-format.mjs",
             "timeout": 15
           }
         ]

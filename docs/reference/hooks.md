@@ -603,12 +603,12 @@ They are configured in `.claude/settings.json`:
     "PreToolUse": [
       {
         "matcher": "Bash",
-        "hooks": [{ "type": "command", "command": "node hooks/native/security-guard.mjs", "timeout": 5 }]
+        "hooks": [{ "type": "command", "command": "node .specialist-agent/hooks/native/security-guard.mjs", "timeout": 5 }]
       }
     ],
     "UserPromptSubmit": [
       {
-        "hooks": [{ "type": "command", "command": "node hooks/native/auto-dispatch.mjs", "timeout": 5 }]
+        "hooks": [{ "type": "command", "command": "node .specialist-agent/hooks/native/auto-dispatch.mjs", "timeout": 5 }]
       }
     ]
   }
@@ -639,7 +639,7 @@ Evaluates every Bash command against security rules **before** it executes. Desi
 
 **Customization:**
 
-Edit `hooks/native/security-config.json` to:
+Edit `.specialist-agent/hooks/native/security-config.json` to:
 - Disable specific rules: `"hard-reset": { "enabled": false }`
 - Add safe patterns to allowlist
 - Configure protected branches

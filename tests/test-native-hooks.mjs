@@ -224,7 +224,9 @@ if (template) {
     for (const hook of entry.hooks || []) {
       if (hook.command) {
         const scriptFile = hook.command.replace('node ', '');
-        const scriptPath = join(ROOT, scriptFile);
+        // Template paths use install dir (.specialist-agent/), source files are in hooks/
+        const sourceFile = scriptFile.replace('.specialist-agent/', '');
+        const scriptPath = join(ROOT, sourceFile);
         assert(existsSync(scriptPath), `Hook script exists: ${scriptFile}`);
       }
     }
