@@ -4,7 +4,7 @@
 
 <p align="center">
   <b>Your AI Development Team</b><br/>
-  25+ specialized agents that build, review, debug, and ship production code.
+  26+ specialized agents that build, review, debug, and ship production code.
 </p>
 
 [![CI](https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml)
@@ -18,7 +18,7 @@
 
 | | Specialist Agent | Others |
 |---|---|---|
-| **Agents** | 25+ specialized | 1-5 generic |
+| **Agents** | 26+ specialized | 1-5 generic |
 | **Frameworks** | Next.js, React, Vue, SvelteKit, Angular, Astro, Nuxt | Generic only |
 | **Cost** | Lite mode (60-80% cheaper) | Full cost always |
 | **Verification** | Proof-based (command output) | Trust-based ("it works") |

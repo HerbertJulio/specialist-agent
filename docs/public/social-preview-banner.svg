@@ -45,22 +45,27 @@
 
   <!-- Tags -->
   <g transform="translate(180, 148)">
-    <rect x="0" y="-14" width="90" height="28" rx="14" fill="#2B5EA7" opacity="0.4"/>
-    <text x="45" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8BADD4">13 Agents</text>
-
-    <rect x="100" y="-14" width="86" height="28" rx="14" fill="#2B5EA7" opacity="0.4"/>
-    <text x="143" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8BADD4">12 Skills</text>
-
-    <rect x="196" y="-14" width="70" height="28" rx="14" fill="#42b883" opacity="0.3"/>
-    <text x="231" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#42b883">Vue 3</text>
-
-    <rect x="276" y="-14" width="70" height="28" rx="14" fill="#61DAFB" opacity="0.3"/>
-    <text x="311" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#61DAFB">React</text>
-
-    <rect x="356" y="-14" width="72" height="28" rx="14" fill="#FFFFFF" opacity="0.15"/>
-    <text x="392" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CCCCCC">Next.js</text>
-
-    <rect x="438" y="-14" width="82" height="28" rx="14" fill="#FF3E00" opacity="0.3"/>
-    <text x="479" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#FF3E00">SvelteKit</text>
+    <rect x="0" y="-14" width="95" height="28" rx="14" fill="#2B5EA7" opacity="0.4"/>
+    <text x="47.5" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8BADD4">26+ Agents</text>
+    <rect x="103" y="-14" width="87.5" height="28" rx="14" fill="#2B5EA7" opacity="0.4"/>
+    <text x="146.75" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8BADD4">21 Skills</text>
+    <rect x="198.5" y="-14" width="87.5" height="28" rx="14" fill="#2B5EA7" opacity="0.4"/>
+    <text x="242.25" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8BADD4">Lite Mode</text>
+    <rect x="294" y="-14" width="72.5" height="28" rx="14" fill="#2B5EA7" opacity="0.4"/>
+    <text x="330.25" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8BADD4">7 Packs</text>
+    <rect x="374.5" y="-14" width="72.5" height="28" rx="14" fill="#DD0031" opacity="0.3"/>
+    <text x="410.75" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#DD0031">Angular</text>
+    <rect x="455" y="-14" width="60" height="28" rx="14" fill="#FF5D01" opacity="0.3"/>
+    <text x="485" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#FF5D01">Astro</text>
+    <rect x="523" y="-14" width="72.5" height="28" rx="14" fill="#CCCCCC" opacity="0.15"/>
+    <text x="559.25" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CCCCCC">Next.js</text>
+    <rect x="603.5" y="-14" width="60" height="28" rx="14" fill="#00DC82" opacity="0.3"/>
+    <text x="633.5" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#00DC82">Nuxt</text>
+    <rect x="671.5" y="-14" width="60" height="28" rx="14" fill="#61DAFB" opacity="0.3"/>
+    <text x="701.5" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#61DAFB">React</text>
+    <rect x="739.5" y="-14" width="87.5" height="28" rx="14" fill="#FF3E00" opacity="0.3"/>
+    <text x="783.25" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#FF3E00">SvelteKit</text>
+    <rect x="835" y="-14" width="60" height="28" rx="14" fill="#42b883" opacity="0.3"/>
+    <text x="865" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#42b883">Vue 3</text>
   </g>
 </svg>

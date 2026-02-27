@@ -2,7 +2,7 @@
 
 ## About
 
-Your AI development team. 25+ specialized agents that build, review, debug, and ship production code.
+Your AI development team. 26+ specialized agents that build, review, debug, and ship production code.
 
 **Available packs:** Vue 3, React, Next.js, SvelteKit, Angular, Astro, Nuxt
 

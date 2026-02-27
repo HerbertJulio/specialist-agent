@@ -45,33 +45,33 @@
   <!-- Subtitle -->
   <text x="640" y="475" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="26" fill="#8BADD4">AI agents for Claude Code — any framework, any stack</text>
 
-  <!-- Tags row 1 -->
+  <!-- Stats row -->
   <g transform="translate(640, 510)">
-    <rect x="-280" y="-18" width="120" height="36" rx="18" fill="#2B5EA7" opacity="0.4"/>
-    <text x="-220" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#8BADD4">12 Agents</text>
-
-    <rect x="-130" y="-18" width="110" height="36" rx="18" fill="#2B5EA7" opacity="0.4"/>
-    <text x="-75" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#8BADD4">12 Skills</text>
-
-    <rect x="10" y="-18" width="120" height="36" rx="18" fill="#2B5EA7" opacity="0.4"/>
-    <text x="70" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#8BADD4">Lite Mode</text>
-
-    <rect x="160" y="-18" width="120" height="36" rx="18" fill="#2B5EA7" opacity="0.4"/>
-    <text x="220" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#8BADD4">4 Packs</text>
+    <rect x="-225" y="-18" width="110" height="36" rx="18" fill="#2B5EA7" opacity="0.4"/>
+    <text x="-170" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#8BADD4">26+ Agents</text>
+    <rect x="-100" y="-18" width="100" height="36" rx="18" fill="#2B5EA7" opacity="0.4"/>
+    <text x="-50" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#8BADD4">21 Skills</text>
+    <rect x="15" y="-18" width="100" height="36" rx="18" fill="#2B5EA7" opacity="0.4"/>
+    <text x="65" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#8BADD4">Lite Mode</text>
+    <rect x="130" y="-18" width="95" height="36" rx="18" fill="#2B5EA7" opacity="0.4"/>
+    <text x="177.5" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#8BADD4">7 Packs</text>
   </g>
 
-  <!-- Tags row 2 — framework packs -->
+  <!-- Frameworks row -->
   <g transform="translate(640, 560)">
-    <rect x="-280" y="-18" width="100" height="36" rx="18" fill="#42b883" opacity="0.3"/>
-    <text x="-230" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#42b883">Vue 3</text>
-
-    <rect x="-150" y="-18" width="100" height="36" rx="18" fill="#61DAFB" opacity="0.3"/>
-    <text x="-100" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#61DAFB">React</text>
-
-    <rect x="-20" y="-18" width="100" height="36" rx="18" fill="#FFFFFF" opacity="0.15"/>
-    <text x="30" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#CCCCCC">Next.js</text>
-
-    <rect x="110" y="-18" width="110" height="36" rx="18" fill="#FF3E00" opacity="0.3"/>
-    <text x="165" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#FF3E00">SvelteKit</text>
+    <rect x="-368.5" y="-18" width="95" height="36" rx="18" fill="#DD0031" opacity="0.3"/>
+    <text x="-321" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#DD0031">Angular</text>
+    <rect x="-261.5" y="-18" width="95" height="36" rx="18" fill="#FF5D01" opacity="0.3"/>
+    <text x="-214" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#FF5D01">Astro</text>
+    <rect x="-154.5" y="-18" width="95" height="36" rx="18" fill="#CCCCCC" opacity="0.15"/>
+    <text x="-107" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#CCCCCC">Next.js</text>
+    <rect x="-47.5" y="-18" width="95" height="36" rx="18" fill="#00DC82" opacity="0.3"/>
+    <text x="0" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#00DC82">Nuxt</text>
+    <rect x="59.5" y="-18" width="95" height="36" rx="18" fill="#61DAFB" opacity="0.3"/>
+    <text x="107" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#61DAFB">React</text>
+    <rect x="166.5" y="-18" width="95" height="36" rx="18" fill="#FF3E00" opacity="0.3"/>
+    <text x="214" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#FF3E00">SvelteKit</text>
+    <rect x="273.5" y="-18" width="95" height="36" rx="18" fill="#42b883" opacity="0.3"/>
+    <text x="321" y="6" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#42b883">Vue 3</text>
   </g>
 </svg>
