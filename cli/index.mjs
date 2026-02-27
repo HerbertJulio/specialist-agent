@@ -86,7 +86,7 @@ const HOOK_EVENT_MAP = {
 function setupNativeHooks(cwd, selectedHooks) {
   // 1. Copy hook scripts to project
   const nativeSource = join(ROOT, 'hooks', 'native')
-  const nativeDest = join(cwd, 'hooks', 'native')
+  const nativeDest = join(cwd, '.specialist-agent', 'hooks', 'native')
   mkdirSync(nativeDest, { recursive: true })
 
   const filesToCopy = [

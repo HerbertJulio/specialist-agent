@@ -223,7 +223,7 @@ The Security Guard hook blocks dangerous commands **before** they execute:
 - **HIGH:** Force push to main, `git reset --hard`, `DROP TABLE`, `curl | bash`
 - **MEDIUM:** Reading `.env` files, inline secrets in commands
 
-Customize rules in `hooks/native/security-config.json`.
+Customize rules in `.specialist-agent/hooks/native/security-config.json`.
 
 ---
 

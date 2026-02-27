@@ -38,8 +38,8 @@ your-project/
 │   ├── agents/           # AI agents
 │   ├── skills/           # Slash commands
 │   └── settings.json     # Native hooks config
-├── hooks/
-│   └── native/           # Hook scripts
+├── .specialist-agent/
+│   └── hooks/native/     # Hook scripts
 ├── docs/
 │   └── ARCHITECTURE.md   # Your conventions
 └── CLAUDE.md             # Project config
