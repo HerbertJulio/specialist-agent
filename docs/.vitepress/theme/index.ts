@@ -2,7 +2,6 @@ import DefaultTheme from 'vitepress/theme'
 import { h } from 'vue'
 import MermaidZoom from './MermaidZoom.vue'
 import LanguageSwitcher from './LanguageSwitcher.vue'
-import AnnouncementBar from './AnnouncementBar.vue'
 import HomePlatforms from './HomePlatforms.vue'
 import HomeHowItWorks from './HomeHowItWorks.vue'
 import HomeFrameworks from './HomeFrameworks.vue'
@@ -13,7 +12,6 @@ export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'layout-top': () => h(AnnouncementBar),
       'nav-bar-content-after': () => h(LanguageSwitcher),
       'home-features-after': () => [
         h(HomePlatforms),
