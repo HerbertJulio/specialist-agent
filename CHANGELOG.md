@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.7.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.6.0...specialist-agent-v2.7.0) (2026-03-01)
+
+
+### Features
+
+* add Google Analytics 4 and npm/GitHub badges to docs ([8172ddc](https://github.com/HerbertJulio/specialist-agent/commit/8172ddc70c6789faa846535f7f4a8338a8072690))
+
+
+### Bug Fixes
+
+* comprehensive project audit fixes for v2.5.0 launch ([62715fb](https://github.com/HerbertJulio/specialist-agent/commit/62715fb20ee3aca430f9fbb12f69cb0eb3b08dc9))
+* comprehensive project audit for v2.5.0 launch ([51c4c0a](https://github.com/HerbertJulio/specialist-agent/commit/51c4c0a889e841463ef568125327d3a3bca921b9))
+* resolve 72 validation warnings in pack lite agents ([78ed4a5](https://github.com/HerbertJulio/specialist-agent/commit/78ed4a595a857b02794a1db3e28da6ecd21e98aa))
+
 ## [2.6.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.5.0...specialist-agent-v2.6.0) (2026-03-01)
 
 
