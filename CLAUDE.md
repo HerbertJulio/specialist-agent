@@ -2,7 +2,7 @@
 
 ## About
 
-Your AI development team. 26+ specialized agents that build, review, debug, and ship production code.
+Your AI development team. 27+ specialized agents that build, review, debug, and ship production code.
 
 **Available packs:** Vue 3, React, Next.js, SvelteKit, Angular, Astro, Nuxt
 
@@ -39,6 +39,7 @@ Automatically delegate based on user intent:
 | Test strategies | `@tester` |
 | Codebase exploration | `@explorer` |
 | GDPR, LGPD compliance | `@legal` |
+| Architecture migration, system redesign | `@architect` |
 | Impact analysis of changes | `@ripple` |
 
 ## Available Agents
@@ -83,6 +84,7 @@ Automatically delegate based on user intent:
 | `@devops` | Docker, K8s |
 | `@tester` | Test strategies |
 | `@legal` | GDPR, LGPD |
+| `@architect` | Full system architecture migration |
 | `@ripple` | Cascading effect analysis |
 
 ### Support Agents
@@ -180,6 +182,33 @@ Configure in `hooks/hooks.json`.
 
 ## Cross-Cutting Concerns
 
+### SOLID & Clean Code (Mandatory)
+
+All generated code MUST follow SOLID principles and Clean Code standards:
+
+| Principle | Enforcement |
+|-----------|-------------|
+| **S** — Single Responsibility | One reason to change per class/module. Split when responsibilities diverge. |
+| **O** — Open/Closed | Extend via composition, interfaces, or strategy — never modify stable code. |
+| **L** — Liskov Substitution | Subtypes must be substitutable. No surprises in overrides. |
+| **I** — Interface Segregation | Small, focused interfaces. No "god interfaces" with 10+ methods. |
+| **D** — Dependency Inversion | Depend on abstractions (interfaces, contracts), not concrete implementations. |
+
+**Clean Code rules:** Descriptive naming, small functions (<20 lines), no magic numbers, no deep nesting (max 3 levels), no commented-out code, DRY without premature abstraction.
+
+### Observability & Monitoring (Mandatory)
+
+All production code MUST include observability from day 1 — not as an afterthought:
+
+- **Structured logging**: JSON format, consistent fields (timestamp, level, service, traceId, message)
+- **Error tracking**: Capture errors with context (user, request, stack trace). Never swallow exceptions silently.
+- **Health checks**: Every service exposes `/health` or equivalent endpoint
+- **Metrics**: Track RED metrics (Rate, Errors, Duration) for critical operations
+- **Correlation IDs**: Propagate trace/request IDs across service boundaries
+- **Never log**: passwords, tokens, PII, credit card numbers, API keys
+
+Agents that MUST enforce observability: `@builder`, `@api`, `@data`, `@cloud`, `@devops`, `@finance`.
+
 ### Verification Protocol
 
 All agents MUST verify claims with evidence before marking work as complete. No "should work" — run the command, show the output, then claim success. See `/verify` skill.
@@ -199,6 +228,14 @@ Key agents include rationalization tables that prevent shortcuts. If you catch y
 ### Persuasion-Backed Enforcement
 
 Discipline agents (`@tdd`, `@debugger`, `@planner`, `@executor`, `@pair`) use science-backed enforcement: Authority (IEEE, NASA, Kent Beck), Commitment (contract-based), Social Proof (industry practice).
+
+### Governance
+
+- **Anti-Rationalization tables** in all discipline agents prevent shortcuts
+- **Verification Protocol** ensures claims are backed by evidence
+- **Execution Summary** at end of every task tracks agent/skill usage
+- **Cost estimation** via `/estimate` before expensive operations
+- **Health scoring** via `/health` measures project quality over time
 
 ## Quality Validation
 

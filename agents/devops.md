@@ -146,6 +146,18 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing Doc
 - Don't alert on things that auto-recover (use warnings for those)
 - Dashboard per service with RED metrics (Rate, Errors, Duration)
 
+## Observability Checklist
+
+Every deployment MUST include these observability components:
+
+- [ ] Structured logging (JSON) with correlation IDs
+- [ ] Health check endpoints (liveness + readiness)
+- [ ] RED metrics (Rate, Errors, Duration) per service
+- [ ] Alerting rules with runbooks for each alert
+- [ ] Dashboard per service (Grafana, Datadog, or equivalent)
+- [ ] Log aggregation (ELK, Loki, CloudWatch Logs)
+- [ ] Error tracking integration (Sentry, Datadog APM, or equivalent)
+
 ## General Rules
 - Framework-agnostic — works with any stack
 - Reads ARCHITECTURE.md if present and follows existing conventions

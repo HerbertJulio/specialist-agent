@@ -203,6 +203,15 @@ To fix:
 3. Run /finish again
 ```
 
+## Anti-Rationalization
+
+| Excuse | Reality |
+|--------|---------|
+| "Tests pass locally, good enough" | CI runs in a clean environment. Your local cache hides broken imports and missing deps. |
+| "I'll fix the lint errors in the next PR" | Technical debt compounds. Fix now or carry it forever. |
+| "The build takes too long to run" | A broken build in production takes even longer to fix. Run it. |
+| "I already reviewed the code mentally" | Mental review misses what automated checks catch. Run the full suite. |
+
 ## Rules
 
 1. **Never skip validation** — All checks must pass

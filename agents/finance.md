@@ -123,6 +123,91 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing fin
 - Large datasets should use pagination or streaming
 - Audit trail: log who generated what report and when
 
+## Advanced Financial Patterns
+
+### Double-Entry Bookkeeping
+Use when the project requires formal accounting, audit trails, or compliance (SOX, PCI). For simple payment integrations (e.g., Stripe checkout), a transaction log is sufficient — don't over-engineer.
+
+When applicable, every financial transaction records TWO entries: a debit and a credit that always balance.
+
+**Account Types:**
+
+| Type | Debit Increases | Credit Increases |
+|------|----------------|-----------------|
+| **Assets** (cash, receivables) | Yes | No |
+| **Liabilities** (payables, loans) | No | Yes |
+| **Equity** (owner's capital) | No | Yes |
+| **Revenue** (sales, fees) | No | Yes |
+| **Expenses** (costs, fees paid) | Yes | No |
+
+**Journal Entry Example:**
+```text
+Date: 2024-01-15
+Description: Customer payment received
+
+  Account              Debit    Credit
+  Cash (Asset)         $100.00
+  Revenue (Income)              $100.00
+  ─────────────────────────────────────
+  Total                $100.00  $100.00  ← MUST balance
+```
+
+**Implementation Rules:**
+- Every transaction creates TWO ledger entries (debit + credit)
+- Sum of all debits MUST equal sum of all credits (trial balance)
+- Ledger entries are IMMUTABLE — corrections are new entries, not modifications
+- Use integer arithmetic (cents) — never floating point
+
+### Event Sourcing for Financial Audit Trail
+Store every financial state change as an immutable event for complete auditability.
+
+```typescript
+// Financial events — immutable, append-only
+type FinancialEvent =
+  | { type: 'InvoiceIssued'; invoiceId: string; amount: number; currency: string; issuedAt: Date }
+  | { type: 'PaymentReceived'; invoiceId: string; amount: number; method: string; receivedAt: Date }
+  | { type: 'RefundProcessed'; invoiceId: string; amount: number; reason: string; processedAt: Date }
+  | { type: 'ChargebackReceived'; invoiceId: string; amount: number; receivedAt: Date }
+```
+
+**Benefits:**
+- Complete audit trail (SOX, PCI compliance)
+- Reconstruct account state at any point in time
+- Debug discrepancies by replaying events
+- Generate reports from any historical period
+
+**Rules:**
+- Events are NEVER deleted or modified
+- Include all financial data in the event payload (don't rely on external lookups)
+- Version events for schema evolution
+- Snapshot balances periodically for performance
+
+### Saga Pattern for Distributed Payments
+Coordinate multi-step payment flows with compensating actions for each step.
+
+```text
+Payment Saga:
+  1. AuthorizePayment   → success → 2. ReserveInventory → success → 3. CapturePayment → success → 4. FulfillOrder
+       ↓ fail                          ↓ fail                          ↓ fail
+  [Saga complete: failed]    VoidAuthorization              ReleaseInventory + VoidAuthorization
+```
+
+**Key rules:**
+- Every step has a compensating action (void, refund, release)
+- Compensating actions MUST be idempotent (safe to retry)
+- Set timeout for each step (don't wait forever for payment processor)
+- Log all saga transitions for debugging and compliance
+- Use idempotency keys for all external payment calls
+
+**Common payment saga steps:**
+1. **Authorize** → reserve funds on customer's card
+2. **Reserve** → hold inventory for the order
+3. **Capture** → charge the authorized amount
+4. **Fulfill** → ship/deliver the order
+5. **Settle** → reconcile with payment processor
+
+If ANY step fails, compensate all previously completed steps in reverse order.
+
 ## General Rules
 - Framework-agnostic — works with any stack
 - Reads ARCHITECTURE.md if present and follows existing conventions

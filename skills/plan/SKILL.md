@@ -124,6 +124,15 @@ Estimated tokens: ~N
 Next: Awaiting approval
 ```
 
+## Anti-Rationalization
+
+| Excuse | Reality |
+|--------|---------|
+| "It's simple enough to just start coding" | That's what every developer says before a 3-day rabbit hole. 10 minutes of planning saves hours. |
+| "I already know the architecture" | Plans aren't just for you — they create alignment and a checkpoint to rollback to. |
+| "Planning is waterfall" | Adaptive planning IS agile. Skipping planning is chaos, not agility. |
+| "I'll refactor later if the approach is wrong" | Refactoring costs 10x more than planning. Get it right first. |
+
 ## Rules
 
 - Never force heavy planning for simple tasks

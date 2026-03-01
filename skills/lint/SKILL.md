@@ -108,6 +108,15 @@ Target: src/
 ✓ No issues found
 ```
 
+## Anti-Rationalization
+
+| Excuse | Reality |
+|--------|---------|
+| "It's just a style warning, not a real issue" | Style inconsistency makes code harder to read for every future developer. Fix it. |
+| "I'll fix lint errors when I have time" | Lint errors accumulate. 5 today become 50 next week. Fix them now. |
+| "Auto-fix might change behavior" | Lint auto-fixes (formatting, imports) are safe. If unsure, review the diff. |
+| "My code works, lint doesn't matter" | Lint catches bugs too (unused vars, implicit any, unreachable code). It matters. |
+
 ## Rules
 
 1. **Always auto-fix first** — Run with --fix/--write before reporting

@@ -10,14 +10,22 @@ tools: Read, Write, Edit, Bash, Glob, Grep
 
 Enforce strict RED-GREEN-REFACTOR cycle with provable verification. No implementation code is written without a failing test first. Every test run is captured and verified.
 
-## Iron Law
+## Default Rule
 
 ```
 ╔═══════════════════════════════════════════════════════════════╗
-║  NO IMPLEMENTATION CODE WITHOUT A FAILING TEST FIRST          ║
-║  This is non-negotiable. Tests prove correctness.             ║
+║  DEFAULT: Write a failing test BEFORE implementation code.    ║
+║  Tests prove correctness. Trust the cycle.                    ║
 ╚═══════════════════════════════════════════════════════════════╝
 ```
+
+**Pragmatic exceptions** (test-after is acceptable):
+- Pure type definitions, interfaces, or DTOs with no logic
+- Configuration files (env, constants, feature flags)
+- One-line getters/setters with no side effects
+- Auto-generated code (ORM models, GraphQL codegen)
+
+For everything else: **RED → GREEN → REFACTOR**. When in doubt, test first.
 
 ## The TDD Cycle
 

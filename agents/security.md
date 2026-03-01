@@ -138,6 +138,71 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing aut
 - Keep dependencies updated, run `npm audit` / `pip audit` regularly
 - Secrets in environment variables only, never in code or version control
 
+## Zero Trust Architecture
+
+### Principles
+- **Never trust, always verify** — every request is authenticated and authorized, regardless of network location
+- **Assume breach** — design as if the attacker is already inside the network
+- **Least privilege** — grant minimum permissions needed, for minimum time needed
+- **Micro-segmentation** — isolate services/modules, limit lateral movement
+- **Continuous verification** — re-validate identity and permissions on every request, not just at login
+
+### Implementation
+- Token validation on EVERY API call (not just at the gateway)
+- Service-to-service authentication (mTLS or signed JWTs)
+- Per-request authorization checks (not cached role checks)
+- Network policies to restrict service communication
+- Audit logging for all access (who accessed what, when, from where)
+
+## OAuth 2.1 / PKCE
+
+### OAuth 2.1 Key Changes (over 2.0)
+- PKCE is REQUIRED for ALL clients (not just public clients)
+- Implicit grant is REMOVED (use authorization code + PKCE instead)
+- Resource Owner Password grant is REMOVED
+- Bearer tokens in URL query strings are FORBIDDEN
+
+### PKCE Flow
+```text
+1. Client generates: code_verifier (random string, 43-128 chars)
+2. Client creates:   code_challenge = BASE64URL(SHA256(code_verifier))
+3. Client sends:     /authorize?code_challenge=xxx&code_challenge_method=S256
+4. User authenticates, server returns: authorization_code
+5. Client exchanges: /token?code=xxx&code_verifier=yyy
+6. Server verifies:  SHA256(code_verifier) === stored code_challenge
+7. Server returns:   access_token + refresh_token
+```
+
+### Token Storage for SPAs
+- **BFF Pattern (recommended):** Backend handles tokens, frontend gets session cookie (HttpOnly, Secure, SameSite=Strict)
+- **In-memory only:** Store access token in JS variable (lost on refresh, use refresh token to get new one)
+- **NEVER localStorage:** Accessible via XSS, tokens persist after logout
+
+## API Key Management
+
+### Key Generation
+- Use cryptographically secure random bytes (minimum 256 bits)
+- Prefix keys with type identifier: `sk_live_`, `sk_test_`, `pk_`
+- Hash keys before storage (store hash, not plaintext)
+
+### Key Lifecycle
+- **Rotation:** Support active + previous key during transition period
+- **Scoping:** Limit keys to specific services, environments, and permissions
+- **Expiry:** Set TTL on keys, force rotation on schedule
+- **Revocation:** Instant revocation with propagation to all services
+- **Monitoring:** Alert on unusual usage patterns (new IPs, high volume, off-hours)
+
+## Anti-Rationalization Table
+
+| Excuse | Reality |
+|--------|---------|
+| "We are behind a firewall" | Zero Trust means firewalls are not enough. Internal threats cause 60% of breaches. |
+| "Only internal users access this" | Internal users get phished, credentials get leaked, insiders go rogue. Validate always. |
+| "We can add security later" | Retrofitting security costs 10x more than building it in. Security is not a feature, it is a foundation. |
+| "This is a small project" | Small projects get compromised too. Automated bots don't check project size before attacking. |
+| "Security through obscurity works" | Obscurity is not a control. If your security breaks when the attacker knows how it works, it is not security. |
+| "The library handles security" | Libraries handle implementation. YOU handle configuration, key management, and threat modeling. |
+
 ## General Rules
 - Framework-agnostic — works with any stack
 - Reads ARCHITECTURE.md if present and follows existing conventions

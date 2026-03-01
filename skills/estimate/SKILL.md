@@ -137,6 +137,15 @@ Comparison:
 | New module | ~15,000 | ~$0.23 |
 | Full feature | ~40,000 | ~$0.60 |
 
+## Anti-Rationalization
+
+| Excuse | Reality |
+|--------|---------|
+| "Estimating wastes time, just start building" | Building without estimates wastes 10x more when you pick the wrong model or approach. |
+| "I can eyeball the complexity" | Eyeballing misses hidden dependencies. A structured estimate catches them. |
+| "Cost doesn't matter for this task" | Every token has a cost. Knowing the cost helps choose Haiku vs Sonnet vs Opus. |
+| "Estimates are always wrong anyway" | Rough estimates beat no estimates. Even ±50% accuracy saves money. |
+
 ## Rules
 
 1. **Always estimate before complex work**

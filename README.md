@@ -4,7 +4,7 @@
 
 <p align="center">
   <b>Your AI Development Team</b><br/>
-  26+ specialized agents that build, review, debug, and ship production code.
+  27+ specialized agents that build, review, debug, and ship production code.
 </p>
 
 [![CI](https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml)
@@ -18,7 +18,7 @@
 
 | | Specialist Agent | Others |
 |---|---|---|
-| **Agents** | 26+ specialized | 1-5 generic |
+| **Agents** | 27+ specialized | 1-5 generic |
 | **Frameworks** | Next.js, React, Vue, SvelteKit, Angular, Astro, Nuxt | Generic only |
 | **Cost** | Lite mode (60-80% cheaper) | Full cost always |
 | **Verification** | Proof-based (command output) | Trust-based ("it works") |
@@ -87,6 +87,7 @@ Done. Start building.
 | `@legal` | GDPR, LGPD, CCPA compliance |
 | `@designer` | Design systems, accessibility |
 | `@tester` | Test strategies |
+| `@architect` | Full system architecture migration (DDD, CQRS, Hexagonal) |
 | `@ripple` | Cascading effect analysis |
 
 ### Support
@@ -241,7 +242,7 @@ Customize rules in `hooks/native/security-config.json`.
 | Full | Sonnet/Opus | Higher accuracy |
 | Lite | Haiku | 60-80% cheaper |
 
-Choose during installation. All 25+ agents have lite variants.
+Choose during installation. All 27+ agents have lite variants.
 
 ---
 

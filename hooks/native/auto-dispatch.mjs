@@ -56,6 +56,9 @@ const INTENT_MAP = {
   // Support agents
   scout:      { phrases: ['analyze project', 'project analysis', 'quick scan'], keywords: ['analyze', 'scan', 'overview', 'analysis'], weight: 1 },
   explorer:   { phrases: ['explore codebase', 'understand code', 'how does this work'], keywords: ['explore', 'understand', 'codebase', 'how does'], weight: 1 },
+  memory:     { phrases: ['remember this', 'save decision', 'recall decision', 'session memory'], keywords: ['remember', 'recall', 'memory', 'decision log'], weight: 1.5 },
+  architect:  { phrases: ['architecture migration', 'monolith to microservices', 'system redesign', 'clean architecture', 'hexagonal architecture', 'migrate architecture'], keywords: ['architecture', 'hexagonal', 'ddd', 'cqrs', 'modular monolith', 'bounded context', 'strangler fig'], weight: 1.5 },
+  ripple:     { phrases: ['impact analysis', 'cascading effects', 'what will break', 'change impact'], keywords: ['impact', 'ripple', 'cascade', 'breaking change', 'downstream'], weight: 1.5 },
 };
 
 // Descriptions for suggestions
@@ -88,6 +91,9 @@ const AGENT_DESCRIPTIONS = {
   tester: 'designs test strategies and improves coverage',
   scout: 'provides quick project analysis (~500 tokens)',
   explorer: 'performs deep codebase exploration',
+  memory: 'saves and recalls decisions across sessions',
+  architect: 'designs and migrates full system architecture (hexagonal, DDD, CQRS, microservices)',
+  ripple: 'analyzes cascading impact of changes across the codebase',
 };
 
 // ── Intent Matching Engine (exported for testing) ───────────

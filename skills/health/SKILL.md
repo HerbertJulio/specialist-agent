@@ -233,6 +233,15 @@ Only checks:
 - Test status
 - File count
 
+## Anti-Rationalization
+
+| Excuse | Reality |
+|--------|---------|
+| "The score doesn't matter, the app works" | Working today doesn't mean maintainable tomorrow. The score measures long-term health. |
+| "We'll improve the score after the deadline" | After the deadline there's another deadline. Measure now, fix incrementally. |
+| "80% coverage is overkill" | 80% is the baseline. Below that, regressions hide in untested code. |
+| "Security checks are paranoid" | One vulnerability costs more than 100 health scans. Paranoia is appropriate. |
+
 ## Rules
 
 1. **Be objective** — Numbers, not opinions

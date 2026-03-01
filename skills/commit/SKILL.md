@@ -131,6 +131,15 @@ Proceed anyway? Showing commit preview:
 Files: 2 changed (+8 / -3)
 ```
 
+## Anti-Rationalization
+
+| Excuse | Reality |
+|--------|---------|
+| "I'll write a proper message later" | You won't. The context is fresh NOW. A bad commit message is permanent. |
+| "It's just a small fix, message doesn't matter" | `git log` is the project's history book. Every entry matters. |
+| "I'll squash before merging anyway" | Squash doesn't fix the habit. Good messages help during review too. |
+| "Validation slows me down" | A leaked secret or committed console.log slows the whole team down. |
+
 ## Rules
 
 1. **Always validate before committing** — Check for secrets and debug code

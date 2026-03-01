@@ -201,6 +201,14 @@ Operation: [create|restore|list|clean]
 [Operation details]
 ```
 
+## Anti-Rationalization
+
+| Excuse | Reality |
+|--------|---------|
+| "I don't need a checkpoint, it's a small change" | Small changes break things too. A checkpoint takes 2 seconds, a rollback without one takes hours. |
+| "Git history is enough" | Checkpoints are labeled save points — faster than hunting through `git reflog`. |
+| "I'll just undo if something goes wrong" | You can't undo what you can't identify. Checkpoints mark the exact safe state. |
+
 ## Rules
 
 1. **Always confirm before restore** — Destructive operation

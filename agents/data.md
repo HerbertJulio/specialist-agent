@@ -151,6 +151,114 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing dat
 - Batch inserts/updates for bulk operations
 - Monitor query performance continuously, not just once
 
+## Advanced Patterns
+
+### Event Sourcing
+Store all changes as a sequence of immutable events instead of overwriting current state.
+
+```text
+Event Store:
+  [OrderCreated]  → {orderId: 1, items: [...], total: 100}
+  [PaymentReceived] → {orderId: 1, amount: 100, method: 'card'}
+  [OrderShipped]  → {orderId: 1, trackingId: 'ABC123'}
+
+Current state = replay all events from the beginning
+```
+
+**When to use:** Audit trail requirements, temporal queries ("what was the state at time X?"), undo/redo, complex domain with many state transitions.
+
+**Key components:**
+- **Event store**: append-only table (event_id, aggregate_id, event_type, payload, timestamp, version)
+- **Snapshots**: periodic state snapshots to avoid replaying entire history (snapshot every N events)
+- **Projections**: materialize events into read-optimized views
+
+**Rules:**
+- Events are IMMUTABLE — never update or delete an event
+- Event names in past tense (OrderCreated, not CreateOrder)
+- Include all data needed to reconstruct state in the event payload
+- Version events for schema evolution
+
+### CQRS (Command Query Responsibility Segregation)
+Separate write model (commands) from read model (queries) when they have different requirements.
+
+```text
+Write Side:                    Read Side:
+  Command → Validate →           Query → Read Model → Response
+  Aggregate → Domain Event →     (denormalized, optimized for reads)
+  Event Store
+         ↓
+  Projection → Read DB (denormalized views)
+```
+
+**When to use:** Read and write patterns differ significantly (e.g., writes are complex domain logic, reads are simple aggregations), different scaling needs for reads vs writes.
+
+**Without Event Sourcing:** Command handlers write to normalized DB, separate process builds read-optimized views (materialized views, search indexes).
+
+**With Event Sourcing:** Events from write side project into read-optimized views. Eventual consistency between write and read sides.
+
+### Saga Pattern (Distributed Transactions)
+Coordinate multi-step operations across services/aggregates with compensating actions.
+
+**Choreography (event-based):**
+```text
+OrderService → [OrderCreated] → PaymentService → [PaymentProcessed] → ShippingService
+                                              ↓ (if fails)
+                                    [PaymentFailed] → OrderService → [OrderCancelled]
+```
+
+**Orchestration (coordinator-based):**
+```text
+SagaOrchestrator:
+  1. CreateOrder → success → 2. ProcessPayment → success → 3. ReserveInventory
+                                             ↓ failure
+                              CompensateOrder (cancel order)
+```
+
+**Key rules:**
+- Every step MUST have a compensating action (undo)
+- Compensating actions must be idempotent
+- Handle timeouts — set deadlines for each step
+- Log all saga state transitions for debugging
+
+### Repository Pattern with DDD Terminology
+
+```typescript
+// Aggregate Root — the only entry point for modifications
+interface OrderRepository {
+  findById(id: OrderId): Promise<Order | null>
+  save(order: Order): Promise<void>
+  // No generic findAll — aggregates are loaded by ID
+}
+
+// Value Object — immutable, equality by value
+class Money {
+  constructor(readonly amount: number, readonly currency: string) {}
+  equals(other: Money) { return this.amount === other.amount && this.currency === other.currency }
+  add(other: Money): Money {
+    if (this.currency !== other.currency) throw new Error('Currency mismatch')
+    return new Money(this.amount + other.amount, this.currency)
+  }
+}
+
+// Domain Event — something that happened
+class OrderPlaced {
+  constructor(readonly orderId: string, readonly total: Money, readonly occurredAt: Date) {}
+}
+```
+
+**Bounded Context isolation:** Each bounded context has its own repositories, its own database schema, and communicates with other contexts through events or Anti-Corruption Layers — never direct database access.
+
+## Observability
+
+All data layers MUST include observability:
+
+- **Query logging**: Log slow queries (>100ms) with EXPLAIN output in development
+- **Connection monitoring**: Track pool size, active connections, wait time
+- **Migration tracking**: Log migration name, direction, duration, and success/failure
+- **Cache metrics**: Track hit rate, miss rate, and eviction count
+- **Error context**: Include query type, table name, and duration in error logs
+- **Never log**: query parameters containing passwords, PII, or sensitive data
+
 ## General Rules
 - Framework-agnostic — works with any stack and database
 - Reads ARCHITECTURE.md if present and follows existing conventions
