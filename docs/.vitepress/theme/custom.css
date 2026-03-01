@@ -28,13 +28,8 @@
     #2B5EA7 70%,
     #CD7F32 100%
   );
-  --vp-home-hero-image-background-image: linear-gradient(
-    135deg,
-    rgba(43, 94, 167, 0.25) 0%,
-    rgba(205, 127, 50, 0.15) 50%,
-    rgba(30, 58, 95, 0.25) 100%
-  );
-  --vp-home-hero-image-filter: blur(44px);
+  --vp-home-hero-image-background-image: none;
+  --vp-home-hero-image-filter: none;
 }
 
 /* Dark mode overrides */
@@ -51,12 +46,7 @@
     #4A7FCF 70%,
     #D4943F 100%
   );
-  --vp-home-hero-image-background-image: linear-gradient(
-    135deg,
-    rgba(74, 127, 207, 0.2) 0%,
-    rgba(212, 148, 63, 0.12) 50%,
-    rgba(15, 34, 64, 0.3) 100%
-  );
+  --vp-home-hero-image-background-image: none;
 }
 
 /* Animated hero gradient */
