@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Specialist Agent
   text: Agentes de IA para Claude Code
-  tagline: 25+ agentes especializados, 18 skills e framework packs — construa, revise, depure e envie código de produção com qualquer stack.
+  tagline: 27+ agentes especializados, 21 skills e 7 framework packs — construa, revise, depure e envie código de produção com qualquer stack.
   actions:
     - theme: brand
       text: Comece Aqui →

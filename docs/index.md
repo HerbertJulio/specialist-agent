@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Specialist Agent
   text: Your AI Development Team
-  tagline: Build production code faster with 25+ specialized AI agents.
+  tagline: Build production code faster with 27+ specialized AI agents.
   actions:
     - theme: brand
       text: Install

@@ -1,9 +1,9 @@
 {
   "id": "herbertjulio/specialist-agent",
   "name": "Specialist Agent",
-  "version": "2.0.0",
-  "tagline": "Your AI development team — 25+ specialized agents",
-  "description": "Build, review, debug, and ship production code faster. Supports Vue, React, Next.js, and SvelteKit with framework-specific patterns.",
+  "version": "2.5.0",
+  "tagline": "Your AI development team — 27+ specialized agents",
+  "description": "Build, review, debug, and ship production code faster. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt with framework-specific patterns.",
   "category": "development",
   "subcategory": "code-generation",
   "icon": "docs/public/logo.svg",
@@ -14,12 +14,12 @@
   },
   "features": [
     {
-      "title": "25+ Specialized Agents",
+      "title": "27+ Specialized Agents",
       "description": "@builder, @reviewer, @tdd, @api, @security, @finance, @perf, and more"
     },
     {
-      "title": "Framework Support",
-      "description": "Vue 3, React, Next.js, SvelteKit with architecture patterns"
+      "title": "7 Framework Packs",
+      "description": "Vue 3, React, Next.js, SvelteKit, Angular, Astro, Nuxt with architecture patterns"
     },
     {
       "title": "Full & Lite Modes",
@@ -42,7 +42,7 @@
       "description": "Remembers decisions across sessions"
     },
     {
-      "title": "18 Skills",
+      "title": "21 Skills",
       "description": "/brainstorm, /plan, /tdd, /debug, /audit, /onboard, /verify, /checkpoint, and more"
     },
     {

@@ -101,4 +101,4 @@ Need manual setup? See platform-specific guides:
 ## Next
 
 - [Quick Start](/guide/quick-start) — Build your first feature
-- [Agents](/reference/agents) — All 25+ agents
+- [Agents](/reference/agents) — All 27+ agents

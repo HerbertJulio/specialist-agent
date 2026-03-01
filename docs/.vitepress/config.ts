@@ -111,6 +111,7 @@ export default withMermaid(defineConfig({
                 { text: 'Agentes', link: '/pt-BR/reference/agents' },
                 { text: 'Skills', link: '/pt-BR/reference/skills' },
                 { text: 'Hooks', link: '/pt-BR/reference/hooks' },
+                { text: 'Tokens', link: '/pt-BR/reference/tokens' },
               ],
             },
           ],
@@ -235,6 +236,17 @@ export default withMermaid(defineConfig({
             { text: 'Agents', link: '/reference/agents' },
             { text: 'Skills', link: '/reference/skills' },
             { text: 'Hooks', link: '/reference/hooks' },
+            { text: 'Tokens', link: '/reference/tokens' },
+          ],
+        },
+      ],
+      '/customization/': [
+        {
+          text: 'Customization',
+          items: [
+            { text: 'Creating Agents', link: '/customization/creating-agents' },
+            { text: 'Creating Skills', link: '/customization/creating-skills' },
+            { text: 'Editing Patterns', link: '/customization/editing-patterns' },
           ],
         },
       ],

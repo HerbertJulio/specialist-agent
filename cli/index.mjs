@@ -104,7 +104,13 @@ function setupNativeHooks(cwd, selectedHooks) {
 
   // 2. Load settings template
   const templatePath = join(nativeSource, 'settings-template.json')
-  const template = JSON.parse(readFileSync(templatePath, 'utf-8'))
+  let template
+  try {
+    template = JSON.parse(readFileSync(templatePath, 'utf-8'))
+  } catch (err) {
+    clack.log.error(`Failed to load hook settings template: ${err.message}`)
+    return 0
+  }
 
   // 3. Filter template to only selected hooks
   const filteredHooks = {}
@@ -175,7 +181,7 @@ async function checkForUpdates(currentVersion) {
 function detectFramework(pkgPath, availablePacks) {
   if (!existsSync(pkgPath)) return null
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'))
-  const deps = { ...pkg.dependencies, ...pkg.devDependencies }
+  const deps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) }
 
   // Order matters: nuxt includes vue, next includes react — check meta-frameworks first
   if (deps['nuxt'] && availablePacks.includes('nuxt')) return 'nuxt'
@@ -395,8 +401,7 @@ async function createAgent() {
     .replace(/\{\{description\}\}/g, description)
     .replace(/\{\{title\}\}/g, title)
     .replace(/\{\{mission\}\}/g, mission || 'Help with specific tasks.')
-    .replace(/\{\{model\}\}/g, model === 'sonnet' ? '' : `\nmodel: ${model}`)
-    .replace(/\nmodel: \n/, '\n')
+    .replace(/model: \{\{model\}\}\n/, model === 'sonnet' ? '' : `model: ${model}\n`)
 
   // Determine destination
   const agentsDest = installScope === 'global'
@@ -936,9 +941,11 @@ async function main() {
   }
 
   // Install pack agents
-  const agentCount = shouldOverwrite
-    ? copyDir(agentsSource, agentsDest)
-    : copyNewOnly(agentsSource, agentsDest)
+  if (shouldOverwrite) {
+    copyDir(agentsSource, agentsDest)
+  } else {
+    copyNewOnly(agentsSource, agentsDest)
+  }
 
   // Install starter agent
   if (installStarter) {

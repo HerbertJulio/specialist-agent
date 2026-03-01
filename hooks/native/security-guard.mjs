@@ -34,8 +34,9 @@ const RULES = [
       // Check target paths
       const dangerousTargets = [
         /\s\/\s*$/, /\s\/[^a-zA-Z]/, // rm -rf /
-        /\s~\s*$/, /\s~\/\s*$/, // rm -rf ~ or ~/
-        /\s\.\s*$/, /\s\.\/\s*$/, // rm -rf . or ./
+        /\s~\s*$/, /\s~\//, // rm -rf ~ or ~/...
+        /\s\.\s*$/, /\s\.\//, // rm -rf . or ./...
+        /\s\.\.\s*$/, /\s\.\.\//, // rm -rf .. or ../...
       ];
       for (const pattern of dangerousTargets) {
         if (pattern.test(' ' + normalized)) {

@@ -1,8 +1,8 @@
 {
   "name": "specialist-agent",
-  "version": "2.0.0",
+  "version": "2.5.0",
   "displayName": "Specialist Agent",
-  "description": "Your AI development team. 25+ specialized agents for building, reviewing, debugging, and shipping production code.",
+  "description": "Your AI development team. 27+ specialized agents for building, reviewing, debugging, and shipping production code.",
   "author": {
     "name": "Herbert Julio",
     "url": "https://github.com/HerbertJulio"

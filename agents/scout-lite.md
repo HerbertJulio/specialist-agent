@@ -1,5 +1,5 @@
 ---
-name: scout
+name: scout-lite
 description: "Use when assessing a project for the first time, evaluating technical debt, or generating a health report."
 model: haiku
 tools: Glob, Grep

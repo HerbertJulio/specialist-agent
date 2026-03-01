@@ -679,7 +679,7 @@ Analyzes your prompt and suggests the best specialist agent. Never forces — on
 Injects a one-line project state summary when your session starts:
 
 ```
-[Specialist Agent] Branch: feat/auth | Uncommitted files: 3 | Last commit: feat: add login | Installed: 25 agents, 18 skills | Session memory: 5 saved decisions
+[Specialist Agent] Branch: feat/auth | Uncommitted files: 3 | Last commit: feat: add login | Installed: 27 agents, 21 skills | Session memory: 5 saved decisions
 ```
 
 **Data collected (all read-only):**

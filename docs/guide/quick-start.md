@@ -164,6 +164,6 @@ Installed during `npx specialist-agent init`. See [Hooks Reference](/reference/h
 
 ## Next
 
-- [Agents](/reference/agents) — All 25+ agents
+- [Agents](/reference/agents) — All 27+ agents
 - [Skills](/reference/skills) — All skills
 - [Architecture](/guide/architecture) — Understand the patterns

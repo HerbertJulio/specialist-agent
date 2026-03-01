@@ -164,5 +164,5 @@ Instalados durante `npx specialist-agent init`. Veja [Referência de Hooks](/pt-
 
 ## Próximo
 
-- [Agentes](/pt-BR/reference/agents) — Todos os 25+ agentes
+- [Agentes](/pt-BR/reference/agents) — Todos os 27+ agentes
 - [Skills](/pt-BR/reference/skills) — Todas as skills
