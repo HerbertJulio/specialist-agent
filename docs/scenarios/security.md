@@ -1,5 +1,8 @@
 # Security
 
+::: info Agents: `@security` `@legal` · Time: 5-10 min per scenario
+:::
+
 Real scenarios for authentication, authorization, and security audits.
 
 ## JWT Authentication {#jwt}

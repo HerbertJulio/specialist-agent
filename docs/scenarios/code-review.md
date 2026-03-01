@@ -1,5 +1,8 @@
 # Code Review
 
+::: info Agents: `@reviewer` `@refactor` · Time: 1-5 min per scenario
+:::
+
 Real scenarios for reviewing and improving code.
 
 ## PR Review {#pr-review}

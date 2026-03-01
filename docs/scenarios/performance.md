@@ -1,5 +1,8 @@
 # Performance Optimization
 
+::: info Agents: `@perf` `@debugger` · Time: 5-10 min per scenario
+:::
+
 Real scenarios for finding and fixing performance issues.
 
 ## Slow Page Load {#slow-page}

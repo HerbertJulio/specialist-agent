@@ -2,6 +2,10 @@
 
 Common questions about Specialist Agent.
 
+::: tip Can't find your answer?
+Open an issue on [GitHub](https://github.com/HerbertJulio/specialist-agent/issues) — we're happy to help.
+:::
+
 ## General
 
 ### Can I use it without a framework pack?
@@ -124,3 +128,9 @@ Your `ARCHITECTURE.md` may not reflect your actual stack. Common fixes:
 3. Update the directory structure if your project uses a non-standard layout
 
 See [Editing Patterns](/customization/editing-patterns) for examples of common customizations.
+
+## What's Next?
+
+- [Quick Start](/guide/quick-start) — Get up and running
+- [Performance & Cost](/guide/benchmark) — Understand token usage
+- [All Agents](/reference/agents) — Full reference catalog

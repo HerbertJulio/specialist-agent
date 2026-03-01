@@ -1,5 +1,8 @@
 # API Design
 
+::: info Agents: `@api` `@data` · Time: 5 min per scenario
+:::
+
 Real scenarios for designing and documenting APIs.
 
 ## REST API {#rest}

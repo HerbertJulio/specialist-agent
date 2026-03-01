@@ -1,5 +1,8 @@
 # Debug Issues
 
+::: info Agents: `@debugger` `@doctor` `@perf` · Time: 3-5 min per scenario
+:::
+
 Real scenarios for finding and fixing bugs.
 
 ## API Error {#api-error}

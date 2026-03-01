@@ -1,5 +1,9 @@
 # Installation
 
+::: info What gets installed
+Specialist Agent only adds markdown files (`.claude/agents/`, `.claude/skills/`, `CLAUDE.md`). It never modifies your source code, dependencies, or config files.
+:::
+
 ## Option 1: Marketplace (Easiest)
 
 **Claude Code:**
@@ -98,7 +102,8 @@ Need manual setup? See platform-specific guides:
 
 ---
 
-## Next
+## What's Next?
 
-- [Quick Start](/guide/quick-start) — Build your first feature
-- [Agents](/reference/agents) — All 27+ agents
+- [Quick Start](/guide/quick-start) — Build your first feature in 2 minutes
+- [All Agents](/reference/agents) — Browse the full 27+ agent catalog
+- [Architecture](/guide/architecture) — Understand the patterns agents follow

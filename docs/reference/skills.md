@@ -1,5 +1,9 @@
 # Skills Reference
 
+::: warning Skills are not shell commands
+Skills work inside Claude Code's chat interface. Don't try to run them in your terminal.
+:::
+
 Skills are shortcuts. Type `/skill-name` in Claude Code.
 
 ## Quick Reference

@@ -1,5 +1,8 @@
 # Payments & Finance
 
+::: info Agents: `@finance` · Time: 10-15 min per scenario
+:::
+
 Real scenarios for payment integration, billing, and financial features.
 
 ## Stripe Checkout {#stripe}

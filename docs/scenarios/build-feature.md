@@ -1,5 +1,8 @@
 # Build Features
 
+::: info Agents: `@builder` `@api` · Time: 3-5 min per scenario
+:::
+
 Real scenarios for building new features.
 
 ## CRUD Module {#crud-module}

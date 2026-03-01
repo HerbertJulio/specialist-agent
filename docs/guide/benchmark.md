@@ -135,3 +135,9 @@ Agent Breakdown:
 ```
 
 Track costs as you work.
+
+## What's Next?
+
+- [FAQ](/guide/faq) — Common questions answered
+- [All Agents](/reference/agents) — Browse the full catalog
+- [Token Reference](/reference/tokens) — Detailed token estimates

@@ -1,5 +1,8 @@
 # Planning
 
+::: info Agents: `@planner` `@analyst` · Time: 5-10 min per scenario
+:::
+
 Real scenarios for planning features and projects.
 
 ## Plan a Feature {#feature}

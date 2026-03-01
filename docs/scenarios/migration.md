@@ -1,5 +1,8 @@
 # Migration
 
+::: info Agents: `@migrator` · Time: varies by scope
+:::
+
 Real scenarios for migrating and modernizing code.
 
 ## JavaScript to TypeScript {#typescript}
