@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="228" viewBox="0 0 280 228" fill="none">
   <defs>
     <linearGradient id="hg1" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0A1628"/>
@@ -14,22 +14,22 @@
     </linearGradient>
   </defs>
 
-  <!-- Orbit ring (behind everything) -->
-  <ellipse cx="200" cy="230" rx="170" ry="50" fill="none" stroke="#4A7FCF" stroke-width="0.5" opacity="0.12" stroke-dasharray="4 6"/>
+  <!-- Orbit ring -->
+  <ellipse cx="140" cy="140" rx="95" ry="28" fill="none" stroke="#4A7FCF" stroke-width="0.5" opacity="0.12" stroke-dasharray="4 6"/>
 
   <!-- Orbiting particles (behind logo) -->
   <circle r="6" fill="#4A7FCF" opacity="0.5">
-    <animateMotion dur="12s" repeatCount="indefinite" path="M200,230 A170,50 0 1,1 199.9,230 Z"/>
+    <animateMotion dur="12s" repeatCount="indefinite" path="M140,140 A95,28 0 1,1 139.9,140 Z"/>
   </circle>
   <circle r="4.5" fill="#CD7F32" opacity="0.45">
-    <animateMotion dur="12s" repeatCount="indefinite" begin="4s" path="M200,230 A170,50 0 1,1 199.9,230 Z"/>
+    <animateMotion dur="12s" repeatCount="indefinite" begin="4s" path="M140,140 A95,28 0 1,1 139.9,140 Z"/>
   </circle>
   <circle r="3.5" fill="#4A7FCF" opacity="0.35">
-    <animateMotion dur="12s" repeatCount="indefinite" begin="8s" path="M200,230 A170,50 0 1,1 199.9,230 Z"/>
+    <animateMotion dur="12s" repeatCount="indefinite" begin="8s" path="M140,140 A95,28 0 1,1 139.9,140 Z"/>
   </circle>
 
-  <!-- Main diamond logo (on top, rendered last) -->
-  <g transform="translate(72, 88) scale(8)">
+  <!-- Main diamond logo (on top) -->
+  <g transform="translate(12, 4) scale(8)">
     <path d="M16 26 L2 19 L16 12 L30 19 Z" fill="url(#hg1)" opacity="0.9"/>
     <path d="M16 21 L2 14 L16 7 L30 14 Z" fill="url(#hg2)" opacity="0.9"/>
     <path d="M16 16 L2 9 L16 2 L30 9 Z" fill="url(#hg3)" opacity="0.95"/>
