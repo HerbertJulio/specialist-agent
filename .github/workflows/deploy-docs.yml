@@ -26,6 +26,8 @@ jobs:
       - run: npm ci
 
       - run: npm run docs:build
+        env:
+          VITEPRESS_GA_ID: ${{ secrets.VITEPRESS_GA_ID }}
 
       - uses: JamesIves/github-pages-deploy-action@v4
         with:

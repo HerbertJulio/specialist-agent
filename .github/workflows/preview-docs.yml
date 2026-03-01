@@ -30,6 +30,7 @@ jobs:
         run: npm run docs:build
         env:
           VITEPRESS_BASE: /specialist-agent/pr-preview/pr-${{ github.event.number }}/
+          VITEPRESS_GA_ID: ${{ secrets.VITEPRESS_GA_ID }}
 
       - uses: rossjrw/pr-preview-action@v1
         with:

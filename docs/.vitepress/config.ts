@@ -1,6 +1,15 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 
+const GA_ID = process.env.VITEPRESS_GA_ID || ''
+
+const gaHead: Array<[string, Record<string, string>] | [string, Record<string, string>, string]> = GA_ID
+  ? [
+      ['script', { async: '', src: `https://www.googletagmanager.com/gtag/js?id=${GA_ID}` }],
+      ['script', {}, `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}')`],
+    ]
+  : []
+
 export default withMermaid(defineConfig({
   title: 'Specialist Agent',
   description: 'Your AI development team - 27+ specialized agents',
@@ -19,6 +28,7 @@ export default withMermaid(defineConfig({
     ['meta', { name: 'twitter:title', content: 'Specialist Agent' }],
     ['meta', { name: 'twitter:description', content: 'Your AI development team - 27+ specialized agents' }],
     ['meta', { name: 'twitter:image', content: 'https://herbertjulio.github.io/specialist-agent/social-preview.svg' }],
+    ...gaHead,
   ],
 
   locales: {
@@ -266,6 +276,7 @@ export default withMermaid(defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/HerbertJulio/specialist-agent' },
+      { icon: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 288h-32v-64h32v64zm288-128v192H288v32H160v-32H0V160h576zm-416 32H32v128h128V192zm160 0H192v128h128V192zm160 0H352v128h128V192z"/></svg>' }, link: 'https://www.npmjs.com/package/specialist-agent' },
     ],
 
     editLink: {
