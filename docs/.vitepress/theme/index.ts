@@ -11,12 +11,10 @@ import './custom.css'
 
 export default {
   extends: DefaultTheme,
-  enhanceApp({ app }) {
-    app.component('HeroAnimation', HeroAnimation)
-  },
   Layout() {
     return h(DefaultTheme.Layout, null, {
       'nav-bar-content-after': () => h(LanguageSwitcher),
+      'home-hero-image': () => h(HeroAnimation),
       'home-features-after': () => [
         h(HomePlatforms),
         h(HomeHowItWorks),

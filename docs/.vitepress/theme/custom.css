@@ -215,56 +215,15 @@ div[class*='language-']:hover {
   background: rgba(74, 127, 207, 0.3);
 }
 
-/* ===== Hero logo animation (float + pulse) ===== */
-.VPHero .image-container {
-  animation: hero-breathe 6s ease-in-out infinite;
-}
-
+/* ===== Hero image area ===== */
 .VPHero .image {
-  min-height: 280px;
+  min-height: 300px;
 }
 
 @media (min-width: 960px) {
   .VPHero .image {
     min-height: 360px;
   }
-}
-
-@keyframes hero-breathe {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-10px) scale(1.03); }
-}
-
-@keyframes hero-rotate3d {
-  0%, 100% { transform: perspective(800px) rotateY(0deg); }
-  50% { transform: perspective(800px) rotateY(12deg); }
-}
-
-@keyframes hero-float-rotate {
-  0%, 100% { transform: translateY(0) perspective(800px) rotateY(-8deg); }
-  50% { transform: translateY(-10px) perspective(800px) rotateY(8deg); }
-}
-
-@keyframes hero-pulse-glow {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(74,127,207,0)); }
-  50% { transform: scale(1.04); filter: drop-shadow(0 8px 24px rgba(74,127,207,0.3)); }
-}
-
-/* Animation preview classes */
-.anim-breathe { animation: hero-breathe 6s ease-in-out infinite; }
-.anim-rotate3d { animation: hero-rotate3d 8s ease-in-out infinite; }
-.anim-float-rotate { animation: hero-float-rotate 7s ease-in-out infinite; }
-.anim-pulse-glow { animation: hero-pulse-glow 5s ease-in-out infinite; }
-
-.VPHero .image-bg {
-  display: none !important;
-}
-
-.VPHero .image,
-.VPHero .image-container,
-.VPHero :deep(.image-src) {
-  background: transparent !important;
-  filter: none !important;
 }
 
 
@@ -307,6 +266,11 @@ div[class*='language-']:hover {
   color: var(--vp-c-brand-1);
   font-weight: 600;
   font-size: 13px;
+}
+
+/* Hide built-in VitePress locale switcher (custom LanguageSwitcher replaces it) */
+.VPNavBarTranslations {
+  display: none !important;
 }
 
 /* Accessibility — respect reduced motion */

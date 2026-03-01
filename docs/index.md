@@ -5,9 +5,6 @@ hero:
   name: Specialist Agent
   text: Your AI Development Team
   tagline: 27+ specialized agents that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, and more.
-  image:
-    src: /logo-hero.svg
-    alt: Specialist Agent
   actions:
     - theme: brand
       text: Get Started
