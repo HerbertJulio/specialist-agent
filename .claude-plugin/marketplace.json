@@ -70,7 +70,7 @@
     "nodeVersion": ">=18"
   },
   "support": {
-    "documentation": "https://herbertjulio.github.io/specialist-agent/",
+    "documentation": "https://specialistagent.com.br/",
     "issues": "https://github.com/HerbertJulio/specialist-agent/issues"
   },
   "install": "npx specialist-agent init"

@@ -114,7 +114,7 @@ Quick shortcuts for common tasks:
 
 ## Support
 
-- Documentation: https://herbertjulio.github.io/specialist-agent/
+- Documentation: <https://specialistagent.com.br/>
 - Issues: https://github.com/HerbertJulio/specialist-agent/issues
 - Discussions: https://github.com/HerbertJulio/specialist-agent/discussions
 

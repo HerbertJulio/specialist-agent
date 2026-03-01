@@ -12,7 +12,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/specialist-agent)](https://www.npmjs.com/package/specialist-agent)
 [![Release](https://img.shields.io/github/v/release/HerbertJulio/specialist-agent?label=Release)](https://github.com/HerbertJulio/specialist-agent/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Docs](https://img.shields.io/badge/Docs-VitePress-646cff.svg)](https://herbertjulio.github.io/specialist-agent/)
+[![Docs](https://img.shields.io/badge/Docs-VitePress-646cff.svg)](https://specialistagent.com.br/)
 
 ---
 
@@ -310,7 +310,7 @@ Decisions persist across sessions.
 
 ## Documentation
 
-Full docs: [herbertjulio.github.io/specialist-agent](https://herbertjulio.github.io/specialist-agent/)
+Full docs: [specialistagent.com.br](https://specialistagent.com.br/)
 
 ```bash
 npm run docs:dev

@@ -21,13 +21,21 @@ export default withMermaid(defineConfig({
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
     ['meta', { property: 'og:title', content: 'Specialist Agent' }],
-    ['meta', { property: 'og:description', content: 'Your AI development team - 27+ specialized agents' }],
-    ['meta', { property: 'og:image', content: 'https://specialistagent.com.br/social-preview.svg' }],
+    ['meta', { property: 'og:description', content: 'Your AI development team - 27+ specialized agents that build, review, debug, and ship production code.' }],
+    ['meta', { property: 'og:image', content: 'https://specialistagent.com.br/social-preview.png' }],
+    ['meta', { property: 'og:image:width', content: '1200' }],
+    ['meta', { property: 'og:image:height', content: '600' }],
+    ['meta', { property: 'og:image:type', content: 'image/png' }],
     ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:url', content: 'https://specialistagent.com.br' }],
+    ['meta', { property: 'og:site_name', content: 'Specialist Agent' }],
+    ['meta', { property: 'og:locale', content: 'en_US' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'Specialist Agent' }],
-    ['meta', { name: 'twitter:description', content: 'Your AI development team - 27+ specialized agents' }],
-    ['meta', { name: 'twitter:image', content: 'https://specialistagent.com.br/social-preview.svg' }],
+    ['meta', { name: 'twitter:description', content: 'Your AI development team - 27+ specialized agents that build, review, debug, and ship production code.' }],
+    ['meta', { name: 'twitter:image', content: 'https://specialistagent.com.br/social-preview.png' }],
+    ['meta', { name: 'description', content: 'Your AI development team - 27+ specialized agents that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, and more.' }],
+    ['meta', { name: 'keywords', content: 'ai agents, claude code, specialist agent, code review, debugging, development tools, vue, react, nextjs, sveltekit, angular, astro, nuxt' }],
     ...gaHead,
   ],
 
@@ -276,7 +284,7 @@ export default withMermaid(defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/HerbertJulio/specialist-agent' },
-      { icon: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 288h-32v-64h32v64zm288-128v192H288v32H160v-32H0V160h576zm-416 32H32v128h128V192zm160 0H192v128h128V192zm160 0H352v128h128V192z"/></svg>' }, link: 'https://www.npmjs.com/package/specialist-agent' },
+      { icon: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.23 27.23"><rect fill="currentColor" width="27.23" height="27.23" rx="2"/><polygon fill="#fff" points="5.8 21.75 13.66 21.75 13.66 8.35 16.78 8.35 16.78 21.75 21.43 21.75 21.43 5.48 5.8 5.48 5.8 21.75"/></svg>' }, link: 'https://www.npmjs.com/package/specialist-agent' },
     ],
 
     editLink: {
