@@ -5,12 +5,18 @@ import HomePlatforms from './HomePlatforms.vue'
 import HomeHowItWorks from './HomeHowItWorks.vue'
 import HomeFrameworks from './HomeFrameworks.vue'
 import HomeSponsors from './HomeSponsors.vue'
+import LanguageSwitcher from './LanguageSwitcher.vue'
+import HeroAnimation from './HeroAnimation.vue'
 import './custom.css'
 
 export default {
   extends: DefaultTheme,
+  enhanceApp({ app }) {
+    app.component('HeroAnimation', HeroAnimation)
+  },
   Layout() {
     return h(DefaultTheme.Layout, null, {
+      'nav-bar-content-after': () => h(LanguageSwitcher),
       'home-features-after': () => [
         h(HomePlatforms),
         h(HomeHowItWorks),
