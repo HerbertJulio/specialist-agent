@@ -8,6 +8,8 @@
 </p>
 
 [![CI](https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/specialist-agent)](https://www.npmjs.com/package/specialist-agent)
+[![npm downloads](https://img.shields.io/npm/dm/specialist-agent)](https://www.npmjs.com/package/specialist-agent)
 [![Release](https://img.shields.io/github/v/release/HerbertJulio/specialist-agent?label=Release)](https://github.com/HerbertJulio/specialist-agent/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Docs](https://img.shields.io/badge/Docs-VitePress-646cff.svg)](https://herbertjulio.github.io/specialist-agent/)
