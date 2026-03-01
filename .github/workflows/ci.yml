@@ -6,8 +6,13 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  build:
+  validate:
+    name: Validate Agents & Skills
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,6 +20,28 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Validate agents and skills
+        run: node tests/validate-agents.mjs
+
+      - name: Run skill behavioral tests
+        run: node tests/test-skills.mjs
+
+  build:
+    name: Build (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
           cache: npm
 
       - run: npm ci
@@ -25,47 +52,8 @@ jobs:
       - name: Validate package
         run: npm pack --dry-run
 
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Validate agent frontmatter
-        run: |
-          echo "Validating agents..."
-          error=0
-          for f in agents/*.md packs/*/agents/*.md; do
-            if [ -f "$f" ]; then
-              if ! head -5 "$f" | grep -q "^---"; then
-                echo "ERROR: $f missing frontmatter"
-                error=1
-              fi
-            fi
-          done
-          exit $error
-
-      - name: Validate skill files
-        run: |
-          echo "Validating skills..."
-          error=0
-          for f in skills/*/SKILL.md packs/*/skills/*/SKILL.md; do
-            if [ -f "$f" ]; then
-              if ! head -5 "$f" | grep -q "^---"; then
-                echo "ERROR: $f missing frontmatter"
-                error=1
-              fi
-            fi
-          done
-          exit $error
-
-      - name: Validate JSON files
-        run: |
-          echo "Validating JSON..."
-          for f in $(find . -name "*.json" -not -path "./node_modules/*"); do
-            node -e "JSON.parse(require('fs').readFileSync('$f'))" || exit 1
-          done
-
-  cli-test:
+  cli:
+    name: CLI Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -77,10 +65,58 @@ jobs:
 
       - run: npm ci
 
-      - name: Test CLI
+      - name: Test CLI commands
         run: |
           node cli/index.mjs list
           node cli/index.mjs --help || true
 
       - name: Test native hooks
         run: node tests/test-native-hooks.mjs
+
+  lint:
+    name: Lint & Security
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          error=0
+          for f in $(find . -name "*.json" -not -path "./node_modules/*" -not -path "./.git/*"); do
+            if ! node -e "JSON.parse(require('fs').readFileSync('$f'))" 2>/dev/null; then
+              echo "ERROR: Invalid JSON in $f"
+              error=1
+            fi
+          done
+          exit $error
+
+      - name: Check for secrets in code
+        run: |
+          if grep -rn 'sk-[a-zA-Z0-9]\{20,\}\|AKIA[A-Z0-9]\{16\}\|ghp_[a-zA-Z0-9]\{36\}' \
+            --include="*.ts" --include="*.js" --include="*.mjs" --include="*.json" \
+            --exclude-dir=node_modules --exclude-dir=.git . 2>/dev/null; then
+            echo "ERROR: Potential secret found in source code"
+            exit 1
+          fi
+          echo "No secrets detected"
+
+      - name: Validate markdown structure
+        run: |
+          error=0
+          for f in agents/*.md packs/*/agents/*.md; do
+            if [ -f "$f" ]; then
+              if ! head -5 "$f" | grep -q "^---"; then
+                echo "ERROR: $f missing frontmatter"
+                error=1
+              fi
+            fi
+          done
+          for f in skills/*/SKILL.md packs/*/skills/*/SKILL.md; do
+            if [ -f "$f" ]; then
+              if ! head -5 "$f" | grep -q "^---"; then
+                echo "ERROR: $f missing frontmatter"
+                error=1
+              fi
+            fi
+          done
+          exit $error

@@ -1,2 +1,21 @@
 # Default owner for everything
 * @HerbertJulio
+
+# Core agent definitions
+/agents/ @HerbertJulio
+/packs/ @HerbertJulio
+
+# Skills
+/skills/ @HerbertJulio
+
+# CLI
+/cli/ @HerbertJulio
+
+# CI/CD and GitHub config
+/.github/ @HerbertJulio
+
+# Hooks (security-sensitive)
+/hooks/ @HerbertJulio
+
+# Documentation
+/docs/ @HerbertJulio

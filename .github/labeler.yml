@@ -1,0 +1,42 @@
+agents:
+  - changed-files:
+      - any-glob-to-any-file:
+          - agents/**
+          - packs/*/agents/**
+
+skills:
+  - changed-files:
+      - any-glob-to-any-file:
+          - skills/**
+          - packs/*/skills/**
+
+cli:
+  - changed-files:
+      - any-glob-to-any-file:
+          - cli/**
+
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/**
+          - '*.md'
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/**
+
+hooks:
+  - changed-files:
+      - any-glob-to-any-file:
+          - hooks/**
+
+packs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packs/**
+
+tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - tests/**
