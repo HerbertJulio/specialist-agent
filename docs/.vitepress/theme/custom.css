@@ -226,7 +226,7 @@ div[class*='language-']:hover {
 }
 
 /* ===== Hero logo animation (Vite-style floating) ===== */
-.VPHero .VPImage {
+.VPHero .image-container {
   animation: hero-float 6s ease-in-out infinite;
 }
 
