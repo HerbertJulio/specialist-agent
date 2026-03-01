@@ -236,8 +236,14 @@ div[class*='language-']:hover {
 }
 
 .VPHero .image-bg {
-  background-image: none !important;
-  opacity: 0 !important;
+  display: none !important;
+}
+
+.VPHero .image,
+.VPHero .image-container,
+.VPHero :deep(.image-src) {
+  background: transparent !important;
+  filter: none !important;
 }
 
 

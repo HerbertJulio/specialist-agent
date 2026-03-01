@@ -12,16 +12,13 @@
       <stop offset="0%" stop-color="#4A7FCF"/>
       <stop offset="100%" stop-color="#CD7F32"/>
     </linearGradient>
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#0A1628" flood-opacity="0.3"/>
-    </filter>
   </defs>
 
   <!-- Orbit ring -->
   <ellipse cx="200" cy="215" rx="160" ry="48" fill="none" stroke="#4A7FCF" stroke-width="0.5" opacity="0.1" stroke-dasharray="4 6"/>
 
   <!-- Main diamond logo - scale 8 -->
-  <g transform="translate(72, 28) scale(8)" filter="url(#shadow)">
+  <g transform="translate(72, 28) scale(8)">
     <path d="M16 26 L2 19 L16 12 L30 19 Z" fill="url(#hg1)" opacity="0.9"/>
     <path d="M16 21 L2 14 L16 7 L30 14 Z" fill="url(#hg2)" opacity="0.9"/>
     <path d="M16 16 L2 9 L16 2 L30 9 Z" fill="url(#hg3)" opacity="0.95"/>
