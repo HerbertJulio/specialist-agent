@@ -20,8 +20,8 @@
   <!-- Orbit ring -->
   <ellipse cx="200" cy="215" rx="160" ry="48" fill="none" stroke="#4A7FCF" stroke-width="0.5" opacity="0.1" stroke-dasharray="4 6"/>
 
-  <!-- Main diamond logo - scale 6.5 -->
-  <g transform="translate(96, 52) scale(6.5)" filter="url(#shadow)">
+  <!-- Main diamond logo - scale 8 -->
+  <g transform="translate(72, 28) scale(8)" filter="url(#shadow)">
     <path d="M16 26 L2 19 L16 12 L30 19 Z" fill="url(#hg1)" opacity="0.9"/>
     <path d="M16 21 L2 14 L16 7 L30 14 Z" fill="url(#hg2)" opacity="0.9"/>
     <path d="M16 16 L2 9 L16 2 L30 9 Z" fill="url(#hg3)" opacity="0.95"/>
