@@ -12,27 +12,50 @@
       <stop offset="0%" stop-color="#4A7FCF"/>
       <stop offset="100%" stop-color="#CD7F32"/>
     </linearGradient>
+
+    <!-- Clip paths for 3D orbit illusion -->
+    <clipPath id="orbit-back">
+      <rect x="0" y="0" width="280" height="125"/>
+    </clipPath>
+    <clipPath id="orbit-front">
+      <rect x="0" y="125" width="280" height="103"/>
+    </clipPath>
   </defs>
 
   <!-- Orbit ring -->
-  <ellipse cx="140" cy="140" rx="95" ry="28" fill="none" stroke="#4A7FCF" stroke-width="0.5" opacity="0.12" stroke-dasharray="4 6"/>
+  <ellipse cx="140" cy="125" rx="100" ry="30" fill="none" stroke="#4A7FCF" stroke-width="0.5" opacity="0.12" stroke-dasharray="4 6"/>
 
-  <!-- Orbiting particles (behind logo) -->
-  <circle r="6" fill="#4A7FCF" opacity="0.5">
-    <animateMotion dur="12s" repeatCount="indefinite" path="M140,140 A95,28 0 1,1 139.9,140 Z"/>
-  </circle>
-  <circle r="4.5" fill="#CD7F32" opacity="0.45">
-    <animateMotion dur="12s" repeatCount="indefinite" begin="4s" path="M140,140 A95,28 0 1,1 139.9,140 Z"/>
-  </circle>
-  <circle r="3.5" fill="#4A7FCF" opacity="0.35">
-    <animateMotion dur="12s" repeatCount="indefinite" begin="8s" path="M140,140 A95,28 0 1,1 139.9,140 Z"/>
-  </circle>
+  <!-- Particles BEHIND diamond (top half of orbit) -->
+  <g clip-path="url(#orbit-back)">
+    <circle r="6" fill="#4A7FCF" opacity="0.5">
+      <animateMotion dur="12s" repeatCount="indefinite" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
+    </circle>
+    <circle r="4.5" fill="#CD7F32" opacity="0.45">
+      <animateMotion dur="12s" repeatCount="indefinite" begin="4s" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
+    </circle>
+    <circle r="3.5" fill="#4A7FCF" opacity="0.35">
+      <animateMotion dur="12s" repeatCount="indefinite" begin="8s" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
+    </circle>
+  </g>
 
-  <!-- Main diamond logo (on top) -->
+  <!-- Main diamond logo -->
   <g transform="translate(12, 4) scale(8)">
     <path d="M16 26 L2 19 L16 12 L30 19 Z" fill="url(#hg1)" opacity="0.9"/>
     <path d="M16 21 L2 14 L16 7 L30 14 Z" fill="url(#hg2)" opacity="0.9"/>
     <path d="M16 16 L2 9 L16 2 L30 9 Z" fill="url(#hg3)" opacity="0.95"/>
     <path d="M16 2 L2 9 L16 16 Z" fill="#fff" opacity="0.15"/>
+  </g>
+
+  <!-- Particles IN FRONT of diamond (bottom half of orbit) -->
+  <g clip-path="url(#orbit-front)">
+    <circle r="6" fill="#4A7FCF" opacity="0.5">
+      <animateMotion dur="12s" repeatCount="indefinite" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
+    </circle>
+    <circle r="4.5" fill="#CD7F32" opacity="0.45">
+      <animateMotion dur="12s" repeatCount="indefinite" begin="4s" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
+    </circle>
+    <circle r="3.5" fill="#4A7FCF" opacity="0.35">
+      <animateMotion dur="12s" repeatCount="indefinite" begin="8s" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
+    </circle>
   </g>
 </svg>
