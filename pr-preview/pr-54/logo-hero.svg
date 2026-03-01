@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
+  <defs>
+    <linearGradient id="hg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#1E3A5F"/>
+    </linearGradient>
+    <linearGradient id="hg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#2B5EA7"/>
+    </linearGradient>
+    <linearGradient id="hg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4A7FCF"/>
+      <stop offset="100%" stop-color="#CD7F32"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#0A1628" flood-opacity="0.3"/>
+    </filter>
+    <!-- Orbiting dots -->
+    <radialGradient id="dotGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4A7FCF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#4A7FCF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.04">
+    <line x1="80" y1="0" x2="80" y2="320" stroke="#4A7FCF" stroke-width="0.5"/>
+    <line x1="160" y1="0" x2="160" y2="320" stroke="#4A7FCF" stroke-width="0.5"/>
+    <line x1="240" y1="0" x2="240" y2="320" stroke="#4A7FCF" stroke-width="0.5"/>
+    <line x1="0" y1="80" x2="320" y2="80" stroke="#4A7FCF" stroke-width="0.5"/>
+    <line x1="0" y1="160" x2="320" y2="160" stroke="#4A7FCF" stroke-width="0.5"/>
+    <line x1="0" y1="240" x2="320" y2="240" stroke="#4A7FCF" stroke-width="0.5"/>
+  </g>
+
+  <!-- Orbit ring -->
+  <ellipse cx="160" cy="170" rx="130" ry="40" fill="none" stroke="#4A7FCF" stroke-width="0.5" opacity="0.12" stroke-dasharray="4 6"/>
+
+  <!-- Main diamond logo - scaled up -->
+  <g transform="translate(90, 70) scale(4.3)" filter="url(#shadow)">
+    <!-- Bottom layer -->
+    <path d="M16 26 L2 19 L16 12 L30 19 Z" fill="url(#hg1)" opacity="0.9"/>
+    <!-- Middle layer -->
+    <path d="M16 21 L2 14 L16 7 L30 14 Z" fill="url(#hg2)" opacity="0.9"/>
+    <!-- Top layer -->
+    <path d="M16 16 L2 9 L16 2 L30 9 Z" fill="url(#hg3)" opacity="0.95"/>
+    <!-- Highlight -->
+    <path d="M16 2 L2 9 L16 16 Z" fill="#fff" opacity="0.15"/>
+  </g>
+
+  <!-- Orbiting particles -->
+  <circle cx="160" cy="170" r="3" fill="#4A7FCF" opacity="0.5">
+    <animateMotion dur="12s" repeatCount="indefinite" path="M0,0 A130,40 0 1,1 -0.1,0 Z"/>
+  </circle>
+  <circle cx="160" cy="170" r="2.5" fill="#CD7F32" opacity="0.5">
+    <animateMotion dur="12s" repeatCount="indefinite" begin="4s" path="M0,0 A130,40 0 1,1 -0.1,0 Z"/>
+  </circle>
+  <circle cx="160" cy="170" r="2" fill="#4A7FCF" opacity="0.4">
+    <animateMotion dur="12s" repeatCount="indefinite" begin="8s" path="M0,0 A130,40 0 1,1 -0.1,0 Z"/>
+  </circle>
+
+  <!-- Corner accent dots -->
+  <circle cx="50" cy="60" r="2" fill="#4A7FCF" opacity="0.15"/>
+  <circle cx="270" cy="60" r="1.5" fill="#CD7F32" opacity="0.15"/>
+  <circle cx="50" cy="270" r="1.5" fill="#CD7F32" opacity="0.12"/>
+  <circle cx="270" cy="270" r="2" fill="#4A7FCF" opacity="0.15"/>
+
+  <!-- Connection lines from corners to logo -->
+  <line x1="50" y1="60" x2="120" y2="120" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
+  <line x1="270" y1="60" x2="200" y2="120" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
+  <line x1="50" y1="270" x2="120" y2="210" stroke="#CD7F32" stroke-width="0.5" opacity="0.06"/>
+  <line x1="270" y1="270" x2="200" y2="210" stroke="#CD7F32" stroke-width="0.5" opacity="0.06"/>
+</svg>
