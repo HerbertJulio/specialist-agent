@@ -230,23 +230,40 @@ div[class*='language-']:hover {
   animation: hero-float 6s ease-in-out infinite;
 }
 
+.VPHero .image {
+  min-height: 280px;
+}
+
+@media (min-width: 960px) {
+  .VPHero .image {
+    min-height: 360px;
+  }
+}
+
 @keyframes hero-float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-14px); }
 }
 
 .VPHero .image-bg {
   animation: hero-glow 8s ease-in-out infinite alternate;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(43, 94, 167, 0.35) 0%,
+    rgba(205, 127, 50, 0.2) 50%,
+    rgba(74, 127, 207, 0.35) 100%
+  ) !important;
+  filter: blur(56px) !important;
 }
 
 @keyframes hero-glow {
   0% {
-    opacity: 0.6;
-    transform: scale(1);
+    opacity: 0.5;
+    transform: scale(0.95);
   }
   100% {
     opacity: 1;
-    transform: scale(1.05);
+    transform: scale(1.08);
   }
 }
 
