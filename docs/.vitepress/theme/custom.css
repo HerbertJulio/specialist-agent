@@ -225,6 +225,13 @@ div[class*='language-']:hover {
   background: rgba(74, 127, 207, 0.3);
 }
 
+/* Hide default translate icon on desktop — custom LanguageSwitcher replaces it */
+@media (min-width: 768px) {
+  .VPNavBarTranslations {
+    display: none !important;
+  }
+}
+
 /* Accessibility — respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .VPHero .name .clip {
