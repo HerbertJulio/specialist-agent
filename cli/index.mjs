@@ -871,6 +871,34 @@ async function main() {
 
   if (clack.isCancel(installScope)) handleCancel()
 
+  // ── Native Claude Code Hooks (ask before spinner) ──
+
+  let selectedHooks = []
+
+  const installNativeHooks = await clack.confirm({
+    message: `Install native Claude Code hooks? ${DIM}(security guard, auto-dispatch, session context, auto-format)${NC}`,
+    initialValue: true,
+  })
+
+  if (clack.isCancel(installNativeHooks)) handleCancel()
+
+  if (installNativeHooks) {
+    const hookChoices = await clack.multiselect({
+      message: 'Which hooks to enable?',
+      options: [
+        { value: 'security-guard', label: 'Security Guard', hint: 'Block dangerous commands (recommended)', selected: true },
+        { value: 'auto-dispatch', label: 'Auto-Dispatch', hint: 'Suggest agents based on your prompt', selected: true },
+        { value: 'session-context', label: 'Session Context', hint: 'Inject project state on session start', selected: true },
+        { value: 'auto-format', label: 'Auto-Format', hint: 'Format files after Write/Edit', selected: false },
+      ],
+      required: false,
+    })
+
+    if (!clack.isCancel(hookChoices) && hookChoices.length > 0) {
+      selectedHooks = hookChoices
+    }
+  }
+
   // ── Install files ──────────────────────────────────
 
   const packDir = join(ROOT, 'packs', framework)
@@ -938,8 +966,9 @@ async function main() {
   // Install specialist agents
   if (installSpecialists) {
     const specialistNames = [
-      'api', 'perf', 'i18n', 'docs', 'refactor', 'deps',  // New agents
-      'explorer', 'finance', 'cloud', 'security', 'designer', 'data', 'devops', 'tester', 'legal'  // Existing
+      'api', 'perf', 'i18n', 'docs', 'refactor', 'deps',
+      'explorer', 'finance', 'cloud', 'security', 'designer', 'data',
+      'devops', 'tester', 'legal', 'architect', 'ripple'
     ]
     for (const name of specialistNames) {
       const suffix = mode === 'lite' ? '-lite.md' : '.md'
@@ -967,31 +996,10 @@ async function main() {
     skillCount += genericSkillCount
   }
 
-  // ── Native Claude Code Hooks ───────────────────────
+  // Install native hooks (using selections from earlier)
   let nativeHooksInstalled = 0
-
-  const installNativeHooks = await clack.confirm({
-    message: `Install native Claude Code hooks? ${DIM}(security guard, auto-dispatch, session context, auto-format)${NC}`,
-    initialValue: true,
-  })
-
-  if (clack.isCancel(installNativeHooks)) handleCancel()
-
-  if (installNativeHooks) {
-    const hookChoices = await clack.multiselect({
-      message: 'Which hooks to enable?',
-      options: [
-        { value: 'security-guard', label: 'Security Guard', hint: 'Block dangerous commands (recommended)', selected: true },
-        { value: 'auto-dispatch', label: 'Auto-Dispatch', hint: 'Suggest agents based on your prompt', selected: true },
-        { value: 'session-context', label: 'Session Context', hint: 'Inject project state on session start', selected: true },
-        { value: 'auto-format', label: 'Auto-Format', hint: 'Format files after Write/Edit', selected: false },
-      ],
-      required: false,
-    })
-
-    if (!clack.isCancel(hookChoices) && hookChoices.length > 0) {
-      nativeHooksInstalled = setupNativeHooks(cwd, hookChoices)
-    }
+  if (selectedHooks.length > 0) {
+    nativeHooksInstalled = setupNativeHooks(cwd, selectedHooks)
   }
 
   // Install ARCHITECTURE.md
