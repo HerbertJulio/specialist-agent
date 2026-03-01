@@ -13,21 +13,21 @@ const gaHead: Array<[string, Record<string, string>] | [string, Record<string, s
 export default withMermaid(defineConfig({
   title: 'Specialist Agent',
   description: 'Your AI development team - 27+ specialized agents',
-  base: (process.env.VITEPRESS_BASE || '/specialist-agent/') as `/${string}/`,
+  base: (process.env.VITEPRESS_BASE || '/') as `/${string}/`,
   sitemap: {
-    hostname: 'https://herbertjulio.github.io/specialist-agent',
+    hostname: 'https://specialistagent.com.br',
   },
 
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/specialist-agent/logo.svg' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
     ['meta', { property: 'og:title', content: 'Specialist Agent' }],
     ['meta', { property: 'og:description', content: 'Your AI development team - 27+ specialized agents' }],
-    ['meta', { property: 'og:image', content: 'https://herbertjulio.github.io/specialist-agent/social-preview.svg' }],
+    ['meta', { property: 'og:image', content: 'https://specialistagent.com.br/social-preview.svg' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'Specialist Agent' }],
     ['meta', { name: 'twitter:description', content: 'Your AI development team - 27+ specialized agents' }],
-    ['meta', { name: 'twitter:image', content: 'https://herbertjulio.github.io/specialist-agent/social-preview.svg' }],
+    ['meta', { name: 'twitter:image', content: 'https://specialistagent.com.br/social-preview.svg' }],
     ...gaHead,
   ],
 
