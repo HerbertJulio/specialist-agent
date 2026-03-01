@@ -2,8 +2,15 @@
   <section class="home-section">
     <h2 class="home-section-title">Framework Packs</h2>
     <p class="home-section-subtitle">Agents and patterns tailored to your stack.</p>
-    <div class="marquee-wrapper" @mouseenter="paused = true" @mouseleave="paused = false">
-      <div class="marquee-track" :class="{ paused }">
+    <div
+      ref="wrapperRef"
+      class="marquee-wrapper"
+      @mouseenter="paused = true"
+      @mouseleave="onMouseLeave"
+      @mousedown="onDragStart"
+      @touchstart.passive="onDragStart"
+    >
+      <div class="marquee-track" :class="{ paused, dragging }">
         <div v-for="fw in doubled" :key="fw.key" class="fw-card" :style="{ '--fw-color': fw.color }">
           <span class="fw-name">{{ fw.name }}</span>
           <span class="fw-detail">{{ fw.detail }}</span>
@@ -14,9 +21,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const paused = ref(false)
+const dragging = ref(false)
+const wrapperRef = ref<HTMLElement | null>(null)
+
+let startX = 0
+let scrollLeft = 0
 
 const frameworks = [
   { name: 'Next.js', color: '#999', detail: 'App Router, Server Components' },
@@ -32,24 +44,82 @@ const doubled = computed(() => [
   ...frameworks.map((fw, i) => ({ ...fw, key: `a-${i}` })),
   ...frameworks.map((fw, i) => ({ ...fw, key: `b-${i}` })),
 ])
+
+function onDragStart(e: MouseEvent | TouchEvent) {
+  dragging.value = true
+  const wrapper = wrapperRef.value
+  if (!wrapper) return
+
+  const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+  startX = clientX - wrapper.offsetLeft
+  scrollLeft = wrapper.scrollLeft
+
+  document.addEventListener('mousemove', onDragMove)
+  document.addEventListener('mouseup', onDragEnd)
+  document.addEventListener('touchmove', onDragMove, { passive: true })
+  document.addEventListener('touchend', onDragEnd)
+}
+
+function onDragMove(e: MouseEvent | TouchEvent) {
+  if (!dragging.value || !wrapperRef.value) return
+  const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+  const x = clientX - wrapperRef.value.offsetLeft
+  const walk = (x - startX) * 2
+  wrapperRef.value.scrollLeft = scrollLeft - walk
+}
+
+function onDragEnd() {
+  dragging.value = false
+  document.removeEventListener('mousemove', onDragMove)
+  document.removeEventListener('mouseup', onDragEnd)
+  document.removeEventListener('touchmove', onDragMove)
+  document.removeEventListener('touchend', onDragEnd)
+}
+
+function onMouseLeave() {
+  paused.value = false
+  if (dragging.value) onDragEnd()
+}
+
+onUnmounted(() => {
+  document.removeEventListener('mousemove', onDragMove)
+  document.removeEventListener('mouseup', onDragEnd)
+  document.removeEventListener('touchmove', onDragMove)
+  document.removeEventListener('touchend', onDragEnd)
+})
 </script>
 
 <style scoped>
 .marquee-wrapper {
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  overflow-x: auto;
+  overflow-y: hidden;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
+  scrollbar-width: none;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.marquee-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .marquee-track {
   display: flex;
   gap: 16px;
   width: max-content;
+  padding: 4px 0;
   animation: marquee-scroll 25s linear infinite;
 }
 
 .marquee-track.paused {
   animation-play-state: paused;
+}
+
+.marquee-track.dragging {
+  animation-play-state: paused;
+  cursor: grabbing;
 }
 
 @keyframes marquee-scroll {
@@ -67,6 +137,11 @@ const doubled = computed(() => [
   text-align: center;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   cursor: default;
+  pointer-events: none;
+}
+
+.marquee-track:not(.dragging) .fw-card {
+  pointer-events: auto;
 }
 
 .fw-card:hover {
@@ -103,6 +178,7 @@ const doubled = computed(() => [
   .marquee-wrapper {
     mask-image: none;
     -webkit-mask-image: none;
+    cursor: auto;
   }
 }
 </style>
