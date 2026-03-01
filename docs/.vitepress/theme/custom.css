@@ -246,26 +246,10 @@ div[class*='language-']:hover {
 }
 
 .VPHero .image-bg {
-  animation: hero-glow 8s ease-in-out infinite alternate;
-  background-image: linear-gradient(
-    -45deg,
-    rgba(43, 94, 167, 0.35) 0%,
-    rgba(205, 127, 50, 0.2) 50%,
-    rgba(74, 127, 207, 0.35) 100%
-  ) !important;
-  filter: blur(56px) !important;
+  background-image: none !important;
+  opacity: 0 !important;
 }
 
-@keyframes hero-glow {
-  0% {
-    opacity: 0.5;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1.08);
-  }
-}
 
 /* ===== Home page section shared styles ===== */
 .home-section {

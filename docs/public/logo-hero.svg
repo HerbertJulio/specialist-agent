@@ -12,35 +12,16 @@
       <stop offset="0%" stop-color="#4A7FCF"/>
       <stop offset="100%" stop-color="#CD7F32"/>
     </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-    </filter>
     <filter id="shadow">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#0A1628" flood-opacity="0.3"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#0A1628" flood-opacity="0.35"/>
     </filter>
-    <!-- Orbiting dots -->
-    <radialGradient id="dotGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#4A7FCF" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#4A7FCF" stop-opacity="0"/>
-    </radialGradient>
   </defs>
 
-  <!-- Subtle grid pattern -->
-  <g opacity="0.04">
-    <line x1="80" y1="0" x2="80" y2="320" stroke="#4A7FCF" stroke-width="0.5"/>
-    <line x1="160" y1="0" x2="160" y2="320" stroke="#4A7FCF" stroke-width="0.5"/>
-    <line x1="240" y1="0" x2="240" y2="320" stroke="#4A7FCF" stroke-width="0.5"/>
-    <line x1="0" y1="80" x2="320" y2="80" stroke="#4A7FCF" stroke-width="0.5"/>
-    <line x1="0" y1="160" x2="320" y2="160" stroke="#4A7FCF" stroke-width="0.5"/>
-    <line x1="0" y1="240" x2="320" y2="240" stroke="#4A7FCF" stroke-width="0.5"/>
-  </g>
-
   <!-- Orbit ring -->
-  <ellipse cx="160" cy="170" rx="130" ry="40" fill="none" stroke="#4A7FCF" stroke-width="0.5" opacity="0.12" stroke-dasharray="4 6"/>
+  <ellipse cx="160" cy="175" rx="140" ry="42" fill="none" stroke="#4A7FCF" stroke-width="0.5" opacity="0.1" stroke-dasharray="4 6"/>
 
-  <!-- Main diamond logo - scaled up -->
-  <g transform="translate(90, 70) scale(4.3)" filter="url(#shadow)">
+  <!-- Main diamond logo -->
+  <g transform="translate(76, 52) scale(5.25)" filter="url(#shadow)">
     <!-- Bottom layer -->
     <path d="M16 26 L2 19 L16 12 L30 19 Z" fill="url(#hg1)" opacity="0.9"/>
     <!-- Middle layer -->
@@ -52,25 +33,13 @@
   </g>
 
   <!-- Orbiting particles -->
-  <circle cx="160" cy="170" r="3" fill="#4A7FCF" opacity="0.5">
-    <animateMotion dur="12s" repeatCount="indefinite" path="M0,0 A130,40 0 1,1 -0.1,0 Z"/>
+  <circle r="3" fill="#4A7FCF" opacity="0.5">
+    <animateMotion dur="12s" repeatCount="indefinite" path="M160,175 A140,42 0 1,1 159.9,175 Z"/>
   </circle>
-  <circle cx="160" cy="170" r="2.5" fill="#CD7F32" opacity="0.5">
-    <animateMotion dur="12s" repeatCount="indefinite" begin="4s" path="M0,0 A130,40 0 1,1 -0.1,0 Z"/>
+  <circle r="2.5" fill="#CD7F32" opacity="0.45">
+    <animateMotion dur="12s" repeatCount="indefinite" begin="4s" path="M160,175 A140,42 0 1,1 159.9,175 Z"/>
   </circle>
-  <circle cx="160" cy="170" r="2" fill="#4A7FCF" opacity="0.4">
-    <animateMotion dur="12s" repeatCount="indefinite" begin="8s" path="M0,0 A130,40 0 1,1 -0.1,0 Z"/>
+  <circle r="2" fill="#4A7FCF" opacity="0.35">
+    <animateMotion dur="12s" repeatCount="indefinite" begin="8s" path="M160,175 A140,42 0 1,1 159.9,175 Z"/>
   </circle>
-
-  <!-- Corner accent dots -->
-  <circle cx="50" cy="60" r="2" fill="#4A7FCF" opacity="0.15"/>
-  <circle cx="270" cy="60" r="1.5" fill="#CD7F32" opacity="0.15"/>
-  <circle cx="50" cy="270" r="1.5" fill="#CD7F32" opacity="0.12"/>
-  <circle cx="270" cy="270" r="2" fill="#4A7FCF" opacity="0.15"/>
-
-  <!-- Connection lines from corners to logo -->
-  <line x1="50" y1="60" x2="120" y2="120" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
-  <line x1="270" y1="60" x2="200" y2="120" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
-  <line x1="50" y1="270" x2="120" y2="210" stroke="#CD7F32" stroke-width="0.5" opacity="0.06"/>
-  <line x1="270" y1="270" x2="200" y2="210" stroke="#CD7F32" stroke-width="0.5" opacity="0.06"/>
 </svg>
