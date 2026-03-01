@@ -380,7 +380,6 @@ export default withMermaid(defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/HerbertJulio/specialist-agent' },
-      { icon: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.23 27.23"><rect fill="currentColor" width="27.23" height="27.23" rx="2"/><polygon fill="#fff" points="5.8 21.75 13.66 21.75 13.66 8.35 16.78 8.35 16.78 21.75 21.43 21.75 21.43 5.48 5.8 5.48 5.8 21.75"/></svg>' }, link: 'https://www.npmjs.com/package/specialist-agent' },
     ],
 
     editLink: {
