@@ -1,6 +1,15 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 
+const GA_ID = process.env.VITEPRESS_GA_ID || ''
+
+const gaHead: Array<[string, Record<string, string>] | [string, Record<string, string>, string]> = GA_ID
+  ? [
+      ['script', { async: '', src: `https://www.googletagmanager.com/gtag/js?id=${GA_ID}` }],
+      ['script', {}, `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}')`],
+    ]
+  : []
+
 export default withMermaid(defineConfig({
   title: 'Specialist Agent',
   description: 'Your AI development team - 27+ specialized agents',
@@ -19,9 +28,7 @@ export default withMermaid(defineConfig({
     ['meta', { name: 'twitter:title', content: 'Specialist Agent' }],
     ['meta', { name: 'twitter:description', content: 'Your AI development team - 27+ specialized agents' }],
     ['meta', { name: 'twitter:image', content: 'https://herbertjulio.github.io/specialist-agent/social-preview.svg' }],
-    // Google Analytics 4 — replace G-XXXXXXXXXX with your Measurement ID
-    ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX' }],
-    ['script', {}, "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XXXXXXXXXX')"],
+    ...gaHead,
   ],
 
   locales: {
