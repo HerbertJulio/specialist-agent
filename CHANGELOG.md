@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.8.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.7.0...specialist-agent-v2.8.0) (2026-03-02)
+
+
+### Features
+
+* configure custom domain specialistagent.com.br ([#51](https://github.com/HerbertJulio/specialist-agent/issues/51)) ([b4a4a5f](https://github.com/HerbertJulio/specialist-agent/commit/b4a4a5ffaab3a84c1257f23beaf48a4c7d9c5235))
+* custom domain specialistagent.com.br + URL migration ([#53](https://github.com/HerbertJulio/specialist-agent/issues/53)) ([8fd7803](https://github.com/HerbertJulio/specialist-agent/commit/8fd780326000215a1c710e7e6f5b0bdc60e4f88f))
+* **docs:** redesign documentation inspired by Vite and Vue.js ([#54](https://github.com/HerbertJulio/specialist-agent/issues/54)) ([2089d41](https://github.com/HerbertJulio/specialist-agent/commit/2089d411d0ab678bc373b92c212009fa1a9a7866))
+
+
+### Bug Fixes
+
+* **security:** patch critical injection and traversal vulnerabilities ([#55](https://github.com/HerbertJulio/specialist-agent/issues/55)) ([8c53f16](https://github.com/HerbertJulio/specialist-agent/commit/8c53f16bd22368087b67b04a0bc47525a2199007))
+
 ## [2.7.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.6.0...specialist-agent-v2.7.0) (2026-03-01)
 
 
