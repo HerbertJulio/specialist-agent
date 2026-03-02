@@ -305,6 +305,6 @@ app.use(express.json({ limit: '10kb' }))
 
 ## Cenários Relacionados
 
-- [Design de API](/pt-BR/scenarios/api-design) — Projete APIs seguras
-- [Depurar Problemas](/pt-BR/scenarios/debug-issue) — Depure problemas de autenticação
-- [Infraestrutura](/pt-BR/scenarios/infrastructure) — Deploy seguro
+- [Design de API](/pt-BR/scenarios/api-design) - Projete APIs seguras
+- [Depurar Problemas](/pt-BR/scenarios/debug-issue) - Depure problemas de autenticação
+- [Infraestrutura](/pt-BR/scenarios/infrastructure) - Deploy seguro

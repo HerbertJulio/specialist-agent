@@ -71,9 +71,9 @@ Test-Driven Development workflow.
 ```
 
 **Process:**
-1. RED — Write failing test
-2. GREEN — Make it pass
-3. REFACTOR — Improve code
+1. RED - Write failing test
+2. GREEN - Make it pass
+3. REFACTOR - Improve code
 
 No code without failing test first.
 
@@ -131,7 +131,7 @@ Finalize branch with metrics.
 
 ### /learn
 
-Learning mode — explains while building.
+Learning mode - explains while building.
 
 ```bash
 /learn create a products module
@@ -149,7 +149,7 @@ Verification before claiming work is complete.
 /verify
 ```
 
-Forces proof-based verification — requires command output, not just "it works." Use after completing any task to ensure correctness with evidence.
+Forces proof-based verification - requires command output, not just "it works." Use after completing any task to ensure correctness with evidence.
 
 **Output:** Verification report with proof artifacts (test results, build output, runtime checks).
 
@@ -165,9 +165,9 @@ Create or improve skills using TDD methodology.
 
 **Process:**
 
-1. RED — Define what the skill should do (failing spec)
-2. GREEN — Write the skill to meet the spec
-3. REFACTOR — Improve clarity and structure
+1. RED - Define what the skill should do (failing spec)
+2. GREEN - Write the skill to meet the spec
+3. REFACTOR - Improve clarity and structure
 
 RED-GREEN-REFACTOR applied to documentation and skill design.
 
@@ -250,9 +250,9 @@ Creates isolated workspaces so you can work on multiple features simultaneously.
 
 **Commands:**
 
-- `/worktree [name]` — Create isolated workspace
-- `git worktree list` — List active worktrees
-- `git worktree remove [path]` — Remove worktree
+- `/worktree [name]` - Create isolated workspace
+- `git worktree list` - List active worktrees
+- `git worktree remove [path]` - Remove worktree
 
 **Output:** Worktree created with dependencies installed and baseline tests passing.
 

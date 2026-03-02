@@ -1,4 +1,4 @@
-# CLAUDE.md — Specialist Agent (Nuxt Pack)
+# CLAUDE.md - Specialist Agent (Nuxt Pack)
 
 ## About
 
@@ -12,7 +12,7 @@ Development toolkit for Nuxt 3+ projects with TypeScript. Includes AI agents, sk
 
 ### Auto-Dispatch Rules
 
-You **MUST** automatically delegate to the correct agent based on the user's intent. Do NOT ask which agent to use — detect it from the request:
+You **MUST** automatically delegate to the correct agent based on the user's intent. Do NOT ask which agent to use - detect it from the request:
 
 | User intent | Agent |
 |-------------|-------|
@@ -36,7 +36,7 @@ If a task spans multiple agents, invoke them in sequence (e.g., @builder then @r
 ### Stack
 
 - Nuxt 3+ with Vue 3 Composition API
-- Auto-imports (composables, components, utils — no explicit imports needed)
+- Auto-imports (composables, components, utils - no explicit imports needed)
 - Nitro server engine (server/ directory)
 - useFetch / useAsyncData (built-in server state with caching)
 - useState (SSR-safe shared client state) + Pinia (complex client state)
@@ -91,18 +91,18 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`
 
 ### Key Patterns (details in docs/ARCHITECTURE.md)
 
-- **Auto-imports**: composables/, components/, utils/ are auto-imported — no explicit import statements needed
+- **Auto-imports**: composables/, components/, utils/ are auto-imported - no explicit import statements needed
 - **useFetch/useAsyncData**: Built-in server state management with caching, replaces TanStack Query
 - **useState**: SSR-safe shared client state (replaces simple Pinia use cases)
 - **Pinia**: Complex client state only (when useState is not enough)
 - **Server routes**: server/api/ for backend endpoints (Nitro engine)
 - **Middleware**: middleware/ for route guards (client-side)
 - **Plugins**: plugins/ for app initialization
-- **Composables**: composables/ — auto-imported, orchestrate useFetch -> adapter -> typed data
+- **Composables**: composables/ - auto-imported, orchestrate useFetch -> adapter -> typed data
 - **Services**: server/utils/ for server-side logic, modules/*/services/ for client-side
 - **Adapters**: pure functions, API <-> App, snake_case -> camelCase
 - **Types**: `.types.ts` (API raw) + `.contracts.ts` (app contract)

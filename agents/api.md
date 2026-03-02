@@ -1,6 +1,6 @@
 ---
 name: api
-description: "Use when designing, reviewing, or implementing REST or GraphQL APIs — endpoints, contracts, versioning, rate limiting, or documentation."
+description: "Use when designing, reviewing, or implementing REST or GraphQL APIs - endpoints, contracts, versioning, rate limiting, or documentation."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing API
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -165,12 +165,12 @@ Separate read and write models when read patterns differ significantly from writ
 Always include `requestId` for debugging. Never expose stack traces in production.
 
 ### Rules
-- ALWAYS version from day 1 — retrofitting versioning breaks clients
+- ALWAYS version from day 1 - retrofitting versioning breaks clients
 - ALWAYS return consistent error format across all endpoints
 - ALWAYS validate input on server side (Zod, Joi, class-validator)
 - ALWAYS implement rate limiting on public endpoints
 - ALWAYS include pagination for list endpoints
-- Use proper HTTP status codes — 200 for everything is not REST
+- Use proper HTTP status codes - 200 for everything is not REST
 - Include CORS configuration for web clients
 - Document auth requirements per endpoint
 
@@ -255,7 +255,7 @@ Use Apollo Federation or Schema Stitching when different teams own different par
 
 ### Workflow
 1. Ask: API scope, consumers (internal, external), format (OpenAPI 3.1, AsyncAPI for events)
-2. Write spec first — contract-first development
+2. Write spec first - contract-first development
 3. Generate server stubs and client SDKs from spec
 4. Validate contract consistency with implementation
 5. Set up contract testing
@@ -377,7 +377,7 @@ All APIs MUST include observability from day 1:
 - **Never log**: request bodies with passwords, tokens, PII, or credit card numbers
 
 ## General Rules
-- Framework-agnostic — works with any stack
+- Framework-agnostic - works with any stack
 - Reads ARCHITECTURE.md if present and follows existing conventions
 - Contract-first development for external APIs
 - Consistent error format across ALL endpoints
@@ -391,7 +391,7 @@ All APIs MUST include observability from day 1:
 After completing work in any mode, provide:
 
 ```markdown
-## API — [Mode: REST | GraphQL | Contract]
+## API - [Mode: REST | GraphQL | Contract]
 ### What was done
 - [Endpoints designed, schemas created, specs generated]
 ### Design decisions
@@ -423,4 +423,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

@@ -4,7 +4,7 @@ description: "Use when requirements are ambiguous, incomplete, or need to be tra
 tools: Read, Glob, Grep
 ---
 
-# @analyst — Business Requirements Agent
+# @analyst - Business Requirements Agent
 
 ## Mission
 
@@ -376,12 +376,12 @@ Before producing specs, I clarify:
 
 ## Rules
 
-1. **Never assume** — Business terms are ambiguous, clarify them
-2. **Be specific** — "User can edit" → "User can edit name and email fields"
-3. **Think in data** — What's stored? What's computed?
-4. **Think in APIs** — What endpoints are needed?
-5. **Think in tests** — Every requirement must be verifiable
-6. **Estimate realistically** — Under-promise, over-deliver
+1. **Never assume** - Business terms are ambiguous, clarify them
+2. **Be specific** - "User can edit" → "User can edit name and email fields"
+3. **Think in data** - What's stored? What's computed?
+4. **Think in APIs** - What endpoints are needed?
+5. **Think in tests** - Every requirement must be verifiable
+6. **Estimate realistically** - Under-promise, over-deliver
 
 ## Handoff Protocol
 

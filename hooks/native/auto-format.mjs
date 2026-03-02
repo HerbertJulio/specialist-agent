@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 /**
- * Auto-Format — PostToolUse Hook (Write|Edit)
+ * Auto-Format - PostToolUse Hook (Write|Edit)
  *
  * Automatically formats files after Claude writes or edits them.
  * Detects available formatters (prettier, eslint, biome) by config presence.
- * Never fails — if no formatter found, silently exits.
+ * Never fails - if no formatter found, silently exits.
  *
  * Claude Code event: PostToolUse (matcher: "Write|Edit")
  * Stdin: { tool_input: { file_path: "..." } }
@@ -182,7 +182,7 @@ async function main() {
   // Format
   formatFile(filePath, formatter, cwd);
 
-  // Always exit 0 — formatting is best-effort, never blocking
+  // Always exit 0 - formatting is best-effort, never blocking
   process.exit(0);
 }
 

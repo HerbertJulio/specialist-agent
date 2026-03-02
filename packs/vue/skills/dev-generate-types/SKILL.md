@@ -20,18 +20,18 @@ Endpoint or example JSON: $ARGUMENTS
 
 3. From the JSON, create:
 
-   a. **`[resource].types.ts`** — types that mirror the API exactly:
+   a. **`[resource].types.ts`** - types that mirror the API exactly:
       - snake_case, string dates, IDs as string
       - Include request payloads and list response (with pagination)
 
-   b. **`[resource].contracts.ts`** — clean app contracts:
+   b. **`[resource].contracts.ts`** - clean app contracts:
       - camelCase, Date objects, derived booleans
       - No internal API fields (tokens, metadata)
 
-   c. **`[resource]-adapter.ts`** — pure functions:
-      - `toXxx(response)` — inbound (API → App)
-      - `toXxxList(response)` — inbound for list
-      - `toCreatePayload(input)` — outbound (App → API)
+   c. **`[resource]-adapter.ts`** - pure functions:
+      - `toXxx(response)` - inbound (API → App)
+      - `toXxxList(response)` - inbound for list
+      - `toCreatePayload(input)` - outbound (App → API)
       - Conversions: snake→camel, string→Date, cents→decimal
 
 4. Validate: `npx tsc --noEmit`

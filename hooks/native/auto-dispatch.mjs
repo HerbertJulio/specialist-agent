@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Auto-Dispatch — UserPromptSubmit Hook
+ * Auto-Dispatch - UserPromptSubmit Hook
  *
  * Detects user intent from prompt text and SUGGESTS (never forces)
  * the best specialist agent. Respects explicit @agent mentions.
@@ -173,7 +173,7 @@ async function main() {
 
     input = data ? JSON.parse(data) : null;
   } catch {
-    // Can't parse input — silently allow (this hook is advisory, not blocking)
+    // Can't parse input - silently allow (this hook is advisory, not blocking)
     process.exit(0);
   }
 
@@ -187,7 +187,7 @@ async function main() {
 
   if (match) {
     const output = {
-      additionalContext: `Specialist Agent suggests: @${match.agent} — ${match.description}. To use it, mention @${match.agent} in your prompt.`,
+      additionalContext: `Specialist Agent suggests: @${match.agent} - ${match.description}. To use it, mention @${match.agent} in your prompt.`,
     };
     process.stdout.write(JSON.stringify(output));
   }
@@ -197,7 +197,7 @@ async function main() {
 
 if (process.argv[1] && resolve(process.argv[1]) === resolve(__filename)) {
   main().catch(() => {
-    // Advisory hook — never block on error
+    // Advisory hook - never block on error
     process.exit(0);
   });
 }

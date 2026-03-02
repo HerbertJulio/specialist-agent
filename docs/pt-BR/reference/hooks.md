@@ -1,6 +1,6 @@
 # Referência de Hooks
 
-Hooks são scripts de ciclo de vida que executam em momentos-chave durante sua sessão de desenvolvimento. Eles automatizam pré-verificações, rastreiam métricas, tratam erros e geram resumos de sessão — tudo sem intervenção manual.
+Hooks são scripts de ciclo de vida que executam em momentos-chave durante sua sessão de desenvolvimento. Eles automatizam pré-verificações, rastreiam métricas, tratam erros e geram resumos de sessão - tudo sem intervenção manual.
 
 ## Referência Rápida
 
@@ -102,10 +102,10 @@ Executa quando uma nova sessão do Claude Code é iniciada.
 
 **O que faz:**
 
-1. **Valida a configuração do projeto** — verifica o diretório `.claude/` e o `CLAUDE.md`
-2. **Inicializa métricas** — cria `.claude/metrics/current-session.json` com contadores zerados
-3. **Cria ponto de restauração** — cria uma tag no commit git atual como `restore-point/session-{timestamp}`
-4. **Carrega memória de sessão** — exibe decisões recentes de `.claude/session-memory.json`
+1. **Valida a configuração do projeto** - verifica o diretório `.claude/` e o `CLAUDE.md`
+2. **Inicializa métricas** - cria `.claude/metrics/current-session.json` com contadores zerados
+3. **Cria ponto de restauração** - cria uma tag no commit git atual como `restore-point/session-{timestamp}`
+4. **Carrega memória de sessão** - exibe decisões recentes de `.claude/session-memory.json`
 
 **Configuração:**
 
@@ -145,10 +145,10 @@ Executa antes de `@planner` criar um plano de implementação.
 
 **O que faz:**
 
-1. **Verifica o arquivo de arquitetura** — procura por `ARCHITECTURE.md` em `docs/`, na raiz ou em `.claude/`
-2. **Verifica o estado do git** — reporta branch atual, mudanças não commitadas e commits recentes
-3. **Detecta o framework** — lê `package.json` para identificar Vue, React, Next.js, SvelteKit, Angular, Astro, Nuxt, TypeScript e test runners
-4. **Escaneia o tamanho do projeto** — conta arquivos-fonte e classifica como Small/Medium/Large
+1. **Verifica o arquivo de arquitetura** - procura por `ARCHITECTURE.md` em `docs/`, na raiz ou em `.claude/`
+2. **Verifica o estado do git** - reporta branch atual, mudanças não commitadas e commits recentes
+3. **Detecta o framework** - lê `package.json` para identificar Vue, React, Next.js, SvelteKit, Angular, Astro, Nuxt, TypeScript e test runners
+4. **Escaneia o tamanho do projeto** - conta arquivos-fonte e classifica como Small/Medium/Large
 
 **Entrada:** Aceita nome da feature via variável de ambiente `PLAN_FEATURE` ou argumento CLI.
 
@@ -194,9 +194,9 @@ Executa após cada tarefa concluída (via `@executor` ou trabalho manual).
 
 **O que faz:**
 
-1. **Atualiza métricas de sessão** — registra a tarefa em `.claude/metrics/current-session.json`
-2. **Loga resumo da tarefa** — exibe status, agente, tokens, duração e arquivos alterados
-3. **Exibe totais acumulados** — mostra tarefas, tokens e custo estimado até o momento
+1. **Atualiza métricas de sessão** - registra a tarefa em `.claude/metrics/current-session.json`
+2. **Loga resumo da tarefa** - exibe status, agente, tokens, duração e arquivos alterados
+3. **Exibe totais acumulados** - mostra tarefas, tokens e custo estimado até o momento
 
 **Entrada:** Aceita dados da tarefa via variáveis de ambiente ou argumentos CLI:
 
@@ -253,10 +253,10 @@ Executa antes de `@reviewer` iniciar uma revisão de código.
 
 **O que faz:**
 
-1. **Roda o linter** — executa `npm run lint` e reporta aprovação/falha
-2. **Roda verificação TypeScript** — executa `npx tsc --noEmit` e conta os erros
-3. **Identifica arquivos alterados** — lista arquivos staged, unstaged e com diff em relação à branch
-4. **Verificação rápida de testes** — lista arquivos de teste disponíveis (com timeout de 10s)
+1. **Roda o linter** - executa `npm run lint` e reporta aprovação/falha
+2. **Roda verificação TypeScript** - executa `npx tsc --noEmit` e conta os erros
+3. **Identifica arquivos alterados** - lista arquivos staged, unstaged e com diff em relação à branch
+4. **Verificação rápida de testes** - lista arquivos de teste disponíveis (com timeout de 10s)
 
 **Entrada:** Aceita escopo da revisão via variável de ambiente `REVIEW_SCOPE` ou argumento CLI.
 
@@ -306,10 +306,10 @@ Executa após `@reviewer` concluir uma revisão de código.
 
 **O que faz:**
 
-1. **Loga resumo da revisão** — exibe veredicto (Approved, Caveats, Rejected) e uma pontuação de qualidade
-2. **Atualiza métricas de sessão** — adiciona dados da revisão à sessão atual
-3. **Salva registro da revisão** — escreve um arquivo JSON com timestamp em `.claude/metrics/reviews/`
-4. **Sugere próximas ações** — fornece orientação baseada no veredicto
+1. **Loga resumo da revisão** - exibe veredicto (Approved, Caveats, Rejected) e uma pontuação de qualidade
+2. **Atualiza métricas de sessão** - adiciona dados da revisão à sessão atual
+3. **Salva registro da revisão** - escreve um arquivo JSON com timestamp em `.claude/metrics/reviews/`
+4. **Sugere próximas ações** - fornece orientação baseada no veredicto
 
 **Entrada:** Aceita dados da revisão via variáveis de ambiente ou argumentos CLI:
 
@@ -363,9 +363,9 @@ Executa quando um agente encontra um erro.
 
 **O que faz:**
 
-1. **Loga o erro nas métricas** — registra agente, mensagem, arquivo, linha e tarefa nos dados de sessão
-2. **Sugere recuperação** — lista checkpoints e restore points disponíveis para rollback
-3. **Fornece orientação** — oferece sugestões específicas com base na mensagem de erro:
+1. **Loga o erro nas métricas** - registra agente, mensagem, arquivo, linha e tarefa nos dados de sessão
+2. **Sugere recuperação** - lista checkpoints e restore points disponíveis para rollback
+3. **Fornece orientação** - oferece sugestões específicas com base na mensagem de erro:
    - Erros TypeScript: rodar `tsc --noEmit`, verificar imports
    - Erros de teste: rodar `npm test`, verificar assertions
    - Erros de sintaxe: verificar colchetes, validar JSON/YAML
@@ -434,11 +434,11 @@ Executa quando uma sessão encerra (acionado manualmente ou detectado automatica
 
 **O que faz:**
 
-1. **Gera resumo da sessão** — visão geral com duração, status e contagem de tarefas
-2. **Calcula métricas finais** — tokens, custo, arquivos alterados, agentes e skills utilizados
-3. **Exibe comparação de custo** — estima a economia em relação a ferramentas alternativas
-4. **Salva no histórico** — escreve dados completos da sessão em `.claude/metrics/history/`
-5. **Preserva o arquivo de sessão** — mantém `current-session.json` para revisão manual
+1. **Gera resumo da sessão** - visão geral com duração, status e contagem de tarefas
+2. **Calcula métricas finais** - tokens, custo, arquivos alterados, agentes e skills utilizados
+3. **Exibe comparação de custo** - estima a economia em relação a ferramentas alternativas
+4. **Salva no histórico** - escreve dados completos da sessão em `.claude/metrics/history/`
+5. **Preserva o arquivo de sessão** - mantém `current-session.json` para revisão manual
 
 **Configuração:**
 
@@ -559,7 +559,7 @@ async function main() {
     const result = execSync('npm run lint', { encoding: 'utf-8' });
     console.log('✓ Lint passed');
   } catch (err) {
-    // Logue, mas não quebre — hooks não devem bloquear a sessão
+    // Logue, mas não quebre - hooks não devem bloquear a sessão
     console.log('⚠ Lint failed, continuing anyway');
   }
 }
@@ -580,7 +580,7 @@ main().catch(console.error);
 
 ## Hooks Nativos do Claude Code
 
-Além dos lifecycle hooks acima, o Specialist Agent oferece **4 hooks nativos** que se integram diretamente ao sistema de hooks do Claude Code. Eles executam automaticamente via `.claude/settings.json` — sem acionamento manual necessário.
+Além dos lifecycle hooks acima, o Specialist Agent oferece **4 hooks nativos** que se integram diretamente ao sistema de hooks do Claude Code. Eles executam automaticamente via `.claude/settings.json` - sem acionamento manual necessário.
 
 ### Referência Rápida
 
@@ -660,7 +660,7 @@ Edite `.specialist-agent/hooks/native/security-config.json` para:
 
 **Evento:** `UserPromptSubmit`
 
-Analisa seu prompt e sugere o melhor agente especialista. Nunca força — apenas fornece contexto.
+Analisa seu prompt e sugere o melhor agente especialista. Nunca força - apenas fornece contexto.
 
 **Como funciona:**
 1. Tokeniza seu prompt e compara com grupos de palavras-chave de cada agente

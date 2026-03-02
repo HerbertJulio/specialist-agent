@@ -1,6 +1,6 @@
 ---
 name: docs
-description: "Use when code needs documentation — API docs, architecture diagrams, user guides, ADRs, JSDoc/TSDoc comments, or onboarding materials."
+description: "Use when code needs documentation - API docs, architecture diagrams, user guides, ADRs, JSDoc/TSDoc comments, or onboarding materials."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing doc
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -101,7 +101,7 @@ export async function createUser(data: CreateUserInput): Promise<User>
 - ALWAYS include `@throws` for functions that can throw
 - ALWAYS include `@param` and `@returns` with types
 - Document edge cases and constraints in the description
-- Keep examples minimal but complete — they should compile
+- Keep examples minimal but complete - they should compile
 
 ## Architecture Docs Mode
 
@@ -168,10 +168,10 @@ graph TB
 [Who uses the system, what external systems it integrates with]
 
 ## High-Level Architecture
-[Container diagram — applications, databases, message queues]
+[Container diagram - applications, databases, message queues]
 
 ## Key Components
-[Component diagram — internal structure of main containers]
+[Component diagram - internal structure of main containers]
 
 ## Data Flow
 [How data moves through the system for key use cases]
@@ -193,9 +193,9 @@ graph TB
 
 ### Rules
 - Start from Level 1 (Context) and go deeper only as needed
-- ALWAYS use Mermaid for diagrams — they live alongside code
+- ALWAYS use Mermaid for diagrams - they live alongside code
 - Document integration contracts (API schemas, message formats)
-- Keep diagrams up to date — stale diagrams are worse than no diagrams
+- Keep diagrams up to date - stale diagrams are worse than no diagrams
 
 ## ADR Mode
 
@@ -247,9 +247,9 @@ graph TB
 - Technology adoption or deprecation
 
 ### Rules
-- NEVER delete ADRs — mark as Deprecated or Superseded
+- NEVER delete ADRs - mark as Deprecated or Superseded
 - ALWAYS link superseding ADRs to their predecessors
-- Keep Context section factual — describe forces, not opinions
+- Keep Context section factual - describe forces, not opinions
 - Maintain the ADR index after every change
 
 ## Guides Mode
@@ -284,17 +284,17 @@ npm run dev
 ```
 
 ### Tutorial Format
-1. **Prerequisites** — what the reader needs before starting
-2. **Steps** — numbered, each with code and expected output
-3. **Verification** — how to confirm the step worked
-4. **Troubleshooting** — common issues and solutions
+1. **Prerequisites** - what the reader needs before starting
+2. **Steps** - numbered, each with code and expected output
+3. **Verification** - how to confirm the step worked
+4. **Troubleshooting** - common issues and solutions
 
 ### Diataxis Framework
 Follow the Diataxis documentation framework to categorize content:
-- **Tutorials** — learning-oriented, guide the reader through steps
-- **How-to Guides** — task-oriented, solve a specific problem
-- **Reference** — information-oriented, describe the machinery (API docs)
-- **Explanation** — understanding-oriented, discuss concepts and decisions (ADRs)
+- **Tutorials** - learning-oriented, guide the reader through steps
+- **How-to Guides** - task-oriented, solve a specific problem
+- **Reference** - information-oriented, describe the machinery (API docs)
+- **Explanation** - understanding-oriented, discuss concepts and decisions (ADRs)
 
 ### Documentation-as-Code
 - Co-locate docs with code when possible (`src/auth/README.md`)
@@ -304,8 +304,8 @@ Follow the Diataxis documentation framework to categorize content:
 
 ### Rules
 - ALWAYS include prerequisites and verification steps
-- Write for the reader's skill level — don't assume knowledge
-- Keep steps atomic — one action per step
+- Write for the reader's skill level - don't assume knowledge
+- Keep steps atomic - one action per step
 - Include expected output for each step so the reader can verify
 
 ## Diagramming
@@ -397,12 +397,21 @@ erDiagram
 | "Just read the code" | New team members shouldn't need to reverse-engineer architecture from import statements. |
 | "ADRs are overhead" | ADRs take 10 minutes. Re-debating the same decision takes 10 hours. |
 
+## Writing Style Rules
+
+- NEVER use em dashes in any generated text. Use regular
+  hyphens (-), colons (:), or commas instead.
+  Em dashes are an AI writing tell and must be avoided.
+- Prefer short, direct sentences over long compound sentences
+- Avoid filler phrases like "It's worth noting that",
+  "In order to", "As a matter of fact"
+
 ## General Rules
-- Framework-agnostic — works with any stack
+- Framework-agnostic - works with any stack
 - Reads ARCHITECTURE.md if present and follows existing conventions
-- Documentation MUST match current code — stale docs are worse than no docs
-- ALWAYS include working code examples — docs without examples are incomplete
-- Use Mermaid for all diagrams — they version-control with code
+- Documentation MUST match current code - stale docs are worse than no docs
+- ALWAYS include working code examples - docs without examples are incomplete
+- Use Mermaid for all diagrams - they version-control with code
 - Follow existing project conventions for doc location and format
 - Provide `.env.example` for any documented configuration
 
@@ -411,7 +420,7 @@ erDiagram
 After completing work in any mode, provide:
 
 ```markdown
-## Docs — [Mode: API Docs | Architecture Docs | Guides | ADR]
+## Docs - [Mode: API Docs | Architecture Docs | Guides | ADR]
 ### What was done
 - [Files created, updated, or documented]
 ### Coverage
@@ -441,4 +450,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

@@ -1,75 +1,59 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="200" viewBox="0 0 960 200">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="bgb" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#0B1929"/>
+      <stop offset="50%" stop-color="#0F2340"/>
+      <stop offset="100%" stop-color="#162D50"/>
+    </linearGradient>
+    <linearGradient id="g1b" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0A1628"/>
       <stop offset="100%" stop-color="#1E3A5F"/>
     </linearGradient>
-    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0A1628"/>
-      <stop offset="100%" stop-color="#1E3A5F"/>
-    </linearGradient>
-    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="g2b" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#1E3A5F"/>
       <stop offset="100%" stop-color="#2B5EA7"/>
     </linearGradient>
-    <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="g3b" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#4A7FCF"/>
       <stop offset="100%" stop-color="#CD7F32"/>
     </linearGradient>
+    <linearGradient id="hlb" x1="0" y1="0" x2="0.85" y2="0.85">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.12"/>
+      <stop offset="60%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glowb" cx="50%" cy="35%" r="40%">
+      <stop offset="0%" stop-color="#2B5EA7" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0A1628" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
   <!-- Background -->
-  <rect width="960" height="200" rx="12" fill="url(#bg)"/>
+  <rect width="960" height="200" rx="12" fill="url(#bgb)"/>
+  <rect width="960" height="200" rx="12" fill="url(#glowb)"/>
 
-  <!-- Subtle grid -->
-  <g opacity="0.04" stroke="#4A7FCF" stroke-width="1">
-    <line x1="0" y1="100" x2="960" y2="100"/>
-    <line x1="240" y1="0" x2="240" y2="200"/>
-    <line x1="480" y1="0" x2="480" y2="200"/>
-    <line x1="720" y1="0" x2="720" y2="200"/>
-  </g>
-
-  <!-- Logo (left side) -->
-  <g transform="translate(60, 48) scale(2.6)">
-    <path d="M16 26 L2 19 L16 12 L30 19 Z" fill="url(#g1)" opacity="0.9"/>
-    <path d="M16 21 L2 14 L16 7 L30 14 Z" fill="url(#g2)" opacity="0.9"/>
-    <path d="M16 16 L2 9 L16 2 L30 9 Z" fill="url(#g3)" opacity="0.95"/>
-    <path d="M16 2 L2 9 L16 16 Z" fill="#fff" opacity="0.12"/>
+  <!-- Logo — isometric card stack (compact for banner) -->
+  <g transform="translate(100, 100) scale(0.52)">
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g1b)" opacity="0.85" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.15"/>
+    </g>
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 0)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g2b)" opacity="0.9" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.2"/>
+    </g>
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, -30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g3b)" opacity="0.95" stroke="#CD7F32" stroke-width="0.5" stroke-opacity="0.25"/>
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#hlb)"/>
+    </g>
   </g>
 
   <!-- Title -->
-  <text x="180" y="72" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="700" fill="#FFFFFF">Specialist Agent</text>
+  <text x="195" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="46" font-weight="700" fill="#FFFFFF" letter-spacing="-0.5">Specialist Agent</text>
 
-  <!-- Subtitle -->
-  <text x="180" y="100" font-family="system-ui, -apple-system, sans-serif" font-size="17" fill="#8BADD4">AI agents for Claude Code — any framework, any stack</text>
+  <!-- Tagline -->
+  <text x="195" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#7BA3CC">Your AI development team — any framework, any stack</text>
 
-  <!-- Row 1: Stats -->
-  <g transform="translate(180, 132)">
-    <rect x="0" y="-12" width="88" height="24" rx="12" fill="#2B5EA7" opacity="0.4"/>
-    <text x="44" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8BADD4">26+ Agents</text>
-    <rect x="96" y="-12" width="81" height="24" rx="12" fill="#2B5EA7" opacity="0.4"/>
-    <text x="136.5" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8BADD4">21 Skills</text>
-    <rect x="185" y="-12" width="81" height="24" rx="12" fill="#2B5EA7" opacity="0.4"/>
-    <text x="225.5" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8BADD4">Lite Mode</text>
-    <rect x="274" y="-12" width="67" height="24" rx="12" fill="#2B5EA7" opacity="0.4"/>
-    <text x="307.5" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8BADD4">7 Packs</text>
-  </g>
+  <!-- URL -->
+  <text x="195" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#4A6A8A" letter-spacing="2">specialistagent.com.br</text>
 
-  <!-- Row 2: Framework packs -->
-  <g transform="translate(180, 164)">
-    <rect x="0" y="-12" width="67" height="24" rx="12" fill="#DD0031" opacity="0.3"/>
-    <text x="33.5" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#DD0031">Angular</text>
-    <rect x="75" y="-12" width="53" height="24" rx="12" fill="#FF5D01" opacity="0.3"/>
-    <text x="101.5" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#FF5D01">Astro</text>
-    <rect x="136" y="-12" width="67" height="24" rx="12" fill="#CCCCCC" opacity="0.15"/>
-    <text x="169.5" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#CCCCCC">Next.js</text>
-    <rect x="211" y="-12" width="52" height="24" rx="12" fill="#00DC82" opacity="0.3"/>
-    <text x="237" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#00DC82">Nuxt</text>
-    <rect x="271" y="-12" width="53" height="24" rx="12" fill="#61DAFB" opacity="0.3"/>
-    <text x="297.5" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#61DAFB">React</text>
-    <rect x="332" y="-12" width="81" height="24" rx="12" fill="#FF3E00" opacity="0.3"/>
-    <text x="372.5" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#FF3E00">SvelteKit</text>
-    <rect x="421" y="-12" width="53" height="24" rx="12" fill="#42b883" opacity="0.3"/>
-    <text x="447.5" y="3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#42b883">Vue 3</text>
-  </g>
+  <!-- Right side accent -->
+  <rect x="957" y="0" width="3" height="200" rx="0" fill="url(#g3b)" opacity="0.4"/>
 </svg>

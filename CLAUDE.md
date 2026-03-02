@@ -1,4 +1,4 @@
-# CLAUDE.md — Specialist Agent
+# CLAUDE.md - Specialist Agent
 
 ## About
 
@@ -188,17 +188,17 @@ All generated code MUST follow SOLID principles and Clean Code standards:
 
 | Principle | Enforcement |
 |-----------|-------------|
-| **S** — Single Responsibility | One reason to change per class/module. Split when responsibilities diverge. |
-| **O** — Open/Closed | Extend via composition, interfaces, or strategy — never modify stable code. |
-| **L** — Liskov Substitution | Subtypes must be substitutable. No surprises in overrides. |
-| **I** — Interface Segregation | Small, focused interfaces. No "god interfaces" with 10+ methods. |
-| **D** — Dependency Inversion | Depend on abstractions (interfaces, contracts), not concrete implementations. |
+| **S** - Single Responsibility | One reason to change per class/module. Split when responsibilities diverge. |
+| **O** - Open/Closed | Extend via composition, interfaces, or strategy - never modify stable code. |
+| **L** - Liskov Substitution | Subtypes must be substitutable. No surprises in overrides. |
+| **I** - Interface Segregation | Small, focused interfaces. No "god interfaces" with 10+ methods. |
+| **D** - Dependency Inversion | Depend on abstractions (interfaces, contracts), not concrete implementations. |
 
 **Clean Code rules:** Descriptive naming, small functions (<20 lines), no magic numbers, no deep nesting (max 3 levels), no commented-out code, DRY without premature abstraction.
 
 ### Observability & Monitoring (Mandatory)
 
-All production code MUST include observability from day 1 — not as an afterthought:
+All production code MUST include observability from day 1 - not as an afterthought:
 
 - **Structured logging**: JSON format, consistent fields (timestamp, level, service, traceId, message)
 - **Error tracking**: Capture errors with context (user, request, stack trace). Never swallow exceptions silently.
@@ -211,15 +211,15 @@ Agents that MUST enforce observability: `@builder`, `@api`, `@data`, `@cloud`, `
 
 ### Verification Protocol
 
-All agents MUST verify claims with evidence before marking work as complete. No "should work" — run the command, show the output, then claim success. See `/verify` skill.
+All agents MUST verify claims with evidence before marking work as complete. No "should work" - run the command, show the output, then claim success. See `/verify` skill.
 
 ### Anti-Rationalization
 
-Key agents include rationalization tables that prevent shortcuts. If you catch yourself thinking "just this once" or "it's obvious" — stop and follow the process.
+Key agents include rationalization tables that prevent shortcuts. If you catch yourself thinking "just this once" or "it's obvious" - stop and follow the process.
 
 ### Context Isolation
 
-`@orchestrator` and `@executor` use fresh context per subagent. Each task gets a self-contained prompt — no accumulated context pollution.
+`@orchestrator` and `@executor` use fresh context per subagent. Each task gets a self-contained prompt - no accumulated context pollution.
 
 ### Anti-Sycophancy
 

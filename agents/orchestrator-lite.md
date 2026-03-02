@@ -5,7 +5,7 @@ model: haiku
 tools: Read, Write, Edit, Bash, Glob, Grep, Task
 ---
 
-# @orchestrator (Lite) — Multi-Agent Coordination
+# @orchestrator (Lite) - Multi-Agent Coordination
 
 ## Mission
 Coordinate parallel agent execution for faster results.

@@ -4,7 +4,7 @@
 This tutorial uses the **Vue 3 pack** patterns. Each framework pack (React, Next.js, SvelteKit, Angular, Astro, Nuxt) provides equivalent patterns adapted to its ecosystem. See [Framework Packs](/guide/introduction#how-packs-work) for details.
 :::
 
-This tutorial walks you through building a complete **Orders** module for an e-commerce app — from zero to a fully working feature with listing, creation, editing, and deletion.
+This tutorial walks you through building a complete **Orders** module for an e-commerce app - from zero to a fully working feature with listing, creation, editing, and deletion.
 
 ## What You'll Build
 
@@ -28,7 +28,7 @@ graph LR
     style R fill:#42b883,color:#fff
 ```
 
-## Step 1 — Create the Module Structure
+## Step 1 - Create the Module Structure
 
 ```bash
 mkdir -p src/modules/orders/{types,adapters,services,composables,stores,components,views,__tests__}
@@ -48,7 +48,7 @@ src/modules/orders/
 └── index.ts
 ```
 
-## Step 2 — Define Types (API Response)
+## Step 2 - Define Types (API Response)
 
 This is the **exact shape** the API returns. Keep it 1:1 with the JSON.
 
@@ -102,10 +102,10 @@ export interface CreateOrderPayload {
 ```
 
 ::: tip Why snake_case?
-The types file mirrors the API exactly. Most REST APIs use `snake_case`. Your app code will use `camelCase` — the adapter handles the conversion.
+The types file mirrors the API exactly. Most REST APIs use `snake_case`. Your app code will use `camelCase` - the adapter handles the conversion.
 :::
 
-## Step 3 — Define Contracts (App Interface)
+## Step 3 - Define Contracts (App Interface)
 
 This is what your **components actually use**. Clean, typed, camelCase.
 
@@ -153,9 +153,9 @@ export interface OrderListResult {
 }
 ```
 
-## Step 4 — Build the Adapter
+## Step 4 - Build the Adapter
 
-The adapter is a **pure function** — no HTTP, no side effects. It converts between the two formats.
+The adapter is a **pure function** - no HTTP, no side effects. It converts between the two formats.
 
 ```typescript
 // src/modules/orders/adapters/orders-adapter.ts
@@ -224,7 +224,7 @@ export const ordersAdapter = {
 Always create both directions: **inbound** (API → App) for reads and **outbound** (App → API) for writes. This keeps the adapter as the single conversion point.
 :::
 
-## Step 5 — Build the Service
+## Step 5 - Build the Service
 
 The service makes HTTP calls. **Nothing else.** No try/catch, no transformation.
 
@@ -257,7 +257,7 @@ export const ordersService = {
 }
 ```
 
-## Step 6 — Build the Composables
+## Step 6 - Build the Composables
 
 ### List composable (query)
 
@@ -358,9 +358,9 @@ export function useCancelOrder() {
 }
 ```
 
-## Step 7 — Build the Store (Client State)
+## Step 7 - Build the Store (Client State)
 
-The store holds **UI state only** — not server data.
+The store holds **UI state only** - not server data.
 
 ```typescript
 // src/modules/orders/stores/orders-store.ts
@@ -412,7 +412,7 @@ export const useOrdersStore = defineStore('orders', () => {
 })
 ```
 
-## Step 8 — Build the Components
+## Step 8 - Build the Components
 
 ### OrdersTable.vue
 
@@ -526,7 +526,7 @@ const statuses: Array<{ value: OrderStatus; label: string }> = [
 </template>
 ```
 
-## Step 9 — Build the View
+## Step 9 - Build the View
 
 The view **composes** components and connects them to composables and stores.
 
@@ -579,7 +579,7 @@ const { cancelOrder, isCancelling } = useCancelOrder()
 </template>
 ```
 
-## Step 10 — Register the Route
+## Step 10 - Register the Route
 
 ```typescript
 // src/router/index.ts (add to routes array)
@@ -595,12 +595,12 @@ const { cancelOrder, isCancelling } = useCancelOrder()
 Always use `() => import(...)` for route components. This creates separate chunks and reduces the initial bundle size.
 :::
 
-## Step 11 — Create the Barrel Export
+## Step 11 - Create the Barrel Export
 
 ```typescript
 // src/modules/orders/index.ts
 
-// Public API — only export what other parts of the app need
+// Public API - only export what other parts of the app need
 export type { Order, OrderStatus, Address } from './types/orders.contracts'
 export { useOrdersList } from './composables/useOrdersList'
 export { useCreateOrder } from './composables/useCreateOrder'
@@ -651,6 +651,6 @@ The agent follows the same steps in this tutorial, reading your `ARCHITECTURE.md
 
 ## Next Steps
 
-- [Service Layer Tutorial](/tutorials/service-layer) — Deep dive into types + adapter + service
-- [Forms Tutorial](/tutorials/forms) — Build a creation form with Zod validation
-- [Pagination + Filters](/tutorials/pagination-filters) — Advanced list patterns
+- [Service Layer Tutorial](/tutorials/service-layer) - Deep dive into types + adapter + service
+- [Forms Tutorial](/tutorials/forms) - Build a creation form with Zod validation
+- [Pagination + Filters](/tutorials/pagination-filters) - Advanced list patterns

@@ -172,7 +172,7 @@ Installed during `npx specialist-agent init`. See [Hooks Reference](/reference/h
 
 ## What's Next?
 
-- [All 27+ Agents](/reference/agents) — Full reference catalog
-- [All Skills](/reference/skills) — Slash commands reference
-- [Architecture](/guide/architecture) — Understand the patterns
-- [Real-World Scenarios](/scenarios/) — See agents in action
+- [All 27+ Agents](/reference/agents) - Full reference catalog
+- [All Skills](/reference/skills) - Slash commands reference
+- [Architecture](/guide/architecture) - Understand the patterns
+- [Real-World Scenarios](/scenarios/) - See agents in action

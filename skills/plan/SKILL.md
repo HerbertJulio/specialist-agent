@@ -1,12 +1,12 @@
 ---
 name: plan
-description: "Use when starting a new feature, refactor, or multi-step task — before writing any code. Use especially when scope is unclear or multiple files are involved."
+description: "Use when starting a new feature, refactor, or multi-step task - before writing any code. Use especially when scope is unclear or multiple files are involved."
 user-invocable: true
 argument-hint: "[feature description]"
 allowed-tools: Read, Glob, Grep
 ---
 
-# /plan — Adaptive Planning
+# /plan - Adaptive Planning
 
 Create an implementation plan that matches the complexity of the task.
 
@@ -41,9 +41,9 @@ Classify as:
 ```markdown
 ## Quick Plan: [Feature]
 
-1. [Step 1] — `file.ts`
-2. [Step 2] — `file.ts`
-3. [Step 3] — `file.ts`
+1. [Step 1] - `file.ts`
+2. [Step 2] - `file.ts`
+3. [Step 3] - `file.ts`
 4. Test: Run `npm test`
 5. Verify: Check [criteria]
 
@@ -58,9 +58,9 @@ Estimated: ~X tokens
 [2-3 sentences]
 
 ### Task Breakdown
-- [ ] Task 1: [description] — `file.ts` (~N lines)
-- [ ] Task 2: [description] — `file.ts` (~N lines)
-- [ ] Task 3: [description] — `file.ts` (~N lines)
+- [ ] Task 1: [description] - `file.ts` (~N lines)
+- [ ] Task 2: [description] - `file.ts` (~N lines)
+- [ ] Task 3: [description] - `file.ts` (~N lines)
 
 ### Dependencies
 - Task 2 depends on Task 1
@@ -92,7 +92,7 @@ Estimated: ~X tokens
 [High-level architecture]
 
 ### Alternatives Considered
-1. [Alternative] — Rejected: [reason]
+1. [Alternative] - Rejected: [reason]
 
 ### Task Breakdown
 [Detailed tasks with estimates]
@@ -129,7 +129,7 @@ Next: Awaiting approval
 | Excuse | Reality |
 |--------|---------|
 | "It's simple enough to just start coding" | That's what every developer says before a 3-day rabbit hole. 10 minutes of planning saves hours. |
-| "I already know the architecture" | Plans aren't just for you — they create alignment and a checkpoint to rollback to. |
+| "I already know the architecture" | Plans aren't just for you - they create alignment and a checkpoint to rollback to. |
 | "Planning is waterfall" | Adaptive planning IS agile. Skipping planning is chaos, not agility. |
 | "I'll refactor later if the approach is wrong" | Refactoring costs 10x more than planning. Get it right first. |
 

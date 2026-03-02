@@ -1,10 +1,10 @@
 ---
 name: tdd
-description: "Use when implementing any feature or bugfix where correctness matters — before writing implementation code."
+description: "Use when implementing any feature or bugfix where correctness matters - before writing implementation code."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# @tdd — Test-Driven Development Enforcer
+# @tdd - Test-Driven Development Enforcer
 
 ## Mission
 
@@ -43,7 +43,7 @@ For everything else: **RED → GREEN → REFACTOR**. When in doubt, test first.
 
 ## Workflow
 
-### Phase 1: RED — Write Failing Test
+### Phase 1: RED - Write Failing Test
 
 ```markdown
 1. UNDERSTAND the requirement
@@ -63,7 +63,7 @@ For everything else: **RED → GREEN → REFACTOR**. When in doubt, test first.
    - Test doesn't test the right thing
 ```
 
-### Phase 2: GREEN — Minimal Implementation
+### Phase 2: GREEN - Minimal Implementation
 
 ```markdown
 1. WRITE the minimum code to pass the test:
@@ -82,7 +82,7 @@ For everything else: **RED → GREEN → REFACTOR**. When in doubt, test first.
    - TypeScript errors exist
 ```
 
-### Phase 3: REFACTOR — Improve Code Quality
+### Phase 3: REFACTOR - Improve Code Quality
 
 ```markdown
 1. IMPROVE the implementation:
@@ -207,7 +207,7 @@ Test: `should return discounted price when valid coupon applied`
 // test/discount.test.ts
 expect(applyDiscount(100, { discount: 0.1 })).toBe(90);
 ```
-Result: FAIL ✗ — "applyDiscount is not defined"
+Result: FAIL ✗ - "applyDiscount is not defined"
 
 ### GREEN
 Implementation:
@@ -236,7 +236,7 @@ Phase: RED
 Writing test for: [behavior]
 Test file: [path]
 Running tests...
-Result: FAIL ✗ — "[error message]"
+Result: FAIL ✗ - "[error message]"
 → Proceeding to GREEN
 
 Phase: GREEN
@@ -280,7 +280,7 @@ All tests passing: ✓
 | "Just this once, it's trivial" | No exceptions. The rule exists for trivial cases too. |
 | "The refactor is optional" | Skipping refactor = compounding tech debt. Always refactor. |
 
-**Red Flags — STOP and delete code:**
+**Red Flags - STOP and delete code:**
 
 - Code written before test exists
 - "I already know what the test should look like"
@@ -305,17 +305,17 @@ By invoking @tdd, you committed to the RED-GREEN-REFACTOR cycle. Breaking that c
 
 ### Social Proof
 
-Every high-reliability engineering team (Google, NASA, financial systems) uses test-first methodology for critical code. Skipping tests is not "moving fast" — it's technical debt that slows everyone down.
+Every high-reliability engineering team (Google, NASA, financial systems) uses test-first methodology for critical code. Skipping tests is not "moving fast" - it's technical debt that slows everyone down.
 
 ## Rules
 
-1. **Never implement before RED** — This is the core of TDD
-2. **Capture all test output** — Proof, not trust
-3. **One behavior per test** — Small, focused tests
-4. **Minimal GREEN** — Just enough to pass, no more
-5. **Always REFACTOR** — Technical debt compounds
-6. **Document each cycle** — Learning and traceability
-7. **Delete code written before tests** — No exceptions
+1. **Never implement before RED** - This is the core of TDD
+2. **Capture all test output** - Proof, not trust
+3. **One behavior per test** - Small, focused tests
+4. **Minimal GREEN** - Just enough to pass, no more
+5. **Always REFACTOR** - Technical debt compounds
+6. **Document each cycle** - Learning and traceability
+7. **Delete code written before tests** - No exceptions
 
 ## Handoff Protocol
 

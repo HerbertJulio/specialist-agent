@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Security Guard — PreToolUse Hook (Bash)
+ * Security Guard - PreToolUse Hook (Bash)
  *
  * Blocks dangerous shell commands BEFORE they execute.
  * Design: fail-closed (if this script crashes, exit 2 = block).
@@ -22,7 +22,7 @@ const __dirname = dirname(__filename);
 // ── Security Rules ──────────────────────────────────────────
 
 const RULES = [
-  // CRITICAL — always block, no exceptions
+  // CRITICAL - always block, no exceptions
   {
     id: 'catastrophic-rm',
     severity: 'CRITICAL',
@@ -40,7 +40,7 @@ const RULES = [
       ];
       for (const pattern of dangerousTargets) {
         if (pattern.test(' ' + normalized)) {
-          // Check allowlist — safe directories are OK
+          // Check allowlist - safe directories are OK
           const safeTargets = [
             /node_modules/, /dist[\/\\]?/, /build[\/\\]?/, /\.next[\/\\]?/,
             /\.nuxt[\/\\]?/, /\.svelte-kit[\/\\]?/, /coverage[\/\\]?/,
@@ -71,7 +71,7 @@ const RULES = [
     message: 'BLOCKED [CRITICAL]: Disk wipe command detected. This would destroy disk data irreversibly.'
   },
 
-  // HIGH — block with descriptive message
+  // HIGH - block with descriptive message
   {
     id: 'force-push-protected',
     severity: 'HIGH',
@@ -124,7 +124,7 @@ const RULES = [
     message: 'BLOCKED [HIGH]: chmod 777 makes files world-readable/writable/executable.\nUse specific permissions instead: chmod 755 (directories), chmod 644 (files), chmod 600 (secrets).'
   },
 
-  // MEDIUM — block access to sensitive files
+  // MEDIUM - block access to sensitive files
   {
     id: 'env-file-read',
     severity: 'MEDIUM',
@@ -228,7 +228,7 @@ async function main() {
   }
 
   if (!input?.tool_input?.command) {
-    // No command to evaluate — allow
+    // No command to evaluate - allow
     process.exit(0);
   }
 
@@ -254,7 +254,7 @@ async function main() {
     process.exit(2);
   }
 
-  // Allow — silent exit
+  // Allow - silent exit
   process.exit(0);
 }
 

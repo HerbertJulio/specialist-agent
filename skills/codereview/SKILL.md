@@ -1,20 +1,20 @@
 ---
 name: codereview
-description: "Use when you need a comprehensive code review combining architecture, security, and test perspectives — especially before merging, releasing, or after major changes."
+description: "Use when you need a comprehensive code review combining architecture, security, and test perspectives - especially before merging, releasing, or after major changes."
 user-invocable: true
 argument-hint: "[path, module, or PR]"
 allowed-tools: Read, Bash, Glob, Grep
 ---
 
-# /codereview — Multi-Reviewer Parallel Code Review
+# /codereview - Multi-Reviewer Parallel Code Review
 
-Run a comprehensive code review that dispatches 3 specialized perspectives concurrently — architecture, security, and testing — then consolidates into a single actionable verdict.
+Run a comprehensive code review that dispatches 3 specialized perspectives concurrently - architecture, security, and testing - then consolidates into a single actionable verdict.
 
 **Target:** $ARGUMENTS
 
 ## Why 3 Perspectives, Not 6
 
-Most multi-reviewer systems use 5-7 overlapping perspectives that waste tokens and produce redundant findings. `/codereview` uses exactly 3 orthogonal perspectives — each covers a distinct failure mode with zero overlap:
+Most multi-reviewer systems use 5-7 overlapping perspectives that waste tokens and produce redundant findings. `/codereview` uses exactly 3 orthogonal perspectives - each covers a distinct failure mode with zero overlap:
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -71,7 +71,7 @@ find $TARGET -type f \( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "
 gh pr diff $PR_NUMBER 2>/dev/null || git diff main...HEAD 2>/dev/null || true
 ```
 
-Read the project's `docs/ARCHITECTURE.md` if it exists — this is the source of truth for architecture review.
+Read the project's `docs/ARCHITECTURE.md` if it exists - this is the source of truth for architecture review.
 
 ### Step 2: Parallel Review Dispatch
 
@@ -157,15 +157,15 @@ npx vitest run --passWithNoTests --reporter=json 2>/dev/null || npx jest --json 
 
 Merge findings from all 3 perspectives:
 
-1. **Deduplicate** — Remove findings flagged by multiple perspectives (keep highest severity)
-2. **Cross-reference** — A security finding that also lacks tests is escalated one severity level
-3. **Assign severity** — Every finding gets a severity level (see table below)
-4. **Sort** — CRITICAL first, then HIGH, MEDIUM, LOW
-5. **Group** — By file, then by severity within each file
+1. **Deduplicate** - Remove findings flagged by multiple perspectives (keep highest severity)
+2. **Cross-reference** - A security finding that also lacks tests is escalated one severity level
+3. **Assign severity** - Every finding gets a severity level (see table below)
+4. **Sort** - CRITICAL first, then HIGH, MEDIUM, LOW
+5. **Group** - By file, then by severity within each file
 
 ### Step 4: Verdict
 
-Apply verdict rules based on the consolidated findings. The verdict is final and non-negotiable — it follows the rules mechanically.
+Apply verdict rules based on the consolidated findings. The verdict is final and non-negotiable - it follows the rules mechanically.
 
 ## Severity Levels
 
@@ -199,7 +199,7 @@ Apply verdict rules based on the consolidated findings. The verdict is final and
 3. Every CRITICAL or HIGH finding includes a specific file:line reference
 4. Every CRITICAL or HIGH finding includes a concrete remediation suggestion
 5. Automated checks were run where available (`npm audit`, `tsc`, linting, test suite)
-6. The verdict follows the Verdict Rules mechanically — no exceptions
+6. The verdict follows the Verdict Rules mechanically - no exceptions
 7. Cross-referencing was performed (security findings checked for test coverage)
 
 ## Anti-Rationalization
@@ -217,16 +217,16 @@ Apply verdict rules based on the consolidated findings. The verdict is final and
 
 ## Rules
 
-1. **All 3 perspectives are mandatory** — Skipping one defeats the purpose of multi-reviewer review
-2. **Read-only** — Never modify files during a review
-3. **Evidence required** — Every finding needs a file:line reference and explanation
-4. **Remediation required** — Findings without fix suggestions are useless
-5. **Verdict is mechanical** — Follow the Verdict Rules table, no subjective overrides
-6. **No sycophancy** — Never say "LGTM", "looks good", or "great job" without evidence
-7. **Cross-reference findings** — A security issue without tests is worse than either alone
-8. **Severity must be justified** — Every rating needs a specific technical reason
-9. **Run automated tools** — Never skip `npm audit`, linting, or type checking if available
-10. **Fresh context per perspective** — Each reviewer perspective starts from the code, not from another reviewer's output
+1. **All 3 perspectives are mandatory** - Skipping one defeats the purpose of multi-reviewer review
+2. **Read-only** - Never modify files during a review
+3. **Evidence required** - Every finding needs a file:line reference and explanation
+4. **Remediation required** - Findings without fix suggestions are useless
+5. **Verdict is mechanical** - Follow the Verdict Rules table, no subjective overrides
+6. **No sycophancy** - Never say "LGTM", "looks good", or "great job" without evidence
+7. **Cross-reference findings** - A security issue without tests is worse than either alone
+8. **Severity must be justified** - Every rating needs a specific technical reason
+9. **Run automated tools** - Never skip `npm audit`, linting, or type checking if available
+10. **Fresh context per perspective** - Each reviewer perspective starts from the code, not from another reviewer's output
 
 ## Output
 
@@ -235,9 +235,9 @@ Apply verdict rules based on the consolidated findings. The verdict is final and
 Target: [path or PR]
 Scope: [X files, Y lines]
 
-Architecture: [N findings] — @reviewer
-Security:     [N findings] — @security
-Tests:        [N findings] — @tester
+Architecture: [N findings] - @reviewer
+Security:     [N findings] - @security
+Tests:        [N findings] - @tester
 
 Severity:
   CRITICAL: N
@@ -246,9 +246,9 @@ Severity:
   LOW: N
 
 Top Findings:
-1. [CRITICAL] [description] — [file:line]
-2. [HIGH] [description] — [file:line]
-3. [HIGH] [description] — [file:line]
+1. [CRITICAL] [description] - [file:line]
+2. [HIGH] [description] - [file:line]
+3. [HIGH] [description] - [file:line]
 
 Verdict: [APPROVE | APPROVE WITH NOTES | REQUEST_CHANGES | BLOCK]
 Reason: [1-line justification]

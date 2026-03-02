@@ -1,12 +1,12 @@
 ---
 name: lint
-description: "Use when you need to lint the codebase and auto-fix issues — detects linter, runs it, and fixes what it can."
+description: "Use when you need to lint the codebase and auto-fix issues - detects linter, runs it, and fixes what it can."
 user-invocable: true
 argument-hint: "[path or --fix]"
 allowed-tools: Read, Bash, Glob, Grep
 ---
 
-# /lint — Lint & Auto-Fix
+# /lint - Lint & Auto-Fix
 
 Detect the project's linter, run it, auto-fix what's possible, and report remaining issues.
 
@@ -93,8 +93,8 @@ Fixed automatically:
   - 3 missing semicolons (ESLint --fix)
 
 Remaining (manual fix needed):
-  - src/auth.ts:42 — no-explicit-any: Unexpected any
-  - src/api.ts:18 — no-unused-vars: 'result' is defined but never used
+  - src/auth.ts:42 - no-explicit-any: Unexpected any
+  - src/api.ts:18 - no-unused-vars: 'result' is defined but never used
 
 Summary: 20 fixed, 2 remaining
 ```
@@ -119,8 +119,8 @@ Target: src/
 
 ## Rules
 
-1. **Always auto-fix first** — Run with --fix/--write before reporting
-2. **Detect, don't assume** — Check which linter is installed
-3. **Format after lint** — Linter first, formatter second (if separate)
-4. **Report remaining** — Only show issues that need manual intervention
-5. **Never install linters** — Use what's already in the project
+1. **Always auto-fix first** - Run with --fix/--write before reporting
+2. **Detect, don't assume** - Check which linter is installed
+3. **Format after lint** - Linter first, formatter second (if separate)
+4. **Report remaining** - Only show issues that need manual intervention
+5. **Never install linters** - Use what's already in the project

@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing fin
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -50,7 +50,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing fin
 1. Ask: payment provider (Stripe, PayPal, Square, etc.), payment types (one-time, subscription, metered), currency requirements
 2. Analyze existing project structure and identify where payment logic should live
 3. Create payment service layer:
-   - Payment types/contracts (amounts in smallest currency unit — cents, not dollars)
+   - Payment types/contracts (amounts in smallest currency unit - cents, not dollars)
    - Payment service (API calls to provider)
    - Payment adapter (provider response → app contract)
    - Webhook handler for async events (payment succeeded, failed, refunded)
@@ -63,7 +63,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing fin
 7. Validate with type checking
 
 ### Rules
-- ALWAYS store amounts in smallest currency unit (cents) — never floating point
+- ALWAYS store amounts in smallest currency unit (cents) - never floating point
 - NEVER log full card numbers, tokens, or sensitive payment data
 - ALWAYS implement idempotency for payment creation
 - Webhook handlers MUST be idempotent (handle duplicate events)
@@ -91,7 +91,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing fin
 5. Validate calculations with unit tests
 
 ### Rules
-- ALWAYS use decimal/integer math for money — never floating point
+- ALWAYS use decimal/integer math for money - never floating point
 - Invoice numbers MUST be sequential and immutable
 - Subscription state changes MUST be auditable (keep history)
 - Support multiple currencies if international
@@ -117,7 +117,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing fin
 5. Validate data accuracy against source transactions
 
 ### Rules
-- Reports MUST be read-only — never modify financial data from reports
+- Reports MUST be read-only - never modify financial data from reports
 - All monetary values displayed with proper currency formatting
 - Time zones MUST be consistent (store UTC, display local)
 - Large datasets should use pagination or streaming
@@ -126,7 +126,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing fin
 ## Advanced Financial Patterns
 
 ### Double-Entry Bookkeeping
-Use when the project requires formal accounting, audit trails, or compliance (SOX, PCI). For simple payment integrations (e.g., Stripe checkout), a transaction log is sufficient — don't over-engineer.
+Use when the project requires formal accounting, audit trails, or compliance (SOX, PCI). For simple payment integrations (e.g., Stripe checkout), a transaction log is sufficient - don't over-engineer.
 
 When applicable, every financial transaction records TWO entries: a debit and a credit that always balance.
 
@@ -155,14 +155,14 @@ Description: Customer payment received
 **Implementation Rules:**
 - Every transaction creates TWO ledger entries (debit + credit)
 - Sum of all debits MUST equal sum of all credits (trial balance)
-- Ledger entries are IMMUTABLE — corrections are new entries, not modifications
-- Use integer arithmetic (cents) — never floating point
+- Ledger entries are IMMUTABLE - corrections are new entries, not modifications
+- Use integer arithmetic (cents) - never floating point
 
 ### Event Sourcing for Financial Audit Trail
 Store every financial state change as an immutable event for complete auditability.
 
 ```typescript
-// Financial events — immutable, append-only
+// Financial events - immutable, append-only
 type FinancialEvent =
   | { type: 'InvoiceIssued'; invoiceId: string; amount: number; currency: string; issuedAt: Date }
   | { type: 'PaymentReceived'; invoiceId: string; amount: number; method: string; receivedAt: Date }
@@ -209,10 +209,10 @@ Payment Saga:
 If ANY step fails, compensate all previously completed steps in reverse order.
 
 ## General Rules
-- Framework-agnostic — works with any stack
+- Framework-agnostic - works with any stack
 - Reads ARCHITECTURE.md if present and follows existing conventions
 - All financial calculations MUST have unit tests
-- Money is NEVER stored as float — use integers (cents) or decimal types
+- Money is NEVER stored as float - use integers (cents) or decimal types
 - PCI compliance: never store raw card data, use tokenization
 - All financial operations must be idempotent where possible
 - Audit logging for all financial state changes
@@ -222,7 +222,7 @@ If ANY step fails, compensate all previously completed steps in reverse order.
 After completing work in any mode, provide:
 
 ```markdown
-## Finance — [Mode: Payment | Billing | Reporting]
+## Finance - [Mode: Payment | Billing | Reporting]
 ### What was done
 - [Integrations, billing models, or reports created]
 ### Financial decisions
@@ -251,4 +251,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

@@ -9,7 +9,7 @@ npx specialist-agent init
 
 ## Configure
 
-Add to `.cursorrules`:
+Add to `.cursor/rules/specialist-agent.mdc` (or `.cursorrules` for older versions):
 
 ```
 When you see @agent-name, read and follow .claude/agents/agent-name.md

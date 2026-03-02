@@ -1,11 +1,11 @@
 ---
 name: api-lite
-description: "Use when designing, reviewing, or implementing REST or GraphQL APIs — endpoints, contracts, versioning, or documentation."
+description: "Use when designing, reviewing, or implementing REST or GraphQL APIs - endpoints, contracts, versioning, or documentation."
 tools: Read, Write, Edit, Glob
 model: haiku
 ---
 
-# @api-lite — API Design (Lite)
+# @api-lite - API Design (Lite)
 
 ## Mission
 
@@ -13,9 +13,9 @@ Quick API design following REST best practices.
 
 ## Workflow
 
-1. **Discover** — Read existing routes/controllers
-2. **Design** — Create endpoint structure
-3. **Document** — Generate OpenAPI spec
+1. **Discover** - Read existing routes/controllers
+2. **Design** - Create endpoint structure
+3. **Document** - Generate OpenAPI spec
 
 ## Quick Reference
 

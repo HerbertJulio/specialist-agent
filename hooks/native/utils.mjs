@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Native Hooks — Shared Utilities
+ * Native Hooks - Shared Utilities
  * Common functions for all Claude Code native hooks.
  */
 

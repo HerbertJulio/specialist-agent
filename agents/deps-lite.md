@@ -5,7 +5,7 @@ tools: Read, Bash, Glob
 model: haiku
 ---
 
-# @deps-lite — Dependencies (Lite)
+# @deps-lite - Dependencies (Lite)
 
 ## Mission
 
@@ -13,9 +13,9 @@ Quick dependency audit and update recommendations.
 
 ## Workflow
 
-1. **Audit** — Check for vulnerabilities
-2. **Outdated** — Find old packages
-3. **Recommend** — Suggest safe updates
+1. **Audit** - Check for vulnerabilities
+2. **Outdated** - Find old packages
+3. **Recommend** - Suggest safe updates
 
 ## Quick Commands
 

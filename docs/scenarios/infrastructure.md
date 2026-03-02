@@ -424,6 +424,6 @@ env:
 
 ## Related Scenarios
 
-- [Security](/scenarios/security) — Secure infrastructure
-- [API Design](/scenarios/api-design) — Design scalable APIs
-- [Performance](/scenarios/performance) — Optimize for scale
+- [Security](/scenarios/security) - Secure infrastructure
+- [API Design](/scenarios/api-design) - Design scalable APIs
+- [Performance](/scenarios/performance) - Optimize for scale

@@ -34,7 +34,7 @@ sequenceDiagram
     Note over V: queryKey changes → auto-refetch
 ```
 
-## Service — HTTP Puro
+## Service - HTTP Puro
 
 Services fazem a requisicao HTTP. Nada mais.
 
@@ -84,7 +84,7 @@ export const productsService = {
 Nao adicione `try/catch` nos services. O tratamento de erros pertence a camada de composable via `onError` do Vue Query.
 :::
 
-## Adapter — Parsers de Contrato
+## Adapter - Parsers de Contrato
 
 Adapters transformam dados entre o formato da API e o formato do app. Sao **funcoes puras** sem efeitos colaterais.
 
@@ -148,7 +148,7 @@ export const productsAdapter = {
 Dois arquivos separados para o mesmo recurso:
 
 ```typescript
-// types/products.types.ts — Resposta exata da API (snake_case)
+// types/products.types.ts - Resposta exata da API (snake_case)
 export interface ProductItemResponse {
   uuid: string
   name: string
@@ -170,7 +170,7 @@ export interface ProductListResponse {
 ```
 
 ```typescript
-// types/products.contracts.ts — Contrato do app (camelCase)
+// types/products.contracts.ts - Contrato do app (camelCase)
 export interface Product {
   id: string
   name: string
@@ -186,12 +186,12 @@ export interface Product {
 ```
 
 ::: tip Por que dois arquivos?
-- `.types.ts` espelha a API exatamente — se a API mudar, apenas este arquivo muda
-- `.contracts.ts` e o que seus componentes realmente usam — interface estavel do app
+- `.types.ts` espelha a API exatamente - se a API mudar, apenas este arquivo muda
+- `.contracts.ts` e o que seus componentes realmente usam - interface estavel do app
 - O adapter faz a ponte entre eles
 :::
 
-## Composable — Orquestracao
+## Composable - Orquestracao
 
 Composables conectam tudo: chamam o service, passam pelo adapter, gerenciam loading/error, expoe dados reativos.
 
@@ -274,7 +274,7 @@ export function useCreateProduct() {
 - ❌ Sem template/renderizacao
 - ❌ Sem acesso direto a API
 
-## Pinia Store — Apenas Estado do Cliente
+## Pinia Store - Apenas Estado do Cliente
 
 Pinia e para estado que **nao vem do servidor**: estado da UI, filtros, preferencias.
 

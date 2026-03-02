@@ -1,11 +1,11 @@
 ---
 name: tdd
-description: "Use when implementing any feature or bugfix where correctness matters — before writing implementation code."
+description: "Use when implementing any feature or bugfix where correctness matters - before writing implementation code."
 model: haiku
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# @tdd (Lite) — TDD Enforcer
+# @tdd (Lite) - TDD Enforcer
 
 ## Iron Law
 **NO CODE WITHOUT FAILING TEST FIRST**

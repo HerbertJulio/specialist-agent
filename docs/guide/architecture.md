@@ -131,6 +131,6 @@ sequenceDiagram
 
 ## Deep Dive
 
-- [Layers](/guide/layers) — Detailed examples of each layer
-- [Components](/guide/components) — Component patterns and composition
+- [Layers](/guide/layers) - Detailed examples of each layer
+- [Components](/guide/components) - Component patterns and composition
 - Full reference: `docs/ARCHITECTURE.md` in your project

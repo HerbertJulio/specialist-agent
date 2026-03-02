@@ -21,14 +21,14 @@ export default withMermaid(defineConfig({
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
 
-    // Open Graph — Facebook, LinkedIn, WhatsApp
-    ['meta', { property: 'og:title', content: 'Specialist Agent — Your AI Development Team' }],
+    // Open Graph - Facebook, LinkedIn, WhatsApp
+    ['meta', { property: 'og:title', content: 'Specialist Agent - Your AI Development Team' }],
     ['meta', { property: 'og:description', content: '27+ specialized AI agents and 21 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode across 7 framework packs.' }],
     ['meta', { property: 'og:image', content: 'https://specialistagent.com.br/social-preview.svg' }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
     ['meta', { property: 'og:image:type', content: 'image/svg+xml' }],
-    ['meta', { property: 'og:image:alt', content: 'Specialist Agent — AI agents for any framework, any stack' }],
+    ['meta', { property: 'og:image:alt', content: 'Specialist Agent - AI agents for any framework, any stack' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:url', content: 'https://specialistagent.com.br' }],
     ['meta', { property: 'og:site_name', content: 'Specialist Agent' }],
@@ -37,10 +37,10 @@ export default withMermaid(defineConfig({
 
     // Twitter / X
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:title', content: 'Specialist Agent — Your AI Development Team' }],
+    ['meta', { name: 'twitter:title', content: 'Specialist Agent - Your AI Development Team' }],
     ['meta', { name: 'twitter:description', content: '27+ AI agents and 21 skills that build, review, debug, and ship production code. Any framework, any stack.' }],
     ['meta', { name: 'twitter:image', content: 'https://specialistagent.com.br/social-preview-twitter.svg' }],
-    ['meta', { name: 'twitter:image:alt', content: 'Specialist Agent — AI agents for any framework, any stack' }],
+    ['meta', { name: 'twitter:image:alt', content: 'Specialist Agent - AI agents for any framework, any stack' }],
 
     // SEO
     ['meta', { name: 'description', content: '27+ specialized AI agents and 21 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt.' }],

@@ -137,7 +137,7 @@ function setupNativeHooks(cwd, selectedHooks) {
     }
   }
 
-  // 5. Deep-merge hooks (idempotent — skip if command already exists)
+  // 5. Deep-merge hooks (idempotent - skip if command already exists)
   if (!existing.hooks) existing.hooks = {}
 
   for (const [eventName, entries] of Object.entries(filteredHooks)) {
@@ -183,7 +183,7 @@ function detectFramework(pkgPath, availablePacks) {
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'))
   const deps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) }
 
-  // Order matters: nuxt includes vue, next includes react — check meta-frameworks first
+  // Order matters: nuxt includes vue, next includes react - check meta-frameworks first
   if (deps['nuxt'] && availablePacks.includes('nuxt')) return 'nuxt'
   if (deps['next'] && availablePacks.includes('nextjs')) return 'nextjs'
   if ((deps['@sveltejs/kit'] || deps['svelte']) && availablePacks.includes('svelte')) return 'svelte'
@@ -292,7 +292,7 @@ model: {{model}}
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# @{{name}} — {{title}}
+# @{{name}} - {{title}}
 
 ## Mission
 
@@ -635,7 +635,7 @@ async function manageCommunity() {
         const descMatch = content.match(/^description:\s*"?([^"]*)"?$/m)
         const name = nameMatch ? nameMatch[1].trim() : entry.name
         const desc = descMatch ? descMatch[1].trim() : ''
-        console.log(`  ${GREEN}/${name}${NC} ${DIM}— ${desc}${NC}`)
+        console.log(`  ${GREEN}/${name}${NC} ${DIM}- ${desc}${NC}`)
         count++
       }
     }
@@ -870,7 +870,7 @@ async function main() {
     message: 'Where to install agents?',
     options: [
       { value: 'project', label: 'This project only', hint: '.claude/agents/' },
-      { value: 'global', label: 'Globally', hint: '~/.claude/agents — available in all projects' },
+      { value: 'global', label: 'Globally', hint: '~/.claude/agents - available in all projects' },
     ],
   })
 

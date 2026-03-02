@@ -1,6 +1,6 @@
 ---
 name: review-review
-description: "Use when code changes need review before merge — validates architecture, types, security, and test coverage."
+description: "Use when code changes need review before merge - validates architecture, types, security, and test coverage."
 user-invocable: true
 argument-hint: "[scope]"
 allowed-tools: Read, Bash, Glob, Grep
@@ -36,9 +36,9 @@ npx vitest run --passWithNoTests
    - Auto-imports: no explicit imports where Nuxt handles them
 
 4. Classify:
-   - VIOLATION — ARCHITECTURE.md violation
-   - ATTENTION — Recommended improvement
-   - COMPLIANT — Correct
-   - HIGHLIGHT — Positive highlight
+   - VIOLATION - ARCHITECTURE.md violation
+   - ATTENTION - Recommended improvement
+   - COMPLIANT - Correct
+   - HIGHLIGHT - Positive highlight
 
 5. Produce report with verdict: Approved | With caveats | Requires changes

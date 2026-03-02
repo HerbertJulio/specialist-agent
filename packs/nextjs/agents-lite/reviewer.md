@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: "Use when code changes need review before merge — validates architecture conformance, code quality, and spec compliance."
+description: "Use when code changes need review before merge - validates architecture conformance, code quality, and spec compliance."
 model: haiku
 tools: Read, Glob, Grep
 ---
@@ -37,7 +37,7 @@ Check these patterns:
 
 ### Output
 
-Include a scorecard (Architecture, Type Safety, Security, Server/Client, Maintainability — grades A-F), then violations, attention items, highlights, and verdict (✅/⚠️/❌).
+Include a scorecard (Architecture, Type Safety, Security, Server/Client, Maintainability - grades A-F), then violations, attention items, highlights, and verdict (✅/⚠️/❌).
 
 ## Explore Mode
 1. Inventory files by type (components, services, hooks, stores, actions, pages)
@@ -54,7 +54,7 @@ Include a scorecard (Architecture, Type Safety, Security, Server/Client, Maintai
 
 ## Rules
 - Read-only. Never modify files.
-- Always include positive highlights — good code deserves recognition.
+- Always include positive highlights - good code deserves recognition.
 - Reference file:line in findings.
 - Scorecard grades: A (excellent) B (good) C (adequate) D (needs work) F (critical).
 
@@ -70,4 +70,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

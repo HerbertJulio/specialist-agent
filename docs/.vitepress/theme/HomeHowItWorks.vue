@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { useData } from 'vitepress'
+
+const { lang } = useData()
+const isPtBR = computed(() => lang.value === 'pt-BR')
 
 interface FlowStage {
   icon: string
@@ -12,7 +16,7 @@ interface FlowScenario {
   stages: FlowStage[]
 }
 
-const scenarios: FlowScenario[] = [
+const scenariosEN: FlowScenario[] = [
   {
     label: 'Build Feature',
     stages: [
@@ -42,6 +46,38 @@ const scenarios: FlowScenario[] = [
   },
 ]
 
+const scenariosPTBR: FlowScenario[] = [
+  {
+    label: 'Criar Feature',
+    stages: [
+      { icon: '💬', title: 'Pedido', content: '"Crie um módulo de produtos com CRUD"' },
+      { icon: '🔀', title: 'Despacho', content: '@orchestrator → @builder' },
+      { icon: '⚙️', title: 'Agente', content: 'types → service → components → tests' },
+      { icon: '✅', title: 'Verificado', content: '14/14 testes passando' },
+    ],
+  },
+  {
+    label: 'Code Review',
+    stages: [
+      { icon: '💬', title: 'Pedido', content: '"Revise o módulo de autenticação"' },
+      { icon: '🔀', title: 'Despacho', content: '@orchestrator → @reviewer' },
+      { icon: '⚙️', title: 'Agente', content: 'spec → qualidade → arquitetura' },
+      { icon: '✅', title: 'Verificado', content: '3 problemas encontrados, 2 corrigidos' },
+    ],
+  },
+  {
+    label: 'Depurar Problema',
+    stages: [
+      { icon: '💬', title: 'Pedido', content: '"Usuários reportam 500 em /api/orders"' },
+      { icon: '🔀', title: 'Despacho', content: '@orchestrator → @doctor' },
+      { icon: '⚙️', title: 'Agente', content: 'reproduzir → isolar → rastrear → corrigir' },
+      { icon: '✅', title: 'Verificado', content: 'Causa raiz corrigida, teste de regressão adicionado' },
+    ],
+  },
+]
+
+const scenarios = computed(() => isPtBR.value ? scenariosPTBR : scenariosEN)
+
 const SCENARIO_DURATION = 8000
 const STAGE_DELAY = 1000
 
@@ -54,7 +90,7 @@ const progressKey = ref(0)
 let cycleTimer: ReturnType<typeof setInterval> | null = null
 let stageTimers: ReturnType<typeof setTimeout>[] = []
 
-const currentScenario = computed(() => scenarios[activeScenario.value])
+const currentScenario = computed(() => scenarios.value[activeScenario.value])
 
 function clearStageTimers() {
   stageTimers.forEach(t => clearTimeout(t))
@@ -85,7 +121,7 @@ function startCycle() {
 
   cycleTimer = setInterval(() => {
     if (isPaused.value) return
-    activeScenario.value = (activeScenario.value + 1) % scenarios.length
+    activeScenario.value = (activeScenario.value + 1) % scenarios.value.length
     progressKey.value++
     nextTick(() => activateStages())
   }, SCENARIO_DURATION)
@@ -121,8 +157,8 @@ onUnmounted(() => {
 
 <template>
   <section class="home-section">
-    <h2 class="home-section-title">How It Works</h2>
-    <p class="home-section-subtitle">Describe your intent. The right agent handles the rest.</p>
+    <h2 class="home-section-title">{{ isPtBR ? 'Como Funciona' : 'How It Works' }}</h2>
+    <p class="home-section-subtitle">{{ isPtBR ? 'Descreva sua intenção. O agente certo cuida do resto.' : 'Describe your intent. The right agent handles the rest.' }}</p>
 
     <div class="flow-tabs">
       <button

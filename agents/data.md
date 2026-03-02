@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing dat
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -72,14 +72,14 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing dat
 6. Validate: run migrations, seed data, test queries
 
 ### Rules
-- ALWAYS use migrations — never modify schema directly in production
+- ALWAYS use migrations - never modify schema directly in production
 - Every table MUST have a primary key
 - Use UUIDs or auto-increment IDs consistently (don't mix)
 - Timestamps (created_at, updated_at) on every table
 - Foreign keys MUST have indexes
 - Name tables in plural snake_case (users, order_items)
 - Name columns in snake_case (first_name, created_at)
-- Avoid N+1 queries — use eager loading or joins
+- Avoid N+1 queries - use eager loading or joins
 
 ## Caching Mode
 
@@ -107,13 +107,13 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing dat
 6. Validate: test cache hit/miss scenarios, measure performance improvement
 
 ### Rules
-- ALWAYS set TTL — never cache forever without explicit reason
+- ALWAYS set TTL - never cache forever without explicit reason
 - Cache keys MUST be deterministic and namespaced
-- Invalidate cache on data mutation — stale data is a bug
-- Handle cache failures gracefully — fallback to source
+- Invalidate cache on data mutation - stale data is a bug
+- Handle cache failures gracefully - fallback to source
 - Don't cache sensitive data (passwords, tokens) in shared caches
-- Monitor cache hit rate — below 80% means poor key design
-- Serialize consistently (JSON, msgpack) — don't mix formats
+- Monitor cache hit rate - below 80% means poor key design
+- Serialize consistently (JSON, msgpack) - don't mix formats
 
 ## Optimization Mode
 
@@ -143,10 +143,10 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing dat
 6. Validate: benchmark before/after, verify query plans improved
 
 ### Rules
-- ALWAYS measure before optimizing — don't guess at bottlenecks
+- ALWAYS measure before optimizing - don't guess at bottlenecks
 - Add indexes for all foreign keys and frequent WHERE/JOIN columns
-- Composite index column order matters — most selective first
-- Don't over-index — each index slows writes
+- Composite index column order matters - most selective first
+- Don't over-index - each index slows writes
 - Use EXPLAIN ANALYZE, not just EXPLAIN
 - Batch inserts/updates for bulk operations
 - Monitor query performance continuously, not just once
@@ -173,7 +173,7 @@ Current state = replay all events from the beginning
 - **Projections**: materialize events into read-optimized views
 
 **Rules:**
-- Events are IMMUTABLE — never update or delete an event
+- Events are IMMUTABLE - never update or delete an event
 - Event names in past tense (OrderCreated, not CreateOrder)
 - Include all data needed to reconstruct state in the event payload
 - Version events for schema evolution
@@ -217,20 +217,20 @@ SagaOrchestrator:
 **Key rules:**
 - Every step MUST have a compensating action (undo)
 - Compensating actions must be idempotent
-- Handle timeouts — set deadlines for each step
+- Handle timeouts - set deadlines for each step
 - Log all saga state transitions for debugging
 
 ### Repository Pattern with DDD Terminology
 
 ```typescript
-// Aggregate Root — the only entry point for modifications
+// Aggregate Root - the only entry point for modifications
 interface OrderRepository {
   findById(id: OrderId): Promise<Order | null>
   save(order: Order): Promise<void>
-  // No generic findAll — aggregates are loaded by ID
+  // No generic findAll - aggregates are loaded by ID
 }
 
-// Value Object — immutable, equality by value
+// Value Object - immutable, equality by value
 class Money {
   constructor(readonly amount: number, readonly currency: string) {}
   equals(other: Money) { return this.amount === other.amount && this.currency === other.currency }
@@ -240,13 +240,13 @@ class Money {
   }
 }
 
-// Domain Event — something that happened
+// Domain Event - something that happened
 class OrderPlaced {
   constructor(readonly orderId: string, readonly total: Money, readonly occurredAt: Date) {}
 }
 ```
 
-**Bounded Context isolation:** Each bounded context has its own repositories, its own database schema, and communicates with other contexts through events or Anti-Corruption Layers — never direct database access.
+**Bounded Context isolation:** Each bounded context has its own repositories, its own database schema, and communicates with other contexts through events or Anti-Corruption Layers - never direct database access.
 
 ## Observability
 
@@ -260,7 +260,7 @@ All data layers MUST include observability:
 - **Never log**: query parameters containing passwords, PII, or sensitive data
 
 ## General Rules
-- Framework-agnostic — works with any stack and database
+- Framework-agnostic - works with any stack and database
 - Reads ARCHITECTURE.md if present and follows existing conventions
 - Data integrity is non-negotiable: use constraints, transactions, validations
 - Migrations MUST be reversible (include down/rollback)
@@ -273,7 +273,7 @@ All data layers MUST include observability:
 After completing work in any mode, provide:
 
 ```markdown
-## Data — [Mode: Modeling | Caching | Optimization]
+## Data - [Mode: Modeling | Caching | Optimization]
 ### What was done
 - [Files created or modified with brief description]
 ### Decisions
@@ -302,4 +302,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

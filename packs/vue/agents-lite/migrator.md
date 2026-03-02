@@ -1,6 +1,6 @@
 ---
 name: migrator
-description: "Use when legacy code needs modernization to the target architecture — components, modules, or full codebase migration."
+description: "Use when legacy code needs modernization to the target architecture - components, modules, or full codebase migration."
 model: haiku
 tools: Read, Write, Edit, Glob, Grep
 ---
@@ -16,12 +16,12 @@ Migrate legacy code to target architecture. Detect scope: module | component.
 - **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
 
 ## Module Mode (6 Phases)
-1. **Analysis** — Map files, count Options vs setup, JS vs TS, mixins, cross-module imports
-2. **Structure** — Create target dirs: components/, composables/, services/, adapters/, stores/, types/, views/, __tests__/
-3. **Types & Adapters** — .types.ts (API snake_case) + .contracts.ts (app camelCase) + adapter (bidirectional)
-4. **Services** — Extract HTTP to pure service (no try/catch, no transformation)
-5. **State** — Server state → Vue Query, client state → Pinia (setup syntax, readonly)
-6. **Components** — Convert to `<script setup lang="ts">`, typed props/emits, extract mixins to composables
+1. **Analysis** - Map files, count Options vs setup, JS vs TS, mixins, cross-module imports
+2. **Structure** - Create target dirs: components/, composables/, services/, adapters/, stores/, types/, views/, __tests__/
+3. **Types & Adapters** - .types.ts (API snake_case) + .contracts.ts (app camelCase) + adapter (bidirectional)
+4. **Services** - Extract HTTP to pure service (no try/catch, no transformation)
+5. **State** - Server state → Vue Query, client state → Pinia (setup syntax, readonly)
+6. **Components** - Convert to `<script setup lang="ts">`, typed props/emits, extract mixins to composables
 
 Order: bottom-up (types → services → state → components). Ask user approval between phases.
 
@@ -70,4 +70,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

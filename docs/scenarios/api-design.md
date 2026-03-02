@@ -318,6 +318,6 @@ Design API with:
 
 ## Related Scenarios
 
-- [Build Features](/scenarios/build-feature) — Implement the API
-- [Security](/scenarios/security) — Secure the API
-- [Database](/scenarios/api-design#database) — Design the data layer
+- [Build Features](/scenarios/build-feature) - Implement the API
+- [Security](/scenarios/security) - Secure the API
+- [Database](/scenarios/api-design#database) - Design the data layer

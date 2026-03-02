@@ -5,10 +5,10 @@
 ::: tip Features Transversais
 Todos os agentes incluem:
 
-- **Protocolo de Verificação** — Verificação baseada em prova antes de declarar conclusão
-- **Anti-Racionalização** — Tabelas prevenindo atalhos e desculpas comuns
-- **Modo Lite** — Variantes Haiku otimizadas em custo (60-80% mais barato)
-- **Handoff Protocol** — Delegação estruturada entre agentes
+- **Protocolo de Verificação** - Verificação baseada em prova antes de declarar conclusão
+- **Anti-Racionalização** - Tabelas prevenindo atalhos e desculpas comuns
+- **Modo Lite** - Variantes Haiku otimizadas em custo (60-80% mais barato)
+- **Handoff Protocol** - Delegação estruturada entre agentes
 
 :::
 
@@ -74,9 +74,9 @@ Construir módulos, componentes, serviços e testes.
 
 Revisar código antes do merge. Três verificações em uma:
 
-1. **Spec compliance** — Atende os requisitos?
-2. **Qualidade de código** — Está limpo e testado?
-3. **Aderência à arquitetura** — Segue os padrões?
+1. **Spec compliance** - Atende os requisitos?
+2. **Qualidade de código** - Está limpo e testado?
+3. **Aderência à arquitetura** - Segue os padrões?
 
 ```bash
 "Use @reviewer to review the auth module"
@@ -151,9 +151,9 @@ Executar planos com checkpoints.
 
 Test-Driven Development.
 
-1. **RED** — Escrever teste falhando
-2. **GREEN** — Fazer passar
-3. **REFACTOR** — Melhorar o código
+1. **RED** - Escrever teste falhando
+2. **GREEN** - Fazer passar
+3. **REFACTOR** - Melhorar o código
 
 ```bash
 "Use @tdd to implement calculateDiscount"
@@ -167,10 +167,10 @@ Sem código sem teste falhando primeiro.
 
 Debugging sistemático em 4 fases.
 
-1. **Gather** — Coletar evidências
-2. **Analyze** — Formar hipótese
-3. **Test** — Verificar hipótese
-4. **Implement** — Corrigir e validar
+1. **Gather** - Coletar evidências
+2. **Analyze** - Formar hipótese
+3. **Test** - Verificar hipótese
+4. **Implement** - Corrigir e validar
 
 ```bash
 "Use @debugger to fix the stale data issue"
@@ -413,7 +413,7 @@ Gerenciamento de memória de sessão.
 Explorar codebases desconhecidos.
 
 ```bash
-"Use @explorer to map this codebase — I'm new here"
+"Use @explorer to map this codebase - I'm new here"
 ```
 
 **Output:** Score de saúde, mapa de estrutura, recomendações.
@@ -452,7 +452,7 @@ Agentes-chave incluem tabelas de prevenção de racionalização:
 | "Deve funcionar" | "Deve" não é evidência. Prove. |
 | "Verifico depois" | Depois nunca chega. Verifique agora. |
 
-Se você se pegar pensando "só dessa vez" — pare e siga o processo.
+Se você se pegar pensando "só dessa vez" - pare e siga o processo.
 
 ---
 

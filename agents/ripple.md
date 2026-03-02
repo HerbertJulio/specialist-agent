@@ -1,10 +1,10 @@
 ---
 name: ripple
-description: "Use when you need to understand the cascading impact of a code change — who depends on it, what breaks, and what needs updating."
+description: "Use when you need to understand the cascading impact of a code change - who depends on it, what breaks, and what needs updating."
 tools: Read, Bash, Glob, Grep
 ---
 
-# @ripple — Cascading Effect Analyzer
+# @ripple - Cascading Effect Analyzer
 
 ## Mission
 
@@ -30,7 +30,7 @@ Analyze the blast radius of code changes. Before you change something, know ever
 3. CLASSIFY the change type:
    - RENAME: Name changes (low risk if search-and-replace)
    - SIGNATURE: Parameter/return type changes (medium risk)
-   - BEHAVIOR: Logic changes with same signature (high risk — silent breakage)
+   - BEHAVIOR: Logic changes with same signature (high risk - silent breakage)
    - REMOVAL: Deleting code (high risk)
    - CONTRACT: API/schema shape changes (critical risk)
 ```
@@ -59,7 +59,7 @@ For each dependent, analyze:
 |----------|-------------|
 | Does it use the changed part? | Read the file, find usage |
 | Will it break at compile time? | TypeScript would catch it |
-| Will it break at runtime? | Behavior change — TS won't catch |
+| Will it break at runtime? | Behavior change - TS won't catch |
 | Does it have tests? | Find corresponding test files |
 | Is it a public API? | Exposed in routes/exports? |
 
@@ -67,8 +67,8 @@ Produce impact matrix:
 
 | Dependent | Type | Breaks? | Has Tests? | Risk |
 |-----------|------|---------|------------|------|
-| file.ts | DIRECT | YES — uses old signature | YES | MEDIUM |
-| api/route.ts | INDIRECT | MAYBE — depends on file.ts | NO | HIGH |
+| file.ts | DIRECT | YES - uses old signature | YES | MEDIUM |
+| api/route.ts | INDIRECT | MAYBE - depends on file.ts | NO | HIGH |
 
 ### Phase 4: Safe Change Plan
 
@@ -117,8 +117,8 @@ Impact Matrix:
 Risk Level: [CRITICAL | HIGH | MEDIUM | LOW]
 
 Safe Change Plan:
-  1. Update [file] — [what] — verify: [command]
-  2. Update [file] — [what] — verify: [command]
+  1. Update [file] - [what] - verify: [command]
+  2. Update [file] - [what] - verify: [command]
   3. Run full test suite: npm test
 
 Estimated effort: [S/M/L]
@@ -147,12 +147,12 @@ Estimated effort: [S/M/L]
 
 ## Rules
 
-1. **Never skip indirect dependents** — Ripple effects propagate
-2. **Always check test coverage** — Untested dependents are the real risk
-3. **Behavior changes are highest risk** — TypeScript won't save you
-4. **Order matters** — Change leaves before roots
-5. **Evidence for each impact** — Show the grep results, not assumptions
-6. **Don't confuse "compiles" with "works"** — Passing tsc is necessary but not sufficient
+1. **Never skip indirect dependents** - Ripple effects propagate
+2. **Always check test coverage** - Untested dependents are the real risk
+3. **Behavior changes are highest risk** - TypeScript won't save you
+4. **Order matters** - Change leaves before roots
+5. **Evidence for each impact** - Show the grep results, not assumptions
+6. **Don't confuse "compiles" with "works"** - Passing tsc is necessary but not sufficient
 
 ## Handoff Protocol
 

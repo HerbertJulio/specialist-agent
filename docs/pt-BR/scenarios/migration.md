@@ -12,10 +12,10 @@ Migrate the user module from JavaScript to TypeScript
 ```
 
 **O que acontece:**
-1. **Escanear** — Analisa os arquivos JS atuais e os padrões usados
-2. **Planejar** — Cria a ordem de migração (arquivos folha primeiro)
-3. **Migrar** — Converte os arquivos com tipagens adequadas
-4. **Verificar** — Garante que o build passa com o modo strict
+1. **Escanear** - Analisa os arquivos JS atuais e os padrões usados
+2. **Planejar** - Cria a ordem de migração (arquivos folha primeiro)
+3. **Migrar** - Converte os arquivos com tipagens adequadas
+4. **Verificar** - Garante que o build passa com o modo strict
 
 **Resultado:**
 ```
@@ -27,7 +27,7 @@ SCAN
   Patterns: CommonJS requires, no JSDoc types
 
 PLAN (leaf-first order)
-  1. types/user.ts (new — shared types)
+  1. types/user.ts (new - shared types)
   2. user.validator.ts (no imports from module)
   3. user.repository.ts (imports validator)
   4. user.service.ts (imports repository)
@@ -54,7 +54,7 @@ VERIFIED
 
 **Comando:**
 ```
-Modernize the auth module — it uses callbacks and var declarations
+Modernize the auth module - it uses callbacks and var declarations
 ```
 
 **Resultado:**
@@ -104,10 +104,10 @@ VERIFIED
 ```
 
 **O que acontece:**
-1. **Analisar** — Mapeia padrões React para equivalentes Vue
-2. **Planejar** — Cria a ordem de migração por dependência
-3. **Converter** — Transforma componentes e gerenciamento de estado
-4. **Verificar** — Garante que as funcionalidades foram preservadas
+1. **Analisar** - Mapeia padrões React para equivalentes Vue
+2. **Planejar** - Cria a ordem de migração por dependência
+3. **Converter** - Transforma componentes e gerenciamento de estado
+4. **Verificar** - Garante que as funcionalidades foram preservadas
 
 **Resultado:**
 ```
@@ -155,7 +155,7 @@ VERIFIED
 Migrate src/modules/auth from JavaScript to TypeScript
 
 # Inclua restrições
-Migrate the dashboard to Vue 3 — keep the same API contracts
+Migrate the dashboard to Vue 3 - keep the same API contracts
 ```
 
 ### Migrações Comuns
@@ -172,6 +172,6 @@ Migrate the dashboard to Vue 3 — keep the same API contracts
 
 ## Cenários Relacionados
 
-- [Construir Funcionalidades](/pt-BR/scenarios/build-feature) — Construa com padrões modernos
-- [Revisão de Código](/pt-BR/scenarios/code-review) — Revise o código migrado
-- [Infraestrutura](/pt-BR/scenarios/infrastructure) — Atualize o deploy para o novo stack
+- [Construir Funcionalidades](/pt-BR/scenarios/build-feature) - Construa com padrões modernos
+- [Revisão de Código](/pt-BR/scenarios/code-review) - Revise o código migrado
+- [Infraestrutura](/pt-BR/scenarios/infrastructure) - Atualize o deploy para o novo stack

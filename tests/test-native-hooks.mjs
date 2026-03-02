@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Native Hooks — Test Suite
+ * Native Hooks - Test Suite
  *
  * Tests security-guard rules, auto-dispatch intent matching,
  * session-context builder, auto-format helpers, and settings template.
@@ -52,7 +52,7 @@ const defaultConfig = JSON.parse(readFileSync(join(ROOT, 'hooks', 'native', 'sec
 
 // ── Security Guard: CRITICAL Rules ──────────────────────────
 
-setSection('Security Guard — CRITICAL');
+setSection('Security Guard - CRITICAL');
 
 assert(evaluateCommand('rm -rf /', defaultConfig).blocked, 'Blocks rm -rf /');
 assert(evaluateCommand('rm -rf ~', defaultConfig).blocked, 'Blocks rm -rf ~');
@@ -66,7 +66,7 @@ assert(evaluateCommand('mkfs.ext4 /dev/sda1', defaultConfig).blocked, 'Blocks mk
 
 // ── Security Guard: HIGH Rules ──────────────────────────────
 
-setSection('Security Guard — HIGH');
+setSection('Security Guard - HIGH');
 
 assert(evaluateCommand('git push --force origin main', defaultConfig).blocked, 'Blocks force push to main');
 assert(evaluateCommand('git push -f origin master', defaultConfig).blocked, 'Blocks force push to master');
@@ -86,7 +86,7 @@ assert(evaluateCommand('chmod 777 .', defaultConfig).blocked, 'Blocks chmod 777 
 
 // ── Security Guard: MEDIUM Rules ────────────────────────────
 
-setSection('Security Guard — MEDIUM');
+setSection('Security Guard - MEDIUM');
 
 assert(evaluateCommand('cat .env', defaultConfig).blocked, 'Blocks cat .env');
 assert(evaluateCommand('less .env', defaultConfig).blocked, 'Blocks less .env');
@@ -99,7 +99,7 @@ assert(evaluateCommand('export SECRET_KEY="mysupersecretkey123"', defaultConfig)
 
 // ── Security Guard: ALLOWED Commands ────────────────────────
 
-setSection('Security Guard — ALLOWED');
+setSection('Security Guard - ALLOWED');
 
 assert(!evaluateCommand('rm -rf node_modules/', defaultConfig).blocked, 'Allows rm -rf node_modules/');
 assert(!evaluateCommand('rm -rf dist/', defaultConfig).blocked, 'Allows rm -rf dist/');
@@ -126,7 +126,7 @@ assert(!evaluateCommand('git log --oneline', defaultConfig).blocked, 'Allows git
 
 // ── Security Guard: Edge Cases ──────────────────────────────
 
-setSection('Security Guard — Edge Cases');
+setSection('Security Guard - Edge Cases');
 
 assert(!evaluateCommand('', defaultConfig).blocked, 'Empty command allowed');
 assert(!evaluateCommand(null, defaultConfig).blocked, 'Null command allowed');
@@ -138,12 +138,12 @@ assert(!evaluateCommand('git reset --hard', configDisabled).blocked, 'Respects d
 
 // Config with security disabled
 const configOff = { ...defaultConfig, enabled: false };
-// Note: evaluateCommand doesn't check enabled (that's done in main()) — this tests the function directly
+// Note: evaluateCommand doesn't check enabled (that's done in main()) - this tests the function directly
 assert(evaluateCommand('rm -rf /', configOff).blocked, 'evaluateCommand always checks rules (enabled is for main())');
 
 // ── Auto-Dispatch: Intent Matching ──────────────────────────
 
-setSection('Auto-Dispatch — Intent Matching');
+setSection('Auto-Dispatch - Intent Matching');
 
 // Clear matches
 const reviewMatch = matchIntent('review the auth module code for quality and architecture');
@@ -172,7 +172,7 @@ assert(secMatch?.agent === 'security', 'Matches "security vulnerabilities OWASP"
 
 // ── Auto-Dispatch: Skip Cases ───────────────────────────────
 
-setSection('Auto-Dispatch — Skip Cases');
+setSection('Auto-Dispatch - Skip Cases');
 
 assert(matchIntent('use @builder to create a user module') === null, 'Skips when @agent already mentioned');
 assert(matchIntent('@reviewer check this code') === null, 'Skips explicit @mention at start');
@@ -184,7 +184,7 @@ assert(matchIntent(null) === null, 'Handles null prompt');
 
 // ── Auto-Format: Path Validation ────────────────────────────
 
-setSection('Auto-Format — Path Validation');
+setSection('Auto-Format - Path Validation');
 
 const testCwd = process.platform === 'win32' ? 'C:\\Users\\test\\project' : '/home/test/project';
 
@@ -199,7 +199,7 @@ assert(
 
 // ── Settings Template Validation ────────────────────────────
 
-setSection('Settings Template — Validation');
+setSection('Settings Template - Validation');
 
 const templatePath = join(ROOT, 'hooks', 'native', 'settings-template.json');
 assert(existsSync(templatePath), 'settings-template.json exists');
@@ -235,7 +235,7 @@ if (template) {
 
 // ── Security Config Validation ──────────────────────────────
 
-setSection('Security Config — Validation');
+setSection('Security Config - Validation');
 
 const configPath = join(ROOT, 'hooks', 'native', 'security-config.json');
 assert(existsSync(configPath), 'security-config.json exists');

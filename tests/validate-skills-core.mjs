@@ -29,7 +29,7 @@ function assert(condition, message) {
 
 async function main() {
   console.log('\n══════════════════════════════════════════════');
-  console.log('  Skills Core — Unit Tests');
+  console.log('  Skills Core - Unit Tests');
   console.log('══════════════════════════════════════════════\n');
 
   const libPath = new URL(`file:///${path.join(ROOT, 'lib', 'skills-core.mjs').replace(/\\/g, '/')}`).href;

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Session Context — SessionStart Hook
+ * Session Context - SessionStart Hook
  *
  * Injects project state as context when a Claude Code session begins.
  * All operations are read-only. Errors are silently ignored.
@@ -130,7 +130,7 @@ async function main() {
 
 if (process.argv[1] && resolve(process.argv[1]) === resolve(__filename)) {
   main().catch(() => {
-    // Advisory hook — never block on error
+    // Advisory hook - never block on error
     process.exit(0);
   });
 }

@@ -1,12 +1,12 @@
 ---
 name: my-skill
-description: "Use when [specific triggering conditions — what symptom or situation activates this skill]"
+description: "Use when [specific triggering conditions - what symptom or situation activates this skill]"
 user-invocable: true
 argument-hint: "[arguments description]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# /my-skill — Skill Title
+# /my-skill - Skill Title
 
 Core principle in 1-2 sentences. What this skill enforces or enables.
 
@@ -71,9 +71,9 @@ Core principle in 1-2 sentences. What this skill enforces or enables.
 
 ## Rules
 
-1. **[Rule 1]** — [Brief explanation]
-2. **[Rule 2]** — [Brief explanation]
-3. **[Rule 3]** — [Brief explanation]
+1. **[Rule 1]** - [Brief explanation]
+2. **[Rule 2]** - [Brief explanation]
+3. **[Rule 3]** - [Brief explanation]
 
 ## Output
 

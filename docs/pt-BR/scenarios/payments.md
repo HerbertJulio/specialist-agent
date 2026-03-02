@@ -350,6 +350,6 @@ app.post('/webhooks', async (req, res) => {
 
 ## Cenários Relacionados
 
-- [Segurança](/pt-BR/scenarios/security) — Proteja o fluxo de pagamento
-- [Design de API](/pt-BR/scenarios/api-design) — Projete a API de pagamentos
-- [Infraestrutura](/pt-BR/scenarios/infrastructure) — Deploy seguro
+- [Segurança](/pt-BR/scenarios/security) - Proteja o fluxo de pagamento
+- [Design de API](/pt-BR/scenarios/api-design) - Projete a API de pagamentos
+- [Infraestrutura](/pt-BR/scenarios/infrastructure) - Deploy seguro

@@ -1,12 +1,12 @@
 ---
 name: brainstorm
-description: "Use when starting a complex feature, exploring unclear requirements, or needing to challenge assumptions before committing to a design — before /plan."
+description: "Use when starting a complex feature, exploring unclear requirements, or needing to challenge assumptions before committing to a design - before /plan."
 user-invocable: true
 argument-hint: "[idea or feature description]"
 allowed-tools: Read, Glob, Grep
 ---
 
-# /brainstorm — Socratic Brainstorming
+# /brainstorm - Socratic Brainstorming
 
 Refine ideas through questioning before committing to a plan. Better questions lead to better designs.
 
@@ -23,18 +23,18 @@ Refine ideas through questioning before committing to a plan. Better questions l
 
 ## Workflow
 
-### Step 1: Discovery — Understand the Problem Space
+### Step 1: Discovery - Understand the Problem Space
 
 Ask open-ended questions to map what's being built:
 
-1. **Read relevant code** — Ground the discussion in reality
+1. **Read relevant code** - Ground the discussion in reality
 2. **Ask foundational questions:**
    - "What problem does this solve for the user?"
    - "Who are the primary users? Secondary users?"
    - "What does success look like? How will we measure it?"
    - "What's explicitly out of scope?"
    - "Are there existing patterns in the codebase we should follow?"
-3. **Map the domain** — Identify entities, relationships, boundaries
+3. **Map the domain** - Identify entities, relationships, boundaries
 
 **Output:**
 ```markdown
@@ -49,17 +49,17 @@ Existing patterns: [relevant code already in the project]
 
 **BLOCKED** until problem space is understood.
 
-### Step 2: Clarification — Challenge Vague Terms
+### Step 2: Clarification - Challenge Vague Terms
 
 Force precision on ambiguous language:
 
-1. **Identify vague terms** — "fast", "scalable", "simple", "flexible"
+1. **Identify vague terms** - "fast", "scalable", "simple", "flexible"
 2. **Ask for specifics:**
    - "When you say 'fast', what response time is acceptable?"
    - "When you say 'scalable', how many concurrent users?"
    - "What do you mean by 'simple'? Simple to use or simple to implement?"
-3. **Resolve contradictions** — "You want it fast AND fully validated?"
-4. **Document decisions** — Each clarification becomes a constraint
+3. **Resolve contradictions** - "You want it fast AND fully validated?"
+4. **Document decisions** - Each clarification becomes a constraint
 
 **Output:**
 ```markdown
@@ -74,7 +74,7 @@ Force precision on ambiguous language:
 
 **BLOCKED** until all vague terms are defined.
 
-### Step 3: Assumption Testing — Surface Hidden Premises
+### Step 3: Assumption Testing - Surface Hidden Premises
 
 List and challenge implicit assumptions:
 
@@ -87,9 +87,9 @@ List and challenge implicit assumptions:
    - "Is there evidence supporting this?"
    - "What's the fallback if this changes?"
 3. **Classify assumptions:**
-   - **Validated** — Evidence exists
-   - **Risky** — No evidence, high impact if wrong
-   - **Safe** — Low impact even if wrong
+   - **Validated** - Evidence exists
+   - **Risky** - No evidence, high impact if wrong
+   - **Safe** - Low impact even if wrong
 
 **Output:**
 ```markdown
@@ -106,14 +106,14 @@ Risky assumptions to address: [list]
 
 **BLOCKED** until at least 5 assumptions are identified and tested.
 
-### Step 4: Alternative Generation — Explore Options
+### Step 4: Alternative Generation - Explore Options
 
 Generate multiple approaches:
 
 1. **Produce at least 3 alternatives:**
-   - **Approach A** — The obvious solution
-   - **Approach B** — The simpler alternative
-   - **Approach C** — The scalable/future-proof option
+   - **Approach A** - The obvious solution
+   - **Approach B** - The simpler alternative
+   - **Approach C** - The scalable/future-proof option
 2. **For each approach, document:**
    - Description (2-3 sentences)
    - Pros (concrete benefits)
@@ -139,17 +139,17 @@ Recommendation: Approach [X] because [rationale]
 
 **BLOCKED** until 3+ alternatives with pros/cons exist.
 
-### Step 5: Convergence — Synthesize and Validate
+### Step 5: Convergence - Synthesize and Validate
 
 Present the design for approval in digestible sections:
 
 1. **Synthesize chosen approach** into a design summary
-2. **Present in sections** — Each section gets user approval:
+2. **Present in sections** - Each section gets user approval:
    - Section 1: Problem & scope (approve?)
    - Section 2: Technical approach (approve?)
    - Section 3: Data model / API design (approve?)
    - Section 4: Key decisions & trade-offs (approve?)
-3. **Document final design** — Ready for `/plan` handoff
+3. **Document final design** - Ready for `/plan` handoff
 
 **Output:**
 ```markdown
@@ -205,13 +205,13 @@ IF /brainstorm output exists:
 
 ## Rules
 
-1. **Never skip assumption testing** — Hidden assumptions cause the biggest failures
-2. **Always generate 3+ alternatives** — One option is not a choice
-3. **Never proceed without user approval** — Design is collaborative
-4. **Keep questions focused** — No irrelevant tangents or philosophical debates
-5. **Ground in codebase** — Read actual files, don't hypothesize about code that exists
-6. **Output must be actionable** — Ready for `/plan` handoff, not abstract musings
-7. **Present in sections** — Digestible chunks, not a wall of text
+1. **Never skip assumption testing** - Hidden assumptions cause the biggest failures
+2. **Always generate 3+ alternatives** - One option is not a choice
+3. **Never proceed without user approval** - Design is collaborative
+4. **Keep questions focused** - No irrelevant tangents or philosophical debates
+5. **Ground in codebase** - Read actual files, don't hypothesize about code that exists
+6. **Output must be actionable** - Ready for `/plan` handoff, not abstract musings
+7. **Present in sections** - Digestible chunks, not a wall of text
 
 ## Output
 

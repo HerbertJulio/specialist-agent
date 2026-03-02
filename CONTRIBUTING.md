@@ -1,6 +1,6 @@
 # Contributing to Specialist Agent
 
-Thanks for your interest in contributing! Specialist Agent is open to contributions of all kinds — new agents, skills, framework packs, documentation improvements, and bug fixes.
+Thanks for your interest in contributing! Specialist Agent is open to contributions of all kinds - new agents, skills, framework packs, documentation improvements, and bug fixes.
 
 ## Getting Started
 
@@ -66,8 +66,8 @@ git commit -m "docs: update installation guide"
 ## Creating Agents
 
 Agents live in two places:
-- `agents/` — Framework-agnostic agents (e.g., `@starter`, `@finance`)
-- `packs/[framework]/agents/` — Pack-specific agents (e.g., `@builder`, `@reviewer`)
+- `agents/` - Framework-agnostic agents (e.g., `@starter`, `@finance`)
+- `packs/[framework]/agents/` - Pack-specific agents (e.g., `@builder`, `@reviewer`)
 
 ### Agent file structure
 
@@ -78,7 +78,7 @@ description: "MUST BE USED when [trigger]. Use PROACTIVELY when [condition]."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# @my-agent — Title
+# @my-agent - Title
 
 ## Mission
 One sentence describing what this agent does.
@@ -91,12 +91,12 @@ Analyze the request and determine the mode:
 - **Mode A**: [condition] → Mode A workflow
 - **Mode B**: [condition] → Mode B workflow
 
-## Mode A — [Name]
+## Mode A - [Name]
 1. Step one
 2. Step two
 3. Validate
 
-## Mode B — [Name]
+## Mode B - [Name]
 1. Step one
 2. Step two
 3. Validate

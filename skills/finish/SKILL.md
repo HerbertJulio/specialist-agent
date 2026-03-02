@@ -6,7 +6,7 @@ argument-hint: "[branch-name]"
 allowed-tools: Read, Bash, Glob, Grep
 ---
 
-# /finish — Finalize Branch
+# /finish - Finalize Branch
 
 Complete development branch with final validation and metrics.
 
@@ -214,7 +214,7 @@ To fix:
 
 ## Rules
 
-1. **Never skip validation** — All checks must pass
-2. **Always show metrics** — Transparency in cost
-3. **Offer cleanup** — Keep repo clean
-4. **Don't auto-merge** — Human decision
+1. **Never skip validation** - All checks must pass
+2. **Always show metrics** - Transparency in cost
+3. **Offer cleanup** - Keep repo clean
+4. **Don't auto-merge** - Human decision

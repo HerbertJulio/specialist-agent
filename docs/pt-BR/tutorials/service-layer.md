@@ -36,9 +36,9 @@ Aqui esta a resposta da API:
 }
 ```
 
-## Passo 1 — Tipar a Resposta da API
+## Passo 1 - Tipar a Resposta da API
 
-Crie o arquivo de types espelhando o JSON **exatamente** — mesmos nomes de campos, mesma estrutura.
+Crie o arquivo de types espelhando o JSON **exatamente** - mesmos nomes de campos, mesma estrutura.
 
 ```typescript
 // src/modules/customers/types/customers.types.ts
@@ -67,10 +67,10 @@ export interface CustomerListResponse {
 ```
 
 ::: tip Dica profissional
-Copie a resposta JSON e depois a tipe. Nao renomeie os campos aqui — esse e o trabalho do adapter.
+Copie a resposta JSON e depois a tipe. Nao renomeie os campos aqui - esse e o trabalho do adapter.
 :::
 
-## Passo 2 — Definir o Contrato da Aplicacao
+## Passo 2 - Definir o Contrato da Aplicacao
 
 Isto e o que seus componentes Vue vao usar. Nomes limpos, tipos adequados.
 
@@ -107,7 +107,7 @@ Observe as diferencas:
 | `lifetime_value_cents` | `lifetimeValue` | Convertido para a moeda |
 | `string` para datas | Objetos `Date` | Tipo adequado |
 
-## Passo 3 — Construir o Adapter
+## Passo 3 - Construir o Adapter
 
 O adapter conecta os dois formatos. **Apenas funcoes puras.**
 
@@ -146,10 +146,10 @@ export const customersAdapter = {
 ```
 
 ::: warning Trate os nulos
-Sempre verifique `null` antes de converter. `response.last_order_at` pode ser `null` — o adapter deve tratar isso, nao o componente.
+Sempre verifique `null` antes de converter. `response.last_order_at` pode ser `null` - o adapter deve tratar isso, nao o componente.
 :::
 
-## Passo 4 — Construir o Service
+## Passo 4 - Construir o Service
 
 O service e a camada mais simples. Chamadas HTTP com request/response tipados. Nada mais.
 
@@ -177,7 +177,7 @@ export const customersService = {
 - Sem transformacao de dados
 - Sem chamadas ao adapter
 
-## Passo 5 — Usar em um Composable
+## Passo 5 - Usar em um Composable
 
 Agora conecte tudo:
 
@@ -240,7 +240,7 @@ graph TB
 
 ## Testando o Adapter
 
-Adapters sao a **camada mais facil de testar** — entrada/saida puras.
+Adapters sao a **camada mais facil de testar** - entrada/saida puras.
 
 ```typescript
 // src/modules/customers/__tests__/customers-adapter.spec.ts
@@ -304,5 +304,5 @@ Ou use o skill:
 
 ## Proximos Passos
 
-- [Tutorial de Modulo CRUD](/pt-BR/tutorials/crud-module) — Construa um modulo completo do zero
-- [Tutorial de Formularios](/pt-BR/tutorials/forms) — Crie um formulario de cliente com validacao Zod
+- [Tutorial de Modulo CRUD](/pt-BR/tutorials/crud-module) - Construa um modulo completo do zero
+- [Tutorial de Formularios](/pt-BR/tutorials/forms) - Crie um formulario de cliente com validacao Zod

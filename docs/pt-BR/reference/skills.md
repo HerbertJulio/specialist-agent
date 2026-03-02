@@ -64,9 +64,9 @@ Workflow de Test-Driven Development.
 ```
 
 **Processo:**
-1. RED — Escrever teste falhando
-2. GREEN — Fazer passar
-3. REFACTOR — Melhorar o código
+1. RED - Escrever teste falhando
+2. GREEN - Fazer passar
+3. REFACTOR - Melhorar o código
 
 Sem código sem teste falhando primeiro.
 
@@ -124,7 +124,7 @@ Finalizar branch com métricas.
 
 ### /learn
 
-Modo de aprendizado — explica enquanto constrói.
+Modo de aprendizado - explica enquanto constrói.
 
 ```bash
 /learn create a products module
@@ -142,7 +142,7 @@ Verificação antes de declarar trabalho como completo.
 /verify
 ```
 
-Força verificação baseada em prova — requer output de comando, não só "funciona". Use após completar qualquer tarefa para garantir corretude com evidência.
+Força verificação baseada em prova - requer output de comando, não só "funciona". Use após completar qualquer tarefa para garantir corretude com evidência.
 
 **Output:** Relatório de verificação com artefatos de prova (resultados de teste, output de build, checks de runtime).
 
@@ -158,9 +158,9 @@ Criar ou melhorar skills usando metodologia TDD.
 
 **Processo:**
 
-1. RED — Definir o que a skill deve fazer (spec falhando)
-2. GREEN — Escrever a skill para atender a spec
-3. REFACTOR — Melhorar clareza e estrutura
+1. RED - Definir o que a skill deve fazer (spec falhando)
+2. GREEN - Escrever a skill para atender a spec
+3. REFACTOR - Melhorar clareza e estrutura
 
 RED-GREEN-REFACTOR aplicado a documentação e design de skills.
 
@@ -243,9 +243,9 @@ Cria workspaces isolados para trabalhar em múltiplas features simultaneamente. 
 
 **Comandos:**
 
-- `/worktree [name]` — Criar workspace isolado
-- `git worktree list` — Listar worktrees ativos
-- `git worktree remove [path]` — Remover worktree
+- `/worktree [name]` - Criar workspace isolado
+- `git worktree list` - Listar worktrees ativos
+- `git worktree remove [path]` - Remover worktree
 
 **Output:** Worktree criado com dependências instaladas e testes baseline passando.
 

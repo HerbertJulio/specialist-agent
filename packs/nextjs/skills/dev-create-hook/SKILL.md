@@ -1,6 +1,6 @@
 ---
 name: dev-create-hook
-description: "Use when adding server state management to a module — creates React Query hook with caching and error handling."
+description: "Use when adding server state management to a module - creates React Query hook with caching and error handling."
 user-invocable: true
 argument-hint: "[hook-name]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

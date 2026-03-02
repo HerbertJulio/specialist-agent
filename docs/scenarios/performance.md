@@ -11,14 +11,14 @@ Real scenarios for finding and fixing performance issues.
 
 **Command:**
 ```
-Optimize the dashboard page — it takes 5 seconds to load
+Optimize the dashboard page - it takes 5 seconds to load
 ```
 
 **What happens:**
-1. **Profile** — Measures current metrics (LCP, FID, CLS)
-2. **Analyze** — Identifies bottlenecks (bundle size, API calls, renders)
-3. **Optimize** — Applies targeted fixes
-4. **Verify** — Measures improvement with evidence
+1. **Profile** - Measures current metrics (LCP, FID, CLS)
+2. **Analyze** - Identifies bottlenecks (bundle size, API calls, renders)
+3. **Optimize** - Applies targeted fixes
+4. **Verify** - Measures improvement with evidence
 
 **Result:**
 ```
@@ -55,7 +55,7 @@ VERIFIED
 
 **Command:**
 ```
-Optimize the /api/products endpoint — it takes 2 seconds to respond
+Optimize the /api/products endpoint - it takes 2 seconds to respond
 ```
 
 **Result:**
@@ -90,7 +90,7 @@ VERIFIED
 
 **Command:**
 ```
-Analyze and reduce the bundle size — it's over 2MB
+Analyze and reduce the bundle size - it's over 2MB
 ```
 
 **Result:**
@@ -125,7 +125,7 @@ VERIFIED
 
 **Command:**
 ```
-Optimize the product list — scrolling is janky with 10k items
+Optimize the product list - scrolling is janky with 10k items
 ```
 
 **Result:**
@@ -167,7 +167,7 @@ VERIFIED
 ### Measure First
 
 ```
-# Don't guess — measure
+# Don't guess - measure
 Analyze the performance of /api/orders endpoint
 
 # Include the symptom
@@ -187,6 +187,6 @@ The dashboard takes 3 seconds to load after login
 
 ## Related Scenarios
 
-- [Debug Issues](/scenarios/debug-issue) — Debug performance-related bugs
-- [Infrastructure](/scenarios/infrastructure) — Scale for performance
-- [API Design](/scenarios/api-design) — Design efficient APIs
+- [Debug Issues](/scenarios/debug-issue) - Debug performance-related bugs
+- [Infrastructure](/scenarios/infrastructure) - Scale for performance
+- [API Design](/scenarios/api-design) - Design efficient APIs

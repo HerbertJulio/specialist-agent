@@ -1,6 +1,6 @@
 ---
 name: dev-create-injectable
-description: "Use when adding a signal-based store or utility service — creates injectable with inject() and Angular Signals."
+description: "Use when adding a signal-based store or utility service - creates injectable with inject() and Angular Signals."
 user-invocable: true
 argument-hint: "[injectable-name]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
@@ -53,7 +53,7 @@ export class MyUtilityService {
 
 4. Rules:
    - @Injectable({ providedIn: 'root' }) or scoped to component
-   - inject() for all dependencies — no constructor DI
+   - inject() for all dependencies - no constructor DI
    - Private WritableSignal, public asReadonly() for stores
    - No HTTP calls in stores (services handle that)
 

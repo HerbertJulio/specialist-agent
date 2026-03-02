@@ -39,9 +39,9 @@ graph TB
     style Data fill:#42b883,color:#fff
 ```
 
-## Step 1 — Store for Filters (Client State)
+## Step 1 - Store for Filters (Client State)
 
-Filters are **client state** — they don't come from the server. Pinia manages them.
+Filters are **client state** - they don't come from the server. Pinia manages them.
 
 ```typescript
 // src/modules/products/stores/products-store.ts
@@ -95,9 +95,9 @@ export const useProductsStore = defineStore('products', () => {
 Pinia persists filter state when navigating away and back. With local refs, the user loses their filters on every route change.
 :::
 
-## Step 2 — Composable with Reactive Query
+## Step 2 - Composable with Reactive Query
 
-The composable creates a **reactive queryKey** — when any filter changes, Vue Query automatically refetches.
+The composable creates a **reactive queryKey** - when any filter changes, Vue Query automatically refetches.
 
 ```typescript
 // src/modules/products/composables/useProductsList.ts
@@ -152,11 +152,11 @@ export function useProductsList(options: {
 
 ### Key patterns explained
 
-**`keepPreviousData`** — While fetching page 2, the user still sees page 1 data. Without this, the list flashes empty on every page change.
+**`keepPreviousData`** - While fetching page 2, the user still sees page 1 data. Without this, the list flashes empty on every page change.
 
-**`staleTime: 5 * 60 * 1000`** — If the user goes to page 2 and comes back to page 1 within 5 minutes, it won't refetch (uses cache).
+**`staleTime: 5 * 60 * 1000`** - If the user goes to page 2 and comes back to page 1 within 5 minutes, it won't refetch (uses cache).
 
-**Reactive `queryKey`** — When `page`, `search`, or `category` change, Vue Query sees a new key and fetches automatically. You don't need to call `refetch()`.
+**Reactive `queryKey`** - When `page`, `search`, or `category` change, Vue Query sees a new key and fetches automatically. You don't need to call `refetch()`.
 
 ```mermaid
 sequenceDiagram
@@ -180,7 +180,7 @@ sequenceDiagram
     API-->>Query: Page 2 results
 ```
 
-## Step 3 — Search Input with Debounce
+## Step 3 - Search Input with Debounce
 
 Don't hit the API on every keystroke. Use a debounced search.
 
@@ -217,7 +217,7 @@ watch(localSearch, (value) => {
 </template>
 ```
 
-## Step 4 — Category Filter
+## Step 4 - Category Filter
 
 ```vue
 <!-- src/modules/products/components/CategoryFilter.vue -->
@@ -253,7 +253,7 @@ const emit = defineEmits<{
 </template>
 ```
 
-## Step 5 — Pagination Component
+## Step 5 - Pagination Component
 
 ```vue
 <!-- src/shared/components/AppPagination.vue -->
@@ -306,7 +306,7 @@ const pages = computed(() => {
 </template>
 ```
 
-## Step 6 — The View (Composing Everything)
+## Step 6 - The View (Composing Everything)
 
 ```vue
 <!-- src/modules/products/views/ProductsView.vue -->
@@ -400,13 +400,13 @@ graph TB
 
 ## Key Takeaways
 
-- **Pinia Store** holds filter state (search, category, page) — persists across navigation
-- **Vue Query** reacts to queryKey changes — no manual refetch needed
+- **Pinia Store** holds filter state (search, category, page) - persists across navigation
+- **Vue Query** reacts to queryKey changes - no manual refetch needed
 - **`keepPreviousData`** keeps the previous page visible while loading the next
-- **Reset page to 1** when filters change — avoid showing an empty page 5
-- **Debounce search** — don't hit the API on every keystroke
+- **Reset page to 1** when filters change - avoid showing an empty page 5
+- **Debounce search** - don't hit the API on every keystroke
 
 ## Next Steps
 
-- [CRUD Module Tutorial](/tutorials/crud-module) — Full module with forms and mutations
-- [Migration Guide](/tutorials/migrate-project) — Migrate your project to this architecture
+- [CRUD Module Tutorial](/tutorials/crud-module) - Full module with forms and mutations
+- [Migration Guide](/tutorials/migrate-project) - Migrate your project to this architecture

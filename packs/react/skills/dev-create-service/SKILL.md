@@ -1,6 +1,6 @@
 ---
 name: dev-create-service
-description: "Use when adding API integration to a module — creates types, contracts, adapter, and service layer."
+description: "Use when adding API integration to a module - creates types, contracts, adapter, and service layer."
 user-invocable: true
 argument-hint: "[resource-name]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

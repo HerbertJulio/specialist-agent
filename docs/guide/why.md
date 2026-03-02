@@ -35,7 +35,7 @@ Long conversations accumulate stale context. Instructions from earlier messages 
 | Add payments | `@finance` | Stripe, PCI compliance |
 | Security audit | `@security` | OWASP Top 10, JWT, encryption |
 
-Each agent has a focused mission, specific workflow, and clear output format. No "jack of all trades" — domain experts for every task.
+Each agent has a focused mission, specific workflow, and clear output format. No "jack of all trades" - domain experts for every task.
 
 ### Proof-based verification
 
@@ -43,15 +43,15 @@ Every agent must show actual output before claiming completion:
 
 ```
 ✅ @builder: Created 6 files, all tests passing (14/14)
-✅ @reviewer: Found 2 issues — both resolved
+✅ @reviewer: Found 2 issues - both resolved
 ✅ @tdd: RED (3 failing) → GREEN (3 passing) → REFACTOR (3 passing)
 ```
 
-Anti-rationalization tables prevent shortcuts. If an agent catches itself thinking "just this once" or "it's obvious" — it stops and follows the process.
+Anti-rationalization tables prevent shortcuts. If an agent catches itself thinking "just this once" or "it's obvious" - it stops and follows the process.
 
 ### Context isolation by design
 
-`@orchestrator` and `@executor` use fresh context per subagent. Each task gets a self-contained prompt — no accumulated context pollution:
+`@orchestrator` and `@executor` use fresh context per subagent. Each task gets a self-contained prompt - no accumulated context pollution:
 
 ```mermaid
 graph LR
@@ -100,6 +100,6 @@ Start with Lite for scaffolding and rapid prototyping. Switch to Full for comple
 
 ## What's Next?
 
-- [Quick Start](/guide/quick-start) — Get running in 2 minutes
-- [Browse all agents](/reference/agents) — See what each agent does
-- [Real-world scenarios](/scenarios/) — How teams use Specialist Agent daily
+- [Quick Start](/guide/quick-start) - Get running in 2 minutes
+- [Browse all agents](/reference/agents) - See what each agent does
+- [Real-world scenarios](/scenarios/) - How teams use Specialist Agent daily

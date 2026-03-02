@@ -4,16 +4,11 @@
 Specialist Agent only adds markdown files (`.claude/agents/`, `.claude/skills/`, `CLAUDE.md`). It never modifies your source code, dependencies, or config files.
 :::
 
-## Option 1: Marketplace (Easiest)
+## Option 1: Marketplace
 
 **Claude Code:**
 ```
 /plugin install specialist-agent
-```
-
-**Cursor:**
-```
-Cmd+Shift+P → Install Plugin → specialist-agent
 ```
 
 ---
@@ -104,6 +99,6 @@ Need manual setup? See platform-specific guides:
 
 ## What's Next?
 
-- [Quick Start](/guide/quick-start) — Build your first feature in 2 minutes
-- [All Agents](/reference/agents) — Browse the full 27+ agent catalog
-- [Architecture](/guide/architecture) — Understand the patterns agents follow
+- [Quick Start](/guide/quick-start) - Build your first feature in 2 minutes
+- [All Agents](/reference/agents) - Browse the full 27+ agent catalog
+- [Architecture](/guide/architecture) - Understand the patterns agents follow

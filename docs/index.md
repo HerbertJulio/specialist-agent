@@ -21,12 +21,12 @@ features:
     linkText: Browse agents
   - icon: 🔍
     title: 3-in-1 Code Review
-    details: "Spec compliance, code quality, and architecture fit — checked in a single pass. Evidence-based verdicts, not 'LGTM'."
+    details: "Spec compliance, code quality, and architecture fit - checked in a single pass. Evidence-based verdicts, not 'LGTM'."
     link: /scenarios/code-review
     linkText: See how
   - icon: 🧪
     title: Real TDD, Not Trust-Based
-    details: "RED → GREEN → REFACTOR with actual test output as proof. No 'tests should pass' — the agent runs them and shows results."
+    details: "RED → GREEN → REFACTOR with actual test output as proof. No 'tests should pass' - the agent runs them and shows results."
     link: /reference/skills
     linkText: View skills
   - icon: ⚡
@@ -36,7 +36,7 @@ features:
     linkText: See benchmarks
   - icon: 📦
     title: 7 Framework Packs
-    details: "Next.js, React, Vue 3, SvelteKit, Angular, Astro, Nuxt — each with agents, skills, and architecture patterns tailored to your stack."
+    details: "Next.js, React, Vue 3, SvelteKit, Angular, Astro, Nuxt - each with agents, skills, and architecture patterns tailored to your stack."
     link: /guide/introduction#framework-support
     linkText: Explore packs
   - icon: 🛡️

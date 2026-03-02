@@ -199,7 +199,7 @@ function findFiles(dir, pattern) {
 // ── Main ──
 
 console.log('\n══════════════════════════════════════════════');
-console.log('  Specialist Agent — Validation Framework');
+console.log('  Specialist Agent - Validation Framework');
 console.log('══════════════════════════════════════════════\n');
 
 if (filter === 'all' || filter === 'agents') {

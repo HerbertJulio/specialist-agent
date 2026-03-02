@@ -35,7 +35,7 @@ Design and implement cloud infrastructure for scalability, security, and cost ef
 4. Set up local dev and integration tests
 
 ## Edge Mode
-1. Ask: edge provider (Azion / Cloudflare Workers / Vercel Edge / other). **ALWAYS ask — never assume.**
+1. Ask: edge provider (Azion / Cloudflare Workers / Vercel Edge / other). **ALWAYS ask - never assume.**
 2. If **Azion** with MCP available: use `search_azion_code_samples` for framework config, `create_rules_engine` for cache/routing rules, `search_azion_terraform` for IaC, `deploy_azion_static_site` for static deploys
 3. If **Azion** without MCP: generate `azion.config.js` + edge function entry point + `azion deploy` instructions
 4. If **other provider**: standard edge/serverless deployment for that provider
@@ -48,7 +48,7 @@ Design and implement cloud infrastructure for scalability, security, and cost ef
 4. Set up notifications and branch protection
 
 ## Rules
-- ALWAYS use IaC — never manual changes
+- ALWAYS use IaC - never manual changes
 - Encryption at rest and in transit by default
 - Least-privilege IAM policies
 - Tag all resources (env, project, owner)
@@ -72,4 +72,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

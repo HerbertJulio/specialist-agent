@@ -71,7 +71,7 @@ Sempre migre de baixo para cima: types → adapters → services → composables
 
 ---
 
-## Fase 1 — Diagnostico
+## Fase 1 - Diagnostico
 
 Antes de tocar em qualquer codigo, **mapeie o que existe**. Use o agente reviewer:
 
@@ -100,7 +100,7 @@ Ou faca manualmente. Responda estas perguntas:
 Modulo de Produtos:
 ├── views/Products.vue          (1247 linhas, Options API, JS)
 ├── views/ProductDetail.vue     (823 linhas, Options API, JS, usa 2 mixins)
-├── store/products.js           (Vuex — chamadas API + mutations + getters)
+├── store/products.js           (Vuex - chamadas API + mutations + getters)
 ├── mixins/paginationMixin.js   (logica compartilhada de paginacao)
 ├── mixins/filtersMixin.js      (logica compartilhada de filtros)
 └── api/products.js             (chamadas axios, alguma transformacao)
@@ -116,7 +116,7 @@ Problemas encontrados:
 
 ---
 
-## Fase 2 — Criar a Estrutura Alvo
+## Fase 2 - Criar a Estrutura Alvo
 
 Crie o esqueleto do modulo. Nao mova arquivos ainda.
 
@@ -131,11 +131,11 @@ A estrutura de diretorios existe e segue a convencao.
 
 ---
 
-## Fase 3 — Extrair Types e Adapters
+## Fase 3 - Extrair Types e Adapters
 
 E aqui que a migracao **comeca a gerar valor**. Voce esta criando o contrato tipado pela primeira vez.
 
-### 3.1 — Estudar as respostas da API
+### 3.1 - Estudar as respostas da API
 
 Abra a aba de rede, acesse os endpoints, copie o JSON:
 
@@ -150,7 +150,7 @@ Abra a aba de rede, acesse os endpoints, copie o JSON:
 }
 ```
 
-### 3.2 — Criar o arquivo de types
+### 3.2 - Criar o arquivo de types
 
 ```typescript
 // src/modules/products/types/products.types.ts
@@ -163,7 +163,7 @@ export interface ProductResponse {
 }
 ```
 
-### 3.3 — Criar o arquivo de contracts
+### 3.3 - Criar o arquivo de contracts
 
 ```typescript
 // src/modules/products/types/products.contracts.ts
@@ -176,7 +176,7 @@ export interface Product {
 }
 ```
 
-### 3.4 — Criar o adapter
+### 3.4 - Criar o adapter
 
 ```typescript
 // src/modules/products/adapters/products-adapter.ts
@@ -204,7 +204,7 @@ npx tsc --noEmit  # Types compilam sem erros
 
 ---
 
-## Fase 4 — Extrair Services
+## Fase 4 - Extrair Services
 
 Encontre todas as chamadas de API no codigo legado e mova-as para um service puro.
 
@@ -258,7 +258,7 @@ O service tem apenas chamadas HTTP, sem try/catch, sem transformacao.
 
 ---
 
-## Fase 5 — Migrar o Estado
+## Fase 5 - Migrar o Estado
 
 ### Dividir Vuex em Pinia + Vue Query
 
@@ -291,7 +291,7 @@ export default {
 }
 ```
 
-### Depois — Composable (estado do servidor)
+### Depois - Composable (estado do servidor)
 
 ```typescript
 // src/modules/products/composables/useProductsList.ts
@@ -328,7 +328,7 @@ export function useProductsList(options: {
 }
 ```
 
-### Depois — Store (estado do cliente)
+### Depois - Store (estado do cliente)
 
 ```typescript
 // src/modules/products/stores/products-store.ts
@@ -385,7 +385,7 @@ Vuex removido do modulo, Pinia + Vue Query funcionando, mixins substituidos.
 
 ---
 
-## Fase 6 — Converter Componentes
+## Fase 6 - Converter Componentes
 
 ### Antes (Options API, 1200+ linhas)
 
@@ -506,14 +506,14 @@ Ou use os skills:
 
 ## Dicas para Projetos Grandes
 
-- **Migre um modulo por vez** — nao tente migrar tudo de uma so vez
-- **Comece pelo modulo mais simples** — ganhe confianca antes de enfrentar os complexos
-- **Mantenha o legado funcionando** — cada fase deve deixar a aplicacao funcional
-- **Use feature flags** se necessario — antigo e novo podem coexistir durante a migracao
-- **Teste apos cada fase** — nao espere ate o final para validar
+- **Migre um modulo por vez** - nao tente migrar tudo de uma so vez
+- **Comece pelo modulo mais simples** - ganhe confianca antes de enfrentar os complexos
+- **Mantenha o legado funcionando** - cada fase deve deixar a aplicacao funcional
+- **Use feature flags** se necessario - antigo e novo podem coexistir durante a migracao
+- **Teste apos cada fase** - nao espere ate o final para validar
 
 ## Proximos Passos
 
-- [Tutorial de Modulo CRUD](/pt-BR/tutorials/crud-module) — Veja a arquitetura alvo em acao
-- [Tutorial da Camada de Service](/pt-BR/tutorials/service-layer) — Mergulho profundo na camada de dados
-- [Visao Geral da Arquitetura](/pt-BR/guide/architecture) — Referencia completa da arquitetura
+- [Tutorial de Modulo CRUD](/pt-BR/tutorials/crud-module) - Veja a arquitetura alvo em acao
+- [Tutorial da Camada de Service](/pt-BR/tutorials/service-layer) - Mergulho profundo na camada de dados
+- [Visao Geral da Arquitetura](/pt-BR/guide/architecture) - Referencia completa da arquitetura

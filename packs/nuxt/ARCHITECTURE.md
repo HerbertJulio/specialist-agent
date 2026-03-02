@@ -1,4 +1,4 @@
-# ARCHITECTURE.md — Architecture Guide and Patterns
+# ARCHITECTURE.md - Architecture Guide and Patterns
 
 > This document is the **source of truth** for all agents and skills.
 > Any architectural decision must be documented here.
@@ -105,12 +105,12 @@ Nuxt 3 is a full-stack Vue 3 framework with auto-imports, file-based routing, an
 
 ### Import Rules Between Layers
 ```
-modules/auth  <->  shared/          OK — Module imports from shared
-modules/auth  ->   modules/market   PROHIBITED — Module imports from another module
-shared/       ->   modules/auth     PROHIBITED — Shared imports from module
-pages/        ->   modules/*        OK — Pages import module components/composables
-composables/  <->  shared/          OK — Shared composables use shared utils
-server/       ->   shared/types     OK — Server uses shared types
+modules/auth  <->  shared/          OK - Module imports from shared
+modules/auth  ->   modules/market   PROHIBITED - Module imports from another module
+shared/       ->   modules/auth     PROHIBITED - Shared imports from module
+pages/        ->   modules/*        OK - Pages import module components/composables
+composables/  <->  shared/          OK - Shared composables use shared utils
+server/       ->   shared/types     OK - Server uses shared types
 ```
 
 If two modules need to share something, move it to `shared/` or `composables/`.
@@ -154,7 +154,7 @@ If two modules need to share something, move it to `shared/` or `composables/`.
 
 ## 4. Responsibility Layers
 
-### 4.1 Services — Pure HTTP Requests
+### 4.1 Services - Pure HTTP Requests
 
 Services perform **only** the HTTP request. No try/catch, no transformation, no business logic.
 
@@ -194,7 +194,7 @@ export const marketplaceService = {
 - YES export as object with methods
 - Use `$fetch` (Nuxt built-in) instead of axios
 
-### 4.2 Adapters — Contract Parsers
+### 4.2 Adapters - Contract Parsers
 
 Adapters transform data from the API to the TypeScript app contract (and vice-versa). They are **pure functions** without side effects.
 
@@ -305,7 +305,7 @@ export interface CreateMarketplaceInput {
 }
 ```
 
-### 4.4 Composables — Business Logic + Orchestration
+### 4.4 Composables - Business Logic + Orchestration
 
 Composables connect everything: call service, pass through adapter, manage loading/error, and expose reactive data. In Nuxt, composables in the `composables/` directory are **auto-imported**.
 
@@ -368,7 +368,7 @@ export function useMarketplaceList(options: UseMarketplaceListOptions) {
 - NO direct API access (service does that)
 - Use `useAsyncData` or `useFetch` for server state (not TanStack Query)
 
-### 4.5 useState — SSR-Safe Shared State
+### 4.5 useState - SSR-Safe Shared State
 
 `useState` is Nuxt's built-in SSR-friendly state. Use it for simple shared state that needs to survive SSR hydration.
 
@@ -408,7 +408,7 @@ export function useMarketplaceFilters() {
 }
 ```
 
-### 4.6 Pinia Stores — Complex Client State Only
+### 4.6 Pinia Stores - Complex Client State Only
 
 Use Pinia only when `useState` is not enough (complex state, devtools, plugin ecosystem).
 
@@ -458,7 +458,7 @@ export const useMarketplaceStore = defineStore('marketplace', () => {
 **State management rules:**
 - `useState` for simple shared state (filters, UI mode, preferences)
 - Pinia for complex client state (cart, multi-step forms, computed chains)
-- `useFetch` / `useAsyncData` for server state — NEVER in Pinia
+- `useFetch` / `useAsyncData` for server state - NEVER in Pinia
 - Pinia: setup syntax, readonly() on state, storeToRefs() in consumers
 - NO HTTP calls inside stores
 
@@ -504,7 +504,7 @@ export default defineEventHandler(async (event) => {
 
 ---
 
-## 5. Components — Composition Pattern
+## 5. Components - Composition Pattern
 
 ### 5.1 SFC Pattern (with auto-imports)
 
@@ -560,9 +560,9 @@ function handlePageChange(newPage: number) {
 </style>
 ```
 
-### 5.2 Stop Prop Drilling — Component Composition
+### 5.2 Stop Prop Drilling - Component Composition
 
-**WRONG — Prop Drilling:**
+**WRONG - Prop Drilling:**
 ```vue
 <Parent :user="user" :theme="theme" :permissions="permissions">
   <Child :user="user" :theme="theme" :permissions="permissions">
@@ -571,7 +571,7 @@ function handlePageChange(newPage: number) {
 </Parent>
 ```
 
-**CORRECT — Composition with Slots:**
+**CORRECT - Composition with Slots:**
 ```vue
 <!-- pages/marketplace/index.vue -->
 <template>
@@ -593,7 +593,7 @@ function handlePageChange(newPage: number) {
 </template>
 ```
 
-**CORRECT — Provide/Inject for shared context:**
+**CORRECT - Provide/Inject for shared context:**
 ```typescript
 // composables/useMarketplaceContext.ts
 import type { InjectionKey, Ref } from 'vue'
@@ -655,7 +655,7 @@ Pages (pages/)        -> Composition, orchestration, provide context
 
 ## 6. Utils vs Helpers
 
-### Utils — Pure Functions
+### Utils - Pure Functions
 - No side effects
 - Input -> Output deterministic
 - Testable without mocks
@@ -673,7 +673,7 @@ export function formatCurrency(value: number, currency = 'USD'): string {
 }
 ```
 
-### Helpers — Functions with Side Effects
+### Helpers - Functions with Side Effects
 - Interact with browser APIs (clipboard, localStorage, DOM)
 - May have side effects
 - May need mocks in tests
@@ -692,7 +692,7 @@ export async function copyToClipboard(text: string): Promise<boolean> {
 
 ---
 
-## 7. Error Handling — Centralized Pattern
+## 7. Error Handling - Centralized Pattern
 
 ### In Composables (useFetch / useAsyncData)
 ```typescript
@@ -751,10 +751,10 @@ export default defineEventHandler(async (event) => {
 ```
 
 ### Error Utilities
-- `useError()` — access current error in components
-- `showError()` — trigger the error page
-- `clearError()` — clear error and optionally redirect
-- `createError()` — create an error in server routes
+- `useError()` - access current error in components
+- `showError()` - trigger the error page
+- `clearError()` - clear error and optionally redirect
+- `createError()` - create an error in server routes
 
 ---
 

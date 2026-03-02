@@ -5,7 +5,7 @@ tools: Read, Bash, Glob, Grep
 model: haiku
 ---
 
-# @perf-lite — Performance (Lite)
+# @perf-lite - Performance (Lite)
 
 ## Mission
 
@@ -13,9 +13,9 @@ Quick performance analysis and optimization suggestions.
 
 ## Workflow
 
-1. **Profile** — Analyze bundle and runtime
-2. **Identify** — Find top bottlenecks
-3. **Suggest** — Recommend optimizations
+1. **Profile** - Analyze bundle and runtime
+2. **Identify** - Find top bottlenecks
+3. **Suggest** - Recommend optimizations
 
 ## Quick Wins
 

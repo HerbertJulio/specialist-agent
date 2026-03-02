@@ -1,12 +1,12 @@
 ---
 name: tdd
-description: "Use when implementing any feature or bugfix where correctness matters — before writing implementation code."
+description: "Use when implementing any feature or bugfix where correctness matters - before writing implementation code."
 user-invocable: true
 argument-hint: "[feature or function to implement]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# /tdd — Test-Driven Development
+# /tdd - Test-Driven Development
 
 Implement the feature using strict TDD methodology.
 
@@ -32,7 +32,7 @@ For each behavior to implement:
 └───────┘      └───────┘      └──────────┘
 ```
 
-### Step 1: RED — Write Failing Test
+### Step 1: RED - Write Failing Test
 
 1. **Create/open test file**
 2. **Write test for ONE behavior:**
@@ -52,10 +52,10 @@ For each behavior to implement:
    ```bash
    npm test -- --testNamePattern="[test name]"
    ```
-4. **Verify FAILS** — Capture output showing failure
+4. **Verify FAILS** - Capture output showing failure
 5. **BLOCKED** if test passes (wrong test or code exists)
 
-### Step 2: GREEN — Minimal Implementation
+### Step 2: GREEN - Minimal Implementation
 
 1. **Write minimum code to pass:**
    - No extra features
@@ -66,10 +66,10 @@ For each behavior to implement:
    ```bash
    npm test -- --testNamePattern="[test name]"
    ```
-3. **Verify PASSES** — Capture output showing success
+3. **Verify PASSES** - Capture output showing success
 4. **BLOCKED** if test fails (fix before continuing)
 
-### Step 3: REFACTOR — Improve
+### Step 3: REFACTOR - Improve
 
 1. **Improve code quality:**
    - Remove duplication
@@ -103,14 +103,14 @@ Output:
   ✕ should calculate discount for valid coupon
     Expected: 90
     Received: undefined
-Status: FAIL ✓ — Proceeding to GREEN
+Status: FAIL ✓ - Proceeding to GREEN
 
 ──── GREEN Phase ────
 Running: npm test -- --testNamePattern="calculate discount"
 Output:
   PASS  src/discount.test.ts
   ✓ should calculate discount for valid coupon
-Status: PASS ✓ — Proceeding to REFACTOR
+Status: PASS ✓ - Proceeding to REFACTOR
 ```
 
 ## Output
@@ -149,8 +149,8 @@ Coverage: [if available]
 ## Rules
 
 1. **Never implement before RED**
-2. **Capture all test output** — Proof, not trust
+2. **Capture all test output** - Proof, not trust
 3. **One behavior per test**
-4. **Minimal GREEN** — Just enough to pass
-5. **Always REFACTOR** — Don't skip
+4. **Minimal GREEN** - Just enough to pass
+5. **Always REFACTOR** - Don't skip
 6. **Document each cycle**

@@ -1,6 +1,6 @@
 ---
 name: dev-create-composable
-description: "Use when adding server state management to a module — creates Vue Query composable with caching and error handling."
+description: "Use when adding server state management to a module - creates Vue Query composable with caching and error handling."
 user-invocable: true
 argument-hint: "[composable-name]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

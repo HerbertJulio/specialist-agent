@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md`.
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
-- ALWAYS use server-side data fetching in frontmatter — no unnecessary client JS
+- ALWAYS use server-side data fetching in frontmatter - no unnecessary client JS
 - Choose the LEAST aggressive hydration strategy for islands (`client:visible` > `client:idle` > `client:load`)
-- Use Content Collections for static content — type-safe and optimized at build time
+- Use Content Collections for static content - type-safe and optimized at build time
 - Lazy load islands and heavy dependencies
 - Avoid shipping JavaScript unless interactivity is required
 - Use `<Image />` from `astro:assets` for optimized images
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -51,10 +51,10 @@ Read `docs/ARCHITECTURE.md`.
 1. Ask: resource name, endpoints, UI type (list/detail/CRUD), interactivity needs
 2. Scaffold `src/modules/[kebab-name]/` with: services/, adapters/, types/, __tests__/, index.ts
 3. Create bottom-up:
-   - `types/[name].types.ts` — exact API response (snake_case)
-   - `types/[name].contracts.ts` — app contract (camelCase, Date objects)
-   - `adapters/[name]-adapter.ts` — pure functions: inbound (API->App) + outbound (App->API)
-   - `services/[name]-service.ts` — fetch only: `{ list, getById, create, update, delete }`. No try/catch, no transformation
+   - `types/[name].types.ts` - exact API response (snake_case)
+   - `types/[name].contracts.ts` - app contract (camelCase, Date objects)
+   - `adapters/[name]-adapter.ts` - pure functions: inbound (API->App) + outbound (App->API)
+   - `services/[name]-service.ts` - fetch only: `{ list, getById, create, update, delete }`. No try/catch, no transformation
 4. Create pages in `src/pages/`:
    - List page: fetch in frontmatter, render with .astro components
    - Detail page: `[slug].astro` or `[id].astro` with `getStaticPaths()` for SSG
@@ -88,24 +88,24 @@ Read `docs/ARCHITECTURE.md`.
 ## Service Mode
 1. Ask: endpoint URL, HTTP method, response format (ask for JSON example)
 2. Create 4 files:
-   - `types/[name].types.ts` — exact API (snake_case, string dates)
-   - `types/[name].contracts.ts` — app contract (camelCase, Date, computed booleans)
-   - `adapters/[name]-adapter.ts` — pure functions, bidirectional. Rename snake->camel, convert string->Date, cents->currency
-   - `services/[name]-service.ts` — fetch only. No try/catch, no transformation, no logic. Export as object with methods
+   - `types/[name].types.ts` - exact API (snake_case, string dates)
+   - `types/[name].contracts.ts` - app contract (camelCase, Date, computed booleans)
+   - `adapters/[name]-adapter.ts` - pure functions, bidirectional. Rename snake->camel, convert string->Date, cents->currency
+   - `services/[name]-service.ts` - fetch only. No try/catch, no transformation, no logic. Export as object with methods
 3. Validate: `npx astro check`
 
 ## Island Mode
 1. Ask: what interactivity is needed? (form, search, toggle, counter, etc.)
 2. Choose framework: React (.tsx), Vue (.vue), or Svelte (.svelte) based on project preference
 3. Choose hydration strategy:
-   - `client:load` — immediately needed (above the fold, critical interaction)
-   - `client:idle` — not urgent (sidebar, secondary features)
-   - `client:visible` — below the fold (comments, carousels)
-   - `client:media="..."` — viewport-specific (mobile menu)
-   - `client:only="react"` — skip SSR (auth, browser-API-dependent)
+   - `client:load` - immediately needed (above the fold, critical interaction)
+   - `client:idle` - not urgent (sidebar, secondary features)
+   - `client:visible` - below the fold (comments, carousels)
+   - `client:media="..."` - viewport-specific (mobile menu)
+   - `client:only="react"` - skip SSR (auth, browser-API-dependent)
 4. Create in `src/islands/` with typed props
 5. Props must be serializable (no functions, no class instances)
-6. Keep islands small — extract non-interactive parts to .astro components
+6. Keep islands small - extract non-interactive parts to .astro components
 7. Validate: `npx astro check && npx astro build`
 
 ## Page Mode
@@ -128,9 +128,9 @@ Read `docs/ARCHITECTURE.md`.
 **Before claiming ANY module/component is complete:**
 
 ```
-1. RUN `npx astro check` — No TypeScript/Astro errors
-2. RUN `npx astro build` — Build succeeds
-3. RUN `npm test` — All tests pass
+1. RUN `npx astro check` - No TypeScript/Astro errors
+2. RUN `npx astro build` - Build succeeds
+3. RUN `npm test` - All tests pass
 4. VERIFY files exist as specified
 5. ONLY THEN claim "complete" WITH evidence
 ```
@@ -149,18 +149,18 @@ Read `docs/ARCHITECTURE.md`.
 ## Rules
 - Follow ARCHITECTURE.md strictly
 - Modules don't import from each other (use shared/)
-- Default to .astro components (zero JS) — only use islands when interactivity is required
+- Default to .astro components (zero JS) - only use islands when interactivity is required
 - Services: no try/catch, no transformation
 - Adapters: pure functions, no side effects
 - Islands: use least aggressive hydration, keep small, serializable props
-- **Verify before claiming complete** — Tests pass = complete
+- **Verify before claiming complete** - Tests pass = complete
 
 ## Output
 
 After completing work in any mode, provide:
 
 ```markdown
-## Built — [Mode: Module | Component | Service | Island | Page]
+## Built - [Mode: Module | Component | Service | Island | Page]
 ### Files created
 - [List with paths]
 ### Patterns applied
@@ -189,4 +189,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

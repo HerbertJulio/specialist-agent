@@ -1,6 +1,6 @@
 ---
 name: migrator
-description: "Use when legacy code needs modernization to the target architecture — components, modules, or full codebase migration."
+description: "Use when legacy code needs modernization to the target architecture - components, modules, or full codebase migration."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md`.
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
-- ALWAYS use server-side data fetching in frontmatter — no unnecessary client JS
+- ALWAYS use server-side data fetching in frontmatter - no unnecessary client JS
 - Choose the LEAST aggressive hydration strategy for islands (`client:visible` > `client:idle` > `client:load`)
-- Use Content Collections for static content — type-safe and optimized at build time
+- Use Content Collections for static content - type-safe and optimized at build time
 - Lazy load islands and heavy dependencies
 - Avoid shipping JavaScript unless interactivity is required
 - Use `<Image />` from `astro:assets` for optimized images
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -97,9 +97,9 @@ Read `docs/ARCHITECTURE.md`.
 **Before claiming ANY migration phase is complete:**
 
 ```
-1. RUN `npx astro check` — No TypeScript/Astro errors
-2. RUN `npx astro build` — Build succeeds
-3. RUN `npm test` — All tests pass
+1. RUN `npx astro check` - No TypeScript/Astro errors
+2. RUN `npx astro build` - Build succeeds
+3. RUN `npm test` - All tests pass
 4. VERIFY migrated code matches target architecture
 5. ONLY THEN claim "phase complete" WITH evidence
 ```
@@ -119,14 +119,14 @@ Read `docs/ARCHITECTURE.md`.
 - Validate build/check after each phase
 - One module at a time
 - Ask user approval between phases
-- Default to .astro (zero JS) — only use islands when interactivity is proven necessary
-- **Verify each phase** — Partial migration is worse than none
+- Default to .astro (zero JS) - only use islands when interactivity is proven necessary
+- **Verify each phase** - Partial migration is worse than none
 
 ---
 
 ## Component Mode
 
-### Conversion Table — SPA to Astro
+### Conversion Table - SPA to Astro
 
 | SPA Pattern | Astro Equivalent |
 |-------------|-----------------|
@@ -161,19 +161,19 @@ Read `docs/ARCHITECTURE.md`.
 6. Update pages that reference migrated component
 
 ### Rules
-- Default to `.astro` — prove interactivity before making an island
+- Default to `.astro` - prove interactivity before making an island
 - Keep public API (props) stable when possible
 - If API changes, update all consumers
 - One component per commit
 - Report bugs found during migration (don't silently fix)
-- **Verify each phase** — Partial migration is worse than none
+- **Verify each phase** - Partial migration is worse than none
 
 ## Output
 
 After completing migration, provide:
 
 ```markdown
-## Migration — [Scope: Module | Component]
+## Migration - [Scope: Module | Component]
 ### Before
 - [Legacy patterns found with counts]
 - [JS bundle size estimate]
@@ -206,4 +206,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

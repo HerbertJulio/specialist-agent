@@ -2,162 +2,166 @@
 import { computed, ref } from 'vue'
 import { useData } from 'vitepress'
 
-const { site, lang } = useData()
-const isOpen = ref(false)
+const { site, lang, page } = useData()
+const open = ref(false)
 
 const locales = computed(() => {
   const entries = Object.entries(site.value.locales || {})
-  return entries.map(([key, locale]) => {
-    const prefix = key === 'root' ? '/' : `/${key}/`
-    return {
-      label: locale.label || key,
-      code: (locale.lang || 'en').split('-')[0].toUpperCase(),
-      link: prefix,
-      active: lang.value === (locale.lang || 'en'),
-    }
-  })
+  return entries.map(([key, locale]) => ({
+    key,
+    label: locale.label || key,
+    lang: locale.lang || 'en',
+    active: lang.value === (locale.lang || 'en'),
+  }))
 })
 
-const currentLocale = computed(() => locales.value.find(l => l.active))
+function getTargetHref(localeKey: string): string {
+  const currentPath = page.value.relativePath.replace(/\.md$/, '')
+  const currentLocale = locales.value.find(l => l.active)
+
+  let pagePath = currentPath
+  if (currentLocale && currentLocale.key !== 'root') {
+    pagePath = pagePath.replace(new RegExp(`^${currentLocale.key}/`), '')
+  }
+
+  const base = site.value.base || '/'
+  if (localeKey === 'root') {
+    return `${base}${pagePath}`
+  }
+  return `${base}${localeKey}/${pagePath}`
+}
 
 function toggle() {
-  isOpen.value = !isOpen.value
+  open.value = !open.value
 }
 
 function close() {
-  isOpen.value = false
+  open.value = false
 }
 </script>
 
 <template>
-  <div v-if="locales.length > 1" class="lang-switcher" @mouseleave="close">
-    <button class="lang-toggle" :aria-label="`Language: ${currentLocale?.label}`" @click="toggle">
-      <span class="lang-code">{{ currentLocale?.code }}</span>
-      <svg class="lang-chevron" :class="{ open: isOpen }" width="12" height="12" viewBox="0 0 24 24" fill="none">
-        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <div v-if="locales.length > 1" class="VPLanguageSwitcher" @mouseleave="close">
+    <button class="trigger" :aria-expanded="open" aria-haspopup="true" @click="toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m5 8 6 6" />
+        <path d="m4 14 6-6 2-3" />
+        <path d="M2 5h12" />
+        <path d="M7 2h1" />
+        <path d="m22 22-5-10-5 10" />
+        <path d="M14 18h6" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron" aria-hidden="true">
+        <path d="m6 9 6 6 6-6" />
       </svg>
     </button>
-    <div v-show="isOpen" class="lang-menu">
-      <a
-        v-for="locale in locales"
-        :key="locale.code"
-        class="lang-option"
-        :class="{ active: locale.active }"
-        :href="locale.link"
-      >
-        <span class="lang-option-code">{{ locale.code }}</span>
-        <span class="lang-option-label">{{ locale.label }}</span>
-        <svg v-if="locale.active" class="lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none">
-          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
+    <div v-show="open" class="menu">
+      <div class="menu-group">
+        <p class="menu-group-title">Languages</p>
+        <a
+          v-for="locale in locales"
+          :key="locale.key"
+          :href="getTargetHref(locale.key)"
+          target="_blank"
+          rel="noopener"
+          class="menu-link"
+          :class="{ active: locale.active }"
+          @click="close"
+        >
+          {{ locale.label }}
+        </a>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.lang-switcher {
+.VPLanguageSwitcher {
   position: relative;
-  display: none;
-}
-
-/* Only show on desktop — mobile already works fine */
-@media (min-width: 768px) {
-  .lang-switcher {
-    display: block;
-    margin-left: 8px;
-  }
-}
-
-.lang-toggle {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 20px;
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-  font-size: 13px;
-  font-weight: 600;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 12px;
+  height: var(--vp-nav-height, 64px);
+  color: var(--vp-c-text-2);
+  background: none;
+  border: none;
   cursor: pointer;
-  transition: all 0.25s ease;
-  line-height: 1;
+  font-family: inherit;
+  transition: color 0.25s;
 }
 
-.lang-toggle:hover {
-  border-color: var(--vp-c-brand-1);
-  color: var(--vp-c-brand-1);
+.trigger:hover {
+  color: var(--vp-c-text-1);
 }
 
-.lang-code {
-  letter-spacing: 0.5px;
+.chevron {
+  transition: transform 0.25s;
 }
 
-.lang-chevron {
-  transition: transform 0.2s ease;
-}
-
-.lang-chevron.open {
+[aria-expanded="true"] .chevron {
   transform: rotate(180deg);
 }
 
-.lang-menu {
+.menu {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(var(--vp-nav-height, 64px) - 4px);
   right: 0;
-  min-width: 160px;
-  padding: 4px;
+  min-width: 148px;
+  padding: 12px;
+  background-color: var(--vp-c-bg-elv);
   border: 1px solid var(--vp-c-divider);
   border-radius: 12px;
-  background: var(--vp-c-bg);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--vp-shadow-3);
   z-index: 100;
+  animation: flyout-enter 0.2s ease-out;
 }
 
-.dark .lang-menu {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+@keyframes flyout-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.lang-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  color: var(--vp-c-text-2);
-  text-decoration: none;
-  font-size: 13px;
-  transition: all 0.2s ease;
-}
-
-.lang-option:hover {
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-}
-
-.lang-option.active {
-  color: var(--vp-c-brand-1);
-  font-weight: 600;
-}
-
-.lang-option-code {
-  font-weight: 700;
+.menu-group-title {
+  padding: 0 8px;
   font-size: 12px;
-  min-width: 24px;
-  text-align: center;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: var(--vp-c-bg-soft);
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+  line-height: 32px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.lang-option.active .lang-option-code {
-  background: var(--vp-c-brand-soft);
+.menu-link {
+  display: block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 28px;
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+.menu-link:hover {
+  background-color: var(--vp-c-default-soft);
   color: var(--vp-c-brand-1);
 }
 
-.lang-check {
-  margin-left: auto;
+.menu-link.active {
   color: var(--vp-c-brand-1);
 }
 </style>

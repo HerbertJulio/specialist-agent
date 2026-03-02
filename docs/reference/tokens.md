@@ -4,7 +4,7 @@ Each operation has a different token cost depending on complexity. Use this tabl
 
 ## How Tokens Are Consumed
 
-Every time you invoke an agent or skill, Claude Code performs multiple steps — each consuming tokens:
+Every time you invoke an agent or skill, Claude Code performs multiple steps - each consuming tokens:
 
 ```mermaid
 graph LR
@@ -26,7 +26,7 @@ graph LR
 | **4. Generate output** | Claude writes code, reviews, or reports | Variable (depends on complexity) |
 
 ::: info
-Token counts below are **total per operation** (all 4 steps combined). Actual costs depend on the model's per-token pricing — check [Anthropic's pricing page](https://www.anthropic.com/pricing) for current rates.
+Token counts below are **total per operation** (all 4 steps combined). Actual costs depend on the model's per-token pricing - check [Anthropic's pricing page](https://www.anthropic.com/pricing) for current rates.
 :::
 
 ## Full Agents (Sonnet/Opus)
@@ -51,7 +51,7 @@ Token counts below are **total per operation** (all 4 steps combined). Actual co
 
 ## Lite Agents (Haiku)
 
-Lite agents use `model: haiku` — significantly cheaper per token.
+Lite agents use `model: haiku` - significantly cheaper per token.
 
 | Operation | Tokens | Savings vs Full |
 |-----------|--------|-----------------|
@@ -113,18 +113,18 @@ Converting a Vuex + Options API module to the target architecture:
 
 ## Tips to Reduce Token Usage
 
-1. **Scope small** — `/dev-create-component ProductCard` costs ~4k vs `/dev-create-module products` at ~20k. Only scaffold what you need.
+1. **Scope small** - `/dev-create-component ProductCard` costs ~4k vs `/dev-create-module products` at ~20k. Only scaffold what you need.
 
-2. **Migrate incrementally** — Use `/migration-migrate-component` (~8k per file) instead of `/migration-migrate-module` (~60k) when possible.
+2. **Migrate incrementally** - Use `/migration-migrate-component` (~8k per file) instead of `/migration-migrate-module` (~60k) when possible.
 
-3. **Use Lite for iteration** — Draft with Lite agents, then run a single Full review at the end.
+3. **Use Lite for iteration** - Draft with Lite agents, then run a single Full review at the end.
 
-4. **Leverage skills over agents** — Skills like `/dev-create-service` are more focused and cheaper than asking `@builder` for the same thing.
+4. **Leverage skills over agents** - Skills like `/dev-create-service` are more focused and cheaper than asking `@builder` for the same thing.
 
-5. **Batch reviews** — Run `/review-check-architecture` (automated, ~7k) before `/review-review` (full, ~12k). If automated passes, you may not need the full review.
+5. **Batch reviews** - Run `/review-check-architecture` (automated, ~7k) before `/review-review` (full, ~12k). If automated passes, you may not need the full review.
 
 ::: tip Cost Optimization Summary
 - Use **Lite agents** for rapid iteration and simple tasks
 - Use **Full agents** for new modules, PRs, and complex migrations
-- For large modules, migrate incrementally — one component at a time with `/migration-migrate-component` instead of the full module migration
+- For large modules, migrate incrementally - one component at a time with `/migration-migrate-component` instead of the full module migration
 :::

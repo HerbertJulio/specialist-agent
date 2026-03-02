@@ -1,6 +1,6 @@
 ---
 name: dev-create-test
-description: "Use when a module needs test coverage — creates tests for adapters, hooks/composables/stores, and components."
+description: "Use when a module needs test coverage - creates tests for adapters, hooks/composables/stores, and components."
 user-invocable: true
 argument-hint: "[file-path]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
@@ -16,7 +16,7 @@ Target: $ARGUMENTS
 
 2. Determine the test type:
 
-### Adapter (high priority — pure functions, easy to test)
+### Adapter (high priority - pure functions, easy to test)
 ```typescript
 import { describe, it, expect } from 'vitest'
 import { xxxAdapter } from '../adapters/xxx-adapter'

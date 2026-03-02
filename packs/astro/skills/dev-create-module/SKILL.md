@@ -1,6 +1,6 @@
 ---
 name: dev-create-module
-description: "Use when creating a new feature module with all layers — service, adapter, types, pages, components, and tests."
+description: "Use when creating a new feature module with all layers - service, adapter, types, pages, components, and tests."
 user-invocable: true
 argument-hint: "[module-name]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

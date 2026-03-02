@@ -4,7 +4,7 @@ Voce pode estender o Specialist Agent criando seus proprios agentes adaptados as
 
 ## O Padrao Blueprint
 
-Todo agente segue um **blueprint de 5 partes**: Mission, Workflow, Output, Rules e Handoff. Essa estrutura garante que os agentes se comportem de forma previsivel — eles sabem o que fazer, como fazer, o que produzir, quais restricoes respeitar e quando delegar para outro agente. Seguir esse padrao torna os agentes composiveis e confiaveis em qualquer projeto.
+Todo agente segue um **blueprint de 5 partes**: Mission, Workflow, Output, Rules e Handoff. Essa estrutura garante que os agentes se comportem de forma previsivel - eles sabem o que fazer, como fazer, o que produzir, quais restricoes respeitar e quando delegar para outro agente. Seguir esse padrao torna os agentes composiveis e confiaveis em qualquer projeto.
 
 ## Estrutura do Arquivo de Agente
 
@@ -64,7 +64,7 @@ O campo `description` determina **quando o Claude delega automaticamente** para 
 :::
 
 ::: tip Override de Modelo
-Adicione `model: haiku` ao frontmatter para executar o agente no modelo Haiku — significativamente mais barato por token. Use isto para tarefas mais simples que nao precisam das capacidades completas do Sonnet/Opus.
+Adicione `model: haiku` ao frontmatter para executar o agente no modelo Haiku - significativamente mais barato por token. Use isto para tarefas mais simples que nao precisam das capacidades completas do Sonnet/Opus.
 :::
 
 ### Ferramentas Disponiveis
@@ -165,7 +165,7 @@ tools: Read, Write, Edit, Glob, Grep
 ## Mission
 Quickly scaffold components with minimal token usage.
 
-## Rules (inline — no ARCHITECTURE.md read)
+## Rules (inline - no ARCHITECTURE.md read)
 - `<script setup lang="ts">`
 - defineProps<T>() and defineEmits<T>()
 - < 200 lines
@@ -179,6 +179,6 @@ Quickly scaffold components with minimal token usage.
 
 - Mantenha os agentes focados em **uma responsabilidade**
 - Sempre referencie `ARCHITECTURE.md` para consistencia
-- Use `Bash` com moderacao — prefira `Read`/`Write`/`Edit`
+- Use `Bash` com moderacao - prefira `Read`/`Write`/`Edit`
 - Use `model: haiku` para tarefas mais simples para economizar tokens
 - Teste seu agente pedindo ao Claude para usa-lo: `"Use @my-agent to..."`

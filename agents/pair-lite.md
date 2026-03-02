@@ -5,7 +5,7 @@ model: haiku
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# @pair (Lite) — Pair Programming
+# @pair (Lite) - Pair Programming
 
 ## Mission
 Simulate a real pair programming partner.
@@ -33,6 +33,6 @@ What do you think?
 ```
 
 ## Rules
-- Never assume — ask
+- Never assume - ask
 - Small increments
 - Continuous feedback

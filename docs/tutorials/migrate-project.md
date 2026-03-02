@@ -71,7 +71,7 @@ Always migrate from the bottom up: types → adapters → services → composabl
 
 ---
 
-## Phase 1 — Diagnosis
+## Phase 1 - Diagnosis
 
 Before touching any code, **map what exists**. Use the reviewer agent:
 
@@ -100,7 +100,7 @@ Or do it manually. Answer these questions:
 Products module:
 ├── views/Products.vue          (1247 lines, Options API, JS)
 ├── views/ProductDetail.vue     (823 lines, Options API, JS, uses 2 mixins)
-├── store/products.js           (Vuex — API calls + mutations + getters)
+├── store/products.js           (Vuex - API calls + mutations + getters)
 ├── mixins/paginationMixin.js   (shared pagination logic)
 ├── mixins/filtersMixin.js      (shared filter logic)
 └── api/products.js             (axios calls, some transformation)
@@ -116,7 +116,7 @@ Issues found:
 
 ---
 
-## Phase 2 — Create Target Structure
+## Phase 2 - Create Target Structure
 
 Create the module skeleton. Don't move files yet.
 
@@ -131,11 +131,11 @@ touch src/modules/products/index.ts
 
 ---
 
-## Phase 3 — Extract Types and Adapters
+## Phase 3 - Extract Types and Adapters
 
 This is where migration **starts producing value**. You're creating the typed contract for the first time.
 
-### 3.1 — Study the API responses
+### 3.1 - Study the API responses
 
 Open the network tab, hit the endpoints, copy the JSON:
 
@@ -150,7 +150,7 @@ Open the network tab, hit the endpoints, copy the JSON:
 }
 ```
 
-### 3.2 — Create the types file
+### 3.2 - Create the types file
 
 ```typescript
 // src/modules/products/types/products.types.ts
@@ -163,7 +163,7 @@ export interface ProductResponse {
 }
 ```
 
-### 3.3 — Create the contracts file
+### 3.3 - Create the contracts file
 
 ```typescript
 // src/modules/products/types/products.contracts.ts
@@ -176,7 +176,7 @@ export interface Product {
 }
 ```
 
-### 3.4 — Create the adapter
+### 3.4 - Create the adapter
 
 ```typescript
 // src/modules/products/adapters/products-adapter.ts
@@ -204,7 +204,7 @@ npx tsc --noEmit  # Types compile without errors
 
 ---
 
-## Phase 4 — Extract Services
+## Phase 4 - Extract Services
 
 Find all API calls in your legacy code and move them to a pure service.
 
@@ -258,7 +258,7 @@ export const productsService = {
 
 ---
 
-## Phase 5 — Migrate State
+## Phase 5 - Migrate State
 
 ### Split Vuex into Pinia + Vue Query
 
@@ -291,7 +291,7 @@ export default {
 }
 ```
 
-### After — Composable (server state)
+### After - Composable (server state)
 
 ```typescript
 // src/modules/products/composables/useProductsList.ts
@@ -328,7 +328,7 @@ export function useProductsList(options: {
 }
 ```
 
-### After — Store (client state)
+### After - Store (client state)
 
 ```typescript
 // src/modules/products/stores/products-store.ts
@@ -385,7 +385,7 @@ export function usePagination(initialPage = 1) {
 
 ---
 
-## Phase 6 — Convert Components
+## Phase 6 - Convert Components
 
 ### Before (Options API, 1200+ lines)
 
@@ -506,14 +506,14 @@ Or use the skills:
 
 ## Tips for Large Projects
 
-- **Migrate one module at a time** — don't try to migrate everything at once
-- **Start with the simplest module** — build confidence before tackling complex ones
-- **Keep legacy working** — each phase should leave the app functional
-- **Use feature flags** if needed — old and new can coexist during migration
-- **Test after every phase** — don't wait until the end to validate
+- **Migrate one module at a time** - don't try to migrate everything at once
+- **Start with the simplest module** - build confidence before tackling complex ones
+- **Keep legacy working** - each phase should leave the app functional
+- **Use feature flags** if needed - old and new can coexist during migration
+- **Test after every phase** - don't wait until the end to validate
 
 ## Next Steps
 
-- [CRUD Module Tutorial](/tutorials/crud-module) — See the target architecture in action
-- [Service Layer Tutorial](/tutorials/service-layer) — Deep dive into the data layer
-- [Architecture Overview](/guide/architecture) — Full architecture reference
+- [CRUD Module Tutorial](/tutorials/crud-module) - See the target architecture in action
+- [Service Layer Tutorial](/tutorials/service-layer) - Deep dive into the data layer
+- [Architecture Overview](/guide/architecture) - Full architecture reference

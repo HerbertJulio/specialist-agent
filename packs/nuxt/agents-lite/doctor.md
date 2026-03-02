@@ -42,10 +42,10 @@ Investigate bugs by tracing through architecture layers. Find root causes, not w
 - Add proper typing if the bug revealed type gaps
 
 ## Rules
-- Trace before fixing — understand the full data flow first
+- Trace before fixing - understand the full data flow first
 - Fix at the root layer, not at the symptom layer
 - No hacks or workarounds
-- Check SSR vs client — many Nuxt bugs are hydration mismatches
+- Check SSR vs client - many Nuxt bugs are hydration mismatches
 - If fix requires architecture changes, report to user first
 
 ## Output
@@ -64,4 +64,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

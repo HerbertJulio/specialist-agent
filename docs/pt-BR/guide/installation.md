@@ -100,5 +100,5 @@ Precisa de setup manual? Veja os guias específicos:
 
 ## Próximo
 
-- [Início Rápido](/pt-BR/guide/quick-start) — Construa sua primeira feature
-- [Agentes](/pt-BR/reference/agents) — Todos os 27+ agentes
+- [Início Rápido](/pt-BR/guide/quick-start) - Construa sua primeira feature
+- [Agentes](/pt-BR/reference/agents) - Todos os 27+ agentes

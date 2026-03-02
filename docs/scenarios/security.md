@@ -308,6 +308,6 @@ app.use(express.json({ limit: '10kb' }))
 
 ## Related Scenarios
 
-- [API Design](/scenarios/api-design) — Design secure APIs
-- [Debug Issues](/scenarios/debug-issue) — Debug auth problems
-- [Infrastructure](/scenarios/infrastructure) — Secure deployment
+- [API Design](/scenarios/api-design) - Design secure APIs
+- [Debug Issues](/scenarios/debug-issue) - Debug auth problems
+- [Infrastructure](/scenarios/infrastructure) - Secure deployment

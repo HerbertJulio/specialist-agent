@@ -34,7 +34,7 @@ sequenceDiagram
     Note over V: queryKey changes → auto-refetch
 ```
 
-## Service — Pure HTTP
+## Service - Pure HTTP
 
 Services make the HTTP request. Nothing else.
 
@@ -84,7 +84,7 @@ export const productsService = {
 Don't add `try/catch` in services. Error handling belongs in the composable layer via Vue Query's `onError`.
 :::
 
-## Adapter — Contract Parsers
+## Adapter - Contract Parsers
 
 Adapters transform data between API format and app format. They are **pure functions** with no side effects.
 
@@ -148,7 +148,7 @@ export const productsAdapter = {
 Two separate files for the same resource:
 
 ```typescript
-// types/products.types.ts — Exact API response (snake_case)
+// types/products.types.ts - Exact API response (snake_case)
 export interface ProductItemResponse {
   uuid: string
   name: string
@@ -170,7 +170,7 @@ export interface ProductListResponse {
 ```
 
 ```typescript
-// types/products.contracts.ts — App contract (camelCase)
+// types/products.contracts.ts - App contract (camelCase)
 export interface Product {
   id: string
   name: string
@@ -186,12 +186,12 @@ export interface Product {
 ```
 
 ::: tip Why two files?
-- `.types.ts` mirrors the API exactly — if the API changes, only this file changes
-- `.contracts.ts` is what your components actually use — stable app interface
+- `.types.ts` mirrors the API exactly - if the API changes, only this file changes
+- `.contracts.ts` is what your components actually use - stable app interface
 - The adapter bridges the gap between them
 :::
 
-## Composable — Orchestration
+## Composable - Orchestration
 
 Composables connect everything: call service, pass through adapter, manage loading/error, expose reactive data.
 
@@ -274,7 +274,7 @@ export function useCreateProduct() {
 - ❌ No template/rendering
 - ❌ No direct API access
 
-## Pinia Store — Client State Only
+## Pinia Store - Client State Only
 
 Pinia is for state that **does not come from the server**: UI state, filters, preferences.
 

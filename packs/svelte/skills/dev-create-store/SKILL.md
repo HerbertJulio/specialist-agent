@@ -1,6 +1,6 @@
 ---
 name: dev-create-store
-description: "Use when adding state management to a module — creates Svelte store with server state integration."
+description: "Use when adding state management to a module - creates Svelte store with server state integration."
 user-invocable: true
 argument-hint: "[store-name]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

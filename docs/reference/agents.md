@@ -5,10 +5,10 @@
 ::: tip Cross-Cutting Features
 All agents include:
 
-- **Verification Protocol** — Proof-based verification before claiming completion
-- **Anti-Rationalization** — Tables preventing common shortcuts and excuses
-- **Lite Mode** — Cost-optimized Haiku variants (60-80% cheaper)
-- **Handoff Protocol** — Structured agent-to-agent delegation
+- **Verification Protocol** - Proof-based verification before claiming completion
+- **Anti-Rationalization** - Tables preventing common shortcuts and excuses
+- **Lite Mode** - Cost-optimized Haiku variants (60-80% cheaper)
+- **Handoff Protocol** - Structured agent-to-agent delegation
 
 :::
 
@@ -75,9 +75,9 @@ Build modules, components, services, and tests.
 
 Review code before merge. Three checks in one:
 
-1. **Spec compliance** — Does it meet requirements?
-2. **Code quality** — Is it clean and tested?
-3. **Architecture fit** — Does it follow patterns?
+1. **Spec compliance** - Does it meet requirements?
+2. **Code quality** - Is it clean and tested?
+3. **Architecture fit** - Does it follow patterns?
 
 ```bash
 "Use @reviewer to review the auth module"
@@ -153,9 +153,9 @@ Execute plans with checkpoints and quality gates.
 
 Test-Driven Development.
 
-1. **RED** — Write failing test
-2. **GREEN** — Make it pass
-3. **REFACTOR** — Improve code
+1. **RED** - Write failing test
+2. **GREEN** - Make it pass
+3. **REFACTOR** - Improve code
 
 ```bash
 "Use @tdd to implement calculateDiscount"
@@ -169,10 +169,10 @@ No code without failing test first.
 
 4-phase systematic debugging.
 
-1. **Gather** — Collect evidence
-2. **Analyze** — Form hypothesis
-3. **Test** — Verify hypothesis
-4. **Implement** — Fix and validate
+1. **Gather** - Collect evidence
+2. **Analyze** - Form hypothesis
+3. **Test** - Verify hypothesis
+4. **Implement** - Fix and validate
 
 ```bash
 "Use @debugger to fix the stale data issue"
@@ -428,7 +428,7 @@ Session memory management.
 Explore unfamiliar codebases.
 
 ```bash
-"Use @explorer to map this codebase — I'm new here"
+"Use @explorer to map this codebase - I'm new here"
 ```
 
 **Output:** Health score, structure map, recommendations.
@@ -467,7 +467,7 @@ Key agents include rationalization prevention tables:
 | "It should work" | "Should" is not evidence. Prove it. |
 | "I'll verify later" | Later never comes. Verify now. |
 
-If you catch yourself thinking "just this once" — stop and follow the process.
+If you catch yourself thinking "just this once" - stop and follow the process.
 
 ---
 

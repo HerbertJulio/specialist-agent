@@ -13,7 +13,7 @@ const show = computed(() => frontmatter.value.layout === 'home' && !dismissed.va
     <div class="announcement-content">
       <a href="/guide/installation">
         <span class="announcement-badge">New</span>
-        v2.7 — Lite agents are now 80% cheaper. Framework packs for 7 stacks.
+        v2.7 - Lite agents are now 80% cheaper. Framework packs for 7 stacks.
       </a>
     </div>
     <button class="announcement-dismiss" @click="dismissed = true" aria-label="Dismiss">&times;</button>

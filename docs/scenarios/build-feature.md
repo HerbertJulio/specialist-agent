@@ -193,6 +193,6 @@ Start small, add features:
 
 ## Related Scenarios
 
-- [Code Review](/scenarios/code-review) — Review the code you built
-- [Debug Issues](/scenarios/debug-issue) — When something doesn't work
-- [API Design](/scenarios/api-design) — Design the backend first
+- [Code Review](/scenarios/code-review) - Review the code you built
+- [Debug Issues](/scenarios/debug-issue) - When something doesn't work
+- [API Design](/scenarios/api-design) - Design the backend first

@@ -4,7 +4,7 @@
 Skip ahead to the [Quick Start](/guide/quick-start) to get up and running in under 2 minutes.
 :::
 
-Specialist Agent is a collection of **27+ specialized AI agents** and **21 skills** that build, review, debug, and ship production code — across any framework and any stack.
+Specialist Agent is a collection of **27+ specialized AI agents** and **21 skills** that build, review, debug, and ship production code - across any framework and any stack.
 
 ## Prerequisites
 
@@ -36,14 +36,13 @@ Specialist Agent is a collection of **27+ specialized AI agents** and **21 skill
 npx specialist-agent init
 ```
 
-```bash [Cursor / VS Code]
-# Install from marketplace
-# Search "Specialist Agent" in Extensions
+```bash [Cursor / VS Code / Windsurf]
+cd your-project
+npx specialist-agent init
 ```
 
-```bash [npm (global)]
-npm install -g specialist-agent
-specialist-agent init
+```bash [Marketplace]
+/plugin install specialist-agent
 ```
 
 :::
@@ -96,7 +95,7 @@ Lite mode uses a smaller model for faster, cheaper results. See [Performance & C
 
 ## What's Next?
 
-- [Why Specialist Agent?](/guide/why) — The problems we solve and how
-- [Quick Start](/guide/quick-start) — Get running in 2 minutes
-- [Real-World Scenarios](/scenarios/) — See agents in action
-- [All Agents Reference](/reference/agents) — Full agent catalog
+- [Why Specialist Agent?](/guide/why) - The problems we solve and how
+- [Quick Start](/guide/quick-start) - Get running in 2 minutes
+- [Real-World Scenarios](/scenarios/) - See agents in action
+- [All Agents Reference](/reference/agents) - Full agent catalog

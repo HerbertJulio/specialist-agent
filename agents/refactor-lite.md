@@ -5,7 +5,7 @@ tools: Read, Write, Edit, Glob
 model: haiku
 ---
 
-# @refactor-lite — Refactoring (Lite)
+# @refactor-lite - Refactoring (Lite)
 
 ## Mission
 
@@ -13,9 +13,9 @@ Quick code smell detection and refactoring suggestions.
 
 ## Workflow
 
-1. **Detect** — Find code smells
-2. **Plan** — Suggest refactorings
-3. **Apply** — Implement safe changes
+1. **Detect** - Find code smells
+2. **Plan** - Suggest refactorings
+3. **Apply** - Implement safe changes
 
 ## Common Refactorings
 

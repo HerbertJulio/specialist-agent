@@ -44,7 +44,7 @@ sequenceDiagram
     end
 ```
 
-## Step 1 — Define the Validation Schema
+## Step 1 - Define the Validation Schema
 
 ```typescript
 // src/modules/products/types/products.schemas.ts
@@ -81,7 +81,7 @@ export type CreateProductFormData = z.infer<typeof createProductSchema>
 The Zod schema validates **form input**. The contract in `products.contracts.ts` defines the **app data model**. They can overlap, but serve different purposes.
 :::
 
-## Step 2 — Build a Form Validation Composable
+## Step 2 - Build a Form Validation Composable
 
 ```typescript
 // src/shared/composables/useFormValidation.ts
@@ -121,7 +121,7 @@ export function useFormValidation<T>(schema: ZodSchema<T>) {
 }
 ```
 
-## Step 3 — Build the Mutation Composable
+## Step 3 - Build the Mutation Composable
 
 ```typescript
 // src/modules/products/composables/useCreateProduct.ts
@@ -154,7 +154,7 @@ export function useCreateProduct() {
 }
 ```
 
-## Step 4 — Build the Form Component
+## Step 4 - Build the Form Component
 
 ```vue
 <!-- src/modules/products/components/ProductForm.vue -->
@@ -353,12 +353,12 @@ const { createProduct, isPending } = props.product
 
 ## Key Takeaways
 
-- **Zod** validates at the form boundary — before data enters the system
-- **Adapter** converts at the API boundary — before data leaves the system
+- **Zod** validates at the form boundary - before data enters the system
+- **Adapter** converts at the API boundary - before data leaves the system
 - **useMutation** handles loading, error, and cache invalidation
-- **Components** show state (loading, errors, success) — no business logic
+- **Components** show state (loading, errors, success) - no business logic
 
 ## Next Steps
 
-- [Pagination + Filters](/tutorials/pagination-filters) — Build advanced list patterns
-- [CRUD Module Tutorial](/tutorials/crud-module) — See the full module with this form integrated
+- [Pagination + Filters](/tutorials/pagination-filters) - Build advanced list patterns
+- [CRUD Module Tutorial](/tutorials/crud-module) - See the full module with this form integrated

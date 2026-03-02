@@ -232,7 +232,7 @@ IF @builder fails:
 ## Exemplo: Workflow Completo de Feature
 
 ```markdown
-# @feature-builder — Agente Composto
+# @feature-builder - Agente Composto
 
 ## Mission
 Construir features completas coordenando agentes especialistas.
@@ -280,9 +280,9 @@ ELSE:
 
 A composição reduz tokens por:
 
-1. **Agentes especializados** — Cada agente é menor, focado
-2. **Isolamento de contexto** — Agentes não carregam histórico completo
-3. **Execução paralela** — Múltiplos agentes trabalham simultaneamente
-4. **Terminação antecipada** — Pula agentes quando não necessário
+1. **Agentes especializados** - Cada agente é menor, focado
+2. **Isolamento de contexto** - Agentes não carregam histórico completo
+3. **Execução paralela** - Múltiplos agentes trabalham simultaneamente
+4. **Terminação antecipada** - Pula agentes quando não necessário
 
 Economia típica: 30-50% vs agentes monolíticos.

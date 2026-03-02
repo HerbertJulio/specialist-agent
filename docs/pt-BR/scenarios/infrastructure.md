@@ -421,6 +421,6 @@ env:
 
 ## Cenarios Relacionados
 
-- [Seguranca](/pt-BR/scenarios/security) — Infraestrutura segura
-- [Design de API](/pt-BR/scenarios/api-design) — Projete APIs escalaveis
-- [Performance](/pt-BR/scenarios/performance) — Otimize para escala
+- [Seguranca](/pt-BR/scenarios/security) - Infraestrutura segura
+- [Design de API](/pt-BR/scenarios/api-design) - Projete APIs escalaveis
+- [Performance](/pt-BR/scenarios/performance) - Otimize para escala
