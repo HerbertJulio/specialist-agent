@@ -6,7 +6,7 @@ argument-hint: "[module or 'full']"
 allowed-tools: Read, Bash, Glob, Grep
 ---
 
-# /health — Project Health Score
+# /health - Project Health Score
 
 Generate a comprehensive health score for your project or a specific module.
 
@@ -179,9 +179,9 @@ TREND (if previous scans exist)
 RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 
-  @reviewer  — Run /review-fix-violations to auto-fix
-  @tester    — Add tests for auth module
-  @builder   — Refactor LoginForm.tsx
+  @reviewer  - Run /review-fix-violations to auto-fix
+  @tester    - Add tests for auth module
+  @builder   - Refactor LoginForm.tsx
 
 ═══════════════════════════════════════════════════════════════
   Generated: 2024-01-20 14:30 | Scan time: 12s
@@ -244,8 +244,8 @@ Only checks:
 
 ## Rules
 
-1. **Be objective** — Numbers, not opinions
-2. **Prioritize issues** — Most impactful first
-3. **Show trends** — Compare to previous scans
-4. **Actionable** — Suggest specific fixes
-5. **Save history** — Track progress over time
+1. **Be objective** - Numbers, not opinions
+2. **Prioritize issues** - Most impactful first
+3. **Show trends** - Compare to previous scans
+4. **Actionable** - Suggest specific fixes
+5. **Save history** - Track progress over time

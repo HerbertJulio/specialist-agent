@@ -1,12 +1,21 @@
 # Introduction
 
-Specialist Agent is a collection of AI agents that help you build software faster.
+::: tip Just want to try it?
+Skip ahead to the [Quick Start](/guide/quick-start) to get up and running in under 2 minutes.
+:::
+
+Specialist Agent is a collection of **27+ specialized AI agents** and **21 skills** that build, review, debug, and ship production code - across any framework and any stack.
+
+## Prerequisites
+
+- **Node.js** 18+ (for CLI installation)
+- An AI coding platform: [Claude Code](/guide/installation), [Cursor](/guide/install-cursor), [VS Code](/guide/install-vscode), [Windsurf](/guide/install-windsurf), [Codex](/guide/install-codex), or [OpenCode](/guide/install-opencode)
 
 ## How It Works
 
-1. You describe what you need
-2. The right agent handles it
-3. You get production-ready code
+1. You describe what you need in plain language
+2. The right specialized agent handles it
+3. You get production-ready, verified code
 
 ```
 "Create a products module with CRUD"
@@ -21,17 +30,26 @@ Specialist Agent is a collection of AI agents that help you build software faste
 
 ## Install
 
-**Marketplace:**
-```
-/plugin install specialist-agent
-```
+::: code-group
 
-**CLI:**
-```bash
+```bash [Claude Code]
 npx specialist-agent init
 ```
 
-Works with Claude Code, Cursor, VS Code, Windsurf, and Codex.
+```bash [Cursor / VS Code / Windsurf]
+cd your-project
+npx specialist-agent init
+```
+
+```bash [Marketplace]
+/plugin install specialist-agent
+```
+
+:::
+
+::: info Works everywhere
+Specialist Agent supports Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode. See [Platform Guides](/guide/install-cursor) for platform-specific setup.
+:::
 
 ## Choose Your Scenario
 
@@ -56,27 +74,28 @@ Works with Claude Code, Cursor, VS Code, Windsurf, and Codex.
 
 | Framework | What You Get |
 |-----------|--------------|
-| Next.js | App Router patterns, Server Components |
-| React | Hooks, React Query, Zustand |
-| Vue 3 | Composition API, Pinia, Vue Query |
-| SvelteKit | Stores, load functions |
-| Angular | Standalone components, Signals, DI |
-| Astro | Islands architecture, Content Collections |
-| Nuxt | Auto-imports, Nitro server, useFetch |
+| **Next.js** | App Router patterns, Server Components |
+| **React** | Hooks, React Query, Zustand |
+| **Vue 3** | Composition API, Pinia, Vue Query |
+| **SvelteKit** | Stores, load functions |
+| **Angular** | Standalone components, Signals, DI |
+| **Astro** | Islands architecture, Content Collections |
+| **Nuxt** | Auto-imports, Nitro server, useFetch |
 
-Each framework has specific patterns for services, state, and components.
+Each framework has specific patterns for services, state, and components. See [Architecture](/guide/architecture) for details.
 
 ## Full vs Lite Mode
 
 | Mode | Best For | Cost |
 |------|----------|------|
-| Full | Complex features, PRs | Standard |
-| Lite | Quick tasks, scaffolding | 60-80% less |
+| **Full** | Complex features, PRs, reviews | Standard |
+| **Lite** | Quick tasks, scaffolding, fixes | 60-80% less |
 
-Lite mode uses a smaller model for faster, cheaper results.
+Lite mode uses a smaller model for faster, cheaper results. See [Performance & Cost](/guide/benchmark) for benchmarks.
 
-## Next Steps
+## What's Next?
 
-1. [See real scenarios](/scenarios/) — How developers use each agent
-2. [Start building](/scenarios/build-feature) — Create your first feature
-3. [Browse all agents](/reference/agents) — Full reference
+- [Why Specialist Agent?](/guide/why) - The problems we solve and how
+- [Quick Start](/guide/quick-start) - Get running in 2 minutes
+- [Real-World Scenarios](/scenarios/) - See agents in action
+- [All Agents Reference](/reference/agents) - Full agent catalog

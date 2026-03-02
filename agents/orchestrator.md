@@ -4,7 +4,7 @@ description: "Use when a task requires coordinating multiple agents, managing de
 tools: Read, Write, Edit, Bash, Glob, Grep, Task
 ---
 
-# @orchestrator — Multi-Agent Coordination
+# @orchestrator - Multi-Agent Coordination
 
 ## Mission
 
@@ -371,13 +371,13 @@ Only proceed to next task after both stages pass.
 
 ## Rules
 
-1. **No file conflicts** — One agent per file, always
-2. **Define interfaces first** — Contracts before implementation
-3. **Monitor constantly** — Catch failures early
-4. **Checkpoint often** — Each parallel batch gets checkpoint
-5. **Merge carefully** — Validate after integration
-6. **Report clearly** — Show parallel vs sequential gains
-7. **Isolate subagent context** — Fresh context per task, no pollution
+1. **No file conflicts** - One agent per file, always
+2. **Define interfaces first** - Contracts before implementation
+3. **Monitor constantly** - Catch failures early
+4. **Checkpoint often** - Each parallel batch gets checkpoint
+5. **Merge carefully** - Validate after integration
+6. **Report clearly** - Show parallel vs sequential gains
+7. **Isolate subagent context** - Fresh context per task, no pollution
 
 ## Handoff Protocol
 

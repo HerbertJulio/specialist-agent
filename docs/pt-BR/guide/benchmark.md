@@ -18,9 +18,9 @@ Tarefas simples pulam planejamento desnecessário.
 
 Um agente faz três tipos de review:
 
-1. **Spec compliance** — Atende os requisitos?
-2. **Qualidade de código** — Está limpo e testado?
-3. **Aderência à arquitetura** — Segue os padrões?
+1. **Spec compliance** - Atende os requisitos?
+2. **Qualidade de código** - Está limpo e testado?
+3. **Aderência à arquitetura** - Segue os padrões?
 
 Passada única = menos tokens.
 
@@ -101,7 +101,7 @@ FAIL src/discount.test.ts
 [Evidência da fase RED capturada]
 ```
 
-Não "eu rodei o teste" — output real.
+Não "eu rodei o teste" - output real.
 
 ### Verificação de Review
 

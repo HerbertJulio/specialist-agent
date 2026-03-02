@@ -346,7 +346,7 @@ function testCrossSkillConsistency(skills) {
 // ── Main ──
 
 console.log('\n══════════════════════════════════════════════');
-console.log('  Specialist Agent — Skill Behavioral Tests');
+console.log('  Specialist Agent - Skill Behavioral Tests');
 console.log('══════════════════════════════════════════════');
 
 const skillsDir = path.join(ROOT, 'skills');

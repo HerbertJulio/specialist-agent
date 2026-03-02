@@ -90,10 +90,10 @@ allowed-tools: Read, Bash, Glob, Grep
 Check if the current branch is ready for a pull request.
 
 ## Steps
-1. Run `tsc --noEmit` — check for type errors
-2. Run `eslint .` — check for lint issues
-3. Run `vitest run` — run all tests
-4. Run `npm run build` — verify build succeeds
+1. Run `tsc --noEmit` - check for type errors
+2. Run `eslint .` - check for lint issues
+3. Run `vitest run` - run all tests
+4. Run `npm run build` - verify build succeeds
 5. Search for `console.log` and `debugger` statements
 6. Check for files > 200 lines in changed files
 7. Produce a summary report
@@ -166,7 +166,7 @@ O nome do diretorio determina o nome da skill:
 
 ## Dicas
 
-- Mantenha as skills **focadas** — uma acao por skill
+- Mantenha as skills **focadas** - uma acao por skill
 - Use `$ARGUMENTS` para entrada do usuario
 - Referencie `ARCHITECTURE.md` para consistencia
 - Use `allowed-tools` para restringir permissoes (ex: skills somente leitura)

@@ -1,6 +1,6 @@
 ---
 name: refactor
-description: "Use when code has grown complex, has duplication, violates patterns, or needs restructuring — from code smells to architecture-level refactoring."
+description: "Use when code has grown complex, has duplication, violates patterns, or needs restructuring - from code smells to architecture-level refactoring."
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan for test coverage (test file
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -131,8 +131,8 @@ function createUser(input: CreateUserInput)
 ```
 
 ### Rules
-- NEVER refactor without tests — if no tests exist, write them first
-- ONE refactoring at a time — never combine multiple changes
+- NEVER refactor without tests - if no tests exist, write them first
+- ONE refactoring at a time - never combine multiple changes
 - Run tests after EVERY change
 - Commit after each successful refactoring
 - Keep refactoring and feature changes in SEPARATE commits
@@ -150,7 +150,7 @@ function createUser(input: CreateUserInput)
 
 #### Creational Patterns
 
-**Factory Pattern** — When object creation logic is complex or varies by type
+**Factory Pattern** - When object creation logic is complex or varies by type
 ```typescript
 // Before: scattered construction logic
 const notification = type === 'email'
@@ -174,7 +174,7 @@ class NotificationFactory {
 }
 ```
 
-**Builder Pattern** — When objects need step-by-step construction with many optional params
+**Builder Pattern** - When objects need step-by-step construction with many optional params
 ```typescript
 // Before: constructor with 8 optional params
 new QueryBuilder('users', ['name', 'email'], 'active', 20, 0, 'name', 'asc', true)
@@ -191,7 +191,7 @@ new QueryBuilder('users')
 
 #### Structural Patterns
 
-**Decorator Pattern** — When adding behavior without modifying existing code
+**Decorator Pattern** - When adding behavior without modifying existing code
 ```typescript
 // Base
 interface Logger { log(message: string): void }
@@ -214,7 +214,7 @@ class PrefixLogger implements Logger {
 const logger = new PrefixLogger(new TimestampLogger(new ConsoleLogger()), 'APP')
 ```
 
-**Composite Pattern** — When treating individual and group objects uniformly
+**Composite Pattern** - When treating individual and group objects uniformly
 ```typescript
 interface PriceComponent {
   getPrice(): number
@@ -234,7 +234,7 @@ class Bundle implements PriceComponent {
 
 #### Behavioral Patterns
 
-**Strategy Pattern** — When algorithm varies by context
+**Strategy Pattern** - When algorithm varies by context
 ```typescript
 // Before: if/else chain
 function calculateDiscount(type: string, total: number) {
@@ -253,7 +253,7 @@ function calculateDiscount(strategy: DiscountStrategy, total: number) {
 }
 ```
 
-**Observer Pattern** — When state changes need to notify multiple dependents
+**Observer Pattern** - When state changes need to notify multiple dependents
 ```typescript
 type Listener<T> = (event: T) => void
 
@@ -271,7 +271,7 @@ orderEvents.on(order => updateInventory(order))
 orderEvents.on(order => notifyWarehouse(order))
 ```
 
-**Chain of Responsibility** — When request passes through multiple handlers
+**Chain of Responsibility** - When request passes through multiple handlers
 ```typescript
 interface Handler<T> {
   handle(request: T): T | null
@@ -288,7 +288,7 @@ const chain = new AuthHandler()
 chain.setNext(new RateLimitHandler()).setNext(new ValidationHandler())
 ```
 
-**Mediator Pattern** — When objects communicate too much with each other
+**Mediator Pattern** - When objects communicate too much with each other
 ```typescript
 // Before: components talk directly (N*N connections)
 // After: components talk through mediator (N connections)
@@ -304,7 +304,7 @@ class ChatRoom {
 ### Rules
 - Pattern introduction must solve a REAL problem, not a hypothetical one
 - If a pattern adds complexity without clear benefit, don't use it
-- Document the "why" — future developers need to understand the choice
+- Document the "why" - future developers need to understand the choice
 - Prefer composition over inheritance
 
 ## Architecture Refactor Mode
@@ -329,7 +329,7 @@ class ChatRoom {
 
 ### Architecture Migration Strategies
 
-**Strangler Fig** — Gradually replace legacy code
+**Strangler Fig** - Gradually replace legacy code
 ```text
 1. Identify boundary to extract
 2. Create interface (port) for the boundary
@@ -338,7 +338,7 @@ class ChatRoom {
 5. Remove legacy code
 ```
 
-**Branch by Abstraction** — Change implementation safely
+**Branch by Abstraction** - Change implementation safely
 ```text
 1. Create abstraction over existing implementation
 2. Move all consumers to use the abstraction
@@ -347,7 +347,7 @@ class ChatRoom {
 5. Remove old implementation
 ```
 
-**Feature Flags** — Refactor in production safely
+**Feature Flags** - Refactor in production safely
 ```text
 1. New code behind feature flag (disabled)
 2. Deploy to production (flag off)
@@ -391,8 +391,8 @@ const orderService = new OrderService(
 ```
 
 ### Rules
-- Map dependencies BEFORE refactoring — understand the blast radius
-- One module at a time — never restructure everything simultaneously
+- Map dependencies BEFORE refactoring - understand the blast radius
+- One module at a time - never restructure everything simultaneously
 - Validate dependency direction after each change (no regressions)
 - Track metrics before/after to prove improvement
 
@@ -420,24 +420,24 @@ const orderService = new OrderService(
 | "This code is too complex to test first" | Then it is too complex to refactor. Write characterization tests to capture current behavior. |
 
 ## General Rules
-- Framework-agnostic — works with any stack
+- Framework-agnostic - works with any stack
 - Reads ARCHITECTURE.md if present and follows existing conventions
-- Tests first — never refactor untested code
-- Small steps — one refactoring at a time
-- Preserve behavior — no functional changes mixed with refactoring
-- Commit often — after each successful refactoring
-- Measure — quantify improvements with metrics
+- Tests first - never refactor untested code
+- Small steps - one refactoring at a time
+- Preserve behavior - no functional changes mixed with refactoring
+- Commit often - after each successful refactoring
+- Measure - quantify improvements with metrics
 
 ## Output
 
 After completing work in any mode, provide:
 
 ```markdown
-## Refactor — [Mode: Smell Fix | Pattern | Architecture]
+## Refactor - [Mode: Smell Fix | Pattern | Architecture]
 ### What was done
 - [Refactorings applied with before/after description]
 ### Metrics
-- [Complexity, coupling, line count — before/after]
+- [Complexity, coupling, line count - before/after]
 ### Validation
 - [Test results, TypeScript check, build status]
 ### Recommendations
@@ -463,4 +463,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

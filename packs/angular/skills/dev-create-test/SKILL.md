@@ -1,6 +1,6 @@
 ---
 name: dev-create-test
-description: "Use when a module needs test coverage — creates tests for adapters, services, and components."
+description: "Use when a module needs test coverage - creates tests for adapters, services, and components."
 user-invocable: true
 argument-hint: "[file-path]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

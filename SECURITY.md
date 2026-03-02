@@ -26,7 +26,7 @@ Instead, please email the maintainers or use [GitHub's private vulnerability rep
 Specialist Agent is a collection of markdown files and a CLI installer. The main security considerations are:
 
 - **CLI (`npx specialist-agent init`)**: File copying operations only, no network calls, no code execution
-- **Agent/skill instructions**: Markdown files that instruct Claude Code — they don't execute code directly
+- **Agent/skill instructions**: Markdown files that instruct Claude Code - they don't execute code directly
 - **Documentation site**: Static VitePress site with no server-side processing
 
 ## Best Practices

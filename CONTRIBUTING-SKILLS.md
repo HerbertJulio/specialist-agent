@@ -15,7 +15,7 @@ argument-hint: "[arguments]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# /my-skill — Title
+# /my-skill - Title
 
 ## When to Use
 ## Workflow
@@ -81,18 +81,18 @@ case 'your-skill':
 
 Community skills installed to `~/.claude/community-skills/` are automatically discovered by the runtime. They follow the same resolution order:
 
-1. **Project** skills (`.claude/skills/`) — highest priority
+1. **Project** skills (`.claude/skills/`) - highest priority
 2. **Pack** skills (framework-specific)
 3. **Community** skills (`~/.claude/community-skills/`)
-4. **Global** skills (`~/.claude/skills/`) — lowest priority
+4. **Global** skills (`~/.claude/skills/`) - lowest priority
 
 Project skills can shadow community skills with the same name.
 
 ## Examples of Well-Written Skills
 
-- `/tdd` — Strict RED-GREEN-REFACTOR with proof
-- `/debug` — 4-phase systematic debugging
-- `/verify` — Evidence-based verification
-- `/audit` — Multi-domain code audit
+- `/tdd` - Strict RED-GREEN-REFACTOR with proof
+- `/debug` - 4-phase systematic debugging
+- `/verify` - Evidence-based verification
+- `/audit` - Multi-domain code audit
 
 Read these for patterns to follow.

@@ -12,10 +12,10 @@ Cenários reais para planejar funcionalidades e projetos.
 ```
 
 **O que acontece:**
-1. **Avaliar** — Avalia a complexidade (S/M/L/XL)
-2. **Decompor** — Divide em fases e tarefas
-3. **Estimar** — Custo em tokens por fase
-4. **Saída** — Plano estruturado com checkpoints
+1. **Avaliar** - Avalia a complexidade (S/M/L/XL)
+2. **Decompor** - Divide em fases e tarefas
+3. **Estimar** - Custo em tokens por fase
+4. **Saída** - Plano estruturado com checkpoints
 
 **Resultado:**
 ```
@@ -23,20 +23,20 @@ Plan: User Authentication
 
 COMPLEXITY: L (multi-module, external integrations)
 
-PHASE 1 — Core Auth (estimated: ~5k tokens)
+PHASE 1 - Core Auth (estimated: ~5k tokens)
   ☐ User model with password hashing
   ☐ JWT token generation and validation
   ☐ Login / Register endpoints
   ☐ Auth middleware
   CHECKPOINT: Basic auth working
 
-PHASE 2 — Social Login (estimated: ~3k tokens)
+PHASE 2 - Social Login (estimated: ~3k tokens)
   ☐ OAuth2 flow (Google, GitHub)
   ☐ Account linking
   ☐ Profile sync
   CHECKPOINT: Social login working
 
-PHASE 3 — Security Hardening (estimated: ~2k tokens)
+PHASE 3 - Security Hardening (estimated: ~2k tokens)
   ☐ Rate limiting on auth endpoints
   ☐ Refresh token rotation
   ☐ Password reset flow
@@ -74,19 +74,19 @@ TARGET STATE
   - PaymentService delegates to strategy
   - Easy to add new providers
 
-PHASE 1 — Extract Interface (estimated: ~2k tokens)
+PHASE 1 - Extract Interface (estimated: ~2k tokens)
   ☐ Define PaymentStrategy interface
   ☐ Create StripeStrategy
   ☐ Create PayPalStrategy
   CHECKPOINT: Strategies compile
 
-PHASE 2 — Refactor Service (estimated: ~2k tokens)
+PHASE 2 - Refactor Service (estimated: ~2k tokens)
   ☐ PaymentService uses strategy map
   ☐ Remove if/else chains
   ☐ Factory for strategy selection
   CHECKPOINT: All tests pass
 
-PHASE 3 — Verify (estimated: ~1k tokens)
+PHASE 3 - Verify (estimated: ~1k tokens)
   ☐ Run existing tests (no behavior change)
   ☐ Add tests for new strategies
   ☐ Code review with @reviewer
@@ -112,27 +112,27 @@ Plan: React → Vue 3 Migration
 
 COMPLEXITY: XL (full frontend rewrite)
 
-PHASE 1 — Setup (estimated: ~1k tokens)
+PHASE 1 - Setup (estimated: ~1k tokens)
   ☐ Vue 3 project setup alongside React
   ☐ Shared API layer (framework-agnostic)
   ☐ Pinia stores matching Redux state
   CHECKPOINT: Vue app boots
 
-PHASE 2 — Core Pages (estimated: ~8k tokens)
+PHASE 2 - Core Pages (estimated: ~8k tokens)
   ☐ Layout components (header, sidebar, footer)
   ☐ Dashboard page
   ☐ Login / Register pages
   ☐ Router setup with guards
   CHECKPOINT: Core navigation working
 
-PHASE 3 — Feature Pages (estimated: ~10k tokens)
+PHASE 3 - Feature Pages (estimated: ~10k tokens)
   ☐ Product listing + detail
   ☐ Cart + checkout
   ☐ User profile + settings
   ☐ Admin panel
   CHECKPOINT: Feature parity
 
-PHASE 4 — Polish (estimated: ~3k tokens)
+PHASE 4 - Polish (estimated: ~3k tokens)
   ☐ E2E tests with Playwright
   ☐ Performance audit with @perf
   ☐ Accessibility check
@@ -174,6 +174,6 @@ Use @executor to implement the payment plan
 
 ## Cenários Relacionados
 
-- [Construir Funcionalidades](/pt-BR/scenarios/build-feature) — Execute o plano
-- [Revisão de Código](/pt-BR/scenarios/code-review) — Revise as mudanças planejadas
-- [Migração](/pt-BR/scenarios/migration) — Planeje grandes migrações
+- [Construir Funcionalidades](/pt-BR/scenarios/build-feature) - Execute o plano
+- [Revisão de Código](/pt-BR/scenarios/code-review) - Revise as mudanças planejadas
+- [Migração](/pt-BR/scenarios/migration) - Planeje grandes migrações

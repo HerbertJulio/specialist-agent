@@ -1,12 +1,20 @@
 # Quick Start
 
-Install first:
+::: tip Fastest path
+Already installed? Jump straight to the first step below.
+:::
 
+::: code-group
+
+```bash [Claude Code]
+npx specialist-agent init
 ```
+
+```bash [Marketplace]
 /plugin install specialist-agent
 ```
 
-Or via CLI: `npx specialist-agent init`
+:::
 
 Then start using agents:
 
@@ -162,8 +170,9 @@ Specialist Agent includes 4 native Claude Code hooks that run automatically:
 
 Installed during `npx specialist-agent init`. See [Hooks Reference](/reference/hooks) for details.
 
-## Next
+## What's Next?
 
-- [Agents](/reference/agents) — All 27+ agents
-- [Skills](/reference/skills) — All skills
-- [Architecture](/guide/architecture) — Understand the patterns
+- [All 27+ Agents](/reference/agents) - Full reference catalog
+- [All Skills](/reference/skills) - Slash commands reference
+- [Architecture](/guide/architecture) - Understand the patterns
+- [Real-World Scenarios](/scenarios/) - See agents in action

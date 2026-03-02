@@ -2,7 +2,7 @@
   "$schema": "https://windsurf.io/schemas/plugin-v1.json",
   "id": "specialist-agent",
   "name": "Specialist Agent",
-  "version": "2.5.0",
+  "version": "2.7.0",
   "description": "Your AI development team. 27+ specialized agents that build, review, debug, and ship production code.",
   "author": {
     "name": "Herbert Julio",

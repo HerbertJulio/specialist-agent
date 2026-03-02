@@ -1,6 +1,6 @@
 # Specialist Agent for OpenCode
 
-AI agents for any framework — Vue 3, React, Next.js, SvelteKit.
+AI agents for any framework — Vue 3, React, Next.js, SvelteKit, Angular, Astro, Nuxt.
 
 ## Quick Install
 
@@ -39,6 +39,15 @@ The wizard will:
 
    # For SvelteKit projects
    cp -r specialist-agent/packs/svelte/* your-project/.claude/
+
+   # For Angular projects
+   cp -r specialist-agent/packs/angular/* your-project/.claude/
+
+   # For Astro projects
+   cp -r specialist-agent/packs/astro/* your-project/.claude/
+
+   # For Nuxt projects
+   cp -r specialist-agent/packs/nuxt/* your-project/.claude/
    ```
 
 3. **Copy CLAUDE.md to your project root:**
@@ -120,4 +129,4 @@ Quick shortcuts for common tasks:
 
 ## License
 
-MIT — Use freely.
+MIT - Use freely.

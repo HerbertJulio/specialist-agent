@@ -4,51 +4,49 @@ layout: home
 hero:
   name: Specialist Agent
   text: Your AI Development Team
-  tagline: Build production code faster with 27+ specialized AI agents.
+  tagline: 27+ specialized agents that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, and more.
   actions:
     - theme: brand
-      text: Install
-      link: /guide/installation
-    - theme: alt
       text: Get Started
-      link: /guide/introduction
+      link: /guide/quick-start
+    - theme: alt
+      text: Why Specialist Agent?
+      link: /guide/why
 
 features:
   - icon: 🏗️
-    title: Build Features
-    details: Create modules, components, APIs. @builder scaffolds production code following your architecture.
-    link: /scenarios/build-feature
+    title: 27+ Specialized Agents
+    details: "From @builder for scaffolding to @security for OWASP audits. Each agent has deep domain expertise, not generic prompts."
+    link: /reference/agents
+    linkText: Browse agents
   - icon: 🔍
-    title: Review Code
-    details: Unified 3-in-1 review checks spec compliance, code quality, and architecture in one pass.
+    title: 3-in-1 Code Review
+    details: "Spec compliance, code quality, and architecture fit - checked in a single pass. Evidence-based verdicts, not 'LGTM'."
     link: /scenarios/code-review
-  - icon: 🐛
-    title: Debug Issues
-    details: Systematic 4-phase debugging traces through layers to find root causes.
-    link: /scenarios/debug-issue
-  - icon: 🛡️
-    title: Audit & Verify
-    details: Multi-domain code audit (security, performance, architecture, dependencies) with proof-based verification.
+    linkText: See how
+  - icon: 🧪
+    title: Real TDD, Not Trust-Based
+    details: "RED → GREEN → REFACTOR with actual test output as proof. No 'tests should pass' - the agent runs them and shows results."
     link: /reference/skills
-  - icon: 🔒
-    title: Security & Compliance
-    details: Auth flows, OWASP audit, GDPR/LGPD compliance, encryption.
-    link: /scenarios/security
-  - icon: 🧠
-    title: Memory & Onboarding
-    details: Cross-session memory, codebase onboarding, and interactive tutorials for new developers.
-    link: /reference/skills
+    linkText: View skills
   - icon: ⚡
-    title: Hooks & Lifecycle
-    details: 7 lifecycle hooks + 4 native Claude Code hooks (security guard, auto-dispatch, session context, auto-format).
-    link: /reference/hooks
-  - icon: 💰
-    title: Cost Optimization
-    details: Lite mode (60-80% cheaper), cost estimation, adaptive planning by complexity.
+    title: 60-80% Cheaper with Lite Mode
+    details: "Every agent has a Lite variant using Haiku. Rapid iteration at a fraction of the cost, Full mode when it matters."
     link: /guide/benchmark
+    linkText: See benchmarks
+  - icon: 📦
+    title: 7 Framework Packs
+    details: "Next.js, React, Vue 3, SvelteKit, Angular, Astro, Nuxt - each with agents, skills, and architecture patterns tailored to your stack."
+    link: /guide/introduction#framework-support
+    linkText: Explore packs
+  - icon: 🛡️
+    title: Built-in Governance
+    details: "Anti-rationalization tables, verification protocol, cost tracking, and session memory. Agents can't cut corners."
+    link: /reference/hooks
+    linkText: Learn more
 ---
 
-<div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:32px 0">
+<div class="badges-bar">
   <a href="https://www.npmjs.com/package/specialist-agent"><img src="https://img.shields.io/npm/v/specialist-agent?color=cb0000&label=npm" alt="npm version" /></a>
   <a href="https://www.npmjs.com/package/specialist-agent"><img src="https://img.shields.io/npm/dm/specialist-agent?color=cb0000&label=downloads" alt="npm downloads" /></a>
   <a href="https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml"><img src="https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>

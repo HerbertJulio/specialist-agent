@@ -1,6 +1,6 @@
 ---
 name: migrator
-description: "Use when legacy code needs modernization to the target architecture — components, modules, or full codebase migration."
+description: "Use when legacy code needs modernization to the target architecture - components, modules, or full codebase migration."
 model: haiku
 tools: Read, Write, Edit, Glob, Grep
 ---
@@ -72,4 +72,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

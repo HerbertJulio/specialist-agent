@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan for build configuration (web
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -102,7 +102,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan for build configuration (web
 | **Virtualization** | Render only visible items in long lists | `@tanstack/virtual`, `vue-virtual-scroller` |
 
 ### Rules
-- ALWAYS measure before optimizing — never guess at bottlenecks
+- ALWAYS measure before optimizing - never guess at bottlenecks
 - Run Lighthouse in incognito mode (no extensions)
 - Test on real devices and throttled networks (not just fast dev machine)
 - Set performance budgets: max bundle size, max LCP, min Lighthouse score
@@ -156,7 +156,7 @@ Origin: Database / API / Computation
 - Profile with production-like data volumes (not 10 rows)
 - Measure p95 and p99, not just average (tail latency matters)
 - Load test before deploying optimizations
-- Monitor after deployment — optimization regressions happen
+- Monitor after deployment - optimization regressions happen
 
 ## Database Mode
 
@@ -189,7 +189,7 @@ Origin: Database / API / Computation
 | **GIN** | Full-text search, JSONB, arrays | `CREATE INDEX idx_tags ON posts USING GIN(tags)` |
 | **Covering** | All query columns in index | `CREATE INDEX idx_cover ON users(email) INCLUDE (name)` |
 
-**Rule:** Composite index column order matters — most selective column FIRST.
+**Rule:** Composite index column order matters - most selective column FIRST.
 
 ### Connection Pool Sizing
 
@@ -205,7 +205,7 @@ Too large → connection overhead, diminishing returns
 ### Rules
 - ALWAYS use EXPLAIN ANALYZE, not just EXPLAIN
 - Index all foreign keys and frequent WHERE/JOIN columns
-- Don't over-index — each index slows writes
+- Don't over-index - each index slows writes
 - Batch inserts/updates for bulk operations (not row-by-row)
 - Monitor query performance continuously, not just once
 - Test with production-scale data volumes
@@ -227,7 +227,7 @@ Too large → connection overhead, diminishing returns
 1. Take heap snapshot (Chrome DevTools → Memory tab)
 2. Perform suspected action (navigate, open/close modal, etc.)
 3. Take second heap snapshot
-4. Compare snapshots — look for objects that should have been collected
+4. Compare snapshots - look for objects that should have been collected
 5. Check "Retainers" panel to find what holds the reference
 6. Fix the leak, re-snapshot to verify
 
@@ -272,24 +272,24 @@ Recommended Budgets:
 | "The framework handles it" | Frameworks provide tools (memo, computed, virtual lists), not magic. You still need to use them. |
 
 ## General Rules
-- Framework-agnostic — works with any stack
+- Framework-agnostic - works with any stack
 - Reads ARCHITECTURE.md if present and follows existing conventions
-- Measure first — never optimize without profiling
-- Budget enforcement — set and maintain performance budgets
-- Progressive — prioritize high-impact optimizations first
-- No regressions — verify functionality after every optimization
-- Document — record all optimizations and their measured impact
+- Measure first - never optimize without profiling
+- Budget enforcement - set and maintain performance budgets
+- Progressive - prioritize high-impact optimizations first
+- No regressions - verify functionality after every optimization
+- Document - record all optimizations and their measured impact
 
 ## Output
 
 After completing work in any mode, provide:
 
 ```markdown
-## Perf — [Mode: Frontend | Backend | Database]
+## Perf - [Mode: Frontend | Backend | Database]
 ### What was done
 - [Optimizations applied with before/after numbers]
 ### Metrics
-- [LCP, INP, CLS, bundle size, p95 response time — before/after]
+- [LCP, INP, CLS, bundle size, p95 response time - before/after]
 ### Validation
 - [Lighthouse score, load test results, EXPLAIN ANALYZE output]
 ### Recommendations
@@ -316,4 +316,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

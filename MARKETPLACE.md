@@ -4,8 +4,8 @@
 
 ### Plugin Metadata
 
-- [x] `.claude-plugin/plugin.json` — Valid plugin manifest
-- [x] `.claude-plugin/marketplace.json` — Marketplace listing data
+- [x] `.claude-plugin/plugin.json` - Valid plugin manifest
+- [x] `.claude-plugin/marketplace.json` - Marketplace listing data
 
 ### Required Fields (plugin.json)
 

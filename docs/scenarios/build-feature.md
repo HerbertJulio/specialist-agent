@@ -1,5 +1,8 @@
 # Build Features
 
+::: info Agents: `@builder` `@api` · Time: 3-5 min per scenario
+:::
+
 Real scenarios for building new features.
 
 ## CRUD Module {#crud-module}
@@ -190,6 +193,6 @@ Start small, add features:
 
 ## Related Scenarios
 
-- [Code Review](/scenarios/code-review) — Review the code you built
-- [Debug Issues](/scenarios/debug-issue) — When something doesn't work
-- [API Design](/scenarios/api-design) — Design the backend first
+- [Code Review](/scenarios/code-review) - Review the code you built
+- [Debug Issues](/scenarios/debug-issue) - When something doesn't work
+- [API Design](/scenarios/api-design) - Design the backend first

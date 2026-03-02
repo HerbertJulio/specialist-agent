@@ -1,5 +1,8 @@
 # Infrastructure
 
+::: info Agents: `@devops` `@cloud` · Time: 5-10 min per scenario
+:::
+
 Real scenarios for deployment, containers, and CI/CD.
 
 ## Docker Setup {#docker}
@@ -421,6 +424,6 @@ env:
 
 ## Related Scenarios
 
-- [Security](/scenarios/security) — Secure infrastructure
-- [API Design](/scenarios/api-design) — Design scalable APIs
-- [Performance](/scenarios/performance) — Optimize for scale
+- [Security](/scenarios/security) - Secure infrastructure
+- [API Design](/scenarios/api-design) - Design scalable APIs
+- [Performance](/scenarios/performance) - Optimize for scale

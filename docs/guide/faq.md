@@ -2,6 +2,10 @@
 
 Common questions about Specialist Agent.
 
+::: tip Can't find your answer?
+Open an issue on [GitHub](https://github.com/HerbertJulio/specialist-agent/issues) - we're happy to help.
+:::
+
 ## General
 
 ### Can I use it without a framework pack?
@@ -12,7 +16,7 @@ The pack-specific agents (`@builder`, `@reviewer`, `@doctor`, `@migrator`) requi
 
 ### Does it work with existing projects?
 
-Yes. Run `npx specialist-agent init` in your project root and choose your framework pack. The installer only adds markdown files — it doesn't modify your source code, dependencies, or configuration.
+Yes. Run `npx specialist-agent init` in your project root and choose your framework pack. The installer only adds markdown files - it doesn't modify your source code, dependencies, or configuration.
 
 Use `@explorer` to assess an existing codebase before making changes:
 
@@ -28,7 +32,7 @@ For shared patterns across workspaces, keep a root-level `ARCHITECTURE.md` with 
 
 ### Does it work offline?
 
-No. Specialist Agent requires an active connection to the Claude API. The agents and skills are markdown instructions that Claude Code reads and executes — the intelligence comes from the Claude model, not from local code.
+No. Specialist Agent requires an active connection to the Claude API. The agents and skills are markdown instructions that Claude Code reads and executes - the intelligence comes from the Claude model, not from local code.
 
 ### How do I update Specialist Agent?
 
@@ -58,11 +62,11 @@ Use Lite agents when speed matters more than polish. Use Full agents when accura
 
 Yes. See [Creating Agents](/customization/creating-agents) for a step-by-step guide. Custom agents follow the same 5-part blueprint:
 
-1. **Mission** — What the agent does
-2. **Workflow** — Step-by-step process
-3. **Output** — Structured result format
-4. **Rules** — Hard constraints
-5. **Handoff Protocol** — When to suggest other agents
+1. **Mission** - What the agent does
+2. **Workflow** - Step-by-step process
+3. **Output** - Structured result format
+4. **Rules** - Hard constraints
+5. **Handoff Protocol** - When to suggest other agents
 
 ### How do agents know my project's conventions?
 
@@ -101,17 +105,17 @@ See [Tips to Reduce Token Usage](/reference/tokens#tips-to-reduce-token-usage) f
 1. Verify the file is at `docs/ARCHITECTURE.md` (not the project root)
 2. Check for syntax errors in the markdown
 3. Run `/review-check-architecture` to validate
-4. Ensure your rules are explicit — agents follow what's written literally
+4. Ensure your rules are explicit - agents follow what's written literally
 
 ### Skills return "command not found"
 
 Skills are not shell commands. They're instructions for Claude Code. Use them inside Claude Code's chat interface:
 
 ```bash
-# Correct — inside Claude Code
+# Correct - inside Claude Code
 /dev-create-component ProductCard
 
-# Wrong — in a terminal
+# Wrong - in a terminal
 npx specialist-agent /dev-create-component ProductCard
 ```
 
@@ -124,3 +128,9 @@ Your `ARCHITECTURE.md` may not reflect your actual stack. Common fixes:
 3. Update the directory structure if your project uses a non-standard layout
 
 See [Editing Patterns](/customization/editing-patterns) for examples of common customizations.
+
+## What's Next?
+
+- [Quick Start](/guide/quick-start) - Get up and running
+- [Performance & Cost](/guide/benchmark) - Understand token usage
+- [All Agents](/reference/agents) - Full reference catalog

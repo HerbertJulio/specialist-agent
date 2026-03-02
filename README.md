@@ -1,6 +1,8 @@
 <p align="center">
-  <img src="docs/public/social-preview-banner.svg" alt="Specialist Agent" />
+  <img src="docs/public/logo-animated.svg" alt="Specialist Agent" width="200" />
 </p>
+
+<h1 align="center">Specialist Agent</h1>
 
 <p align="center">
   <b>Your AI Development Team</b><br/>
@@ -106,7 +108,7 @@ Done. Start building.
 
 | Skill | What it Does |
 |-------|--------------|
-| `/brainstorm` | Socratic brainstorming — refine ideas before planning |
+| `/brainstorm` | Socratic brainstorming - refine ideas before planning |
 | `/plan` | Plan a feature adaptively |
 | `/tdd` | Test-driven development cycle |
 | `/debug` | 4-phase systematic debugging |
@@ -122,7 +124,7 @@ Done. Start building.
 | `/recall` | Query saved decisions |
 | `/estimate` | Estimate token cost before starting |
 | `/finish` | Finalize branch with metrics |
-| `/learn` | Learning mode — explains while building |
+| `/learn` | Learning mode - explains while building |
 | `/tutorial` | Interactive tutorial |
 | `/worktree` | Git worktree isolation for parallel tasks |
 | `/write-skill` | Create or improve skills with TDD |
@@ -194,7 +196,7 @@ CLAIM: "No security issues"
 PROOF: Must show npm audit / lint output
 ```
 
-No "should work" — run the command, show the output.
+No "should work" - run the command, show the output.
 
 ---
 

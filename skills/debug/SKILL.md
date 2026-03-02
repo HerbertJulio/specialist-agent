@@ -1,12 +1,12 @@
 ---
 name: debug
-description: "Use when encountering any bug, test failure, unexpected behavior, or error — before proposing fixes. Use especially when previous fix attempts have failed."
+description: "Use when encountering any bug, test failure, unexpected behavior, or error - before proposing fixes. Use especially when previous fix attempts have failed."
 user-invocable: true
 argument-hint: "[error message or bug description]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# /debug — Systematic Debugging
+# /debug - Systematic Debugging
 
 Investigate and fix the bug using 4-phase methodology.
 
@@ -149,7 +149,7 @@ H2: [second option] (15%)
 ```markdown
 ## Resolution
 
-Hypothesis: H1 — CONFIRMED ✓
+Hypothesis: H1 - CONFIRMED ✓
 
 Root Cause:
 [Clear explanation]
@@ -204,7 +204,7 @@ Confidence: HIGH
 
 ## Rules
 
-1. **Never guess** — Evidence first
-2. **Never fix without understanding** — Know the root cause
-3. **Never skip phases** — Each prevents blind spots
-4. **Always checkpoint** — Fixes must be reversible
+1. **Never guess** - Evidence first
+2. **Never fix without understanding** - Know the root cause
+3. **Never skip phases** - Each prevents blind spots
+4. **Always checkpoint** - Fixes must be reversible

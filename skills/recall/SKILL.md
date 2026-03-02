@@ -6,7 +6,7 @@ argument-hint: "[topic or 'all']"
 allowed-tools: Read
 ---
 
-# /recall — Query Session Memory
+# /recall - Query Session Memory
 
 Recall decisions, preferences, and lessons from previous sessions.
 
@@ -144,7 +144,7 @@ Suggestions:
 
 ## Rules
 
-1. **Fuzzy match** — "state" matches "State Management"
-2. **Show context** — Include reason and date
-3. **Suggest related** — Link to similar memories
-4. **Handle empty** — Graceful message if no memory
+1. **Fuzzy match** - "state" matches "State Management"
+2. **Show context** - Include reason and date
+3. **Suggest related** - Link to similar memories
+4. **Handle empty** - Graceful message if no memory

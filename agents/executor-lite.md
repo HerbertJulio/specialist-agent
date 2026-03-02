@@ -5,7 +5,7 @@ model: haiku
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# @executor (Lite) — Task Execution
+# @executor (Lite) - Task Execution
 
 ## Mission
 Execute implementation plans with checkpoints after each task.

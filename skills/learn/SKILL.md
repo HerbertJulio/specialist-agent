@@ -1,12 +1,12 @@
 ---
 name: learn
-description: "Use when implementing a feature and want to understand the code as it's built — during onboarding, teaching, or learning a new pattern."
+description: "Use when implementing a feature and want to understand the code as it's built - during onboarding, teaching, or learning a new pattern."
 user-invocable: true
 argument-hint: "[feature to implement and learn]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# /learn — Learning Mode Implementation
+# /learn - Learning Mode Implementation
 
 Implement features while explaining concepts, patterns, and decisions along the way.
 
@@ -127,7 +127,7 @@ const example = ...;
 ```
 
 **Alternatives considered:**
-- [Alternative] — didn't use because [reason]
+- [Alternative] - didn't use because [reason]
 ```
 
 ### Step 5: Gotchas and Best Practices
@@ -231,7 +231,7 @@ loading states, errors, and caching.
 ### Step 1: The Types
 
 Before any logic, we define our types. This is called
-"types-first development" — we describe the shape of our
+"types-first development" - we describe the shape of our
 data before we write code that uses it.
 
 ```typescript
@@ -253,8 +253,8 @@ interface User {
 
 ## Rules
 
-1. **Never skip the "why"** — Every piece needs justification
-2. **Build incrementally** — Complex → Simple steps
-3. **Use visuals** — Diagrams help understanding
-4. **Ask questions** — Engage the learner
-5. **Connect concepts** — Show the bigger picture
+1. **Never skip the "why"** - Every piece needs justification
+2. **Build incrementally** - Complex → Simple steps
+3. **Use visuals** - Diagrams help understanding
+4. **Ask questions** - Engage the learner
+5. **Connect concepts** - Show the bigger picture

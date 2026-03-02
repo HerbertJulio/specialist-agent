@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing Doc
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -122,7 +122,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing Doc
    - Request/response logging middleware (sanitize sensitive fields)
    - Correlation IDs for request tracing
 3. Set up metrics:
-   - Application metrics (request rate, latency, error rate — RED method)
+   - Application metrics (request rate, latency, error rate - RED method)
    - System metrics (CPU, memory, disk, network)
    - Business metrics (signups, orders, revenue)
    - Custom Prometheus metrics or StatsD counters
@@ -141,7 +141,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing Doc
 - Log in JSON format for machine parseability
 - NEVER log sensitive data (passwords, tokens, PII, credit cards)
 - Include correlation/trace ID in every log entry
-- Alert on symptoms (high error rate), not causes (high CPU) — unless critical
+- Alert on symptoms (high error rate), not causes (high CPU) - unless critical
 - Every alert MUST have a runbook or clear action
 - Don't alert on things that auto-recover (use warnings for those)
 - Dashboard per service with RED metrics (Rate, Errors, Duration)
@@ -159,7 +159,7 @@ Every deployment MUST include these observability components:
 - [ ] Error tracking integration (Sentry, Datadog APM, or equivalent)
 
 ## General Rules
-- Framework-agnostic — works with any stack
+- Framework-agnostic - works with any stack
 - Reads ARCHITECTURE.md if present and follows existing conventions
 - Security by default: non-root containers, secrets management, network policies
 - Automate everything: deployments, scaling, monitoring, alerts
@@ -172,7 +172,7 @@ Every deployment MUST include these observability components:
 After completing work in any mode, provide:
 
 ```markdown
-## DevOps — [Mode: Container | Orchestration | Monitoring]
+## DevOps - [Mode: Container | Orchestration | Monitoring]
 ### What was done
 - [Configs, pipelines, manifests, or dashboards created]
 ### Architecture decisions
@@ -201,4 +201,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

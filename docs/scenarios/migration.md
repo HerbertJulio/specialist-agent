@@ -1,5 +1,8 @@
 # Migration
 
+::: info Agents: `@migrator` · Time: varies by scope
+:::
+
 Real scenarios for migrating and modernizing code.
 
 ## JavaScript to TypeScript {#typescript}
@@ -12,10 +15,10 @@ Migrate the user module from JavaScript to TypeScript
 ```
 
 **What happens:**
-1. **Scan** — Analyzes current JS files and patterns
-2. **Plan** — Creates migration order (leaf files first)
-3. **Migrate** — Converts files with proper types
-4. **Verify** — Ensures build passes with strict mode
+1. **Scan** - Analyzes current JS files and patterns
+2. **Plan** - Creates migration order (leaf files first)
+3. **Migrate** - Converts files with proper types
+4. **Verify** - Ensures build passes with strict mode
 
 **Result:**
 ```
@@ -27,7 +30,7 @@ SCAN
   Patterns: CommonJS requires, no JSDoc types
 
 PLAN (leaf-first order)
-  1. types/user.ts (new — shared types)
+  1. types/user.ts (new - shared types)
   2. user.validator.ts (no imports from module)
   3. user.repository.ts (imports validator)
   4. user.service.ts (imports repository)
@@ -54,7 +57,7 @@ VERIFIED
 
 **Command:**
 ```
-Modernize the auth module — it uses callbacks and var declarations
+Modernize the auth module - it uses callbacks and var declarations
 ```
 
 **Result:**
@@ -104,10 +107,10 @@ VERIFIED
 ```
 
 **What happens:**
-1. **Analyze** — Maps React patterns to Vue equivalents
-2. **Plan** — Creates migration order by dependency
-3. **Convert** — Transforms components and state
-4. **Verify** — Ensures functionality preserved
+1. **Analyze** - Maps React patterns to Vue equivalents
+2. **Plan** - Creates migration order by dependency
+3. **Convert** - Transforms components and state
+4. **Verify** - Ensures functionality preserved
 
 **Result:**
 ```
@@ -155,7 +158,7 @@ VERIFIED
 Migrate src/modules/auth from JavaScript to TypeScript
 
 # Include constraints
-Migrate the dashboard to Vue 3 — keep the same API contracts
+Migrate the dashboard to Vue 3 - keep the same API contracts
 ```
 
 ### Common Migrations
@@ -172,6 +175,6 @@ Migrate the dashboard to Vue 3 — keep the same API contracts
 
 ## Related Scenarios
 
-- [Build Features](/scenarios/build-feature) — Build with modern patterns
-- [Code Review](/scenarios/code-review) — Review migrated code
-- [Infrastructure](/scenarios/infrastructure) — Update deployment for new stack
+- [Build Features](/scenarios/build-feature) - Build with modern patterns
+- [Code Review](/scenarios/code-review) - Review migrated code
+- [Infrastructure](/scenarios/infrastructure) - Update deployment for new stack

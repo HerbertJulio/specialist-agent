@@ -1,6 +1,6 @@
 ---
 name: dev-create-component
-description: "Use when adding a new UI component to the project — handles templates, props, and scoped styles."
+description: "Use when adding a new UI component to the project - handles templates, props, and scoped styles."
 user-invocable: true
 argument-hint: "[ComponentName]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

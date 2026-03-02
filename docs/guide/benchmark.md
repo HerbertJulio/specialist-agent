@@ -18,9 +18,9 @@ Simple tasks skip unnecessary planning.
 
 One agent handles three review types:
 
-1. **Spec compliance** — Does it meet requirements?
-2. **Code quality** — Is it clean and tested?
-3. **Architecture fit** — Does it follow patterns?
+1. **Spec compliance** - Does it meet requirements?
+2. **Code quality** - Is it clean and tested?
+3. **Architecture fit** - Does it follow patterns?
 
 Single pass = fewer tokens.
 
@@ -101,7 +101,7 @@ FAIL src/discount.test.ts
 [Evidence of RED phase captured]
 ```
 
-Not "I ran the test" — actual output.
+Not "I ran the test" - actual output.
 
 ### Review Verification
 
@@ -135,3 +135,9 @@ Agent Breakdown:
 ```
 
 Track costs as you work.
+
+## What's Next?
+
+- [FAQ](/guide/faq) - Common questions answered
+- [All Agents](/reference/agents) - Browse the full catalog
+- [Token Reference](/reference/tokens) - Detailed token estimates

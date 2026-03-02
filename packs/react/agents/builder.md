@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md`.
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -94,9 +94,9 @@ Read `docs/ARCHITECTURE.md`.
 **Before claiming ANY module/component is complete:**
 
 ```
-1. RUN `npx tsc --noEmit` — No TypeScript errors
-2. RUN `npm test` — All tests pass
-3. RUN `npm run lint` — No lint errors
+1. RUN `npx tsc --noEmit` - No TypeScript errors
+2. RUN `npm test` - All tests pass
+3. RUN `npm run lint` - No lint errors
 4. VERIFY files exist as specified
 5. ONLY THEN claim "complete" WITH evidence
 ```
@@ -119,14 +119,14 @@ Read `docs/ARCHITECTURE.md`.
 - Adapters: pure functions, no side effects
 - Components: functional TSX, typed props, < 200 lines
 - useCallback for handlers passed to children, useMemo for expensive derivations
-- **Verify before claiming complete** — Tests pass = complete
+- **Verify before claiming complete** - Tests pass = complete
 
 ## Output
 
 After completing work in any mode, provide:
 
 ```markdown
-## Built — [Mode: Module | Component | Service | ...]
+## Built - [Mode: Module | Component | Service | ...]
 ### Files created
 - [List with paths]
 ### Patterns applied
@@ -155,4 +155,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

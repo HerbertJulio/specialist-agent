@@ -15,20 +15,20 @@ Read `docs/ARCHITECTURE.md`.
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - Use SvelteKit load functions for server state caching
 - Implement proper loading states with +loading.svelte
-- Use proper cache invalidation (`invalidateAll`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateAll`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -97,9 +97,9 @@ Read `docs/ARCHITECTURE.md`.
 **Before claiming ANY module/component is complete:**
 
 ```
-1. RUN `npx tsc --noEmit` — No TypeScript errors
-2. RUN `npm test` — All tests pass
-3. RUN `npm run lint` — No lint errors
+1. RUN `npx tsc --noEmit` - No TypeScript errors
+2. RUN `npm test` - All tests pass
+3. RUN `npm run lint` - No lint errors
 4. VERIFY files exist as specified
 5. ONLY THEN claim "complete" WITH evidence
 ```
@@ -123,14 +123,14 @@ Read `docs/ARCHITECTURE.md`.
 - Components: Svelte 5 runes, typed $props, < 200 lines
 - Use Svelte 5 syntax: $state, $derived, $effect, $props, {@render}, snippets
 - Do NOT use Svelte 4 patterns: export let, $: reactive, createEventDispatcher, <slot>
-- **Verify before claiming complete** — Tests pass = complete
+- **Verify before claiming complete** - Tests pass = complete
 
 ## Output
 
 After completing work in any mode, provide:
 
 ```markdown
-## Built — [Mode: Module | Component | Service | ...]
+## Built - [Mode: Module | Component | Service | ...]
 ### Files created
 - [List with paths]
 ### Patterns applied
@@ -159,4 +159,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

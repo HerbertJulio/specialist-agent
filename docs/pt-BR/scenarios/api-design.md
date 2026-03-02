@@ -315,6 +315,6 @@ Design API with:
 
 ## Cenários Relacionados
 
-- [Construindo Features](/pt-BR/scenarios/build-feature) — Implementar a API
-- [Segurança](/pt-BR/scenarios/security) — Proteger a API
-- [Banco de Dados](/pt-BR/scenarios/api-design#database) — Projetar a camada de dados
+- [Construindo Features](/pt-BR/scenarios/build-feature) - Implementar a API
+- [Segurança](/pt-BR/scenarios/security) - Proteger a API
+- [Banco de Dados](/pt-BR/scenarios/api-design#database) - Projetar a camada de dados

@@ -137,7 +137,7 @@ Se dois módulos precisam compartilhar algo → mover para `shared/`.
 
 ## 4. Camadas de Responsabilidade
 
-### 4.1 Services — Requisições Puras
+### 4.1 Services - Requisições Puras
 
 Services fazem **apenas** a request HTTP. Sem try/catch, sem transformação, sem lógica de negócio.
 
@@ -174,7 +174,7 @@ export const marketplaceService = {
 - ✅ Um arquivo por domínio/recurso
 - ✅ Exportar como objeto com métodos
 
-### 4.2 Adapters — Parsers de Contrato
+### 4.2 Adapters - Parsers de Contrato
 
 Adapters transformam dados da API para o contrato TypeScript da aplicação (e vice-versa). São **funções puras** sem side effects.
 
@@ -291,7 +291,7 @@ export interface CreateMarketplaceInput {
 }
 ```
 
-### 4.4 Composables — Lógica de Negócio + Orquestração
+### 4.4 Composables - Lógica de Negócio + Orquestração
 
 Composables conectam tudo: chamam service, passam pelo adapter, gerenciam loading/error, e expõem dados reativos.
 
@@ -366,7 +366,7 @@ export function useMarketplaceList(options: UseMarketplaceListOptions) {
 - ❌ Sem template/rendering (isso é do componente)
 - ❌ Sem acesso direto à API (service faz isso)
 
-### 4.5 Stores Pinia — Apenas Client State
+### 4.5 Stores Pinia - Apenas Client State
 
 Pinia é para estado que **não vem do servidor**: UI state, filtros, preferências, auth.
 
@@ -594,7 +594,7 @@ Views (Pages)         → Composição, orquestração, provide context
 
 ## 6. Utils vs Helpers
 
-### Utils — Funções Puras
+### Utils - Funções Puras
 - Sem side effects
 - Input → Output determinístico
 - Testáveis sem mocks
@@ -617,7 +617,7 @@ export function slugify(text: string): string {
 }
 ```
 
-### Helpers — Funções com Side Effects ou DOM
+### Helpers - Funções com Side Effects ou DOM
 - Interagem com browser APIs (clipboard, localStorage, DOM)
 - Podem ter side effects
 - Podem precisar de mocks nos testes
@@ -652,7 +652,7 @@ export function showToast(message: string, type: 'success' | 'error' = 'success'
 
 ---
 
-## 7. Error Handling — Padrão Centralizado
+## 7. Error Handling - Padrão Centralizado
 
 ### Na Camada de Query (composable)
 ```typescript

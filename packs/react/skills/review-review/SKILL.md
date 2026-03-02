@@ -1,6 +1,6 @@
 ---
 name: review-review
-description: "Use when code changes need review before merge — validates architecture, types, security, and test coverage."
+description: "Use when code changes need review before merge - validates architecture, types, security, and test coverage."
 user-invocable: true
 argument-hint: "[scope]"
 allowed-tools: Read, Bash, Glob, Grep

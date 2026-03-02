@@ -1,11 +1,11 @@
 ---
 name: memory
-description: "Use when decisions, preferences, or lessons need to persist across sessions — save and retrieve session memory."
+description: "Use when decisions, preferences, or lessons need to persist across sessions - save and retrieve session memory."
 model: haiku
 tools: Read, Write, Glob
 ---
 
-# @memory — Session Memory Manager
+# @memory - Session Memory Manager
 
 ## Mission
 
@@ -214,11 +214,11 @@ What went wrong and how to prevent it.
 
 ## Rules
 
-1. **Be concise** — Memory should be scannable
-2. **Include reasons** — Why matters as much as what
-3. **Update, don't duplicate** — Same topic = update existing
-4. **Privacy aware** — Never store secrets or credentials
-5. **Versioned** — Memory format has version for migrations
+1. **Be concise** - Memory should be scannable
+2. **Include reasons** - Why matters as much as what
+3. **Update, don't duplicate** - Same topic = update existing
+4. **Privacy aware** - Never store secrets or credentials
+5. **Versioned** - Memory format has version for migrations
 
 ## Integration Example
 
@@ -227,8 +227,8 @@ In @builder:
 Before creating code:
 1. Read .claude/session-memory.json
 2. Apply preferences.codeStyle
-3. Check patterns.avoided — don't use these
-4. Check patterns.preferred — use these
+3. Check patterns.avoided - don't use these
+4. Check patterns.preferred - use these
 5. Reference relevant decisions
 ```
 

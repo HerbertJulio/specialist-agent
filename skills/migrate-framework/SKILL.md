@@ -1,12 +1,12 @@
 ---
 name: migrate-framework
-description: "Use when switching a project or component between frameworks — React to Vue, Vue to Svelte, or any supported framework pair."
+description: "Use when switching a project or component between frameworks - React to Vue, Vue to Svelte, or any supported framework pair."
 user-invocable: true
 argument-hint: "[source-framework] to [target-framework] [file-or-directory]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# /migrate-framework — Cross-Framework Migration
+# /migrate-framework - Cross-Framework Migration
 
 Migrate code from one framework to another while preserving functionality.
 
@@ -158,11 +158,11 @@ Files created:
 
 ## Rules
 
-1. **Preserve behavior** — Functionality must match
-2. **Type safety** — Maintain TypeScript types
-3. **Idiomatic code** — Use target framework patterns
-4. **Flag manual work** — Mark complex conversions
-5. **Keep original** — Don't delete source files
+1. **Preserve behavior** - Functionality must match
+2. **Type safety** - Maintain TypeScript types
+3. **Idiomatic code** - Use target framework patterns
+4. **Flag manual work** - Mark complex conversions
+5. **Keep original** - Don't delete source files
 
 ## Limitations
 

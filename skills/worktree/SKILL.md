@@ -6,9 +6,9 @@ argument-hint: "[task-name]"
 allowed-tools: Read, Bash, Glob, Grep
 ---
 
-# /worktree — Git Worktree Isolation
+# /worktree - Git Worktree Isolation
 
-Create isolated workspaces for parallel development. Each task gets its own directory — no branch switching, no stashing, no conflicts.
+Create isolated workspaces for parallel development. Each task gets its own directory - no branch switching, no stashing, no conflicts.
 
 **Target:** $ARGUMENTS
 
@@ -142,12 +142,12 @@ Merge when all complete.
 
 ## Rules
 
-1. **Always name worktrees descriptively** — `worktree/auth-refactor` not `worktree/temp`
-2. **Install dependencies after creation** — Auto-detect package manager
-3. **Verify baseline before working** — Tests must pass in fresh worktree
-4. **Clean up when done** — Remove worktrees and branches after merge
-5. **Never work in .git/** — Worktrees are directories, not git internals
-6. **Gitignore the worktrees directory** — Add `.claude/worktrees/` to `.gitignore`
+1. **Always name worktrees descriptively** - `worktree/auth-refactor` not `worktree/temp`
+2. **Install dependencies after creation** - Auto-detect package manager
+3. **Verify baseline before working** - Tests must pass in fresh worktree
+4. **Clean up when done** - Remove worktrees and branches after merge
+5. **Never work in .git/** - Worktrees are directories, not git internals
+6. **Gitignore the worktrees directory** - Add `.claude/worktrees/` to `.gitignore`
 
 ## Output
 

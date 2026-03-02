@@ -74,6 +74,6 @@ O modo Lite usa um modelo menor para resultados mais rápidos e baratos.
 
 ## Próximos Passos
 
-1. [Ver cenários reais](/pt-BR/scenarios/) — Como desenvolvedores usam cada agente
-2. [Comece a construir](/pt-BR/scenarios/build-feature) — Crie sua primeira feature
-3. [Ver todos os agentes](/pt-BR/reference/agents) — Referência completa
+1. [Ver cenários reais](/pt-BR/scenarios/) - Como desenvolvedores usam cada agente
+2. [Comece a construir](/pt-BR/scenarios/build-feature) - Crie sua primeira feature
+3. [Ver todos os agentes](/pt-BR/reference/agents) - Referência completa

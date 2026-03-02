@@ -5,7 +5,7 @@ model: haiku
 tools: Read, Glob, Grep
 ---
 
-# @scout — Project Scout (Ultra-Light)
+# @scout - Project Scout (Ultra-Light)
 
 ## Mission
 
@@ -71,17 +71,17 @@ ls -d .github/workflows .gitlab-ci.yml 2>/dev/null
 
 For your CURRENT task, use:
 
-  @[agent1] — [why]
-  @[agent2] — [why]
+  @[agent1] - [why]
+  @[agent2] - [why]
 
 Available for this project:
 
-  ✓ @builder   — Create new code
-  ✓ @reviewer  — Review & architecture check
-  ✓ @doctor    — Debug issues
-  ✓ @tdd       — Test-driven development
-  ○ @migrator  — [only if legacy detected]
-  ○ @security  — [only if auth code exists]
+  ✓ @builder   - Create new code
+  ✓ @reviewer  - Review & architecture check
+  ✓ @doctor    - Debug issues
+  ✓ @tdd       - Test-driven development
+  ○ @migrator  - [only if legacy detected]
+  ○ @security  - [only if auth code exists]
 
 ──────────────────────────────────────────────
            QUICK HEALTH CHECK
@@ -162,11 +162,11 @@ Based on analysis, suggest profile:
 
 ## Rules
 
-1. **Be FAST** — Maximum 1000 tokens
-2. **Be SPECIFIC** — Exact agent names, not vague advice
-3. **Be ACTIONABLE** — What to do RIGHT NOW
-4. **Skip details** — @explorer does deep analysis
-5. **Recommend profile** — Help configure the team
+1. **Be FAST** - Maximum 1000 tokens
+2. **Be SPECIFIC** - Exact agent names, not vague advice
+3. **Be ACTIONABLE** - What to do RIGHT NOW
+4. **Skip details** - @explorer does deep analysis
+5. **Recommend profile** - Help configure the team
 
 ## Example Output
 
@@ -185,11 +185,11 @@ Based on analysis, suggest profile:
 
 For "add user authentication":
 
-  @analyst  — Convert requirements to spec
-  @planner  — Design implementation plan
-  @security — Auth is security-critical
-  @builder  — Implement the code
-  @tester   — Add auth tests
+  @analyst  - Convert requirements to spec
+  @planner  - Design implementation plan
+  @security - Auth is security-critical
+  @builder  - Implement the code
+  @tester   - Add auth tests
 
 Or use: @orchestrator to run @builder + @tester in parallel
 

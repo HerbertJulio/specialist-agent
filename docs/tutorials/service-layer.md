@@ -36,9 +36,9 @@ Here's the API response:
 }
 ```
 
-## Step 1 — Type the API Response
+## Step 1 - Type the API Response
 
-Create the types file mirroring the JSON **exactly** — same field names, same structure.
+Create the types file mirroring the JSON **exactly** - same field names, same structure.
 
 ```typescript
 // src/modules/customers/types/customers.types.ts
@@ -67,10 +67,10 @@ export interface CustomerListResponse {
 ```
 
 ::: tip Pro tip
-Copy the JSON response, then type it. Don't rename fields here — that's the adapter's job.
+Copy the JSON response, then type it. Don't rename fields here - that's the adapter's job.
 :::
 
-## Step 2 — Define the App Contract
+## Step 2 - Define the App Contract
 
 This is what your Vue components will use. Clean names, proper types.
 
@@ -107,7 +107,7 @@ Notice the differences:
 | `lifetime_value_cents` | `lifetimeValue` | Converted to dollars |
 | `string` dates | `Date` objects | Proper type |
 
-## Step 3 — Build the Adapter
+## Step 3 - Build the Adapter
 
 The adapter bridges the gap between the two formats. **Pure functions only.**
 
@@ -146,10 +146,10 @@ export const customersAdapter = {
 ```
 
 ::: warning Handle nullables
-Always check for `null` before converting. `response.last_order_at` can be `null` — the adapter must handle that, not the component.
+Always check for `null` before converting. `response.last_order_at` can be `null` - the adapter must handle that, not the component.
 :::
 
-## Step 4 — Build the Service
+## Step 4 - Build the Service
 
 The service is the simplest layer. HTTP calls with typed request/response. Nothing else.
 
@@ -177,7 +177,7 @@ export const customersService = {
 - ✅ No data transformation
 - ✅ No adapter calls
 
-## Step 5 — Use in a Composable
+## Step 5 - Use in a Composable
 
 Now connect everything:
 
@@ -240,7 +240,7 @@ graph TB
 
 ## Testing the Adapter
 
-Adapters are the **easiest layer to test** — pure input/output.
+Adapters are the **easiest layer to test** - pure input/output.
 
 ```typescript
 // src/modules/customers/__tests__/customers-adapter.spec.ts
@@ -304,5 +304,5 @@ Or use the skill:
 
 ## Next Steps
 
-- [CRUD Module Tutorial](/tutorials/crud-module) — Build a complete module from scratch
-- [Forms Tutorial](/tutorials/forms) — Create a customer form with Zod validation
+- [CRUD Module Tutorial](/tutorials/crud-module) - Build a complete module from scratch
+- [Forms Tutorial](/tutorials/forms) - Create a customer form with Zod validation

@@ -8,14 +8,14 @@ Cenários reais para encontrar e corrigir problemas de performance.
 
 **Comando:**
 ```
-Optimize the dashboard page — it takes 5 seconds to load
+Optimize the dashboard page - it takes 5 seconds to load
 ```
 
 **O que acontece:**
-1. **Perfilar** — Mede as métricas atuais (LCP, FID, CLS)
-2. **Analisar** — Identifica gargalos (tamanho do bundle, chamadas de API, renders)
-3. **Otimizar** — Aplica correções direcionadas
-4. **Verificar** — Mede a melhoria com evidências
+1. **Perfilar** - Mede as métricas atuais (LCP, FID, CLS)
+2. **Analisar** - Identifica gargalos (tamanho do bundle, chamadas de API, renders)
+3. **Otimizar** - Aplica correções direcionadas
+4. **Verificar** - Mede a melhoria com evidências
 
 **Resultado:**
 ```
@@ -52,7 +52,7 @@ VERIFIED
 
 **Comando:**
 ```
-Optimize the /api/products endpoint — it takes 2 seconds to respond
+Optimize the /api/products endpoint - it takes 2 seconds to respond
 ```
 
 **Resultado:**
@@ -87,7 +87,7 @@ VERIFIED
 
 **Comando:**
 ```
-Analyze and reduce the bundle size — it's over 2MB
+Analyze and reduce the bundle size - it's over 2MB
 ```
 
 **Resultado:**
@@ -122,7 +122,7 @@ VERIFIED
 
 **Comando:**
 ```
-Optimize the product list — scrolling is janky with 10k items
+Optimize the product list - scrolling is janky with 10k items
 ```
 
 **Resultado:**
@@ -164,7 +164,7 @@ VERIFIED
 ### Meça Primeiro
 
 ```
-# Não adivinhe — meça
+# Não adivinhe - meça
 Analyze the performance of /api/orders endpoint
 
 # Inclua o sintoma
@@ -184,6 +184,6 @@ The dashboard takes 3 seconds to load after login
 
 ## Cenários Relacionados
 
-- [Depurar Problemas](/pt-BR/scenarios/debug-issue) — Depurar bugs relacionados a performance
-- [Infraestrutura](/pt-BR/scenarios/infrastructure) — Escalar para melhor performance
-- [Design de API](/pt-BR/scenarios/api-design) — Projetar APIs eficientes
+- [Depurar Problemas](/pt-BR/scenarios/debug-issue) - Depurar bugs relacionados a performance
+- [Infraestrutura](/pt-BR/scenarios/infrastructure) - Escalar para melhor performance
+- [Design de API](/pt-BR/scenarios/api-design) - Projetar APIs eficientes

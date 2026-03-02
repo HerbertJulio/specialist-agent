@@ -1,17 +1,17 @@
-# ARCHITECTURE.md — Architecture Guide & Patterns
+# ARCHITECTURE.md - Architecture Guide & Patterns
 
 > This document is the **source of truth** for all agents and skills.
 > Any architectural decision must be documented here.
 
 ---
 
-## 1. Overview — Islands Architecture
+## 1. Overview - Islands Architecture
 
 Astro is a **server-first** web framework designed for content-driven websites. Key principles:
 
 | Principle | Description |
 |-----------|-------------|
-| Server-first | Components render on the server — zero JS shipped by default |
+| Server-first | Components render on the server - zero JS shipped by default |
 | Islands Architecture | Interactive UI is opt-in via `client:*` directives |
 | Content Collections | Type-safe content management with Zod schemas |
 | Multi-framework | Use React, Vue, Svelte, or Solid components as islands |
@@ -89,12 +89,12 @@ src/
 
 ### Import Rules Between Layers
 ```
-modules/newsletter  <->  shared/           OK — Module imports from shared
-modules/newsletter  ->   modules/commerce  FORBIDDEN — Module does NOT import from another module
-shared/             ->   modules/newsletter FORBIDDEN — Shared does NOT import from modules
-pages/              ->   modules/*          OK — Pages import modules
-pages/              ->   components/*       OK — Pages import components
-pages/              ->   islands/*          OK — Pages import islands
+modules/newsletter  <->  shared/           OK - Module imports from shared
+modules/newsletter  ->   modules/commerce  FORBIDDEN - Module does NOT import from another module
+shared/             ->   modules/newsletter FORBIDDEN - Shared does NOT import from modules
+pages/              ->   modules/*          OK - Pages import modules
+pages/              ->   components/*       OK - Pages import components
+pages/              ->   islands/*          OK - Pages import islands
 ```
 
 If two modules need to share something, move it to `shared/`.
@@ -142,7 +142,7 @@ If two modules need to share something, move it to `shared/`.
 
 ## 4. Responsibility Layers
 
-### 4.1 Services — Pure Requests
+### 4.1 Services - Pure Requests
 
 Services make **only** the HTTP request. No try/catch, no transformation, no business logic.
 
@@ -178,7 +178,7 @@ export const newsletterService = {
 - One file per resource
 - Export as object with methods
 
-### 4.2 Adapters — Contract Parsers
+### 4.2 Adapters - Contract Parsers
 
 Adapters transform data from the API to the TypeScript app contract (and vice-versa). **Pure functions** with no side effects.
 
@@ -270,9 +270,9 @@ export interface NewsletterList {
 }
 ```
 
-### 4.4 Data Fetching — Frontmatter & Endpoints
+### 4.4 Data Fetching - Frontmatter & Endpoints
 
-In Astro, data is fetched **at build time (SSG) or request time (SSR)** in the component frontmatter or in server endpoints. There are no client-side composables or Vue Query — data flows server-side.
+In Astro, data is fetched **at build time (SSG) or request time (SSR)** in the component frontmatter or in server endpoints. There are no client-side composables or Vue Query - data flows server-side.
 
 ```astro
 ---
@@ -442,7 +442,7 @@ import SearchBar from '../islands/SearchBar'
 - ALWAYS specify a `client:*` directive when using in `.astro` files
 - Choose the LEAST aggressive hydration strategy (prefer `client:visible` or `client:idle` over `client:load`)
 - Props must be serializable (no functions, no complex objects with methods)
-- Keep islands small — extract non-interactive parts to `.astro` components
+- Keep islands small - extract non-interactive parts to `.astro` components
 - Each island is an independent hydration boundary
 
 ### 5.3 Component Hierarchy
@@ -465,7 +465,7 @@ Pages (src/pages/)        -> Data fetching, compose layouts + components
 
 ## 6. Utils vs Helpers
 
-### Utils — Pure Functions
+### Utils - Pure Functions
 - No side effects
 - Input -> Output deterministic
 - Testable without mocks
@@ -483,7 +483,7 @@ export function slugify(text: string): string {
 }
 ```
 
-### Helpers — Functions with Side Effects or DOM
+### Helpers - Functions with Side Effects or DOM
 - Interact with browser APIs (clipboard, localStorage, DOM)
 - May have side effects
 - May need mocks in tests
@@ -559,7 +559,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 ---
 
 <BaseLayout title="Not Found">
-  <h1>404 — Page Not Found</h1>
+  <h1>404 - Page Not Found</h1>
   <p>The page you are looking for does not exist.</p>
   <a href="/">Go home</a>
 </BaseLayout>

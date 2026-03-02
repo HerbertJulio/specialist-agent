@@ -1,6 +1,6 @@
 ---
 name: review-review
-description: "Use when code changes need review before merge — validates architecture, types, security, and test coverage."
+description: "Use when code changes need review before merge - validates architecture, types, security, and test coverage."
 user-invocable: true
 argument-hint: "[scope]"
 allowed-tools: Read, Bash, Glob, Grep
@@ -34,9 +34,9 @@ ng test --watch=false
    - DI: inject() everywhere, no constructor DI
 
 4. Classify:
-   - VIOLATION — breaks ARCHITECTURE.md
-   - ATTENTION — recommended improvement
-   - COMPLIANT — correct
-   - HIGHLIGHT — positive highlight
+   - VIOLATION - breaks ARCHITECTURE.md
+   - ATTENTION - recommended improvement
+   - COMPLIANT - correct
+   - HIGHLIGHT - positive highlight
 
 5. Produce report with verdict: Approved | With caveats | Requires changes

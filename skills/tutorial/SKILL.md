@@ -6,7 +6,7 @@ argument-hint: "[beginner|intermediate|advanced]"
 allowed-tools: Read, Glob
 ---
 
-# /tutorial — Interactive Tutorial
+# /tutorial - Interactive Tutorial
 
 Learn Specialist Agent with hands-on exercises.
 
@@ -63,9 +63,9 @@ Skills are shortcuts. They start with `/`.
 This shows your project's health score.
 
 **Other useful skills:**
-- `/plan` — Plan a feature
-- `/checkpoint` — Save your progress
-- `/remember` — Save a decision
+- `/plan` - Plan a feature
+- `/checkpoint` - Save your progress
+- `/remember` - Save a decision
 
 ---
 
@@ -127,9 +127,9 @@ Write tests first with @tdd.
 ```
 
 The workflow:
-1. **RED** — Write failing test
-2. **GREEN** — Make it pass
-3. **REFACTOR** — Clean up
+1. **RED** - Write failing test
+2. **GREEN** - Make it pass
+3. **REFACTOR** - Clean up
 
 No code without failing test first.
 
@@ -258,10 +258,10 @@ One sentence describing the goal.
 Set behavior for different contexts.
 
 **Available profiles:**
-- `startup-fast` — Move fast, minimal validation
-- `enterprise-strict` — Full validation, strict rules
-- `learning-mode` — Explain everything
-- `cost-optimized` — Minimize token usage
+- `startup-fast` - Move fast, minimal validation
+- `enterprise-strict` - Full validation, strict rules
+- `learning-mode` - Explain everything
+- `cost-optimized` - Minimize token usage
 
 **Set profile:**
 ```bash
@@ -274,10 +274,10 @@ npx specialist-agent profiles set startup-fast
 
 Reduce token usage:
 
-1. **Use Lite mode** — 60-80% cheaper
-2. **Be specific** — Less exploration needed
-3. **Use @scout first** — Get recommendations
-4. **Batch related tasks** — Less context switching
+1. **Use Lite mode** - 60-80% cheaper
+2. **Be specific** - Less exploration needed
+3. **Use @scout first** - Get recommendations
+4. **Batch related tasks** - Less context switching
 
 **Check cost:**
 ```

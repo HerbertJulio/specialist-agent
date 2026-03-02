@@ -1,6 +1,6 @@
 ---
 name: dev-create-service
-description: "Use when adding API integration to a module — creates types, contracts, adapter, and service layer."
+description: "Use when adding API integration to a module - creates types, contracts, adapter, and service layer."
 user-invocable: true
 argument-hint: "[resource-name]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
@@ -21,10 +21,10 @@ Resource: $ARGUMENTS
 
 3. Create in order:
 
-   a. `types/[resource].types.ts` — mirrors API exactly (snake_case)
-   b. `types/[resource].contracts.ts` — app contract (camelCase, correct types)
-   c. `adapters/[resource]-adapter.ts` — inbound (API->App) + outbound (App->API)
-   d. `services/[resource]-service.ts` — HTTP only using $fetch, no try/catch, no transformation
+   a. `types/[resource].types.ts` - mirrors API exactly (snake_case)
+   b. `types/[resource].contracts.ts` - app contract (camelCase, correct types)
+   c. `adapters/[resource]-adapter.ts` - inbound (API->App) + outbound (App->API)
+   d. `services/[resource]-service.ts` - HTTP only using $fetch, no try/catch, no transformation
 
 4. Required rules:
    - Service: **NO try/catch**, **NO .map()/.filter()/new Date()**, use `$fetch`

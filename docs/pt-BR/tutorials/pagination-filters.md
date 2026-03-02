@@ -39,9 +39,9 @@ graph TB
     style Data fill:#42b883,color:#fff
 ```
 
-## Passo 1 — Store para Filtros (Estado do Cliente)
+## Passo 1 - Store para Filtros (Estado do Cliente)
 
-Filtros sao **estado do cliente** — nao vem do servidor. O Pinia os gerencia.
+Filtros sao **estado do cliente** - nao vem do servidor. O Pinia os gerencia.
 
 ```typescript
 // src/modules/products/stores/products-store.ts
@@ -95,9 +95,9 @@ export const useProductsStore = defineStore('products', () => {
 O Pinia persiste o estado dos filtros quando o usuario navega para outra pagina e volta. Com refs locais, o usuario perde os filtros a cada mudanca de rota.
 :::
 
-## Passo 2 — Composable com Query Reativa
+## Passo 2 - Composable com Query Reativa
 
-O composable cria uma **queryKey reativa** — quando qualquer filtro muda, o Vue Query refaz a busca automaticamente.
+O composable cria uma **queryKey reativa** - quando qualquer filtro muda, o Vue Query refaz a busca automaticamente.
 
 ```typescript
 // src/modules/products/composables/useProductsList.ts
@@ -152,11 +152,11 @@ export function useProductsList(options: {
 
 ### Padroes-chave explicados
 
-**`keepPreviousData`** — Enquanto busca a pagina 2, o usuario ainda ve os dados da pagina 1. Sem isso, a lista pisca vazia a cada mudanca de pagina.
+**`keepPreviousData`** - Enquanto busca a pagina 2, o usuario ainda ve os dados da pagina 1. Sem isso, a lista pisca vazia a cada mudanca de pagina.
 
-**`staleTime: 5 * 60 * 1000`** — Se o usuario vai para a pagina 2 e volta para a pagina 1 em menos de 5 minutos, nao refaz a busca (usa o cache).
+**`staleTime: 5 * 60 * 1000`** - Se o usuario vai para a pagina 2 e volta para a pagina 1 em menos de 5 minutos, nao refaz a busca (usa o cache).
 
-**`queryKey` reativa** — Quando `page`, `search` ou `category` mudam, o Vue Query detecta uma nova key e busca automaticamente. Voce nao precisa chamar `refetch()`.
+**`queryKey` reativa** - Quando `page`, `search` ou `category` mudam, o Vue Query detecta uma nova key e busca automaticamente. Voce nao precisa chamar `refetch()`.
 
 ```mermaid
 sequenceDiagram
@@ -180,7 +180,7 @@ sequenceDiagram
     API-->>Query: Resultados da pagina 2
 ```
 
-## Passo 3 — Campo de Busca com Debounce
+## Passo 3 - Campo de Busca com Debounce
 
 Nao faca chamadas a API a cada tecla digitada. Use uma busca com debounce.
 
@@ -217,7 +217,7 @@ watch(localSearch, (value) => {
 </template>
 ```
 
-## Passo 4 — Filtro de Categoria
+## Passo 4 - Filtro de Categoria
 
 ```vue
 <!-- src/modules/products/components/CategoryFilter.vue -->
@@ -253,7 +253,7 @@ const emit = defineEmits<{
 </template>
 ```
 
-## Passo 5 — Componente de Paginacao
+## Passo 5 - Componente de Paginacao
 
 ```vue
 <!-- src/shared/components/AppPagination.vue -->
@@ -306,7 +306,7 @@ const pages = computed(() => {
 </template>
 ```
 
-## Passo 6 — A View (Compondo Tudo)
+## Passo 6 - A View (Compondo Tudo)
 
 ```vue
 <!-- src/modules/products/views/ProductsView.vue -->
@@ -400,13 +400,13 @@ graph TB
 
 ## Pontos-Chave
 
-- **Pinia Store** armazena o estado dos filtros (busca, categoria, pagina) — persiste entre navegacoes
-- **Vue Query** reage a mudancas na queryKey — sem necessidade de refetch manual
+- **Pinia Store** armazena o estado dos filtros (busca, categoria, pagina) - persiste entre navegacoes
+- **Vue Query** reage a mudancas na queryKey - sem necessidade de refetch manual
 - **`keepPreviousData`** mantem a pagina anterior visivel enquanto carrega a proxima
-- **Voltar para a pagina 1** quando os filtros mudam — evita exibir uma pagina 5 vazia
-- **Debounce na busca** — nao faca chamadas a API a cada tecla digitada
+- **Voltar para a pagina 1** quando os filtros mudam - evita exibir uma pagina 5 vazia
+- **Debounce na busca** - nao faca chamadas a API a cada tecla digitada
 
 ## Proximos Passos
 
-- [Tutorial de Modulo CRUD](/pt-BR/tutorials/crud-module) — Modulo completo com formularios e mutations
-- [Guia de Migracao](/pt-BR/tutorials/migrate-project) — Migre seu projeto para esta arquitetura
+- [Tutorial de Modulo CRUD](/pt-BR/tutorials/crud-module) - Modulo completo com formularios e mutations
+- [Guia de Migracao](/pt-BR/tutorials/migrate-project) - Migre seu projeto para esta arquitetura

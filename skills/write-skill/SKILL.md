@@ -6,7 +6,7 @@ argument-hint: "[skill-name]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# /write-skill — Create or Improve Skills with TDD
+# /write-skill - Create or Improve Skills with TDD
 
 Writing skills IS Test-Driven Development applied to process documentation.
 
@@ -42,7 +42,7 @@ argument-hint: "[arguments]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# /my-skill — Title
+# /my-skill - Title
 
 [Core principle in 1-2 sentences.]
 
@@ -89,18 +89,18 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 
 ### Description Rules
 
-1. **Start with "Use when..."** — Focus on triggering conditions
-2. **NEVER summarize the workflow** — Claude will follow the summary and skip the content
-3. **Include symptoms** — Error messages, situations, contexts
-4. **Third person** — Descriptions are injected into system prompts
-5. **Under 500 characters** — Be concise
+1. **Start with "Use when..."** - Focus on triggering conditions
+2. **NEVER summarize the workflow** - Claude will follow the summary and skip the content
+3. **Include symptoms** - Error messages, situations, contexts
+4. **Third person** - Descriptions are injected into system prompts
+5. **Under 500 characters** - Be concise
 
 ```yaml
-# BAD: Summarizes workflow — Claude may follow this instead of reading skill
+# BAD: Summarizes workflow - Claude may follow this instead of reading skill
 description: "Debug issues using 4-phase methodology: gather, analyze, hypothesize, fix"
 
 # GOOD: Just triggering conditions
-description: "Use when encountering any bug, test failure, or unexpected behavior — before proposing fixes"
+description: "Use when encountering any bug, test failure, or unexpected behavior - before proposing fixes"
 ```
 
 ### Name Rules
@@ -122,7 +122,7 @@ Before writing the skill, test what happens WITHOUT it:
    - What choices did it make?
    - What rationalizations did it use?
    - Where did it deviate from best practice?
-4. This is your "failing test" — the baseline behavior
+4. This is your "failing test" - the baseline behavior
 ```
 
 ### GREEN: Write Minimal Skill
@@ -205,9 +205,9 @@ File: skills/[name]/SKILL.md
 
 ## Rules
 
-1. **No skill without failing test first** — TDD applies to documentation too
-2. **CSO-optimize descriptions** — "Use when..." not "What it does"
-3. **Never summarize workflow in description** — Claude will skip the content
-4. **Address every rationalization** — Build the table from real test failures
-5. **One excellent example** — Beats five mediocre ones
-6. **Verify before deploying** — Run the validation checklist
+1. **No skill without failing test first** - TDD applies to documentation too
+2. **CSO-optimize descriptions** - "Use when..." not "What it does"
+3. **Never summarize workflow in description** - Claude will skip the content
+4. **Address every rationalization** - Build the table from real test failures
+5. **One excellent example** - Beats five mediocre ones
+6. **Verify before deploying** - Run the validation checklist

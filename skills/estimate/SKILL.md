@@ -6,7 +6,7 @@ argument-hint: "[feature description]"
 allowed-tools: Read, Glob, Grep
 ---
 
-# /estimate — Cost Estimation
+# /estimate - Cost Estimation
 
 Estimate token usage and cost before implementing a feature.
 

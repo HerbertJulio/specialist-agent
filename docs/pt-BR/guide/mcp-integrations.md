@@ -1,6 +1,6 @@
 # Integracoes MCP
 
-Servidores [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) estendem as capacidades do Claude Code dando acesso a ferramentas e fontes de dados externas. **O Specialist Agent funciona completamente sem nenhum MCP** — todos os agentes operam usando arquivos locais e ferramentas nativas. MCPs sao melhorias opcionais.
+Servidores [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) estendem as capacidades do Claude Code dando acesso a ferramentas e fontes de dados externas. **O Specialist Agent funciona completamente sem nenhum MCP** - todos os agentes operam usando arquivos locais e ferramentas nativas. MCPs sao melhorias opcionais.
 
 ## O que os MCPs Adicionam
 
@@ -23,11 +23,11 @@ graph LR
 
 ---
 
-## Context7 — Documentacao de Bibliotecas
+## Context7 - Documentacao de Bibliotecas
 
 **O que faz:** Busca documentacao atualizada e exemplos de codigo para qualquer biblioteca (Vue 3, React, Pinia, TanStack Query, etc.).
 
-**Quem se beneficia:** Principalmente **voce, o desenvolvedor**. Quando voce pergunta ao Claude Code sobre uma API de biblioteca, o Context7 fornece docs atuais em vez de depender dos dados de treinamento. Os agentes nao consultam o Context7 automaticamente — eles seguem o `ARCHITECTURE.md` do seu projeto e convencoes locais.
+**Quem se beneficia:** Principalmente **voce, o desenvolvedor**. Quando voce pergunta ao Claude Code sobre uma API de biblioteca, o Context7 fornece docs atuais em vez de depender dos dados de treinamento. Os agentes nao consultam o Context7 automaticamente - eles seguem o `ARCHITECTURE.md` do seu projeto e convencoes locais.
 
 **Configuracao:**
 
@@ -48,18 +48,18 @@ O Context7 vem pre-configurado no `.mcp.json` do Specialist Agent. Nenhuma confi
 
 ---
 
-## Azion — Deploy e Configuracao na Edge
+## Azion - Deploy e Configuracao na Edge
 
 **O que faz:** Conecta o Claude Code a [Plataforma Edge da Azion](https://www.azion.com/en/documentation/devtools/mcp/), dando aos agentes acesso a documentacao, exemplos de codigo, comandos CLI, specs de API, configs Terraform e uma ferramenta de deploy de sites estaticos.
 
 **Quais agentes usam:**
 
-- `@starter` — Apos o scaffold, pode gerar configs de edge Azion e fazer deploy de sites estaticos
-- `@cloud` — O Edge Mode usa as ferramentas do Azion MCP para gerar configs de rules engine, recursos Terraform e queries de observabilidade
+- `@starter` - Apos o scaffold, pode gerar configs de edge Azion e fazer deploy de sites estaticos
+- `@cloud` - O Edge Mode usa as ferramentas do Azion MCP para gerar configs de rules engine, recursos Terraform e queries de observabilidade
 
 ### Ferramentas MCP Disponiveis
 
-O Azion MCP expoe **9 ferramentas** — 7 de busca/geracao e 1 de deploy:
+O Azion MCP expoe **9 ferramentas** - 7 de busca/geracao e 1 de deploy:
 
 | Ferramenta | Categoria | O que faz |
 |------------|-----------|-----------|
@@ -76,7 +76,7 @@ O Azion MCP expoe **9 ferramentas** — 7 de busca/geracao e 1 de deploy:
 ::: info Como funciona na pratica
 Para **sites estaticos** (output SSG de Vite, Nuxt, Next.js, SvelteKit), o agente pode fazer deploy direto via `deploy_azion_static_site`.
 
-Para **apps dinamicos** (edge functions, SSR), o agente gera o `azion.config.js`, comandos CLI e configs de infraestrutura corretos — voce executa `azion deploy` manualmente.
+Para **apps dinamicos** (edge functions, SSR), o agente gera o `azion.config.js`, comandos CLI e configs de infraestrutura corretos - voce executa `azion deploy` manualmente.
 :::
 
 **Configuracao:**
@@ -103,7 +103,7 @@ claude mcp add --transport http azion https://mcp.azion.com \
 ```
 
 ::: warning Autenticacao Necessaria
-Voce precisa de um Azion Personal Token. Crie um no [Azion Console](https://console.azion.com/) em **Menu da Conta > Personal Tokens**. Armazene como variavel de ambiente — nunca faca commit de tokens no seu repositorio.
+Voce precisa de um Azion Personal Token. Crie um no [Azion Console](https://console.azion.com/) em **Menu da Conta > Personal Tokens**. Armazene como variavel de ambiente - nunca faca commit de tokens no seu repositorio.
 :::
 
 ---
@@ -156,4 +156,4 @@ No Edge Mode, o agente cloud usa `create_rules_engine` para gerar regras de cach
 "How do I configure staleTime in TanStack Vue Query v5?"
 ```
 
-Com o Context7 disponivel, o Claude busca as docs mais recentes do TanStack Query em vez de depender dos dados de treinamento — garantindo assinaturas de API e exemplos atuais.
+Com o Context7 disponivel, o Claude busca as docs mais recentes do TanStack Query em vez de depender dos dados de treinamento - garantindo assinaturas de API e exemplos atuais.

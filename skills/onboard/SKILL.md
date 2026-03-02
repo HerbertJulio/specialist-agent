@@ -6,7 +6,7 @@ argument-hint: "[path or focus area]"
 allowed-tools: Read, Bash, Glob, Grep
 ---
 
-# /onboard — Codebase Onboarding
+# /onboard - Codebase Onboarding
 
 Understand any codebase in minutes. Generates a developer guide with architecture, conventions, key modules, and getting-started instructions.
 
@@ -126,12 +126,12 @@ Compile everything into an actionable guide.
 
 ## Rules
 
-1. **Read actual code** — Never rely solely on README or documentation
-2. **Map before explaining** — Architecture diagram first, then details
-3. **Focus on key modules** — 3-5 most important, not all of them
-4. **Detect, don't assume** — Conventions come from reading files, not guessing
-5. **Be honest about gaps** — Missing tests, docs, or conventions are findings too
-6. **Actionable output** — Every section should help the developer start working
+1. **Read actual code** - Never rely solely on README or documentation
+2. **Map before explaining** - Architecture diagram first, then details
+3. **Focus on key modules** - 3-5 most important, not all of them
+4. **Detect, don't assume** - Conventions come from reading files, not guessing
+5. **Be honest about gaps** - Missing tests, docs, or conventions are findings too
+6. **Actionable output** - Every section should help the developer start working
 
 ## Output
 
@@ -151,9 +151,9 @@ Conventions:
   Styling: [Tailwind / CSS Modules / styled-components]
 
 Key Modules:
-  1. [module] — [purpose] ([X files])
-  2. [module] — [purpose] ([X files])
-  3. [module] — [purpose] ([X files])
+  1. [module] - [purpose] ([X files])
+  2. [module] - [purpose] ([X files])
+  3. [module] - [purpose] ([X files])
 
 Getting Started:
   Install: [command]

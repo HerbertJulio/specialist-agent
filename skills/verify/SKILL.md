@@ -1,12 +1,12 @@
 ---
 name: verify
-description: "Use when about to claim work is complete, fixed, or passing — before committing, creating PRs, or moving to next task. Requires running verification commands and confirming output before making any success claims."
+description: "Use when about to claim work is complete, fixed, or passing - before committing, creating PRs, or moving to next task. Requires running verification commands and confirming output before making any success claims."
 user-invocable: true
 argument-hint: "[test|build|lint|all]"
 allowed-tools: Bash, Read, Glob, Grep
 ---
 
-# /verify — Verification Before Completion
+# /verify - Verification Before Completion
 
 Evidence before claims. Always.
 
@@ -36,13 +36,13 @@ If you haven't run the verification command in THIS message, you cannot claim it
 ```
 BEFORE claiming any status:
 
-1. IDENTIFY — What command proves this claim?
-2. RUN — Execute the FULL command (fresh, complete, not cached)
-3. READ — Full output, check exit code, count failures
-4. VERIFY — Does output ACTUALLY confirm the claim?
+1. IDENTIFY - What command proves this claim?
+2. RUN - Execute the FULL command (fresh, complete, not cached)
+3. READ - Full output, check exit code, count failures
+4. VERIFY - Does output ACTUALLY confirm the claim?
    → If NO: State actual status with evidence
    → If YES: State claim WITH the evidence
-5. ONLY THEN — Make the claim
+5. ONLY THEN - Make the claim
 
 Skip any step = lying, not verifying.
 ```
@@ -102,7 +102,7 @@ Command: npm test
 Exit code: 0
 Result: 42/42 tests passed, 0 failed
 
-VERIFIED ✓ — All tests pass (evidence above)
+VERIFIED ✓ - All tests pass (evidence above)
 ```
 
 Or:
@@ -113,14 +113,14 @@ Command: npm test
 Exit code: 1
 Result: 40/42 tests passed, 2 failed
 
-FAILED ✗ — 2 tests failing:
-  - src/auth.test.ts: "should validate token" — Expected true, got false
-  - src/user.test.ts: "should create user" — Timeout after 5000ms
+FAILED ✗ - 2 tests failing:
+  - src/auth.test.ts: "should validate token" - Expected true, got false
+  - src/user.test.ts: "should create user" - Timeout after 5000ms
 
 DO NOT claim completion. Fix failures first.
 ```
 
-## Red Flags — STOP
+## Red Flags - STOP
 
 If you catch yourself thinking:
 - "Should work now"
@@ -151,18 +151,18 @@ If you catch yourself thinking:
 ## Integration
 
 This skill is a **cross-cutting concern**. It applies to:
-- @builder — Before claiming module is complete
-- @executor — Before marking task checkpoint
-- @tdd — Before claiming GREEN phase
-- @reviewer — Before giving verdict
-- @debugger — Before claiming bug is fixed
-- @migrator — Before claiming migration is complete
+- @builder - Before claiming module is complete
+- @executor - Before marking task checkpoint
+- @tdd - Before claiming GREEN phase
+- @reviewer - Before giving verdict
+- @debugger - Before claiming bug is fixed
+- @migrator - Before claiming migration is complete
 
 ## Rules
 
-1. **Evidence before claims** — Non-negotiable
-2. **Fresh runs only** — Never cite previous runs
-3. **Full output** — Don't truncate or summarize
-4. **Exit codes matter** — 0 = success, anything else = failure
-5. **Read warnings** — Warnings can indicate real problems
-6. **One claim per verification** — Don't bundle claims
+1. **Evidence before claims** - Non-negotiable
+2. **Fresh runs only** - Never cite previous runs
+3. **Full output** - Don't truncate or summarize
+4. **Exit codes matter** - 0 = success, anything else = failure
+5. **Read warnings** - Warnings can indicate real problems
+6. **One claim per verification** - Don't bundle claims

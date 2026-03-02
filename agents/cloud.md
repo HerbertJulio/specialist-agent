@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing inf
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -68,7 +68,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing inf
 6. Validate: `terraform validate` / `pulumi preview` / `cdk synth`
 
 ### Rules
-- ALWAYS use IaC — never manual console changes for production
+- ALWAYS use IaC - never manual console changes for production
 - Enable encryption at rest and in transit by default
 - Use least-privilege IAM policies
 - Tag all resources with environment, project, owner
@@ -100,7 +100,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing inf
 
 ### Rules
 - Functions MUST be stateless
-- Keep functions focused — one responsibility per function
+- Keep functions focused - one responsibility per function
 - Minimize cold starts: small bundles, lazy initialization
 - Use environment variables for configuration, never hardcode
 - Set appropriate memory and timeout limits
@@ -110,13 +110,13 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing inf
 ## Edge Mode
 
 ### Workflow
-1. Ask: edge provider (**Azion** / Cloudflare Workers / Vercel Edge / other). **ALWAYS ask — never assume a provider.**
+1. Ask: edge provider (**Azion** / Cloudflare Workers / Vercel Edge / other). **ALWAYS ask - never assume a provider.**
 2. Analyze project: detect framework (Vue/React/Next.js/SvelteKit), build output (static/SSR), existing configs
 3. If **Azion** selected and **Azion MCP is available** (check for `search_azion_docs_and_site` tool):
    - Use `search_azion_docs_and_site` for recommended architecture for the project type
    - Use `search_azion_code_samples` for framework-specific edge function examples
    - Use `create_rules_engine` to generate cache rules, routing behaviors, and redirect configs
-   - Use `search_azion_terraform` if IaC is required — generate full Terraform provider config
+   - Use `search_azion_terraform` if IaC is required - generate full Terraform provider config
    - Use `create_graphql_query` to generate observability queries for Real-Time Events and Analytics
    - For **static sites**: use `deploy_azion_static_site` to deploy directly
    - For **dynamic apps** (SSR/edge functions): generate `azion.config.js` + provide `azion deploy` command
@@ -128,10 +128,10 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing inf
 6. Validate: check generated configs, verify build output compatibility
 
 ### Rules
-- ALWAYS ask the user which edge provider they want — never default to one
+- ALWAYS ask the user which edge provider they want - never default to one
 - Edge functions MUST be stateless
 - Optimize for cold start: minimal dependencies, lazy initialization
-- Configure cache rules explicitly — don't rely on defaults
+- Configure cache rules explicitly - don't rely on defaults
 - Use environment variables for secrets, never hardcode
 - For Azion: generate `azion.config.js` at project root
 
@@ -168,7 +168,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing inf
 - Pin action/image versions, don't use `latest`
 
 ## General Rules
-- Framework-agnostic — works with any stack
+- Framework-agnostic - works with any stack
 - Reads ARCHITECTURE.md if present and follows existing conventions
 - Security by default: encryption, least privilege, no hardcoded secrets
 - Cost awareness: right-size resources, use spot/preemptible where appropriate
@@ -180,7 +180,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing inf
 After completing work in any mode, provide:
 
 ```markdown
-## Cloud — [Mode: Infrastructure | Serverless | Edge | Pipeline]
+## Cloud - [Mode: Infrastructure | Serverless | Edge | Pipeline]
 ### What was done
 - [Resources provisioned, configs created or modified]
 ### Architecture decisions
@@ -209,4 +209,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

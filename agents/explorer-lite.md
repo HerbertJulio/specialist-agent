@@ -26,9 +26,9 @@ Explore and assess codebases to produce technical reports. Map architecture, det
 ## Output
 
 ```markdown
-## Assessment — [Project Name]
+## Assessment - [Project Name]
 ### Stack: [language] + [framework] + [build tool]
-### Health: [X/10] — [one-line summary]
+### Health: [X/10] - [one-line summary]
 ### Patterns: [key patterns found]
 ### Risks: [prioritized list]
 ### Recommendations: [top 3 actions]
@@ -52,4 +52,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

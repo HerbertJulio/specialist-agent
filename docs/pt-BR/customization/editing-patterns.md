@@ -65,7 +65,7 @@ Quando voce edita o `ARCHITECTURE.md`, os agentes mudam imediatamente o comporta
 
 ### Exemplo: Trocando de fetch para Axios
 
-**Antes** — ARCHITECTURE.md diz "Use fetch with typed wrappers":
+**Antes** - ARCHITECTURE.md diz "Use fetch with typed wrappers":
 
 ```typescript
 // @builder gera este service:
@@ -77,7 +77,7 @@ export async function getOrders(params: GetOrdersParams): Promise<OrdersResponse
 }
 ```
 
-**Depois** — Voce muda o ARCHITECTURE.md para "Use Axios with `src/shared/services/api-client.ts`":
+**Depois** - Voce muda o ARCHITECTURE.md para "Use Axios with `src/shared/services/api-client.ts`":
 
 ```typescript
 // @builder agora gera isto:
@@ -90,7 +90,7 @@ export async function getOrders(params: GetOrdersParams): Promise<OrdersResponse
 ```
 
 ::: tip
-A mudanca e automatica — voce nao precisa avisar cada agente sobre o Axios. Todos leem o mesmo ARCHITECTURE.md.
+A mudanca e automatica - voce nao precisa avisar cada agente sobre o Axios. Todos leem o mesmo ARCHITECTURE.md.
 :::
 
 ## Personalizacoes Comuns
@@ -102,7 +102,7 @@ A mudanca e automatica — voce nao precisa avisar cada agente sobre o Axios. To
 - Client state: Zustand stores in `src/modules/[name]/stores/`
 - Server state: TanStack React Query in `src/modules/[name]/hooks/`
 - Store naming: `use[Name]Store` (e.g., `useCartStore`)
-- No global stores — each module owns its state
+- No global stores - each module owns its state
 ```
 
 ### Trocar API Client (fetch para Axios)
@@ -133,7 +133,7 @@ src/features/[name]/
 ## Code Standards
 - Max function length: 30 lines
 - Max file length: 250 lines
-- No `any` type — use `unknown` with type guards
+- No `any` type - use `unknown` with type guards
 - No barrel exports in components/ directories
 - Composables must return readonly refs for state
 ```
@@ -165,30 +165,30 @@ Atualize os padroes de referencia rapida:
 
 ## Boas Praticas
 
-1. **Seja explicito** — Os agentes seguem o que esta escrito literalmente
-2. **Use exemplos** — Exemplos de codigo no ARCHITECTURE.md se tornam templates
-3. **Mantenha atualizado** — Documentacao desatualizada leva a codigo inconsistente
-4. **Controle de versao** — Faca commit das alteracoes no ARCHITECTURE.md com mensagens claras
-5. **Alinhamento da equipe** — Revise as alteracoes de padroes com a equipe antes de fazer commit
+1. **Seja explicito** - Os agentes seguem o que esta escrito literalmente
+2. **Use exemplos** - Exemplos de codigo no ARCHITECTURE.md se tornam templates
+3. **Mantenha atualizado** - Documentacao desatualizada leva a codigo inconsistente
+4. **Controle de versao** - Faca commit das alteracoes no ARCHITECTURE.md com mensagens claras
+5. **Alinhamento da equipe** - Revise as alteracoes de padroes com a equipe antes de fazer commit
 
 ## Checklist de Validacao
 
 Apos editar o `ARCHITECTURE.md`, verifique suas mudancas:
 
-1. **Rode as verificacoes automatizadas** — Captura violacoes estruturais:
+1. **Rode as verificacoes automatizadas** - Captura violacoes estruturais:
 
    ```bash
    /review-check-architecture
    ```
 
-2. **Gere um componente de teste** — Verifique se os agentes usam seus novos padroes:
+2. **Gere um componente de teste** - Verifique se os agentes usam seus novos padroes:
 
    ```bash
    "Use @builder to create a test-example component"
    ```
 
-3. **Revise o output** — Confira se o codigo gerado segue suas regras atualizadas
+3. **Revise o output** - Confira se o codigo gerado segue suas regras atualizadas
 
-4. **Delete o arquivo de teste** — Limpe apos a validacao
+4. **Delete o arquivo de teste** - Limpe apos a validacao
 
 Nenhum reinicio necessario. Os agentes leem `ARCHITECTURE.md` novamente a cada invocacao. As alteracoes entram em vigor imediatamente.

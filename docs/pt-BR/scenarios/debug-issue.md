@@ -12,10 +12,10 @@ Debug the 500 error when users try to login
 ```
 
 **O que acontece:**
-1. **Coletar** — Coleta logs de erro, request/response
-2. **Analisar** — Formula hipótese com base nas evidências
-3. **Testar** — Verifica a hipótese
-4. **Corrigir** — Implementa e valida a solução
+1. **Coletar** - Coleta logs de erro, request/response
+2. **Analisar** - Formula hipótese com base nas evidências
+3. **Testar** - Verifica a hipótese
+4. **Corrigir** - Implementa e valida a solução
 
 **Resultado:**
 ```
@@ -33,7 +33,7 @@ ANALYZE
   Field name mismatch causes undefined access
 
 ROOT CAUSE
-  auth-adapter.ts:12 — toLoginPayload() maps to 'username'
+  auth-adapter.ts:12 - toLoginPayload() maps to 'username'
   but API expects 'email'
 
 FIX
@@ -49,7 +49,7 @@ FIX
 
 **Comando:**
 ```
-Debug the memory leak in the dashboard — memory grows 50MB per hour
+Debug the memory leak in the dashboard - memory grows 50MB per hour
 ```
 
 **O que acontece:**
@@ -174,10 +174,10 @@ ANALYZE
 
   Parent creates new options object on each render
 
-FIX (Option 1 — Memoize in parent):
+FIX (Option 1 - Memoize in parent):
   const options = useMemo(() => ({ theme, lang }), [theme, lang])
 
-FIX (Option 2 — Use primitives):
+FIX (Option 2 - Use primitives):
   useEffect(() => {
     loadSettings({ theme, lang })
   }, [theme, lang])  // Primitives are stable
@@ -273,6 +273,6 @@ Actual: After login, stays on login page with no error
 
 ## Cenários Relacionados
 
-- [Construindo Features](/pt-BR/scenarios/build-feature) — Construir corretamente para evitar bugs
-- [Revisão de Código](/pt-BR/scenarios/code-review) — Capturar bugs antes de ir para produção
-- [Performance](/pt-BR/scenarios/performance) — Depurar código lento
+- [Construindo Features](/pt-BR/scenarios/build-feature) - Construir corretamente para evitar bugs
+- [Revisão de Código](/pt-BR/scenarios/code-review) - Capturar bugs antes de ir para produção
+- [Performance](/pt-BR/scenarios/performance) - Depurar código lento

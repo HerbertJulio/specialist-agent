@@ -1,5 +1,8 @@
 # Payments & Finance
 
+::: info Agents: `@finance` · Time: 10-15 min per scenario
+:::
+
 Real scenarios for payment integration, billing, and financial features.
 
 ## Stripe Checkout {#stripe}
@@ -350,6 +353,6 @@ app.post('/webhooks', async (req, res) => {
 
 ## Related Scenarios
 
-- [Security](/scenarios/security) — Secure payment flow
-- [API Design](/scenarios/api-design) — Design payment API
-- [Infrastructure](/scenarios/infrastructure) — Deploy securely
+- [Security](/scenarios/security) - Secure payment flow
+- [API Design](/scenarios/api-design) - Design payment API
+- [Infrastructure](/scenarios/infrastructure) - Deploy securely

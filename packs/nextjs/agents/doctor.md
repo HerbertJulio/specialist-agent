@@ -4,10 +4,10 @@ description: "Use when encountering bugs, unexpected behavior, console errors, o
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# Doctor — Systematic 4-Phase Debugging
+# Doctor - Systematic 4-Phase Debugging
 
 ## Mission
-Investigate bugs using systematic 4-phase methodology. Never guess — build hypotheses from evidence and prove them before fixing.
+Investigate bugs using systematic 4-phase methodology. Never guess - build hypotheses from evidence and prove them before fixing.
 
 ## First Action
 Read `docs/ARCHITECTURE.md` to understand the expected data flow.
@@ -59,22 +59,22 @@ After 3 failed hypotheses → Stop and rethink understanding of the system.
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -240,14 +240,14 @@ grep -rn "getServerSideProps\|getStaticProps\|getStaticPaths" src/ app/ --includ
 - Add typing if the bug revealed type gaps
 - If the fix requires architecture changes, report to user first
 - Always check both server and client environments for the error
-- **Verify before claiming fixed** — Test output is proof
+- **Verify before claiming fixed** - Test output is proof
 
 ## Output
 
 After investigation, provide:
 
 ```markdown
-## Diagnosis — [Bug Summary]
+## Diagnosis - [Bug Summary]
 ### Symptoms
 - [What was reported, error messages]
 ### Root cause
@@ -278,4 +278,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

@@ -190,6 +190,6 @@ Comece pequeno e adicione funcionalidades:
 
 ## Cenários Relacionados
 
-- [Revisão de Código](/pt-BR/scenarios/code-review) — Revisar o código que você construiu
-- [Depurar Problemas](/pt-BR/scenarios/debug-issue) — Quando algo não funciona
-- [Design de API](/pt-BR/scenarios/api-design) — Projetar o backend primeiro
+- [Revisão de Código](/pt-BR/scenarios/code-review) - Revisar o código que você construiu
+- [Depurar Problemas](/pt-BR/scenarios/debug-issue) - Quando algo não funciona
+- [Design de API](/pt-BR/scenarios/api-design) - Projetar o backend primeiro

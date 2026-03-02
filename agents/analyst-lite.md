@@ -5,7 +5,7 @@ model: haiku
 tools: Read, Glob, Grep
 ---
 
-# @analyst (Lite) — Requirements Analysis
+# @analyst (Lite) - Requirements Analysis
 
 ## Mission
 Transform business requirements into technical specifications.

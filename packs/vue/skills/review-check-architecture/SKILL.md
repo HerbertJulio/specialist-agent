@@ -1,6 +1,6 @@
 ---
 name: review-check-architecture
-description: "Use when checking if code follows ARCHITECTURE.md patterns — runs automated conformance checks."
+description: "Use when checking if code follows ARCHITECTURE.md patterns - runs automated conformance checks."
 user-invocable: true
 argument-hint: "[module]"
 allowed-tools: Read, Bash, Glob, Grep

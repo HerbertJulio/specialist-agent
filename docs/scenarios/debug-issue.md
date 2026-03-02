@@ -1,5 +1,8 @@
 # Debug Issues
 
+::: info Agents: `@debugger` `@doctor` `@perf` · Time: 3-5 min per scenario
+:::
+
 Real scenarios for finding and fixing bugs.
 
 ## API Error {#api-error}
@@ -12,10 +15,10 @@ Debug the 500 error when users try to login
 ```
 
 **What happens:**
-1. **Gather** — Collects error logs, request/response
-2. **Analyze** — Forms hypothesis based on evidence
-3. **Test** — Verifies hypothesis
-4. **Fix** — Implements and validates solution
+1. **Gather** - Collects error logs, request/response
+2. **Analyze** - Forms hypothesis based on evidence
+3. **Test** - Verifies hypothesis
+4. **Fix** - Implements and validates solution
 
 **Result:**
 ```
@@ -33,7 +36,7 @@ ANALYZE
   Field name mismatch causes undefined access
 
 ROOT CAUSE
-  auth-adapter.ts:12 — toLoginPayload() maps to 'username'
+  auth-adapter.ts:12 - toLoginPayload() maps to 'username'
   but API expects 'email'
 
 FIX
@@ -49,7 +52,7 @@ FIX
 
 **Command:**
 ```
-Debug the memory leak in the dashboard — memory grows 50MB per hour
+Debug the memory leak in the dashboard - memory grows 50MB per hour
 ```
 
 **What happens:**
@@ -174,10 +177,10 @@ ANALYZE
 
   Parent creates new options object on each render
 
-FIX (Option 1 — Memoize in parent):
+FIX (Option 1 - Memoize in parent):
   const options = useMemo(() => ({ theme, lang }), [theme, lang])
 
-FIX (Option 2 — Use primitives):
+FIX (Option 2 - Use primitives):
   useEffect(() => {
     loadSettings({ theme, lang })
   }, [theme, lang])  // Primitives are stable
@@ -273,6 +276,6 @@ Actual: After login, stays on login page with no error
 
 ## Related Scenarios
 
-- [Build Features](/scenarios/build-feature) — Build correctly to avoid bugs
-- [Code Review](/scenarios/code-review) — Catch bugs before they ship
-- [Performance](/scenarios/performance) — Debug slow code
+- [Build Features](/scenarios/build-feature) - Build correctly to avoid bugs
+- [Code Review](/scenarios/code-review) - Catch bugs before they ship
+- [Performance](/scenarios/performance) - Debug slow code

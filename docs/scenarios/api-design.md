@@ -1,5 +1,8 @@
 # API Design
 
+::: info Agents: `@api` `@data` · Time: 5 min per scenario
+:::
+
 Real scenarios for designing and documenting APIs.
 
 ## REST API {#rest}
@@ -315,6 +318,6 @@ Design API with:
 
 ## Related Scenarios
 
-- [Build Features](/scenarios/build-feature) — Implement the API
-- [Security](/scenarios/security) — Secure the API
-- [Database](/scenarios/api-design#database) — Design the data layer
+- [Build Features](/scenarios/build-feature) - Implement the API
+- [Security](/scenarios/security) - Secure the API
+- [Database](/scenarios/api-design#database) - Design the data layer

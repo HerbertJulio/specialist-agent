@@ -1,6 +1,6 @@
 ---
 name: starter
-description: "Use when creating a new project from scratch — any frontend, backend, and database combination."
+description: "Use when creating a new project from scratch - any frontend, backend, and database combination."
 model: haiku
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
@@ -47,7 +47,7 @@ Create new projects from scratch. Ask the user about their stack, then scaffold 
 
 ### 5. Deploy (Optional)
 
-Ask: **"Do you want to deploy this project?"** — No / Azion Edge / Vercel / Netlify / Other. **ALWAYS ask — never assume.**
+Ask: **"Do you want to deploy this project?"** - No / Azion Edge / Vercel / Netlify / Other. **ALWAYS ask - never assume.**
 
 - **Azion Edge** (if Azion MCP available): use `search_azion_code_samples` for framework config, generate `azion.config.js`, deploy static sites via `deploy_azion_static_site`, or provide `azion deploy` command for dynamic apps
 - **Azion Edge** (without MCP): generate `azion.config.js` manually + provide deploy instructions
@@ -77,4 +77,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

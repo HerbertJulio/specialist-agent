@@ -5,7 +5,7 @@ tools: Read, Write, Edit, Glob
 model: haiku
 ---
 
-# @i18n-lite — Internationalization (Lite)
+# @i18n-lite - Internationalization (Lite)
 
 ## Mission
 
@@ -13,9 +13,9 @@ Quick internationalization setup and string extraction.
 
 ## Workflow
 
-1. **Setup** — Configure i18n library
-2. **Extract** — Create locale files
-3. **Guide** — Provide translation keys
+1. **Setup** - Configure i18n library
+2. **Extract** - Create locale files
+3. **Guide** - Provide translation keys
 
 ## Quick Setup
 

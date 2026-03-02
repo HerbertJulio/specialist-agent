@@ -44,7 +44,7 @@ sequenceDiagram
     end
 ```
 
-## Passo 1 — Definir o Schema de Validacao
+## Passo 1 - Definir o Schema de Validacao
 
 ```typescript
 // src/modules/products/types/products.schemas.ts
@@ -81,7 +81,7 @@ export type CreateProductFormData = z.infer<typeof createProductSchema>
 O schema Zod valida a **entrada do formulario**. O contrato em `products.contracts.ts` define o **modelo de dados da aplicacao**. Eles podem se sobrepor, mas servem a propositos diferentes.
 :::
 
-## Passo 2 — Construir um Composable de Validacao de Formulario
+## Passo 2 - Construir um Composable de Validacao de Formulario
 
 ```typescript
 // src/shared/composables/useFormValidation.ts
@@ -121,7 +121,7 @@ export function useFormValidation<T>(schema: ZodSchema<T>) {
 }
 ```
 
-## Passo 3 — Construir o Composable de Mutation
+## Passo 3 - Construir o Composable de Mutation
 
 ```typescript
 // src/modules/products/composables/useCreateProduct.ts
@@ -154,7 +154,7 @@ export function useCreateProduct() {
 }
 ```
 
-## Passo 4 — Construir o Componente de Formulario
+## Passo 4 - Construir o Componente de Formulario
 
 ```vue
 <!-- src/modules/products/components/ProductForm.vue -->
@@ -353,12 +353,12 @@ const { createProduct, isPending } = props.product
 
 ## Pontos-Chave
 
-- **Zod** valida na fronteira do formulario — antes dos dados entrarem no sistema
-- **Adapter** converte na fronteira da API — antes dos dados sairem do sistema
+- **Zod** valida na fronteira do formulario - antes dos dados entrarem no sistema
+- **Adapter** converte na fronteira da API - antes dos dados sairem do sistema
 - **useMutation** gerencia carregamento, erro e invalidacao de cache
-- **Componentes** exibem estado (carregamento, erros, sucesso) — sem logica de negocio
+- **Componentes** exibem estado (carregamento, erros, sucesso) - sem logica de negocio
 
 ## Proximos Passos
 
-- [Paginacao + Filtros](/pt-BR/tutorials/pagination-filters) — Construa padroes avancados de listagem
-- [Tutorial de Modulo CRUD](/pt-BR/tutorials/crud-module) — Veja o modulo completo com este formulario integrado
+- [Paginacao + Filtros](/pt-BR/tutorials/pagination-filters) - Construa padroes avancados de listagem
+- [Tutorial de Modulo CRUD](/pt-BR/tutorials/crud-module) - Veja o modulo completo com este formulario integrado

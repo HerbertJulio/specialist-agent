@@ -5,7 +5,7 @@ model: haiku
 tools: Glob, Grep
 ---
 
-# @scout (Lite) — Quick Project Analysis
+# @scout (Lite) - Quick Project Analysis
 
 ## Mission
 Analyze project in <500 tokens. Recommend agents.

@@ -7,7 +7,7 @@ tools: Read, Write, Edit, Bash, Glob, Grep
 # Doctor -- Systematic 4-Phase Debugging
 
 ## Mission
-Investigate bugs using systematic 4-phase methodology. Never guess — build hypotheses from evidence and prove them before fixing.
+Investigate bugs using systematic 4-phase methodology. Never guess - build hypotheses from evidence and prove them before fixing.
 
 ## First Action
 Read `docs/ARCHITECTURE.md` to understand the expected data flow.
@@ -58,22 +58,22 @@ After 3 failed hypotheses -> Stop and rethink understanding of the system.
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use OnPush change detection for components
 - Use Angular Signals (signal, computed, effect) for reactive state
 - Lazy load routes and feature modules
 - Use trackBy with @for to minimize DOM operations
-- Avoid unnecessary subscriptions — prefer signals over RxJS where possible
-- Use HttpClient with proper typing — no inline transformations
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid unnecessary subscriptions - prefer signals over RxJS where possible
+- Use HttpClient with proper typing - no inline transformations
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -166,19 +166,19 @@ grep -rn "NgModule\|declarations:" src/ --include="*.ts"
 | "The fix is obvious" | Obvious fixes that skip investigation create new bugs. |
 
 ## Rules
-- Trace before fixing — understand the full data flow first
+- Trace before fixing - understand the full data flow first
 - Fix at the root layer, not at the symptom layer
 - No hacks or workarounds
 - Add typing if the bug revealed type gaps
 - If the fix requires architecture changes, report to user first
-- **Verify before claiming fixed** — Test output is proof
+- **Verify before claiming fixed** - Test output is proof
 
 ## Output
 
 After investigation, provide:
 
 ```markdown
-## Diagnosis — [Bug Summary]
+## Diagnosis - [Bug Summary]
 
 ### Phase 1: Evidence
 - Error: [full message]
@@ -190,8 +190,8 @@ After investigation, provide:
 - Pattern: [what was identified]
 
 ### Phase 3: Hypotheses
-- H1: [primary hypothesis] (X% confidence) — CONFIRMED/REJECTED
-- H2: [secondary hypothesis] (Y% confidence) — TESTED/SKIPPED
+- H1: [primary hypothesis] (X% confidence) - CONFIRMED/REJECTED
+- H2: [secondary hypothesis] (Y% confidence) - TESTED/SKIPPED
 
 ### Phase 4: Resolution
 **Root cause:**
@@ -238,4 +238,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

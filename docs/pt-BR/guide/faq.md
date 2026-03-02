@@ -12,7 +12,7 @@ Os agentes de pack (`@builder`, `@reviewer`, `@doctor`, `@migrator`) precisam de
 
 ### Funciona com projetos existentes?
 
-Sim. Execute `npx specialist-agent init` na raiz do projeto e escolha seu framework pack. O instalador apenas adiciona arquivos markdown — não modifica seu código-fonte, dependências ou configuração.
+Sim. Execute `npx specialist-agent init` na raiz do projeto e escolha seu framework pack. O instalador apenas adiciona arquivos markdown - não modifica seu código-fonte, dependências ou configuração.
 
 Use `@explorer` para avaliar um codebase existente antes de fazer mudanças:
 
@@ -28,7 +28,7 @@ Para padrões compartilhados entre workspaces, mantenha um `ARCHITECTURE.md` na 
 
 ### Funciona offline?
 
-Não. O Specialist Agent requer conexão ativa com a API do Claude. Os agentes e skills são instruções markdown que o Claude Code lê e executa — a inteligência vem do modelo Claude, não de código local.
+Não. O Specialist Agent requer conexão ativa com a API do Claude. Os agentes e skills são instruções markdown que o Claude Code lê e executa - a inteligência vem do modelo Claude, não de código local.
 
 ### Como atualizo o Specialist Agent?
 
@@ -58,11 +58,11 @@ Use agentes Lite quando velocidade importa mais que polimento. Use agentes Full 
 
 Sim. Veja [Criando Agentes](/pt-BR/customization/creating-agents) para um guia passo a passo. Agentes customizados seguem o mesmo blueprint de 5 partes:
 
-1. **Mission** — O que o agente faz
-2. **Workflow** — Processo passo a passo
-3. **Output** — Formato estruturado de resultado
-4. **Rules** — Restrições rígidas
-5. **Handoff Protocol** — Quando sugerir outros agentes
+1. **Mission** - O que o agente faz
+2. **Workflow** - Processo passo a passo
+3. **Output** - Formato estruturado de resultado
+4. **Rules** - Restrições rígidas
+5. **Handoff Protocol** - Quando sugerir outros agentes
 
 ### Como os agentes conhecem as convenções do meu projeto?
 
@@ -101,17 +101,17 @@ Veja [Dicas para Reduzir Uso de Tokens](/pt-BR/reference/tokens#dicas-para-reduz
 1. Verifique se o arquivo está em `docs/ARCHITECTURE.md` (não na raiz do projeto)
 2. Verifique erros de sintaxe no markdown
 3. Execute `/review-check-architecture` para validar
-4. Certifique-se que suas regras são explícitas — agentes seguem o que está escrito literalmente
+4. Certifique-se que suas regras são explícitas - agentes seguem o que está escrito literalmente
 
 ### Skills retornam "command not found"
 
 Skills não são comandos de shell. São instruções para o Claude Code. Use dentro da interface de chat do Claude Code:
 
 ```bash
-# Correto — dentro do Claude Code
+# Correto - dentro do Claude Code
 /dev-create-component ProductCard
 
-# Errado — em um terminal
+# Errado - em um terminal
 npx specialist-agent /dev-create-component ProductCard
 ```
 

@@ -1,6 +1,6 @@
 # MCP Integrations
 
-[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers extend Claude Code's capabilities by giving access to external tools and data sources. **Specialist Agent works fully without any MCP** — all agents operate using local files and built-in tools. MCPs are optional enhancements.
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers extend Claude Code's capabilities by giving access to external tools and data sources. **Specialist Agent works fully without any MCP** - all agents operate using local files and built-in tools. MCPs are optional enhancements.
 
 ## What MCPs Add
 
@@ -23,11 +23,11 @@ graph LR
 
 ---
 
-## Context7 — Library Documentation
+## Context7 - Library Documentation
 
 **What it does:** Fetches up-to-date documentation and code examples for any programming library (Vue 3, React, Pinia, TanStack Query, etc.).
 
-**Who benefits:** Primarily **you, the developer**. When you ask Claude Code about a library API, Context7 provides current docs instead of relying on training data. Agents don't query Context7 automatically — they follow your project's `ARCHITECTURE.md` and local conventions.
+**Who benefits:** Primarily **you, the developer**. When you ask Claude Code about a library API, Context7 provides current docs instead of relying on training data. Agents don't query Context7 automatically - they follow your project's `ARCHITECTURE.md` and local conventions.
 
 **Configuration:**
 
@@ -48,18 +48,18 @@ Context7 is pre-configured in Specialist Agent's `.mcp.json`. No setup needed.
 
 ---
 
-## Azion — Edge Deployment & Configuration
+## Azion - Edge Deployment & Configuration
 
 **What it does:** Connects Claude Code to the [Azion Edge Platform](https://www.azion.com/en/documentation/devtools/mcp/), giving agents access to Azion's documentation, code samples, CLI commands, API specs, Terraform configs, and a static site deployment tool.
 
 **Which agents use it:**
 
-- `@starter` — After scaffolding, can generate Azion edge configs and deploy static sites
-- `@cloud` — Edge Mode uses Azion MCP tools to generate rules engine configs, Terraform resources, and observability queries
+- `@starter` - After scaffolding, can generate Azion edge configs and deploy static sites
+- `@cloud` - Edge Mode uses Azion MCP tools to generate rules engine configs, Terraform resources, and observability queries
 
 ### Available MCP Tools
 
-The Azion MCP exposes **9 tools** — 7 for search/generation and 1 for deployment:
+The Azion MCP exposes **9 tools** - 7 for search/generation and 1 for deployment:
 
 | Tool | Category | What it does |
 |------|----------|-------------|
@@ -76,7 +76,7 @@ The Azion MCP exposes **9 tools** — 7 for search/generation and 1 for deployme
 ::: info How it works in practice
 For **static sites** (SSG output from Vite, Nuxt, Next.js, SvelteKit), the agent can deploy directly via `deploy_azion_static_site`.
 
-For **dynamic apps** (edge functions, SSR), the agent generates the correct `azion.config.js`, CLI commands, and infrastructure configs — you run `azion deploy` yourself.
+For **dynamic apps** (edge functions, SSR), the agent generates the correct `azion.config.js`, CLI commands, and infrastructure configs - you run `azion deploy` yourself.
 :::
 
 **Configuration:**
@@ -103,7 +103,7 @@ claude mcp add --transport http azion https://mcp.azion.com \
 ```
 
 ::: warning Authentication Required
-You need an Azion Personal Token. Create one in the [Azion Console](https://console.azion.com/) under **Account Menu > Personal Tokens**. Store it as an environment variable — never commit tokens to your repository.
+You need an Azion Personal Token. Create one in the [Azion Console](https://console.azion.com/) under **Account Menu > Personal Tokens**. Store it as an environment variable - never commit tokens to your repository.
 :::
 
 ---
@@ -156,4 +156,4 @@ In Edge Mode, the cloud agent uses `create_rules_engine` to generate cache rules
 "How do I configure staleTime in TanStack Vue Query v5?"
 ```
 
-With Context7 available, Claude fetches the latest TanStack Query docs instead of relying on training data — ensuring you get current API signatures and examples.
+With Context7 available, Claude fetches the latest TanStack Query docs instead of relying on training data - ensuring you get current API signatures and examples.

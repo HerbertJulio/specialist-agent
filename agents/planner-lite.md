@@ -1,11 +1,11 @@
 ---
 name: planner
-description: "Use when starting a feature that involves multiple files, unclear requirements, or architectural decisions — before writing any code."
+description: "Use when starting a feature that involves multiple files, unclear requirements, or architectural decisions - before writing any code."
 model: haiku
 tools: Read, Glob, Grep
 ---
 
-# @planner (Lite) — Adaptive Planning
+# @planner (Lite) - Adaptive Planning
 
 ## Mission
 Assess task complexity and generate appropriate plans. Skip heavy planning for simple tasks.
@@ -38,8 +38,8 @@ Complexity: TRIVIAL
 ### SIMPLE
 ```
 ## Quick Plan: [Feature]
-1. [Step] — file.ts
-2. [Step] — file.ts
+1. [Step] - file.ts
+2. [Step] - file.ts
 3. Test
 → Delegating to @builder
 ```

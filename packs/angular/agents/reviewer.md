@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: "Use when code changes need review before merge — validates architecture conformance, code quality, and spec compliance."
+description: "Use when code changes need review before merge - validates architecture conformance, code quality, and spec compliance."
 tools: Read, Bash, Glob, Grep
 ---
 
@@ -52,22 +52,22 @@ Unlike competitors that use separate agents for spec review and code review (dou
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use OnPush change detection for components
 - Use Angular Signals (signal, computed, effect) for reactive state
 - Lazy load routes and feature modules
 - Use trackBy with @for to minimize DOM operations
-- Avoid unnecessary subscriptions — prefer signals over RxJS where possible
-- Use HttpClient with proper typing — no inline transformations
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid unnecessary subscriptions - prefer signals over RxJS where possible
+- Use HttpClient with proper typing - no inline transformations
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -115,15 +115,15 @@ grep -rn "innerHTML\|\[innerHTML\]" src/ --include="*.ts" 2>/dev/null && echo "V
 - DI: inject() everywhere, no constructor DI
 
 ### 4. Classification
-- VIOLATION — deviates from ARCHITECTURE.md
-- ATTENTION — partial pattern, should improve
-- COMPLIANT — correct
-- HIGHLIGHT — above expectations
+- VIOLATION - deviates from ARCHITECTURE.md
+- ATTENTION - partial pattern, should improve
+- COMPLIANT - correct
+- HIGHLIGHT - above expectations
 
 ### Output -- Unified 3-in-1 Format
 
 ```markdown
-## Review — [Scope]
+## Review - [Scope]
 
 ### Unified 3-in-1 Summary
 
@@ -146,13 +146,13 @@ grep -rn "innerHTML\|\[innerHTML\]" src/ --include="*.ts" 2>/dev/null && echo "V
 ### Auto: tsc / Lint / Build / Tests
 
 ### Violations (Blocking)
-- [file:line] — [issue] -> [suggested fix]
+- [file:line] - [issue] -> [suggested fix]
 
 ### Attention (Non-blocking)
-- [file:line] — [concern] -> [recommendation]
+- [file:line] - [concern] -> [recommendation]
 
 ### Highlights (Recognition)
-- [file:line] — [what was done well and why it matters]
+- [file:line] - [what was done well and why it matters]
 
 ### Verdict: Approved | Approved with Caveats | Requires Changes
 
@@ -174,7 +174,7 @@ grep -rn "innerHTML\|\[innerHTML\]" src/ --include="*.ts" 2>/dev/null && echo "V
 ---
 
 ## Performance Mode
-1. Bundle: `ng build` — check output sizes, identify large chunks
+1. Bundle: `ng build` - check output sizes, identify large chunks
 2. Lazy loading: verify routes use `loadComponent`, not static imports
 3. Change detection: find components without OnPush
 4. Signals: find BehaviorSubject/ReplaySubject that could be signals
@@ -203,9 +203,9 @@ RIGHT: "This will cause a production bug. Blocking."
 When another agent receives review feedback:
 
 ```
-1. EVALUATE technically — Is the feedback correct?
-2. CHECK against ARCHITECTURE.md — Does it align?
-3. YAGNI test — Is the suggestion actually needed?
+1. EVALUATE technically - Is the feedback correct?
+2. CHECK against ARCHITECTURE.md - Does it align?
+3. YAGNI test - Is the suggestion actually needed?
    - Does it solve a real problem?
    - Or is it speculative improvement?
 4. IF valid -> Implement the fix
@@ -236,7 +236,7 @@ Before accepting a reviewer suggestion:
 
 ## Rules
 - Read-only. Never modify files.
-- Always include positive highlights — good code deserves recognition.
+- Always include positive highlights - good code deserves recognition.
 - Reference file:line in every finding.
 - Suggest concrete fixes with code snippets.
 - Scorecard grades: A (excellent) B (good) C (adequate) D (needs work) F (critical issues).
@@ -260,4 +260,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

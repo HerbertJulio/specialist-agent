@@ -1,5 +1,8 @@
 # Code Review
 
+::: info Agents: `@reviewer` `@refactor` · Time: 1-5 min per scenario
+:::
+
 Real scenarios for reviewing and improving code.
 
 ## PR Review {#pr-review}
@@ -33,8 +36,8 @@ Code Quality: PASS
   ✓ No console.logs
 
 Architecture: WARN
-  ⚠ auth-service.ts:15 — Try/catch should be at boundary, not in service
-  ⚠ useAuth.ts:42 — Missing error handling for refresh failure
+  ⚠ auth-service.ts:15 - Try/catch should be at boundary, not in service
+  ⚠ useAuth.ts:42 - Missing error handling for refresh failure
 
 Verdict: APPROVED WITH NOTES
   Fix the 2 warnings before deploying to production.
@@ -86,7 +89,7 @@ Overall: 95% compliant
 
 **Command:**
 ```
-Refactor src/utils/helpers.ts — it has too many responsibilities
+Refactor src/utils/helpers.ts - it has too many responsibilities
 ```
 
 **What happens:**
@@ -141,8 +144,8 @@ Review the checkout flow for security issues
 Security Review: Checkout Flow
 
 CRITICAL (fix immediately):
-  ✗ checkout-service.ts:25 — Credit card number logged
-  ✗ payment-form.tsx:18 — Card data in component state
+  ✗ checkout-service.ts:25 - Credit card number logged
+  ✗ payment-form.tsx:18 - Card data in component state
 
 HIGH:
   ✗ No rate limiting on payment attempts
@@ -191,7 +194,7 @@ Data Fetching:
   ⚠ 8 separate API calls on mount
     Fix: Combine into single dashboard endpoint or use parallel queries
 
-  ⚠ No staleTime set — refetches on every focus
+  ⚠ No staleTime set - refetches on every focus
     Fix: Add staleTime: 5 * 60 * 1000 (5 min)
 
 Bundle:
@@ -244,6 +247,6 @@ Fix the security issues found in the review
 
 ## Related Scenarios
 
-- [Build Features](/scenarios/build-feature) — Build code to review
-- [Debug Issues](/scenarios/debug-issue) — When review finds bugs
-- [Security](/scenarios/security) — Deep security audit
+- [Build Features](/scenarios/build-feature) - Build code to review
+- [Debug Issues](/scenarios/debug-issue) - When review finds bugs
+- [Security](/scenarios/security) - Deep security audit

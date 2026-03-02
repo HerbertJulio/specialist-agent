@@ -6,7 +6,7 @@ argument-hint: "[path or module]"
 allowed-tools: Read, Bash, Glob, Grep
 ---
 
-# /audit — Multi-Agent Code Audit
+# /audit - Multi-Agent Code Audit
 
 Run a comprehensive audit that combines security, performance, architecture, and dependency analysis in one pass.
 
@@ -138,12 +138,12 @@ Compile findings into a structured report with severity ratings.
 
 ## Rules
 
-1. **Check all 4 domains** — Skipping one defeats the purpose
-2. **Run automated tools** — Never skip `npm audit` or linting if available
-3. **Severity must be justified** — Every rating needs evidence
-4. **Remediation is required** — Findings without fix suggestions are useless
-5. **Line references are required** — Point to exact files and lines
-6. **Never assume safety** — Verify, don't trust
+1. **Check all 4 domains** - Skipping one defeats the purpose
+2. **Run automated tools** - Never skip `npm audit` or linting if available
+3. **Severity must be justified** - Every rating needs evidence
+4. **Remediation is required** - Findings without fix suggestions are useless
+5. **Line references are required** - Point to exact files and lines
+6. **Never assume safety** - Verify, don't trust
 
 ## Output
 
@@ -161,9 +161,9 @@ Overall Score: [0-100]
 Risk Level: [CRITICAL | HIGH | MEDIUM | LOW]
 
 Top Findings:
-1. [CRITICAL] [description] — [file:line]
-2. [HIGH] [description] — [file:line]
-3. [HIGH] [description] — [file:line]
+1. [CRITICAL] [description] - [file:line]
+2. [HIGH] [description] - [file:line]
+3. [HIGH] [description] - [file:line]
 
 Full report: [inline below]
 ```

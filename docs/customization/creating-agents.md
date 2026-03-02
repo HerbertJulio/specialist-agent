@@ -4,7 +4,7 @@ You can extend Specialist Agent by creating your own agents tailored to your pro
 
 ## The Blueprint Pattern
 
-Every agent follows a **5-part blueprint**: Mission, Workflow, Output, Rules, and Handoff. This structure ensures agents behave predictably — they know what to do, how to do it, what to produce, what constraints to respect, and when to delegate to another agent. Following this pattern makes agents composable and reliable across any project.
+Every agent follows a **5-part blueprint**: Mission, Workflow, Output, Rules, and Handoff. This structure ensures agents behave predictably - they know what to do, how to do it, what to produce, what constraints to respect, and when to delegate to another agent. Following this pattern makes agents composable and reliable across any project.
 
 ## Agent File Structure
 
@@ -64,7 +64,7 @@ The `description` field determines **when Claude automatically delegates** to yo
 :::
 
 ::: tip Model Override
-Add `model: haiku` to the frontmatter to run the agent on the Haiku model — significantly cheaper per token. Use this for simpler tasks that don't need the full Sonnet/Opus capabilities.
+Add `model: haiku` to the frontmatter to run the agent on the Haiku model - significantly cheaper per token. Use this for simpler tasks that don't need the full Sonnet/Opus capabilities.
 :::
 
 ### Available Tools
@@ -165,7 +165,7 @@ tools: Read, Write, Edit, Glob, Grep
 ## Mission
 Quickly scaffold components with minimal token usage.
 
-## Rules (inline — no ARCHITECTURE.md read)
+## Rules (inline - no ARCHITECTURE.md read)
 - `<script setup lang="ts">`
 - defineProps<T>() and defineEmits<T>()
 - < 200 lines
@@ -179,6 +179,6 @@ Quickly scaffold components with minimal token usage.
 
 - Keep agents focused on **one responsibility**
 - Always reference `ARCHITECTURE.md` for consistency
-- Use `Bash` sparingly — prefer `Read`/`Write`/`Edit`
+- Use `Bash` sparingly - prefer `Read`/`Write`/`Edit`
 - Use `model: haiku` for simpler tasks to save tokens
 - Test your agent by asking Claude to use it: `"Use @my-agent to..."`

@@ -1,4 +1,4 @@
-# CLAUDE.md — Specialist Agent (Astro Pack)
+# CLAUDE.md - Specialist Agent (Astro Pack)
 
 ## About
 
@@ -12,7 +12,7 @@ Development toolkit for Astro 4+ projects with TypeScript. Includes AI agents, s
 
 ### Auto-Dispatch Rules
 
-You **MUST** automatically delegate to the correct agent based on the user's intent. Do NOT ask which agent to use — detect it from the request:
+You **MUST** automatically delegate to the correct agent based on the user's intent. Do NOT ask which agent to use - detect it from the request:
 
 | User intent | Agent |
 |-------------|-------|
@@ -41,7 +41,7 @@ If a task spans multiple agents, invoke them in sequence (e.g., @builder then @r
 - Content Collections (type-safe content with Zod schemas)
 - Islands: React/Vue/Svelte components with `client:*` directives
 - Vitest + Playwright
-- Zero JS by default — selective hydration
+- Zero JS by default - selective hydration
 
 ### Available Agents
 
@@ -90,7 +90,7 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`
 
 ### Key Patterns (details in docs/ARCHITECTURE.md)
 

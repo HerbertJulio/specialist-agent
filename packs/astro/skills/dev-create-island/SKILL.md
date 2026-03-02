@@ -1,6 +1,6 @@
 ---
 name: dev-create-island
-description: "Use when adding an interactive UI component that requires client-side JavaScript — creates a framework island with hydration strategy."
+description: "Use when adding an interactive UI component that requires client-side JavaScript - creates a framework island with hydration strategy."
 user-invocable: true
 argument-hint: "[IslandName]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
@@ -14,7 +14,7 @@ Island: $ARGUMENTS
 
 1. Read `docs/ARCHITECTURE.md` section 5.2.
 
-2. Confirm interactivity is required — if the component is purely presentational, use `/dev-create-component` instead.
+2. Confirm interactivity is required - if the component is purely presentational, use `/dev-create-component` instead.
 
 3. Determine the framework (based on project preference):
    - **React** -> `src/islands/IslandName.tsx`
@@ -22,11 +22,11 @@ Island: $ARGUMENTS
    - **Svelte** -> `src/islands/IslandName.svelte`
 
 4. Choose hydration strategy:
-   - `client:load` — immediately visible + interactive (above the fold)
-   - `client:idle` — not urgent, hydrate when browser is idle
-   - `client:visible` — below the fold, hydrate when scrolled into view
-   - `client:media="(max-width: 768px)"` — only on specific viewports
-   - `client:only="react"` — skip SSR entirely (browser-API-dependent)
+   - `client:load` - immediately visible + interactive (above the fold)
+   - `client:idle` - not urgent, hydrate when browser is idle
+   - `client:visible` - below the fold, hydrate when scrolled into view
+   - `client:media="(max-width: 768px)"` - only on specific viewports
+   - `client:only="react"` - skip SSR entirely (browser-API-dependent)
 
 5. Create the island with typed props (React example):
 

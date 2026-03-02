@@ -3,47 +3,50 @@ layout: home
 
 hero:
   name: Specialist Agent
-  text: Agentes de IA para Claude Code
-  tagline: 27+ agentes especializados, 21 skills e 7 framework packs — construa, revise, depure e envie código de produção com qualquer stack.
+  text: Seu Time de Desenvolvimento AI
+  tagline: 27+ agentes especializados que constroem, revisam, depuram e entregam código de produção. Funciona com Claude Code, Cursor, VS Code e mais.
   actions:
     - theme: brand
-      text: Comece Aqui →
-      link: /pt-BR/guide/introduction
+      text: Começar
+      link: /pt-BR/guide/quick-start
     - theme: alt
-      text: Ver no GitHub
-      link: https://github.com/HerbertJulio/specialist-agent
+      text: Por que Specialist Agent?
+      link: /pt-BR/guide/introduction
 
 features:
-  - icon: 🚀
-    title: "@starter"
-    details: Crie novos projetos do zero — qualquer frontend + qualquer backend + qualquer banco de dados, totalmente configurado.
   - icon: 🏗️
-    title: "@builder"
-    details: Crie módulos, componentes, serviços e testes — detecta automaticamente o que você precisa a partir do seu framework pack.
-  - icon: ✅
-    title: "@reviewer"
-    details: Review 3-em-1 — spec compliance, qualidade de código e arquitetura em uma única passada.
-  - icon: 🔄
-    title: "@migrator"
-    details: Migre padrões legados para arquitetura moderna em 6 fases com aprovação em cada etapa.
+    title: 27+ Agentes Especializados
+    details: "Do @builder para scaffolding ao @security para auditorias OWASP. Cada agente tem expertise profunda de domínio, não prompts genéricos."
+    link: /pt-BR/reference/agents
+    linkText: Ver agentes
   - icon: 🔍
-    title: "@doctor"
-    details: Rastreie bugs através de Component → State → Adapter → Service → API para encontrar causas raiz.
+    title: Code Review 3-em-1
+    details: "Conformidade com spec, qualidade de código e aderência arquitetural — verificados em uma única passada. Vereditos baseados em evidências, não 'LGTM'."
+    link: /pt-BR/scenarios/code-review
+    linkText: Saiba como
   - icon: 🧪
-    title: "@tdd"
-    details: "Test-Driven Development de verdade — RED → GREEN → REFACTOR com evidência. Sem código sem teste falhando primeiro."
-  - icon: 📋
-    title: "@planner + @executor"
-    details: "Planejamento adaptativo + execução com checkpoints git e rollback automático."
-  - icon: 💼
-    title: Agentes Especialistas
-    details: "@api, @finance, @cloud, @security, @designer, @data, @devops, @tester, @legal — especialistas de domínio para qualquer projeto."
-  - icon: 🪶
-    title: Framework Packs
-    details: "Next.js, React, SvelteKit, Vue 3 — agentes, skills e padrões de arquitetura para cada stack."
+    title: TDD Real, Não Baseado em Confiança
+    details: "RED → GREEN → REFACTOR com output real dos testes como prova. Sem 'os testes devem passar' — o agente executa e mostra os resultados."
+    link: /pt-BR/reference/skills
+    linkText: Ver skills
+  - icon: ⚡
+    title: 60-80% Mais Barato com Lite Mode
+    details: "Todo agente tem uma variante Lite usando Haiku. Iteração rápida por uma fração do custo, modo Full quando importa."
+    link: /pt-BR/guide/benchmark
+    linkText: Ver benchmarks
+  - icon: 📦
+    title: 7 Framework Packs
+    details: "Next.js, React, Vue 3, SvelteKit, Angular, Astro, Nuxt — cada um com agentes, skills e padrões de arquitetura sob medida para seu stack."
+    link: /pt-BR/guide/introduction#framework-support
+    linkText: Explorar packs
+  - icon: 🛡️
+    title: Governança Embutida
+    details: "Tabelas anti-racionalização, protocolo de verificação, rastreamento de custo e memória de sessão. Os agentes não podem cortar caminho."
+    link: /pt-BR/reference/hooks
+    linkText: Saiba mais
 ---
 
-<div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:32px 0">
+<div class="badges-bar">
   <a href="https://www.npmjs.com/package/specialist-agent"><img src="https://img.shields.io/npm/v/specialist-agent?color=cb0000&label=npm" alt="npm version" /></a>
   <a href="https://www.npmjs.com/package/specialist-agent"><img src="https://img.shields.io/npm/dm/specialist-agent?color=cb0000&label=downloads" alt="npm downloads" /></a>
   <a href="https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml"><img src="https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>

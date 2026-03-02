@@ -1,6 +1,6 @@
 # Hooks Reference
 
-Hooks are lifecycle scripts that run at key moments during your development session. They automate pre-checks, track metrics, handle errors, and generate session summaries — all without manual intervention.
+Hooks are lifecycle scripts that run at key moments during your development session. They automate pre-checks, track metrics, handle errors, and generate session summaries - all without manual intervention.
 
 ## Quick Reference
 
@@ -102,10 +102,10 @@ Runs when a new Claude Code session starts.
 
 **What it does:**
 
-1. **Validates project setup** — checks for `.claude/` directory and `CLAUDE.md`
-2. **Initializes metrics** — creates `.claude/metrics/current-session.json` with empty counters
-3. **Creates restore point** — tags current git commit as `restore-point/session-{timestamp}`
-4. **Loads session memory** — displays recent decisions from `.claude/session-memory.json`
+1. **Validates project setup** - checks for `.claude/` directory and `CLAUDE.md`
+2. **Initializes metrics** - creates `.claude/metrics/current-session.json` with empty counters
+3. **Creates restore point** - tags current git commit as `restore-point/session-{timestamp}`
+4. **Loads session memory** - displays recent decisions from `.claude/session-memory.json`
 
 **Configuration:**
 
@@ -145,10 +145,10 @@ Runs before `@planner` creates an implementation plan.
 
 **What it does:**
 
-1. **Checks architecture file** — looks for `ARCHITECTURE.md` in `docs/`, root, or `.claude/`
-2. **Checks git state** — reports current branch, uncommitted changes, and recent commits
-3. **Detects framework** — reads `package.json` to identify Vue, React, Next.js, SvelteKit, Angular, Astro, Nuxt, TypeScript, and test runners
-4. **Scans project size** — counts source files and classifies as Small/Medium/Large
+1. **Checks architecture file** - looks for `ARCHITECTURE.md` in `docs/`, root, or `.claude/`
+2. **Checks git state** - reports current branch, uncommitted changes, and recent commits
+3. **Detects framework** - reads `package.json` to identify Vue, React, Next.js, SvelteKit, Angular, Astro, Nuxt, TypeScript, and test runners
+4. **Scans project size** - counts source files and classifies as Small/Medium/Large
 
 **Input:** Accepts feature name via `PLAN_FEATURE` env var or CLI argument.
 
@@ -194,9 +194,9 @@ Runs after each task completes (from `@executor` or manual work).
 
 **What it does:**
 
-1. **Updates session metrics** — records task in `.claude/metrics/current-session.json`
-2. **Logs task summary** — shows status, agent, tokens, duration, and file changes
-3. **Shows running totals** — displays cumulative tasks, tokens, and estimated cost
+1. **Updates session metrics** - records task in `.claude/metrics/current-session.json`
+2. **Logs task summary** - shows status, agent, tokens, duration, and file changes
+3. **Shows running totals** - displays cumulative tasks, tokens, and estimated cost
 
 **Input:** Accepts task data via environment variables or CLI arguments:
 
@@ -253,10 +253,10 @@ Runs before `@reviewer` starts a code review.
 
 **What it does:**
 
-1. **Runs linter** — executes `npm run lint` and reports pass/fail
-2. **Runs TypeScript check** — executes `npx tsc --noEmit` and counts errors
-3. **Identifies changed files** — lists staged, unstaged, and branch-diff files
-4. **Quick test check** — lists available test files (with 10s timeout)
+1. **Runs linter** - executes `npm run lint` and reports pass/fail
+2. **Runs TypeScript check** - executes `npx tsc --noEmit` and counts errors
+3. **Identifies changed files** - lists staged, unstaged, and branch-diff files
+4. **Quick test check** - lists available test files (with 10s timeout)
 
 **Input:** Accepts review scope via `REVIEW_SCOPE` env var or CLI argument.
 
@@ -306,10 +306,10 @@ Runs after `@reviewer` completes a code review.
 
 **What it does:**
 
-1. **Logs review summary** — shows verdict (Approved, Caveats, Rejected) and a quality score
-2. **Updates session metrics** — adds review data to the current session
-3. **Saves review record** — writes a timestamped JSON file to `.claude/metrics/reviews/`
-4. **Suggests next actions** — provides guidance based on the verdict
+1. **Logs review summary** - shows verdict (Approved, Caveats, Rejected) and a quality score
+2. **Updates session metrics** - adds review data to the current session
+3. **Saves review record** - writes a timestamped JSON file to `.claude/metrics/reviews/`
+4. **Suggests next actions** - provides guidance based on the verdict
 
 **Input:** Accepts review data via environment variables or CLI arguments:
 
@@ -363,9 +363,9 @@ Runs when an agent encounters an error.
 
 **What it does:**
 
-1. **Logs error to metrics** — records agent, message, file, line, and task in session data
-2. **Suggests recovery** — lists available checkpoints and restore points for rollback
-3. **Provides guidance** — gives error-specific suggestions based on the error message:
+1. **Logs error to metrics** - records agent, message, file, line, and task in session data
+2. **Suggests recovery** - lists available checkpoints and restore points for rollback
+3. **Provides guidance** - gives error-specific suggestions based on the error message:
    - TypeScript errors: run `tsc --noEmit`, check imports
    - Test errors: run `npm test`, check assertions
    - Syntax errors: check brackets, validate JSON/YAML
@@ -434,11 +434,11 @@ Runs when a session ends (manually triggered or detected).
 
 **What it does:**
 
-1. **Generates session summary** — overview with duration, status, and task counts
-2. **Calculates final metrics** — tokens, cost, files changed, agents and skills used
-3. **Displays cost comparison** — estimates savings vs alternative tooling
-4. **Saves to history** — writes full session data to `.claude/metrics/history/`
-5. **Preserves session file** — keeps `current-session.json` for manual review
+1. **Generates session summary** - overview with duration, status, and task counts
+2. **Calculates final metrics** - tokens, cost, files changed, agents and skills used
+3. **Displays cost comparison** - estimates savings vs alternative tooling
+4. **Saves to history** - writes full session data to `.claude/metrics/history/`
+5. **Preserves session file** - keeps `current-session.json` for manual review
 
 **Configuration:**
 
@@ -559,7 +559,7 @@ async function main() {
     const result = execSync('npm run lint', { encoding: 'utf-8' });
     console.log('✓ Lint passed');
   } catch (err) {
-    // Log but don't crash — hooks should not block the session
+    // Log but don't crash - hooks should not block the session
     console.log('⚠ Lint failed, continuing anyway');
   }
 }
@@ -580,7 +580,7 @@ main().catch(console.error);
 
 ## Native Claude Code Hooks
 
-In addition to the lifecycle hooks above, Specialist Agent provides **4 native hooks** that integrate directly with Claude Code's hook system. These execute automatically via `.claude/settings.json` — no manual triggering needed.
+In addition to the lifecycle hooks above, Specialist Agent provides **4 native hooks** that integrate directly with Claude Code's hook system. These execute automatically via `.claude/settings.json` - no manual triggering needed.
 
 ### Quick Reference
 
@@ -660,7 +660,7 @@ Edit `.specialist-agent/hooks/native/security-config.json` to:
 
 **Event:** `UserPromptSubmit`
 
-Analyzes your prompt and suggests the best specialist agent. Never forces — only provides context.
+Analyzes your prompt and suggests the best specialist agent. Never forces - only provides context.
 
 **How it works:**
 1. Tokenizes your prompt and matches against keyword groups for each agent

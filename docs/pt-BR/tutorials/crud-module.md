@@ -4,7 +4,7 @@
 Os exemplos abaixo utilizam os padroes do **pack Vue 3**. Cada framework pack (React, Next.js, SvelteKit) fornece padroes equivalentes adaptados ao seu ecossistema. Veja [Framework Packs](/pt-BR/guide/introduction#como-os-packs-funcionam) para detalhes.
 :::
 
-Este tutorial guia voce na construcao de um modulo completo de **Pedidos** para um app de e-commerce — do zero ate uma funcionalidade totalmente funcional com listagem, criacao, edicao e exclusao.
+Este tutorial guia voce na construcao de um modulo completo de **Pedidos** para um app de e-commerce - do zero ate uma funcionalidade totalmente funcional com listagem, criacao, edicao e exclusao.
 
 ## O Que Voce Vai Construir
 
@@ -28,7 +28,7 @@ graph LR
     style R fill:#42b883,color:#fff
 ```
 
-## Passo 1 — Criar a Estrutura do Modulo
+## Passo 1 - Criar a Estrutura do Modulo
 
 ```bash
 mkdir -p src/modules/orders/{types,adapters,services,composables,stores,components,views,__tests__}
@@ -48,7 +48,7 @@ src/modules/orders/
 └── index.ts
 ```
 
-## Passo 2 — Definir os Types (Resposta da API)
+## Passo 2 - Definir os Types (Resposta da API)
 
 Este e o **formato exato** que a API retorna. Mantenha-o identico ao JSON.
 
@@ -102,10 +102,10 @@ export interface CreateOrderPayload {
 ```
 
 ::: tip Por que snake_case?
-O arquivo de types espelha a API exatamente. A maioria das APIs REST usa `snake_case`. O codigo da sua aplicacao usara `camelCase` — o adapter cuida da conversao.
+O arquivo de types espelha a API exatamente. A maioria das APIs REST usa `snake_case`. O codigo da sua aplicacao usara `camelCase` - o adapter cuida da conversao.
 :::
 
-## Passo 3 — Definir os Contracts (Interface da Aplicacao)
+## Passo 3 - Definir os Contracts (Interface da Aplicacao)
 
 Isto e o que seus **componentes realmente usam**. Limpo, tipado, camelCase.
 
@@ -153,9 +153,9 @@ export interface OrderListResult {
 }
 ```
 
-## Passo 4 — Construir o Adapter
+## Passo 4 - Construir o Adapter
 
-O adapter e uma **funcao pura** — sem HTTP, sem efeitos colaterais. Ele converte entre os dois formatos.
+O adapter e uma **funcao pura** - sem HTTP, sem efeitos colaterais. Ele converte entre os dois formatos.
 
 ```typescript
 // src/modules/orders/adapters/orders-adapter.ts
@@ -224,7 +224,7 @@ export const ordersAdapter = {
 Sempre crie ambas as direcoes: **entrada** (API → App) para leituras e **saida** (App → API) para escritas. Isso mantem o adapter como o unico ponto de conversao.
 :::
 
-## Passo 5 — Construir o Service
+## Passo 5 - Construir o Service
 
 O service faz chamadas HTTP. **Nada mais.** Sem try/catch, sem transformacao.
 
@@ -257,7 +257,7 @@ export const ordersService = {
 }
 ```
 
-## Passo 6 — Construir os Composables
+## Passo 6 - Construir os Composables
 
 ### Composable de listagem (query)
 
@@ -358,9 +358,9 @@ export function useCancelOrder() {
 }
 ```
 
-## Passo 7 — Construir a Store (Estado do Cliente)
+## Passo 7 - Construir a Store (Estado do Cliente)
 
-A store armazena **apenas estado da UI** — nao dados do servidor.
+A store armazena **apenas estado da UI** - nao dados do servidor.
 
 ```typescript
 // src/modules/orders/stores/orders-store.ts
@@ -412,7 +412,7 @@ export const useOrdersStore = defineStore('orders', () => {
 })
 ```
 
-## Passo 8 — Construir os Componentes
+## Passo 8 - Construir os Componentes
 
 ### OrdersTable.vue
 
@@ -526,7 +526,7 @@ const statuses: Array<{ value: OrderStatus; label: string }> = [
 </template>
 ```
 
-## Passo 9 — Construir a View
+## Passo 9 - Construir a View
 
 A view **compoe** componentes e os conecta aos composables e stores.
 
@@ -579,7 +579,7 @@ const { cancelOrder, isCancelling } = useCancelOrder()
 </template>
 ```
 
-## Passo 10 — Registrar a Rota
+## Passo 10 - Registrar a Rota
 
 ```typescript
 // src/router/index.ts (adicione ao array de rotas)
@@ -595,12 +595,12 @@ const { cancelOrder, isCancelling } = useCancelOrder()
 Sempre use `() => import(...)` para componentes de rota. Isso cria chunks separados e reduz o tamanho do bundle inicial.
 :::
 
-## Passo 11 — Criar o Barrel Export
+## Passo 11 - Criar o Barrel Export
 
 ```typescript
 // src/modules/orders/index.ts
 
-// API publica — exporte apenas o que outras partes da app precisam
+// API publica - exporte apenas o que outras partes da app precisam
 export type { Order, OrderStatus, Address } from './types/orders.contracts'
 export { useOrdersList } from './composables/useOrdersList'
 export { useCreateOrder } from './composables/useCreateOrder'
@@ -651,6 +651,6 @@ O agente segue os mesmos passos deste tutorial, lendo as convencoes do seu `ARCH
 
 ## Proximos Passos
 
-- [Tutorial da Camada de Service](/pt-BR/tutorials/service-layer) — Mergulho profundo em types + adapter + service
-- [Tutorial de Formularios](/pt-BR/tutorials/forms) — Construa um formulario de criacao com validacao Zod
-- [Paginacao + Filtros](/pt-BR/tutorials/pagination-filters) — Padroes avancados de listagem
+- [Tutorial da Camada de Service](/pt-BR/tutorials/service-layer) - Mergulho profundo em types + adapter + service
+- [Tutorial de Formularios](/pt-BR/tutorials/forms) - Construa um formulario de criacao com validacao Zod
+- [Paginacao + Filtros](/pt-BR/tutorials/pagination-filters) - Padroes avancados de listagem

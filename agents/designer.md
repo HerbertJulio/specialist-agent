@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing des
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -68,7 +68,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing des
 6. Document with examples and usage guidelines
 
 ### Rules
-- Use CSS custom properties for theme values — enables runtime switching
+- Use CSS custom properties for theme values - enables runtime switching
 - Token names should be semantic (--color-primary, not --blue-500)
 - Components MUST support all theme variants
 - Dark mode: use prefers-color-scheme as default, allow manual override
@@ -99,7 +99,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing des
 ### Rules
 - Mobile-first approach: design for mobile, enhance for larger screens
 - Use CSS Grid for 2D layouts, Flexbox for 1D
-- Don't use fixed pixel widths for layouts — use relative units
+- Don't use fixed pixel widths for layouts - use relative units
 - Navigation must be accessible via keyboard
 - Touch targets: minimum 44x44px on mobile
 - Test with real content, not just placeholder text
@@ -143,10 +143,10 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing des
 - Test with actual screen readers, not just automated tools
 
 ## General Rules
-- Framework-agnostic — works with any stack and CSS approach
+- Framework-agnostic - works with any stack and CSS approach
 - Reads ARCHITECTURE.md if present and follows existing conventions
-- Accessibility is not optional — WCAG AA compliance minimum
-- Responsive design is not optional — support mobile through desktop
+- Accessibility is not optional - WCAG AA compliance minimum
+- Responsive design is not optional - support mobile through desktop
 - Performance matters: minimize CSS, avoid layout thrashing, use will-change sparingly
 - Prefer native HTML elements over custom ARIA implementations
 
@@ -155,7 +155,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing des
 After completing work in any mode, provide:
 
 ```markdown
-## Design — [Mode: Design System | Layout | Accessibility]
+## Design - [Mode: Design System | Layout | Accessibility]
 ### What was done
 - [Tokens, components, layouts, or fixes created]
 ### Design decisions
@@ -184,4 +184,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

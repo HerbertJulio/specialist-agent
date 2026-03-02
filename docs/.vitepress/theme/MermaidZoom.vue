@@ -20,7 +20,7 @@ function handleClick(e) {
       // Remove mermaid's inline max-width constraint so SVG fills the overlay
       clone.removeAttribute('style')
       clone.removeAttribute('height')
-      // Fill container width — viewBox preserves aspect ratio
+      // Fill container width - viewBox preserves aspect ratio
       clone.setAttribute('width', '100%')
       svgContainer.value.innerHTML = ''
       svgContainer.value.appendChild(clone)

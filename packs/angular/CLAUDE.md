@@ -12,7 +12,7 @@ Development toolkit for Angular projects with TypeScript. Includes AI agents, sk
 
 ### Auto-Dispatch Rules
 
-You **MUST** automatically delegate to the correct agent based on the user's intent. Do NOT ask which agent to use — detect it from the request:
+You **MUST** automatically delegate to the correct agent based on the user's intent. Do NOT ask which agent to use - detect it from the request:
 
 | User intent | Agent |
 |-------------|-------|
@@ -91,7 +91,7 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`
 
 ### Key Patterns (details in docs/ARCHITECTURE.md)
 

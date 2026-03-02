@@ -1,12 +1,12 @@
 ---
 name: commit
-description: "Use when changes are ready to commit — generates conventional commit messages with scope detection and validation."
+description: "Use when changes are ready to commit - generates conventional commit messages with scope detection and validation."
 user-invocable: true
 argument-hint: "[optional message override]"
 allowed-tools: Read, Bash, Glob, Grep
 ---
 
-# /commit — Smart Commit
+# /commit - Smart Commit
 
 Generate and execute conventional commits with automatic scope detection and pre-commit validation.
 
@@ -66,7 +66,7 @@ Rules:
 - Type: lowercase (`feat`, `fix`, `refactor`, `test`, `docs`, `chore`, `perf`, `ci`, `style`)
 - Scope: optional, lowercase, max 15 chars
 - Description: imperative mood, lowercase start, no period, max 72 chars
-- Body: optional, for complex changes — wrap at 72 chars
+- Body: optional, for complex changes - wrap at 72 chars
 
 If $ARGUMENTS provided, use it as description override but still validate format.
 
@@ -142,9 +142,9 @@ Files: 2 changed (+8 / -3)
 
 ## Rules
 
-1. **Always validate before committing** — Check for secrets and debug code
-2. **Follow conventional commits** — type(scope): description
-3. **Imperative mood** — "add feature" not "added feature"
-4. **Never commit .env files** — Block and warn
-5. **Max 72 chars** — Subject line must fit in git log
-6. **One logical change per commit** — Don't mix features
+1. **Always validate before committing** - Check for secrets and debug code
+2. **Follow conventional commits** - type(scope): description
+3. **Imperative mood** - "add feature" not "added feature"
+4. **Never commit .env files** - Block and warn
+5. **Max 72 chars** - Subject line must fit in git log
+6. **One logical change per commit** - Don't mix features

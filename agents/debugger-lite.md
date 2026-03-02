@@ -1,11 +1,11 @@
 ---
 name: debugger
-description: "Use when encountering any bug, test failure, unexpected behavior, or error — before proposing fixes."
+description: "Use when encountering any bug, test failure, unexpected behavior, or error - before proposing fixes."
 model: haiku
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-# @debugger (Lite) — 4-Phase Debugging
+# @debugger (Lite) - 4-Phase Debugging
 
 ## Phases
 

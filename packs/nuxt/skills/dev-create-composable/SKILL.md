@@ -1,6 +1,6 @@
 ---
 name: dev-create-composable
-description: "Use when adding server state management or shared logic — creates an auto-imported composable with useFetch/useAsyncData."
+description: "Use when adding server state management or shared logic - creates an auto-imported composable with useFetch/useAsyncData."
 user-invocable: true
 argument-hint: "[composable-name]"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep

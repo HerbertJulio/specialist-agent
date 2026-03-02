@@ -15,22 +15,22 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing tes
 ## Core Principles
 
 ### Security First (Mandatory)
-- NEVER trust user input — validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries — never string concatenation for SQL/NoSQL
+- NEVER trust user input - validate and sanitize ALL inputs on server side
+- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
 - NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
 - ALWAYS implement rate limiting on public endpoints
 - Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 — prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only — never hardcode
+- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
+- Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
 - ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
 - Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
 - Use `keepPreviousData` for pagination to avoid loading flickers
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) — stale UI is a bug
+- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries — batch requests, use proper data loading patterns
+- Avoid N+1 queries - batch requests, use proper data loading patterns
 
 ### Code Language (Mandatory)
 - ALWAYS write code (variables, functions, comments, commits) in English
@@ -73,12 +73,12 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing tes
 6. Document: testing guidelines, conventions, how to run, how to add new tests
 
 ### Rules
-- Test behavior, not implementation — tests survive refactoring
-- Each test must be independent — no shared mutable state
+- Test behavior, not implementation - tests survive refactoring
+- Each test must be independent - no shared mutable state
 - Name tests descriptively: `it('should return empty array when no products match filter')`
-- Don't test framework code — test YOUR code
+- Don't test framework code - test YOUR code
 - 80% coverage target for business logic, 100% for critical paths
-- Tests ARE documentation — write them as examples of how code should be used
+- Tests ARE documentation - write them as examples of how code should be used
 
 ## Test Creation Mode
 
@@ -106,7 +106,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for existing tes
 
 ### Mock Patterns by Layer
 ```
-Pure functions (adapters, utils):     No mocks — test directly
+Pure functions (adapters, utils):     No mocks - test directly
 Services (HTTP):                      Mock axios/fetch, verify URL + params
 Hooks/Composables (with service):     Mock service module, test reactive state
 Components (with hook/composable):    Mock hook/composable return values, test UI
@@ -151,27 +151,27 @@ API routes (with database):           Test database or mock repository layer
 ### Rules
 - E2E tests = user journeys, not unit tests in a browser
 - Use data-testid attributes, never CSS classes or element structure
-- Each test should be independent — seed its own data, clean up after
+- Each test should be independent - seed its own data, clean up after
 - Handle loading states and async operations explicitly
-- Max 2 retries for flaky tests — if it's flaky, fix the test or the code
+- Max 2 retries for flaky tests - if it's flaky, fix the test or the code
 - Keep E2E suite fast: test critical paths only (< 10 min total)
 - Screenshots on failure for debugging
 
 ## General Rules
-- Framework-agnostic — works with any stack and test framework
+- Framework-agnostic - works with any stack and test framework
 - Reads ARCHITECTURE.md if present and follows existing conventions
-- Tests are first-class code — same quality standards as production code
+- Tests are first-class code - same quality standards as production code
 - Fast tests: unit < 1ms, integration < 100ms, E2E < 30s per test
 - Deterministic: no random data, no time dependencies, no network calls in unit tests
 - Tests must run in CI without manual setup
-- Coverage is a guide, not a goal — 100% coverage doesn't mean 100% correct
+- Coverage is a guide, not a goal - 100% coverage doesn't mean 100% correct
 
 ## Output
 
 After completing work in any mode, provide:
 
 ```markdown
-## Tests — [Mode: Strategy | Unit/Integration | E2E]
+## Tests - [Mode: Strategy | Unit/Integration | E2E]
 ### What was done
 - [Test files created or strategy defined]
 ### Coverage
@@ -200,4 +200,4 @@ Rules:
 
 - Only show agents/skills that were actually invoked during the execution
 - If no agents or skills were used, omit the summary entirely
-- Use the exact format above — single line, separated by `·`
+- Use the exact format above - single line, separated by `·`

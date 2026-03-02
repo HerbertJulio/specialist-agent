@@ -6,7 +6,7 @@ argument-hint: "[what to remember]"
 allowed-tools: Read, Write
 ---
 
-# /remember — Save to Session Memory
+# /remember - Save to Session Memory
 
 Save decisions, preferences, and lessons that persist across sessions.
 
@@ -152,7 +152,7 @@ This will be recalled in future sessions.
 
 ## Rules
 
-1. **Extract key info** — Don't store raw text
-2. **Categorize correctly** — Decision vs preference vs pattern
-3. **No duplicates** — Update existing if same topic
-4. **No secrets** — Never store credentials
+1. **Extract key info** - Don't store raw text
+2. **Categorize correctly** - Decision vs preference vs pattern
+3. **No duplicates** - Update existing if same topic
+4. **No secrets** - Never store credentials

@@ -20,22 +20,34 @@ export default withMermaid(defineConfig({
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
-    ['meta', { property: 'og:title', content: 'Specialist Agent' }],
-    ['meta', { property: 'og:description', content: 'Your AI development team - 27+ specialized agents that build, review, debug, and ship production code.' }],
-    ['meta', { property: 'og:image', content: 'https://specialistagent.com.br/social-preview.png' }],
+
+    // Open Graph - Facebook, LinkedIn, WhatsApp
+    ['meta', { property: 'og:title', content: 'Specialist Agent - Your AI Development Team' }],
+    ['meta', { property: 'og:description', content: '27+ specialized AI agents and 21 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode across 7 framework packs.' }],
+    ['meta', { property: 'og:image', content: 'https://specialistagent.com.br/social-preview.svg' }],
     ['meta', { property: 'og:image:width', content: '1200' }],
-    ['meta', { property: 'og:image:height', content: '600' }],
-    ['meta', { property: 'og:image:type', content: 'image/png' }],
+    ['meta', { property: 'og:image:height', content: '630' }],
+    ['meta', { property: 'og:image:type', content: 'image/svg+xml' }],
+    ['meta', { property: 'og:image:alt', content: 'Specialist Agent - AI agents for any framework, any stack' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:url', content: 'https://specialistagent.com.br' }],
     ['meta', { property: 'og:site_name', content: 'Specialist Agent' }],
     ['meta', { property: 'og:locale', content: 'en_US' }],
+    ['meta', { property: 'og:locale:alternate', content: 'pt_BR' }],
+
+    // Twitter / X
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:title', content: 'Specialist Agent' }],
-    ['meta', { name: 'twitter:description', content: 'Your AI development team - 27+ specialized agents that build, review, debug, and ship production code.' }],
-    ['meta', { name: 'twitter:image', content: 'https://specialistagent.com.br/social-preview.png' }],
-    ['meta', { name: 'description', content: 'Your AI development team - 27+ specialized agents that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, and more.' }],
-    ['meta', { name: 'keywords', content: 'ai agents, claude code, specialist agent, code review, debugging, development tools, vue, react, nextjs, sveltekit, angular, astro, nuxt' }],
+    ['meta', { name: 'twitter:title', content: 'Specialist Agent - Your AI Development Team' }],
+    ['meta', { name: 'twitter:description', content: '27+ AI agents and 21 skills that build, review, debug, and ship production code. Any framework, any stack.' }],
+    ['meta', { name: 'twitter:image', content: 'https://specialistagent.com.br/social-preview-twitter.svg' }],
+    ['meta', { name: 'twitter:image:alt', content: 'Specialist Agent - AI agents for any framework, any stack' }],
+
+    // SEO
+    ['meta', { name: 'description', content: '27+ specialized AI agents and 21 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt.' }],
+    ['meta', { name: 'keywords', content: 'ai agents, claude code, specialist agent, code review, debugging, development tools, ai coding assistant, cursor ai, vscode ai, windsurf, codex, opencode, vue, react, nextjs, sveltekit, angular, astro, nuxt, tdd, pair programming, code generation' }],
+    ['meta', { name: 'author', content: 'Herbert Julio' }],
+    ['meta', { name: 'robots', content: 'index, follow' }],
+    ['link', { rel: 'canonical', href: 'https://specialistagent.com.br' }],
     ...gaHead,
   ],
 
@@ -53,6 +65,37 @@ export default withMermaid(defineConfig({
           { text: 'Guia', link: '/pt-BR/guide/introduction' },
           { text: 'Cenários', link: '/pt-BR/scenarios/' },
           { text: 'Referência', link: '/pt-BR/reference/agents' },
+          {
+            text: 'Ecossistema',
+            items: [
+              {
+                text: 'Plataformas',
+                items: [
+                  { text: 'Claude Code', link: '/pt-BR/guide/installation' },
+                  { text: 'Cursor', link: '/pt-BR/guide/install-cursor' },
+                  { text: 'VS Code', link: '/pt-BR/guide/install-vscode' },
+                  { text: 'Windsurf', link: '/pt-BR/guide/install-windsurf' },
+                  { text: 'Codex', link: '/pt-BR/guide/install-codex' },
+                  { text: 'OpenCode', link: '/pt-BR/guide/install-opencode' },
+                ],
+              },
+              {
+                text: 'Integrações',
+                items: [
+                  { text: 'Servidores MCP', link: '/pt-BR/guide/mcp-integrations' },
+                  { text: 'Framework Packs', link: '/pt-BR/guide/architecture' },
+                ],
+              },
+              {
+                text: 'Comunidade',
+                items: [
+                  { text: 'GitHub', link: 'https://github.com/HerbertJulio/specialist-agent' },
+                  { text: 'npm', link: 'https://www.npmjs.com/package/specialist-agent' },
+                  { text: 'Sponsor', link: 'https://github.com/sponsors/HerbertJulio' },
+                ],
+              },
+            ],
+          },
         ],
 
         sidebar: {
@@ -60,13 +103,24 @@ export default withMermaid(defineConfig({
             {
               text: 'Começando',
               items: [
+                { text: 'Por que Specialist Agent', link: '/pt-BR/guide/why' },
                 { text: 'Introdução', link: '/pt-BR/guide/introduction' },
                 { text: 'Instalação', link: '/pt-BR/guide/installation' },
                 { text: 'Início Rápido', link: '/pt-BR/guide/quick-start' },
               ],
             },
             {
+              text: 'Conceitos',
+              items: [
+                { text: 'Arquitetura', link: '/pt-BR/guide/architecture' },
+                { text: 'Camadas', link: '/pt-BR/guide/layers' },
+                { text: 'Componentes', link: '/pt-BR/guide/components' },
+                { text: 'Composição de Agentes', link: '/pt-BR/guide/agent-composition' },
+              ],
+            },
+            {
               text: 'Guias por Plataforma',
+              collapsed: true,
               items: [
                 { text: 'Cursor', link: '/pt-BR/guide/install-cursor' },
                 { text: 'VS Code', link: '/pt-BR/guide/install-vscode' },
@@ -76,10 +130,10 @@ export default withMermaid(defineConfig({
               ],
             },
             {
-              text: 'Saiba Mais',
+              text: 'Avançado',
               items: [
+                { text: 'Integrações MCP', link: '/pt-BR/guide/mcp-integrations' },
                 { text: 'Performance e Custo', link: '/pt-BR/guide/benchmark' },
-                { text: 'Composição de Agentes', link: '/pt-BR/guide/agent-composition' },
                 { text: 'FAQ', link: '/pt-BR/guide/faq' },
               ],
             },
@@ -163,8 +217,8 @@ export default withMermaid(defineConfig({
         },
 
         footer: {
-          message: 'Publicado sob a Licença MIT.',
-          copyright: 'Copyright © 2025-presente',
+          message: 'Publicado sob a <a href="https://github.com/HerbertJulio/specialist-agent/blob/main/LICENSE" target="_blank">Licença MIT</a>.',
+          copyright: 'Copyright © 2025-presente <a href="https://github.com/HerbertJulio" target="_blank">Herbert Julio</a>',
         },
       },
     },
@@ -178,6 +232,37 @@ export default withMermaid(defineConfig({
       { text: 'Guide', link: '/guide/introduction' },
       { text: 'Scenarios', link: '/scenarios/' },
       { text: 'Reference', link: '/reference/agents' },
+      {
+        text: 'Ecosystem',
+        items: [
+          {
+            text: 'Platforms',
+            items: [
+              { text: 'Claude Code', link: '/guide/installation' },
+              { text: 'Cursor', link: '/guide/install-cursor' },
+              { text: 'VS Code', link: '/guide/install-vscode' },
+              { text: 'Windsurf', link: '/guide/install-windsurf' },
+              { text: 'Codex', link: '/guide/install-codex' },
+              { text: 'OpenCode', link: '/guide/install-opencode' },
+            ],
+          },
+          {
+            text: 'Integrations',
+            items: [
+              { text: 'MCP Servers', link: '/guide/mcp-integrations' },
+              { text: 'Framework Packs', link: '/guide/architecture' },
+            ],
+          },
+          {
+            text: 'Community',
+            items: [
+              { text: 'GitHub', link: 'https://github.com/HerbertJulio/specialist-agent' },
+              { text: 'npm', link: 'https://www.npmjs.com/package/specialist-agent' },
+              { text: 'Sponsor', link: 'https://github.com/sponsors/HerbertJulio' },
+            ],
+          },
+        ],
+      },
     ],
 
     sidebar: {
@@ -185,13 +270,24 @@ export default withMermaid(defineConfig({
         {
           text: 'Getting Started',
           items: [
+            { text: 'Why Specialist Agent', link: '/guide/why' },
             { text: 'Introduction', link: '/guide/introduction' },
             { text: 'Installation', link: '/guide/installation' },
             { text: 'Quick Start', link: '/guide/quick-start' },
           ],
         },
         {
+          text: 'Concepts',
+          items: [
+            { text: 'Architecture', link: '/guide/architecture' },
+            { text: 'Layers', link: '/guide/layers' },
+            { text: 'Components', link: '/guide/components' },
+            { text: 'Agent Composition', link: '/guide/agent-composition' },
+          ],
+        },
+        {
           text: 'Platform Guides',
+          collapsed: true,
           items: [
             { text: 'Cursor', link: '/guide/install-cursor' },
             { text: 'VS Code', link: '/guide/install-vscode' },
@@ -201,10 +297,10 @@ export default withMermaid(defineConfig({
           ],
         },
         {
-          text: 'Learn More',
+          text: 'Advanced',
           items: [
+            { text: 'MCP Integrations', link: '/guide/mcp-integrations' },
             { text: 'Performance & Cost', link: '/guide/benchmark' },
-            { text: 'Agent Composition', link: '/guide/agent-composition' },
             { text: 'FAQ', link: '/guide/faq' },
           ],
         },
@@ -284,7 +380,6 @@ export default withMermaid(defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/HerbertJulio/specialist-agent' },
-      { icon: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.23 27.23"><rect fill="currentColor" width="27.23" height="27.23" rx="2"/><polygon fill="#fff" points="5.8 21.75 13.66 21.75 13.66 8.35 16.78 8.35 16.78 21.75 21.43 21.75 21.43 5.48 5.8 5.48 5.8 21.75"/></svg>' }, link: 'https://www.npmjs.com/package/specialist-agent' },
     ],
 
     editLink: {
@@ -293,8 +388,8 @@ export default withMermaid(defineConfig({
     },
 
     footer: {
-      message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2025-present',
+      message: 'Released under the <a href="https://github.com/HerbertJulio/specialist-agent/blob/main/LICENSE" target="_blank">MIT License</a>.',
+      copyright: 'Copyright © 2025-present <a href="https://github.com/HerbertJulio" target="_blank">Herbert Julio</a>',
     },
 
     search: {
