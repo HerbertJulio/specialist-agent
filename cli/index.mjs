@@ -2,7 +2,7 @@
 
 import * as clack from '@clack/prompts'
 import { existsSync, mkdirSync, cpSync, rmSync, readdirSync, readFileSync, writeFileSync } from 'fs'
-import { execSync } from 'child_process'
+import { execFileSync } from 'child_process'
 import { join, dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 import { homedir } from 'os'
@@ -140,7 +140,11 @@ function setupNativeHooks(cwd, selectedHooks) {
   // 5. Deep-merge hooks (idempotent — skip if command already exists)
   if (!existing.hooks) existing.hooks = {}
 
+  // Reject prototype pollution keys
+  const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype'])
+
   for (const [eventName, entries] of Object.entries(filteredHooks)) {
+    if (UNSAFE_KEYS.has(eventName)) continue;
     if (!existing.hooks[eventName]) {
       existing.hooks[eventName] = entries
     } else {
@@ -663,8 +667,21 @@ async function manageCommunity() {
     }
 
     if (source.startsWith('http') || source.startsWith('git@')) {
-      // Git clone
-      const repoName = source.split('/').pop().replace('.git', '')
+      // Validate URL format to prevent injection
+      if (source.startsWith('http')) {
+        try { new URL(source) } catch {
+          console.error(`  ${RED}Invalid URL: ${source}${NC}`)
+          process.exit(1)
+        }
+      }
+
+      // Sanitize repo name — allow only safe characters
+      const rawName = source.split('/').pop().replace('.git', '')
+      const repoName = rawName.replace(/[^a-zA-Z0-9._-]/g, '')
+      if (!repoName) {
+        console.error(`  ${RED}Invalid repository name${NC}`)
+        process.exit(1)
+      }
       const targetDir = join(communityDir, repoName)
 
       if (existsSync(targetDir)) {
@@ -675,7 +692,8 @@ async function manageCommunity() {
 
       console.log(`  Cloning ${source}...`)
       try {
-        execSync(`git clone --depth 1 "${source}" "${targetDir}"`, { stdio: 'pipe' })
+        // Use execFileSync with array args to prevent command injection
+        execFileSync('git', ['clone', '--depth', '1', source, targetDir], { stdio: 'pipe' })
         console.log(`  ${GREEN}✓${NC} Installed "${repoName}" to community skills`)
       } catch (err) {
         console.error(`  ${RED}Failed to clone: ${err.message}${NC}`)
@@ -705,6 +723,12 @@ async function manageCommunity() {
     const skillName = args[2]
     if (!skillName) {
       console.error(`  ${RED}Usage: specialist-agent community remove <skill-name>${NC}`)
+      process.exit(1)
+    }
+
+    // Validate skill name — prevent path traversal (e.g. "../../etc")
+    if (!/^[a-zA-Z0-9._-]+$/.test(skillName)) {
+      console.error(`  ${RED}Invalid skill name. Use only letters, numbers, dots, hyphens, and underscores.${NC}`)
       process.exit(1)
     }
 

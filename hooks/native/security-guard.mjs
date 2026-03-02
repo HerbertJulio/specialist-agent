@@ -156,8 +156,8 @@ const RULES = [
     test: (cmd) => {
       // Block patterns like: export SECRET_KEY=actual_value, TOKEN=xxx command
       const secretPatterns = [
-        /\b\w*(API_KEY|SECRET|TOKEN|PASSWORD|CREDENTIALS|PRIVATE_KEY)\w*\s*=\s*['"][^'"]{8,}['"]/i,
-        /\bexport\s+\w*(API_KEY|SECRET|TOKEN|PASSWORD|CREDENTIALS|PRIVATE_KEY)\w*\s*=\s*\S{8,}/i,
+        /\b\w*(API_KEY|SECRET|TOKEN|PASSWORD|CREDENTIALS|PRIVATE_KEY)\w*\s*=\s*['"][^'"]{8,256}['"]/i,
+        /\bexport\s+\w*(API_KEY|SECRET|TOKEN|PASSWORD|CREDENTIALS|PRIVATE_KEY)\w*\s*=\s*\S{8,256}/i,
       ];
       return secretPatterns.some(p => p.test(cmd));
     },
@@ -184,9 +184,14 @@ export function evaluateCommand(command, config = {}) {
     // Check if rule is disabled in config
     if (enabledRules[rule.id]?.enabled === false) continue;
 
-    // Check allowlist
+    // Check allowlist — normalize whitespace and compare the full command
+    // to prevent bypass via chaining (e.g. "rm -rf dist; malicious")
     const allowlist = config?.allowlist || [];
-    const isAllowed = allowlist.some(pattern => command.includes(pattern));
+    const normalizedCmd = command.replace(/\s+/g, ' ').trim();
+    const isAllowed = allowlist.some(pattern => {
+      const normalizedPattern = pattern.replace(/\s+/g, ' ').trim();
+      return normalizedCmd === normalizedPattern;
+    });
     if (isAllowed) continue;
 
     // Test the rule

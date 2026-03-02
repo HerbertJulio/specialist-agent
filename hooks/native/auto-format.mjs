@@ -12,9 +12,9 @@
  * Output: silent (no additionalContext needed)
  */
 
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { existsSync } from 'fs';
-import { resolve, extname, normalize, join } from 'path';
+import { resolve, extname, normalize, join, sep, relative } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -90,7 +90,10 @@ export function isWithinProject(filePath, cwd) {
   try {
     const resolved = resolve(filePath);
     const normalizedCwd = resolve(cwd);
-    return resolved.startsWith(normalizedCwd);
+    // Use path.relative to prevent prefix-matching false positives
+    // e.g. "/projectsecrets" would pass startsWith("/project") but not this check
+    const rel = relative(normalizedCwd, resolved);
+    return !rel.startsWith('..') && !resolve(rel).startsWith(sep);
   } catch {
     return false;
   }
@@ -105,10 +108,10 @@ export function isWithinProject(filePath, cwd) {
  */
 export function formatFile(filePath, formatter, cwd) {
   try {
-    const quotedPath = `"${filePath}"`;
-
+    // Use execFileSync with argument array to prevent command injection
+    // filePath is never interpolated into a shell string
     if (formatter === 'prettier') {
-      execSync(`npx prettier --write ${quotedPath}`, {
+      execFileSync('npx', ['prettier', '--write', filePath], {
         cwd,
         encoding: 'utf-8',
         timeout: 10000,
@@ -118,7 +121,7 @@ export function formatFile(filePath, formatter, cwd) {
     }
 
     if (formatter === 'biome') {
-      execSync(`npx @biomejs/biome format --write ${quotedPath}`, {
+      execFileSync('npx', ['@biomejs/biome', 'format', '--write', filePath], {
         cwd,
         encoding: 'utf-8',
         timeout: 10000,
