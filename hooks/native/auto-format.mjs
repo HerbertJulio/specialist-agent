@@ -14,7 +14,7 @@
 
 import { execFileSync } from 'child_process';
 import { existsSync } from 'fs';
-import { resolve, extname, normalize, join, sep, relative } from 'path';
+import { resolve, extname, normalize, join, relative, isAbsolute } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -93,7 +93,7 @@ export function isWithinProject(filePath, cwd) {
     // Use path.relative to prevent prefix-matching false positives
     // e.g. "/projectsecrets" would pass startsWith("/project") but not this check
     const rel = relative(normalizedCwd, resolved);
-    return !rel.startsWith('..') && !resolve(rel).startsWith(sep);
+    return !rel.startsWith('..') && !isAbsolute(rel);
   } catch {
     return false;
   }
