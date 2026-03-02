@@ -1,61 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="280" height="228" viewBox="0 0 280 228" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" fill="none">
   <defs>
-    <linearGradient id="hg1" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="lh1" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0A1628"/>
       <stop offset="100%" stop-color="#1E3A5F"/>
     </linearGradient>
-    <linearGradient id="hg2" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="lh2" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#1E3A5F"/>
       <stop offset="100%" stop-color="#2B5EA7"/>
     </linearGradient>
-    <linearGradient id="hg3" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="lh3" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#4A7FCF"/>
       <stop offset="100%" stop-color="#CD7F32"/>
     </linearGradient>
-
-    <!-- Clip paths for 3D orbit illusion -->
-    <clipPath id="orbit-back">
-      <rect x="0" y="0" width="280" height="125"/>
-    </clipPath>
-    <clipPath id="orbit-front">
-      <rect x="0" y="125" width="280" height="103"/>
-    </clipPath>
+    <linearGradient id="hl" x1="0" y1="0" x2="0.85" y2="0.85">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.12"/>
+      <stop offset="60%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
   </defs>
 
-  <!-- Orbit ring -->
-  <ellipse cx="140" cy="125" rx="100" ry="30" fill="none" stroke="#4A7FCF" stroke-width="0.5" opacity="0.12" stroke-dasharray="4 6"/>
-
-  <!-- Particles BEHIND diamond (top half of orbit) -->
-  <g clip-path="url(#orbit-back)">
-    <circle r="6" fill="#4A7FCF" opacity="0.5">
-      <animateMotion dur="12s" repeatCount="indefinite" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
-    </circle>
-    <circle r="4.5" fill="#CD7F32" opacity="0.45">
-      <animateMotion dur="12s" repeatCount="indefinite" begin="4s" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
-    </circle>
-    <circle r="3.5" fill="#4A7FCF" opacity="0.35">
-      <animateMotion dur="12s" repeatCount="indefinite" begin="8s" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
-    </circle>
-  </g>
-
-  <!-- Main diamond logo -->
-  <g transform="translate(12, 4) scale(8)">
-    <path d="M16 26 L2 19 L16 12 L30 19 Z" fill="url(#hg1)" opacity="0.9"/>
-    <path d="M16 21 L2 14 L16 7 L30 14 Z" fill="url(#hg2)" opacity="0.9"/>
-    <path d="M16 16 L2 9 L16 2 L30 9 Z" fill="url(#hg3)" opacity="0.95"/>
-    <path d="M16 2 L2 9 L16 16 Z" fill="#fff" opacity="0.15"/>
-  </g>
-
-  <!-- Particles IN FRONT of diamond (bottom half of orbit) -->
-  <g clip-path="url(#orbit-front)">
-    <circle r="6" fill="#4A7FCF" opacity="0.5">
-      <animateMotion dur="12s" repeatCount="indefinite" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
-    </circle>
-    <circle r="4.5" fill="#CD7F32" opacity="0.45">
-      <animateMotion dur="12s" repeatCount="indefinite" begin="4s" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
-    </circle>
-    <circle r="3.5" fill="#4A7FCF" opacity="0.35">
-      <animateMotion dur="12s" repeatCount="indefinite" begin="8s" path="M140,125 A100,30 0 1,1 139.9,125 Z"/>
-    </circle>
+  <!-- Isometric card stack: matrix(0.707, -0.405, 0.707, 0.405, tx, ty) -->
+  <!-- simulates CSS rotateX(55deg) rotateZ(-45deg) -->
+  <g transform="translate(150, 145)">
+    <!-- Hooks (bottom card) -->
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#lh1)" opacity="0.85" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.15"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.5" letter-spacing="0.5">HOOKS</text>
+    </g>
+    <!-- Skills (middle card) -->
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 0)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#lh2)" opacity="0.9" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.2"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.5" letter-spacing="0.5">SKILLS</text>
+    </g>
+    <!-- Agents (top card) -->
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, -30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#lh3)" opacity="0.95" stroke="#CD7F32" stroke-width="0.5" stroke-opacity="0.25"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.7" letter-spacing="0.5">AGENTS</text>
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#hl)"/>
+    </g>
   </g>
 </svg>
