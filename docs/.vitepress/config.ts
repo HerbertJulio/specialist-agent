@@ -59,6 +59,7 @@ export default withMermaid(defineConfig({
     'pt-BR': {
       label: 'Português',
       lang: 'pt-BR',
+      link: 'https://specialistagent.com.br/pt-BR/',
       description: 'Seu time de desenvolvimento AI - 27+ agentes especializados',
       themeConfig: {
         nav: [
