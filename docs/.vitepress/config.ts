@@ -59,6 +59,7 @@ export default withMermaid(defineConfig({
     'pt-BR': {
       label: 'Português',
       lang: 'pt-BR',
+      link: 'https://specialistagent.com.br/pt-BR/',
       description: 'Seu time de desenvolvimento AI - 27+ agentes especializados',
       themeConfig: {
         nav: [
@@ -217,7 +218,7 @@ export default withMermaid(defineConfig({
         },
 
         footer: {
-          message: 'Publicado sob a <a href="https://github.com/HerbertJulio/specialist-agent/blob/main/LICENSE" target="_blank">Licença MIT</a>.',
+          message: 'Publicado sob a <a href="https://github.com/HerbertJulio/specialist-agent/blob/main/LICENSE" target="_blank">Licença MIT</a>. | <a href="/pt-BR/privacy-policy">Política de Privacidade</a>',
           copyright: 'Copyright © 2025-presente <a href="https://github.com/HerbertJulio" target="_blank">Herbert Julio</a>',
         },
       },
@@ -388,7 +389,7 @@ export default withMermaid(defineConfig({
     },
 
     footer: {
-      message: 'Released under the <a href="https://github.com/HerbertJulio/specialist-agent/blob/main/LICENSE" target="_blank">MIT License</a>.',
+      message: 'Released under the <a href="https://github.com/HerbertJulio/specialist-agent/blob/main/LICENSE" target="_blank">MIT License</a>. | <a href="/privacy-policy">Privacy Policy</a>',
       copyright: 'Copyright © 2025-present <a href="https://github.com/HerbertJulio" target="_blank">Herbert Julio</a>',
     },
 

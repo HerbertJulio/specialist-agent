@@ -25,18 +25,20 @@ export default {
   Layout,
   enhanceApp() {
     if (typeof window !== 'undefined') {
-      // Intercept built-in locale switcher links to open in a new tab
+      // On mobile/tablet: navigate in same tab instead of opening new tab
       document.addEventListener(
         'click',
         (e) => {
+          if (window.innerWidth >= 768) return
+
           const link = (e.target as HTMLElement).closest(
-            '.VPNavBarTranslations a, .VPNavScreenTranslations a, .VPNavBarExtra .translations a',
+            '.VPNavScreenTranslations a',
           )
           if (link) {
             e.preventDefault()
             e.stopPropagation()
             const href = link.getAttribute('href')
-            if (href) window.open(href, '_blank', 'noopener')
+            if (href) window.location.href = href
           }
         },
         true,
