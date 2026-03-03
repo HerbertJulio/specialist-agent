@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.8.1](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.8.0...specialist-agent-v2.8.1) (2026-03-03)
+
+
+### Bug Fixes
+
+* **docs:** use native VitePress locale switcher ([#59](https://github.com/HerbertJulio/specialist-agent/issues/59)) ([f5960b2](https://github.com/HerbertJulio/specialist-agent/commit/f5960b23787ed50836c76a6e3104178933edc8d9))
+
+
+### Documentation
+
+* add privacy policy page (EN + PT-BR) ([#57](https://github.com/HerbertJulio/specialist-agent/issues/57)) ([226844c](https://github.com/HerbertJulio/specialist-agent/commit/226844c13c6d36ecf8affcfef2d31bba02286805))
+
 ## [2.8.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.7.0...specialist-agent-v2.8.0) (2026-03-02)
 
 
