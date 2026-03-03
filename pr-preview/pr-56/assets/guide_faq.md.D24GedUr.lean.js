@@ -1,1 +1,0 @@
-import{_ as t,o as a,c as o,a4 as s}from"./chunks/framework.C3khWEve.js";const u=JSON.parse('{"title":"FAQ","description":"","frontmatter":{},"headers":[],"relativePath":"guide/faq.md","filePath":"guide/faq.md"}'),i={name:"guide/faq.md"};function n(r,e,d,l,c,h){return a(),o("div",null,[...e[0]||(e[0]=[s("",52)])])}const g=t(i,[["render",n]]);export{u as __pageData,g as default};
