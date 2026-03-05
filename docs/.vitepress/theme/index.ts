@@ -6,11 +6,13 @@ import HomeHowItWorks from './HomeHowItWorks.vue'
 import HomeFrameworks from './HomeFrameworks.vue'
 import HomeSponsors from './HomeSponsors.vue'
 import HeroAnimation from './HeroAnimation.vue'
+import HomeInstall from './HomeInstall.vue'
 import './custom.css'
 
 const Layout = () =>
   h(DefaultTheme.Layout, null, {
     'home-hero-image': () => h(HeroAnimation),
+    'home-hero-actions-after': () => h(HomeInstall),
     'home-features-after': () => [
       h(HomePlatforms),
       h(HomeHowItWorks),
