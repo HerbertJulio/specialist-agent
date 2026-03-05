@@ -1,40 +1,47 @@
 # Camadas de Responsabilidade
 
-::: info Nota sobre Framework
-Os exemplos abaixo utilizam os padroes do **pack Vue 3**. Cada framework pack (React, Next.js, SvelteKit) fornece padroes equivalentes adaptados ao seu ecossistema. Veja [Framework Packs](/pt-BR/guide/introduction#como-os-packs-funcionam) para detalhes.
-:::
-
-Cada camada na arquitetura tem uma responsabilidade unica e bem definida.
+Cada camada na arquitetura tem uma responsabilidade unica e bem definida. Todos os framework packs seguem o mesmo padrao de camadas — apenas os detalhes de implementacao diferem.
 
 ## Fluxo Completo de Requisicao
 
 ```mermaid
 sequenceDiagram
     participant V as View / Component
-    participant Co as Composable
+    participant L as Camada Logica
     participant S as Service
     participant API as REST API
     participant Ad as Adapter
-    participant St as Pinia Store
+    participant St as State Store
 
-    Note over V,St: User clicks "Load Products"
-    V->>Co: useProductsList({ page, search })
-    Co->>S: productsService.list({ page, search })
+    Note over V,St: Usuario clica em "Carregar Produtos"
+    V->>L: loadProducts({ page, search })
+    L->>S: productsService.list({ page, search })
     S->>API: GET /v2/products?page=1&search=shoes
     API-->>S: 200 { data: [...], total_pages: 5 }
-    S-->>Co: raw response (snake_case)
-    Co->>Ad: productsAdapter.toProductList(response)
-    Ad-->>Co: { items: Product[], totalPages: 5 }
-    Note over Co: Vue Query caches result (staleTime: 5min)
-    Co-->>V: { items, isLoading: false, totalPages }
+    S-->>L: resposta bruta (snake_case)
+    L->>Ad: productsAdapter.toProductList(response)
+    Ad-->>L: { items: Product[], totalPages: 5 }
+    Note over L: Cache do resultado (staleTime: 5min)
+    L-->>V: { items, isLoading: false, totalPages }
 
-    Note over V,St: User changes filter
+    Note over V,St: Usuario muda filtro
     V->>St: store.setCategory('shoes')
-    St-->>V: selectedCategory updated
-    Note over V: queryKey changes → auto-refetch
+    St-->>V: selectedCategory atualizado
+    Note over V: Query key muda, auto-refetch
 ```
 
-## Service - HTTP Puro
+### Camada Logica por Framework
+
+| Framework | Camada logica | Cache / Estado servidor |
+|-----------|---------------|-------------------------|
+| Vue | Composable (`useXxx`) | TanStack Vue Query |
+| React | Hook (`useXxx`) | TanStack React Query |
+| Next.js | Hook / Server Action | TanStack + RSC |
+| SvelteKit | Load function | Built-in SvelteKit |
+| Angular | Service + `inject()` | HttpClient |
+| Nuxt | Composable / `useFetch` | Built-in Nuxt |
+
+## Service — HTTP Puro
 
 Services fazem a requisicao HTTP. Nada mais.
 
@@ -72,30 +79,30 @@ export const productsService = {
 
 **Regras:**
 
-- ✅ Chamadas HTTP com request/response tipados
-- ✅ Um arquivo por dominio/recurso
-- ✅ Exportar como objeto com metodos
-- ❌ Sem try/catch (o chamador trata os erros)
-- ❌ Sem transformacao de dados (o adapter faz isso)
-- ❌ Sem logica de negocio
-- ❌ Sem acesso a store/composable
+- Chamadas HTTP com request/response tipados
+- Um arquivo por dominio/recurso
+- Exportar como objeto com metodos
+- Sem try/catch (o chamador trata os erros)
+- Sem transformacao de dados (o adapter faz isso)
+- Sem logica de negocio
+- Sem acesso a store ou camada logica
 
 ::: warning Erro comum
-Nao adicione `try/catch` nos services. O tratamento de erros pertence a camada de composable via `onError` do Vue Query.
+Nao adicione `try/catch` nos services. O tratamento de erros pertence a camada logica (hooks, composables, load functions, etc.).
 :::
 
-## Adapter - Parsers de Contrato
+## Adapter — Parsers de Contrato
 
 Adapters transformam dados entre o formato da API e o formato do app. Sao **funcoes puras** sem efeitos colaterais.
 
 ```mermaid
 graph LR
-    API["API Response<br/><i>snake_case, string dates, cents</i>"] -->|"toProduct()"| App["App Contract<br/><i>camelCase, Date objects, currency</i>"]
-    App -->|"toCreatePayload()"| API2["API Payload<br/><i>snake_case, ISO strings, cents</i>"]
+    API["Resposta API<br/><i>snake_case, datas string, centavos</i>"] -->|"toProduct()"| App["Contrato App<br/><i>camelCase, objetos Date, moeda</i>"]
+    App -->|"toCreatePayload()"| API2["Payload API<br/><i>snake_case, ISO strings, centavos</i>"]
 
-    style API fill:#35495e,color:#fff
-    style App fill:#42b883,color:#fff
-    style API2 fill:#35495e,color:#fff
+    style API fill:#2d3748,color:#fff
+    style App fill:#4a5568,color:#fff
+    style API2 fill:#2d3748,color:#fff
 ```
 
 ```typescript
@@ -104,7 +111,7 @@ import type { ProductItemResponse } from '../types/products.types'
 import type { Product } from '../types/products.contracts'
 
 export const productsAdapter = {
-  // Inbound: API → App
+  // Entrada: API → App
   toProduct(response: ProductItemResponse): Product {
     return {
       id: response.uuid,
@@ -120,7 +127,7 @@ export const productsAdapter = {
     }
   },
 
-  // Outbound: App → API
+  // Saida: App → API
   toCreatePayload(input: CreateProductInput): CreateProductPayload {
     return {
       name: input.name,
@@ -136,19 +143,19 @@ export const productsAdapter = {
 
 **Regras:**
 
-- ✅ Funcoes puras (entrada → saida)
-- ✅ Bidirecional: API → App (entrada) e App → API (saida)
-- ✅ Renomear campos (snake_case → camelCase)
-- ✅ Converter tipos (string → Date, centavos → decimal, status → booleano)
-- ❌ Sem chamadas HTTP
-- ❌ Sem acesso a store/composable
+- Funcoes puras (entrada → saida)
+- Bidirecional: API → App (entrada) e App → API (saida)
+- Renomear campos (snake_case → camelCase)
+- Converter tipos (string → Date, centavos → decimal, status → booleano)
+- Sem chamadas HTTP
+- Sem acesso a store ou camada logica
 
 ## Types e Contracts
 
 Dois arquivos separados para o mesmo recurso:
 
 ```typescript
-// types/products.types.ts - Resposta exata da API (snake_case)
+// types/products.types.ts — Resposta exata da API (snake_case)
 export interface ProductItemResponse {
   uuid: string
   name: string
@@ -170,7 +177,7 @@ export interface ProductListResponse {
 ```
 
 ```typescript
-// types/products.contracts.ts - Contrato do app (camelCase)
+// types/products.contracts.ts — Contrato do app (camelCase)
 export interface Product {
   id: string
   name: string
@@ -186,179 +193,71 @@ export interface Product {
 ```
 
 ::: tip Por que dois arquivos?
-- `.types.ts` espelha a API exatamente - se a API mudar, apenas este arquivo muda
-- `.contracts.ts` e o que seus componentes realmente usam - interface estavel do app
+- `.types.ts` espelha a API exatamente — se a API mudar, apenas este arquivo muda
+- `.contracts.ts` e o que seus componentes realmente usam — interface estavel do app
 - O adapter faz a ponte entre eles
 :::
 
-## Composable - Orquestracao
+## Camada Logica — Orquestracao
 
-Composables conectam tudo: chamam o service, passam pelo adapter, gerenciam loading/error, expoe dados reativos.
+A camada logica conecta tudo: chama o service, passa pelo adapter, gerencia loading/error, e expoe dados para a UI.
 
-```typescript
-// composables/useProductsList.ts
-import { computed, type MaybeRef, toValue } from 'vue'
-import { useQuery, keepPreviousData } from '@tanstack/vue-query'
-import { productsService } from '../services/products-service'
-import { productsAdapter } from '../adapters/products-adapter'
+Cada framework implementa de forma diferente:
 
-export function useProductsList(options: {
-  page: MaybeRef<number>
-  pageSize?: MaybeRef<number>
-  search?: MaybeRef<string>
-}) {
-  const page = computed(() => toValue(options.page))
-  const pageSize = computed(() => toValue(options.pageSize) ?? 20)
-  const search = computed(() => toValue(options.search) ?? '')
+| Framework | Padrao | Exemplo |
+|-----------|--------|---------|
+| Vue | Composable + Vue Query | `useProductsList()` |
+| React | Hook + React Query | `useProductsList()` |
+| Next.js | Hook + Server Action | `useProductsList()` / `createProduct()` |
+| SvelteKit | Load function | `+page.ts load()` |
+| Angular | Service + inject() | `ProductsService` |
+| Nuxt | Composable + useFetch | `useProductsList()` |
 
-  const { data, isLoading, isFetching, error, refetch } = useQuery({
-    queryKey: computed(() => [
-      'products', 'list',
-      { page: page.value, pageSize: pageSize.value, search: search.value },
-    ]),
-    queryFn: async () => {
-      const response = await productsService.list({
-        page: page.value,
-        pageSize: pageSize.value,
-        search: search.value,
-      })
-      return {
-        items: response.data.data.map(productsAdapter.toProduct),
-        totalPages: response.data.total_pages,
-      }
-    },
-    staleTime: 5 * 60 * 1000,     // 5 minutes
-    placeholderData: keepPreviousData,
-  })
+**Regras (universais):**
 
-  const items = computed(() => data.value?.items ?? [])
-  const totalPages = computed(() => data.value?.totalPages ?? 0)
-  const isEmpty = computed(() => !isLoading.value && items.value.length === 0)
+- Orquestrar: service → adapter → dados reativos
+- Gerenciar estados de loading, error e vazio
+- Retornar valores reativos/observaveis (nunca brutos)
+- Sem template/renderizacao
+- Sem acesso direto a API (o service faz isso)
 
-  return { items, totalPages, isLoading, isFetching, isEmpty, error, refetch }
-}
-```
+## Client State Store
 
-**Exemplo de mutation:**
-
-```typescript
-// composables/useCreateProduct.ts
-import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import { productsService } from '../services/products-service'
-import { productsAdapter } from '../adapters/products-adapter'
-import type { CreateProductInput } from '../types/products.contracts'
-
-export function useCreateProduct() {
-  const queryClient = useQueryClient()
-
-  const { mutate, isPending, error } = useMutation({
-    mutationFn: (input: CreateProductInput) => {
-      const payload = productsAdapter.toCreatePayload(input)
-      return productsService.create(payload)
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['products'] })
-    },
-  })
-
-  return { createProduct: mutate, isPending, error }
-}
-```
-
-**Regras:**
-
-- ✅ Orquestrar: service → adapter → dados reativos
-- ✅ Gerenciar estados de loading, error e vazio
-- ✅ Retornar refs/computed (nunca valores brutos)
-- ✅ Nomeados `useXxx`
-- ❌ Sem template/renderizacao
-- ❌ Sem acesso direto a API
-
-## Pinia Store - Apenas Estado do Cliente
-
-Pinia e para estado que **nao vem do servidor**: estado da UI, filtros, preferencias.
+Estado do cliente e para dados que **nao vem do servidor**: preferencias de UI, filtros, selecoes.
 
 ```mermaid
 graph TB
-    subgraph "Server State (Vue Query)"
-        Q["useProductsList()"]
-        QD["products data, loading, error"]
+    subgraph "Estado Servidor (Camada Logica)"
+        Q["loadProducts()"]
+        QD["dados produtos, loading, error"]
         Q --> QD
     end
 
-    subgraph "Client State (Pinia)"
-        P["useProductsStore()"]
-        PD["filters, viewMode, selectedIds"]
+    subgraph "Estado Cliente (Store)"
+        P["productsStore"]
+        PD["filtros, viewMode, selectedIds"]
         P --> PD
     end
 
-    QD -->|"displayed in"| Comp["ProductsView.vue"]
-    PD -->|"controls"| Comp
+    QD -->|"exibido em"| Comp["ProductsView"]
+    PD -->|"controla"| Comp
 
-    style Q fill:#42b883,color:#fff
-    style P fill:#35495e,color:#fff
-    style Comp fill:#42b883,color:#fff
+    style Q fill:#2d3748,color:#fff
+    style P fill:#4a5568,color:#fff
+    style Comp fill:#2d3748,color:#fff
 ```
 
-```typescript
-// stores/products-store.ts
-import { defineStore } from 'pinia'
-import { ref, computed, readonly } from 'vue'
+| Framework | Estado cliente | Estado servidor |
+|-----------|---------------|-----------------|
+| Vue | Pinia | TanStack Vue Query |
+| React | Zustand | TanStack React Query |
+| Next.js | Zustand | TanStack + Server Components |
+| SvelteKit | Svelte stores | SvelteKit load |
+| Angular | Signals | HttpClient |
+| Nuxt | Pinia / useState | useFetch / useAsyncData |
 
-export const useProductsStore = defineStore('products', () => {
-  // State
-  const selectedCategory = ref<string | null>(null)
-  const viewMode = ref<'grid' | 'list'>('grid')
-  const searchQuery = ref('')
-  const selectedIds = ref<Set<string>>(new Set())
+**Regras (universais):**
 
-  // Getters
-  const hasActiveFilters = computed(() =>
-    !!selectedCategory.value || !!searchQuery.value
-  )
-
-  const selectedCount = computed(() => selectedIds.value.size)
-
-  // Actions
-  function setCategory(category: string | null) {
-    selectedCategory.value = category
-  }
-
-  function clearFilters() {
-    selectedCategory.value = null
-    searchQuery.value = ''
-  }
-
-  function toggleSelection(id: string) {
-    if (selectedIds.value.has(id)) {
-      selectedIds.value.delete(id)
-    } else {
-      selectedIds.value.add(id)
-    }
-  }
-
-  return {
-    // Readonly state
-    selectedCategory: readonly(selectedCategory),
-    viewMode: readonly(viewMode),
-    searchQuery,
-    selectedIds: readonly(selectedIds),
-    // Getters
-    hasActiveFilters,
-    selectedCount,
-    // Actions
-    setCategory,
-    clearFilters,
-    toggleSelection,
-  }
-})
-```
-
-**Regras:**
-
-- ✅ Apenas estado do cliente (UI, filtros, preferencias, sessao)
-- ✅ Setup syntax
-- ✅ `readonly()` no estado exposto
-- ✅ `storeToRefs()` ao desestruturar em componentes
-- ❌ Sem estado do servidor (dados da API vao no Vue Query)
-- ❌ Sem chamadas HTTP
+- Apenas estado do cliente (UI, filtros, preferencias, sessao)
+- Sem estado do servidor (dados da API pertencem a camada logica)
+- Sem chamadas HTTP

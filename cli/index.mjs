@@ -201,12 +201,17 @@ function detectFramework(pkgPath, availablePacks) {
 
 // ── Guidance texts ───────────────────────────────────
 
-function buildGettingStarted(agentNames, installedSkills) {
+function buildGettingStarted(agentNames, installedSkills, archInstalled) {
   const lines = []
 
-  lines.push('Agents enforce the architecture defined in docs/ARCHITECTURE.md.')
-  lines.push('They ensure consistency across modules \u2014 the more you use them,')
-  lines.push('the more value they deliver.')
+  if (archInstalled) {
+    lines.push('Agents enforce the architecture defined in docs/ARCHITECTURE.md.')
+    lines.push('They ensure consistency across modules \u2014 the more you use them,')
+    lines.push('the more value they deliver.')
+  } else {
+    lines.push('Agents use generic best practices for your framework.')
+    lines.push('To customize patterns, add a docs/ARCHITECTURE.md to your project.')
+  }
   lines.push('')
   lines.push('Examples:')
   lines.push('')
@@ -928,6 +933,18 @@ async function main() {
     }
   }
 
+  // ── Architecture Guide (optional) ─────────────────
+
+  let installArch = false
+
+  const wantArch = await clack.confirm({
+    message: `Install architecture guide? ${DIM}(docs/ARCHITECTURE.md)${NC}`,
+    initialValue: false,
+  })
+
+  if (clack.isCancel(wantArch)) handleCancel()
+  installArch = wantArch
+
   // ── Install files ──────────────────────────────────
 
   const packDir = join(ROOT, 'packs', framework)
@@ -1033,10 +1050,10 @@ async function main() {
     nativeHooksInstalled = setupNativeHooks(cwd, selectedHooks)
   }
 
-  // Install ARCHITECTURE.md
+  // Install ARCHITECTURE.md (only if user opted in)
   const archDest = join(cwd, 'docs', 'ARCHITECTURE.md')
   let archInstalled = false
-  if (!existsSync(archDest) && existsSync(archSource)) {
+  if (installArch && !existsSync(archDest) && existsSync(archSource)) {
     mkdirSync(dirname(archDest), { recursive: true })
     cpSync(archSource, archDest)
     archInstalled = true
@@ -1080,7 +1097,7 @@ async function main() {
     ? readdirSync(skillsDest, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => '/' + d.name)
     : []
 
-  clack.note(buildGettingStarted(agentNames, installedSkills), 'Getting started')
+  clack.note(buildGettingStarted(agentNames, installedSkills, archInstalled), 'Getting started')
 
   if (mode === 'lite') {
     clack.log.info(`${DIM}Lite mode: agents run on Haiku (lower cost, faster).${NC}`)

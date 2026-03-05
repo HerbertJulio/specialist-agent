@@ -1,10 +1,53 @@
 # Visao Geral da Arquitetura
 
-::: info Nota sobre Framework
-Os exemplos abaixo utilizam os padroes do **pack Vue 3**. Cada framework pack (React, Next.js, SvelteKit) fornece padroes equivalentes adaptados ao seu ecossistema. Veja [Framework Packs](/pt-BR/guide/introduction#como-os-packs-funcionam) para detalhes.
+O arquivo `docs/ARCHITECTURE.md` e uma configuracao **opcional** que personaliza como os agentes geram e revisam codigo no seu projeto. Quando presente, todos os agentes seguem seus padroes. Quando ausente, os agentes usam boas praticas genericas para o seu framework.
+
+::: tip Opcional
+Durante `specialist-agent init`, voce escolhe se deseja instalar o guia de arquitetura. Voce pode adiciona-lo depois copiando do pack do seu framework para `docs/ARCHITECTURE.md`.
 :::
 
-O `docs/ARCHITECTURE.md` no seu projeto e a **fonte de verdade** que todos os agentes seguem. Esta pagina resume os padroes principais.
+## Como Funciona
+
+1. Durante o `init`, escolha instalar `docs/ARCHITECTURE.md` (ou pule)
+2. Os agentes verificam se o arquivo existe antes de cada acao
+3. Se encontrado, seguem seus padroes para geracao e revisao de codigo
+4. Se nao encontrado, usam boas praticas genericas
+5. Edite o arquivo a qualquer momento para mudar o comportamento dos agentes — sem reiniciar
+
+## Padrao Universal
+
+Todos os framework packs seguem a mesma arquitetura de quatro camadas:
+
+```mermaid
+graph LR
+    S["Service<br/><i>Apenas HTTP</i>"] --> A["Adapter<br/><i>Parsear & Transformar</i>"]
+    A --> L["Camada Logica<br/><i>Orquestrar</i>"]
+    L --> UI["Component<br/><i>UI</i>"]
+
+    style S fill:#2d3748,color:#fff
+    style A fill:#4a5568,color:#fff
+    style L fill:#2d3748,color:#fff
+    style UI fill:#4a5568,color:#fff
+```
+
+| Camada | Faz | NAO Faz |
+|--------|-----|---------|
+| **Service** | Chamadas HTTP | try/catch, transformacao, logica |
+| **Adapter** | Parsear API ↔ App (snake_case → camelCase) | HTTP, efeitos colaterais |
+| **Logica** | Orquestrar service + adapter + estado | Renderizar UI |
+| **State Store** | Estado do cliente (UI, filtros, preferencias) | Estado do servidor, HTTP |
+| **Component** | UI + composicao | Logica de negocio pesada |
+
+### Equivalentes por Framework
+
+Cada framework tem sua propria terminologia para os mesmos conceitos:
+
+| Camada | Vue | React | Next.js | SvelteKit | Angular | Astro | Nuxt |
+|--------|-----|-------|---------|-----------|---------|-------|------|
+| **Logica** | Composable | Hook | Hook / Server Action | Load function | Service + inject() | Endpoint | Composable / useFetch |
+| **Estado cliente** | Pinia | Zustand | Zustand | Svelte stores | Signals | — | Pinia / useState |
+| **Estado servidor** | TanStack Vue Query | TanStack React Query | TanStack + RSC | SvelteKit load | HttpClient | — | useFetch / useAsyncData |
+| **Componente** | SFC (.vue) | JSX (.tsx) | JSX (.tsx) | .svelte | Standalone component | .astro / Islands | SFC (.vue) |
 
 ## Estrutura Modular
 
@@ -13,10 +56,10 @@ Cada funcionalidade e um modulo autocontido:
 ```text
 src/modules/[feature]/
 ├── components/     ← UI
-├── composables/    ← Logica (service → adapter → query)
+├── logic/          ← Orquestracao (hooks, composables, load functions)
 ├── services/       ← HTTP puro (sem try/catch)
 ├── adapters/       ← Parsers (API ↔ App)
-├── stores/         ← Apenas estado do cliente (Pinia)
+├── stores/         ← Apenas estado do cliente
 ├── types/          ← .types.ts (API) + .contracts.ts (App)
 ├── views/          ← Paginas
 ├── __tests__/      ← Testes
@@ -27,73 +70,21 @@ src/modules/[feature]/
 
 ```mermaid
 graph LR
-    App["app/"] -->|"✅ imports"| ModA["modules/auth"]
-    App -->|"✅ imports"| ModB["modules/market"]
-    ModA -->|"✅ imports"| Shared["shared/"]
-    ModB -->|"✅ imports"| Shared
-    ModA -.->|"❌ never"| ModB
+    App["app/"] -->|"importa"| ModA["modules/auth"]
+    App -->|"importa"| ModB["modules/products"]
+    ModA -->|"importa"| Shared["shared/"]
+    ModB -->|"importa"| Shared
+    ModA -.->|"nunca"| ModB
 
-    style App fill:#42b883,color:#fff
-    style ModA fill:#35495e,color:#fff
-    style ModB fill:#35495e,color:#fff
-    style Shared fill:#42b883,color:#fff
+    style App fill:#2d3748,color:#fff
+    style ModA fill:#4a5568,color:#fff
+    style ModB fill:#4a5568,color:#fff
+    style Shared fill:#2d3748,color:#fff
 ```
 
-- **Modules → Shared**: ✅ Permitido
-- **Modules → Modules**: ❌ Nunca (mova o codigo compartilhado para `shared/`)
-- **App → Modules**: ✅ Apenas router e registro
-
-## Arquitetura de Quatro Camadas
-
-```mermaid
-graph LR
-    S["🌐 Service<br/><i>HTTP only</i>"] --> A["🔄 Adapter<br/><i>Parse & Transform</i>"]
-    A --> C["⚙️ Composable<br/><i>Orchestrate + Vue Query</i>"]
-    C --> UI["🖼️ Component<br/><i>UI + Template</i>"]
-
-    style S fill:#35495e,color:#fff
-    style A fill:#42b883,color:#fff
-    style C fill:#35495e,color:#fff
-    style UI fill:#42b883,color:#fff
-```
-
-| Camada | Faz | NAO Faz |
-|--------|-----|---------|
-| **Service** | Chamadas HTTP | try/catch, transformacao, logica |
-| **Adapter** | Parsear API ↔ App (snake_case → camelCase) | HTTP, efeitos colaterais |
-| **Composable** | Orquestrar service + adapter + Vue Query | Renderizar UI |
-| **Pinia Store** | Estado do cliente (UI, filtros, preferencias) | Estado do servidor, HTTP |
-| **Component** | UI + composicao | Logica de negocio pesada |
-
-## Exemplo de Fluxo de Dados
-
-Veja o que acontece quando um usuario visita a pagina de Produtos:
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant Component as ProductsView.vue
-    participant Composable as useProductsList
-    participant Service as products-service
-    participant API as REST API
-    participant Adapter as products-adapter
-
-    User->>Component: Navigate to /products
-    Component->>Composable: useProductsList({ page: 1 })
-    Composable->>Service: marketplaceService.list({ page: 1 })
-    Service->>API: GET /v2/products?page=1
-    API-->>Service: { data: [...], total_pages: 5 }
-    Service-->>Composable: raw API response
-    Composable->>Adapter: toProductList(response)
-    Adapter-->>Composable: { items: Product[], totalPages: 5 }
-    Composable-->>Component: { items, isLoading, totalPages }
-    Component-->>User: Rendered product table
-```
-
-::: tip Separacao de Gerenciamento de Estado
-**Pinia** = Estado do cliente (UI, filtros, preferencias)
-**Vue Query** = Estado do servidor (dados da API, cache, atualizacao em segundo plano)
-:::
+- **Modules → Shared**: Permitido
+- **Modules → Modules**: Nunca (mova o codigo compartilhado para `shared/`)
+- **App → Modules**: Apenas router e registro
 
 ## Convencoes de Nomenclatura
 
@@ -102,35 +93,49 @@ sequenceDiagram
 | Tipo | Padrao | Exemplo |
 |------|--------|---------|
 | Diretorios | `kebab-case` | `user-settings/` |
-| Componentes | `PascalCase.vue` | `UserSettingsForm.vue` |
-| Views | `PascalCase + View.vue` | `MarketplaceView.vue` |
-| Composables | `use + PascalCase.ts` | `useMarketplaceList.ts` |
-| Services | `kebab-case-service.ts` | `marketplace-service.ts` |
-| Adapters | `kebab-case-adapter.ts` | `marketplace-adapter.ts` |
-| Stores | `kebab-case-store.ts` | `marketplace-store.ts` |
-| Types | `kebab-case.types.ts` | `marketplace.types.ts` |
-| Contracts | `kebab-case.contracts.ts` | `marketplace.contracts.ts` |
+| Componentes | `PascalCase` | `UserSettingsForm` |
+| Views / Paginas | `PascalCase` | `MarketplaceView` |
+| Logica (hooks, etc.) | `use` + `PascalCase.ts` | `useProductsList.ts` |
+| Services | `kebab-case-service.ts` | `products-service.ts` |
+| Adapters | `kebab-case-adapter.ts` | `products-adapter.ts` |
+| Types | `kebab-case.types.ts` | `products.types.ts` |
+| Contracts | `kebab-case.contracts.ts` | `products.contracts.ts` |
 
 ### Codigo
 
 | Tipo | Padrao | Exemplo |
 |------|--------|---------|
 | Variaveis / funcoes | `camelCase` | `getUserById`, `isLoading` |
-| Types / Interfaces | `PascalCase` | `UserProfile`, `MarketplaceItem` |
+| Types / Interfaces | `PascalCase` | `UserProfile`, `Product` |
 | Constantes | `UPPER_SNAKE_CASE` | `API_BASE_URL`, `MAX_RETRIES` |
-| Composables | `use` + `PascalCase` | `useAuth`, `useMarketplaceList` |
 | Booleanos | `is`/`has`/`can`/`should` | `isLoading`, `hasPermission` |
 | Event handlers | `handle` + acao | `handleSubmit`, `handleDelete` |
 
 ## Padroes Principais
 
-- **Pare o Prop Drilling**: Use slots + provide/inject + composables diretos
+- **Evite Prop Drilling**: Use padroes de composicao nativos do seu framework
 - **Utils vs Helpers**: Utils = funcoes puras, Helpers = funcoes com efeitos colaterais
-- **Tratamento de Erros**: Centralizado nos composables (Vue Query `onError`)
-- **SOLID no Vue**: Cada arquivo = 1 responsabilidade
+- **Tratamento de Erros**: Centralizado na camada de logica
+- **SOLID**: Cada arquivo = 1 responsabilidade
+
+## Sem ARCHITECTURE.md
+
+Quando nao ha `docs/ARCHITECTURE.md` no projeto:
+
+- **Agentes funcionam normalmente** — usam padroes genericos para o seu framework
+- **@planner** nota a ausencia e usa padroes genericos
+- **@builder** gera codigo usando convencoes padroes do framework
+- **@reviewer** revisa contra boas praticas gerais
+
+Para adicionar depois:
+
+```bash
+# Copie do pack do seu framework instalado
+cp node_modules/specialist-agent/packs/{framework}/ARCHITECTURE.md docs/ARCHITECTURE.md
+```
 
 ## Mergulho Profundo
 
-- [Camadas](/pt-BR/guide/layers) - Exemplos detalhados de cada camada
-- [Componentes](/pt-BR/guide/components) - Padroes e composicao de componentes
-- Referencia completa: `docs/ARCHITECTURE.md` no seu projeto
+- [Camadas](/pt-BR/guide/layers) — Exemplos detalhados de cada camada
+- [Componentes](/pt-BR/guide/components) — Padroes e composicao de componentes
+- Referencia completa: `docs/ARCHITECTURE.md` no seu projeto (se instalado)
