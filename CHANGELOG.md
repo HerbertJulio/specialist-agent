@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.8.1...specialist-agent-v2.9.0) (2026-03-05)
+
+
+### Features
+
+* **docs:** add terminal install widget to homepage hero ([#61](https://github.com/HerbertJulio/specialist-agent/issues/61)) ([d5b4279](https://github.com/HerbertJulio/specialist-agent/commit/d5b42797eba5c55502cd44c155167afd71c6490f))
+
 ## [2.8.1](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.8.0...specialist-agent-v2.8.1) (2026-03-03)
 
 
