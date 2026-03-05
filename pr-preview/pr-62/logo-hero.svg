@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" fill="none">
+  <defs>
+    <linearGradient id="lh1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#1E3A5F"/>
+    </linearGradient>
+    <linearGradient id="lh2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#2B5EA7"/>
+    </linearGradient>
+    <linearGradient id="lh3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4A7FCF"/>
+      <stop offset="100%" stop-color="#CD7F32"/>
+    </linearGradient>
+    <linearGradient id="hl" x1="0" y1="0" x2="0.85" y2="0.85">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.12"/>
+      <stop offset="60%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Isometric card stack: matrix(0.707, -0.405, 0.707, 0.405, tx, ty) -->
+  <!-- simulates CSS rotateX(55deg) rotateZ(-45deg) -->
+  <g transform="translate(150, 145)">
+    <!-- Hooks (bottom card) -->
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#lh1)" opacity="0.85" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.15"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.5" letter-spacing="0.5">HOOKS</text>
+    </g>
+    <!-- Skills (middle card) -->
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 0)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#lh2)" opacity="0.9" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.2"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.5" letter-spacing="0.5">SKILLS</text>
+    </g>
+    <!-- Agents (top card) -->
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, -30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#lh3)" opacity="0.95" stroke="#CD7F32" stroke-width="0.5" stroke-opacity="0.25"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.7" letter-spacing="0.5">AGENTS</text>
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#hl)"/>
+    </g>
+  </g>
+</svg>
