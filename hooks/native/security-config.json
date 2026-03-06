@@ -13,6 +13,9 @@
     "pipe-to-shell": { "enabled": true, "severity": "HIGH" },
     "chmod-777": { "enabled": true, "severity": "HIGH" },
     "env-file-read": { "enabled": true, "severity": "MEDIUM" },
+    "ssh-key-access": { "enabled": true, "severity": "MEDIUM" },
+    "aws-credentials": { "enabled": true, "severity": "MEDIUM" },
+    "cloud-credentials": { "enabled": true, "severity": "MEDIUM" },
     "env-file-write": { "enabled": true, "severity": "MEDIUM" },
     "inline-secrets": { "enabled": true, "severity": "MEDIUM" }
   },

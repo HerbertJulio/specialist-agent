@@ -1,0 +1,141 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": "Read CLAUDE.md for project conventions. Always use specialist agents (@builder, @reviewer, @planner, etc.) instead of generic prompts.",
+  "agent": {
+    "builder": {
+      "description": "Build modules, components, and services with tests",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "reviewer": {
+      "description": "Unified 3-in-1 code review (spec, quality, architecture)",
+      "mode": "primary",
+      "tools": { "write": false, "edit": false, "bash": true }
+    },
+    "doctor": {
+      "description": "Investigate bugs with systematic 4-phase diagnosis",
+      "mode": "primary",
+      "tools": { "write": false, "edit": false, "bash": true }
+    },
+    "planner": {
+      "description": "Create adaptive implementation plans by complexity",
+      "mode": "primary",
+      "tools": { "write": true, "edit": false, "bash": false }
+    },
+    "executor": {
+      "description": "Execute plans with checkpoints and cost tracking",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "tdd": {
+      "description": "Test-driven development (RED > GREEN > REFACTOR)",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "debugger": {
+      "description": "Systematic 4-phase debugging with evidence",
+      "mode": "primary",
+      "tools": { "write": false, "edit": true, "bash": true }
+    },
+    "pair": {
+      "description": "Real-time pair programming assistance",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "analyst": {
+      "description": "Convert requirements into technical specifications",
+      "mode": "primary",
+      "tools": { "write": true, "edit": false, "bash": false }
+    },
+    "api": {
+      "description": "Design REST/GraphQL APIs with OpenAPI specs",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "perf": {
+      "description": "Performance optimization with measurable improvements",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "security": {
+      "description": "Auth and OWASP vulnerability audits",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "finance": {
+      "description": "Payment, billing, and subscription systems",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "cloud": {
+      "description": "Cloud architecture and Infrastructure as Code",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "data": {
+      "description": "Database schemas, migrations, and caching",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "devops": {
+      "description": "Docker, Kubernetes, and CI/CD pipelines",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "i18n": {
+      "description": "Internationalization and translations",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": false }
+    },
+    "docs": {
+      "description": "Generate documentation from code",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": false }
+    },
+    "refactor": {
+      "description": "Code refactoring for clarity and maintainability",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "deps": {
+      "description": "Dependency management and security updates",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "legal": {
+      "description": "GDPR, LGPD, CCPA compliance",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": false }
+    },
+    "designer": {
+      "description": "Design systems with accessibility",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": false }
+    },
+    "tester": {
+      "description": "Test strategies and coverage improvement",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "scout": {
+      "description": "Quick project analysis",
+      "mode": "primary",
+      "tools": { "write": false, "edit": false, "bash": true }
+    },
+    "explorer": {
+      "description": "Deep codebase exploration",
+      "mode": "primary",
+      "tools": { "write": false, "edit": false, "bash": true }
+    },
+    "architect": {
+      "description": "Full system architecture migration (hexagonal, DDD, CQRS)",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "ripple": {
+      "description": "Cascading impact analysis of changes",
+      "mode": "primary",
+      "tools": { "write": false, "edit": false, "bash": true }
+    }
+  }
+}

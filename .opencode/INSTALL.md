@@ -4,129 +4,124 @@ AI agents for any framework — Vue 3, React, Next.js, SvelteKit, Angular, Astro
 
 ## Quick Install
 
-### Option 1: CLI (Recommended)
+### Option 1: CLI + OpenCode Config
 
 ```bash
 cd /path/to/your-project
 npx specialist-agent init
 ```
 
-The wizard will:
+Then copy the OpenCode config to your project root:
 
-1. Auto-detect your framework from `package.json`
-2. Let you choose Full or Lite mode
-3. Install agents and skills to `.claude/`
+```bash
+cp node_modules/specialist-agent/.opencode/opencode.json ./opencode.json
+```
 
-### Option 2: Manual Installation
+Or manually add `opencode.json` (see template in this directory).
 
-1. **Clone the repository:**
+### Option 2: Native OpenCode Agents
 
-   ```bash
-   git clone https://github.com/HerbertJulio/specialist-agent.git
-   ```
+OpenCode reads agents from `.opencode/agents/`. Install directly:
 
-2. **Copy your framework pack:**
+```bash
+git clone https://github.com/HerbertJulio/specialist-agent.git /tmp/sa
 
-   ```bash
-   # For React projects
-   cp -r specialist-agent/packs/react/* your-project/.claude/
+# Copy agents to OpenCode directory
+mkdir -p .opencode/agents
+cp /tmp/sa/agents/*.md .opencode/agents/
 
-   # For Vue projects
-   cp -r specialist-agent/packs/vue/* your-project/.claude/
+# Copy framework-specific agents (pick your framework)
+cp /tmp/sa/packs/react/agents/*.md .opencode/agents/
+# Options: react, vue, nextjs, svelte, angular, astro, nuxt
 
-   # For Next.js projects
-   cp -r specialist-agent/packs/nextjs/* your-project/.claude/
+# Copy opencode.json and CLAUDE.md
+cp /tmp/sa/.opencode/opencode.json ./opencode.json
+cp /tmp/sa/packs/{your-framework}/CLAUDE.md ./CLAUDE.md
 
-   # For SvelteKit projects
-   cp -r specialist-agent/packs/svelte/* your-project/.claude/
+rm -rf /tmp/sa
+```
 
-   # For Angular projects
-   cp -r specialist-agent/packs/angular/* your-project/.claude/
+### Option 3: opencode.json Only
 
-   # For Astro projects
-   cp -r specialist-agent/packs/astro/* your-project/.claude/
+If you already have agents in `.claude/agents/` from the CLI, just add the `opencode.json` to your project root. OpenCode will pick up the agent definitions from the config.
 
-   # For Nuxt projects
-   cp -r specialist-agent/packs/nuxt/* your-project/.claude/
-   ```
+## Key Difference: Directory
 
-3. **Copy CLAUDE.md to your project root:**
+| Platform | Agent directory | Config |
+|----------|----------------|--------|
+| Claude Code | `.claude/agents/` | `.claude/settings.json` |
+| OpenCode | `.opencode/agents/` | `opencode.json` |
 
-   ```bash
-   cp specialist-agent/packs/{your-framework}/CLAUDE.md your-project/CLAUDE.md
-   ```
+The markdown agent files are compatible across both platforms. Copy them to the directory your platform expects.
 
-4. **Copy framework-agnostic agents (optional):**
+## Usage
 
-   ```bash
-   cp -r specialist-agent/agents/* your-project/.claude/agents/
-   ```
-
-## Usage in OpenCode
-
-Once installed, use agents by mentioning them:
+Reference agents with `@`:
 
 ```
 @builder create an orders module with CRUD for /v2/orders
 @reviewer review the authentication module
 @tdd implement the payment service with tests first
-@planner plan the user dashboard feature
+@planner plan the checkout flow
+@doctor the login page returns 500, investigate
 ```
 
 ## Available Agents
 
-### Framework-Agnostic
+### Core
 
-- `@starter` - Create new projects from scratch
-- `@explorer` - Explore unfamiliar codebases
-- `@planner` - Adaptive task planning
-- `@executor` - Cost-aware task execution with autonomous mode
-- `@tdd` - Test-Driven Development enforcer
-- `@debugger` - Systematic 4-phase debugging
-- `@finance` - Payment and billing systems
-- `@cloud` - Cloud architecture and IaC
-- `@security` - Authentication and security
-- `@designer` - UI/UX and design systems
-- `@data` - Database and caching
-- `@devops` - Docker, K8s, CI/CD
-- `@tester` - Test strategies and coverage
+| Agent | Use For |
+|-------|---------|
+| `@builder` | Create modules, components, services |
+| `@reviewer` | Code review (spec + quality + architecture) |
+| `@doctor` | Bug investigation |
+| `@planner` | Feature planning |
+| `@executor` | Execute plans with checkpoints |
+| `@tdd` | Test-driven development |
 
-### Pack-Specific
+### Specialist
 
-- `@builder` - Create modules, components, services
-- `@reviewer` - Unified 3-in-1 code review
-- `@doctor` - Bug investigation
-- `@migrator` - Legacy code migration
+| Agent | Use For |
+|-------|---------|
+| `@api` | REST/GraphQL API design |
+| `@perf` | Performance optimization |
+| `@security` | Auth, OWASP audits |
+| `@finance` | Payments, billing |
+| `@cloud` | Cloud architecture, IaC |
+| `@data` | Database design |
+| `@devops` | Docker, K8s, CI/CD |
+| `@architect` | System architecture migration |
+| `@designer` | Design systems, accessibility |
 
-## Skills
+### Support
 
-Quick shortcuts for common tasks:
+| Agent | Use For |
+|-------|---------|
+| `@scout` | Quick project analysis |
+| `@explorer` | Deep codebase exploration |
+| `@debugger` | Systematic debugging |
+| `@pair` | Pair programming |
 
+## Troubleshooting
+
+**Agents not recognized?**
+
+1. Verify `.opencode/agents/` has `.md` files, OR `opencode.json` has agent definitions
+2. Reference agents with `@name` (e.g., `@builder`)
+
+**Using both Claude Code and OpenCode?**
+
+Run `npx specialist-agent init` for `.claude/` agents, then copy them:
+
+```bash
+cp .claude/agents/*.md .opencode/agents/
 ```
-/brainstorm [idea]        - Socratic brainstorming before planning
-/plan [feature]           - Create adaptive implementation plan
-/tdd [module]             - TDD workflow: RED → GREEN → REFACTOR
-/debug [error]            - Systematic debugging
-/audit [path]             - Multi-domain code audit
-/onboard                  - Codebase onboarding
-/checkpoint [name]        - Create git checkpoint
-/estimate [feature]       - Estimate token cost
-/dev-create-module [name] - Scaffold complete module
-```
-
-## Mode Selection
-
-| Mode | Model | Cost | Best For |
-|------|-------|------|----------|
-| Full | Sonnet/Opus | Higher | Complex features, architecture |
-| Lite | Haiku | Lower | Simple tasks, quick fixes |
 
 ## Support
 
 - Documentation: <https://specialistagent.com.br/>
 - Issues: https://github.com/HerbertJulio/specialist-agent/issues
-- Discussions: https://github.com/HerbertJulio/specialist-agent/discussions
 
 ## License
 
-MIT - Use freely.
+MIT

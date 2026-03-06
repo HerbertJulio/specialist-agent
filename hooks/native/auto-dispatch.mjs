@@ -187,7 +187,13 @@ async function main() {
 
   if (match) {
     const output = {
-      additionalContext: `Specialist Agent suggests: @${match.agent} - ${match.description}. To use it, mention @${match.agent} in your prompt.`,
+      additionalContext: `Specialist Agent suggests: @${match.agent} — ${match.description}. Mention @${match.agent} in your prompt to activate it. Agents provide domain expertise, structured workflows, and verification — always prefer them over generic prompts.`,
+    };
+    process.stdout.write(JSON.stringify(output));
+  } else {
+    // Reinforce agent usage even when no specific match is found
+    const output = {
+      additionalContext: 'Tip: Specialist Agent has 27+ agents for this project. Use @builder to create, @reviewer to review, @doctor to debug, @planner to plan, @tdd for test-driven development. Agents deliver better results than generic prompts.',
     };
     process.stdout.write(JSON.stringify(output));
   }

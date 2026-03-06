@@ -13,7 +13,7 @@
  */
 
 import { readFileSync } from 'fs';
-import { join, dirname, resolve, normalize } from 'path';
+import { join, dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -129,17 +129,54 @@ const RULES = [
     id: 'env-file-read',
     severity: 'MEDIUM',
     test: (cmd) => {
+      const readCmds = /\b(cat|less|more|head|tail|sed|awk|grep|bat|type)\b/;
       // Block reading .env files (but allow .env.example, .env.sample, .env.template)
-      if (/\bcat\b.*\.env\b/.test(cmd) || /\bless\b.*\.env\b/.test(cmd) || /\bmore\b.*\.env\b/.test(cmd)) {
+      if (readCmds.test(cmd) && /\.env\b/.test(cmd)) {
         if (/\.env\.(example|sample|template|test|development)/.test(cmd)) return false;
-        if (/\.env\.local/.test(cmd)) return true; // .env.local has secrets
         return true;
       }
       // Block reading private keys
-      if (/\bcat\b.*\.(pem|key|p12|pfx)\b/.test(cmd)) return true;
+      if (readCmds.test(cmd) && /\.(pem|key|p12|pfx)\b/.test(cmd)) return true;
       return false;
     },
     message: 'BLOCKED [MEDIUM]: Reading sensitive file (.env or private key) via shell.\nUse the Read tool instead, which provides better access control.\nAllowed: .env.example, .env.sample, .env.template'
+  },
+  {
+    id: 'ssh-key-access',
+    severity: 'MEDIUM',
+    test: (cmd) => {
+      const readCmds = /\b(cat|less|more|head|tail|sed|awk|grep|bat|type|cp|scp)\b/;
+      if (!readCmds.test(cmd)) return false;
+      return /[~\/]\.ssh\/(id_|authorized_keys|known_hosts|config)/.test(cmd);
+    },
+    message: 'BLOCKED [MEDIUM]: Accessing SSH keys or config via shell.\nSSH keys are sensitive credentials that should never be read or copied by AI agents.\nIf you need to configure SSH, do it manually in your terminal.'
+  },
+  {
+    id: 'aws-credentials',
+    severity: 'MEDIUM',
+    test: (cmd) => {
+      const readCmds = /\b(cat|less|more|head|tail|sed|awk|grep|bat|type|cp)\b/;
+      if (!readCmds.test(cmd)) return false;
+      return /[~\/]\.aws\/(credentials|config)/.test(cmd);
+    },
+    message: 'BLOCKED [MEDIUM]: Accessing AWS credentials via shell.\nAWS credentials contain secret access keys. Use environment variables ($AWS_ACCESS_KEY_ID, $AWS_SECRET_ACCESS_KEY) or IAM roles instead.'
+  },
+  {
+    id: 'cloud-credentials',
+    severity: 'MEDIUM',
+    test: (cmd) => {
+      const readCmds = /\b(cat|less|more|head|tail|sed|awk|grep|bat|type|cp)\b/;
+      if (!readCmds.test(cmd)) return false;
+      return /application_default_credentials\.json/.test(cmd) ||
+        /service[_-]account[_-]?key.*\.json/.test(cmd) ||
+        /[~\/]\.azure\/(credentials|config|accessTokens)/.test(cmd) ||
+        /[~\/]\.kube\/config/.test(cmd) ||
+        /[~\/]\.docker\/config\.json/.test(cmd) ||
+        /[~\/]\.npmrc/.test(cmd) ||
+        /[~\/]\.netrc/.test(cmd) ||
+        /[~\/]\.pgpass/.test(cmd);
+    },
+    message: 'BLOCKED [MEDIUM]: Accessing cloud/service credentials via shell.\nThese files contain sensitive tokens and secrets. Use environment variables or secret managers instead.'
   },
   {
     id: 'env-file-write',
