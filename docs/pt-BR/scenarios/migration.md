@@ -146,6 +146,50 @@ VERIFIED
 
 ---
 
+## Migração de Arquitetura {#architecture}
+
+**Objetivo:** Migrar entre padrões de arquitetura.
+
+**Comando:**
+```
+/migrate-architecture mvc to clean full project
+```
+
+**O que acontece:**
+1. **Avaliar** - Detecta a arquitetura atual com score de confiança
+2. **Planejar** - Mapeia arquivos para novos locais, ordena por acoplamento
+3. **Executar** - Move arquivos, cria camadas, atualiza imports
+4. **Validar** - Check TypeScript, regras de import, testes
+
+**Resultado:**
+```
+Architecture Migration Complete
+From: MVC (Layered)
+To: Clean Architecture (Full)
+
+Files moved: 24
+Files created: 8
+Imports updated: 47
+Barrel exports created: 12
+
+Validation:
+  TypeScript: compiles
+  Import rules: no violations
+  Tests: passing
+
+docs/ARCHITECTURE.md: generated
+```
+
+**Padrões suportados:** Modular, Clean Architecture, Hexagonal,
+DDD, FSD, CQRS, Event-Driven, Modular Monolith, Atomic,
+MVC, Microservices, Serverless, e mais.
+
+**Variantes:**
+- **Full** - Implementação completa com todas as camadas
+- **Lite** - Menos camadas, mesmos princípios (times menores)
+
+---
+
 ## Dicas Rápidas
 
 ### Estratégia de Migração
@@ -166,6 +210,9 @@ Migrate the dashboard to Vue 3 - keep the same API contracts
 | React | Vue 3 | @migrator |
 | REST | GraphQL | @api |
 | Monolito | Microsserviços | @architect |
+| MVC | Clean Architecture | @architect |
+| Flat | Modular | @architect |
+| Modular | Hexagonal | @architect |
 | Class components | Functional | @refactor |
 
 ---

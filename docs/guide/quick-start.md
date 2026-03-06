@@ -118,6 +118,12 @@ Rollback if needed.
 "Use @migrator to modernize src/legacy/"
 ```
 
+### Architecture Migration
+
+```bash
+/migrate-architecture mvc to clean full project
+```
+
 ## 8. Audit Before Release
 
 ```bash
@@ -156,6 +162,7 @@ Maps architecture, detects conventions, generates developer guide.
 | `/write-skill` | Create custom skills |
 | `/tutorial` | Interactive tutorial |
 | `/migrate-framework` | Migrate between frameworks |
+| `/migrate-architecture` | Migrate architecture patterns |
 
 ## Native Hooks
 

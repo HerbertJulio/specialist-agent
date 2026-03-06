@@ -49,20 +49,29 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for architecture
 
 ### Workflow
 1. Scan project structure: directory depth, module boundaries, dependency direction
-2. Detect current architecture pattern:
+2. Detect current architecture pattern using these heuristics:
 
-| Pattern | Indicators |
-|---------|-----------|
-| **Monolith** | Single deployment unit, shared database, deep coupling between modules |
-| **Layered (MVC)** | `controllers/`, `models/`, `views/` directories, horizontal slicing |
-| **Feature-based Modular** | `modules/[feature]/` directories, vertical slicing |
-| **Hexagonal (Ports & Adapters)** | `ports/`, `adapters/`, `domain/` directories, dependency inversion |
-| **Clean Architecture** | `entities/`, `use-cases/`, `interfaces/`, `frameworks/` layers |
-| **DDD** | `aggregates/`, `value-objects/`, `domain-events/`, bounded contexts |
-| **Microservices** | Multiple `package.json`, separate deployments, API gateways |
-| **Event-Driven** | Message brokers, event handlers, eventual consistency patterns |
-| **Modular Monolith** | Module boundaries enforced but single deployment |
-| **Serverless** | Function handlers, event triggers, stateless execution units |
+| Pattern | Detection Heuristics |
+|---------|---------------------|
+| **Flat / Component-Driven** | Single `src/components/` with many files, no modules/ or features/ |
+| **Layered (MVC/MVVM)** | `controllers/`, `models/`, `views/`, `routes/`, `repositories/` dirs |
+| **Feature-based Modular** | `modules/[feature]/` or `features/[feature]/` with barrel exports (index.ts) |
+| **Feature-Sliced Design** | 3+ of: `app/`, `pages/`, `widgets/`, `features/`, `entities/`, `shared/` |
+| **Atomic Design** | `atoms/`, `molecules/`, `organisms/`, `templates/` directories |
+| **Screaming Architecture** | Top-level dirs are business domains (not technical: users/, orders/, payments/) |
+| **Clean Architecture** | `domain/`, `use-cases/` or `application/`, `infrastructure/`, `presentation/` |
+| **Hexagonal (Ports & Adapters)** | `ports/` (in/out), `adapters/` (in/out), `domain/` or `core/` |
+| **DDD** | `aggregates/`, `value-objects/`, `domain-events/`, `bounded-contexts/` |
+| **CQRS** | `commands/`, `queries/`, `command-handlers/`, `query-handlers/`, `read-models/` |
+| **Event-Driven** | `events/`, `handlers/`, `subscribers/`, `publishers/`, `sagas/` |
+| **Microservices** | Multiple `package.json`/`Dockerfile` in subdirs, API gateway config |
+| **Modular Monolith** | Single pkg.json, `modules/` with domain/application/infrastructure layers |
+| **Serverless** | `serverless.yml`, `sam-template.yaml`, function handlers |
+| **Unstructured** | No clear pattern, files loosely organized |
+
+**Monorepo Detection:** Also check for `turbo.json` (Turborepo), `nx.json` (Nx), `lerna.json` (Lerna), `pnpm-workspace.yaml` (pnpm), or `package.json` with `workspaces` field.
+
+**Next.js Router:** Check for `app/layout.tsx` (App Router) vs `pages/_app.tsx` (Pages Router).
 
 3. Analyze dependency health:
    - Map import directions (are dependencies flowing inward or outward?)

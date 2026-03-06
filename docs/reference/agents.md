@@ -33,6 +33,7 @@ All agents include:
 | Refactoring | `@refactor` |
 | Dependencies | `@deps` |
 | Compliance | `@legal` |
+| Architecture migration | `@architect` |
 | Impact analysis | `@ripple` |
 | Explore codebase | `@explorer` or `@scout` |
 
@@ -362,6 +363,24 @@ UI/UX implementation.
 ```
 
 **Covers:** Design tokens, responsive layouts, accessibility.
+
+---
+
+### @architect
+
+Full system architecture migration and redesign.
+
+```bash
+"Use @architect to migrate from MVC to Clean Architecture"
+"Use @architect to assess our current architecture"
+```
+
+**Supports:** 15 architecture patterns (Modular, Clean, Hexagonal, DDD, FSD, CQRS, Event-Driven, Modular Monolith, Microservices, and more). Detects current architecture, recommends migration paths, and executes migrations with Full or Lite variants.
+
+**Modes:**
+- **Assessment** - Detect current architecture pattern with confidence score
+- **Migration** - Plan and execute architecture migrations
+- **Recommendation** - Suggest best architecture based on team size and project type
 
 ---
 

@@ -110,6 +110,12 @@ Rollback se necessário.
 "Use @migrator to modernize src/legacy/"
 ```
 
+### Migração de Arquitetura
+
+```bash
+/migrate-architecture mvc to clean full project
+```
+
 ## 8. Auditoria Antes do Release
 
 ```bash
@@ -148,6 +154,7 @@ Mapeia arquitetura, detecta convenções, gera guia para desenvolvedores.
 | `/write-skill` | Criar skills customizadas |
 | `/tutorial` | Tutorial interativo |
 | `/migrate-framework` | Migrar entre frameworks |
+| `/migrate-architecture` | Migrar padrões de arquitetura |
 
 ## Native Hooks
 

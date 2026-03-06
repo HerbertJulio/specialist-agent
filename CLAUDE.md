@@ -120,6 +120,7 @@ Automatically delegate based on user intent:
 | `/commit` | Smart conventional commits |
 | `/lint` | Lint and auto-fix |
 | `/migrate-framework` | Migrate between frameworks |
+| `/migrate-architecture` | Migrate between architecture patterns (Flat, Modular, Clean, Hexagonal, DDD, ...) |
 
 ## Security Rules
 

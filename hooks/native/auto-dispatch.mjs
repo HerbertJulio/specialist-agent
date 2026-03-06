@@ -57,7 +57,7 @@ const INTENT_MAP = {
   scout:      { phrases: ['analyze project', 'project analysis', 'quick scan'], keywords: ['analyze', 'scan', 'overview', 'analysis'], weight: 1 },
   explorer:   { phrases: ['explore codebase', 'understand code', 'how does this work'], keywords: ['explore', 'understand', 'codebase', 'how does'], weight: 1 },
   memory:     { phrases: ['remember this', 'save decision', 'recall decision', 'session memory'], keywords: ['remember', 'recall', 'memory', 'decision log'], weight: 1.5 },
-  architect:  { phrases: ['architecture migration', 'monolith to microservices', 'system redesign', 'clean architecture', 'hexagonal architecture', 'migrate architecture'], keywords: ['architecture', 'hexagonal', 'ddd', 'cqrs', 'modular monolith', 'bounded context', 'strangler fig'], weight: 1.5 },
+  architect:  { phrases: ['architecture migration', 'monolith to microservices', 'system redesign', 'clean architecture', 'hexagonal architecture', 'migrate architecture', 'detect architecture', 'change architecture', 'improve architecture', 'modular monolith', 'domain driven design', 'feature sliced design', 'ports and adapters'], keywords: ['architecture', 'hexagonal', 'ddd', 'cqrs', 'modular monolith', 'bounded context', 'strangler fig', 'modular', 'fsd', 'clean arch', 'ports adapters'], weight: 1.5 },
   ripple:     { phrases: ['impact analysis', 'cascading effects', 'what will break', 'change impact'], keywords: ['impact', 'ripple', 'cascade', 'breaking change', 'downstream'], weight: 1.5 },
 };
 

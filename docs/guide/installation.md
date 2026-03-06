@@ -27,9 +27,10 @@ Works on any platform.
 ## What Happens
 
 1. Detects your framework (React, Vue, Next.js, SvelteKit, Angular, Astro, Nuxt)
-2. Asks Full or Lite mode
-3. Installs agents and skills to `.claude/`
-4. Optionally installs native Claude Code hooks (security guard, auto-dispatch, session context, auto-format)
+2. Detects current architecture and suggests improvements (15 patterns supported)
+3. Asks Full or Lite mode
+4. Installs agents and skills to `.claude/`
+5. Optionally installs native Claude Code hooks (security guard, auto-dispatch, session context, auto-format)
 
 ```text
 your-project/
@@ -67,6 +68,7 @@ your-project/
 
 ```bash
 npx specialist-agent init              # Install
+npx specialist-agent detect            # Detect architecture
 npx specialist-agent list              # List installed
 npx specialist-agent create-agent @x   # Create custom agent
 npx specialist-agent profiles set x    # Set team profile

@@ -149,6 +149,50 @@ VERIFIED
 
 ---
 
+## Architecture Migration {#architecture}
+
+**Goal:** Migrate between architecture patterns.
+
+**Command:**
+```
+/migrate-architecture mvc to clean full project
+```
+
+**What happens:**
+1. **Assess** - Detects current architecture with confidence score
+2. **Plan** - Maps files to new locations, orders by coupling
+3. **Execute** - Moves files, creates layers, updates imports
+4. **Validate** - TypeScript check, import rules, tests
+
+**Result:**
+```
+Architecture Migration Complete
+From: MVC (Layered)
+To: Clean Architecture (Full)
+
+Files moved: 24
+Files created: 8
+Imports updated: 47
+Barrel exports created: 12
+
+Validation:
+  TypeScript: compiles
+  Import rules: no violations
+  Tests: passing
+
+docs/ARCHITECTURE.md: generated
+```
+
+**Supported patterns:** Modular, Clean Architecture, Hexagonal,
+DDD, FSD, CQRS, Event-Driven, Modular Monolith, Atomic,
+MVC, Microservices, Serverless, and more.
+
+**Variants:**
+- **Full** - Complete implementation with all layers
+- **Lite** - Fewer layers, same principles (smaller teams)
+
+---
+
 ## Quick Tips
 
 ### Migration Strategy
@@ -169,6 +213,9 @@ Migrate the dashboard to Vue 3 - keep the same API contracts
 | React | Vue 3 | @migrator |
 | REST | GraphQL | @api |
 | Monolith | Microservices | @architect |
+| MVC | Clean Architecture | @architect |
+| Flat | Modular | @architect |
+| Modular | Hexagonal | @architect |
 | Class components | Functional | @refactor |
 
 ---

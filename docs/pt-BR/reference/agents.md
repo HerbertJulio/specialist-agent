@@ -32,6 +32,8 @@ Todos os agentes incluem:
 | Documentação | `@docs` |
 | Refactoring | `@refactor` |
 | Dependências | `@deps` |
+| Migração de arquitetura | `@architect` |
+| Análise de impacto | `@ripple` |
 | Compliance | `@legal` |
 | Explorar codebase | `@explorer` ou `@scout` |
 
@@ -360,6 +362,37 @@ Implementação UI/UX.
 ```
 
 **Cobre:** Design tokens, layouts responsivos, acessibilidade.
+
+---
+
+### @architect
+
+Migração e redesign completo de arquitetura do sistema.
+
+```bash
+"Use @architect to migrate from MVC to Clean Architecture"
+"Use @architect to assess our current architecture"
+```
+
+**Suporta:** 15 padrões de arquitetura (Modular, Clean, Hexagonal, DDD, FSD, CQRS, Event-Driven, Modular Monolith, Microservices, e mais). Detecta a arquitetura atual, recomenda caminhos de migração e executa migrações com variantes Full ou Lite.
+
+**Modos:**
+- **Assessment** - Detecta o padrão de arquitetura atual com score de confiança
+- **Migration** - Planeja e executa migrações de arquitetura
+- **Recommendation** - Sugere a melhor arquitetura baseada no tamanho do time e tipo de projeto
+
+---
+
+### @ripple
+
+Análise de efeito cascata.
+
+```bash
+"Use @ripple to analyze the impact of renaming UserService"
+"Use @ripple before changing the API response shape"
+```
+
+**Analisa:** Dependentes diretos, dependentes indiretos, cobertura de testes, breaking changes. Produz planos de mudança seguros ordenados por dependência.
 
 ---
 

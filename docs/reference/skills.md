@@ -23,6 +23,7 @@ Skills are shortcuts. Type `/skill-name` in Claude Code.
 | `/learn` | Learn while building |
 | `/tutorial` | Interactive tutorial |
 | `/migrate-framework` | Migrate between frameworks |
+| `/migrate-architecture` | Migrate between architecture patterns |
 | `/verify` | Verification before completion (proof-based) |
 | `/write-skill` | Create or improve skills with TDD |
 | `/codereview` | Multi-reviewer parallel code review |
@@ -274,6 +275,29 @@ Migrate between frameworks.
 - Vue → React
 - Vue → Svelte
 - Vue 2 → Vue 3
+
+---
+
+### /migrate-architecture
+
+Migrate between architecture patterns.
+
+```bash
+/migrate-architecture flat to modular full project
+/migrate-architecture mvc to clean lite src/modules/auth
+```
+
+**Supports:** 15 patterns including Modular, Clean Architecture,
+Hexagonal, DDD, FSD, CQRS, Event-Driven, Modular Monolith,
+and more. Each with Full and Lite variants.
+
+**Process:**
+1. **Assessment** - Detect current architecture pattern
+2. **Planning** - Generate migration plan with file mapping
+3. **Execution** - Move files, update imports, create layers
+4. **Validation** - TypeScript check, import rules, tests
+
+**Output:** Migrated codebase with updated `ARCHITECTURE.md`.
 
 ---
 
