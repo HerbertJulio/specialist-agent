@@ -23,6 +23,7 @@ build/
 
 # Local config
 .claude/settings.local.json
+.claude/
 .mcp.json
 
 # VitePress
