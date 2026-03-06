@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.10.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.9.0...specialist-agent-v2.10.0) (2026-03-06)
+
+
+### Features
+
+* architecture detection, recommendation & migration system ([#63](https://github.com/HerbertJulio/specialist-agent/issues/63)) ([eaee744](https://github.com/HerbertJulio/specialist-agent/commit/eaee74476c2cd2edd5996b3c2c53bf50bd378233))
+
 ## [2.9.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.8.1...specialist-agent-v2.9.0) (2026-03-05)
 
 
