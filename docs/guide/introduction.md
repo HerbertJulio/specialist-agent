@@ -4,7 +4,7 @@
 Skip ahead to the [Quick Start](/guide/quick-start) to get up and running in under 2 minutes.
 :::
 
-Specialist Agent is a collection of **27+ specialized AI agents** and **21 skills** that build, review, debug, and ship production code - across any framework and any stack.
+Specialist Agent is a collection of **30 specialized AI agents** and **23 skills** that build, review, debug, and ship production code - across any framework and any stack.
 
 ## Prerequisites
 
@@ -84,6 +84,24 @@ Specialist Agent supports Claude Code, Cursor, VS Code, Windsurf, Codex, and Ope
 
 Each framework has specific patterns for services, state, and components. See [Architecture](/guide/architecture) for details.
 
+## How Specialist Agent Maps to Claude Code
+
+Specialist Agent builds on top of Claude Code's native concepts. Here's how they connect:
+
+| Claude Code Concept | Location | How Specialist Agent Uses It |
+|---|---|---|
+| **Sub-Agents** | `.claude/agents/*.md` | 30 specialized agents with missions, workflows, and handoff protocols |
+| **Skills** | `.claude/skills/*/SKILL.md` | 23 repeatable workflows (`/plan`, `/tdd`, `/audit`, `/discovery`) |
+| **Commands** | `.claude/commands/*.md` | Orchestration entry points |
+| **CLAUDE.md** | Project root | Auto-dispatch rules, agent catalog, cross-cutting concerns |
+| **Rules** | `.claude/rules/*.md` | Framework-specific patterns, ARCHITECTURE.md conventions |
+| **Hooks** | `.claude/hooks/` | Security Guard, Auto-Dispatch, Auto-Format, Session Context |
+| **MCP Servers** | `.mcp.json` | Context7 (docs), Azion (edge deploy) |
+| **Checkpointing** | Built-in (git) | `@executor` creates checkpoints per task with rollback support |
+| **Memory** | `~/.claude/projects/` | `@memory` agent for cross-session decisions |
+
+You don't need to understand all of these to get started — just pick an agent and go. But knowing the mapping helps when you want to [create your own agents](/customization/creating-agents) or [customize patterns](/customization/editing-patterns).
+
 ## Full vs Lite Mode
 
 | Mode | Best For | Cost |
@@ -97,5 +115,6 @@ Lite mode uses a smaller model for faster, cheaper results. See [Performance & C
 
 - [Why Specialist Agent?](/guide/why) - The problems we solve and how
 - [Quick Start](/guide/quick-start) - Get running in 2 minutes
+- [Best Practices](/guide/best-practices) - Tips for maximum productivity
 - [Real-World Scenarios](/scenarios/) - See agents in action
 - [All Agents Reference](/reference/agents) - Full agent catalog

@@ -94,6 +94,62 @@ Os custos dependem do modelo Claude e do número de tokens consumidos. Veja [Uso
 
 Veja [Dicas para Reduzir Uso de Tokens](/pt-BR/reference/tokens#dicas-para-reduzir-uso-de-tokens) para mais estratégias.
 
+## Estratégia e Workflow
+
+### Quando usar command vs agente vs skill?
+
+| Conceito | Quando Usar | Exemplo |
+|----------|-------------|---------|
+| **Agente** | Tarefas complexas que exigem expertise, workflows multi-passo, conhecimento de domínio | `@builder`, `@reviewer`, `@security` |
+| **Skill** | Operações focadas e repetitivas com formato de saída específico | `/plan`, `/tdd`, `/audit`, `/discovery` |
+| **Prompt direto** | Tarefas simples de um único arquivo que não precisam de conhecimento especializado | "Fix the typo on line 42" |
+
+**Regra geral:** Se a tarefa toca múltiplos arquivos ou precisa de passos de verificação, use um agente. Se é um processo repetitivo com output definido, use um skill. Se é trivial, só pergunte diretamente.
+
+### Devo usar plan mode ou `@planner`?
+
+Ambos funcionam, mas servem propósitos diferentes:
+
+- **Plan mode** (nativo): Planejamento rápido e leve dentro da conversa atual. Bom para features pequenas.
+- **`@planner`**: Planejamento estruturado com fases, critérios de aceitação, estimativas de custo e recomendações de agentes. Bom para features que envolvem múltiplos agentes.
+
+Para qualquer coisa que vai usar `@orchestrator` ou `@executor`, comece com `@planner` — seu formato de saída é projetado para alimentar esses agentes diretamente.
+
+### O que devo colocar no CLAUDE.md?
+
+Mantenha o `CLAUDE.md` abaixo de 200 linhas. Inclua:
+
+- Convenções específicas do projeto (nomenclatura, estrutura de diretórios)
+- Decisões arquiteturais chave ("usamos React Query, não SWR")
+- Regras de auto-dispatch (qual agente para qual intenção)
+- Restrições rígidas ("nunca use any no TypeScript")
+
+Não inclua boas práticas genéricas, documentação de framework, ou regras que já são enforced pelo linter/compilador. Para regras detalhadas, use arquivos `.claude/rules/` — eles carregam sob demanda.
+
+### Por que o Claude às vezes ignora instruções do CLAUDE.md?
+
+Causas comuns:
+
+1. **Overflow de contexto** — O arquivo é muito longo e é truncado ou desprioritizado. Mantenha abaixo de 200 linhas.
+2. **Instruções conflitantes** — Duas regras se contradizem. Seja explícito sobre prioridade.
+3. **Linguagem vaga** — "Tente usar..." é mais fraco que "DEVE sempre usar...". Use diretivas fortes para regras rígidas.
+4. **Poluição de contexto** — Conversas longas diluem o impacto das instruções. Use `/compact` a 50% do contexto ou comece sessões novas.
+
+### Com que frequência devo atualizar meus agentes e CLAUDE.md?
+
+Atualize quando algo mudar nas convenções do seu projeto ou quando notar que agentes cometem repetidamente os mesmos erros. Não atualize para cada melhoria de modelo — os agentes do Specialist Agent são projetados para funcionar entre versões de modelo.
+
+### Posso converter um codebase existente em specs, deletar e regenerar?
+
+Isso é arriscado. Em vez disso, use abordagens incrementais:
+
+1. Use `@scout` para analisar o codebase existente
+2. Use `@analyst` para extrair requisitos do código existente
+3. Use `@migrator` para modernizar incrementalmente
+4. Use `@refactor` para melhorias estruturais
+
+Regenerar do zero perde edge cases, bug fixes e conhecimento implícito embutido no código existente.
+
 ## Troubleshooting
 
 ### Agentes não estão seguindo meu ARCHITECTURE.md

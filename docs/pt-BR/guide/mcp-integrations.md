@@ -156,4 +156,57 @@ No Edge Mode, o agente cloud usa `create_rules_engine` para gerar regras de cach
 "How do I configure staleTime in TanStack Vue Query v5?"
 ```
 
-Com o Context7 disponivel, o Claude busca as docs mais recentes do TanStack Query em vez de depender dos dados de treinamento - garantindo assinaturas de API e exemplos atuais.
+Com o Context7 disponível, o Claude busca as docs mais recentes do TanStack Query em vez de depender dos dados de treinamento — garantindo assinaturas de API e exemplos atuais.
+
+---
+
+## Ferramentas Complementares
+
+Estas não são servidores MCP incluídos no Specialist Agent, mas ferramentas externas que combinam bem com ele.
+
+### Automação de Browser
+
+| Ferramenta | O que Faz | Melhor Para |
+| ---------- | --------- | ----------- |
+| **Playwright MCP** | Testes automatizados de browser, screenshots, interação com páginas | Testes e2e do `@tester`, debug visual do `@doctor` |
+| **Chrome DevTools MCP** | Logs do console, aba de rede, inspeção DOM | Debug ao vivo do `@debugger`, análise runtime do `@perf` |
+
+Esses MCPs permitem que agentes vejam o que está acontecendo no browser — erros no console, falhas de rede, problemas de renderização — sem você precisar copiar e colar logs.
+
+**Configuração do Playwright MCP:**
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@anthropic/mcp-playwright"]
+    }
+  }
+}
+```
+
+### Prompts por Voz
+
+Ferramentas de entrada por voz permitem descrever tarefas verbalmente em vez de digitar prompts longos:
+
+| Ferramenta | Plataforma | Como Ajuda |
+| ---------- | ---------- | ---------- |
+| **Wispr Flow** | macOS | Dite prompts complexos naturalmente — útil com entrevistas do `@analyst` |
+| **SuperWhisper** | macOS | Voz-para-texto offline com vocabulário customizado |
+| **Claude Voice Mode** | Nativo | Comando `/voice` no Claude Code |
+
+Voz é especialmente produtivo para sessões de brainstorming com `/brainstorm` e entrevistas de requisitos com `@analyst`.
+
+### Multiplexação de Terminal
+
+Para workflows paralelos de agentes, um multiplexador de terminal permite rodar múltiplas sessões do Claude Code lado a lado:
+
+| Ferramenta | O que Faz |
+| ---------- | --------- |
+| **tmux** | Divide o terminal em painéis, cada um rodando uma sessão do Claude Code |
+| **iTerm2** | Terminal macOS com painéis divididos nativos e gerenciamento de sessão |
+| **Ghostty** | Terminal rápido com GPU e suporte a divisão |
+| **Windows Terminal** | Terminal nativo do Windows com suporte a abas/painéis |
+
+Isso combina bem com workflows do `@orchestrator` — rode o orquestrador em um painel e acompanhe a atividade dos subagentes nos outros.

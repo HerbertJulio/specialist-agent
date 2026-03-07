@@ -157,3 +157,56 @@ In Edge Mode, the cloud agent uses `create_rules_engine` to generate cache rules
 ```
 
 With Context7 available, Claude fetches the latest TanStack Query docs instead of relying on training data - ensuring you get current API signatures and examples.
+
+---
+
+## Complementary Tools
+
+These are not MCP servers bundled with Specialist Agent, but external tools that pair well with it.
+
+### Browser Automation
+
+| Tool | What It Does | Best For |
+| ---- | ------------ | -------- |
+| **Playwright MCP** | Automated browser testing, screenshots, page interaction | `@tester` e2e tests, `@doctor` visual debugging |
+| **Chrome DevTools MCP** | Console logs, network tab, DOM inspection | `@debugger` live debugging, `@perf` runtime analysis |
+
+These MCPs let agents see what's happening in the browser — console errors, network failures, rendering issues — without you having to copy-paste logs.
+
+**Playwright MCP setup:**
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@anthropic/mcp-playwright"]
+    }
+  }
+}
+```
+
+### Voice Prompting
+
+Voice input tools let you describe tasks verbally instead of typing long prompts:
+
+| Tool | Platform | How It Helps |
+| ---- | -------- | ------------ |
+| **Wispr Flow** | macOS | Dictate complex prompts naturally — useful with `@analyst` interviews |
+| **SuperWhisper** | macOS | Offline voice-to-text with custom vocabulary |
+| **Claude Voice Mode** | Built-in | `/voice` command in Claude Code |
+
+Voice is especially productive for brainstorming sessions with `/brainstorm` and requirement interviews with `@analyst`.
+
+### Terminal Multiplexing
+
+For parallel agent workflows, a terminal multiplexer lets you run multiple Claude Code sessions side by side:
+
+| Tool | What It Does |
+| ---- | ------------ |
+| **tmux** | Split terminal into panes, each running a Claude Code session |
+| **iTerm2** | macOS terminal with native split panes and session management |
+| **Ghostty** | Fast GPU-accelerated terminal with splits |
+| **Windows Terminal** | Native Windows terminal with tab/pane support |
+
+This pairs well with `@orchestrator` workflows — run the orchestrator in one pane and watch subagent activity in others.

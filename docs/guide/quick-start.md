@@ -66,7 +66,15 @@ Creates adaptive plan based on complexity.
 
 RED → GREEN → REFACTOR with proof.
 
-## 7. Save Progress
+## 7. Evaluate Feasibility
+
+```bash
+/discovery implement real-time notifications with WebSocket
+```
+
+GO/NO-GO verdict with risk analysis before committing resources.
+
+## 8. Save Progress
 
 ```bash
 /checkpoint create before-refactor
@@ -124,7 +132,7 @@ Rollback if needed.
 /migrate-architecture mvc to clean full project
 ```
 
-## 8. Audit Before Release
+## 9. Audit Before Release
 
 ```bash
 /audit src/modules/auth
@@ -132,7 +140,7 @@ Rollback if needed.
 
 Security + performance + architecture + dependency check in one pass.
 
-## 9. Onboard to a Codebase
+## 10. Onboard to a Codebase
 
 ```bash
 /onboard
@@ -140,7 +148,7 @@ Security + performance + architecture + dependency check in one pass.
 
 Maps architecture, detects conventions, generates developer guide.
 
-## Skills
+## All 23 Skills
 
 | Skill | What it Does |
 |-------|--------------|
@@ -148,6 +156,10 @@ Maps architecture, detects conventions, generates developer guide.
 | `/plan` | Plan a feature |
 | `/tdd` | Test-driven development |
 | `/debug` | Debug an issue |
+| `/discovery` | Feasibility evaluation with GO/NO-GO |
+| `/codereview` | Multi-reviewer parallel code review |
+| `/commit` | Smart conventional commits |
+| `/lint` | Lint and auto-fix |
 | `/audit` | Multi-domain code audit |
 | `/onboard` | Codebase onboarding |
 | `/verify` | Verification before completion |
@@ -179,7 +191,8 @@ Installed during `npx specialist-agent init`. See [Hooks Reference](/reference/h
 
 ## What's Next?
 
-- [All 27+ Agents](/reference/agents) - Full reference catalog
+- [All 30 Agents](/reference/agents) - Full reference catalog
 - [All Skills](/reference/skills) - Slash commands reference
 - [Architecture](/guide/architecture) - Understand the patterns
 - [Real-World Scenarios](/scenarios/) - See agents in action
+- [Best Practices](/guide/best-practices) - Tips for maximum productivity

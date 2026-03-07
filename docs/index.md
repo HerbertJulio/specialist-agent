@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Specialist Agent
   text: Your AI Development Team
-  tagline: 27+ specialized agents that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, and more.
+  tagline: 30 specialized agents and 23 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode.
   actions:
     - theme: brand
       text: Get Started
@@ -14,32 +14,32 @@ hero:
       link: /guide/why
 
 features:
-  - icon: 🏗️
-    title: 27+ Specialized Agents
-    details: "From @builder for scaffolding to @security for OWASP audits. Each agent has deep domain expertise, not generic prompts."
+  - icon: "\U0001F3D7\uFE0F"
+    title: 30 Specialized Agents
+    details: "From @builder for modules to @security for OWASP audits to @finance for Stripe — each agent has deep domain expertise, not generic prompts."
     link: /reference/agents
     linkText: Browse agents
-  - icon: 🔍
+  - icon: "\U0001F50D"
     title: 3-in-1 Code Review
-    details: "Spec compliance, code quality, and architecture fit - checked in a single pass. Evidence-based verdicts, not 'LGTM'."
+    details: "Spec compliance, code quality, and architecture fit — checked in a single pass. Evidence-based verdicts, not 'LGTM'."
     link: /scenarios/code-review
     linkText: See how
-  - icon: 🧪
+  - icon: "\U0001F9EA"
     title: Real TDD, Not Trust-Based
-    details: "RED → GREEN → REFACTOR with actual test output as proof. No 'tests should pass' - the agent runs them and shows results."
+    details: "RED -> GREEN -> REFACTOR with actual test output as proof. No 'tests should pass' — the agent runs them and shows results."
     link: /reference/skills
     linkText: View skills
-  - icon: ⚡
+  - icon: "\u26A1"
     title: 60-80% Cheaper with Lite Mode
     details: "Every agent has a Lite variant using Haiku. Rapid iteration at a fraction of the cost, Full mode when it matters."
     link: /guide/benchmark
     linkText: See benchmarks
-  - icon: 📦
+  - icon: "\U0001F4E6"
     title: 7 Framework Packs
-    details: "Next.js, React, Vue 3, SvelteKit, Angular, Astro, Nuxt - each with agents, skills, and architecture patterns tailored to your stack."
+    details: "Next.js, React, Vue 3, SvelteKit, Angular, Astro, Nuxt — each with agents, skills, and architecture patterns tailored to your stack."
     link: /guide/introduction#framework-support
     linkText: Explore packs
-  - icon: 🛡️
+  - icon: "\U0001F6E1\uFE0F"
     title: Built-in Governance
     details: "Anti-rationalization tables, verification protocol, cost tracking, and session memory. Agents can't cut corners."
     link: /reference/hooks

@@ -24,7 +24,7 @@ Long conversations accumulate stale context. Instructions from earlier messages 
 
 ### Specialized agents, not generic prompts
 
-27+ agents, each with deep domain expertise:
+30 agents, each with deep domain expertise:
 
 | Need | Agent | Expertise |
 |------|-------|-----------|
@@ -77,7 +77,7 @@ Agents read your `ARCHITECTURE.md` and follow YOUR conventions:
 | Architecture awareness | None | Reads ARCHITECTURE.md |
 | Code verification | "Should work" | Actual test/build output |
 | Cost control | Unpredictable | Adaptive planning + Lite mode |
-| Agent specialization | One model does everything | 27+ domain experts |
+| Agent specialization | One model does everything | 30 domain experts |
 | Governance | None | Anti-rationalization + verification |
 | Framework support | Generic | 7 tailored packs |
 | Context management | Degrades over time | Fresh context per task |

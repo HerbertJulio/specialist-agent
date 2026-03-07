@@ -1,6 +1,6 @@
 # Agents Reference
 
-27+ specialized AI agents organized by purpose.
+30 specialized AI agents organized by purpose.
 
 ::: tip Cross-Cutting Features
 All agents include:

@@ -12,7 +12,7 @@ const gaHead: Array<[string, Record<string, string>] | [string, Record<string, s
 
 export default withMermaid(defineConfig({
   title: 'Specialist Agent',
-  description: 'Your AI development team - 27+ specialized agents',
+  description: 'Your AI development team - 30 specialized agents and 23 skills',
   base: (process.env.VITEPRESS_BASE || '/') as `/${string}/`,
   sitemap: {
     hostname: 'https://specialistagent.com.br',
@@ -23,7 +23,7 @@ export default withMermaid(defineConfig({
 
     // Open Graph - Facebook, LinkedIn, WhatsApp
     ['meta', { property: 'og:title', content: 'Specialist Agent - Your AI Development Team' }],
-    ['meta', { property: 'og:description', content: '27+ specialized AI agents and 21 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode across 7 framework packs.' }],
+    ['meta', { property: 'og:description', content: '30 specialized AI agents and 23 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode across 7 framework packs.' }],
     ['meta', { property: 'og:image', content: 'https://specialistagent.com.br/social-preview.svg' }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
@@ -38,12 +38,12 @@ export default withMermaid(defineConfig({
     // Twitter / X
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'Specialist Agent - Your AI Development Team' }],
-    ['meta', { name: 'twitter:description', content: '27+ AI agents and 21 skills that build, review, debug, and ship production code. Any framework, any stack.' }],
+    ['meta', { name: 'twitter:description', content: '30 AI agents and 23 skills that build, review, debug, and ship production code. Any framework, any stack.' }],
     ['meta', { name: 'twitter:image', content: 'https://specialistagent.com.br/social-preview-twitter.svg' }],
     ['meta', { name: 'twitter:image:alt', content: 'Specialist Agent - AI agents for any framework, any stack' }],
 
     // SEO
-    ['meta', { name: 'description', content: '27+ specialized AI agents and 21 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt.' }],
+    ['meta', { name: 'description', content: '30 specialized AI agents and 23 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt.' }],
     ['meta', { name: 'keywords', content: 'ai agents, claude code, specialist agent, code review, debugging, development tools, ai coding assistant, cursor ai, vscode ai, windsurf, codex, opencode, vue, react, nextjs, sveltekit, angular, astro, nuxt, tdd, pair programming, code generation' }],
     ['meta', { name: 'author', content: 'Herbert Julio' }],
     ['meta', { name: 'robots', content: 'index, follow' }],
@@ -60,7 +60,7 @@ export default withMermaid(defineConfig({
       label: 'Português',
       lang: 'pt-BR',
       link: 'https://specialistagent.com.br/pt-BR/',
-      description: 'Seu time de desenvolvimento AI - 27+ agentes especializados',
+      description: 'Seu time de desenvolvimento AI - 30 agentes especializados e 23 skills',
       themeConfig: {
         nav: [
           { text: 'Guia', link: '/pt-BR/guide/introduction' },
@@ -133,6 +133,7 @@ export default withMermaid(defineConfig({
             {
               text: 'Avançado',
               items: [
+                { text: 'Boas Práticas', link: '/pt-BR/guide/best-practices' },
                 { text: 'Integrações MCP', link: '/pt-BR/guide/mcp-integrations' },
                 { text: 'Performance e Custo', link: '/pt-BR/guide/benchmark' },
                 { text: 'FAQ', link: '/pt-BR/guide/faq' },
@@ -300,6 +301,7 @@ export default withMermaid(defineConfig({
         {
           text: 'Advanced',
           items: [
+            { text: 'Best Practices', link: '/guide/best-practices' },
             { text: 'MCP Integrations', link: '/guide/mcp-integrations' },
             { text: 'Performance & Cost', link: '/guide/benchmark' },
             { text: 'FAQ', link: '/guide/faq' },

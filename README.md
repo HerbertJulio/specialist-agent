@@ -6,7 +6,7 @@
 
 <p align="center">
   <b>Your AI Development Team</b><br/>
-  27+ specialized agents that build, review, debug, and ship production code.
+  30 specialized agents and 23 skills that build, review, debug, and ship production code — across any framework, any stack.
 </p>
 
 [![CI](https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml)
@@ -18,259 +18,234 @@
 
 ---
 
-## Why Specialist Agent?
-
-| | Specialist Agent | Others |
-|---|---|---|
-| **Agents** | 27+ specialized | 1-5 generic |
-| **Frameworks** | Next.js, React, Vue, SvelteKit, Angular, Astro, Nuxt | Generic only |
-| **Cost** | Lite mode (60-80% cheaper) | Full cost always |
-| **Verification** | Proof-based (command output) | Trust-based ("it works") |
-| **Memory** | Cross-session persistence | None |
-| **Rollback** | Git checkpoints | None |
-| **Hooks** | 11 (7 lifecycle + 4 native) | 0-1 |
-| **Platforms** | 6 (Claude, Cursor, VS Code, Windsurf, Codex, OpenCode) | 1-3 |
-
----
-
 ## Install
 
-**Marketplace:**
-```
+Two options — pick one:
+
+```bash
+# Option 1: CLI (recommended)
+cd your-project
+npx specialist-agent init
+
+# Option 2: Claude Code Marketplace
 /plugin install specialist-agent
 ```
 
-**CLI:**
-```bash
-npx specialist-agent init
-```
+The installer detects your framework, asks Full or Lite mode, and copies agents + skills to `.claude/`. No dependencies, no config files modified, no lock on any platform.
 
-Done. Start building.
+**Works with:** Claude Code, Cursor, VS Code, Windsurf, Codex, OpenCode
 
 ---
 
-## Agents
-
-### Core
-
-| Agent | What it Does |
-|-------|--------------|
-| `@starter` | Create projects from scratch |
-| `@builder` | Build modules, components, services |
-| `@reviewer` | Unified 3-in-1 review (spec + quality + architecture) |
-| `@doctor` | Debug issues systematically |
-| `@migrator` | Modernize legacy code |
-
-### Workflow
-
-| Agent | What it Does |
-|-------|--------------|
-| `@planner` | Plan features adaptively by complexity |
-| `@executor` | Execute with checkpoints, gates, and cost tracking |
-| `@tdd` | Test-Driven Development (RED-GREEN-REFACTOR) |
-| `@debugger` | 4-phase systematic debugging |
-| `@pair` | Real-time pair programming |
-| `@analyst` | Requirements to technical specs |
-| `@orchestrator` | Coordinate multiple agents |
-
-### Specialists
-
-| Agent | What it Does |
-|-------|--------------|
-| `@api` | REST/GraphQL API design |
-| `@perf` | Performance optimization |
-| `@security` | Auth, OWASP, encryption |
-| `@finance` | Payments, billing, subscriptions |
-| `@cloud` | AWS, GCP, Terraform, serverless |
-| `@data` | Database design, migrations, caching |
-| `@devops` | Docker, K8s, CI/CD |
-| `@i18n` | Internationalization |
-| `@docs` | Documentation generation |
-| `@refactor` | Code refactoring |
-| `@deps` | Dependency management |
-| `@legal` | GDPR, LGPD, CCPA compliance |
-| `@designer` | Design systems, accessibility |
-| `@tester` | Test strategies |
-| `@architect` | Full system architecture migration (DDD, CQRS, Hexagonal) |
-| `@ripple` | Cascading effect analysis |
-
-### Support
-
-| Agent | What it Does |
-|-------|--------------|
-| `@scout` | Quick project analysis (~500 tokens) |
-| `@explorer` | Deep codebase exploration |
-| `@memory` | Session memory management |
-
----
-
-## Skills
-
-| Skill | What it Does |
-|-------|--------------|
-| `/brainstorm` | Socratic brainstorming - refine ideas before planning |
-| `/plan` | Plan a feature adaptively |
-| `/tdd` | Test-driven development cycle |
-| `/debug` | 4-phase systematic debugging |
-| `/codereview` | Multi-reviewer parallel code review (3 perspectives) |
-| `/commit` | Smart conventional commits with validation |
-| `/lint` | Lint and auto-fix (detects Biome/ESLint/Prettier) |
-| `/audit` | Multi-domain code audit (security + perf + architecture + deps) |
-| `/onboard` | Codebase onboarding for new developers |
-| `/checkpoint` | Save/restore progress with git |
-| `/health` | Project health score (0-100) |
-| `/verify` | Verification before completion (proof-based) |
-| `/remember` | Save decisions to memory |
-| `/recall` | Query saved decisions |
-| `/estimate` | Estimate token cost before starting |
-| `/finish` | Finalize branch with metrics |
-| `/learn` | Learning mode - explains while building |
-| `/tutorial` | Interactive tutorial |
-| `/worktree` | Git worktree isolation for parallel tasks |
-| `/write-skill` | Create or improve skills with TDD |
-| `/migrate-framework` | Migrate between frameworks |
-
----
-
-## Framework Packs
-
-| Pack | Stack |
-|------|-------|
-| **Next.js** | App Router + TypeScript + Zustand |
-| **React** | React 18 + TypeScript + React Query |
-| **Vue 3** | Vue 3 + TypeScript + Pinia |
-| **SvelteKit** | SvelteKit 2 + TypeScript |
-| **Angular** | Angular 17+ Standalone + Signals |
-| **Astro** | Astro 4+ Islands + Content Collections |
-| **Nuxt** | Nuxt 3 + Auto-imports + Nitro |
-
-7 framework packs, each with 4 specialized agents, 4 lite agents, and 12 skills.
-
----
-
-## Examples
+## What It Does — Real Examples
 
 ```bash
-# New project
-"Use @starter to create an e-commerce app with Next.js + PostgreSQL"
-
-# Build a feature
+# Build a complete feature module with types, service, components, and tests
 "Use @builder to create a products module with CRUD"
 
-# Review code
+# Get a 3-in-1 code review: spec compliance + code quality + architecture
 "Use @reviewer to review the auth module"
 
-# Debug
-"Use @doctor to investigate the 500 error"
+# Systematic 4-phase debugging — not guesswork
+"Use @doctor to investigate the 500 error on login"
 
-# Plan
-/plan add user authentication
+# Plan before coding — adaptive plan based on complexity
+/plan add user authentication with JWT
 
-# TDD
-/tdd implement calculateDiscount
+# Test-Driven Development with real test output as proof
+/tdd implement calculateDiscount function
 
-# Audit
+# Multi-domain audit in one pass: security, performance, architecture, deps
 /audit src/modules/auth
 
-# Onboard
-/onboard
+# Evaluate feasibility before committing to a feature
+/discovery implement real-time notifications with WebSocket
 
-# Save progress
-/checkpoint create before-refactor
+# Scaffold a new project from scratch
+"Use @starter to create a SaaS app with Next.js + PostgreSQL + Stripe"
+
+# Migrate architecture patterns across your entire codebase
+/migrate-architecture mvc to clean full project
 ```
+
+---
+
+## Why Specialist Agent?
+
+| | Specialist Agent | Generic AI |
+|---|---|---|
+| **Agents** | 30 domain-specialized | 1 generic prompt |
+| **Frameworks** | 7 tailored packs (Next.js, React, Vue, SvelteKit, Angular, Astro, Nuxt) | Generic only |
+| **Verification** | Proof-based — runs tests, shows output | Trust-based — "it should work" |
+| **Cost control** | Lite mode (60-80% cheaper) + `/estimate` | Full cost always |
+| **Context** | Fresh context per task — no pollution | Degrades over conversation |
+| **Memory** | Cross-session decisions persist | Starts from zero every time |
+| **Rollback** | Git checkpoints per task | None |
+| **Governance** | Anti-rationalization + verification protocol | None |
+| **Platforms** | 6 platforms | 1-3 |
+
+---
+
+## All 30 Agents
+
+### Core — Build, Review, Debug
+
+| Agent | What it Does | Example |
+|-------|--------------|---------|
+| `@starter` | Scaffold projects from scratch | "Create a Next.js + Prisma app" |
+| `@builder` | Build modules, components, services | "Create a products module with CRUD" |
+| `@reviewer` | 3-in-1 review: spec + quality + architecture | "Review the auth module" |
+| `@doctor` | Systematic 4-phase debugging | "Investigate the 500 error on login" |
+| `@migrator` | Modernize legacy code | "Migrate src/legacy/ to TypeScript" |
+
+### Workflow — Plan, Execute, Coordinate
+
+| Agent | What it Does | Example |
+|-------|--------------|---------|
+| `@planner` | Adaptive planning by complexity | "Plan the checkout flow" |
+| `@executor` | Execute plans with checkpoints and gates | "Execute the auth migration plan" |
+| `@tdd` | Test-Driven Development (RED-GREEN-REFACTOR) | "TDD the discount calculator" |
+| `@debugger` | 4-phase systematic debugging | "Debug the state sync issue" |
+| `@pair` | Real-time pair programming | "Pair with me on the payment flow" |
+| `@analyst` | Requirements to technical specs | "Spec out the notification system" |
+| `@orchestrator` | Coordinate multiple agents on complex tasks | "Orchestrate the full checkout feature" |
+
+### Specialists — Domain Experts
+
+| Agent | What it Does | Example |
+|-------|--------------|---------|
+| `@api` | REST/GraphQL API design with OpenAPI | "Design the orders API" |
+| `@perf` | Performance profiling and optimization | "Optimize the dashboard load time" |
+| `@security` | Auth, OWASP Top 10, encryption | "Audit for XSS and injection" |
+| `@finance` | Payments, billing, subscriptions | "Integrate Stripe checkout" |
+| `@cloud` | AWS, GCP, Terraform, serverless | "Set up Lambda + API Gateway" |
+| `@data` | Database design, migrations, caching | "Design the schema with Prisma" |
+| `@devops` | Docker, Kubernetes, CI/CD | "Create the GitHub Actions pipeline" |
+| `@i18n` | Internationalization | "Add Portuguese support" |
+| `@docs` | Documentation generation | "Generate API docs from code" |
+| `@refactor` | Code refactoring with safety | "Extract service layer from controllers" |
+| `@deps` | Dependency management and updates | "Audit and update dependencies" |
+| `@legal` | GDPR, LGPD, CCPA compliance | "Check LGPD compliance" |
+| `@designer` | Design systems, accessibility | "Create the component library" |
+| `@tester` | Test strategies and coverage | "Create test strategy for payments" |
+| `@architect` | Architecture migration (DDD, CQRS, Hexagonal) | "Migrate to Clean Architecture" |
+| `@ripple` | Cascading effect analysis | "What breaks if I change the User model?" |
+
+### Business — Product & Growth
+
+| Agent | What it Does | Example |
+|-------|--------------|---------|
+| `@marketing` | Landing pages, SEO, analytics | "Create the pricing page" |
+| `@product` | Feature specs, user stories, roadmap | "Write user stories for onboarding" |
+| `@support` | Help docs, error pages, FAQ | "Create the help center" |
+
+### Support — Explore & Remember
+
+| Agent | What it Does | Example |
+|-------|--------------|---------|
+| `@scout` | Quick project analysis (~500 tokens) | "Analyze this project" |
+| `@explorer` | Deep codebase exploration | "Map the module dependencies" |
+| `@memory` | Cross-session decision persistence | "Remember: use Zustand for state" |
+
+---
+
+## All 23 Skills
+
+Skills are slash commands that trigger repeatable workflows:
+
+| Skill | What it Does | Example |
+|-------|--------------|---------|
+| `/brainstorm` | Socratic brainstorming before planning | `/brainstorm notification system` |
+| `/plan` | Adaptive feature planning | `/plan add user authentication` |
+| `/tdd` | Test-driven development cycle | `/tdd implement calculateDiscount` |
+| `/debug` | 4-phase systematic debugging | `/debug login returns 401` |
+| `/discovery` | Feasibility evaluation with GO/NO-GO verdict | `/discovery real-time chat with WebSocket` |
+| `/codereview` | Multi-reviewer parallel code review (3 perspectives) | `/codereview src/modules/auth` |
+| `/commit` | Smart conventional commits with validation | `/commit` |
+| `/lint` | Lint and auto-fix (detects Biome/ESLint/Prettier) | `/lint src/` |
+| `/audit` | Multi-domain audit: security + perf + arch + deps | `/audit src/modules/auth` |
+| `/onboard` | Codebase onboarding for new developers | `/onboard` |
+| `/checkpoint` | Save/restore progress with git | `/checkpoint create before-refactor` |
+| `/health` | Project health score (0-100) | `/health` |
+| `/verify` | Proof-based verification before completion | `/verify` |
+| `/remember` | Save a decision to memory | `/remember use Zustand for state` |
+| `/recall` | Query saved decisions | `/recall state management` |
+| `/estimate` | Estimate token cost before starting | `/estimate add payments module` |
+| `/finish` | Finalize branch with metrics | `/finish` |
+| `/learn` | Learning mode — explains while building | `/learn create a REST API` |
+| `/tutorial` | Interactive guided tutorial | `/tutorial` |
+| `/worktree` | Git worktree isolation for parallel tasks | `/worktree feature/payments` |
+| `/write-skill` | Create or improve custom skills | `/write-skill deploy-preview` |
+| `/migrate-framework` | Migrate between frameworks | `/migrate-framework react to vue` |
+| `/migrate-architecture` | Migrate architecture patterns | `/migrate-architecture mvc to clean` |
+
+---
+
+## 7 Framework Packs
+
+Each pack includes 4 specialized agents, 4 lite agents, and 12 skills — all tailored to the framework's conventions:
+
+| Pack | Stack | What You Get |
+|------|-------|--------------|
+| **Next.js** | App Router + TypeScript + Zustand | Server Components, RSC patterns, route handlers |
+| **React** | React 18 + TypeScript + React Query | Hooks, Suspense, code splitting |
+| **Vue 3** | Vue 3 + TypeScript + Pinia | Composition API, composables, Vue Query |
+| **SvelteKit** | SvelteKit 2 + TypeScript | Stores, load functions, form actions |
+| **Angular** | Angular 17+ + Standalone + Signals | DI, standalone components, RxJS |
+| **Astro** | Astro 4+ + Islands | Content Collections, island architecture |
+| **Nuxt** | Nuxt 3 + Auto-imports + Nitro | useFetch, server routes, auto-imports |
 
 ---
 
 ## Verification Protocol
 
-All agents verify claims with evidence before marking work complete:
+Every agent must show actual command output before claiming completion:
 
 ```
-CLAIM: "Tests pass"
-PROOF: Must show actual test output in the same message
-
-CLAIM: "Build succeeds"
-PROOF: Must show build command output
-
-CLAIM: "No security issues"
-PROOF: Must show npm audit / lint output
+CLAIM: "Tests pass"       → PROOF: actual test output shown
+CLAIM: "Build succeeds"   → PROOF: build command output shown
+CLAIM: "No vulnerabilities" → PROOF: npm audit / lint output shown
 ```
 
-No "should work" - run the command, show the output.
+Anti-rationalization tables prevent agents from cutting corners. No "should work" — run the command, show the output, then claim done.
 
 ---
 
-## Hooks
+## Native Hooks
 
-7 lifecycle hooks + 4 native Claude Code hooks:
+4 Claude Code hooks that run automatically after install:
 
-| Hook | When |
-|------|------|
-| `session-start` | Session begins |
-| `before-plan` | Before `@planner` creates a plan |
-| `after-task` | After any task completes |
-| `before-review` | Before `@reviewer` starts |
-| `after-review` | After `@reviewer` finishes |
-| `on-error` | When an error occurs |
-| `session-end` | Session ends |
+| Hook | Trigger | What it Does |
+|------|---------|-------------|
+| **Security Guard** | Before command execution | Blocks `rm -rf /`, `DROP TABLE`, force push to main, `curl \| bash` |
+| **Auto-Dispatch** | On every prompt | Suggests the best agent for your intent |
+| **Session Context** | On session start | Injects project state (branch, installed agents, memory) |
+| **Auto-Format** | After file write/edit | Formats files with your project's formatter |
 
-### Native Hooks (Claude Code)
-
-| Hook | Event | What it Does |
-|------|-------|-------------|
-| Security Guard | `PreToolUse` | Blocks dangerous commands (`rm -rf /`, force push, `DROP TABLE`) |
-| Auto-Dispatch | `UserPromptSubmit` | Suggests the best agent for your prompt |
-| Session Context | `SessionStart` | Injects project state (branch, agents, memory) |
-| Auto-Format | `PostToolUse` | Auto-formats files after Write/Edit |
-
-Configure lifecycle hooks in `hooks/hooks.json`. Native hooks in `.claude/settings.json`.
-
----
-
-## Security
-
-The Security Guard hook blocks dangerous commands **before** they execute:
-
-- **CRITICAL:** `rm -rf /`, fork bombs, disk wipe commands
-- **HIGH:** Force push to main, `git reset --hard`, `DROP TABLE`, `curl | bash`
-- **MEDIUM:** Reading `.env` files, inline secrets in commands
-
-Customize rules in `.specialist-agent/hooks/native/security-config.json`.
+Plus 7 lifecycle hooks (`session-start`, `before-plan`, `after-task`, `before-review`, `after-review`, `on-error`, `session-end`) configurable in `hooks/hooks.json`.
 
 ---
 
 ## Full vs Lite Mode
 
-| Mode | Model | Cost |
-|------|-------|------|
-| Full | Sonnet/Opus | Higher accuracy |
-| Lite | Haiku | 60-80% cheaper |
+| Mode | Model | Best For | Cost |
+|------|-------|----------|------|
+| **Full** | Sonnet/Opus | Complex features, architecture, PRs | Standard |
+| **Lite** | Haiku | Scaffolding, quick fixes, rapid iteration | **60-80% less** |
 
-Choose during installation. All 27+ agents have lite variants.
-
----
-
-## Platforms
-
-| Platform | Install |
-|----------|---------|
-| Claude Code | `npx specialist-agent init` or `/plugin install` |
-| Cursor | Copy `.cursor-plugin/` |
-| VS Code | `.vscode/extension.json` |
-| Windsurf | `.windsurf/plugin.json` |
-| Codex | `.codex/INSTALL.md` |
-| OpenCode | `.opencode/INSTALL.md` |
+Every agent has a Lite variant. Use `/estimate` to preview cost before starting.
 
 ---
 
-## CLI
+## CLI Commands
 
 ```bash
-npx specialist-agent init                    # Install
-npx specialist-agent create-agent @my-agent  # Create agent
-npx specialist-agent list                    # List agents
-npx specialist-agent profiles set startup-fast  # Set profile
-npx specialist-agent community list          # Community skills
+npx specialist-agent init                    # Install agents + skills
+npx specialist-agent detect                  # Detect framework and architecture
+npx specialist-agent list                    # List installed agents
+npx specialist-agent create-agent @my-agent  # Create a custom agent
+npx specialist-agent profiles set startup-fast  # Apply team profile
+npx specialist-agent community list          # Browse community skills
 ```
 
 ---
@@ -279,43 +254,32 @@ npx specialist-agent community list          # Community skills
 
 | Profile | Description |
 |---------|-------------|
-| `startup-fast` | Move fast, Haiku |
-| `enterprise-strict` | Full validation |
-| `learning-mode` | Explain everything |
-| `cost-optimized` | Minimize tokens |
+| `startup-fast` | Speed-first, Haiku, minimal ceremony |
+| `enterprise-strict` | Full validation, all gates enforced |
+| `learning-mode` | Explains every decision while building |
+| `cost-optimized` | Minimizes token usage across all agents |
 
 ---
 
-## Industry Templates
+## Platforms
 
-| Template | For |
-|----------|-----|
-| E-commerce | Online stores |
-| SaaS | Subscription apps |
-| Fintech | Financial apps |
-
----
-
-## Session Memory
-
-```bash
-# Save a decision
-/remember use Zustand for state management
-
-# Recall later
-/recall state management
-```
-
-Decisions persist across sessions.
+| Platform | Install |
+|----------|---------|
+| **Claude Code** | `npx specialist-agent init` or `/plugin install` |
+| **Cursor** | Copy `.cursor-plugin/` |
+| **VS Code** | `.vscode/extension.json` |
+| **Windsurf** | `.windsurf/plugin.json` |
+| **Codex** | `.codex/INSTALL.md` |
+| **OpenCode** | `.opencode/INSTALL.md` |
 
 ---
 
 ## Documentation
 
-Full docs: [specialistagent.com.br](https://specialistagent.com.br/)
+Full docs: **[specialistagent.com.br](https://specialistagent.com.br/)**
 
 ```bash
-npm run docs:dev
+npm run docs:dev   # Run docs locally
 ```
 
 ---

@@ -1,6 +1,6 @@
 # Referência de Agentes
 
-27+ agentes de IA especializados organizados por propósito.
+30 agentes de IA especializados organizados por propósito.
 
 ::: tip Features Transversais
 Todos os agentes incluem:

@@ -205,12 +205,35 @@ function detectFramework(pkgPath, availablePacks) {
 
 // ── Guidance texts ───────────────────────────────────
 
-function buildGettingStarted(agentNames, installedSkills, archInstalled) {
+function buildGettingStarted(agentNames, installedSkills, archInstalled, isEmptyProject) {
   const lines = []
+
+  if (isEmptyProject) {
+    lines.push('You\'re starting fresh — here\'s how to get going:')
+    lines.push('')
+    lines.push('  $ claude')
+    lines.push('')
+    if (agentNames.includes('starter')) {
+      lines.push('  Create a project from scratch:')
+      lines.push('  > "Use @starter to create an app with Next.js + PostgreSQL"')
+      lines.push('  > "Use @starter to create a Vue 3 SaaS with Stripe"')
+      lines.push('')
+    }
+    if (agentNames.includes('planner')) {
+      lines.push('  Plan before building:')
+      lines.push('  > /plan add user authentication with JWT')
+      lines.push('  > /discovery implement real-time chat with WebSocket')
+      lines.push('')
+    }
+    lines.push('  All 30 agents are installed. When you choose a framework,')
+    lines.push('  re-run to swap to framework-specific pack agents:')
+    lines.push('  > npx specialist-agent init')
+    return lines.join('\n')
+  }
 
   if (archInstalled) {
     lines.push('Agents enforce the architecture defined in docs/ARCHITECTURE.md.')
-    lines.push('They ensure consistency across modules \u2014 the more you use them,')
+    lines.push('They ensure consistency across modules — the more you use them,')
     lines.push('the more value they deliver.')
     lines.push('')
     lines.push('To migrate your project to the new architecture:')
@@ -238,16 +261,19 @@ function buildGettingStarted(agentNames, installedSkills, archInstalled) {
   if (installedSkills.length > 0) {
     lines.push('')
     lines.push('Skills (slash commands):')
-    installedSkills.slice(0, 3).forEach(skill => {
-      lines.push(`  > ${skill}`)
-    })
+    const topSkills = ['/plan', '/tdd', '/audit', '/discovery']
+    const available = topSkills.filter(s => installedSkills.includes(s))
+    if (available.length > 0) {
+      available.forEach(skill => lines.push(`  > ${skill}`))
+    } else {
+      installedSkills.slice(0, 4).forEach(skill => lines.push(`  > ${skill}`))
+    }
   }
 
   if (agentNames.includes('starter')) {
     lines.push('')
-    lines.push('If you need to scaffold a new project from scratch, @starter')
-    lines.push('can help with the initial setup (stack, backend, database).')
-    lines.push('  > "Use @starter to create my project"')
+    lines.push('Scaffold a new project from scratch:')
+    lines.push('  > "Use @starter to create an e-commerce app with Next.js"')
   }
 
   return lines.join('\n')
@@ -273,12 +299,12 @@ if (args.includes('--help') || args.includes('-h')) {
   console.log('  Usage: specialist-agent <command> [options]')
   console.log()
   console.log('  Commands:')
-  console.log(`    init                    ${DIM}Install agents and skills in your project${NC}`)
-  console.log(`    detect                  ${DIM}Detect project architecture, monorepo, and suggest migrations${NC}`)
+  console.log(`    init                    ${DIM}Install 30 agents and 23 skills (works on empty projects too)${NC}`)
+  console.log(`    detect                  ${DIM}Detect architecture, monorepo, and suggest migrations${NC}`)
   console.log(`    create-agent <name>     ${DIM}Create a custom agent from template${NC}`)
-  console.log(`    list                    ${DIM}List installed agents and skills${NC}`)
+  console.log(`    list                    ${DIM}List installed agents, skills, and memory${NC}`)
   console.log(`    profiles                ${DIM}Manage AI team profiles${NC}`)
-  console.log(`    community               ${DIM}Manage community skills${NC}`)
+  console.log(`    community               ${DIM}Manage community skills (list/install/remove)${NC}`)
   console.log()
   console.log('  Options:')
   console.log(`    -h, --help      ${DIM}Show this help message${NC}`)
@@ -286,8 +312,10 @@ if (args.includes('--help') || args.includes('-h')) {
   console.log(`    -f, --force     ${DIM}Overwrite existing agents without asking${NC}`)
   console.log()
   console.log('  Examples:')
-  console.log(`    ${DIM}$ specialist-agent init${NC}`)
-  console.log(`    ${DIM}$ specialist-agent create-agent @my-custom-agent${NC}`)
+  console.log(`    ${DIM}$ specialist-agent init              # Install in existing project${NC}`)
+  console.log(`    ${DIM}$ specialist-agent init              # Start from empty dir (no framework yet)${NC}`)
+  console.log(`    ${DIM}$ specialist-agent detect            # Analyze architecture & get recommendations${NC}`)
+  console.log(`    ${DIM}$ specialist-agent create-agent @qa  # Create a custom agent${NC}`)
   console.log(`    ${DIM}$ specialist-agent profiles set startup-fast${NC}`)
   console.log()
   process.exit(0)
@@ -999,6 +1027,14 @@ async function main() {
   const detected = detectFramework(join(cwd, 'package.json'), packs)
   let framework
 
+  const frameworkOptions = [
+    ...packs.map(p => ({
+      value: p,
+      label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
+    })),
+    { value: 'none', label: 'No framework yet', hint: 'Empty project — I haven\'t decided yet' },
+  ]
+
   if (detected) {
     clack.log.success(`Detected ${packLabels[detected] || detected} from package.json`)
 
@@ -1014,24 +1050,24 @@ async function main() {
     } else {
       framework = await clack.select({
         message: 'Which framework?',
-        options: packs.map(p => ({
-          value: p,
-          label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
-        })),
+        options: frameworkOptions,
       })
 
       if (clack.isCancel(framework)) handleCancel()
     }
   } else {
     framework = await clack.select({
-      message: 'Which framework?',
-      options: packs.map(p => ({
-        value: p,
-        label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
-      })),
+      message: 'Which framework will you use?',
+      options: frameworkOptions,
     })
 
     if (clack.isCancel(framework)) handleCancel()
+  }
+
+  const isEmptyProject = framework === 'none'
+  if (isEmptyProject) {
+    clack.log.info('No framework selected — installing all agents so you have everything available.')
+    clack.log.info(`${DIM}When you choose a framework, re-run to swap pack agents: npx specialist-agent init${NC}`)
   }
 
   // 2. Mode
@@ -1055,7 +1091,7 @@ async function main() {
 
   // 4. Workflow agents
   const installWorkflow = await clack.confirm({
-    message: `Install workflow agents? ${DIM}(@planner, @executor, @tdd, @debugger, @pair)${NC}`,
+    message: `Install workflow agents? ${DIM}(@planner, @executor, @tdd, @debugger, @pair, @analyst, @orchestrator)${NC}`,
     initialValue: true,
   })
 
@@ -1063,11 +1099,19 @@ async function main() {
 
   // 5. Specialist agents
   const installSpecialists = await clack.confirm({
-    message: `Install specialist agents? ${DIM}(@api, @perf, @security, @finance, @data, @i18n, @docs, @deps, @legal, ...)${NC}`,
+    message: `Install specialist agents? ${DIM}(@api, @perf, @security, @finance, @data, @devops, @architect, ...)${NC}`,
     initialValue: true,
   })
 
   if (clack.isCancel(installSpecialists)) handleCancel()
+
+  // 5b. Business agents
+  const installBusiness = await clack.confirm({
+    message: `Install business agents? ${DIM}(@marketing, @product, @support)${NC}`,
+    initialValue: true,
+  })
+
+  if (clack.isCancel(installBusiness)) handleCancel()
 
   // 6. Install scope
   const installScope = await clack.select({
@@ -1116,7 +1160,7 @@ async function main() {
   let generateCustomArch = false
 
   // Detect current architecture
-  const archDetection = detectProjectArchitecture(cwd, { framework })
+  const archDetection = detectProjectArchitecture(cwd, { framework: isEmptyProject ? null : framework })
   const detectedArch = archDetection.architecture
   const detectedArchName = ARCHITECTURE_PATTERNS[detectedArch]?.name || detectedArch
 
@@ -1286,11 +1330,13 @@ async function main() {
 
   // ── Install files ──────────────────────────────────
 
-  const packDir = join(ROOT, 'packs', framework)
+  // For empty projects, use React as default pack so all agents are available
+  const defaultPack = isEmptyProject ? 'react' : framework
+  const packDir = join(ROOT, 'packs', defaultPack)
   const agentsSource = mode === 'lite' ? join(packDir, 'agents-lite') : join(packDir, 'agents')
   const skillsSource = join(packDir, 'skills')
-  const archSource = join(packDir, 'ARCHITECTURE.md')
-  const claudeSource = join(packDir, 'CLAUDE.md')
+  const archSource = isEmptyProject ? null : join(packDir, 'ARCHITECTURE.md')
+  const claudeSource = isEmptyProject ? join(ROOT, 'CLAUDE.md') : join(packDir, 'CLAUDE.md')
 
   const installGlobal = installScope === 'global'
   const agentsDest = installGlobal
@@ -1320,11 +1366,13 @@ async function main() {
     s.start('Installing agents and skills...')
   }
 
-  // Install pack agents
-  if (shouldOverwrite) {
-    copyDir(agentsSource, agentsDest)
-  } else {
-    copyNewOnly(agentsSource, agentsDest)
+  // Install pack agents (React default for empty projects)
+  if (existsSync(agentsSource)) {
+    if (shouldOverwrite) {
+      copyDir(agentsSource, agentsDest)
+    } else {
+      copyNewOnly(agentsSource, agentsDest)
+    }
   }
 
   // Install starter agent
@@ -1367,12 +1415,28 @@ async function main() {
     }
   }
 
-  // Install skills (pack-specific)
+  // Install business agents
+  if (installBusiness) {
+    const businessNames = ['marketing', 'product', 'support']
+    for (const name of businessNames) {
+      const suffix = mode === 'lite' ? '-lite.md' : '.md'
+      const source = join(ROOT, 'agents', `${name}${suffix}`)
+      const dest = join(agentsDest, `${name}.md`)
+      if (existsSync(source) && (shouldOverwrite || !existsSync(dest))) {
+        cpSync(source, dest)
+      }
+    }
+  }
+
+  // Install skills (pack-specific — React default for empty projects)
   const skillsDest = join(cwd, '.claude', 'skills')
   mkdirSync(skillsDest, { recursive: true })
-  let skillCount = shouldOverwrite
-    ? copyDir(skillsSource, skillsDest)
-    : copyNewOnly(skillsSource, skillsDest)
+  let skillCount = 0
+  if (existsSync(skillsSource)) {
+    skillCount = shouldOverwrite
+      ? copyDir(skillsSource, skillsDest)
+      : copyNewOnly(skillsSource, skillsDest)
+  }
 
   // Install generic skills
   const genericSkillsSource = join(ROOT, 'skills')
@@ -1397,14 +1461,14 @@ async function main() {
       // Generate architecture guide for the selected pattern + framework + variant
       const guide = generateArchitectureGuide({
         architecture: selectedArchitecture,
-        framework,
+        framework: defaultPack,
         variant: selectedArchVariant,
         nextjsRouter: archDetection.nextjsRouter,
       })
       mkdirSync(dirname(archDest), { recursive: true })
       writeFileSync(archDest, guide)
       archInstalled = true
-    } else if (!existsSync(archDest) && existsSync(archSource)) {
+    } else if (!existsSync(archDest) && archSource && existsSync(archSource)) {
       // Fallback to pack default
       mkdirSync(dirname(archDest), { recursive: true })
       cpSync(archSource, archDest)
@@ -1415,9 +1479,18 @@ async function main() {
   // Install CLAUDE.md
   const claudeDest = join(cwd, 'CLAUDE.md')
   let claudeInstalled = false
-  if (!existsSync(claudeDest) && existsSync(claudeSource)) {
-    cpSync(claudeSource, claudeDest)
-    claudeInstalled = true
+  if (!existsSync(claudeDest)) {
+    if (claudeSource && existsSync(claudeSource)) {
+      cpSync(claudeSource, claudeDest)
+      claudeInstalled = true
+    } else {
+      // For empty projects, copy the root CLAUDE.md
+      const rootClaude = join(ROOT, 'CLAUDE.md')
+      if (existsSync(rootClaude)) {
+        cpSync(rootClaude, claudeDest)
+        claudeInstalled = true
+      }
+    }
   }
 
   s.stop('Installation complete')
@@ -1425,7 +1498,7 @@ async function main() {
   // ── Summary ────────────────────────────────────────
 
   const agentNames = getAgentNames(agentsDest)
-  const packLabel = packLabels[framework] || framework
+  const packLabel = isEmptyProject ? 'Universal' : (packLabels[framework] || framework)
 
   const summaryLines = []
   agentNames.forEach(name => summaryLines.push(`\u2713 @${name}`))
@@ -1454,7 +1527,7 @@ async function main() {
     ? readdirSync(skillsDest, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => '/' + d.name)
     : []
 
-  clack.note(buildGettingStarted(agentNames, installedSkills, archInstalled), 'Getting started')
+  clack.note(buildGettingStarted(agentNames, installedSkills, archInstalled, isEmptyProject), 'Getting started')
 
   if (mode === 'lite') {
     clack.log.info(`${DIM}Lite mode: agents run on Haiku (lower cost, faster).${NC}`)

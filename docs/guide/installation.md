@@ -102,5 +102,5 @@ Need manual setup? See platform-specific guides:
 ## What's Next?
 
 - [Quick Start](/guide/quick-start) - Build your first feature in 2 minutes
-- [All Agents](/reference/agents) - Browse the full 27+ agent catalog
+- [All Agents](/reference/agents) - Browse the full 30 agent catalog
 - [Architecture](/guide/architecture) - Understand the patterns agents follow

@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Specialist Agent
   text: Seu Time de Desenvolvimento AI
-  tagline: 27+ agentes especializados que constroem, revisam, depuram e entregam código de produção. Funciona com Claude Code, Cursor, VS Code e mais.
+  tagline: 30 agentes especializados e 23 skills que constroem, revisam, depuram e entregam código de produção. Funciona com Claude Code, Cursor, VS Code, Windsurf, Codex e OpenCode.
   actions:
     - theme: brand
       text: Começar
@@ -14,32 +14,32 @@ hero:
       link: /pt-BR/guide/introduction
 
 features:
-  - icon: 🏗️
-    title: 27+ Agentes Especializados
-    details: "Do @builder para scaffolding ao @security para auditorias OWASP. Cada agente tem expertise profunda de domínio, não prompts genéricos."
+  - icon: "\U0001F3D7\uFE0F"
+    title: 30 Agentes Especializados
+    details: "Do @builder para módulos ao @security para auditorias OWASP ao @finance para Stripe — cada agente tem expertise profunda de domínio, não prompts genéricos."
     link: /pt-BR/reference/agents
     linkText: Ver agentes
-  - icon: 🔍
+  - icon: "\U0001F50D"
     title: Code Review 3-em-1
     details: "Conformidade com spec, qualidade de código e aderência arquitetural — verificados em uma única passada. Vereditos baseados em evidências, não 'LGTM'."
     link: /pt-BR/scenarios/code-review
     linkText: Saiba como
-  - icon: 🧪
+  - icon: "\U0001F9EA"
     title: TDD Real, Não Baseado em Confiança
     details: "RED → GREEN → REFACTOR com output real dos testes como prova. Sem 'os testes devem passar' — o agente executa e mostra os resultados."
     link: /pt-BR/reference/skills
     linkText: Ver skills
-  - icon: ⚡
+  - icon: "\u26A1"
     title: 60-80% Mais Barato com Lite Mode
     details: "Todo agente tem uma variante Lite usando Haiku. Iteração rápida por uma fração do custo, modo Full quando importa."
     link: /pt-BR/guide/benchmark
     linkText: Ver benchmarks
-  - icon: 📦
+  - icon: "\U0001F4E6"
     title: 7 Framework Packs
     details: "Next.js, React, Vue 3, SvelteKit, Angular, Astro, Nuxt — cada um com agentes, skills e padrões de arquitetura sob medida para seu stack."
     link: /pt-BR/guide/introduction#framework-support
     linkText: Explorar packs
-  - icon: 🛡️
+  - icon: "\U0001F6E1\uFE0F"
     title: Governança Embutida
     details: "Tabelas anti-racionalização, protocolo de verificação, rastreamento de custo e memória de sessão. Os agentes não podem cortar caminho."
     link: /pt-BR/reference/hooks

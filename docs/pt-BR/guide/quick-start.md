@@ -58,7 +58,15 @@ Cria plano adaptativo baseado na complexidade.
 
 RED → GREEN → REFACTOR com evidência.
 
-## 7. Salve o Progresso
+## 7. Avalie a Viabilidade
+
+```bash
+/discovery implement real-time notifications with WebSocket
+```
+
+Veredito GO/NO-GO com análise de risco antes de comprometer recursos.
+
+## 8. Salve o Progresso
 
 ```bash
 /checkpoint create before-refactor
@@ -116,7 +124,7 @@ Rollback se necessário.
 /migrate-architecture mvc to clean full project
 ```
 
-## 8. Auditoria Antes do Release
+## 9. Auditoria Antes do Release
 
 ```bash
 /audit src/modules/auth
@@ -124,7 +132,7 @@ Rollback se necessário.
 
 Segurança + performance + arquitetura + dependências em uma única passada.
 
-## 9. Onboarding em um Codebase
+## 10. Onboarding em um Codebase
 
 ```bash
 /onboard
@@ -132,7 +140,7 @@ Segurança + performance + arquitetura + dependências em uma única passada.
 
 Mapeia arquitetura, detecta convenções, gera guia para desenvolvedores.
 
-## Skills
+## Todas as 23 Skills
 
 | Skill | O que faz |
 |-------|-----------|
@@ -140,6 +148,10 @@ Mapeia arquitetura, detecta convenções, gera guia para desenvolvedores.
 | `/plan` | Planejar uma feature |
 | `/tdd` | Test-driven development |
 | `/debug` | Debugar um problema |
+| `/discovery` | Avaliação de viabilidade com GO/NO-GO |
+| `/codereview` | Code review paralelo multi-reviewer |
+| `/commit` | Commits convencionais inteligentes |
+| `/lint` | Lint e auto-fix |
 | `/audit` | Auditoria multi-domínio |
 | `/onboard` | Onboarding de codebase |
 | `/verify` | Verificação antes de concluir |
@@ -171,5 +183,8 @@ Instalados durante `npx specialist-agent init`. Veja [Referência de Hooks](/pt-
 
 ## Próximo
 
-- [Agentes](/pt-BR/reference/agents) - Todos os 27+ agentes
-- [Skills](/pt-BR/reference/skills) - Todas as skills
+- [Todos os 30 Agentes](/pt-BR/reference/agents) - Catálogo completo
+- [Todas as Skills](/pt-BR/reference/skills) - Referência de slash commands
+- [Arquitetura](/pt-BR/guide/architecture) - Entenda os padrões
+- [Cenários Reais](/pt-BR/scenarios/) - Veja os agentes em ação
+- [Boas Práticas](/pt-BR/guide/best-practices) - Dicas para produtividade máxima

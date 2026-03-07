@@ -98,6 +98,62 @@ Costs depend on the Claude model and number of tokens consumed. See [Token Usage
 
 See [Tips to Reduce Token Usage](/reference/tokens#tips-to-reduce-token-usage) for more strategies.
 
+## Strategy & Workflow
+
+### When should I use a command vs agent vs skill?
+
+| Concept | When to Use | Example |
+|---------|-------------|---------|
+| **Agent** | Complex tasks requiring expertise, multi-step workflows, domain knowledge | `@builder`, `@reviewer`, `@security` |
+| **Skill** | Focused, repeatable operations with a specific output format | `/plan`, `/tdd`, `/audit`, `/discovery` |
+| **Vanilla prompt** | Simple, single-file tasks that don't need specialized knowledge | "Fix the typo on line 42" |
+
+**Rule of thumb:** If the task touches multiple files or needs verification steps, use an agent. If it's a repeatable process with a defined output, use a skill. If it's trivial, just ask directly.
+
+### Should I use plan mode or `@planner`?
+
+Both work, but they serve different purposes:
+
+- **Plan mode** (built-in): Quick, lightweight planning inside your current conversation. Good for small features.
+- **`@planner`**: Structured, phase-gated planning with acceptance criteria, cost estimates, and agent recommendations. Good for features that will involve multiple agents.
+
+For anything that will use `@orchestrator` or `@executor`, start with `@planner` — its output format is designed to feed directly into those agents.
+
+### What should I put in CLAUDE.md?
+
+Keep `CLAUDE.md` under 200 lines. Include:
+
+- Project-specific conventions (naming, directory structure)
+- Key architectural decisions ("we use React Query, not SWR")
+- Auto-dispatch rules (which agent for which intent)
+- Hard constraints ("never use any in TypeScript")
+
+Don't include generic best practices, framework documentation, or rules that are already enforced by your linter/compiler. For detailed rules, use `.claude/rules/` files instead — they load on-demand.
+
+### Why does Claude sometimes ignore CLAUDE.md instructions?
+
+Common causes:
+
+1. **Context overflow** — The file is too long and gets truncated or deprioritized. Keep it under 200 lines.
+2. **Conflicting instructions** — Two rules contradict each other. Be explicit about priority.
+3. **Vague language** — "Try to use..." is weaker than "MUST always use...". Use strong directives for hard rules.
+4. **Context pollution** — Long conversations dilute the impact of instructions. Use `/compact` at 50% context or start fresh sessions.
+
+### How often should I update my agents and CLAUDE.md?
+
+Update when something changes in your project's conventions or when you notice agents repeatedly making the same mistakes. Don't update for every model improvement — Specialist Agent's agents are designed to work across model versions.
+
+### Can I convert an existing codebase into specs, delete it, and regenerate?
+
+This is risky. Instead, use incremental approaches:
+
+1. Use `@scout` to analyze the existing codebase
+2. Use `@analyst` to extract requirements from existing code
+3. Use `@migrator` to modernize incrementally
+4. Use `@refactor` for structural improvements
+
+Regenerating from scratch loses edge cases, bug fixes, and implicit knowledge baked into existing code.
+
 ## Troubleshooting
 
 ### Agents are not following my ARCHITECTURE.md
@@ -131,6 +187,7 @@ See [Editing Patterns](/customization/editing-patterns) for examples of common c
 
 ## What's Next?
 
+- [Best Practices](/guide/best-practices) - Tips for getting the most out of Specialist Agent
 - [Quick Start](/guide/quick-start) - Get up and running
 - [Performance & Cost](/guide/benchmark) - Understand token usage
 - [All Agents](/reference/agents) - Full reference catalog
