@@ -2,6 +2,7 @@
 name: deps
 description: "Use when dependencies are outdated, have security vulnerabilities, need license compliance checks, conflict with each other, need major version upgrades, or require supply chain hardening."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#10b981"
 ---
 
 # Deps

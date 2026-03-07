@@ -2,6 +2,7 @@
 name: explorer
 description: "Use when onboarding onto an unfamiliar codebase, mapping project structure, or understanding how modules connect."
 tools: Read, Bash, Glob, Grep
+color: "#94a3b8"
 ---
 
 # Explorer

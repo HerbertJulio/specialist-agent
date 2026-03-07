@@ -2,6 +2,7 @@
 name: finance
 description: "Use when implementing payment processing, billing systems, invoicing, tax calculation, or financial reporting features."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#f59e0b"
 ---
 
 # Finance

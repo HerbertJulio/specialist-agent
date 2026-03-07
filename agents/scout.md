@@ -3,6 +3,7 @@ name: scout
 description: "Use when assessing a project for the first time, evaluating technical debt, or generating a health report."
 model: haiku
 tools: Read, Glob, Grep
+color: "#64748b"
 ---
 
 # @scout - Project Scout (Ultra-Light)

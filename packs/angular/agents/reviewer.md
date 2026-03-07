@@ -181,6 +181,20 @@ grep -rn "innerHTML\|\[innerHTML\]" src/ --include="*.ts" 2>/dev/null && echo "V
 5. Template: find heavy computation in templates without computed()
 6. Report bottlenecks sorted by user impact
 
+## Automatic Fail Triggers
+
+The following conditions result in an **AUTOMATIC FAIL** verdict -- no exceptions:
+
+| Trigger | Why |
+|---------|-----|
+| "Zero issues found" | Every codebase has improvement areas. Zero findings = insufficient review. |
+| "LGTM" or "Looks good to me" without specifics | Lazy. Explain what you verified and how. |
+| Approval without running `tsc`, `eslint`, `build`, or `tests` | No automated check output = no review. |
+| "Minor issues only" when violations exist | A violation is blocking. Do not minimize. |
+| Praising code that violates ARCHITECTURE.md | Architecture compliance is non-negotiable. |
+| Reviewing without reading ARCHITECTURE.md first | Context-free review is worthless. |
+| Approving code with `any` types in business logic | Type safety is not optional. |
+
 ## Anti-Sycophancy Protocol
 
 ### For the Reviewer (Giving Feedback)

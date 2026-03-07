@@ -2,6 +2,7 @@
 name: data
 description: "Use when designing database schemas, writing migrations, optimizing queries, or planning caching strategies."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#8b5cf6"
 ---
 
 # Data

@@ -2,6 +2,7 @@
 name: devops
 description: "Use when setting up Docker, Kubernetes, CI/CD pipelines, monitoring, or deployment infrastructure."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#f97316"
 ---
 
 # DevOps

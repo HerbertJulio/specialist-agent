@@ -2,6 +2,7 @@
 name: debugger
 description: "Use when encountering any bug, test failure, unexpected behavior, or error - before proposing fixes."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#6d28d9"
 ---
 
 # @debugger - Systematic Debugging Agent (4 Phases)

@@ -2,6 +2,7 @@
 name: designer
 description: "Use when building design systems, improving UI/UX, ensuring WCAG accessibility, or creating responsive layouts."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#ec4899"
 ---
 
 # Designer

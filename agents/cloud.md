@@ -2,6 +2,7 @@
 name: cloud
 description: "Use when designing cloud infrastructure, setting up IaC, configuring serverless functions, or planning cloud architecture."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#6366f1"
 ---
 
 # Cloud

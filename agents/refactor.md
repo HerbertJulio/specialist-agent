@@ -2,6 +2,7 @@
 name: refactor
 description: "Use when code has grown complex, has duplication, violates patterns, or needs restructuring - from code smells to architecture-level refactoring."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#14b8a6"
 ---
 
 # Refactor

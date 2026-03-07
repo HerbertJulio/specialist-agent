@@ -2,6 +2,7 @@
 name: architect
 description: "Use when migrating entire system architectures, transforming monoliths to microservices, adopting DDD/CQRS/Hexagonal, or redesigning application layers at system level."
 tools: Read, Write, Edit, Bash, Glob, Grep, Task
+color: "#1e40af"
 ---
 
 # Architect

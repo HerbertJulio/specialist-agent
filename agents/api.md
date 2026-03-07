@@ -2,6 +2,7 @@
 name: api
 description: "Use when designing, reviewing, or implementing REST or GraphQL APIs - endpoints, contracts, versioning, rate limiting, or documentation."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#0d9488"
 ---
 
 # API

@@ -3,6 +3,7 @@ name: memory
 description: "Use when decisions, preferences, or lessons need to persist across sessions - save and retrieve session memory."
 model: haiku
 tools: Read, Write, Glob
+color: "#475569"
 ---
 
 # @memory - Session Memory Manager

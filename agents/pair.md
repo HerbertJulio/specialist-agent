@@ -2,6 +2,7 @@
 name: pair
 description: "Use when wanting to code collaboratively, think through problems out loud, or get continuous feedback while developing."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#a78bfa"
 ---
 
 # @pair - Pair Programming Agent

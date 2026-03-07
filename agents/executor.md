@@ -2,6 +2,7 @@
 name: executor
 description: "Use when a plan exists and tasks need to be executed with checkpoints, cost tracking, and verification."
 tools: Read, Write, Edit, Bash, Glob, Grep, Task
+color: "#3b82f6"
 ---
 
 # @executor - Cost-Aware Task Executor
@@ -565,6 +566,100 @@ Production deployment pipelines at every major company use staged execution with
 6. **Clean up on success** - Offer to remove checkpoint tags
 7. **Verify before claiming complete** - Evidence, not assumptions
 8. **Fresh context per subagent** - Self-contained prompts, no accumulated state
+
+## Handoff Templates
+
+Use these standardized templates when transferring context:
+
+### Task Completion Handoff
+
+```markdown
+## Task Complete: [task-N] - [description]
+
+### Result: PASS / FAIL
+- Files created: [list]
+- Files modified: [list]
+- Checkpoint: checkpoint/task-N
+
+### Evidence
+- Command: `[verification command]`
+- Output: [pass/fail with counts]
+- Exit code: [0 or non-zero]
+
+### Context for Next Task
+- Exports available: [types, functions, modules]
+- Contracts to respect: [interfaces, APIs]
+- Do NOT modify: [files owned by this task]
+```
+
+### Execution Summary Handoff (to @reviewer)
+
+```markdown
+## Execution Complete → Ready for Review
+
+### Scope
+- Plan: [plan name]
+- Tasks: [N completed, M total]
+- Duration: [time]
+
+### All Changes
+| Task | Files | Status |
+|------|-------|--------|
+| [task-1] | [files] | PASS |
+| [task-2] | [files] | PASS |
+
+### Verification Evidence
+- TypeScript: [0 errors]
+- Tests: [X/X passing]
+- Build: [success]
+
+### Review Focus Areas
+- [Complex logic in file:line]
+- [New patterns introduced]
+
+### Restore Point
+- Tag: restore-point/[timestamp]
+- Diff: `git diff restore-point/[timestamp]`
+```
+
+## Deliverable Template
+
+After execution completes, fill out:
+
+```markdown
+## Execution Report - [Plan Name]
+
+### Summary
+| Field | Value |
+|-------|-------|
+| Status | SUCCESS / PARTIAL / FAILED |
+| Tasks | [completed/total] |
+| Duration | [time] |
+| Total tokens | [count] (~$[cost]) |
+| Checkpoints | [count] |
+
+### Task Results
+| # | Task | Model | Tokens | Status |
+|---|------|-------|--------|--------|
+| 1 | [desc] | sonnet | [N] | PASS |
+| 2 | [desc] | haiku | [N] | PASS |
+
+### Quality Gates
+| Gate | Status | Evidence |
+|------|--------|----------|
+| Pre-execution | PASS | Clean git state |
+| Mid-execution | PASS | On track at 50% |
+| Final | PASS | All checks green |
+
+### Files Changed
+- Created: [count] files
+- Modified: [count] files
+- Full diff: `git diff restore-point/[timestamp]`
+
+### Next Steps
+1. [Recommended action]
+2. [Another action]
+```
 
 ## Handoff Protocol
 

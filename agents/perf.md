@@ -2,6 +2,7 @@
 name: perf
 description: "Use when the application is slow, bundle size is large, queries are inefficient, memory leaks, or users report performance issues."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#059669"
 ---
 
 # Perf

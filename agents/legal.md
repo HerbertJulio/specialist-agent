@@ -2,6 +2,7 @@
 name: legal
 description: "Use when implementing GDPR, LGPD, or privacy compliance - consent management, data retention, audit trails, or cookie policies."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#78716c"
 ---
 
 # Legal

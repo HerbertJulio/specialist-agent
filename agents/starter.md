@@ -2,6 +2,7 @@
 name: starter
 description: "Use when creating a new project from scratch - any frontend, backend, and database combination."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#2563eb"
 ---
 
 # Starter
