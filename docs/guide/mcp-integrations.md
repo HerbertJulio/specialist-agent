@@ -160,6 +160,40 @@ With Context7 available, Claude fetches the latest TanStack Query docs instead o
 
 ---
 
+## MCP Discovery Hook
+
+Specialist Agent includes a **MCP Discovery** native hook that runs on session start. It automatically:
+
+1. Reads your `.mcp.json` configuration
+2. Maps configured MCPs to the agents that benefit from them
+3. Injects availability context so agents know what external tools they can use
+
+This is enabled by default during `npx specialist-agent init`. No manual configuration needed.
+
+### Agent-MCP Capability Matrix
+
+| MCP Server | Enhanced Agents | What It Enables |
+|-----------|----------------|-----------------|
+| **Context7** | `@builder`, `@doctor`, `@migrator`, `@deps` | Up-to-date library documentation |
+| **Azion** | `@starter`, `@cloud` | Edge deployment, Rules Engine, Terraform |
+| **Playwright** | `@tester`, `@doctor`, `@debugger`, `@perf` | Browser screenshots, e2e tests, DOM inspection |
+| **GitHub** | `@sentry-triage`, `@reviewer`, `@ripple`, `@deps`, `@devops` | Create issues/PRs, read CI status, manage releases |
+| **Sentry** | `@sentry-triage`, `@doctor`, `@debugger` | Fetch errors directly, no CLI required |
+| **Linear** | `@planner`, `@analyst`, `@product`, `@orchestrator` | Read/create issues, link tasks to code |
+| **Jira** | `@planner`, `@analyst`, `@product`, `@orchestrator` | Read/create issues, link tasks to code |
+| **Supabase** | `@data`, `@builder`, `@security` | Read schemas, manage migrations, configure auth |
+| **Slack** | `@orchestrator`, `@support` | Notifications on reviews, deploys, errors |
+
+### Example Session Output
+
+When MCPs are detected, the hook injects context like:
+
+```
+[MCP Discovery] MCPs available: context7, playwright | Enhanced agents: @builder(+context7) @tester(+playwright) @doctor(+context7,playwright)
+```
+
+---
+
 ## Complementary Tools
 
 These are not MCP servers bundled with Specialist Agent, but external tools that pair well with it.

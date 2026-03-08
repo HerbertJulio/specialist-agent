@@ -11,9 +11,10 @@
  */
 
 import { execSync } from 'child_process';
-import { readFileSync, readdirSync, existsSync } from 'fs';
+import { readdirSync, existsSync } from 'fs';
 import { join, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { outputJson, readJsonFile } from './utils.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -52,25 +53,49 @@ function getSkillCount(cwd) {
 }
 
 function getMemoryDecisions(cwd) {
-  try {
-    const memoryPath = join(cwd, '.claude', 'session-memory.json');
-    if (!existsSync(memoryPath)) return 0;
-    const memory = JSON.parse(readFileSync(memoryPath, 'utf-8'));
-    return Array.isArray(memory.decisions) ? memory.decisions.length : 0;
-  } catch {
-    return 0;
-  }
+  const memoryPath = join(cwd, '.claude', 'session-memory.json');
+  const memory = readJsonFile(memoryPath);
+  if (!memory) return 0;
+  return Array.isArray(memory.decisions) ? memory.decisions.length : 0;
 }
 
 function getActiveProfile(cwd) {
-  try {
-    const configPath = join(cwd, '.claude', 'config.json');
-    if (!existsSync(configPath)) return null;
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
-    return config.profile || null;
-  } catch {
-    return null;
-  }
+  const configPath = join(cwd, '.claude', 'config.json');
+  const config = readJsonFile(configPath);
+  return config?.profile || null;
+}
+
+function detectFramework(cwd) {
+  const pkg = readJsonFile(join(cwd, 'package.json'));
+  if (!pkg) return null;
+  const deps = { ...pkg.dependencies, ...pkg.devDependencies };
+  if (deps['nuxt']) return 'Nuxt';
+  if (deps['next']) return 'Next.js';
+  if (deps['@sveltejs/kit']) return 'SvelteKit';
+  if (deps['@angular/core']) return 'Angular';
+  if (deps['astro']) return 'Astro';
+  if (deps['vue']) return 'Vue';
+  if (deps['react']) return 'React';
+  return null;
+}
+
+function detectProjectFeatures(cwd) {
+  const features = [];
+  const pkg = readJsonFile(join(cwd, 'package.json'));
+  const deps = { ...pkg?.dependencies, ...pkg?.devDependencies };
+
+  if (existsSync(join(cwd, 'tsconfig.json'))) features.push('TypeScript');
+  if (deps?.['vitest'] || deps?.['jest'] || deps?.['mocha']) features.push('Tests');
+  if (existsSync(join(cwd, 'docs', 'ARCHITECTURE.md')) || existsSync(join(cwd, 'ARCHITECTURE.md'))) features.push('ARCHITECTURE.md');
+  if (existsSync(join(cwd, '.mcp.json'))) features.push('MCP configured');
+
+  return features;
+}
+
+function getAvailableMCPs(cwd) {
+  const mcpConfig = readJsonFile(join(cwd, '.mcp.json'));
+  if (!mcpConfig?.mcpServers) return [];
+  return Object.keys(mcpConfig.mcpServers);
 }
 
 // ── Context Builder (exported for testing) ──────────────────
@@ -93,11 +118,29 @@ export function buildContext(cwd) {
     parts.push(`Last commit: ${git.lastCommit}`);
   }
 
+  // Framework
+  const framework = detectFramework(cwd);
+  if (framework) {
+    parts.push(`Framework: ${framework}`);
+  }
+
+  // Project features
+  const features = detectProjectFeatures(cwd);
+  if (features.length > 0) {
+    parts.push(`Features: ${features.join(', ')}`);
+  }
+
   // Agents & skills
   const agents = getAgentCount(cwd);
   const skills = getSkillCount(cwd);
   if (agents > 0 || skills > 0) {
     parts.push(`Installed: ${agents} agents, ${skills} skills`);
+  }
+
+  // MCPs
+  const mcps = getAvailableMCPs(cwd);
+  if (mcps.length > 0) {
+    parts.push(`MCPs: ${mcps.join(', ')}`);
   }
 
   // Memory
@@ -122,7 +165,7 @@ async function main() {
   const context = buildContext(cwd);
 
   if (context) {
-    process.stdout.write(JSON.stringify({ additionalContext: context }));
+    outputJson({ additionalContext: context });
   }
 
   process.exit(0);

@@ -32,6 +32,15 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .specialist-agent/hooks/native/mcp-discovery.mjs",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "PostToolUse": [
