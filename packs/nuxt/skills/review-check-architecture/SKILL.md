@@ -16,25 +16,25 @@ Run all checks and report a summary:
 
 ```bash
 echo "=== 1. Services with try/catch ==="
-grep -rn "try {" modules/*/services/ --include="*.ts" 2>/dev/null || echo "None found"
+grep -rn "try {" modules/*/services/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 2. Services with transformation ==="
-grep -rn "\.map(\|\.filter(\|new Date\|\.reduce(" modules/*/services/ --include="*.ts" 2>/dev/null || echo "None found"
+grep -rn "\.map(\|\.filter(\|new Date\|\.reduce(" modules/*/services/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 3. Components without script setup ==="
-grep -rL "script setup" modules/*/components/*.vue pages/*.vue 2>/dev/null || echo "All ok"
+grep -rL "script setup" modules/*/components/*.vue pages/*.vue 2>/dev/null || echo "PASS: All ok"
 
 echo "=== 4. Components without TypeScript ==="
-grep -rL 'lang="ts"' modules/*/components/*.vue pages/*.vue 2>/dev/null || echo "All ok"
+grep -rL 'lang="ts"' modules/*/components/*.vue pages/*.vue 2>/dev/null || echo "PASS: All ok"
 
 echo "=== 5. Options API ==="
-grep -rn "defineComponent\|export default {" modules/ pages/ --include="*.vue" 2>/dev/null || echo "None found"
+grep -rn "defineComponent\|export default {" modules/ pages/ --include="*.vue" 2>/dev/null || echo "PASS: None"
 
 echo "=== 6. Explicit Vue imports (should use auto-imports) ==="
-grep -rn "from 'vue'" composables/ components/ pages/ --include="*.vue" --include="*.ts" 2>/dev/null || echo "None found"
+grep -rn "from 'vue'" composables/ components/ pages/ --include="*.vue" --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 7. Server state in Pinia ==="
-grep -rn "\$fetch\|useFetch\|useAsyncData" modules/*/stores/ --include="*.ts" 2>/dev/null || echo "None found"
+grep -rn "\$fetch\|useFetch\|useAsyncData" modules/*/stores/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 8. any types ==="
 grep -rn ": any\| any;\|as any\|<any>" modules/ --include="*.ts" --include="*.vue" 2>/dev/null | wc -l
@@ -46,26 +46,26 @@ for module in modules/*/; do
 done
 
 echo "=== 10. v-html ==="
-grep -rn "v-html" --include="*.vue" 2>/dev/null || echo "None found"
+grep -rn "v-html" --include="*.vue" 2>/dev/null || echo "PASS: None"
 
 echo "=== 11. Debug artifacts ==="
 grep -rn "console\.\|debugger" modules/ --include="*.ts" --include="*.vue" 2>/dev/null | wc -l
 
 echo "=== 12. Server routes without Zod validation ==="
-grep -rL "readValidatedBody\|getValidatedQuery\|getValidatedRouterParams" server/api/**/*.ts 2>/dev/null || echo "All ok"
+grep -rL "readValidatedBody\|getValidatedQuery\|getValidatedRouterParams" server/api/**/*.ts 2>/dev/null || echo "PASS: All ok"
 
 echo "=== 13. Components > 200 lines ==="
 find modules pages components -name "*.vue" -exec sh -c 'lines=$(wc -l < "$1"); [ "$lines" -gt 200 ] && echo "$1: $lines lines"' _ {} \; 2>/dev/null
 
 echo "=== 14. Nuxt 2 patterns ==="
-grep -rn "asyncData\|nuxtServerInit\|\$axios\|this\.\$store\|this\.\$route\|this\.\$router" --include="*.vue" --include="*.ts" 2>/dev/null || echo "None found"
+grep -rn "asyncData\|nuxtServerInit\|\$axios\|this\.\$store\|this\.\$route\|this\.\$router" --include="*.vue" --include="*.ts" 2>/dev/null || echo "PASS: None"
 ```
 
 Produce a summary table:
 
 | Check | Status | Occurrences |
 |-------|--------|-------------|
-| Services without try/catch | OK/FAIL | X |
+| Services without try/catch | PASS/FAIL | X |
 | ... | ... | ... |
 
 Overall score: X/14 checks passing.

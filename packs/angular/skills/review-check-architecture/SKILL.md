@@ -16,22 +16,22 @@ Run all checks and report a summary:
 
 ```bash
 echo "=== 1. Services with try/catch ==="
-grep -rn "try {" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "None"
+grep -rn "try {" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 2. Services with transformation ==="
-grep -rn "\.map(\|\.filter(\|new Date\|\.reduce(" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "None"
+grep -rn "\.map(\|\.filter(\|new Date\|\.reduce(" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 3. NgModule usage ==="
-grep -rn "NgModule\|declarations:" src/modules/ --include="*.ts" 2>/dev/null || echo "All standalone"
+grep -rn "NgModule\|declarations:" src/modules/ --include="*.ts" 2>/dev/null || echo "PASS: All standalone"
 
 echo "=== 4. Constructor DI ==="
-grep -rn "constructor(" src/modules/ --include="*.ts" 2>/dev/null | grep -v "\.spec\.ts" || echo "All using inject()"
+grep -rn "constructor(" src/modules/ --include="*.ts" 2>/dev/null | grep -v "\.spec\.ts" || echo "PASS: All using inject()"
 
 echo "=== 5. Legacy @Input/@Output decorators ==="
-grep -rn "@Input()\|@Output()" src/modules/ --include="*.ts" 2>/dev/null || echo "All using input()/output()"
+grep -rn "@Input()\|@Output()" src/modules/ --include="*.ts" 2>/dev/null || echo "PASS: All using input()/output()"
 
 echo "=== 6. BehaviorSubject in stores ==="
-grep -rn "BehaviorSubject\|ReplaySubject" src/modules/*/stores/ --include="*.ts" 2>/dev/null || echo "All signal-based"
+grep -rn "BehaviorSubject\|ReplaySubject" src/modules/*/stores/ --include="*.ts" 2>/dev/null || echo "PASS: All signal-based"
 
 echo "=== 7. Missing OnPush ==="
 grep -rn "@Component" src/modules/ --include="*.ts" -l 2>/dev/null | while read f; do
@@ -48,7 +48,7 @@ for module in src/modules/*/; do
 done
 
 echo "=== 10. innerHTML ==="
-grep -rn "innerHTML\|\[innerHTML\]" src/ --include="*.ts" 2>/dev/null || echo "None"
+grep -rn "innerHTML\|\[innerHTML\]" src/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 11. Debug artifacts ==="
 grep -rn "console\.\|debugger" src/modules/ --include="*.ts" 2>/dev/null | wc -l

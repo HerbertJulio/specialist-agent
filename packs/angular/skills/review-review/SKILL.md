@@ -24,6 +24,7 @@ ng lint
 ng test --watch=false
 ```
 
+2b. Run `/review-check-architecture $SCOPE` for automated pattern validation.
 3. Check ARCHITECTURE.md patterns:
    - Services: HttpClient only, no try/catch, no transformation, inject(HttpClient)
    - Adapters: pure functions

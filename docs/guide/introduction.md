@@ -1,120 +1,92 @@
 # Introduction
 
-::: tip Just want to try it?
-Skip ahead to the [Quick Start](/guide/quick-start) to get up and running in under 2 minutes.
-:::
+## The Problem
 
-Specialist Agent is a collection of **30 specialized AI agents** and **23 skills** that build, review, debug, and ship production code - across any framework and any stack.
+AI coding assistants are generalists. They write code, but they don't enforce architecture, they don't follow your team's patterns, and they don't catch what a senior engineer would.
 
-## Prerequisites
+You end up:
 
-- **Node.js** 18+ (for CLI installation)
-- An AI coding platform: [Claude Code](/guide/installation), [Cursor](/guide/install-cursor), [VS Code](/guide/install-vscode), [Windsurf](/guide/install-windsurf), [Codex](/guide/install-codex), or [OpenCode](/guide/install-opencode)
+- Re-explaining the same conventions every session
+- Getting "it works" code that doesn't match your architecture
+- Missing security issues, performance problems, or compliance gaps
+- Doing manual code review on AI-generated code
+
+## The Solution
+
+Specialist Agent gives your AI assistant a team of domain experts. Instead of one generalist, you get:
+
+- **@builder** that knows your framework's component patterns
+- **@reviewer** that enforces SOLID, security, and architecture rules
+- **@security** that catches OWASP Top 10 issues
+- **@sentry-triage** that triages production errors automatically
+
+Each agent carries specific knowledge, rules, and workflows. They don't just write code — they enforce standards.
 
 ## How It Works
 
-1. You describe what you need in plain language
-2. The right specialized agent handles it
-3. You get production-ready, verified code
+You install agents into your project. When you need something done, you call the right agent:
 
 ```
-"Create a products module with CRUD"
-→ @builder creates types, service, components, tests
-
-"Review the auth module"
-→ @reviewer checks quality, architecture, security
-
-"Debug the login error"
-→ @debugger traces through layers to find root cause
+> Use @builder to create the products module with CRUD
+> Use @sentry-triage to check errors from the last 24h
+> Use @reviewer to review src/modules/auth/
+> /plan add real-time notifications with WebSocket
 ```
 
-## Install
+## Agent Categories
 
-::: code-group
+| Category | Agents | Purpose |
+|----------|--------|---------|
+| **Core** | 5 | Build, review, debug, migrate |
+| **Workflow** | 9 | Plan, execute, test, pair program |
+| **Engineering** | 17 | API, security, data, DevOps, architecture |
+| **Business** | 3 | Marketing, product, support |
+| **Automation** | 1 | Sentry triage, auto-fix production errors |
 
-```bash [Claude Code]
-npx specialist-agent init
-```
+## Skills
 
-```bash [Cursor / VS Code / Windsurf]
-cd your-project
-npx specialist-agent init
-```
+Skills are repeatable workflows you invoke with a slash command:
 
-```bash [Marketplace]
-/plugin install specialist-agent
-```
+| Category | Skills |
+|----------|--------|
+| Planning | `/brainstorm`, `/plan`, `/discovery`, `/estimate` |
+| Development | `/tdd`, `/debug`, `/autofix`, `/lint`, `/commit` |
+| Quality | `/verify`, `/codereview`, `/audit`, `/health` |
+| Workflow | `/checkpoint`, `/finish`, `/worktree`, `/learn` |
+| Migration | `/migrate-framework`, `/migrate-architecture` |
+| Knowledge | `/remember`, `/recall`, `/onboard`, `/tutorial`, `/write-skill` |
 
-:::
+## What Makes It Different
 
-::: info Works everywhere
-Specialist Agent supports Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode. See [Platform Guides](/guide/install-cursor) for platform-specific setup.
-:::
+| Feature | Generic AI | Specialist Agent |
+|---------|-----------|-----------------|
+| Architecture enforcement | No | Agents enforce your ARCHITECTURE.md |
+| Framework-specific patterns | Generic | 7 framework packs with optimized agents |
+| Code review depth | Surface-level | 3-in-1 review (quality + security + architecture) |
+| Production ops | Manual | @sentry-triage auto-triages errors |
+| Business agents | No | @marketing, @product, @support |
+| Repeatable workflows | Manual | 24 skills (/plan, /tdd, /autofix, ...) |
+| Multi-platform | Varies | 6 platforms supported |
 
-## Choose Your Scenario
+## Framework Packs
 
-### I want to...
+Each framework gets optimized agents with framework-specific patterns:
 
-| Goal | Agent | Example |
-|------|-------|---------|
-| Build a new feature | `@builder` | "Create user registration" |
-| Review code | `@reviewer` | "Review the auth module" |
-| Debug an issue | `@debugger` | "Fix the 500 error on login" |
-| Design an API | `@api` | "Design REST API for orders" |
-| Add payments | `@finance` | "Integrate Stripe checkout" |
-| Add authentication | `@security` | "Implement JWT auth" |
-| Optimize performance | `@perf` | "Optimize the dashboard" |
-| Add translations | `@i18n` | "Add Portuguese support" |
-| Modernize legacy code | `@migrator` | "Migrate to TypeScript" |
-| Plan a complex feature | `@planner` | "Plan the checkout flow" |
-| Audit code before release | `/audit` | "/audit src/modules/auth" |
-| Onboard to new codebase | `/onboard` | "/onboard" |
+**Vue 3** | **React** | **Next.js** | **SvelteKit** | **Angular** | **Astro** | **Nuxt**
 
-## Framework Support
+## Platform Support
 
-| Framework | What You Get |
-|-----------|--------------|
-| **Next.js** | App Router patterns, Server Components |
-| **React** | Hooks, React Query, Zustand |
-| **Vue 3** | Composition API, Pinia, Vue Query |
-| **SvelteKit** | Stores, load functions |
-| **Angular** | Standalone components, Signals, DI |
-| **Astro** | Islands architecture, Content Collections |
-| **Nuxt** | Auto-imports, Nitro server, useFetch |
+Works on: **Claude Code**, **Cursor**, **VS Code**, **Windsurf**, **Codex**, **OpenCode**
 
-Each framework has specific patterns for services, state, and components. See [Architecture](/guide/architecture) for details.
+## Who It's For
 
-## How Specialist Agent Maps to Claude Code
+- **Solo developers** who want senior-level review on every commit
+- **Teams** who want to standardize how AI assists development
+- **Startups** who need to move fast without accumulating tech debt
+- **Enterprise** teams who need compliance, security, and architecture enforcement
 
-Specialist Agent builds on top of Claude Code's native concepts. Here's how they connect:
+## What's Next
 
-| Claude Code Concept | Location | How Specialist Agent Uses It |
-|---|---|---|
-| **Sub-Agents** | `.claude/agents/*.md` | 30 specialized agents with missions, workflows, and handoff protocols |
-| **Skills** | `.claude/skills/*/SKILL.md` | 23 repeatable workflows (`/plan`, `/tdd`, `/audit`, `/discovery`) |
-| **Commands** | `.claude/commands/*.md` | Orchestration entry points |
-| **CLAUDE.md** | Project root | Auto-dispatch rules, agent catalog, cross-cutting concerns |
-| **Rules** | `.claude/rules/*.md` | Framework-specific patterns, ARCHITECTURE.md conventions |
-| **Hooks** | `.claude/hooks/` | Security Guard, Auto-Dispatch, Auto-Format, Session Context |
-| **MCP Servers** | `.mcp.json` | Context7 (docs), Azion (edge deploy) |
-| **Checkpointing** | Built-in (git) | `@executor` creates checkpoints per task with rollback support |
-| **Memory** | `~/.claude/projects/` | `@memory` agent for cross-session decisions |
-
-You don't need to understand all of these to get started — just pick an agent and go. But knowing the mapping helps when you want to [create your own agents](/customization/creating-agents) or [customize patterns](/customization/editing-patterns).
-
-## Full vs Lite Mode
-
-| Mode | Best For | Cost |
-|------|----------|------|
-| **Full** | Complex features, PRs, reviews | Standard |
-| **Lite** | Quick tasks, scaffolding, fixes | 60-80% less |
-
-Lite mode uses a smaller model for faster, cheaper results. See [Performance & Cost](/guide/benchmark) for benchmarks.
-
-## What's Next?
-
-- [Why Specialist Agent?](/guide/why) - The problems we solve and how
-- [Quick Start](/guide/quick-start) - Get running in 2 minutes
-- [Best Practices](/guide/best-practices) - Tips for maximum productivity
-- [Real-World Scenarios](/scenarios/) - See agents in action
-- [All Agents Reference](/reference/agents) - Full agent catalog
+- [Quick Start](/guide/quick-start) — Install and use your first agent
+- [Agent Catalog](/reference/agents) — Browse all 35 agents
+- [Skills Reference](/reference/skills) — All 24 skills

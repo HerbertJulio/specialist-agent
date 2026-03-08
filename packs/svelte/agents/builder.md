@@ -14,26 +14,11 @@ Read `docs/ARCHITECTURE.md`.
 
 ## Core Principles
 
-### Security First (Mandatory)
-- NEVER trust user input - validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
-- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
-- ALWAYS implement rate limiting on public endpoints
-- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only - never hardcode
+Refer to the pack CLAUDE.md for full stack details and key patterns.
 
-### Performance First (Mandatory)
-- Use SvelteKit load functions for server state caching
-- Implement proper loading states with +loading.svelte
-- Use proper cache invalidation (`invalidateAll`) - stale UI is a bug
-- Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries - batch requests, use proper data loading patterns
-
-### Code Language (Mandatory)
-- ALWAYS write code (variables, functions, comments, commits) in English
-- Only use other languages if explicitly requested by the user
-- User-facing text (UI labels, messages) should match project's i18n strategy
+- **Security**: Validate all inputs server-side, parameterized queries only, no secrets in code, OWASP Top 10
+- **Performance**: Use the framework's recommended server state caching, lazy load routes and components, no N+1 queries
+- **Code Language**: All code in English. User-facing text follows project i18n strategy
 
 ## Scope Detection
 - **Module**: user wants a full feature (CRUD, page, multiple endpoints) -> Module mode
@@ -45,52 +30,19 @@ Read `docs/ARCHITECTURE.md`.
 ---
 
 ## Module Mode
-1. Ask: resource name, endpoints, UI type (list/detail/CRUD), client state needs
-2. Scaffold `src/lib/modules/[kebab-name]/` with: components/, stores/, services/, adapters/, types/, __tests__/, index.ts
-3. Create bottom-up:
-   - `types/[name].types.ts` -- exact API response (snake_case)
-   - `types/[name].contracts.ts` -- app contract (camelCase, Date objects)
-   - `adapters/[name]-adapter.ts` -- pure functions: inbound (API->App) + outbound (App->API)
-   - `services/[name]-service.ts` -- HTTP only: `{ list, getById, create, update, delete }`. No try/catch, no transformation
-   - `stores/[name]-store.ts` -- client state only (filters, UI). writable/readable or rune-based class
-   - Components -- Svelte 5 runes ($state, $derived, $props), typed props, < 200 lines
-4. Create SvelteKit route files:
-   - `src/routes/[name]/+page.ts` -- load function: service -> adapter -> typed return
-   - `src/routes/[name]/+page.svelte` -- page component consuming load data
-   - `src/routes/[name]/+error.svelte` -- error page
-5. Create barrel export (index.ts): components + contracts only
-6. Validate: `npx svelte-check --tsconfig ./tsconfig.json`
+Run `/dev-create-module $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Component Mode
-1. Determine placement: feature -> `src/lib/modules/[feature]/components/`, shared -> `src/lib/shared/components/`
-2. Use Svelte 5 runes template: imports -> `$props()` with interface -> stores -> local `$state` -> `$derived` -> `$effect` -> handlers
-3. Rules: < 200 lines, PascalCase.svelte, no prop drilling (use snippets + setContext/getContext), handle loading/error/empty states
-4. Extract logic > 20 lines to a store or shared function
-5. Use callback props (`onselect`, `ondelete`) instead of event dispatchers
+Run `/dev-create-component $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Service Mode
-1. Ask: endpoint URL, HTTP method, response format (ask for JSON example)
-2. Create 4 files:
-   - `types/[name].types.ts` -- exact API (snake_case, string dates)
-   - `types/[name].contracts.ts` -- app contract (camelCase, Date, computed booleans)
-   - `adapters/[name]-adapter.ts` -- pure functions, bidirectional. Rename snake->camel, convert string->Date, cents->currency
-   - `services/[name]-service.ts` -- HTTP only. No try/catch, no transformation, no logic. Export as object with methods. Use native `fetch`
-3. Validate: `npx svelte-check --tsconfig ./tsconfig.json`
+Run `/dev-create-service $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Store Mode
-1. Determine scope: module-specific -> `src/lib/modules/[feature]/stores/`, shared -> `src/lib/shared/stores/`
-2. Choose pattern:
-   - **writable/readable store** -- for simple state (filters, toggles)
-   - **Rune-based class** -- for state with derived values and methods
-3. Rules: only client state, factory function or class pattern, read-only exposure where possible
-4. Create in `stores/[name]-store.ts`
-5. Validate: `npx svelte-check --tsconfig ./tsconfig.json`
+Run `/dev-create-store $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Test Mode
-1. Read the target file
-2. Priority: adapters (pure functions, easy) > stores (test state logic) > components (@testing-library/svelte)
-3. Create in `__tests__/[OriginalName].spec.ts`
-4. Run: `npx vitest run [file]`
+Run `/dev-create-test $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Verification Protocol
 

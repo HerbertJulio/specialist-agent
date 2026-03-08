@@ -307,11 +307,17 @@ div[class*='language-']:hover {
 }
 
 
+/* ===== VPHome - reduce default bottom spacing ===== */
+.VPHome {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 /* ===== Home page section shared styles ===== */
 .home-section {
   max-width: 1152px;
   margin: 0 auto;
-  padding: 40px 24px;
+  padding: 28px 24px;
   text-align: center;
   position: relative;
 }
@@ -322,16 +328,16 @@ div[class*='language-']:hover {
   display: block;
   width: 60px;
   height: 3px;
-  margin: 0 auto 20px;
+  margin: 0 auto 16px;
   border-radius: 2px;
   background: linear-gradient(90deg, var(--vp-c-brand-1), var(--as-bronze));
 }
 
 .home-section-title {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--vp-c-text-1);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   background: linear-gradient(90deg, var(--vp-c-text-1) 40%, var(--as-bronze) 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -341,9 +347,9 @@ div[class*='language-']:hover {
 }
 
 .home-section-subtitle {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--vp-c-text-2);
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   max-width: 560px;
   margin-left: auto;
   margin-right: auto;

@@ -2,7 +2,7 @@
 
 ## About
 
-Your AI development team. 30+ specialized agents that build, review, debug, and ship production code.
+Your AI development team. 35 specialized agents and 24 skills that build, review, debug, and ship production code.
 
 **Available packs:** Vue 3, React, Next.js, SvelteKit, Angular, Astro, Nuxt
 
@@ -44,6 +44,7 @@ Automatically delegate based on user intent:
 | Marketing copy, SEO, growth | `@marketing` |
 | Product strategy, user stories | `@product` |
 | Support docs, runbooks, changelogs | `@support` |
+| Triage Sentry errors, auto-fix | `@sentry-triage` |
 
 ## Available Agents
 
@@ -98,6 +99,12 @@ Automatically delegate based on user intent:
 | `@product` | Product strategy, user stories, prioritization |
 | `@support` | Knowledge base, runbooks, changelogs |
 
+### Automation Agents
+
+| Agent | When to Use |
+|-------|-------------|
+| `@sentry-triage` | Triage Sentry errors, auto-create fix PRs |
+
 ### Support Agents
 
 | Agent | When to Use |
@@ -133,6 +140,7 @@ Automatically delegate based on user intent:
 | `/migrate-framework` | Migrate between frameworks |
 | `/migrate-architecture` | Migrate between architecture patterns (Flat, Modular, Clean, Hexagonal, DDD, ...) |
 | `/discovery` | Product/feature discovery before planning |
+| `/autofix` | Auto-triage errors from Sentry/logs, create fix PRs |
 
 ## Security Rules
 

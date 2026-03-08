@@ -14,28 +14,11 @@ Read `docs/ARCHITECTURE.md`.
 
 ## Core Principles
 
-### Security First (Mandatory)
-- NEVER trust user input - validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
-- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
-- ALWAYS implement rate limiting on public endpoints
-- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only - never hardcode
+Refer to the pack CLAUDE.md for full stack details and key patterns.
 
-### Performance First (Mandatory)
-- ALWAYS use server-side data fetching in frontmatter - no unnecessary client JS
-- Choose the LEAST aggressive hydration strategy for islands (`client:visible` > `client:idle` > `client:load`)
-- Use Content Collections for static content - type-safe and optimized at build time
-- Lazy load islands and heavy dependencies
-- Avoid shipping JavaScript unless interactivity is required
-- Use `<Image />` from `astro:assets` for optimized images
-- Avoid N+1 queries - batch requests, use proper data loading patterns
-
-### Code Language (Mandatory)
-- ALWAYS write code (variables, functions, comments, commits) in English
-- Only use other languages if explicitly requested by the user
-- User-facing text (UI labels, messages) should match project's i18n strategy
+- **Security**: Validate all inputs server-side, parameterized queries only, no secrets in code, OWASP Top 10
+- **Performance**: Use the framework's recommended server state caching, lazy load routes and components, no N+1 queries
+- **Code Language**: All code in English. User-facing text follows project i18n strategy
 
 ## Scope Detection
 - **Module**: user wants to migrate an entire module/directory -> Module mode (6 phases)
@@ -44,53 +27,7 @@ Read `docs/ARCHITECTURE.md`.
 ---
 
 ## Module Mode (6 Phases)
-
-### Phase 0: Analysis
-- Map current state: count files, identify framework (React/Vue/Svelte), JS vs TS, client-side routing, state management
-- List API endpoints used and data fetching patterns (useEffect, useSWR, Vue Query, etc.)
-- Identify interactive vs static parts
-- Report to user before proceeding
-
-### Phase 1: Structure
-- Create target directories: `src/pages/`, `src/components/`, `src/islands/`, `src/layouts/`, `src/modules/[name]/`
-- Set up Astro configuration (integrations, adapters)
-- Validate: `npx astro check`
-
-### Phase 2: Types & Adapters
-- Create `.types.ts` (exact API response, snake_case)
-- Create `.contracts.ts` (app contract, camelCase)
-- Create adapter with bidirectional parsing
-- Validate: `npx astro check`
-
-### Phase 3: Services
-- Extract HTTP calls to pure service (no try/catch, no transformation)
-- Convert from axios/fetch wrappers to plain fetch
-- One file per resource
-- Validate: `npx astro build`
-
-### Phase 4: Pages & Routing
-- Convert SPA routes to file-based routing (`src/pages/`)
-- Move client-side data fetching (useEffect, useSWR, Vue Query) to frontmatter server-side fetch
-- Create layouts for shared page structure
-- Set up `getStaticPaths()` for dynamic SSG routes
-- Create API endpoints for mutations (`src/pages/api/`)
-- Validate: `npx astro build`
-
-### Phase 5: Components & Islands
-- Analyze each component: does it need interactivity?
-  - **No interactivity** -> Convert to `.astro` component (zero JS)
-  - **Has interactivity** -> Keep as framework component, move to `src/islands/`, add `client:*` directive
-- Choose hydration strategy per island (prefer `client:visible` > `client:idle` > `client:load`)
-- Remove client-side state management where possible (data comes from server)
-- Keep minimal island state for UI interactions only
-- Validate after each component
-
-### Phase 6: Review
-- Run pattern checks (same as @reviewer review mode)
-- Verify zero JS on pages without islands
-- Check bundle size reduction
-- Report remaining issues
-- Get user approval
+Run `/migration-migrate-module $PATH`. This skill contains the full 6-phase migration workflow -- do NOT duplicate it here.
 
 ## Verification Protocol
 
@@ -125,48 +62,7 @@ Read `docs/ARCHITECTURE.md`.
 ---
 
 ## Component Mode
-
-### Conversion Table - SPA to Astro
-
-| SPA Pattern | Astro Equivalent |
-|-------------|-----------------|
-| React/Vue page component | `.astro` page with layout |
-| Client-side routing | File-based routing (`src/pages/`) |
-| `useEffect` / `onMounted` (data fetch) | Frontmatter `await` call |
-| `useState` / `ref()` (UI state) | Keep in island or remove |
-| `useState` / `ref()` (server data) | Frontmatter fetch + adapter |
-| `useContext` / `provide/inject` | Props or server-side data |
-| CSS-in-JS (styled-components) | Scoped `<style>` in .astro |
-| Event handlers (onClick, etc.) | Island with `client:*` directive |
-| Static/presentational component | `.astro` component (zero JS) |
-| Loading spinner | Remove (server-rendered, no loading state for SSG) |
-| Error boundary | try/catch in frontmatter |
-| Redux/Pinia store (server data) | Frontmatter fetch |
-| Redux/Pinia store (UI state) | Island local state or `nanostores` |
-
-### Workflow
-1. Read the component and determine: is it interactive or presentational?
-2. If **presentational** -> Convert to `.astro`:
-   - Props -> `Astro.props` with `Props` interface
-   - JSX -> Astro template syntax
-   - CSS-in-JS -> scoped `<style>`
-   - Remove all JavaScript that runs on client
-3. If **interactive** -> Move to `src/islands/`:
-   - Keep framework code (React/Vue/Svelte)
-   - Remove data fetching (move to page frontmatter)
-   - Keep only UI interactivity state
-   - Choose `client:*` directive
-4. Move data fetching to the page that uses this component
-5. Validate: `npx astro check && npx astro build`
-6. Update pages that reference migrated component
-
-### Rules
-- Default to `.astro` - prove interactivity before making an island
-- Keep public API (props) stable when possible
-- If API changes, update all consumers
-- One component per commit
-- Report bugs found during migration (don't silently fix)
-- **Verify each phase** - Partial migration is worse than none
+Run `/migration-migrate-component $FILE`. This skill contains the full component migration workflow -- do NOT duplicate it here.
 
 ## Output
 

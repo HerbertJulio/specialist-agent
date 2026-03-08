@@ -1,506 +1,98 @@
-# Referência de Agentes
+# Catalogo de Agentes
 
-30 agentes de IA especializados organizados por propósito.
-
-::: tip Features Transversais
-Todos os agentes incluem:
-
-- **Protocolo de Verificação** - Verificação baseada em prova antes de declarar conclusão
-- **Anti-Racionalização** - Tabelas prevenindo atalhos e desculpas comuns
-- **Modo Lite** - Variantes Haiku otimizadas em custo (60-80% mais barato)
-- **Handoff Protocol** - Delegação estruturada entre agentes
-
-:::
-
-## Referência Rápida
-
-| Necessidade | Agente |
-|-------------|--------|
-| Novo projeto | `@starter` |
-| Nova feature | `@builder` |
-| Revisão de código | `@reviewer` |
-| Corrigir bug | `@doctor` ou `@debugger` |
-| Planejar feature | `@planner` |
-| Escrever testes | `@tdd` ou `@tester` |
-| Design de API | `@api` |
-| Performance | `@perf` |
-| Segurança | `@security` |
-| Pagamentos | `@finance` |
-| Infraestrutura | `@cloud` ou `@devops` |
-| Banco de dados | `@data` |
-| Traduções | `@i18n` |
-| Documentação | `@docs` |
-| Refactoring | `@refactor` |
-| Dependências | `@deps` |
-| Migração de arquitetura | `@architect` |
-| Análise de impacto | `@ripple` |
-| Compliance | `@legal` |
-| Explorar codebase | `@explorer` ou `@scout` |
-
----
+35 agentes especializados organizados por dominio. Cada agente e um especialista na sua area — chame o certo para o trabalho.
 
 ## Agentes Core
 
-### @starter
+A base. Construir, revisar, depurar e migrar codigo.
 
-Criar projetos do zero.
-
-```bash
-"Use @starter to create an e-commerce app with Next.js + PostgreSQL"
-```
-
-**Suporta:** Vue, React, Next.js, SvelteKit, Express, Fastify, PostgreSQL, MongoDB e mais.
-
----
-
-### @builder
-
-Construir módulos, componentes, serviços e testes.
-
-```bash
-# Módulo completo
-"Use @builder to create a products module with CRUD"
-
-# Componente
-"Use @builder to create a ProductCard component"
-
-# Serviço
-"Use @builder to create the orders service for /v2/orders"
-```
-
-**Cria:** Types, adapters, services, hooks/composables, componentes, testes.
-
----
-
-### @reviewer
-
-Revisar código antes do merge. Três verificações em uma:
-
-1. **Spec compliance** - Atende os requisitos?
-2. **Qualidade de código** - Está limpo e testado?
-3. **Aderência à arquitetura** - Segue os padrões?
-
-```bash
-"Use @reviewer to review the auth module"
-```
-
-**Output:** Veredito Pass/Fail com problemas específicos.
-
----
-
-### @doctor
-
-Investigar bugs rastreando pelas camadas.
-
-```bash
-"Use @doctor to investigate the 500 error on login"
-```
-
-**Rastreia:** Component → State → Adapter → Service → API
-
-Encontra causa raiz, não sintomas.
-
----
-
-### @migrator
-
-Modernizar código legado em 6 fases.
-
-```bash
-"Use @migrator to migrate src/legacy/billing/"
-```
-
-**Fases:** Análise → Estrutura → Types → Services → State → Components
-
-Aprovação necessária entre fases.
-
----
+| Agente | Descricao | Exemplo |
+|--------|-----------|---------|
+| `@starter` | Criar novos projetos do zero | "Use @starter para criar um SaaS Next.js com Stripe" |
+| `@builder` | Construir modulos, componentes, servicos | "Use @builder para criar o modulo de produtos com CRUD" |
+| `@reviewer` | Revisao de codigo unificada 3-em-1 (qualidade, seguranca, arquitetura) | "Use @reviewer para revisar src/modules/auth/" |
+| `@doctor` | Debugging sistematico em 4 fases | "Use @doctor para investigar o timeout do checkout" |
+| `@migrator` | Modernizar codigo legado com seguranca | "Use @migrator para converter class components para hooks" |
 
 ## Agentes de Workflow
 
-### @planner
-
-Planejar features baseado na complexidade.
-
-| Complexidade | Planejamento |
-|--------------|--------------|
-| Trivial | Pular |
-| Simples | Plano rápido |
-| Médio | Plano detalhado |
-| Complexo | Design completo |
-
-```bash
-"Use @planner to plan user authentication"
-```
-
----
-
-### @executor
-
-Executar planos com checkpoints.
-
-- Rastreia progresso e custos
-- Cria checkpoints git
-- Suporta rollback
-
-```bash
-"Use @executor to implement the auth plan"
-```
-
----
-
-### @tdd
-
-Test-Driven Development.
-
-1. **RED** - Escrever teste falhando
-2. **GREEN** - Fazer passar
-3. **REFACTOR** - Melhorar o código
-
-```bash
-"Use @tdd to implement calculateDiscount"
-```
-
-Sem código sem teste falhando primeiro.
-
----
-
-### @debugger
-
-Debugging sistemático em 4 fases.
-
-1. **Gather** - Coletar evidências
-2. **Analyze** - Formar hipótese
-3. **Test** - Verificar hipótese
-4. **Implement** - Corrigir e validar
-
-```bash
-"Use @debugger to fix the stale data issue"
-```
-
----
-
-### @pair
-
-Pair programming em tempo real.
-
-- Pensa em voz alta
-- Captura erros cedo
-- Sugere melhorias
-
-```bash
-"Use @pair while I work on the checkout flow"
-```
-
----
-
-## Agentes Especialistas
-
-### @api
-
-Projetar APIs REST e GraphQL.
-
-```bash
-"Use @api to design the orders API with OpenAPI spec"
-```
-
-**Cria:** Specs OpenAPI, schemas GraphQL, documentação de endpoints.
-
----
-
-### @perf
-
-Otimizar performance.
-
-```bash
-"Use @perf to analyze and optimize the dashboard"
-```
-
-**Analisa:** Bundle size, runtime, rede, renderização.
-
----
-
-### @security
-
-Segurança de aplicações.
-
-```bash
-"Use @security to implement JWT auth with refresh tokens"
-"Use @security to audit for OWASP vulnerabilities"
-```
-
-**Cobre:** Auth, RBAC/ABAC, criptografia, scanning de vulnerabilidades.
-
----
-
-### @finance
-
-Sistemas financeiros.
-
-```bash
-"Use @finance to integrate Stripe payments"
-```
-
-**Cobre:** Pagamentos, assinaturas, faturamento, relatórios.
-
----
-
-### @cloud
-
-Arquitetura cloud.
-
-```bash
-"Use @cloud to set up AWS with Terraform"
-```
-
-**Cobre:** AWS, GCP, Azure, Terraform, Pulumi, serverless.
-
----
-
-### @data
-
-Engenharia de banco de dados.
-
-```bash
-"Use @data to design the schema with Prisma"
-```
-
-**Cobre:** Design de schema, migrações, cache, otimização de queries.
-
----
-
-### @devops
-
-DevOps e infraestrutura.
-
-```bash
-"Use @devops to create Docker and Kubernetes config"
-```
-
-**Cobre:** Docker, K8s, CI/CD, monitoramento, logging.
-
----
-
-### @i18n
-
-Internacionalização.
-
-```bash
-"Use @i18n to add multi-language support"
-```
-
-**Cobre:** Traduções, gerenciamento de locale, suporte RTL.
-
----
-
-### @docs
-
-Geração de documentação.
-
-```bash
-"Use @docs to generate API documentation"
-```
-
-**Cria:** README, docs de API, documentação inline.
-
----
-
-### @refactor
-
-Refactoring de código.
-
-```bash
-"Use @refactor to clean up the utils module"
-```
-
-**Aplica:** Extract method, remover duplicação, melhorar nomenclatura.
-
----
-
-### @deps
-
-Gerenciamento de dependências.
-
-```bash
-"Use @deps to audit and update dependencies"
-```
-
-**Cobre:** Auditoria de segurança, check de desatualizadas, deps não utilizadas.
-
----
-
-### @legal
-
-Compliance de privacidade de dados.
-
-```bash
-"Use @legal to review for GDPR compliance"
-```
-
-**Cobre:** GDPR, LGPD, CCPA, gerenciamento de consentimento.
-
----
-
-### @tester
-
-Especialista em testes.
-
-```bash
-"Use @tester to create tests for the orders module"
-```
-
-**Cria:** Testes unitários, testes de integração, testes E2E.
-
----
-
-### @designer
-
-Implementação UI/UX.
-
-```bash
-"Use @designer to create a design system with dark mode"
-```
-
-**Cobre:** Design tokens, layouts responsivos, acessibilidade.
-
----
-
-### @architect
-
-Migração e redesign completo de arquitetura do sistema.
-
-```bash
-"Use @architect to migrate from MVC to Clean Architecture"
-"Use @architect to assess our current architecture"
-```
-
-**Suporta:** 15 padrões de arquitetura (Modular, Clean, Hexagonal, DDD, FSD, CQRS, Event-Driven, Modular Monolith, Microservices, e mais). Detecta a arquitetura atual, recomenda caminhos de migração e executa migrações com variantes Full ou Lite.
-
-**Modos:**
-- **Assessment** - Detecta o padrão de arquitetura atual com score de confiança
-- **Migration** - Planeja e executa migrações de arquitetura
-- **Recommendation** - Sugere a melhor arquitetura baseada no tamanho do time e tipo de projeto
-
----
-
-### @ripple
-
-Análise de efeito cascata.
-
-```bash
-"Use @ripple to analyze the impact of renaming UserService"
-"Use @ripple before changing the API response shape"
-```
-
-**Analisa:** Dependentes diretos, dependentes indiretos, cobertura de testes, breaking changes. Produz planos de mudança seguros ordenados por dependência.
-
----
-
-## Agentes de Suporte
-
-### @scout
-
-Análise rápida do projeto. Recomenda quais agentes usar.
-
-```bash
-"Use @scout to analyze this project"
-```
-
-Ultra-leve. ~500 tokens.
-
----
-
-### @analyst
-
-Converter requisitos de negócio em specs técnicas.
-
-```bash
-"Use @analyst to convert these requirements to a technical spec"
-```
-
----
-
-### @orchestrator
-
-Coordenar múltiplos agentes.
-
-```bash
-"Use @orchestrator to build the feature with parallel agents"
-```
-
----
-
-### @memory
-
-Gerenciamento de memória de sessão.
-
-```bash
-"Use @memory to save this decision"
-"Use @memory to recall previous decisions"
-```
-
----
-
-### @explorer
-
-Explorar codebases desconhecidos.
-
-```bash
-"Use @explorer to map this codebase - I'm new here"
-```
-
-**Output:** Score de saúde, mapa de estrutura, recomendações.
-
----
-
-## Protocolo de Verificação
-
-Todos os agentes-chave verificam afirmações com evidência antes de marcar trabalho como completo.
-
-```text
-AFIRMAÇÃO: "Testes passam"
-PROVA: Deve mostrar output real do teste (PASS/FAIL)
-
-AFIRMAÇÃO: "Build passou"
-PROVA: Deve mostrar output do comando de build
-
-AFIRMAÇÃO: "Bug corrigido"
-PROVA: Deve mostrar teste que reproduz o bug agora passando
-```
-
-Nada de "deve funcionar" ou "provavelmente tá ok". Rode o comando, mostre o output.
-
-Veja a skill `/verify` para o framework completo de verificação.
-
----
-
-## Anti-Racionalização
-
-Agentes-chave incluem tabelas de prevenção de racionalização:
-
-| Desculpa | Realidade |
-|----------|-----------|
-| "É óbvio, não precisa testar" | Óbvio pra você, não pro computador. Rode o teste. |
-| "Só dessa vez" | "Só dessa vez" é como todo mau hábito começa. |
-| "Deve funcionar" | "Deve" não é evidência. Prove. |
-| "Verifico depois" | Depois nunca chega. Verifique agora. |
-
-Se você se pegar pensando "só dessa vez" - pare e siga o processo.
-
----
-
-## Versões Lite
-
-Todos os agentes têm versões lite usando o modelo Haiku.
-
-| Aspecto | Full | Lite |
-|---------|------|------|
-| Modelo | Sonnet/Opus | Haiku |
-| Custo | Maior | 60-80% menos |
-| Melhor para | Tarefas complexas | Tarefas rápidas |
-
-Escolha o modo durante a instalação:
-
-```bash
-npx specialist-agent init  # Selecione "Lite"
-```
+Orquestrando como voce trabalha — planejando, executando, testando, pareando.
+
+| Agente | Descricao | Exemplo |
+|--------|-----------|---------|
+| `@planner` | Planejamento adaptativo que escala com a complexidade | "Use @planner para planejar o sistema de notificacoes" |
+| `@executor` | Executar planos com checkpoints e rollback | "Use @executor para implementar o plano" |
+| `@tdd` | Test-Driven Development com Red-Green-Refactor | "Use @tdd para construir o validador de pagamento" |
+| `@debugger` | Debugging sistematico com teste de hipoteses | "Use @debugger para rastrear o memory leak" |
+| `@pair` | Pair programming com IA e feedback em tempo real | "Use @pair para trabalhar na feature de busca" |
+| `@analyst` | Transformar requisitos em specs tecnicas | "Use @analyst para especificar o sistema multi-tenant" |
+| `@orchestrator` | Coordenar multiplos agentes para tarefas complexas | "Use @orchestrator para construir o modulo de auth" |
+| `@scout` | Analisar estrutura do projeto e recomendar agentes | "Use @scout para analisar este projeto" |
+| `@memory` | Persistir decisoes e contexto entre sessoes | "Use @memory para salvar as decisoes de arquitetura" |
+
+## Agentes de Engenharia
+
+Expertise profunda em dominios — de design de API a arquitetura cloud.
+
+| Agente | Descricao | Exemplo |
+|--------|-----------|---------|
+| `@api` | Design de API REST/GraphQL com specs OpenAPI | "Use @api para projetar o endpoint de pedidos" |
+| `@perf` | Profiling e otimizacao de performance | "Use @perf para otimizar o tempo de carga do dashboard" |
+| `@i18n` | Internacionalizacao e localizacao | "Use @i18n para adicionar suporte a espanhol" |
+| `@docs` | Gerar documentacao a partir do codigo | "Use @docs para documentar o modulo de auth" |
+| `@refactor` | Refactoring seguro de codigo com testes | "Use @refactor para extrair a logica de validacao" |
+| `@deps` | Gerenciamento e atualizacao de dependencias | "Use @deps para auditar e atualizar dependencias" |
+| `@explorer` | Exploracao e analise profunda do codebase | "Use @explorer para mapear o fluxo de dados no checkout" |
+| `@finance` | Sistemas de pagamento, cobranca, assinaturas | "Use @finance para implementar assinaturas Stripe" |
+| `@cloud` | Arquitetura cloud, IaC, serverless | "Use @cloud para projetar a infraestrutura AWS" |
+| `@security` | Auth, OWASP, criptografia, auditoria | "Use @security para auditar o fluxo de autenticacao" |
+| `@designer` | Design systems, acessibilidade, padroes de UI | "Use @designer para criar a biblioteca de componentes" |
+| `@data` | Design de banco de dados, migracoes, otimizacao | "Use @data para projetar o schema multi-tenant" |
+| `@devops` | Docker, Kubernetes, pipelines CI/CD | "Use @devops para configurar o pipeline do GitHub Actions" |
+| `@tester` | Estrategias de teste e planos de cobertura | "Use @tester para criar a estrategia de testes" |
+| `@legal` | GDPR, LGPD, implementacao de compliance | "Use @legal para implementar gerenciamento de consentimento LGPD" |
+| `@architect` | Design e migracao completa de arquitetura de sistema | "Use @architect para migrar para arquitetura hexagonal" |
+| `@ripple` | Analise de impacto de mudancas no codigo | "Use @ripple para analisar o impacto de remover UserService" |
+
+## Agentes de Negocios
+
+Estrategia, crescimento e operacoes voltadas ao usuario.
+
+| Agente | Descricao | Exemplo |
+|--------|-----------|---------|
+| `@marketing` | Copy, SEO, experimentos de crescimento, estrategia social | "Use @marketing para escrever copy da landing page" |
+| `@product` | Roadmaps de produto, specs, PRDs, priorizacao de features | "Use @product para criar o roadmap do Q1" |
+| `@support` | Docs de suporte, FAQs, runbooks, caminhos de escalacao | "Use @support para criar o guia de troubleshooting da API" |
+
+## Agentes de Automacao
+
+Automatizar operacoes repetitivas — triagem de erros, monitoramento de producao, workflows de correcao.
+
+| Agente | Descricao | Exemplo |
+|--------|-----------|---------|
+| `@sentry-triage` | Buscar erros do Sentry, cruzar com PRs, priorizar por severidade, criar PRs de correcao automaticamente | "Use @sentry-triage para verificar erros das ultimas 24h" |
+
+## Agentes Especificos de Framework
+
+Cada pack de framework inclui versoes otimizadas dos agentes core:
+
+| Pack | Agentes Incluidos |
+|------|-------------------|
+| Vue 3 | @builder, @reviewer, @doctor, @migrator |
+| React | @builder, @reviewer, @doctor, @migrator |
+| Next.js | @builder, @reviewer, @doctor, @migrator |
+| SvelteKit | @builder, @reviewer, @doctor, @migrator |
+| Angular | @builder, @reviewer, @doctor, @migrator |
+| Astro | @builder, @reviewer, @doctor, @migrator |
+| Nuxt | @builder, @reviewer, @doctor, @migrator |
+
+## Modos de Agente
+
+Todo agente tem dois modos:
+
+| Modo | Modelo | Caso de Uso |
+|------|--------|-------------|
+| Full | Sonnet/Opus | Qualidade maxima, output detalhado |
+| Lite | Haiku | Menor custo, respostas mais rapidas |
+
+Escolha durante a instalacao: `npx specialist-agent init`

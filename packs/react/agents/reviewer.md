@@ -51,28 +51,11 @@ Unlike competitors that use separate agents for spec review and code review (dou
 
 ## Core Principles
 
-### Security First (Mandatory)
-- NEVER trust user input - validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
-- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
-- ALWAYS implement rate limiting on public endpoints
-- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only - never hardcode
+Refer to the pack CLAUDE.md for full stack details and key patterns.
 
-### Performance First (Mandatory)
-- ALWAYS use TanStack Query (React Query) for server state caching
-- Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
-- Use `keepPreviousData` for pagination to avoid loading flickers
-- Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
-- Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries - batch requests, use proper data loading patterns
-
-### Code Language (Mandatory)
-- ALWAYS write code (variables, functions, comments, commits) in English
-- Only use other languages if explicitly requested by the user
-- User-facing text (UI labels, messages) should match project's i18n strategy
+- **Security**: Validate all inputs server-side, parameterized queries only, no secrets in code, OWASP Top 10
+- **Performance**: Use the framework's recommended server state caching, lazy load routes and components, no N+1 queries
+- **Code Language**: All code in English. User-facing text follows project i18n strategy
 
 ## Scope Detection
 - **Review**: user wants code review, PR validation, or violation fixing -> Review mode
@@ -92,39 +75,9 @@ npx vitest run --passWithNoTests
 ```
 
 ### 2. Pattern Checks
-```bash
-grep -rn "try {" src/modules/*/services/ --include="*.ts" 2>/dev/null && echo "VIOLATION: try/catch in service"
-grep -rn "\.map(\|new Date" src/modules/*/services/ --include="*.ts" 2>/dev/null && echo "VIOLATION: transformation in service"
-grep -rn "class.*extends.*Component" src/modules/ --include="*.tsx" 2>/dev/null && echo "VIOLATION: class component"
-grep -rn "PropTypes\." src/modules/ --include="*.tsx" --include="*.ts" 2>/dev/null && echo "VIOLATION: PropTypes (use TypeScript)"
-grep -rn "connect(" src/modules/ --include="*.tsx" --include="*.ts" 2>/dev/null && echo "VIOLATION: Redux connect (use Zustand)"
-grep -rn "useSelector\|useDispatch\|createSlice\|createStore" src/ --include="*.ts" --include="*.tsx" 2>/dev/null && echo "VIOLATION: Redux (use Zustand)"
-grep -rn "style={{" src/modules/ --include="*.tsx" 2>/dev/null && echo "ATTENTION: inline style object in JSX (re-creates on render)"
-grep -rn "useEffect.*\[\]" src/modules/ --include="*.ts" --include="*.tsx" 2>/dev/null && echo "ATTENTION: empty dependency array in useEffect (verify intent)"
-grep -rn ": any\|as any" src/modules/ --include="*.ts" --include="*.tsx" 2>/dev/null && echo "ATTENTION: any types"
-grep -rn "console\.\|debugger" src/modules/ --include="*.ts" --include="*.tsx" 2>/dev/null && echo "ATTENTION: debug artifacts"
-grep -rn "dangerouslySetInnerHTML" src/ --include="*.tsx" 2>/dev/null && echo "VIOLATION: dangerouslySetInnerHTML"
-```
-
-### 3. React-Specific Checks
-```bash
-# Missing useCallback for handlers passed to children
-grep -rn "function handle" src/modules/ --include="*.tsx" 2>/dev/null && echo "CHECK: handlers may need useCallback"
-
-# Inline objects in JSX (re-creates on render)
-grep -rn "={{" src/modules/ --include="*.tsx" 2>/dev/null && echo "CHECK: inline objects in JSX props"
-
-# useEffect without cleanup
-grep -rn "useEffect" src/modules/ --include="*.ts" --include="*.tsx" 2>/dev/null && echo "CHECK: verify useEffect cleanup"
-
-# Missing staleTime
-grep -rn "useQuery" src/ --include="*.ts" -l 2>/dev/null | while read f; do
-  grep -L "staleTime" "$f" 2>/dev/null
-done
-
-# Full store destructure (causes re-renders)
-grep -rn "} = use.*Store()" src/ --include="*.tsx" 2>/dev/null && echo "CHECK: full Zustand destructure (use selectors)"
-```
+Run `/review-check-architecture $SCOPE` and include the results in the review.
+This skill contains all framework-specific automated checks
+-- do NOT duplicate them here.
 
 ### 4. Manual Review
 - Services: HTTP only, no try/catch, no transformation

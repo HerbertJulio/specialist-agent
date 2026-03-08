@@ -14,70 +14,17 @@ Read `docs/ARCHITECTURE.md` to understand the expected data flow.
 
 ## 4-Phase Methodology
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  Phase 1         Phase 2          Phase 3          Phase 4      │
-│  ┌─────────┐    ┌──────────┐    ┌───────────┐    ┌───────────┐ │
-│  │ GATHER  │ ─► │ ANALYZE  │ ─► │ FORMULATE │ ─► │ IMPLEMENT │ │
-│  │ Evidence│    │ Patterns │    │ Hypothesis│    │   & Prove │ │
-│  └─────────┘    └──────────┘    └───────────┘    └───────────┘ │
-└──────────────────────────────────────────────────────────────────┘
-```
+Follow the @debugger agent's 4-phase protocol: GATHER EVIDENCE → ANALYZE PATTERNS → FORMULATE HYPOTHESIS → IMPLEMENT & PROVE. Each phase has blocking rules -- do NOT skip phases.
 
-### Phase 1: GATHER EVIDENCE
-- Read the COMPLETE error message and stack trace
-- Reproduce consistently (document exact steps)
-- Identify: Server-side (load function) or client-side (component)?
-- Check recent changes: `git log --oneline -10`
-
-**⛔ BLOCKED** until evidence collected.
-
-### Phase 2: ANALYZE PATTERNS
-- Trace execution path: entry → error location
-- Check rune usage ($state, $derived, $effect)
-- Compare with working code
-- Identify: consistent or intermittent? data-dependent?
-
-**⛔ BLOCKED** until patterns identified.
-
-### Phase 3: FORMULATE HYPOTHESIS
-- Generate MULTIPLE hypotheses (not just one)
-- Rank by probability
-- Design test for each
-
-**⛔ BLOCKED** until hypotheses formulated.
-
-### Phase 4: IMPLEMENT & PROVE
-- Test primary hypothesis
-- If confirmed → Write test that reproduces bug → Fix → Verify
-- If rejected → Test next hypothesis
-- Create checkpoint after fix
-
-### Three-Strike Rule
-After 3 failed hypotheses → Stop and rethink understanding of the system.
+Three-Strike Rule: After 3 failed hypotheses, stop and rethink understanding of the system.
 
 ## Core Principles
 
-### Security First (Mandatory)
-- NEVER trust user input - validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
-- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
-- ALWAYS implement rate limiting on public endpoints
-- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only - never hardcode
+Refer to the pack CLAUDE.md for full stack details and key patterns.
 
-### Performance First (Mandatory)
-- Use SvelteKit load functions for server state caching
-- Implement proper loading states with +loading.svelte
-- Use proper cache invalidation (`invalidateAll`) - stale UI is a bug
-- Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries - batch requests, use proper data loading patterns
-
-### Code Language (Mandatory)
-- ALWAYS write code (variables, functions, comments, commits) in English
-- Only use other languages if explicitly requested by the user
-- User-facing text (UI labels, messages) should match project's i18n strategy
+- **Security**: Validate all inputs server-side, parameterized queries only, no secrets in code, OWASP Top 10
+- **Performance**: Use the framework's recommended server state caching, lazy load routes and components, no N+1 queries
+- **Code Language**: All code in English. User-facing text follows project i18n strategy
 
 ## Workflow
 

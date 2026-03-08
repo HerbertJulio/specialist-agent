@@ -14,28 +14,11 @@ Read `docs/ARCHITECTURE.md`.
 
 ## Core Principles
 
-### Security First (Mandatory)
-- NEVER trust user input - validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
-- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
-- ALWAYS implement rate limiting on public endpoints
-- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only - never hardcode
+Refer to the pack CLAUDE.md for full stack details and key patterns.
 
-### Performance First (Mandatory)
-- ALWAYS use server-side data fetching in frontmatter - no unnecessary client JS
-- Choose the LEAST aggressive hydration strategy for islands (`client:visible` > `client:idle` > `client:load`)
-- Use Content Collections for static content - type-safe and optimized at build time
-- Lazy load islands and heavy dependencies
-- Avoid shipping JavaScript unless interactivity is required
-- Use `<Image />` from `astro:assets` for optimized images
-- Avoid N+1 queries - batch requests, use proper data loading patterns
-
-### Code Language (Mandatory)
-- ALWAYS write code (variables, functions, comments, commits) in English
-- Only use other languages if explicitly requested by the user
-- User-facing text (UI labels, messages) should match project's i18n strategy
+- **Security**: Validate all inputs server-side, parameterized queries only, no secrets in code, OWASP Top 10
+- **Performance**: Use the framework's recommended server state caching, lazy load routes and components, no N+1 queries
+- **Code Language**: All code in English. User-facing text follows project i18n strategy
 
 ## Scope Detection
 - **Module**: user wants a full feature (CRUD, page, multiple endpoints) -> Module mode
@@ -48,65 +31,16 @@ Read `docs/ARCHITECTURE.md`.
 ---
 
 ## Module Mode
-1. Ask: resource name, endpoints, UI type (list/detail/CRUD), interactivity needs
-2. Scaffold `src/modules/[kebab-name]/` with: services/, adapters/, types/, __tests__/, index.ts
-3. Create bottom-up:
-   - `types/[name].types.ts` - exact API response (snake_case)
-   - `types/[name].contracts.ts` - app contract (camelCase, Date objects)
-   - `adapters/[name]-adapter.ts` - pure functions: inbound (API->App) + outbound (App->API)
-   - `services/[name]-service.ts` - fetch only: `{ list, getById, create, update, delete }`. No try/catch, no transformation
-4. Create pages in `src/pages/`:
-   - List page: fetch in frontmatter, render with .astro components
-   - Detail page: `[slug].astro` or `[id].astro` with `getStaticPaths()` for SSG
-   - API endpoints: `src/pages/api/[name]/` for mutations
-5. Create .astro components for presentational UI
-6. Create islands for interactive parts only (forms, search, filters)
-7. Validate: `npx astro check && npx astro build`
+Run `/dev-create-module $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Component Mode
-1. Determine placement: feature -> `src/components/`, shared -> `src/shared/components/`
-2. Determine type:
-   - **Astro component** (default): server-rendered, zero JS, `.astro` file
-   - **Island**: interactive, needs JS, framework component in `src/islands/`
-3. Astro component template:
-   ```astro
-   ---
-   interface Props {
-     // type all props
-   }
-   const { prop1, prop2 } = Astro.props
-   ---
-   <div class="component-name">
-     <!-- template -->
-   </div>
-   <style>
-     /* scoped styles */
-   </style>
-   ```
-4. Rules: PascalCase.astro, props via `Astro.props`, scoped `<style>`, no JS shipped
+Run `/dev-create-component $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Service Mode
-1. Ask: endpoint URL, HTTP method, response format (ask for JSON example)
-2. Create 4 files:
-   - `types/[name].types.ts` - exact API (snake_case, string dates)
-   - `types/[name].contracts.ts` - app contract (camelCase, Date, computed booleans)
-   - `adapters/[name]-adapter.ts` - pure functions, bidirectional. Rename snake->camel, convert string->Date, cents->currency
-   - `services/[name]-service.ts` - fetch only. No try/catch, no transformation, no logic. Export as object with methods
-3. Validate: `npx astro check`
+Run `/dev-create-service $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Island Mode
-1. Ask: what interactivity is needed? (form, search, toggle, counter, etc.)
-2. Choose framework: React (.tsx), Vue (.vue), or Svelte (.svelte) based on project preference
-3. Choose hydration strategy:
-   - `client:load` - immediately needed (above the fold, critical interaction)
-   - `client:idle` - not urgent (sidebar, secondary features)
-   - `client:visible` - below the fold (comments, carousels)
-   - `client:media="..."` - viewport-specific (mobile menu)
-   - `client:only="react"` - skip SSR (auth, browser-API-dependent)
-4. Create in `src/islands/` with typed props
-5. Props must be serializable (no functions, no class instances)
-6. Keep islands small - extract non-interactive parts to .astro components
-7. Validate: `npx astro check && npx astro build`
+Run `/dev-create-island $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Page Mode
 1. Determine type: static (SSG) or dynamic (SSR)
@@ -118,10 +52,7 @@ Read `docs/ARCHITECTURE.md`.
 7. Validate: `npx astro check && npx astro build`
 
 ## Test Mode
-1. Read the target file
-2. Priority: adapters (pure functions, easy) > services (mock fetch) > islands (framework test utils)
-3. Create in `__tests__/[OriginalName].spec.ts`
-4. Run: `npx vitest run [file]`
+Run `/dev-create-test $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Verification Protocol
 

@@ -24,6 +24,7 @@ npx eslint --ext .ts,.vue src/ --max-warnings 0
 npx vitest run --passWithNoTests
 ```
 
+2b. Run `/review-check-architecture $SCOPE` for automated pattern validation.
 3. Check ARCHITECTURE.md patterns:
    - Services: no try/catch, no transformation
    - Adapters: pure functions

@@ -1,106 +1,63 @@
 # Installation
 
-::: info What gets installed
-Specialist Agent only adds markdown files (`.claude/agents/`, `.claude/skills/`, `CLAUDE.md`). It never modifies your source code, dependencies, or config files.
-:::
+## Claude Code (Primary)
 
-## Option 1: Marketplace
-
-**Claude Code:**
-```
-/plugin install specialist-agent
-```
-
----
-
-## Option 2: CLI
-
-```bash
-cd your-project
+```sh
 npx specialist-agent init
 ```
 
-Works on any platform.
+Interactive CLI that:
+- Detects your framework or lets you start with an empty project
+- Installs 35 agents (Full or Lite mode)
+- Configures 24 skills
+- Sets up native hooks (security guard, auto-dispatch, auto-format)
+- Detects and generates architecture guides
 
----
+## Cursor
 
-## What Happens
+Copy the `.cursor-plugin/` directory to your project, or install via Cursor's plugin marketplace.
 
-1. Detects your framework (React, Vue, Next.js, SvelteKit, Angular, Astro, Nuxt)
-2. Detects current architecture and suggests improvements (15 patterns supported)
-3. Asks Full or Lite mode
-4. Installs agents and skills to `.claude/`
-5. Optionally installs native Claude Code hooks (security guard, auto-dispatch, session context, auto-format)
+## VS Code
 
-```text
-your-project/
-├── .claude/
-│   ├── agents/           # AI agents
-│   ├── skills/           # Slash commands
-│   └── settings.json     # Native hooks config
-├── .specialist-agent/
-│   └── hooks/native/     # Hook scripts
-├── docs/
-│   └── ARCHITECTURE.md   # Your conventions
-└── CLAUDE.md             # Project config
+Install via the VS Code extension marketplace or copy `.vscode/extension.json`.
+
+## Windsurf
+
+Copy the `.windsurf/plugin.json` to your project root.
+
+## Codex
+
+See [Codex installation guide](/guide/install-codex).
+
+## OpenCode
+
+See [OpenCode installation guide](/guide/install-opencode).
+
+## Global vs Project Install
+
+| Scope | Location | Use case |
+|-------|----------|----------|
+| Project | `.claude/agents/` | Framework-specific agents per project |
+| Global | `~/.claude/agents/` | Shared agents across all projects |
+
+## Framework Packs
+
+Each pack includes optimized versions of @builder, @reviewer, @doctor, @migrator:
+
+| Pack | Framework |
+|------|-----------|
+| `vue` | Vue 3 + Composition API |
+| `react` | React 18+ with hooks |
+| `nextjs` | Next.js App Router / Pages |
+| `svelte` | SvelteKit |
+| `angular` | Angular 17+ |
+| `astro` | Astro |
+| `nuxt` | Nuxt 3 |
+
+Empty projects get all agents with React defaults. Re-run `npx specialist-agent init` when you choose a framework.
+
+## Updating
+
+```sh
+npx specialist-agent init --force
 ```
-
----
-
-## Verify
-
-```
-"Use @scout to analyze this project"
-```
-
----
-
-## Modes
-
-| Mode | Model | Cost |
-|------|-------|------|
-| Full | Sonnet/Opus | Standard |
-| Lite | Haiku | 60-80% less |
-
----
-
-## CLI Commands
-
-```bash
-npx specialist-agent init              # Install
-npx specialist-agent detect            # Detect architecture
-npx specialist-agent list              # List installed
-npx specialist-agent create-agent @x   # Create custom agent
-npx specialist-agent profiles set x    # Set team profile
-```
-
----
-
-## Team Profiles
-
-| Profile | Description |
-|---------|-------------|
-| `startup-fast` | Move fast, Haiku |
-| `enterprise-strict` | Full validation |
-| `learning-mode` | Explain everything |
-| `cost-optimized` | Minimize tokens |
-
----
-
-## Platform Guides
-
-Need manual setup? See platform-specific guides:
-
-- [Cursor](/guide/install-cursor)
-- [VS Code](/guide/install-vscode)
-- [Windsurf](/guide/install-windsurf)
-- [Codex](/guide/install-codex)
-- [OpenCode](/guide/install-opencode)
-
----
-
-## What's Next?
-
-- [Quick Start](/guide/quick-start) - Build your first feature in 2 minutes
-- [All Agents](/reference/agents) - Browse the full 30 agent catalog
-- [Architecture](/guide/architecture) - Understand the patterns agents follow
