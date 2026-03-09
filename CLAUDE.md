@@ -199,7 +199,7 @@ packs/[framework]/
 | Session Context | `SessionStart` | Injects project state |
 | Auto-Format | `PostToolUse` | Formats files after Write/Edit |
 
-Configure in `hooks/hooks.json`.
+Native hooks configured in `hooks/hooks.json` (official Claude Code format). Internal lifecycle hooks in `hooks/lifecycle.json`.
 
 ## Cross-Cutting Concerns
 
