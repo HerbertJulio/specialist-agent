@@ -1,1 +1,0 @@
-import{_ as t,o as a,c as o,a3 as s}from"./chunks/framework.weVe1IXV.js";const p=JSON.parse('{"title":"FAQ","description":"","frontmatter":{},"headers":[],"relativePath":"guide/faq.md","filePath":"guide/faq.md"}'),i={name:"guide/faq.md"};function n(r,e,d,l,c,h){return a(),o("div",null,[...e[0]||(e[0]=[s("",73)])])}const g=t(i,[["render",n]]);export{p as __pageData,g as default};
