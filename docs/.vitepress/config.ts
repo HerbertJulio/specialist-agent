@@ -119,6 +119,65 @@ export default withMermaid(defineConfig({
               ],
             },
             {
+              text: 'Tutoriais',
+              items: [
+                { text: 'Módulo CRUD', link: '/pt-BR/tutorials/crud-module' },
+                { text: 'Camada de Serviço', link: '/pt-BR/tutorials/service-layer' },
+                { text: 'Formulários', link: '/pt-BR/tutorials/forms' },
+                { text: 'Paginação', link: '/pt-BR/tutorials/pagination-filters' },
+                { text: 'Migração de Projeto', link: '/pt-BR/tutorials/migrate-project' },
+              ],
+            },
+            {
+              text: 'Guias por Plataforma',
+              collapsed: true,
+              items: [
+                { text: 'Cursor', link: '/pt-BR/guide/install-cursor' },
+                { text: 'VS Code', link: '/pt-BR/guide/install-vscode' },
+                { text: 'Windsurf', link: '/pt-BR/guide/install-windsurf' },
+                { text: 'Codex', link: '/pt-BR/guide/install-codex' },
+                { text: 'OpenCode', link: '/pt-BR/guide/install-opencode' },
+              ],
+            },
+            {
+              text: 'Avançado',
+              items: [
+                { text: 'Boas Práticas', link: '/pt-BR/guide/best-practices' },
+                { text: 'Integrações MCP', link: '/pt-BR/guide/mcp-integrations' },
+                { text: 'Performance e Custo', link: '/pt-BR/guide/benchmark' },
+                { text: 'FAQ', link: '/pt-BR/guide/faq' },
+              ],
+            },
+          ],
+          '/pt-BR/tutorials/': [
+            {
+              text: 'Começando',
+              items: [
+                { text: 'Introdução', link: '/pt-BR/guide/introduction' },
+                { text: 'Instalação', link: '/pt-BR/guide/installation' },
+                { text: 'Início Rápido', link: '/pt-BR/guide/quick-start' },
+              ],
+            },
+            {
+              text: 'Conceitos',
+              items: [
+                { text: 'Arquitetura', link: '/pt-BR/guide/architecture' },
+                { text: 'Camadas', link: '/pt-BR/guide/layers' },
+                { text: 'Componentes', link: '/pt-BR/guide/components' },
+                { text: 'Composição de Agentes', link: '/pt-BR/guide/agent-composition' },
+              ],
+            },
+            {
+              text: 'Tutoriais',
+              items: [
+                { text: 'Módulo CRUD', link: '/pt-BR/tutorials/crud-module' },
+                { text: 'Camada de Serviço', link: '/pt-BR/tutorials/service-layer' },
+                { text: 'Formulários', link: '/pt-BR/tutorials/forms' },
+                { text: 'Paginação', link: '/pt-BR/tutorials/pagination-filters' },
+                { text: 'Migração de Projeto', link: '/pt-BR/tutorials/migrate-project' },
+              ],
+            },
+            {
               text: 'Guias por Plataforma',
               collapsed: true,
               items: [
@@ -188,22 +247,27 @@ export default withMermaid(defineConfig({
                 { text: 'Tokens', link: '/pt-BR/reference/tokens' },
               ],
             },
-          ],
-          '/pt-BR/tutorials/': [
             {
-              text: 'Tutoriais',
+              text: 'Extensão',
               items: [
-                { text: 'Módulo CRUD', link: '/pt-BR/tutorials/crud-module' },
-                { text: 'Camada de Serviço', link: '/pt-BR/tutorials/service-layer' },
-                { text: 'Formulários', link: '/pt-BR/tutorials/forms' },
-                { text: 'Paginação', link: '/pt-BR/tutorials/pagination-filters' },
-                { text: 'Migração', link: '/pt-BR/tutorials/migrate-project' },
+                { text: 'Criar Agentes', link: '/pt-BR/customization/creating-agents' },
+                { text: 'Criar Skills', link: '/pt-BR/customization/creating-skills' },
+                { text: 'Editar Padrões', link: '/pt-BR/customization/editing-patterns' },
               ],
             },
           ],
           '/pt-BR/customization/': [
             {
-              text: 'Personalização',
+              text: 'Referência',
+              items: [
+                { text: 'Agentes', link: '/pt-BR/reference/agents' },
+                { text: 'Skills', link: '/pt-BR/reference/skills' },
+                { text: 'Hooks', link: '/pt-BR/reference/hooks' },
+                { text: 'Tokens', link: '/pt-BR/reference/tokens' },
+              ],
+            },
+            {
+              text: 'Extensão',
               items: [
                 { text: 'Criar Agentes', link: '/pt-BR/customization/creating-agents' },
                 { text: 'Criar Skills', link: '/pt-BR/customization/creating-skills' },
@@ -287,6 +351,65 @@ export default withMermaid(defineConfig({
           ],
         },
         {
+          text: 'Tutorials',
+          items: [
+            { text: 'CRUD Module', link: '/tutorials/crud-module' },
+            { text: 'Service Layer', link: '/tutorials/service-layer' },
+            { text: 'Forms', link: '/tutorials/forms' },
+            { text: 'Pagination', link: '/tutorials/pagination-filters' },
+            { text: 'Project Migration', link: '/tutorials/migrate-project' },
+          ],
+        },
+        {
+          text: 'Platform Guides',
+          collapsed: true,
+          items: [
+            { text: 'Cursor', link: '/guide/install-cursor' },
+            { text: 'VS Code', link: '/guide/install-vscode' },
+            { text: 'Windsurf', link: '/guide/install-windsurf' },
+            { text: 'Codex', link: '/guide/install-codex' },
+            { text: 'OpenCode', link: '/guide/install-opencode' },
+          ],
+        },
+        {
+          text: 'Advanced',
+          items: [
+            { text: 'Best Practices', link: '/guide/best-practices' },
+            { text: 'MCP Integrations', link: '/guide/mcp-integrations' },
+            { text: 'Performance & Cost', link: '/guide/benchmark' },
+            { text: 'FAQ', link: '/guide/faq' },
+          ],
+        },
+      ],
+      '/tutorials/': [
+        {
+          text: 'Getting Started',
+          items: [
+            { text: 'Introduction', link: '/guide/introduction' },
+            { text: 'Installation', link: '/guide/installation' },
+            { text: 'Quick Start', link: '/guide/quick-start' },
+          ],
+        },
+        {
+          text: 'Concepts',
+          items: [
+            { text: 'Architecture', link: '/guide/architecture' },
+            { text: 'Layers', link: '/guide/layers' },
+            { text: 'Components', link: '/guide/components' },
+            { text: 'Agent Composition', link: '/guide/agent-composition' },
+          ],
+        },
+        {
+          text: 'Tutorials',
+          items: [
+            { text: 'CRUD Module', link: '/tutorials/crud-module' },
+            { text: 'Service Layer', link: '/tutorials/service-layer' },
+            { text: 'Forms', link: '/tutorials/forms' },
+            { text: 'Pagination', link: '/tutorials/pagination-filters' },
+            { text: 'Project Migration', link: '/tutorials/migrate-project' },
+          ],
+        },
+        {
           text: 'Platform Guides',
           collapsed: true,
           items: [
@@ -356,10 +479,8 @@ export default withMermaid(defineConfig({
             { text: 'Tokens', link: '/reference/tokens' },
           ],
         },
-      ],
-      '/customization/': [
         {
-          text: 'Customization',
+          text: 'Extending',
           items: [
             { text: 'Creating Agents', link: '/customization/creating-agents' },
             { text: 'Creating Skills', link: '/customization/creating-skills' },
@@ -367,15 +488,22 @@ export default withMermaid(defineConfig({
           ],
         },
       ],
-      '/tutorials/': [
+      '/customization/': [
         {
-          text: 'Framework Tutorials',
+          text: 'Reference',
           items: [
-            { text: 'CRUD Module', link: '/tutorials/crud-module' },
-            { text: 'Service Layer', link: '/tutorials/service-layer' },
-            { text: 'Forms', link: '/tutorials/forms' },
-            { text: 'Pagination', link: '/tutorials/pagination-filters' },
-            { text: 'Migration', link: '/tutorials/migrate-project' },
+            { text: 'Agents', link: '/reference/agents' },
+            { text: 'Skills', link: '/reference/skills' },
+            { text: 'Hooks', link: '/reference/hooks' },
+            { text: 'Tokens', link: '/reference/tokens' },
+          ],
+        },
+        {
+          text: 'Extending',
+          items: [
+            { text: 'Creating Agents', link: '/customization/creating-agents' },
+            { text: 'Creating Skills', link: '/customization/creating-skills' },
+            { text: 'Editing Patterns', link: '/customization/editing-patterns' },
           ],
         },
       ],
