@@ -29,6 +29,8 @@ jobs:
         env:
           VITEPRESS_GA_ID: ${{ secrets.VITEPRESS_GA_ID }}
 
+      - run: touch docs/.vitepress/dist/.nojekyll
+
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: docs/.vitepress/dist
