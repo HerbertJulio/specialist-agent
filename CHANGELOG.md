@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.11.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.10.0...specialist-agent-v2.11.0) (2026-03-09)
+
+
+### Features
+
+* competitive improvements agnostic agents, docs overhaul & new capabilities ([3817e64](https://github.com/HerbertJulio/specialist-agent/commit/3817e647007c9e023fac3dc6dfc6abf4eefe9986))
+
 ## [2.10.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.9.0...specialist-agent-v2.10.0) (2026-03-06)
 
 
