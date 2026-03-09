@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.11.2](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.11.1...specialist-agent-v2.11.2) (2026-03-09)
+
+
+### Bug Fixes
+
+* add refactor type to release-please config ([#72](https://github.com/HerbertJulio/specialist-agent/issues/72)) ([c1b885d](https://github.com/HerbertJulio/specialist-agent/commit/c1b885d76fc6a06638d0deb944455446def8e561))
+* scope cli init to install only inside .claude directory ([#70](https://github.com/HerbertJulio/specialist-agent/issues/70)) ([f19f483](https://github.com/HerbertJulio/specialist-agent/commit/f19f483d2c6982eca8bf812a0445f10adc794e02))
+
+
+### Refactoring
+
+* cli installs only inside .claude/ directory ([#69](https://github.com/HerbertJulio/specialist-agent/issues/69)) ([0a2a116](https://github.com/HerbertJulio/specialist-agent/commit/0a2a11650dcfe36aefc95048874d897aba76868c))
+
 ## [2.11.1](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.11.0...specialist-agent-v2.11.1) (2026-03-09)
 
 
