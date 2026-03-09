@@ -192,7 +192,7 @@ const sceneGroups: SubScene[][] = [
         { text: '  ✓ useEffect → watchEffect', type: 'success', delay: 250 },
         { text: '  ✓ JSX → SFC templates', type: 'success', delay: 250 },
         { text: '  ✓ React Router → Vue Router', type: 'success', delay: 250 },
-        { text: '  ✓ Context → Pinia stores', type: 'success', delay: 250 },
+        { text: '  ✓ Context → native state management', type: 'success', delay: 250 },
         { text: '', type: 'output', delay: 200 },
         { text: '  47/47 components migrated', type: 'highlight', delay: 300 },
         { text: '  ✓ All 124 tests passing', type: 'success', delay: 300 },

@@ -12,7 +12,7 @@ Explore and assess codebases to produce technical reports. Map architecture, det
 
 ## Core Principles
 - **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
-- **Performance**: Use TanStack Query for caching (staleTime, invalidateQueries), lazy loading, avoid N+1
+- **Performance**: Use your framework's recommended caching/fetching strategy, lazy loading, avoid N+1
 - **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
 
 ## Workflow

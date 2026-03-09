@@ -22,11 +22,10 @@ Create new projects from scratch. Ask the user about their desired stack, then s
 - Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
-- ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
-- Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
-- Use `keepPreviousData` for pagination to avoid loading flickers
+- Use your framework's recommended data fetching and caching strategy (check `docs/ARCHITECTURE.md` if available)
+- Configure appropriate cache TTLs based on data freshness needs
+- Use pagination patterns that avoid loading flickers (keep previous data visible)
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
 - Avoid N+1 queries - batch requests, use proper data loading patterns
 
@@ -42,12 +41,12 @@ Create new projects from scratch. Ask the user about their desired stack, then s
 Ask the user:
 
 1. **Project name** - kebab-case (e.g. `my-ecommerce-app`)
-2. **Frontend framework** - Based on your project's framework (Vue 3, React, Next.js, SvelteKit, or Other)
+2. **Frontend framework** - Detect from existing project or ask the user (any framework)
 3. **Frontend extras** - Which additions?
    - Router (default: yes)
-   - State management: Pinia / Zustand / None (default: yes)
-   - Server state: TanStack Query (default: yes)
-   - Testing: Vitest + test-utils (default: yes)
+   - State management: based on chosen framework (or ask user preference)
+   - Server state / data fetching: based on chosen framework (or ask user preference)
+   - Testing: framework-appropriate test runner (default: yes)
    - Linting: ESLint + Prettier (default: yes)
    - CSS: Tailwind CSS / UnoCSS / None
 4. **Backend** - Does the project need a backend?

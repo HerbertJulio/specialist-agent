@@ -42,7 +42,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for architecture
 - **Hexagonal**: Domain has ZERO external deps. All dependencies point inward.
 - **DDD**: Bounded Contexts, Aggregate Roots, Value Objects, Domain Events.
 - **CQRS**: Separate write (Command) and read (Query) models.
-- **Modular Monolith**: Module isolation without distributed complexity. Always start here.
+- **Modular Monolith**: Module isolation without distributed complexity. Consider starting here unless requirements justify distribution.
 
 **Rules:** Every decision MUST have an ADR. Target MUST be achievable incrementally.
 
@@ -81,7 +81,7 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for architecture
 ## Rules
 
 1. Framework-agnostic - works with any stack
-2. Modular Monolith before Microservices - always
+2. Consider Modular Monolith before Microservices - start simpler unless requirements justify distribution
 3. Strangler Fig over Big Bang - always
 4. Evidence-based claims only - run tests, show output
 5. Coordinate with specialist agents for domain-specific changes

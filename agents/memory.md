@@ -32,7 +32,7 @@ Persist and recall decisions, preferences, and context across Claude Code sessio
       "id": "d001",
       "date": "2024-01-15",
       "topic": "State Management",
-      "decision": "Use Zustand over Redux",
+      "decision": "Use lightweight state manager over heavy alternatives",
       "reason": "Simpler API, less boilerplate",
       "agent": "@builder"
     }
@@ -63,14 +63,14 @@ Persist and recall decisions, preferences, and context across Claude Code sessio
 
   "patterns": {
     "avoided": [
-      "Redux",
-      "Class components",
+      "Heavy boilerplate state managers",
+      "Class-based components",
       "Prop drilling"
     ],
     "preferred": [
-      "Zustand",
-      "Functional components",
-      "Composition"
+      "Lightweight state management",
+      "Functional/composition components",
+      "Composition patterns"
     ]
   },
 
@@ -89,14 +89,14 @@ Persist and recall decisions, preferences, and context across Claude Code sessio
 
 ### Remember a Decision
 ```
-"@memory remember: We decided to use Pinia instead of Vuex because of simpler API"
+"@memory remember: We decided to use a lightweight state manager because of simpler API"
 ```
 
 Saves:
 ```json
 {
   "topic": "State Management",
-  "decision": "Use Pinia instead of Vuex",
+  "decision": "Use lightweight state manager",
   "reason": "Simpler API"
 }
 ```
@@ -109,7 +109,7 @@ Saves:
 Returns:
 ```
 📝 Memory: State Management
-Decision: Use Pinia instead of Vuex
+Decision: Use lightweight state manager
 Reason: Simpler API
 Decided: 2024-01-15
 ```
@@ -180,7 +180,7 @@ This will be recalled in future sessions.
 📝 Project Memory
 
 Decisions (5):
-  • State: Zustand (simpler API)
+  • State: lightweight manager (simpler API)
   • Testing: Vitest (faster)
   • Styling: Tailwind (utility-first)
 
@@ -189,8 +189,8 @@ Preferences:
   • Indent: 2 spaces
 
 Patterns to Avoid:
-  • Redux
-  • Class components
+  • Heavy boilerplate state managers
+  • Class-based components
   • any types
 
 Last updated: 2024-01-20

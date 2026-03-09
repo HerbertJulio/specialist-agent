@@ -14,9 +14,9 @@ Durante `specialist-agent init`, voce escolhe se deseja instalar o guia de arqui
 4. Se nao encontrado, usam boas praticas genericas
 5. Edite o arquivo a qualquer momento para mudar o comportamento dos agentes — sem reiniciar
 
-## Padrao Universal
+## Padrao Default
 
-Todos os framework packs seguem a mesma arquitetura de quatro camadas:
+Quando `docs/ARCHITECTURE.md` e instalado, ele fornece uma arquitetura de quatro camadas como ponto de partida. Isso **nao e obrigatorio** — voce pode editar ou substituir por qualquer padrao que se encaixe no seu projeto (Clean Architecture, Hexagonal, DDD, Feature-Sliced Design, ou o seu proprio).
 
 ```mermaid
 graph LR
@@ -40,13 +40,13 @@ graph LR
 
 ### Equivalentes por Framework
 
-Cada framework tem sua propria terminologia para os mesmos conceitos:
+Cada framework tem sua propria terminologia e ferramentas idiomaticas. A tabela abaixo mostra **escolhas comuns** — nao prescricoes. Use o que fizer sentido para o seu projeto:
 
 | Camada | Vue | React | Next.js | SvelteKit | Angular | Astro | Nuxt |
 |--------|-----|-------|---------|-----------|---------|-------|------|
 | **Logica** | Composable | Hook | Hook / Server Action | Load function | Service + inject() | Endpoint | Composable / useFetch |
-| **Estado cliente** | Pinia | Zustand | Zustand | Svelte stores | Signals | — | Pinia / useState |
-| **Estado servidor** | TanStack Vue Query | TanStack React Query | TanStack + RSC | SvelteKit load | HttpClient | — | useFetch / useAsyncData |
+| **Estado cliente** | Pinia, etc. | Zustand, Redux, etc. | Zustand, etc. | Svelte stores | Signals, NgRx | — | Pinia / useState |
+| **Estado servidor** | Vue Query, etc. | React Query, SWR, etc. | RSC, React Query, etc. | SvelteKit load | HttpClient, etc. | — | useFetch / useAsyncData |
 | **Componente** | SFC (.vue) | JSX (.tsx) | JSX (.tsx) | .svelte | Standalone component | .astro / Islands | SFC (.vue) |
 
 ## Estrutura Modular

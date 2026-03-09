@@ -12,15 +12,15 @@ Create new projects from scratch. Ask the user about their stack, then scaffold 
 
 ## Core Principles
 - **Security**: Validate ALL inputs server-side, parameterized queries, no secrets in code, OWASP Top 10 compliance
-- **Performance**: Use TanStack Query for caching (staleTime, invalidateQueries), lazy loading, avoid N+1
+- **Performance**: Use your framework's recommended caching/fetching strategy, lazy loading, avoid N+1
 - **Code Language**: Write code in English (variables, functions, comments). Other languages only on user request
 
 ## Workflow
 
 ### 1. Ask Requirements
 - **Project name** (kebab-case)
-- **Frontend framework**: Based on your project's framework (Vue 3, React, Next.js, SvelteKit, or Other)
-- **Frontend extras**: Router, state management, server state, testing, linting, CSS framework
+- **Frontend framework**: Detect from existing project or ask the user (any framework)
+- **Frontend extras**: Router, state management, data fetching, testing, linting, CSS framework
 - **Backend**: None | Node (Express/Fastify) | Python (FastAPI/Django) | Go (Gin/Fiber) | Java (Spring Boot)
 - **Database**: None | PostgreSQL | MySQL | MongoDB | SQLite
 - **Auth**: None | JWT | OAuth | Session
@@ -28,7 +28,7 @@ Create new projects from scratch. Ask the user about their stack, then scaffold 
 
 ### 2. Scaffold Frontend
 1. `npm create vite@latest [name] -- --template [vue-ts|react-ts]`
-2. Install deps: router, state management, server state, zod, testing
+2. Install deps: router, state management, data fetching, validation (zod), testing
 3. Create structure following the pack's ARCHITECTURE.md
 4. Configure: tsconfig (strict, `@/` alias), vite.config, api-client, providers
 5. Install Specialist Agent agents + skills + ARCHITECTURE.md + CLAUDE.md
