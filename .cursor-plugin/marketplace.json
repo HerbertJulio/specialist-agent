@@ -1,8 +1,15 @@
 {
+  "name": "specialist-agent",
+  "owner": {
+    "name": "Herbert Julio"
+  },
+  "metadata": {
+    "description": "Your AI development team — 35 agents and 24 skills for building, reviewing, debugging, and shipping production code."
+  },
   "plugins": [
     {
       "name": "specialist-agent",
-      "path": ".",
+      "source": ".",
       "description": "Your AI development team — 35 agents and 24 skills"
     }
   ]
