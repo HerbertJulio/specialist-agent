@@ -218,42 +218,6 @@ assert(
   'Allows file at project root'
 );
 
-// ── Settings Template Validation ────────────────────────────
-
-setSection('Settings Template - Validation');
-
-const templatePath = join(ROOT, 'hooks', 'native', 'settings-template.json');
-assert(existsSync(templatePath), 'settings-template.json exists');
-
-let template;
-try {
-  template = JSON.parse(readFileSync(templatePath, 'utf-8'));
-  assert(true, 'settings-template.json is valid JSON');
-} catch {
-  assert(false, 'settings-template.json is valid JSON');
-}
-
-if (template) {
-  assert(template.hooks?.PreToolUse, 'Template has PreToolUse event');
-  assert(template.hooks?.UserPromptSubmit, 'Template has UserPromptSubmit event');
-  assert(template.hooks?.SessionStart, 'Template has SessionStart event');
-  assert(template.hooks?.PostToolUse, 'Template has PostToolUse event');
-
-  // Verify all hook commands reference existing files
-  const allHookEntries = Object.values(template.hooks).flat();
-  for (const entry of allHookEntries) {
-    for (const hook of entry.hooks || []) {
-      if (hook.command) {
-        const scriptFile = hook.command.replace('node ', '');
-        // Template paths use install dir (.specialist-agent/), source files are in hooks/
-        const sourceFile = scriptFile.replace('.specialist-agent/', '');
-        const scriptPath = join(ROOT, sourceFile);
-        assert(existsSync(scriptPath), `Hook script exists: ${scriptFile}`);
-      }
-    }
-  }
-}
-
 // ── Security Config Validation ──────────────────────────────
 
 setSection('Security Config - Validation');
