@@ -1,16 +1,52 @@
 {
   "name": "specialist-agent",
   "owner": {
-    "name": "Herbert Julio"
+    "name": "Herbert Julio",
+    "email": "herbert@specialistagent.com.br"
   },
   "metadata": {
-    "description": "Your AI development team — 35 agents and 24 skills for building, reviewing, debugging, and shipping production code."
+    "description": "Your AI development team — 35 agents and 24 skills for building, reviewing, debugging, and shipping production code.",
+    "version": "2.10.0"
   },
   "plugins": [
     {
       "name": "specialist-agent",
       "source": ".",
-      "description": "Your AI development team — 35 agents and 24 skills"
+      "description": "35 specialized agents and 24 skills. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt with framework-specific patterns.",
+      "version": "2.10.0",
+      "author": {
+        "name": "Herbert Julio",
+        "email": "herbert@specialistagent.com.br"
+      },
+      "homepage": "https://specialistagent.com.br/",
+      "repository": "https://github.com/HerbertJulio/specialist-agent",
+      "license": "MIT",
+      "keywords": [
+        "agents",
+        "ai-agents",
+        "code-generation",
+        "code-review",
+        "tdd",
+        "debugging",
+        "architecture",
+        "vue",
+        "react",
+        "nextjs",
+        "svelte",
+        "angular",
+        "astro",
+        "nuxt"
+      ],
+      "category": "development",
+      "tags": [
+        "ai-agents",
+        "code-generation",
+        "code-review",
+        "testing",
+        "development",
+        "security",
+        "architecture"
+      ]
     }
   ]
 }

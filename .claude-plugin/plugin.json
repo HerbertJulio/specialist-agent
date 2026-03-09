@@ -1,16 +1,15 @@
 {
   "name": "specialist-agent",
   "version": "2.10.0",
-  "displayName": "Specialist Agent",
   "description": "Your AI development team. 35 agents and 24 skills for building, reviewing, debugging, and shipping production code. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt.",
   "author": {
     "name": "Herbert Julio",
+    "email": "herbert@specialistagent.com.br",
     "url": "https://github.com/HerbertJulio"
   },
   "repository": "https://github.com/HerbertJulio/specialist-agent",
   "homepage": "https://specialistagent.com.br/",
   "license": "MIT",
-  "icon": "docs/public/logo.svg",
   "keywords": [
     "agents",
     "ai-agents",
@@ -18,24 +17,19 @@
     "react",
     "nextjs",
     "svelte",
+    "angular",
+    "astro",
+    "nuxt",
     "code-generation",
     "code-review",
     "tdd",
     "debugging",
     "architecture"
   ],
-  "categories": [
-    "AI",
-    "Development",
-    "Code Generation",
-    "Testing"
-  ],
   "agents": "./agents",
   "skills": "./skills",
-  "hooks": "./hooks",
-  "templates": "./templates",
-  "rules": "./packs",
-  "readme": "./README.md",
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
   "install": {
     "command": "npx specialist-agent init",
     "postInstall": "Select your framework pack when prompted"
