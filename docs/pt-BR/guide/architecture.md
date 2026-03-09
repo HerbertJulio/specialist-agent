@@ -3,12 +3,12 @@
 O arquivo `docs/ARCHITECTURE.md` e uma configuracao **opcional** que personaliza como os agentes geram e revisam codigo no seu projeto. Quando presente, todos os agentes seguem seus padroes. Quando ausente, os agentes usam boas praticas genericas para o seu framework.
 
 ::: tip Opcional
-Durante `specialist-agent init`, voce escolhe se deseja instalar o guia de arquitetura. Voce pode adiciona-lo depois copiando do pack do seu framework para `docs/ARCHITECTURE.md`.
+Use `specialist-agent detect` para analisar seu projeto e gerar um guia de arquitetura. Voce tambem pode criar `docs/ARCHITECTURE.md` manualmente.
 :::
 
 ## Como Funciona
 
-1. Durante o `init`, escolha instalar `docs/ARCHITECTURE.md` (ou pule)
+1. Execute `specialist-agent detect` para analisar e gerar `docs/ARCHITECTURE.md`
 2. Os agentes verificam se o arquivo existe antes de cada acao
 3. Se encontrado, seguem seus padroes para geracao e revisao de codigo
 4. Se nao encontrado, usam boas praticas genericas

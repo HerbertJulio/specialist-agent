@@ -11,7 +11,6 @@ Interactive CLI that:
 - Installs 35 agents (Full or Lite mode)
 - Configures 24 skills
 - Sets up native hooks (security guard, auto-dispatch, auto-format)
-- Detects and generates architecture guides
 
 ## Cursor
 

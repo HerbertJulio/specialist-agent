@@ -305,7 +305,7 @@ async function main() {
   const result = evaluateCommand(command, config);
 
   if (result.blocked) {
-    process.stderr.write(`\n🛡️ Security Guard\n${result.message}\n\nRule: ${result.rule} (${result.severity})\nTo customize: edit hooks/native/security-config.json\n`);
+    process.stderr.write(`\n🛡️ Security Guard\n${result.message}\n\nRule: ${result.rule} (${result.severity})\nTo customize: edit .claude/hooks/security-config.json\n`);
     process.exit(2);
   }
 
