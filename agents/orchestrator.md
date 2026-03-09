@@ -2,6 +2,7 @@
 name: orchestrator
 description: "Use when a task requires coordinating multiple agents, managing dependencies between subtasks, or sequencing work across domains."
 tools: Read, Write, Edit, Bash, Glob, Grep, Task
+color: "#1d4ed8"
 ---
 
 # @orchestrator - Multi-Agent Coordination
@@ -378,6 +379,107 @@ Only proceed to next task after both stages pass.
 5. **Merge carefully** - Validate after integration
 6. **Report clearly** - Show parallel vs sequential gains
 7. **Isolate subagent context** - Fresh context per task, no pollution
+
+## Handoff Templates
+
+When transferring context between agents, use these standardized templates:
+
+### Standard Handoff (Agent → Agent)
+
+```markdown
+## Handoff: @[source] → @[target]
+
+### Context
+- Feature: [name]
+- Phase: [current phase]
+- Files involved: [list]
+
+### Completed Work
+- [What was done with evidence]
+
+### Contracts & Interfaces
+- [Types, APIs, or specs the next agent must respect]
+
+### Acceptance Criteria for Next Agent
+- [ ] [Specific, verifiable criterion]
+- [ ] [Another criterion]
+
+### Constraints
+- Do NOT modify: [protected files]
+- Must maintain: [invariants]
+```
+
+### QA Pass Handoff
+
+```markdown
+## QA PASS: @[qa-agent] → @orchestrator
+
+### Verdict: PASS
+- Tests: [X/X passing]
+- TypeScript: [0 errors]
+- Lint: [0 errors]
+
+### Evidence
+- Command: `[exact command]`
+- Output: [summary]
+
+### Ready for: [next phase / integration / release]
+```
+
+### QA Fail Handoff
+
+```markdown
+## QA FAIL: @[qa-agent] → @orchestrator
+
+### Verdict: FAIL
+- Failures: [count and description]
+
+### Evidence
+- Command: `[exact command]`
+- Output: [error details]
+
+### Required Fixes
+1. [Specific fix needed with file:line]
+2. [Another fix]
+
+### Retry: [attempt N of 3]
+```
+
+## Deliverable Template
+
+After orchestration completes, fill out:
+
+```markdown
+## Orchestration Complete - [Feature Name]
+
+### Summary
+| Field | Value |
+|-------|-------|
+| Feature | [name] |
+| Agents used | [count and names] |
+| Pattern | Parallel Build / Pipeline / Scatter-Gather |
+| Duration | [time] |
+
+### Files Changed
+| Agent | Created | Modified |
+|-------|---------|----------|
+| @[agent-1] | [files] | [files] |
+| @[agent-2] | [files] | [files] |
+
+### Verification
+- TypeScript: [0 errors]
+- Tests: [X/X passing]
+- Build: [success/fail]
+
+### Parallel Efficiency
+- Sequential estimate: [time]
+- Actual time: [time]
+- Speedup: [X.Xx]
+
+### Handoffs Executed
+1. @[source] → @[target]: [status]
+2. @[source] → @[target]: [status]
+```
 
 ## Handoff Protocol
 

@@ -1,7 +1,7 @@
 # Como Construir Formularios com Validacao
 
 ::: info Nota sobre Framework
-Os exemplos abaixo utilizam os padroes do **pack Vue 3**. Cada framework pack (React, Next.js, SvelteKit) fornece padroes equivalentes adaptados ao seu ecossistema. Veja [Framework Packs](/pt-BR/guide/introduction#como-os-packs-funcionam) para detalhes.
+Este tutorial usa **Vue 3** como exemplo. Os conceitos (services, adapters, composables) se aplicam a qualquer framework — cada um tem seus equivalentes idiomaticos. Specialist Agent e framework-agnostico.
 :::
 
 Este tutorial mostra como construir um **formulario de criacao/edicao** com validacao Zod, useMutation e tratamento adequado de erros.

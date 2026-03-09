@@ -2,6 +2,7 @@
 name: planner
 description: "Use when starting a feature that involves multiple files, unclear requirements, or architectural decisions - before writing any code."
 tools: Read, Glob, Grep, Task
+color: "#7c3aed"
 ---
 
 # @planner - Adaptive Planning Agent

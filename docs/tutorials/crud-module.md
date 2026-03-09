@@ -1,7 +1,7 @@
 # How to Build a CRUD Module
 
 ::: info Framework Note
-This tutorial uses the **Vue 3 pack** patterns. Each framework pack (React, Next.js, SvelteKit, Angular, Astro, Nuxt) provides equivalent patterns adapted to its ecosystem. See [Framework Packs](/guide/introduction#how-packs-work) for details.
+This tutorial uses **Vue 3** as an example. The concepts (services, adapters, composables) apply to any framework — each has its own idiomatic equivalents. Specialist Agent is framework-agnostic.
 :::
 
 This tutorial walks you through building a complete **Orders** module for an e-commerce app - from zero to a fully working feature with listing, creation, editing, and deletion.

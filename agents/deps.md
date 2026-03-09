@@ -2,6 +2,7 @@
 name: deps
 description: "Use when dependencies are outdated, have security vulnerabilities, need license compliance checks, conflict with each other, need major version upgrades, or require supply chain hardening."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#10b981"
 ---
 
 # Deps
@@ -24,11 +25,10 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for `package.jso
 - Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
-- ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
-- Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
-- Use `keepPreviousData` for pagination to avoid loading flickers
+- Use your framework's recommended data fetching and caching strategy (check `docs/ARCHITECTURE.md` if available)
+- Configure appropriate cache TTLs based on data freshness needs
+- Use pagination patterns that avoid loading flickers (keep previous data visible)
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
 - Avoid N+1 queries - batch requests, use proper data loading patterns
 

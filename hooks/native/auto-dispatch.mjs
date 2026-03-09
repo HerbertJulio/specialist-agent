@@ -13,6 +13,7 @@
 
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { readStdin, outputJson } from './utils.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -52,6 +53,14 @@ const INTENT_MAP = {
   legal:      { phrases: ['gdpr compliance', 'lgpd', 'ccpa', 'privacy policy', 'data protection'], keywords: ['gdpr', 'lgpd', 'ccpa', 'compliance', 'privacy', 'data protection'], weight: 1.5 },
   designer:   { phrases: ['design system', 'component library', 'accessibility audit'], keywords: ['design system', 'accessibility', 'a11y', 'ui library', 'theme'], weight: 1.5 },
   tester:     { phrases: ['test strategy', 'test coverage', 'e2e tests', 'testing plan'], keywords: ['test strategy', 'coverage', 'e2e', 'testing'], weight: 1 },
+
+  // Business agents
+  marketing:  { phrases: ['landing page', 'marketing copy', 'seo optimization', 'growth strategy', 'social media'], keywords: ['marketing', 'seo', 'copy', 'landing', 'growth', 'conversion', 'funnel'], weight: 1.5 },
+  product:    { phrases: ['product strategy', 'user story', 'product roadmap', 'feature prioritization', 'product requirement'], keywords: ['product', 'roadmap', 'prd', 'user story', 'prioritization', 'backlog'], weight: 1.5 },
+  support:    { phrases: ['knowledge base', 'runbook', 'changelog', 'support docs', 'faq'], keywords: ['support', 'runbook', 'changelog', 'faq', 'knowledge base', 'help docs'], weight: 1.5 },
+
+  // Automation agents
+  'sentry-triage': { phrases: ['sentry error', 'triage errors', 'sentry issue', 'error triage', 'fix sentry'], keywords: ['sentry', 'triage', 'error tracking', 'alert'], weight: 2 },
 
   // Support agents
   scout:      { phrases: ['analyze project', 'project analysis', 'quick scan'], keywords: ['analyze', 'scan', 'overview', 'analysis'], weight: 1 },
@@ -94,6 +103,10 @@ const AGENT_DESCRIPTIONS = {
   memory: 'saves and recalls decisions across sessions',
   architect: 'designs and migrates full system architecture (hexagonal, DDD, CQRS, microservices)',
   ripple: 'analyzes cascading impact of changes across the codebase',
+  marketing: 'creates landing pages, marketing copy, SEO optimization, and growth strategies',
+  product: 'defines product strategy, user stories, roadmaps, and feature prioritization',
+  support: 'generates knowledge base articles, runbooks, changelogs, and FAQs',
+  'sentry-triage': 'triages Sentry errors, prioritizes by impact, and auto-creates fix PRs',
 };
 
 // ── Intent Matching Engine (exported for testing) ───────────
@@ -158,24 +171,7 @@ export function matchIntent(prompt) {
 // ── Main Execution ──────────────────────────────────────────
 
 async function main() {
-  let input = null;
-
-  try {
-    const data = await new Promise((resolve) => {
-      let buf = '';
-      const timeout = setTimeout(() => resolve(buf), 3000);
-      process.stdin.setEncoding('utf-8');
-      process.stdin.on('data', (chunk) => { buf += chunk; });
-      process.stdin.on('end', () => { clearTimeout(timeout); resolve(buf); });
-      process.stdin.on('error', () => { clearTimeout(timeout); resolve(''); });
-      process.stdin.resume();
-    });
-
-    input = data ? JSON.parse(data) : null;
-  } catch {
-    // Can't parse input - silently allow (this hook is advisory, not blocking)
-    process.exit(0);
-  }
+  const input = await readStdin();
 
   const prompt = input?.prompt || '';
 
@@ -186,16 +182,13 @@ async function main() {
   const match = matchIntent(prompt);
 
   if (match) {
-    const output = {
+    outputJson({
       additionalContext: `Specialist Agent suggests: @${match.agent} — ${match.description}. Mention @${match.agent} in your prompt to activate it. Agents provide domain expertise, structured workflows, and verification — always prefer them over generic prompts.`,
-    };
-    process.stdout.write(JSON.stringify(output));
+    });
   } else {
-    // Reinforce agent usage even when no specific match is found
-    const output = {
-      additionalContext: 'Tip: Specialist Agent has 27+ agents for this project. Use @builder to create, @reviewer to review, @doctor to debug, @planner to plan, @tdd for test-driven development. Agents deliver better results than generic prompts.',
-    };
-    process.stdout.write(JSON.stringify(output));
+    outputJson({
+      additionalContext: 'Tip: Specialist Agent has 35 agents for this project. Use @builder to create, @reviewer to review, @doctor to debug, @planner to plan, @tdd for test-driven development. Agents deliver better results than generic prompts.',
+    });
   }
 
   process.exit(0);

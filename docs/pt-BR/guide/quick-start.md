@@ -1,175 +1,65 @@
-# Início Rápido
+# Inicio Rapido
 
-Instale primeiro:
+Comece a usar em menos de 2 minutos.
 
-```
-/plugin install specialist-agent
-```
+## 1. Instale
 
-Ou via CLI: `npx specialist-agent init`
-
-Depois comece a usar os agentes:
-
-## 1. Analise Seu Projeto
-
-```bash
-"Use @scout to analyze this project"
+```sh
+npx specialist-agent init
 ```
 
-Receba recomendações de quais agentes usar.
+O CLI vai pedir para voce:
 
-## 2. Construa uma Feature
+1. Escolher seu framework (ou "No framework" para projetos vazios)
+2. Escolher o modo dos agentes (Full para Sonnet/Opus, Lite para Haiku)
+3. Selecionar quais grupos de agentes instalar
+4. Configurar native hooks (opcional)
 
-```bash
-"Use @builder to create a products module with CRUD"
+## 2. Use um Agente
+
+Abra seu assistente de IA e chame um agente:
+
+```
+Use @builder to create the products module with CRUD and validation
 ```
 
-Cria: types, service, adapter, componentes, testes.
-
-## 3. Revise Antes do Merge
-
-```bash
-"Use @reviewer to review the products module"
+```
+Use @reviewer to review src/modules/auth/
 ```
 
-Verifica: spec compliance, qualidade de código, arquitetura.
-
-## 4. Debug um Problema
-
-```bash
-"Use @doctor to investigate the 500 error on login"
+```
+Use @sentry-triage to check Sentry errors from the last 24h
 ```
 
-Rastreia: Component → State → Adapter → Service → API
+## 3. Use uma Skill
 
-## 5. Planeje uma Feature Complexa
+Skills sao fluxos de trabalho repetitivos:
 
-```bash
-/plan add user authentication with JWT
+```
+/plan add user authentication with JWT and refresh tokens
 ```
 
-Cria plano adaptativo baseado na complexidade.
-
-## 6. Test-Driven Development
-
-```bash
-/tdd implement calculateDiscount function
+```
+/autofix --timeframe=24h
 ```
 
-RED → GREEN → REFACTOR com evidência.
-
-## 7. Salve o Progresso
-
-```bash
-/checkpoint create before-refactor
+```
+/tdd create the payment validation service
 ```
 
-Rollback se necessário.
+## 4. Combine Agentes + Skills
 
-## Fluxos Comuns
+O verdadeiro poder esta em combinar:
 
-### Novo Projeto
-
-```bash
-"Use @starter to create an app with Next.js + PostgreSQL"
+```txt
+/plan add real-time notifications
+→ @builder implements
+→ @reviewer reviews
+→ /verify confirms
 ```
 
-### Design de API
+## Proximo Passo
 
-```bash
-"Use @api to design the orders API with OpenAPI spec"
-```
-
-### Performance
-
-```bash
-"Use @perf to optimize the dashboard"
-```
-
-### Segurança
-
-```bash
-"Use @security to audit for vulnerabilities"
-```
-
-### Banco de Dados
-
-```bash
-"Use @data to design the schema with Prisma"
-```
-
-### Pagamentos
-
-```bash
-"Use @finance to integrate Stripe"
-```
-
-### Migrações
-
-```bash
-"Use @migrator to modernize src/legacy/"
-```
-
-### Migração de Arquitetura
-
-```bash
-/migrate-architecture mvc to clean full project
-```
-
-## 8. Auditoria Antes do Release
-
-```bash
-/audit src/modules/auth
-```
-
-Segurança + performance + arquitetura + dependências em uma única passada.
-
-## 9. Onboarding em um Codebase
-
-```bash
-/onboard
-```
-
-Mapeia arquitetura, detecta convenções, gera guia para desenvolvedores.
-
-## Skills
-
-| Skill | O que faz |
-|-------|-----------|
-| `/brainstorm` | Brainstorming socrático |
-| `/plan` | Planejar uma feature |
-| `/tdd` | Test-driven development |
-| `/debug` | Debugar um problema |
-| `/audit` | Auditoria multi-domínio |
-| `/onboard` | Onboarding de codebase |
-| `/verify` | Verificação antes de concluir |
-| `/checkpoint` | Salvar/restaurar progresso |
-| `/health` | Score de saúde do projeto |
-| `/estimate` | Estimar custo em tokens |
-| `/remember` | Salvar uma decisão |
-| `/recall` | Relembrar decisões |
-| `/finish` | Finalizar branch |
-| `/learn` | Aprender enquanto constrói |
-| `/worktree` | Isolamento com git worktree |
-| `/write-skill` | Criar skills customizadas |
-| `/tutorial` | Tutorial interativo |
-| `/migrate-framework` | Migrar entre frameworks |
-| `/migrate-architecture` | Migrar padrões de arquitetura |
-
-## Native Hooks
-
-O Specialist Agent inclui 4 native hooks do Claude Code que rodam automaticamente:
-
-| Hook | O que faz |
-|------|-----------|
-| Security Guard | Bloqueia comandos perigosos antes da execução |
-| Auto-Dispatch | Sugere o melhor agente para seu prompt |
-| Session Context | Injeta estado do projeto no início da sessão |
-| Auto-Format | Formata arquivos após Write/Edit |
-
-Instalados durante `npx specialist-agent init`. Veja [Referência de Hooks](/pt-BR/reference/hooks) para detalhes.
-
-## Próximo
-
-- [Agentes](/pt-BR/reference/agents) - Todos os 27+ agentes
-- [Skills](/pt-BR/reference/skills) - Todas as skills
+- [Catalogo de Agentes](/pt-BR/reference/agents) — Todos os 35 agentes por categoria
+- [Referencia de Skills](/pt-BR/reference/skills) — Todas as 24 skills
+- [Boas Praticas](/pt-BR/guide/best-practices) — Tire o maximo dos seus agentes

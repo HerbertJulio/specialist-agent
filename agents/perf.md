@@ -2,6 +2,7 @@
 name: perf
 description: "Use when the application is slow, bundle size is large, queries are inefficient, memory leaks, or users report performance issues."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#059669"
 ---
 
 # Perf
@@ -24,11 +25,10 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan for build configuration (web
 - Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
-- ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
-- Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
-- Use `keepPreviousData` for pagination to avoid loading flickers
+- Use your framework's recommended data fetching and caching strategy (check `docs/ARCHITECTURE.md` if available)
+- Configure appropriate cache TTLs based on data freshness needs
+- Use pagination patterns that avoid loading flickers (keep previous data visible)
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
 - Avoid N+1 queries - batch requests, use proper data loading patterns
 

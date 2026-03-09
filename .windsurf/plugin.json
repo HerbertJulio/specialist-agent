@@ -2,8 +2,8 @@
   "$schema": "https://windsurf.io/schemas/plugin-v1.json",
   "id": "specialist-agent",
   "name": "Specialist Agent",
-  "version": "2.7.0",
-  "description": "Your AI development team. 27+ specialized agents that build, review, debug, and ship production code.",
+  "version": "2.10.0",
+  "description": "Your AI development team. 35 agents and 24 skills that build, review, debug, and ship production code.",
   "author": {
     "name": "Herbert Julio",
     "email": "herbertjulio@gmail.com",
@@ -169,6 +169,12 @@
       "name": "@legal",
       "description": "GDPR, LGPD compliance.",
       "file": "agents/legal.md"
+    },
+    {
+      "id": "sentry-triage",
+      "name": "@sentry-triage",
+      "description": "Triage Sentry errors, auto-create fix PRs.",
+      "file": "agents/sentry-triage.md"
     }
   ],
   "skills": [
@@ -225,6 +231,12 @@
       "name": "/migrate-framework",
       "description": "Migrate between frameworks",
       "file": "skills/migrate-framework/SKILL.md"
+    },
+    {
+      "id": "autofix",
+      "name": "/autofix",
+      "description": "Auto-triage errors, prioritize, create fix PRs",
+      "file": "skills/autofix/SKILL.md"
     }
   ],
   "profiles": {

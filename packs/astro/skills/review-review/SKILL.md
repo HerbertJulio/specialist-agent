@@ -25,6 +25,7 @@ npx astro build
 npx vitest run --passWithNoTests
 ```
 
+2b. Run `/review-check-architecture $SCOPE` for automated pattern validation.
 3. Check ARCHITECTURE.md patterns:
    - Services: no try/catch, no transformation, fetch only
    - Adapters: pure functions

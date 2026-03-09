@@ -16,28 +16,28 @@ Run all checks and report a summary:
 
 ```bash
 echo "=== 1. Services with try/catch ==="
-grep -rn "try {" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "✅ None"
+grep -rn "try {" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 2. Services with transformation ==="
-grep -rn "\.map(\|\.filter(\|new Date\|\.reduce(" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "✅ None"
+grep -rn "\.map(\|\.filter(\|new Date\|\.reduce(" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 3. Components without script setup ==="
-grep -rL "script setup" src/modules/*/components/*.vue src/modules/*/views/*.vue 2>/dev/null || echo "✅ All ok"
+grep -rL "script setup" src/modules/*/components/*.vue src/modules/*/views/*.vue 2>/dev/null || echo "PASS: All ok"
 
 echo "=== 4. Components without TypeScript ==="
-grep -rL 'lang="ts"' src/modules/*/components/*.vue src/modules/*/views/*.vue 2>/dev/null || echo "✅ All ok"
+grep -rL 'lang="ts"' src/modules/*/components/*.vue src/modules/*/views/*.vue 2>/dev/null || echo "PASS: All ok"
 
 echo "=== 5. Options API ==="
-grep -rn "defineComponent\|export default {" src/modules/ --include="*.vue" 2>/dev/null || echo "✅ None"
+grep -rn "defineComponent\|export default {" src/modules/ --include="*.vue" 2>/dev/null || echo "PASS: None"
 
 echo "=== 6. Mixins ==="
-grep -rn "mixins:" src/ --include="*.vue" 2>/dev/null || echo "✅ None"
+grep -rn "mixins:" src/ --include="*.vue" 2>/dev/null || echo "PASS: None"
 
 echo "=== 7. Server state in Pinia ==="
-grep -rn "async.*fetch\|axios\|api\.\|\.get(\|\.post(" src/modules/*/stores/ --include="*.ts" 2>/dev/null || echo "✅ None"
+grep -rn "async.*fetch\|axios\|api\.\|\.get(\|\.post(" src/modules/*/stores/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 8. Missing storeToRefs ==="
-grep -rn "const {.*} = use.*Store()" src/ --include="*.vue" 2>/dev/null | grep -v "storeToRefs" || echo "✅ All ok"
+grep -rn "const {.*} = use.*Store()" src/ --include="*.vue" 2>/dev/null | grep -v "storeToRefs" || echo "PASS: All ok"
 
 echo "=== 9. any types ==="
 grep -rn ": any\| any;\|as any\|<any>" src/modules/ --include="*.ts" --include="*.vue" 2>/dev/null | wc -l
@@ -49,7 +49,7 @@ for module in src/modules/*/; do
 done
 
 echo "=== 11. v-html ==="
-grep -rn "v-html" src/ --include="*.vue" 2>/dev/null || echo "✅ None"
+grep -rn "v-html" src/ --include="*.vue" 2>/dev/null || echo "PASS: None"
 
 echo "=== 12. Debug artifacts ==="
 grep -rn "console\.\|debugger" src/modules/ --include="*.ts" --include="*.vue" 2>/dev/null | wc -l
@@ -67,7 +67,7 @@ Produce a summary table:
 
 | Check | Status | Occurrences |
 |-------|--------|-------------|
-| Services without try/catch | ✅/❌ | X |
+| Services without try/catch | PASS/FAIL | X |
 | ... | ... | ... |
 
 Overall score: X/14 checks passing.

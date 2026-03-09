@@ -16,22 +16,22 @@ Run all checks and report a summary:
 
 ```bash
 echo "=== 1. Services with try/catch ==="
-grep -rn "try {" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "OK: None"
+grep -rn "try {" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 2. Services with transformation ==="
-grep -rn "\.map(\|\.filter(\|new Date\|\.reduce(" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "OK: None"
+grep -rn "\.map(\|\.filter(\|new Date\|\.reduce(" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 3. Unnecessary client:load ==="
-grep -rn "client:load" src/ --include="*.astro" 2>/dev/null || echo "OK: None"
+grep -rn "client:load" src/ --include="*.astro" 2>/dev/null || echo "PASS: None"
 
 echo "=== 4. client:only usage (skips SSR) ==="
-grep -rn "client:only" src/ --include="*.astro" 2>/dev/null || echo "OK: None"
+grep -rn "client:only" src/ --include="*.astro" 2>/dev/null || echo "PASS: None"
 
 echo "=== 5. set:html usage (XSS risk) ==="
-grep -rn "set:html" src/ --include="*.astro" 2>/dev/null || echo "OK: None"
+grep -rn "set:html" src/ --include="*.astro" 2>/dev/null || echo "PASS: None"
 
 echo "=== 6. innerHTML in islands ==="
-grep -rn "innerHTML\|dangerouslySetInnerHTML" src/islands/ --include="*.tsx" --include="*.vue" --include="*.svelte" 2>/dev/null || echo "OK: None"
+grep -rn "innerHTML\|dangerouslySetInnerHTML" src/islands/ --include="*.tsx" --include="*.vue" --include="*.svelte" 2>/dev/null || echo "PASS: None"
 
 echo "=== 7. any types ==="
 grep -rn ": any\| any;\|as any\|<any>" src/modules/ --include="*.ts" --include="*.astro" 2>/dev/null | wc -l
@@ -49,7 +49,7 @@ echo "=== 10. Missing Content Collection schemas ==="
 ls src/content/config.ts 2>/dev/null || echo "WARNING: No content config found"
 
 echo "=== 11. Raw img tags (should use Image component) ==="
-grep -rn "<img " src/ --include="*.astro" 2>/dev/null | grep -v "astro:assets" || echo "OK: None"
+grep -rn "<img " src/ --include="*.astro" 2>/dev/null | grep -v "astro:assets" || echo "PASS: None"
 
 echo "=== 12. Islands without client directive ==="
 grep -rn "import.*from.*islands/" src/ --include="*.astro" 2>/dev/null | while read f; do
@@ -59,14 +59,14 @@ grep -rn "import.*from.*islands/" src/ --include="*.astro" 2>/dev/null | while r
 done
 
 echo "=== 13. Environment variables in client code ==="
-grep -rn "import.meta.env" src/islands/ --include="*.tsx" --include="*.vue" --include="*.svelte" 2>/dev/null || echo "OK: None"
+grep -rn "import.meta.env" src/islands/ --include="*.tsx" --include="*.vue" --include="*.svelte" 2>/dev/null || echo "PASS: None"
 ```
 
 Produce a summary table:
 
 | Check | Status | Occurrences |
 |-------|--------|-------------|
-| Services without try/catch | OK/FAIL | X |
+| Services without try/catch | PASS/FAIL | X |
 | ... | ... | ... |
 
 Overall score: X/13 checks passing.

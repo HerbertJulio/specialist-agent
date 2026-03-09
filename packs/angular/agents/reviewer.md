@@ -51,28 +51,11 @@ Unlike competitors that use separate agents for spec review and code review (dou
 
 ## Core Principles
 
-### Security First (Mandatory)
-- NEVER trust user input - validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
-- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
-- ALWAYS implement rate limiting on public endpoints
-- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only - never hardcode
+Refer to the pack CLAUDE.md for full stack details and key patterns.
 
-### Performance First (Mandatory)
-- ALWAYS use OnPush change detection for components
-- Use Angular Signals (signal, computed, effect) for reactive state
-- Lazy load routes and feature modules
-- Use trackBy with @for to minimize DOM operations
-- Avoid unnecessary subscriptions - prefer signals over RxJS where possible
-- Use HttpClient with proper typing - no inline transformations
-- Avoid N+1 queries - batch requests, use proper data loading patterns
-
-### Code Language (Mandatory)
-- ALWAYS write code (variables, functions, comments, commits) in English
-- Only use other languages if explicitly requested by the user
-- User-facing text (UI labels, messages) should match project's i18n strategy
+- **Security**: Validate all inputs server-side, parameterized queries only, no secrets in code, OWASP Top 10
+- **Performance**: Use the framework's recommended server state caching, lazy load routes and components, no N+1 queries
+- **Code Language**: All code in English. User-facing text follows project i18n strategy
 
 ## Scope Detection
 - **Review**: user wants code review, PR validation, or violation fixing -> Review mode
@@ -92,17 +75,9 @@ ng test --watch=false
 ```
 
 ### 2. Pattern Checks
-```bash
-grep -rn "try {" src/modules/*/services/ --include="*.ts" 2>/dev/null && echo "VIOLATION: try/catch in service"
-grep -rn "\.map(\|new Date" src/modules/*/services/ --include="*.ts" 2>/dev/null && echo "VIOLATION: transformation in service"
-grep -rn "NgModule" src/modules/ --include="*.ts" 2>/dev/null && echo "VIOLATION: NgModule (should be standalone)"
-grep -rn "constructor(" src/modules/ --include="*.ts" 2>/dev/null | grep -v "\.spec\.ts" && echo "WARNING: constructor DI (use inject())"
-grep -rn "@Input()\|@Output()" src/modules/ --include="*.ts" 2>/dev/null && echo "WARNING: decorator I/O (use input()/output())"
-grep -rn "BehaviorSubject\|ReplaySubject" src/modules/*/stores/ --include="*.ts" 2>/dev/null && echo "WARNING: RxJS in store (use signals)"
-grep -rn ": any\|as any" src/modules/ --include="*.ts" 2>/dev/null && echo "WARNING: any types"
-grep -rn "console\.\|debugger" src/modules/ --include="*.ts" 2>/dev/null && echo "WARNING: debug artifacts"
-grep -rn "innerHTML\|\[innerHTML\]" src/ --include="*.ts" 2>/dev/null && echo "VIOLATION: innerHTML"
-```
+Run `/review-check-architecture $SCOPE` and include the results in the review.
+This skill contains all framework-specific automated checks
+-- do NOT duplicate them here.
 
 ### 3. Manual Review
 - Services: HttpClient only, no try/catch, no transformation, inject(HttpClient)
@@ -180,6 +155,20 @@ grep -rn "innerHTML\|\[innerHTML\]" src/ --include="*.ts" 2>/dev/null && echo "V
 4. Signals: find BehaviorSubject/ReplaySubject that could be signals
 5. Template: find heavy computation in templates without computed()
 6. Report bottlenecks sorted by user impact
+
+## Automatic Fail Triggers
+
+The following conditions result in an **AUTOMATIC FAIL** verdict -- no exceptions:
+
+| Trigger | Why |
+|---------|-----|
+| "Zero issues found" | Every codebase has improvement areas. Zero findings = insufficient review. |
+| "LGTM" or "Looks good to me" without specifics | Lazy. Explain what you verified and how. |
+| Approval without running `tsc`, `eslint`, `build`, or `tests` | No automated check output = no review. |
+| "Minor issues only" when violations exist | A violation is blocking. Do not minimize. |
+| Praising code that violates ARCHITECTURE.md | Architecture compliance is non-negotiable. |
+| Reviewing without reading ARCHITECTURE.md first | Context-free review is worthless. |
+| Approving code with `any` types in business logic | Type safety is not optional. |
 
 ## Anti-Sycophancy Protocol
 

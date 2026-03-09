@@ -14,28 +14,11 @@ Read `docs/ARCHITECTURE.md`.
 
 ## Core Principles
 
-### Security First (Mandatory)
-- NEVER trust user input - validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
-- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
-- ALWAYS implement rate limiting on public endpoints
-- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only - never hardcode
+Refer to the pack CLAUDE.md for full stack details and key patterns.
 
-### Performance First (Mandatory)
-- ALWAYS use TanStack Query (Vue Query) for server state caching
-- Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
-- Use `keepPreviousData` for pagination to avoid loading flickers
-- Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
-- Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries - batch requests, use proper data loading patterns
-
-### Code Language (Mandatory)
-- ALWAYS write code (variables, functions, comments, commits) in English
-- Only use other languages if explicitly requested by the user
-- User-facing text (UI labels, messages) should match project's i18n strategy
+- **Security**: Validate all inputs server-side, parameterized queries only, no secrets in code, OWASP Top 10
+- **Performance**: Use the framework's recommended server state caching, lazy load routes and components, no N+1 queries
+- **Code Language**: All code in English. User-facing text follows project i18n strategy
 
 ## Scope Detection
 - **Module**: user wants to migrate an entire module/directory → Module mode (6 phases)
@@ -44,46 +27,7 @@ Read `docs/ARCHITECTURE.md`.
 ---
 
 ## Module Mode (6 Phases)
-
-### Phase 0: Analysis
-- Map current state: count files, identify Options vs setup, JS vs TS, mixins, cross-module imports
-- List API endpoints used
-- Report to user before proceeding
-
-### Phase 1: Structure
-- Create target directories: components/, composables/, services/, adapters/, stores/, types/, views/, __tests__/
-- Move existing files to correct locations
-- Validate: `npx vite build`
-
-### Phase 2: Types & Adapters
-- Create `.types.ts` (exact API response, snake_case)
-- Create `.contracts.ts` (app contract, camelCase)
-- Create adapter with bidirectional parsing
-- Validate: `npx tsc --noEmit`
-
-### Phase 3: Services
-- Extract HTTP calls to pure service (no try/catch, no transformation)
-- One file per resource
-- Validate: `npx vite build`
-
-### Phase 4: State
-- Server state → Vue Query (composables with staleTime)
-- Client state → Pinia (setup syntax, readonly, storeToRefs)
-- Remove server state from Pinia stores
-- Validate: `npx vite build`
-
-### Phase 5: Components
-- Convert each component to `<script setup lang="ts">`
-- Type props with defineProps<T>(), emits with defineEmits<T>()
-- Extract mixins to composables
-- Eliminate prop drilling (slots + provide/inject)
-- Decompose if > 200 lines
-- Validate after each component
-
-### Phase 6: Review
-- Run pattern checks (same as @reviewer review mode)
-- Report remaining issues
-- Get user approval
+Run `/migration-migrate-module $PATH`. This skill contains the full 6-phase migration workflow -- do NOT duplicate it here.
 
 ## Verification Protocol
 
@@ -116,37 +60,7 @@ Read `docs/ARCHITECTURE.md`.
 ---
 
 ## Component Mode
-
-### Conversion Table
-| Options API | Script Setup |
-|------------|--------------|
-| `props` | `defineProps<T>()` |
-| `emits` | `defineEmits<T>()` |
-| `data()` | `ref()` / `reactive()` |
-| `computed` | `computed()` |
-| `methods` | functions |
-| `watch` | `watch()` / `watchEffect()` |
-| mixins | composables |
-| `this.$emit` | `emit()` |
-| `this.$refs` | `useTemplateRef()` |
-
-### Workflow
-1. Read the component and list: props, emits, data, computed, methods, watchers, mixins, lifecycle hooks
-2. Map consumers (who uses this component) - note if props/emits API changes
-3. Convert to `<script setup lang="ts">`
-4. Type all props and emits
-5. Extract mixins to composables in same module
-6. Eliminate prop drilling if found
-7. Decompose if > 200 lines
-8. Validate: `npx tsc --noEmit`
-9. Update consumers if API changed
-
-### Rules
-- Keep public API (props/emits/slots) stable when possible
-- If API changes, update all consumers
-- One component per commit
-- Report bugs found during migration (don't silently fix)
-- **Verify each phase** - Partial migration is worse than none
+Run `/migration-migrate-component $FILE`. This skill contains the full component migration workflow -- do NOT duplicate it here.
 
 ## Output
 

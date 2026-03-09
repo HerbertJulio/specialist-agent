@@ -1,5 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useRoute } from 'vitepress'
+
+const route = useRoute()
+const isPtBr = computed(() => route.path.startsWith('/pt-BR'))
+
+const dlCount = ref<number | null>(null)
+const dlLoaded = ref(false)
+
+function formatNumber(n: number): string {
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M'
+  if (n >= 1_000) return (n / 1_000).toFixed(1).replace(/\.0$/, '') + 'k'
+  return n.toLocaleString()
+}
 
 /* ── Refs ── */
 const backRef = ref<HTMLCanvasElement | null>(null)
@@ -246,6 +259,13 @@ onMounted(() => {
   if (sceneRef.value) resizeObserver.observe(sceneRef.value)
 
   tick()
+
+  // Fetch npm downloads
+  fetch('https://api.npmjs.org/downloads/point/last-month/specialist-agent')
+    .then(r => r.json())
+    .then(d => { if (d.downloads != null) dlCount.value = d.downloads })
+    .catch(() => {})
+    .finally(() => { dlLoaded.value = true })
 })
 
 onUnmounted(() => {
@@ -289,12 +309,24 @@ onUnmounted(() => {
       <!-- Canvas FRONT -->
       <canvas ref="frontRef" class="ha-canvas ha-canvas-front" :class="{ visible: settled }" />
     </div>
+
+    <!-- Download counter below animation -->
+    <div v-if="dlLoaded && dlCount != null" class="dl-counter">
+      <svg class="dl-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
+      <span class="dl-value">{{ formatNumber(dlCount) }}</span>
+      <span class="dl-label">{{ isPtBr ? 'downloads / mês' : 'downloads / month' }}</span>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .hero-anim-3d {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -481,6 +513,47 @@ onUnmounted(() => {
   50% { transform: translateY(-6px); }
 }
 
+/* ── Download counter ── */
+.dl-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  font-family: var(--vp-font-family-mono, ui-monospace, monospace);
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+  animation: dl-fade-in 0.6s ease;
+}
+
+.dl-counter:hover {
+  border-color: var(--vp-c-brand-1);
+}
+
+.dl-icon {
+  color: var(--vp-c-brand-1);
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.dl-value {
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+
+.dl-label {
+  color: var(--vp-c-text-3);
+  font-size: 12px;
+}
+
+@keyframes dl-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ── Mobile: smaller scene ── */
 @media (max-width: 640px) {
   .hero-anim-3d {
@@ -500,6 +573,14 @@ onUnmounted(() => {
   .ha-tag span {
     font-size: 10px;
     padding: 3px 8px;
+  }
+  .dl-counter {
+    font-size: 11px;
+    padding: 4px 10px;
+    gap: 6px;
+  }
+  .dl-label {
+    font-size: 10px;
   }
 }
 

@@ -1,7 +1,7 @@
 # How to Migrate Your Project Architecture
 
 ::: info Framework Note
-This tutorial uses the **Vue 3 pack** as an example. The migration workflow (`@migrator` 6-phase process) works with any framework pack. See [Framework Packs](/guide/introduction#how-packs-work) for details.
+This tutorial uses **Vue 3** as an example. The migration workflow (`@migrator` 6-phase process) works with any framework. Specialist Agent is framework-agnostic.
 :::
 
 This guide walks you through migrating a **legacy Vue project** to the Specialist Agent architecture. It covers the realistic scenario of a project with everything in `views/`, Options API, JavaScript, no typing, Vuex, and mixins.

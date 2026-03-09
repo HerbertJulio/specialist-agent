@@ -91,7 +91,7 @@ const platforms = [
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  padding: 20px 12px;
+  padding: 16px 12px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 12px;
   background: var(--vp-c-bg-soft);

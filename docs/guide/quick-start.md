@@ -1,185 +1,65 @@
 # Quick Start
 
-::: tip Fastest path
-Already installed? Jump straight to the first step below.
-:::
+Get running in under 2 minutes.
 
-::: code-group
+## 1. Install
 
-```bash [Claude Code]
+```sh
 npx specialist-agent init
 ```
 
-```bash [Marketplace]
-/plugin install specialist-agent
+The CLI will ask you to:
+
+1. Pick your framework (or "No framework" for empty projects)
+2. Choose agent mode (Full for Sonnet/Opus, Lite for Haiku)
+3. Select which agent groups to install
+4. Configure native hooks (optional)
+
+## 2. Use an Agent
+
+Open your AI assistant and call an agent:
+
+```txt
+Use @builder to create the products module with CRUD and validation
 ```
 
-:::
-
-Then start using agents:
-
-## 1. Analyze Your Project
-
-```bash
-"Use @scout to analyze this project"
+```txt
+Use @reviewer to review src/modules/auth/
 ```
 
-Get recommendations for which agents to use.
-
-## 2. Build a Feature
-
-```bash
-"Use @builder to create a products module with CRUD"
+```txt
+Use @sentry-triage to check Sentry errors from the last 24h
 ```
 
-Creates: types, service, adapter, components, tests.
+## 3. Use a Skill
 
-## 3. Review Before Merge
+Skills are repeatable workflows:
 
-```bash
-"Use @reviewer to review the products module"
+```txt
+/plan add user authentication with JWT and refresh tokens
 ```
 
-Checks: spec compliance, code quality, architecture.
-
-## 4. Debug an Issue
-
-```bash
-"Use @doctor to investigate the 500 error on login"
+```txt
+/autofix --timeframe=24h
 ```
 
-Traces through: Component → State → Adapter → Service → API
-
-## 5. Plan a Complex Feature
-
-```bash
-/plan add user authentication with JWT
+```txt
+/tdd create the payment validation service
 ```
 
-Creates adaptive plan based on complexity.
+## 4. Combine Agents + Skills
 
-## 6. Test-Driven Development
+The real power is combining them:
 
-```bash
-/tdd implement calculateDiscount function
+```txt
+/plan add real-time notifications
+→ @builder implements
+→ @reviewer reviews
+→ /verify confirms
 ```
 
-RED → GREEN → REFACTOR with proof.
+## What's Next
 
-## 7. Save Progress
-
-```bash
-/checkpoint create before-refactor
-```
-
-Rollback if needed.
-
-## Common Workflows
-
-### New Project
-
-```bash
-"Use @starter to create an app with Next.js + PostgreSQL"
-```
-
-### API Design
-
-```bash
-"Use @api to design the orders API with OpenAPI spec"
-```
-
-### Performance
-
-```bash
-"Use @perf to optimize the dashboard"
-```
-
-### Security
-
-```bash
-"Use @security to audit for vulnerabilities"
-```
-
-### Database
-
-```bash
-"Use @data to design the schema with Prisma"
-```
-
-### Payments
-
-```bash
-"Use @finance to integrate Stripe"
-```
-
-### Migrations
-
-```bash
-"Use @migrator to modernize src/legacy/"
-```
-
-### Architecture Migration
-
-```bash
-/migrate-architecture mvc to clean full project
-```
-
-## 8. Audit Before Release
-
-```bash
-/audit src/modules/auth
-```
-
-Security + performance + architecture + dependency check in one pass.
-
-## 9. Onboard to a Codebase
-
-```bash
-/onboard
-```
-
-Maps architecture, detects conventions, generates developer guide.
-
-## Skills
-
-| Skill | What it Does |
-|-------|--------------|
-| `/brainstorm` | Socratic brainstorming |
-| `/plan` | Plan a feature |
-| `/tdd` | Test-driven development |
-| `/debug` | Debug an issue |
-| `/audit` | Multi-domain code audit |
-| `/onboard` | Codebase onboarding |
-| `/verify` | Verification before completion |
-| `/checkpoint` | Save/restore progress |
-| `/health` | Project health score |
-| `/estimate` | Estimate token cost |
-| `/remember` | Save a decision |
-| `/recall` | Recall decisions |
-| `/finish` | Finalize branch |
-| `/learn` | Learn while building |
-| `/worktree` | Git worktree isolation |
-| `/write-skill` | Create custom skills |
-| `/tutorial` | Interactive tutorial |
-| `/migrate-framework` | Migrate between frameworks |
-| `/migrate-architecture` | Migrate architecture patterns |
-
-## Native Hooks
-
-Specialist Agent includes 4 native Claude Code hooks that run automatically:
-
-| Hook | What it Does |
-|------|-------------|
-| Security Guard | Blocks dangerous commands before execution |
-| Auto-Dispatch | Suggests the best agent for your prompt |
-| Session Context | Injects project state on session start |
-| Auto-Format | Formats files after Write/Edit |
-
-Installed during `npx specialist-agent init`. See [Hooks Reference](/reference/hooks) for details.
-
-## What's Next?
-
-- [All 27+ Agents](/reference/agents) - Full reference catalog
-- [All Skills](/reference/skills) - Slash commands reference
-- [Architecture](/guide/architecture) - Understand the patterns
-- [Real-World Scenarios](/scenarios/) - See agents in action
+- [Agent Catalog](/reference/agents) — All 35 agents by category
+- [Skills Reference](/reference/skills) — All 24 skills
+- [Best Practices](/guide/best-practices) — Get the most out of your agents

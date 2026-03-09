@@ -2,6 +2,7 @@
 name: refactor
 description: "Use when code has grown complex, has duplication, violates patterns, or needs restructuring - from code smells to architecture-level refactoring."
 tools: Read, Write, Edit, Bash, Glob, Grep
+color: "#14b8a6"
 ---
 
 # Refactor
@@ -24,11 +25,10 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan for test coverage (test file
 - Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
-- ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
-- Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
-- Use `keepPreviousData` for pagination to avoid loading flickers
+- Use your framework's recommended data fetching and caching strategy (check `docs/ARCHITECTURE.md` if available)
+- Configure appropriate cache TTLs based on data freshness needs
+- Use pagination patterns that avoid loading flickers (keep previous data visible)
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
 - Avoid N+1 queries - batch requests, use proper data loading patterns
 

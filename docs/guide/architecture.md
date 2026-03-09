@@ -14,9 +14,9 @@ During `specialist-agent init`, you choose whether to install the architecture g
 4. If not found, they use generic best practices
 5. Edit the file anytime to change agent behavior — no restart needed
 
-## Universal Pattern
+## Default Pattern
 
-All framework packs follow the same four-layer architecture:
+When `docs/ARCHITECTURE.md` is installed, it provides a four-layer architecture as a starting point. This is **not mandatory** — you can edit or replace it with any pattern that fits your project (Clean Architecture, Hexagonal, DDD, Feature-Sliced Design, or your own).
 
 ```mermaid
 graph LR
@@ -40,13 +40,13 @@ graph LR
 
 ### Framework Equivalents
 
-Each framework has its own terminology for the same concepts:
+Each framework has its own terminology and idiomatic tools. The table below shows **common choices** — not prescriptions. Use whatever fits your project:
 
 | Layer | Vue | React | Next.js | SvelteKit | Angular | Astro | Nuxt |
 |-------|-----|-------|---------|-----------|---------|-------|------|
 | **Logic** | Composable | Hook | Hook / Server Action | Load function | Service + inject() | Endpoint | Composable / useFetch |
-| **Client state** | Pinia | Zustand | Zustand | Svelte stores | Signals | — | Pinia / useState |
-| **Server state** | TanStack Vue Query | TanStack React Query | TanStack + RSC | SvelteKit load | HttpClient | — | useFetch / useAsyncData |
+| **Client state** | Pinia, etc. | Zustand, Redux, etc. | Zustand, etc. | Svelte stores | Signals, NgRx | — | Pinia / useState |
+| **Server state** | Vue Query, etc. | React Query, SWR, etc. | RSC, React Query, etc. | SvelteKit load | HttpClient, etc. | — | useFetch / useAsyncData |
 | **Component** | SFC (.vue) | JSX (.tsx) | JSX (.tsx) | .svelte | Standalone component | .astro / Islands | SFC (.vue) |
 
 ## Modular Structure

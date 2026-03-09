@@ -14,8 +14,9 @@
 
 import { execFileSync } from 'child_process';
 import { existsSync } from 'fs';
-import { resolve, extname, normalize, join, relative, isAbsolute } from 'path';
+import { resolve, extname, join, relative, isAbsolute } from 'path';
 import { fileURLToPath } from 'url';
+import { readStdin, readJsonFile } from './utils.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -64,12 +65,8 @@ export function detectFormatter(cwd) {
   }
 
   // Check package.json for prettier key
-  try {
-    const pkg = JSON.parse(require('fs').readFileSync(join(cwd, 'package.json'), 'utf-8'));
-    if (pkg.prettier) return 'prettier';
-  } catch {
-    // ignore
-  }
+  const pkg = readJsonFile(join(cwd, 'package.json'));
+  if (pkg?.prettier) return 'prettier';
 
   // Check biome
   for (const config of BIOME_CONFIGS) {
@@ -139,24 +136,7 @@ export function formatFile(filePath, formatter, cwd) {
 // ── Main Execution ──────────────────────────────────────────
 
 async function main() {
-  let input = null;
-
-  try {
-    const data = await new Promise((resolve) => {
-      let buf = '';
-      const timeout = setTimeout(() => resolve(buf), 3000);
-      process.stdin.setEncoding('utf-8');
-      process.stdin.on('data', (chunk) => { buf += chunk; });
-      process.stdin.on('end', () => { clearTimeout(timeout); resolve(buf); });
-      process.stdin.on('error', () => { clearTimeout(timeout); resolve(''); });
-      process.stdin.resume();
-    });
-
-    input = data ? JSON.parse(data) : null;
-  } catch {
-    process.exit(0);
-  }
-
+  const input = await readStdin();
   const filePath = input?.tool_input?.file_path;
 
   if (!filePath) {

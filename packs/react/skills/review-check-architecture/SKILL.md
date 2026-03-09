@@ -16,25 +16,25 @@ Run all checks and report a summary:
 
 ```bash
 echo "=== 1. Services with try/catch ==="
-grep -rn "try {" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "OK None"
+grep -rn "try {" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 2. Services with transformation ==="
-grep -rn "\.map(\|\.filter(\|new Date\|\.reduce(" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "OK None"
+grep -rn "\.map(\|\.filter(\|new Date\|\.reduce(" src/modules/*/services/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 3. Class components ==="
-grep -rn "class.*extends.*Component" src/modules/ --include="*.tsx" 2>/dev/null || echo "OK None"
+grep -rn "class.*extends.*Component" src/modules/ --include="*.tsx" 2>/dev/null || echo "PASS: None"
 
 echo "=== 4. PropTypes usage ==="
-grep -rn "PropTypes\." src/modules/ --include="*.tsx" --include="*.ts" 2>/dev/null || echo "OK None"
+grep -rn "PropTypes\." src/modules/ --include="*.tsx" --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 5. Redux usage ==="
-grep -rn "useSelector\|useDispatch\|createSlice\|createStore\|connect(" src/modules/ --include="*.ts" --include="*.tsx" 2>/dev/null || echo "OK None"
+grep -rn "useSelector\|useDispatch\|createSlice\|createStore\|connect(" src/modules/ --include="*.ts" --include="*.tsx" 2>/dev/null || echo "PASS: None"
 
 echo "=== 6. Server state in Zustand ==="
-grep -rn "async.*fetch\|axios\|api\.\|\.get(\|\.post(" src/modules/*/stores/ --include="*.ts" 2>/dev/null || echo "OK None"
+grep -rn "async.*fetch\|axios\|api\.\|\.get(\|\.post(" src/modules/*/stores/ --include="*.ts" 2>/dev/null || echo "PASS: None"
 
 echo "=== 7. Full Zustand destructure (should use selectors) ==="
-grep -rn "} = use.*Store()" src/ --include="*.tsx" 2>/dev/null || echo "OK None"
+grep -rn "} = use.*Store()" src/ --include="*.tsx" 2>/dev/null || echo "PASS: None"
 
 echo "=== 8. any types ==="
 grep -rn ": any\| any;\|as any\|<any>" src/modules/ --include="*.ts" --include="*.tsx" 2>/dev/null | wc -l
@@ -46,7 +46,7 @@ for module in src/modules/*/; do
 done
 
 echo "=== 10. dangerouslySetInnerHTML ==="
-grep -rn "dangerouslySetInnerHTML" src/ --include="*.tsx" 2>/dev/null || echo "OK None"
+grep -rn "dangerouslySetInnerHTML" src/ --include="*.tsx" 2>/dev/null || echo "PASS: None"
 
 echo "=== 11. Debug artifacts ==="
 grep -rn "console\.\|debugger" src/modules/ --include="*.ts" --include="*.tsx" 2>/dev/null | wc -l
@@ -60,14 +60,14 @@ echo "=== 13. Components > 200 lines ==="
 find src/modules -name "*.tsx" -exec sh -c 'lines=$(wc -l < "$1"); [ "$lines" -gt 200 ] && echo "$1: $lines lines"' _ {} \;
 
 echo "=== 14. Inline style objects in JSX ==="
-grep -rn "style={{" src/modules/ --include="*.tsx" 2>/dev/null || echo "OK None"
+grep -rn "style={{" src/modules/ --include="*.tsx" 2>/dev/null || echo "PASS: None"
 ```
 
 Produce a summary table:
 
 | Check | Status | Occurrences |
 |-------|--------|-------------|
-| Services without try/catch | OK/FAIL | X |
+| Services without try/catch | PASS/FAIL | X |
 | ... | ... | ... |
 
 Overall score: X/14 checks passing.

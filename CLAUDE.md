@@ -2,7 +2,7 @@
 
 ## About
 
-Your AI development team. 27+ specialized agents that build, review, debug, and ship production code.
+Your AI development team. 35 specialized agents and 24 skills that build, review, debug, and ship production code.
 
 **Available packs:** Vue 3, React, Next.js, SvelteKit, Angular, Astro, Nuxt
 
@@ -41,6 +41,10 @@ Automatically delegate based on user intent:
 | GDPR, LGPD compliance | `@legal` |
 | Architecture migration, system redesign | `@architect` |
 | Impact analysis of changes | `@ripple` |
+| Marketing copy, SEO, growth | `@marketing` |
+| Product strategy, user stories | `@product` |
+| Support docs, runbooks, changelogs | `@support` |
+| Triage Sentry errors, auto-fix | `@sentry-triage` |
 
 ## Available Agents
 
@@ -87,6 +91,20 @@ Automatically delegate based on user intent:
 | `@architect` | Full system architecture migration |
 | `@ripple` | Cascading effect analysis |
 
+### Business Agents
+
+| Agent | When to Use |
+|-------|-------------|
+| `@marketing` | Growth, copy, SEO, social media |
+| `@product` | Product strategy, user stories, prioritization |
+| `@support` | Knowledge base, runbooks, changelogs |
+
+### Automation Agents
+
+| Agent | When to Use |
+|-------|-------------|
+| `@sentry-triage` | Triage Sentry errors, auto-create fix PRs |
+
 ### Support Agents
 
 | Agent | When to Use |
@@ -121,6 +139,8 @@ Automatically delegate based on user intent:
 | `/lint` | Lint and auto-fix |
 | `/migrate-framework` | Migrate between frameworks |
 | `/migrate-architecture` | Migrate between architecture patterns (Flat, Modular, Clean, Hexagonal, DDD, ...) |
+| `/discovery` | Product/feature discovery before planning |
+| `/autofix` | Auto-triage errors from Sentry/logs, create fix PRs |
 
 ## Security Rules
 
@@ -222,6 +242,10 @@ Key agents include rationalization tables that prevent shortcuts. If you catch y
 
 `@orchestrator` and `@executor` use fresh context per subagent. Each task gets a self-contained prompt - no accumulated context pollution.
 
+### Automatic Fail Triggers
+
+`@reviewer` and `@tester` agents include automatic fail conditions that prevent lazy reviews and insufficient analysis. Any claim of "zero issues found" or approval without running automated checks triggers an automatic failure.
+
 ### Anti-Sycophancy
 
 `@reviewer` agents push back on bad code. No "LGTM" or "Looks good!". Technical evaluation with evidence, YAGNI checks on suggestions.
@@ -230,10 +254,21 @@ Key agents include rationalization tables that prevent shortcuts. If you catch y
 
 Discipline agents (`@tdd`, `@debugger`, `@planner`, `@executor`, `@pair`) use science-backed enforcement: Authority (IEEE, NASA, Kent Beck), Commitment (contract-based), Social Proof (industry practice).
 
+### Handoff Templates
+
+`@orchestrator` and `@executor` use standardized handoff templates (Standard, QA PASS, QA FAIL) for structured context transfer between agents. No more "copy-paste and hope" -- every handoff includes evidence, contracts, and acceptance criteria.
+
+### Deliverable Templates
+
+Key agents (`@tester`, `@executor`, `@orchestrator`, `@marketing`, `@product`, `@support`) include deliverable templates that standardize output format. Every completion produces a structured report with summary, evidence, and next steps.
+
 ### Governance
 
 - **Anti-Rationalization tables** in all discipline agents prevent shortcuts
+- **Automatic Fail Triggers** in `@reviewer` and `@tester` prevent lazy approvals
 - **Verification Protocol** ensures claims are backed by evidence
+- **Handoff Templates** ensure structured context transfer between agents
+- **Deliverable Templates** standardize agent output format
 - **Execution Summary** at end of every task tracks agent/skill usage
 - **Cost estimation** via `/estimate` before expensive operations
 - **Health scoring** via `/health` measures project quality over time

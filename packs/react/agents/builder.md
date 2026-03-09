@@ -14,28 +14,11 @@ Read `docs/ARCHITECTURE.md`.
 
 ## Core Principles
 
-### Security First (Mandatory)
-- NEVER trust user input - validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
-- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
-- ALWAYS implement rate limiting on public endpoints
-- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only - never hardcode
+Refer to the pack CLAUDE.md for full stack details and key patterns.
 
-### Performance First (Mandatory)
-- ALWAYS use TanStack Query (React Query) for server state caching
-- Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
-- Use `keepPreviousData` for pagination to avoid loading flickers
-- Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
-- Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries - batch requests, use proper data loading patterns
-
-### Code Language (Mandatory)
-- ALWAYS write code (variables, functions, comments, commits) in English
-- Only use other languages if explicitly requested by the user
-- User-facing text (UI labels, messages) should match project's i18n strategy
+- **Security**: Validate all inputs server-side, parameterized queries only, no secrets in code, OWASP Top 10
+- **Performance**: Use the framework's recommended server state caching, lazy load routes and components, no N+1 queries
+- **Code Language**: All code in English. User-facing text follows project i18n strategy
 
 ## Scope Detection
 - **Module**: user wants a full feature (CRUD, page, multiple endpoints) -> Module mode
@@ -47,47 +30,19 @@ Read `docs/ARCHITECTURE.md`.
 ---
 
 ## Module Mode
-1. Ask: resource name, endpoints, UI type (list/detail/CRUD), client state needs
-2. Scaffold `src/modules/[kebab-name]/` with: components/, hooks/, services/, adapters/, stores/, types/, pages/, __tests__/, index.ts
-3. Create bottom-up:
-   - `types/[name].types.ts` -- exact API response (snake_case)
-   - `types/[name].contracts.ts` -- app contract (camelCase, Date objects)
-   - `adapters/[name]-adapter.ts` -- pure functions: inbound (API->App) + outbound (App->API)
-   - `services/[name]-service.ts` -- HTTP only: `{ list, getById, create, update, delete }`. No try/catch, no transformation
-   - `stores/[name]-store.ts` -- client state only (filters, UI). Zustand create with typed state/actions
-   - `hooks/useXxxList.ts` -- orchestrate service->adapter->React Query. Set staleTime, queryKey array
-   - Components -- functional TSX, typed props interface, < 200 lines, useCallback for handlers
-   - Page -- compose components with children/render props, provide context if needed
-4. Register lazy route in router using React.lazy() + Suspense
-5. Create barrel export (index.ts): pages + contracts only
-6. Validate: `npx tsc --noEmit`
+Run `/dev-create-module $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Component Mode
-1. Determine placement: feature -> `src/modules/[feature]/components/`, shared -> `src/shared/components/`
-2. Use functional component template: imports -> Props interface -> destructure props -> stores (selectors) -> hooks -> local state (useState) -> derived (useMemo) -> handlers (useCallback) -> JSX
-3. Rules: < 200 lines, PascalCase.tsx, no prop drilling (use composition/context), handle loading/error/empty states
-4. Extract logic > 20 lines to custom hook
+Run `/dev-create-component $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Service Mode
-1. Ask: endpoint URL, HTTP method, response format (ask for JSON example)
-2. Create 4 files:
-   - `types/[name].types.ts` -- exact API (snake_case, string dates)
-   - `types/[name].contracts.ts` -- app contract (camelCase, Date, computed booleans)
-   - `adapters/[name]-adapter.ts` -- pure functions, bidirectional. Rename snake->camel, convert string->Date, cents->currency
-   - `services/[name]-service.ts` -- HTTP only. No try/catch, no transformation, no logic. Export as object with methods
-3. Validate: `npx tsc --noEmit`
+Run `/dev-create-service $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Hook Mode
-1. **Query** (reading): `useQuery` with queryKey array, explicit staleTime, keepPreviousData. Call service in queryFn, pass through adapter. Return typed data
-2. **Mutation** (writing): `useMutation` with invalidateQueries on success. Use adapter for payload. Return { mutate, isPending, error }
-3. **Shared logic** (no API): useState/useMemo/useEffect with typed return
-4. Rules: prefix `use`, return typed values, use service (never direct API), use adapter (never inline transform), always staleTime
+Run `/dev-create-hook $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Test Mode
-1. Read the target file
-2. Priority: adapters (pure functions, easy) > hooks (mock service, renderHook) > components (React Testing Library)
-3. Create in `__tests__/[OriginalName].spec.ts(x)`
-4. Run: `npx vitest run [file]`
+Run `/dev-create-test $NAME`. This skill contains the full scaffold workflow -- do NOT duplicate it here.
 
 ## Verification Protocol
 

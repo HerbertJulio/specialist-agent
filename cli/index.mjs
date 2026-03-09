@@ -18,6 +18,7 @@ const ROOT = resolve(__dirname, '..')
 const YELLOW = '\x1b[33m'
 const RED = '\x1b[31m'
 const GREEN = '\x1b[32m'
+const CYAN = '\x1b[36m'
 const BOLD = '\x1b[1m'
 const DIM = '\x1b[2m'
 const NC = '\x1b[0m'
@@ -84,6 +85,7 @@ const HOOK_EVENT_MAP = {
   'security-guard': 'PreToolUse',
   'auto-dispatch': 'UserPromptSubmit',
   'session-context': 'SessionStart',
+  'mcp-discovery': 'SessionStart',
   'auto-format': 'PostToolUse',
 }
 
@@ -99,6 +101,7 @@ function setupNativeHooks(cwd, selectedHooks) {
     'security-config.json',
     'auto-dispatch.mjs',
     'session-context.mjs',
+    'mcp-discovery.mjs',
     'auto-format.mjs',
   ]
   for (const file of filesToCopy) {
@@ -203,14 +206,188 @@ function detectFramework(pkgPath, availablePacks) {
   return null
 }
 
+// ── Platform Detection ──────────────────────────────
+
+const PLATFORMS = {
+  'claude-code': {
+    label: 'Claude Code',
+    detect: (cwd) => true, // always install (primary platform)
+  },
+  'cursor': {
+    label: 'Cursor',
+    detect: (cwd) => {
+      if (existsSync(join(cwd, '.cursor'))) return true
+      if (existsSync(join(cwd, '.cursorignore'))) return true
+      if (existsSync(join(cwd, '.cursorrules'))) return true
+      try { execFileSync('cursor', ['--version'], { stdio: 'pipe', timeout: 3000 }); return true } catch { return false }
+    },
+  },
+  'windsurf': {
+    label: 'Windsurf',
+    detect: (cwd) => {
+      if (existsSync(join(cwd, '.windsurf'))) return true
+      if (existsSync(join(cwd, '.windsurfrules'))) return true
+      try { execFileSync('windsurf', ['--version'], { stdio: 'pipe', timeout: 3000 }); return true } catch { return false }
+    },
+  },
+  'vscode': {
+    label: 'VS Code',
+    detect: (cwd) => {
+      if (existsSync(join(cwd, '.vscode'))) return true
+      try { execFileSync('code', ['--version'], { stdio: 'pipe', timeout: 3000 }); return true } catch { return false }
+    },
+  },
+  'codex': {
+    label: 'Codex',
+    detect: (cwd) => {
+      if (existsSync(join(cwd, '.codex'))) return true
+      try { execFileSync('codex', ['--version'], { stdio: 'pipe', timeout: 3000 }); return true } catch { return false }
+    },
+  },
+  'opencode': {
+    label: 'OpenCode',
+    detect: (cwd) => {
+      if (existsSync(join(cwd, '.opencode'))) return true
+      if (existsSync(join(cwd, 'opencode.json'))) return true
+      try { execFileSync('opencode', ['--version'], { stdio: 'pipe', timeout: 3000 }); return true } catch { return false }
+    },
+  },
+}
+
+function detectPlatforms(cwd) {
+  const detected = []
+  for (const [id, platform] of Object.entries(PLATFORMS)) {
+    if (platform.detect(cwd)) {
+      detected.push({ id, label: platform.label })
+    }
+  }
+  return detected
+}
+
+function setupPlatformConfigs(cwd, platforms, { framework, version }) {
+  const installed = []
+
+  for (const platform of platforms) {
+    switch (platform.id) {
+      case 'claude-code':
+        // Handled by main install flow
+        break
+
+      case 'cursor': {
+        const cursorDir = join(cwd, '.cursor')
+        mkdirSync(cursorDir, { recursive: true })
+
+        // Copy agents to .cursor/agents/ (Cursor reads agents from here)
+        const cursorAgentsDir = join(cursorDir, 'agents')
+        const claudeAgentsDir = join(cwd, '.claude', 'agents')
+        if (existsSync(claudeAgentsDir)) {
+          mkdirSync(cursorAgentsDir, { recursive: true })
+          copyDir(claudeAgentsDir, cursorAgentsDir)
+        }
+
+        installed.push({ platform: 'Cursor', path: '.cursor/agents/' })
+        break
+      }
+
+      case 'windsurf': {
+        const windsurfDir = join(cwd, '.windsurf')
+        mkdirSync(windsurfDir, { recursive: true })
+
+        // Copy agents to .windsurf/agents/
+        const wsAgentsDir = join(windsurfDir, 'agents')
+        const claudeAgentsDir = join(cwd, '.claude', 'agents')
+        if (existsSync(claudeAgentsDir)) {
+          mkdirSync(wsAgentsDir, { recursive: true })
+          copyDir(claudeAgentsDir, wsAgentsDir)
+        }
+
+        installed.push({ platform: 'Windsurf', path: '.windsurf/agents/' })
+        break
+      }
+
+      case 'vscode': {
+        // VS Code uses .vscode/ — just ensure the settings reference .claude/
+        const vscodeDir = join(cwd, '.vscode')
+        mkdirSync(vscodeDir, { recursive: true })
+
+        const settingsPath = join(vscodeDir, 'settings.json')
+        let settings = {}
+        if (existsSync(settingsPath)) {
+          try { settings = JSON.parse(readFileSync(settingsPath, 'utf-8')) } catch {}
+        }
+
+        if (!settings['specialist-agent.framework']) {
+          settings['specialist-agent.framework'] = framework || 'auto'
+          writeFileSync(settingsPath, JSON.stringify(settings, null, 2))
+        }
+
+        installed.push({ platform: 'VS Code', path: '.vscode/settings.json' })
+        break
+      }
+
+      case 'codex': {
+        // Codex reads from .claude/agents/ — same as Claude Code, just confirm
+        installed.push({ platform: 'Codex', path: '.claude/agents/' })
+        break
+      }
+
+      case 'opencode': {
+        // Copy agents to .opencode/agents/
+        const opencodeDir = join(cwd, '.opencode')
+        mkdirSync(join(opencodeDir, 'agents'), { recursive: true })
+
+        const claudeAgentsDir = join(cwd, '.claude', 'agents')
+        if (existsSync(claudeAgentsDir)) {
+          copyDir(claudeAgentsDir, join(opencodeDir, 'agents'))
+        }
+
+        // Copy opencode.json if it doesn't exist
+        const opencodeConfigSrc = join(ROOT, '.opencode', 'opencode.json')
+        const opencodeConfigDest = join(cwd, 'opencode.json')
+        if (!existsSync(opencodeConfigDest) && existsSync(opencodeConfigSrc)) {
+          cpSync(opencodeConfigSrc, opencodeConfigDest)
+        }
+
+        installed.push({ platform: 'OpenCode', path: '.opencode/agents/' })
+        break
+      }
+    }
+  }
+
+  return installed
+}
+
 // ── Guidance texts ───────────────────────────────────
 
-function buildGettingStarted(agentNames, installedSkills, archInstalled) {
+function buildGettingStarted(agentNames, installedSkills, archInstalled, isEmptyProject) {
   const lines = []
+
+  if (isEmptyProject) {
+    lines.push('You\'re starting fresh — here\'s how to get going:')
+    lines.push('')
+    lines.push('  $ claude')
+    lines.push('')
+    if (agentNames.includes('starter')) {
+      lines.push('  Create a project from scratch:')
+      lines.push('  > "Use @starter to create an app with Next.js + PostgreSQL"')
+      lines.push('  > "Use @starter to create a Vue 3 SaaS with Stripe"')
+      lines.push('')
+    }
+    if (agentNames.includes('planner')) {
+      lines.push('  Plan before building:')
+      lines.push('  > /plan add user authentication with JWT')
+      lines.push('  > /discovery implement real-time chat with WebSocket')
+      lines.push('')
+    }
+    lines.push('  All 35 agents are installed. When you choose a framework,')
+    lines.push('  re-run to swap to framework-specific pack agents:')
+    lines.push('  > npx specialist-agent init')
+    return lines.join('\n')
+  }
 
   if (archInstalled) {
     lines.push('Agents enforce the architecture defined in docs/ARCHITECTURE.md.')
-    lines.push('They ensure consistency across modules \u2014 the more you use them,')
+    lines.push('They ensure consistency across modules — the more you use them,')
     lines.push('the more value they deliver.')
     lines.push('')
     lines.push('To migrate your project to the new architecture:')
@@ -238,16 +415,19 @@ function buildGettingStarted(agentNames, installedSkills, archInstalled) {
   if (installedSkills.length > 0) {
     lines.push('')
     lines.push('Skills (slash commands):')
-    installedSkills.slice(0, 3).forEach(skill => {
-      lines.push(`  > ${skill}`)
-    })
+    const topSkills = ['/plan', '/tdd', '/audit', '/discovery']
+    const available = topSkills.filter(s => installedSkills.includes(s))
+    if (available.length > 0) {
+      available.forEach(skill => lines.push(`  > ${skill}`))
+    } else {
+      installedSkills.slice(0, 4).forEach(skill => lines.push(`  > ${skill}`))
+    }
   }
 
   if (agentNames.includes('starter')) {
     lines.push('')
-    lines.push('If you need to scaffold a new project from scratch, @starter')
-    lines.push('can help with the initial setup (stack, backend, database).')
-    lines.push('  > "Use @starter to create my project"')
+    lines.push('Scaffold a new project from scratch:')
+    lines.push('  > "Use @starter to create an e-commerce app with Next.js"')
   }
 
   return lines.join('\n')
@@ -273,12 +453,12 @@ if (args.includes('--help') || args.includes('-h')) {
   console.log('  Usage: specialist-agent <command> [options]')
   console.log()
   console.log('  Commands:')
-  console.log(`    init                    ${DIM}Install agents and skills in your project${NC}`)
-  console.log(`    detect                  ${DIM}Detect project architecture, monorepo, and suggest migrations${NC}`)
+  console.log(`    init                    ${DIM}Install 35 agents and 24 skills (works on empty projects too)${NC}`)
+  console.log(`    detect                  ${DIM}Detect architecture, monorepo, and suggest migrations${NC}`)
   console.log(`    create-agent <name>     ${DIM}Create a custom agent from template${NC}`)
-  console.log(`    list                    ${DIM}List installed agents and skills${NC}`)
+  console.log(`    list                    ${DIM}List installed agents, skills, and memory${NC}`)
   console.log(`    profiles                ${DIM}Manage AI team profiles${NC}`)
-  console.log(`    community               ${DIM}Manage community skills${NC}`)
+  console.log(`    community               ${DIM}Manage community skills (list/install/remove)${NC}`)
   console.log()
   console.log('  Options:')
   console.log(`    -h, --help      ${DIM}Show this help message${NC}`)
@@ -286,8 +466,10 @@ if (args.includes('--help') || args.includes('-h')) {
   console.log(`    -f, --force     ${DIM}Overwrite existing agents without asking${NC}`)
   console.log()
   console.log('  Examples:')
-  console.log(`    ${DIM}$ specialist-agent init${NC}`)
-  console.log(`    ${DIM}$ specialist-agent create-agent @my-custom-agent${NC}`)
+  console.log(`    ${DIM}$ specialist-agent init              # Install in existing project${NC}`)
+  console.log(`    ${DIM}$ specialist-agent init              # Start from empty dir (no framework yet)${NC}`)
+  console.log(`    ${DIM}$ specialist-agent detect            # Analyze architecture & get recommendations${NC}`)
+  console.log(`    ${DIM}$ specialist-agent create-agent @qa  # Create a custom agent${NC}`)
   console.log(`    ${DIM}$ specialist-agent profiles set startup-fast${NC}`)
   console.log()
   process.exit(0)
@@ -957,17 +1139,20 @@ async function main() {
 
   clack.intro(`Specialist Agent ${DIM}v${pkg.version}${NC}`)
 
-  // Check for updates
+  // Check for updates (non-blocking)
   const latestVersion = await checkForUpdates(pkg.version)
   if (latestVersion) {
     clack.log.warn(`Update available: v${pkg.version} → v${latestVersion}`)
     clack.log.info(`${DIM}Run: npm i -g specialist-agent@latest${NC}`)
   }
 
-  // Check we're in a project
   const cwd = process.cwd()
+
+  // ── Auto-detect everything ──────────────────────────
+
+  // Check/create package.json
   if (!existsSync(join(cwd, 'package.json'))) {
-    clack.log.warn('No package.json found in current directory.')
+    clack.log.warn('No package.json found.')
 
     const createPkg = await clack.confirm({
       message: 'Create a package.json to initialize this project?',
@@ -989,7 +1174,7 @@ async function main() {
     clack.log.success('package.json created')
   }
 
-  // 1. Framework
+  // Auto-detect framework
   const packs = readdirSync(join(ROOT, 'packs'), { withFileTypes: true })
     .filter(d => d.isDirectory())
     .map(d => d.name)
@@ -997,300 +1182,248 @@ async function main() {
   const packLabels = { vue: 'Vue 3', react: 'React', nextjs: 'Next.js', svelte: 'SvelteKit', angular: 'Angular', astro: 'Astro', nuxt: 'Nuxt' }
 
   const detected = detectFramework(join(cwd, 'package.json'), packs)
-  let framework
 
+  // Auto-detect platforms
+  const detectedPlatforms = detectPlatforms(cwd)
+  const platformLabels = detectedPlatforms.map(p => p.label).join(', ')
+
+  // Auto-detect architecture
+  let framework = detected
+  const isEmptyProject = !detected
+  const archDetection = detectProjectArchitecture(cwd, { framework: isEmptyProject ? null : framework })
+  const detectedArch = archDetection.architecture
+  const detectedArchName = ARCHITECTURE_PATTERNS[detectedArch]?.name || detectedArch
+
+  // ── Show detection results ──────────────────────────
+
+  const detectionLines = []
   if (detected) {
-    clack.log.success(`Detected ${packLabels[detected] || detected} from package.json`)
-
-    const useDetected = await clack.confirm({
-      message: `Use ${packLabels[detected] || detected} pack?`,
-      initialValue: true,
-    })
-
-    if (clack.isCancel(useDetected)) handleCancel()
-
-    if (useDetected) {
-      framework = detected
-    } else {
-      framework = await clack.select({
-        message: 'Which framework?',
-        options: packs.map(p => ({
-          value: p,
-          label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
-        })),
-      })
-
-      if (clack.isCancel(framework)) handleCancel()
-    }
+    detectionLines.push(`${GREEN}✓${NC} Framework: ${BOLD}${packLabels[detected] || detected}${NC}`)
   } else {
-    framework = await clack.select({
-      message: 'Which framework?',
-      options: packs.map(p => ({
-        value: p,
-        label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
-      })),
-    })
-
-    if (clack.isCancel(framework)) handleCancel()
+    detectionLines.push(`${DIM}○ Framework: none detected (empty project)${NC}`)
+  }
+  detectionLines.push(`${GREEN}✓${NC} Platforms: ${BOLD}${platformLabels}${NC}`)
+  if (detectedArch && detectedArch !== 'unstructured') {
+    detectionLines.push(`${GREEN}✓${NC} Architecture: ${BOLD}${detectedArchName}${NC}`)
+  }
+  if (archDetection.monorepo) {
+    detectionLines.push(`${GREEN}✓${NC} Monorepo: ${BOLD}${archDetection.monorepo.name}${NC} (${archDetection.monorepo.apps.length} apps/packages)`)
   }
 
-  // 2. Mode
+  clack.note(detectionLines.join('\n'), 'Auto-detected')
+
+  // ── Step 1: Framework (only ask if not detected) ────
+
+  if (!detected) {
+    framework = 'none'
+    clack.log.info('No framework detected — installing universal agents.')
+    clack.log.info(`${DIM}When you choose a framework, re-run: npx specialist-agent init${NC}`)
+  }
+
+  const isNone = framework === 'none' || !framework
+
+  // ── Step 2: Mode ────────────────────────────────────
+
   const mode = await clack.select({
     message: 'Agent mode?',
     options: [
-      { value: 'full', label: 'Full', hint: 'Sonnet/Opus' },
-      { value: 'lite', label: 'Lite', hint: 'Haiku \u2014 lower cost' },
+      { value: 'full', label: 'Full', hint: 'Sonnet/Opus — best quality' },
+      { value: 'lite', label: 'Lite', hint: 'Haiku — lower cost, faster' },
     ],
   })
 
   if (clack.isCancel(mode)) handleCancel()
 
-  // 3. Starter agent
-  const installStarter = await clack.confirm({
-    message: 'Install @starter agent?',
-    initialValue: true,
-  })
+  // ── Step 3: Install scope ──────────────────────────
 
-  if (clack.isCancel(installStarter)) handleCancel()
-
-  // 4. Workflow agents
-  const installWorkflow = await clack.confirm({
-    message: `Install workflow agents? ${DIM}(@planner, @executor, @tdd, @debugger, @pair)${NC}`,
-    initialValue: true,
-  })
-
-  if (clack.isCancel(installWorkflow)) handleCancel()
-
-  // 5. Specialist agents
-  const installSpecialists = await clack.confirm({
-    message: `Install specialist agents? ${DIM}(@api, @perf, @security, @finance, @data, @i18n, @docs, @deps, @legal, ...)${NC}`,
-    initialValue: true,
-  })
-
-  if (clack.isCancel(installSpecialists)) handleCancel()
-
-  // 6. Install scope
   const installScope = await clack.select({
-    message: 'Where to install agents?',
+    message: 'Install scope?',
     options: [
-      { value: 'project', label: 'This project only', hint: '.claude/agents/' },
-      { value: 'global', label: 'Globally', hint: '~/.claude/agents - available in all projects' },
+      { value: 'project', label: 'This project', hint: '.claude/agents/' },
+      { value: 'global', label: 'Global', hint: '~/.claude/agents/ — all projects' },
     ],
   })
 
   if (clack.isCancel(installScope)) handleCancel()
 
-  // ── Native Claude Code Hooks (ask before spinner) ──
+  // ── Step 4: Customize (optional) ───────────────────
 
-  let selectedHooks = []
-
-  const installNativeHooks = await clack.confirm({
-    message: `Install native Claude Code hooks? ${DIM}(security guard, auto-dispatch, session context, auto-format)${NC}`,
-    initialValue: true,
+  const customize = await clack.confirm({
+    message: `Customize installation? ${DIM}(hooks, architecture, agent selection)${NC}`,
+    initialValue: false,
   })
 
-  if (clack.isCancel(installNativeHooks)) handleCancel()
+  if (clack.isCancel(customize)) handleCancel()
 
-  if (installNativeHooks) {
+  let selectedHooks = ['security-guard', 'auto-dispatch', 'session-context', 'mcp-discovery']
+  let installArch = true
+  let selectedArchitecture = 'modular'
+  let selectedArchVariant = 'full'
+  let generateCustomArch = false
+  let installStarter = true
+  let installWorkflow = true
+  let installSpecialists = true
+  let installBusiness = true
+
+  if (customize) {
+    // Native hooks selection
     const hookChoices = await clack.multiselect({
-      message: 'Which hooks to enable?',
+      message: 'Native Claude Code hooks:',
       options: [
-        { value: 'security-guard', label: 'Security Guard', hint: 'Block dangerous commands (recommended)', selected: true },
-        { value: 'auto-dispatch', label: 'Auto-Dispatch', hint: 'Suggest agents based on your prompt', selected: true },
-        { value: 'session-context', label: 'Session Context', hint: 'Inject project state on session start', selected: true },
+        { value: 'security-guard', label: 'Security Guard', hint: 'Block dangerous commands', selected: true },
+        { value: 'auto-dispatch', label: 'Auto-Dispatch', hint: 'Suggest agents based on prompt', selected: true },
+        { value: 'session-context', label: 'Session Context', hint: 'Inject project state on start', selected: true },
+        { value: 'mcp-discovery', label: 'MCP Discovery', hint: 'Detect MCP servers and enhance agents', selected: true },
         { value: 'auto-format', label: 'Auto-Format', hint: 'Format files after Write/Edit', selected: false },
       ],
       required: false,
     })
 
-    if (!clack.isCancel(hookChoices) && hookChoices.length > 0) {
+    if (!clack.isCancel(hookChoices)) {
       selectedHooks = hookChoices
     }
-  }
 
-  // ── Architecture Detection & Guide ──────────────────
-
-  let installArch = false
-  let selectedArchitecture = 'modular'
-  let selectedArchVariant = 'full'
-  let generateCustomArch = false
-
-  // Detect current architecture
-  const archDetection = detectProjectArchitecture(cwd, { framework })
-  const detectedArch = archDetection.architecture
-  const detectedArchName = ARCHITECTURE_PATTERNS[detectedArch]?.name || detectedArch
-
-  if (detectedArch && detectedArch !== 'unstructured') {
-    clack.log.info(`Detected architecture: ${BOLD}${detectedArchName}${NC}`)
-  }
-
-  // Monorepo detection
-  if (archDetection.monorepo) {
-    clack.log.info(`Monorepo detected: ${BOLD}${archDetection.monorepo.name}${NC} (${archDetection.monorepo.apps.length} apps/packages)`)
-  }
-
-  // Ask about architecture
-  const archAction = await clack.select({
-    message: 'Architecture guide for your project?',
-    options: [
-      {
-        value: 'detect-and-suggest',
-        label: 'Detect & suggest improvements',
-        hint: 'Analyze current architecture and recommend best practices',
-      },
-      {
-        value: 'choose',
-        label: 'Choose a specific architecture',
-        hint: 'Pick from our catalog of patterns (Modular, Clean, Hexagonal, DDD, ...)',
-      },
-      {
-        value: 'default',
-        label: `Use default (Modular)`,
-        hint: 'Install the standard modular ARCHITECTURE.md',
-      },
-      {
-        value: 'skip',
-        label: 'Skip',
-        hint: 'No architecture guide',
-      },
-    ],
-  })
-
-  if (clack.isCancel(archAction)) handleCancel()
-
-  if (archAction === 'detect-and-suggest') {
-    // Ask team size for better recommendations
-    const teamSize = await clack.select({
-      message: 'Team size?',
+    // Agent group selection
+    const agentGroups = await clack.multiselect({
+      message: 'Agent groups to install:',
       options: [
-        { value: 'small', label: '1-3 developers' },
-        { value: 'medium', label: '3-10 developers' },
-        { value: 'large', label: '10-20 developers' },
-        { value: 'enterprise', label: '20+ developers' },
+        { value: 'core', label: 'Core', hint: '@builder, @reviewer, @doctor, @migrator, @starter', selected: true },
+        { value: 'workflow', label: 'Workflow', hint: '@planner, @executor, @tdd, @debugger, @pair, @analyst, @orchestrator', selected: true },
+        { value: 'specialist', label: 'Specialist', hint: '@api, @perf, @security, @finance, @data, @devops, @architect, ...', selected: true },
+        { value: 'business', label: 'Business', hint: '@marketing, @product, @support', selected: true },
+      ],
+      required: true,
+    })
+
+    if (!clack.isCancel(agentGroups)) {
+      installStarter = agentGroups.includes('core')
+      installWorkflow = agentGroups.includes('workflow')
+      installSpecialists = agentGroups.includes('specialist')
+      installBusiness = agentGroups.includes('business')
+    }
+
+    // Architecture selection
+    const archAction = await clack.select({
+      message: 'Architecture guide?',
+      options: [
+        { value: 'default', label: 'Modular (default)', hint: 'Feature-based — recommended for most projects' },
+        { value: 'choose', label: 'Choose pattern', hint: 'Clean, Hexagonal, DDD, CQRS, ...' },
+        { value: 'detect', label: 'Detect & suggest', hint: 'Analyze your project and recommend' },
+        { value: 'skip', label: 'Skip', hint: 'No architecture guide' },
       ],
     })
 
-    if (clack.isCancel(teamSize)) handleCancel()
+    if (clack.isCancel(archAction)) handleCancel()
 
-    const recs = getRecommendations(archDetection, { teamSize })
-
-    // Show recommendations
-    const recOptions = []
-    for (const rec of recs.recommendations) {
-      const tagPrefix = rec.tag === 'recommended' ? '[RECOMMENDED] '
-        : rec.tag === 'backend-recommended' ? '[BACKEND] '
-        : ''
-      const effortNote = rec.migration ? ` (effort: ${rec.migration.effort})` : ''
-      const sameNote = rec.isSameArch ? ' (current)' : ''
-
-      recOptions.push({
-        value: rec.id,
-        label: `${tagPrefix}${rec.name}${sameNote}`,
-        hint: `${rec.description.slice(0, 60)}${effortNote}`,
+    if (archAction === 'skip') {
+      installArch = false
+    } else if (archAction === 'detect') {
+      const teamSize = await clack.select({
+        message: 'Team size?',
+        options: [
+          { value: 'small', label: '1-3 developers' },
+          { value: 'medium', label: '3-10 developers' },
+          { value: 'large', label: '10-20 developers' },
+          { value: 'enterprise', label: '20+ developers' },
+        ],
       })
-    }
 
-    recOptions.push({ value: 'skip', label: 'Skip', hint: 'No architecture guide' })
+      if (clack.isCancel(teamSize)) handleCancel()
 
-    if (recs.reason) {
-      clack.log.info(recs.reason)
-    }
+      const recs = getRecommendations(archDetection, { teamSize })
 
-    const archChoice = await clack.select({
-      message: 'Which architecture to adopt?',
-      options: recOptions,
-    })
+      const recOptions = []
+      for (const rec of recs.recommendations) {
+        const tagPrefix = rec.tag === 'recommended' ? '[RECOMMENDED] '
+          : rec.tag === 'backend-recommended' ? '[BACKEND] '
+          : ''
+        const effortNote = rec.migration ? ` (effort: ${rec.migration.effort})` : ''
+        const sameNote = rec.isSameArch ? ' (current)' : ''
 
-    if (clack.isCancel(archChoice)) handleCancel()
+        recOptions.push({
+          value: rec.id,
+          label: `${tagPrefix}${rec.name}${sameNote}`,
+          hint: `${rec.description.slice(0, 60)}${effortNote}`,
+        })
+      }
 
-    if (archChoice !== 'skip') {
+      recOptions.push({ value: 'skip', label: 'Skip', hint: 'No architecture guide' })
+
+      if (recs.reason) clack.log.info(recs.reason)
+
+      const archChoice = await clack.select({
+        message: 'Which architecture?',
+        options: recOptions,
+      })
+
+      if (clack.isCancel(archChoice)) handleCancel()
+
+      if (archChoice !== 'skip') {
+        selectedArchitecture = archChoice
+        generateCustomArch = true
+
+        const chosenRec = recs.recommendations.find(r => r.id === archChoice)
+        if (chosenRec?.variants.length > 0) {
+          const variantChoice = await clack.select({
+            message: 'Variant?',
+            options: chosenRec.variants.map(v => ({
+              value: v.id,
+              label: v.name,
+              hint: v.description.slice(0, 70),
+            })),
+          })
+
+          if (clack.isCancel(variantChoice)) handleCancel()
+          selectedArchVariant = variantChoice
+        }
+
+        if (chosenRec?.migration && !chosenRec.isSameArch) {
+          clack.log.info(`${DIM}After install, use /migrate-architecture to apply.${NC}`)
+        }
+      } else {
+        installArch = false
+      }
+    } else if (archAction === 'choose') {
+      const archChoice = await clack.select({
+        message: 'Architecture pattern?',
+        options: [
+          { value: 'modular', label: 'Modular (Feature-Based)', hint: 'Recommended for most projects' },
+          { value: 'clean', label: 'Clean Architecture', hint: 'Domain > Use Cases > Adapters' },
+          { value: 'hexagonal', label: 'Hexagonal (Ports & Adapters)', hint: 'Core isolated' },
+          { value: 'fsd', label: 'Feature-Sliced Design', hint: 'Strict layered' },
+          { value: 'ddd', label: 'Domain-Driven Design', hint: 'Bounded contexts' },
+          { value: 'modular-monolith', label: 'Modular Monolith', hint: 'Backend/fullstack' },
+          { value: 'atomic', label: 'Atomic Design', hint: 'Component granularity' },
+          { value: 'cqrs', label: 'CQRS', hint: 'Command/query separation' },
+          { value: 'mvc', label: 'MVC / Layered', hint: 'Classic layers' },
+        ],
+      })
+
+      if (clack.isCancel(archChoice)) handleCancel()
       selectedArchitecture = archChoice
-      installArch = true
       generateCustomArch = true
 
-      // Choose variant
-      const chosenRec = recs.recommendations.find(r => r.id === archChoice)
-      if (chosenRec?.variants.length > 0) {
-        const variantOptions = chosenRec.variants.map(v => ({
-          value: v.id,
-          label: v.name,
-          hint: v.description.slice(0, 70),
-        }))
+      const variantChoice = await clack.select({
+        message: 'Variant?',
+        options: [
+          { value: 'full', label: 'Full', hint: 'All layers — established teams' },
+          { value: 'lite', label: 'Simplified', hint: 'Fewer layers — smaller teams' },
+        ],
+      })
 
-        const variantChoice = await clack.select({
-          message: 'Which variant?',
-          options: variantOptions,
-        })
-
-        if (clack.isCancel(variantChoice)) handleCancel()
-        selectedArchVariant = variantChoice
-      }
-
-      // Show directory preview
-      const chosenVariant = chosenRec?.variants.find(v => v.id === selectedArchVariant)
-      if (chosenVariant?.directoryStructure) {
-        clack.note(
-          chosenVariant.directoryStructure.join('\n'),
-          `${ARCHITECTURE_PATTERNS[selectedArchitecture]?.name || selectedArchitecture} (${selectedArchVariant})`
-        )
-      }
-
-      // If it's a migration, show migration info
-      if (chosenRec?.migration && !chosenRec.isSameArch) {
-        clack.log.info(`${DIM}Migration: ${chosenRec.migration.description}${NC}`)
-        clack.log.info(`${DIM}After install, use /migrate-architecture to execute the migration.${NC}`)
-        clack.log.info(`${DIM}Agents: ${chosenRec.migration.agents.join(', ')}${NC}`)
-      }
+      if (clack.isCancel(variantChoice)) handleCancel()
+      selectedArchVariant = variantChoice
     }
-  } else if (archAction === 'choose') {
-    // Direct architecture selection
-    const archOptions = [
-      { value: 'modular', label: 'Modular (Feature-Based)', hint: 'Recommended for most projects' },
-      { value: 'clean', label: 'Clean Architecture', hint: 'Domain > Use Cases > Adapters > Frameworks' },
-      { value: 'hexagonal', label: 'Hexagonal (Ports & Adapters)', hint: 'Core isolated, infrastructure swappable' },
-      { value: 'fsd', label: 'Feature-Sliced Design', hint: 'Strict layered: app > pages > features > entities > shared' },
-      { value: 'ddd', label: 'Domain-Driven Design', hint: 'Bounded contexts, aggregates, domain events' },
-      { value: 'modular-monolith', label: 'Modular Monolith', hint: 'Single deploy, strict boundaries (backend/fullstack)' },
-      { value: 'atomic', label: 'Atomic Design', hint: 'Components by granularity: atoms > molecules > organisms' },
-      { value: 'cqrs', label: 'CQRS', hint: 'Separate command/query paths (backend)' },
-      { value: 'mvc', label: 'MVC / Layered', hint: 'Classic horizontal slicing (backend)' },
-    ]
-
-    const archChoice = await clack.select({
-      message: 'Which architecture pattern?',
-      options: archOptions,
-    })
-
-    if (clack.isCancel(archChoice)) handleCancel()
-    selectedArchitecture = archChoice
-    installArch = true
-    generateCustomArch = true
-
-    // Variant
-    const variantChoice = await clack.select({
-      message: 'Which variant?',
-      options: [
-        { value: 'full', label: 'Full', hint: 'All layers and patterns - for established teams' },
-        { value: 'lite', label: 'Simplified', hint: 'Fewer layers, same principles - for smaller teams' },
-      ],
-    })
-
-    if (clack.isCancel(variantChoice)) handleCancel()
-    selectedArchVariant = variantChoice
-  } else if (archAction === 'default') {
-    installArch = true
-    selectedArchitecture = 'modular'
-    selectedArchVariant = 'full'
+    // archAction === 'default': keep defaults
   }
-  // archAction === 'skip': installArch remains false
 
-  // ── Install files ──────────────────────────────────
+  // ── Install ─────────────────────────────────────────
 
-  const packDir = join(ROOT, 'packs', framework)
+  const defaultPack = isNone ? 'react' : framework
+  const packDir = join(ROOT, 'packs', defaultPack)
   const agentsSource = mode === 'lite' ? join(packDir, 'agents-lite') : join(packDir, 'agents')
   const skillsSource = join(packDir, 'skills')
-  const archSource = join(packDir, 'ARCHITECTURE.md')
-  const claudeSource = join(packDir, 'CLAUDE.md')
+  const claudeSource = isNone ? join(ROOT, 'CLAUDE.md') : join(packDir, 'CLAUDE.md')
 
   const installGlobal = installScope === 'global'
   const agentsDest = installGlobal
@@ -1298,15 +1431,13 @@ async function main() {
     : join(cwd, '.claude', 'agents')
   mkdirSync(agentsDest, { recursive: true })
 
-  // Detect existing agents
-  const agentsLabel = installGlobal ? '~/.claude/agents/' : '.claude/agents/'
+  // Handle existing agents
   const existingAgents = detectExistingAgents(agentsDest)
   let shouldOverwrite = forceMode
 
   if (existingAgents.length > 0 && !forceMode) {
-    clack.log.warn(`Existing agents detected in ${agentsLabel} (${existingAgents.length} files)`)
     const overwriteChoice = await clack.confirm({
-      message: 'Overwrite existing agent files?',
+      message: `${existingAgents.length} existing agents found. Overwrite?`,
       initialValue: false,
     })
     if (clack.isCancel(overwriteChoice)) handleCancel()
@@ -1314,100 +1445,94 @@ async function main() {
   }
 
   const s = clack.spinner()
-  if (existingAgents.length > 0 && !shouldOverwrite) {
-    s.start('Installing new agents and skills (preserving existing)...')
-  } else {
-    s.start('Installing agents and skills...')
-  }
+  s.start('Installing agents, skills, and platform configs...')
 
   // Install pack agents
-  if (shouldOverwrite) {
-    copyDir(agentsSource, agentsDest)
-  } else {
-    copyNewOnly(agentsSource, agentsDest)
-  }
-
-  // Install starter agent
-  if (installStarter) {
-    const starterFile = mode === 'lite' ? 'starter-lite.md' : 'starter.md'
-    const starterSource = join(ROOT, 'agents', starterFile)
-    const starterDest = join(agentsDest, 'starter.md')
-    if (existsSync(starterSource) && (shouldOverwrite || !existsSync(starterDest))) {
-      cpSync(starterSource, starterDest)
+  if (existsSync(agentsSource)) {
+    if (shouldOverwrite) {
+      copyDir(agentsSource, agentsDest)
+    } else {
+      copyNewOnly(agentsSource, agentsDest)
     }
   }
 
-  // Install workflow agents
+  // Install all agent groups
+  const allAgentNames = []
+
+  if (installStarter) allAgentNames.push('starter')
+
   if (installWorkflow) {
-    const workflowNames = ['planner', 'executor', 'tdd', 'debugger', 'pair', 'analyst', 'orchestrator', 'scout', 'memory']
-    for (const name of workflowNames) {
-      const suffix = mode === 'lite' ? '-lite.md' : '.md'
-      const source = join(ROOT, 'agents', `${name}${suffix}`)
-      const dest = join(agentsDest, `${name}.md`)
-      if (existsSync(source) && (shouldOverwrite || !existsSync(dest))) {
-        cpSync(source, dest)
-      }
-    }
+    allAgentNames.push('planner', 'executor', 'tdd', 'debugger', 'pair', 'analyst', 'orchestrator', 'scout', 'memory')
   }
 
-  // Install specialist agents
   if (installSpecialists) {
-    const specialistNames = [
+    allAgentNames.push(
       'api', 'perf', 'i18n', 'docs', 'refactor', 'deps',
       'explorer', 'finance', 'cloud', 'security', 'designer', 'data',
-      'devops', 'tester', 'legal', 'architect', 'ripple'
-    ]
-    for (const name of specialistNames) {
-      const suffix = mode === 'lite' ? '-lite.md' : '.md'
-      const source = join(ROOT, 'agents', `${name}${suffix}`)
-      const dest = join(agentsDest, `${name}.md`)
-      if (existsSync(source) && (shouldOverwrite || !existsSync(dest))) {
-        cpSync(source, dest)
-      }
+      'devops', 'tester', 'legal', 'architect', 'ripple', 'sentry-triage'
+    )
+  }
+
+  if (installBusiness) {
+    allAgentNames.push('marketing', 'product', 'support')
+  }
+
+  for (const name of allAgentNames) {
+    const suffix = mode === 'lite' ? '-lite.md' : '.md'
+    const source = join(ROOT, 'agents', `${name}${suffix}`)
+    const dest = join(agentsDest, `${name}.md`)
+    if (existsSync(source) && (shouldOverwrite || !existsSync(dest))) {
+      cpSync(source, dest)
     }
   }
 
-  // Install skills (pack-specific)
+  // Install skills
   const skillsDest = join(cwd, '.claude', 'skills')
   mkdirSync(skillsDest, { recursive: true })
-  let skillCount = shouldOverwrite
-    ? copyDir(skillsSource, skillsDest)
-    : copyNewOnly(skillsSource, skillsDest)
-
-  // Install generic skills
-  const genericSkillsSource = join(ROOT, 'skills')
-  if (existsSync(genericSkillsSource)) {
-    const genericSkillCount = shouldOverwrite
-      ? copyDir(genericSkillsSource, skillsDest)
-      : copyNewOnly(genericSkillsSource, skillsDest)
-    skillCount += genericSkillCount
+  let skillCount = 0
+  if (existsSync(skillsSource)) {
+    skillCount = shouldOverwrite
+      ? copyDir(skillsSource, skillsDest)
+      : copyNewOnly(skillsSource, skillsDest)
   }
 
-  // Install native hooks (using selections from earlier)
+  const genericSkillsSource = join(ROOT, 'skills')
+  if (existsSync(genericSkillsSource)) {
+    skillCount += shouldOverwrite
+      ? copyDir(genericSkillsSource, skillsDest)
+      : copyNewOnly(genericSkillsSource, skillsDest)
+  }
+
+  // Install native hooks (defaults: security-guard, auto-dispatch, session-context)
   let nativeHooksInstalled = 0
   if (selectedHooks.length > 0) {
     nativeHooksInstalled = setupNativeHooks(cwd, selectedHooks)
   }
 
-  // Install ARCHITECTURE.md (only if user opted in)
+  // Install ARCHITECTURE.md
   const archDest = join(cwd, 'docs', 'ARCHITECTURE.md')
   let archInstalled = false
   if (installArch) {
     if (generateCustomArch) {
-      // Generate architecture guide for the selected pattern + framework + variant
       const guide = generateArchitectureGuide({
         architecture: selectedArchitecture,
-        framework,
+        framework: defaultPack,
         variant: selectedArchVariant,
         nextjsRouter: archDetection.nextjsRouter,
       })
       mkdirSync(dirname(archDest), { recursive: true })
       writeFileSync(archDest, guide)
       archInstalled = true
-    } else if (!existsSync(archDest) && existsSync(archSource)) {
-      // Fallback to pack default
+    } else if (!existsSync(archDest)) {
+      // Default: generate Modular architecture
+      const guide = generateArchitectureGuide({
+        architecture: 'modular',
+        framework: defaultPack,
+        variant: 'full',
+        nextjsRouter: archDetection.nextjsRouter,
+      })
       mkdirSync(dirname(archDest), { recursive: true })
-      cpSync(archSource, archDest)
+      writeFileSync(archDest, guide)
       archInstalled = true
     }
   }
@@ -1415,46 +1540,66 @@ async function main() {
   // Install CLAUDE.md
   const claudeDest = join(cwd, 'CLAUDE.md')
   let claudeInstalled = false
-  if (!existsSync(claudeDest) && existsSync(claudeSource)) {
-    cpSync(claudeSource, claudeDest)
-    claudeInstalled = true
+  if (!existsSync(claudeDest)) {
+    if (claudeSource && existsSync(claudeSource)) {
+      cpSync(claudeSource, claudeDest)
+      claudeInstalled = true
+    } else {
+      const rootClaude = join(ROOT, 'CLAUDE.md')
+      if (existsSync(rootClaude)) {
+        cpSync(rootClaude, claudeDest)
+        claudeInstalled = true
+      }
+    }
   }
+
+  // ── Setup platform configs ─────────────────────────
+
+  const extraPlatforms = detectedPlatforms.filter(p => p.id !== 'claude-code')
+  const platformResults = extraPlatforms.length > 0
+    ? setupPlatformConfigs(cwd, extraPlatforms, { framework: defaultPack, version: pkg.version })
+    : []
 
   s.stop('Installation complete')
 
   // ── Summary ────────────────────────────────────────
 
-  const agentNames = getAgentNames(agentsDest)
-  const packLabel = packLabels[framework] || framework
+  const installedAgentNames = getAgentNames(agentsDest)
+  const packLabel = isNone ? 'Universal' : (packLabels[framework] || framework)
 
   const summaryLines = []
-  agentNames.forEach(name => summaryLines.push(`\u2713 @${name}`))
-  if (skillCount > 0) summaryLines.push(`\u2713 ${skillCount} skills`)
-  if (nativeHooksInstalled > 0) summaryLines.push(`\u2713 ${nativeHooksInstalled} native hooks`)
+  summaryLines.push(`${BOLD}${installedAgentNames.length} agents${NC} installed`)
+  if (skillCount > 0) summaryLines.push(`${BOLD}${skillCount} skills${NC} installed`)
+  if (nativeHooksInstalled > 0) summaryLines.push(`${BOLD}${nativeHooksInstalled} native hooks${NC} configured`)
   if (archInstalled) {
     const archLabel = ARCHITECTURE_PATTERNS[selectedArchitecture]?.name || selectedArchitecture
     const varLabel = selectedArchVariant === 'lite' ? ' (Simplified)' : ''
-    summaryLines.push(`\u2713 docs/ARCHITECTURE.md (${archLabel}${varLabel})`)
+    summaryLines.push(`${GREEN}✓${NC} docs/ARCHITECTURE.md (${archLabel}${varLabel})`)
   }
-  if (claudeInstalled) summaryLines.push('\u2713 CLAUDE.md')
+  if (claudeInstalled) summaryLines.push(`${GREEN}✓${NC} CLAUDE.md`)
 
-  const scopeLabel = installGlobal ? 'Global' : 'Project'
-  clack.note(summaryLines.join('\n'), `${packLabel} \u00b7 ${mode === 'full' ? 'Full' : 'Lite'} \u00b7 ${scopeLabel}`)
-
-  if (installGlobal) {
-    clack.log.info(`${DIM}Agents installed to ~/.claude/agents/ (available in all projects)${NC}`)
+  // Platform results
+  summaryLines.push('')
+  summaryLines.push(`${BOLD}Platforms:${NC}`)
+  summaryLines.push(`  ${GREEN}✓${NC} Claude Code → .claude/agents/`)
+  for (const result of platformResults) {
+    summaryLines.push(`  ${GREEN}✓${NC} ${result.platform} → ${result.path}`)
   }
 
   if (existingAgents.length > 0 && !shouldOverwrite) {
-    clack.log.info(`${DIM}${existingAgents.length} existing agent(s) preserved. Use --force to overwrite.${NC}`)
+    summaryLines.push('')
+    summaryLines.push(`${DIM}${existingAgents.length} existing agent(s) preserved. Use --force to overwrite.${NC}`)
   }
+
+  const scopeLabel = installGlobal ? 'Global' : 'Project'
+  clack.note(summaryLines.join('\n'), `${packLabel} · ${mode === 'full' ? 'Full' : 'Lite'} · ${scopeLabel}`)
 
   // Getting started
   const installedSkills = existsSync(skillsDest)
     ? readdirSync(skillsDest, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => '/' + d.name)
     : []
 
-  clack.note(buildGettingStarted(agentNames, installedSkills, archInstalled), 'Getting started')
+  clack.note(buildGettingStarted(installedAgentNames, installedSkills, archInstalled, isNone), 'Getting started')
 
   if (mode === 'lite') {
     clack.log.info(`${DIM}Lite mode: agents run on Haiku (lower cost, faster).${NC}`)

@@ -2,6 +2,7 @@
 name: analyst
 description: "Use when requirements are ambiguous, incomplete, or need to be translated into technical specifications."
 tools: Read, Glob, Grep
+color: "#5b21b6"
 ---
 
 # @analyst - Business Requirements Agent

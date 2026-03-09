@@ -12,9 +12,9 @@
  * Allow: exit 0 (silent)
  */
 
-import { readFileSync } from 'fs';
-import { join, dirname, resolve } from 'path';
+import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { readStdin, readJsonFile } from './utils.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -122,6 +122,37 @@ const RULES = [
     severity: 'HIGH',
     test: (cmd) => /\bchmod\b.*\b777\b/.test(cmd),
     message: 'BLOCKED [HIGH]: chmod 777 makes files world-readable/writable/executable.\nUse specific permissions instead: chmod 755 (directories), chmod 644 (files), chmod 600 (secrets).'
+  },
+  {
+    id: 'git-branch-force-delete',
+    severity: 'HIGH',
+    test: (cmd) => {
+      if (!/\bgit\s+branch\b/.test(cmd)) return false;
+      return /-D\b/.test(cmd);
+    },
+    message: 'BLOCKED [HIGH]: git branch -D force-deletes a branch even if not fully merged.\nUse git branch -d (lowercase) for safe deletion — it warns if the branch has unmerged changes.'
+  },
+  {
+    id: 'npm-publish-no-dry-run',
+    severity: 'HIGH',
+    test: (cmd) => {
+      if (!/\bnpm\s+publish\b/.test(cmd)) return false;
+      if (/--dry-run/.test(cmd)) return false;
+      return true;
+    },
+    message: 'BLOCKED [HIGH]: npm publish without --dry-run detected.\nPublishing to npm is irreversible (versions cannot be overwritten).\nRun with --dry-run first to verify, then publish manually in your terminal.'
+  },
+  {
+    id: 'docker-system-prune',
+    severity: 'HIGH',
+    test: (cmd) => /\bdocker\s+system\s+prune\b/.test(cmd) && /-a\b/.test(cmd),
+    message: 'BLOCKED [HIGH]: docker system prune -a removes ALL unused images, containers, networks, and volumes.\nUse targeted cleanup: docker image prune, docker container prune, or docker volume prune.'
+  },
+  {
+    id: 'kubectl-delete-namespace',
+    severity: 'HIGH',
+    test: (cmd) => /\bkubectl\s+delete\s+(namespace|ns)\b/.test(cmd),
+    message: 'BLOCKED [HIGH]: kubectl delete namespace destroys ALL resources within the namespace.\nThis is a cascading delete that removes deployments, services, pods, secrets, and more.\nVerify the namespace and run this command manually in your terminal.'
   },
 
   // MEDIUM - block access to sensitive files
@@ -248,22 +279,9 @@ export function evaluateCommand(command, config = {}) {
 // ── Main Execution ──────────────────────────────────────────
 
 async function main() {
-  let input = null;
+  const input = await readStdin();
 
-  try {
-    // Read stdin
-    const data = await new Promise((resolve) => {
-      let buf = '';
-      const timeout = setTimeout(() => resolve(buf), 3000);
-      process.stdin.setEncoding('utf-8');
-      process.stdin.on('data', (chunk) => { buf += chunk; });
-      process.stdin.on('end', () => { clearTimeout(timeout); resolve(buf); });
-      process.stdin.on('error', () => { clearTimeout(timeout); resolve(''); });
-      process.stdin.resume();
-    });
-
-    input = data ? JSON.parse(data) : null;
-  } catch {
+  if (!input) {
     // Fail-closed: if we can't parse input, block
     process.stderr.write('Security Guard: Failed to parse input. Blocking as precaution.');
     process.exit(2);
@@ -277,13 +295,8 @@ async function main() {
   const command = input.tool_input.command;
 
   // Load config
-  let config = {};
-  try {
-    const configPath = join(__dirname, 'security-config.json');
-    config = JSON.parse(readFileSync(configPath, 'utf-8'));
-  } catch {
-    // No config = use defaults (all rules enabled)
-  }
+  const configPath = resolve(__dirname, 'security-config.json');
+  const config = readJsonFile(configPath) || {};
 
   if (config.enabled === false) {
     process.exit(0);

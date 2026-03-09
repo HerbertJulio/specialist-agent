@@ -1,8 +1,8 @@
 {
   "name": "specialist-agent",
-  "version": "2.7.0",
+  "version": "2.10.0",
   "displayName": "Specialist Agent",
-  "description": "Your AI development team. 27+ specialized agents for building, reviewing, debugging, and shipping production code. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt.",
+  "description": "Your AI development team. 35 agents and 24 skills for building, reviewing, debugging, and shipping production code. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt.",
   "author": {
     "name": "Herbert Julio",
     "url": "https://github.com/HerbertJulio"

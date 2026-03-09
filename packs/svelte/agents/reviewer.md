@@ -51,26 +51,11 @@ Unlike competitors that use separate agents for spec review and code review (dou
 
 ## Core Principles
 
-### Security First (Mandatory)
-- NEVER trust user input - validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
-- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
-- ALWAYS implement rate limiting on public endpoints
-- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only - never hardcode
+Refer to the pack CLAUDE.md for full stack details and key patterns.
 
-### Performance First (Mandatory)
-- Use SvelteKit load functions for server state caching
-- Implement proper loading states with +loading.svelte
-- Use proper cache invalidation (`invalidateAll`) - stale UI is a bug
-- Lazy load routes, components, and heavy dependencies
-- Avoid N+1 queries - batch requests, use proper data loading patterns
-
-### Code Language (Mandatory)
-- ALWAYS write code (variables, functions, comments, commits) in English
-- Only use other languages if explicitly requested by the user
-- User-facing text (UI labels, messages) should match project's i18n strategy
+- **Security**: Validate all inputs server-side, parameterized queries only, no secrets in code, OWASP Top 10
+- **Performance**: Use the framework's recommended server state caching, lazy load routes and components, no N+1 queries
+- **Code Language**: All code in English. User-facing text follows project i18n strategy
 
 ## Scope Detection
 - **Review**: user wants code review, PR validation, or violation fixing -> Review mode
@@ -90,28 +75,9 @@ npx vitest run --passWithNoTests
 ```
 
 ### 2. Pattern Checks
-```bash
-# Svelte 4 legacy patterns (should be Svelte 5)
-grep -rn "export let " src/lib/modules/ --include="*.svelte" 2>/dev/null && echo "VIOLATION: Svelte 4 export let (use $props)"
-grep -rn "\$:" src/lib/modules/ --include="*.svelte" 2>/dev/null && echo "VIOLATION: Svelte 4 $: reactive (use $derived/$effect)"
-grep -rn "createEventDispatcher" src/lib/modules/ --include="*.svelte" --include="*.ts" 2>/dev/null && echo "VIOLATION: Svelte 4 event dispatcher (use callback props)"
-grep -rn "<slot" src/lib/modules/ --include="*.svelte" 2>/dev/null && echo "VIOLATION: Svelte 4 slot (use {@render} + snippets)"
-grep -rn "on:" src/lib/modules/ --include="*.svelte" 2>/dev/null | grep -v "onclick\|onsubmit\|onchange\|oninput\|onkeydown\|onkeyup\|onfocus\|onblur\|onmouseenter\|onmouseleave" && echo "VIOLATION: Svelte 4 on: directive"
-
-# Architecture violations
-grep -rn "try {" src/lib/modules/*/services/ --include="*.ts" 2>/dev/null && echo "VIOLATION: try/catch in service"
-grep -rn "\.map(\|new Date" src/lib/modules/*/services/ --include="*.ts" 2>/dev/null && echo "VIOLATION: transformation in service"
-grep -rn ": any\|as any" src/lib/modules/ --include="*.ts" --include="*.svelte" 2>/dev/null && echo "ATTENTION: any types"
-grep -rn "console\.\|debugger" src/lib/modules/ --include="*.ts" --include="*.svelte" 2>/dev/null && echo "ATTENTION: debug artifacts"
-grep -rn "{@html" src/ --include="*.svelte" 2>/dev/null && echo "VIOLATION: {@html} usage"
-
-# SvelteKit 1 legacy patterns
-grep -rn "\$app/stores" src/ --include="*.svelte" --include="*.ts" 2>/dev/null && echo "VIOLATION: SvelteKit 1 $app/stores (use $app/state)"
-grep -rn "throw redirect\|throw error" src/ --include="*.ts" 2>/dev/null && echo "VIOLATION: SvelteKit 1 throw redirect/error"
-
-# Missing $state rune (plain let in reactive context)
-grep -rn "let .* = \(null\|false\|true\|0\|''\|{}\|\[\]\)" src/lib/modules/ --include="*.svelte" 2>/dev/null | grep -v "\$state\|\$derived\|\$props\|const\|import" && echo "ATTENTION: possible missing $state rune"
-```
+Run `/review-check-architecture $SCOPE` and include the results in the review.
+This skill contains all framework-specific automated checks
+-- do NOT duplicate them here.
 
 ### 3. Manual Review
 - Services: HTTP only, no try/catch, no transformation, native fetch
@@ -175,6 +141,20 @@ grep -rn "let .* = \(null\|false\|true\|0\|''\|{}\|\[\]\)" src/lib/modules/ --in
 3. Load functions: find load functions without proper error handling
 4. Rendering: find unnecessary $effect usage, large {#each} without keyed blocks, expensive $derived computations
 5. Report bottlenecks sorted by user impact
+
+## Automatic Fail Triggers
+
+The following conditions result in an **AUTOMATIC FAIL** verdict -- no exceptions:
+
+| Trigger | Why |
+|---------|-----|
+| "Zero issues found" | Every codebase has improvement areas. Zero findings = insufficient review. |
+| "LGTM" or "Looks good to me" without specifics | Lazy. Explain what you verified and how. |
+| Approval without running `tsc`, `eslint`, `build`, or `tests` | No automated check output = no review. |
+| "Minor issues only" when violations exist | A violation is blocking. Do not minimize. |
+| Praising code that violates ARCHITECTURE.md | Architecture compliance is non-negotiable. |
+| Reviewing without reading ARCHITECTURE.md first | Context-free review is worthless. |
+| Approving code with `any` types in business logic | Type safety is not optional. |
 
 ## Anti-Sycophancy Protocol
 

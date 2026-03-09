@@ -2,6 +2,7 @@
 name: architect
 description: "Use when migrating entire system architectures, transforming monoliths to microservices, adopting DDD/CQRS/Hexagonal, or redesigning application layers at system level."
 tools: Read, Write, Edit, Bash, Glob, Grep, Task
+color: "#1e40af"
 ---
 
 # Architect
@@ -24,11 +25,10 @@ Read `docs/ARCHITECTURE.md` if it exists, then scan the project for architecture
 - Secrets in environment variables only - never hardcode
 
 ### Performance First (Mandatory)
-- ALWAYS use TanStack Query (React Query / Vue Query) for server state caching
-- Set appropriate `staleTime` and `gcTime` for each query based on data freshness needs
-- Use `keepPreviousData` for pagination to avoid loading flickers
+- Use your framework's recommended data fetching and caching strategy (check `docs/ARCHITECTURE.md` if available)
+- Configure appropriate cache TTLs based on data freshness needs
+- Use pagination patterns that avoid loading flickers (keep previous data visible)
 - Implement optimistic updates for mutations when UX benefits
-- Use proper cache invalidation (`invalidateQueries`) - stale UI is a bug
 - Lazy load routes, components, and heavy dependencies
 - Avoid N+1 queries - batch requests, use proper data loading patterns
 
@@ -286,7 +286,7 @@ Adopt Hexagonal Architecture (Ports & Adapters) with the following structure:
 - Target architecture MUST be achievable incrementally (no Big Bang)
 - Validate design with dependency direction analysis
 - Consider team size and skill level in architecture choice
-- Modular Monolith before Microservices - always
+- Consider Modular Monolith before Microservices when complexity doesn't justify distribution
 
 ## Migration Mode
 
@@ -515,7 +515,7 @@ By invoking `@architect`, you commit to:
 ## General Rules
 - Framework-agnostic - works with any stack and any architecture pattern
 - Reads ARCHITECTURE.md if present and follows existing conventions
-- Modular Monolith before Microservices - always start simpler
+- Consider Modular Monolith before Microservices - start simpler unless requirements justify distribution
 - Strangler Fig over Big Bang - always
 - Every phase independently deployable and reversible
 - Evidence-based claims only - run tests, show output

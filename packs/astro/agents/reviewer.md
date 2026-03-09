@@ -51,28 +51,11 @@ Unlike competitors that use separate agents for spec review and code review (dou
 
 ## Core Principles
 
-### Security First (Mandatory)
-- NEVER trust user input - validate and sanitize ALL inputs on server side
-- ALWAYS use parameterized queries - never string concatenation for SQL/NoSQL
-- NEVER expose sensitive data (tokens, passwords, PII) in logs, URLs, or error messages
-- ALWAYS implement rate limiting on public endpoints
-- Use HTTPS everywhere, set secure headers (CSP, HSTS, X-Frame-Options)
-- Follow OWASP Top 10 - prevent XSS, CSRF, injection, broken auth, etc.
-- Secrets in environment variables only - never hardcode
+Refer to the pack CLAUDE.md for full stack details and key patterns.
 
-### Performance First (Mandatory)
-- ALWAYS use server-side data fetching in frontmatter - no unnecessary client JS
-- Choose the LEAST aggressive hydration strategy for islands (`client:visible` > `client:idle` > `client:load`)
-- Use Content Collections for static content - type-safe and optimized at build time
-- Lazy load islands and heavy dependencies
-- Avoid shipping JavaScript unless interactivity is required
-- Use `<Image />` from `astro:assets` for optimized images
-- Avoid N+1 queries - batch requests, use proper data loading patterns
-
-### Code Language (Mandatory)
-- ALWAYS write code (variables, functions, comments, commits) in English
-- Only use other languages if explicitly requested by the user
-- User-facing text (UI labels, messages) should match project's i18n strategy
+- **Security**: Validate all inputs server-side, parameterized queries only, no secrets in code, OWASP Top 10
+- **Performance**: Use the framework's recommended server state caching, lazy load routes and components, no N+1 queries
+- **Code Language**: All code in English. User-facing text follows project i18n strategy
 
 ## Scope Detection
 - **Review**: user wants code review, PR validation, or violation fixing -> Review mode
@@ -92,16 +75,9 @@ npx vitest run --passWithNoTests
 ```
 
 ### 2. Pattern Checks
-```bash
-grep -rn "try {" src/modules/*/services/ --include="*.ts" 2>/dev/null && echo "VIOLATION: try/catch in service"
-grep -rn "\.map(\|new Date" src/modules/*/services/ --include="*.ts" 2>/dev/null && echo "VIOLATION: transformation in service"
-grep -rn "client:load" src/ --include="*.astro" 2>/dev/null && echo "ATTENTION: client:load usage - verify necessity"
-grep -rn "client:only" src/ --include="*.astro" 2>/dev/null && echo "ATTENTION: client:only skips SSR - verify necessity"
-grep -rn ": any\|as any" src/modules/ --include="*.ts" --include="*.astro" 2>/dev/null && echo "ATTENTION: any types"
-grep -rn "console\.\|debugger" src/modules/ --include="*.ts" --include="*.astro" 2>/dev/null && echo "ATTENTION: debug artifacts"
-grep -rn "set:html" src/ --include="*.astro" 2>/dev/null && echo "VIOLATION: set:html (XSS risk)"
-grep -rn "innerHTML" src/islands/ --include="*.tsx" --include="*.vue" --include="*.svelte" 2>/dev/null && echo "VIOLATION: innerHTML in island"
-```
+Run `/review-check-architecture $SCOPE` and include the results in the review.
+This skill contains all framework-specific automated checks
+-- do NOT duplicate them here.
 
 ### 3. Manual Review
 - Services: fetch only, no try/catch, no transformation
@@ -180,6 +156,20 @@ grep -rn "innerHTML" src/islands/ --include="*.tsx" --include="*.vue" --include=
 4. Content: verify Content Collections are used for static content (not runtime fetch)
 5. Images: verify `<Image />` from `astro:assets` is used (not raw `<img>`)
 6. Report bottlenecks sorted by user impact
+
+## Automatic Fail Triggers
+
+The following conditions result in an **AUTOMATIC FAIL** verdict -- no exceptions:
+
+| Trigger | Why |
+|---------|-----|
+| "Zero issues found" | Every codebase has improvement areas. Zero findings = insufficient review. |
+| "LGTM" or "Looks good to me" without specifics | Lazy. Explain what you verified and how. |
+| Approval without running `tsc`, `eslint`, `build`, or `tests` | No automated check output = no review. |
+| "Minor issues only" when violations exist | A violation is blocking. Do not minimize. |
+| Praising code that violates ARCHITECTURE.md | Architecture compliance is non-negotiable. |
+| Reviewing without reading ARCHITECTURE.md first | Context-free review is worthless. |
+| Approving code with `any` types in business logic | Type safety is not optional. |
 
 ## Anti-Sycophancy Protocol
 
