@@ -13,11 +13,11 @@ const terminalFlip = ref(false)
 
 const links = [
   '/guide/quick-start',
-  '/guide/agents',
-  '/guide/skills',
-  '/guide/framework-packs',
-  '/guide/platforms',
-  '/guide/automation',
+  '/reference/agents',
+  '/reference/skills',
+  '/guide/architecture',
+  '/guide/installation',
+  '/reference/hooks',
 ]
 
 const features = computed(() => {
