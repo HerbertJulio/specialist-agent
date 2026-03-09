@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.11.3](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.11.2...specialist-agent-v2.11.3) (2026-03-09)
+
+
+### Bug Fixes
+
+* add .nojekyll to prevent jekyll processing on github pages ([#73](https://github.com/HerbertJulio/specialist-agent/issues/73)) ([6320faf](https://github.com/HerbertJulio/specialist-agent/commit/6320fafdcdf14031f36e33557d348a2768615aa8))
+
 ## [2.11.2](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.11.1...specialist-agent-v2.11.2) (2026-03-09)
 
 
