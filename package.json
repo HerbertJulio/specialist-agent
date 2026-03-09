@@ -1,6 +1,6 @@
 {
   "name": "specialist-agent",
-  "version": "2.11.1",
+  "version": "2.11.2",
   "type": "module",
   "description": "AI agents for Claude Code — any framework, any stack",
   "bin": {
