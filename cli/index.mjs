@@ -1215,23 +1215,9 @@ async function main() {
   // ── Step 1: Framework (only ask if not detected) ────
 
   if (!detected) {
-    clack.log.info('No framework detected — installing all agents.')
+    framework = 'none'
+    clack.log.info('No framework detected — installing universal agents.')
     clack.log.info(`${DIM}When you choose a framework, re-run: npx specialist-agent init${NC}`)
-
-    const frameworkOptions = [
-      { value: 'none', label: 'No framework yet', hint: 'Install all agents — decide later' },
-      ...packs.map(p => ({
-        value: p,
-        label: packLabels[p] || p.charAt(0).toUpperCase() + p.slice(1),
-      })),
-    ]
-
-    framework = await clack.select({
-      message: 'Framework (or skip)?',
-      options: frameworkOptions,
-    })
-
-    if (clack.isCancel(framework)) handleCancel()
   }
 
   const isNone = framework === 'none' || !framework
