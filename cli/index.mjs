@@ -1150,29 +1150,7 @@ async function main() {
 
   // ── Auto-detect everything ──────────────────────────
 
-  // Check/create package.json
-  if (!existsSync(join(cwd, 'package.json'))) {
-    clack.log.warn('No package.json found.')
-
-    const createPkg = await clack.confirm({
-      message: 'Create a package.json to initialize this project?',
-      initialValue: true,
-    })
-
-    if (clack.isCancel(createPkg)) handleCancel()
-
-    if (!createPkg) {
-      clack.cancel('Run this command from the root of your project.')
-      process.exit(1)
-    }
-
-    const dirName = cwd.split(/[\\/]/).pop() || 'my-project'
-    writeFileSync(
-      join(cwd, 'package.json'),
-      JSON.stringify({ name: dirName, version: '0.1.0', private: true }, null, 2) + '\n'
-    )
-    clack.log.success('package.json created')
-  }
+  // package.json is optional — init continues without it
 
   // Auto-detect framework
   const packs = readdirSync(join(ROOT, 'packs'), { withFileTypes: true })
