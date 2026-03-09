@@ -18,12 +18,57 @@ Hooks are lifecycle scripts that run at key moments during your development sess
 
 ## Configuration
 
-Hooks are configured in `hooks/hooks.json` at the project root.
+Specialist Agent uses **two hook systems**:
+
+1. **Claude Code Native Hooks** (`hooks/hooks.json`) — official Claude Code plugin hooks that execute automatically via events like `PreToolUse`, `PostToolUse`, `SessionStart`, etc.
+2. **Lifecycle Hooks** (`hooks/lifecycle.json`) — internal agent lifecycle hooks used by `@executor`, `@planner`, and other agents.
+
+### Claude Code Native Hooks
+
+The `hooks/hooks.json` file follows the official Claude Code plugin hook format. These hooks are automatically loaded when the plugin is installed:
 
 ```json
 {
-  "$schema": "https://specialist-agent.dev/schemas/hooks-v1.json",
-  "version": "1.0.0",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/native/security-guard.mjs",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/native/session-context.mjs",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**Available events:** `PreToolUse`, `PostToolUse`, `PostToolUseFailure`, `UserPromptSubmit`, `SessionStart`, `SessionEnd`, `SubagentStart`, `SubagentStop`, `Stop`, `Notification`, `PermissionRequest`, `TeammateIdle`, `TaskCompleted`, `PreCompact`
+
+**Hook types:** `command` (shell script), `prompt` (LLM evaluation), `agent` (agentic verifier with tools)
+
+**`${CLAUDE_PLUGIN_ROOT}`** — resolves to the plugin's installation directory. Always use this for paths in hook commands.
+
+### Lifecycle Hooks
+
+Lifecycle hooks are configured in `hooks/lifecycle.json` and used internally by agents:
+
+```json
+{
   "hooks": {
     "session-start": {
       "description": "Runs when a new Claude Code session starts",
@@ -39,9 +84,9 @@ Hooks are configured in `hooks/hooks.json` at the project root.
 }
 ```
 
-### Configuration Options
+### Lifecycle Hook Options
 
-Each hook entry supports:
+Each lifecycle hook entry supports:
 
 | Field | Type | Description |
 |-------|------|-------------|

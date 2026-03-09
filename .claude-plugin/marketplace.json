@@ -1,77 +1,52 @@
 {
-  "id": "herbertjulio/specialist-agent",
-  "name": "Specialist Agent",
-  "version": "2.7.0",
-  "tagline": "Your AI development team — 35 agents and 24 skills",
-  "description": "Build, review, debug, and ship production code faster. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt with framework-specific patterns.",
-  "category": "development",
-  "subcategory": "code-generation",
-  "icon": "docs/public/logo.svg",
-  "banner": "https://raw.githubusercontent.com/HerbertJulio/specialist-agent/main/docs/public/social-preview-banner.svg",
-  "pricing": {
-    "model": "free",
-    "details": "MIT Licensed - Free and open source"
+  "name": "specialist-agent",
+  "owner": {
+    "name": "Herbert Julio",
+    "email": "herbert@specialistagent.com.br"
   },
-  "features": [
+  "metadata": {
+    "description": "Your AI development team — 35 agents and 24 skills for building, reviewing, debugging, and shipping production code.",
+    "version": "2.10.0"
+  },
+  "plugins": [
     {
-      "title": "35 Specialized Agents",
-      "description": "@builder, @reviewer, @tdd, @api, @security, @sentry-triage, @marketing, and more"
-    },
-    {
-      "title": "7 Framework Packs",
-      "description": "Vue 3, React, Next.js, SvelteKit, Angular, Astro, Nuxt with architecture patterns"
-    },
-    {
-      "title": "Full & Lite Modes",
-      "description": "Sonnet/Opus for complex tasks, Haiku for quick tasks (60-80% cheaper)"
-    },
-    {
-      "title": "TDD Enforcer",
-      "description": "@tdd blocks code without failing tests first"
-    },
-    {
-      "title": "Unified Code Review",
-      "description": "@reviewer checks spec, quality, and architecture in one pass"
-    },
-    {
-      "title": "Checkpoint & Rollback",
-      "description": "Git checkpoints after tasks, easy rollback"
-    },
-    {
-      "title": "Session Memory",
-      "description": "Remembers decisions across sessions"
-    },
-    {
-      "title": "24 Skills",
-      "description": "/plan, /tdd, /autofix, /codereview, /audit, /discovery, /migrate-architecture, and more"
-    },
-    {
-      "title": "Autonomous Execution",
-      "description": "Self-healing execution with progress reports and batch optimization"
-    },
-    {
-      "title": "Community Skills",
-      "description": "Install and manage community-contributed skills"
-    },
-    {
-      "title": "6 Platforms",
-      "description": "Claude Code, Cursor, VS Code, Windsurf, Codex, OpenCode"
-    },
-    {
-      "title": "Native Claude Code Hooks",
-      "description": "Security guard, auto-dispatch, session context, auto-format — real automation"
-    },
-    {
-      "title": "Security Guard",
-      "description": "Blocks dangerous commands (rm -rf /, force push, DROP TABLE) before execution"
+      "name": "specialist-agent",
+      "source": ".",
+      "description": "35 specialized agents and 24 skills. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt with framework-specific patterns.",
+      "version": "2.10.0",
+      "author": {
+        "name": "Herbert Julio",
+        "email": "herbert@specialistagent.com.br"
+      },
+      "homepage": "https://specialistagent.com.br/",
+      "repository": "https://github.com/HerbertJulio/specialist-agent",
+      "license": "MIT",
+      "keywords": [
+        "agents",
+        "ai-agents",
+        "code-generation",
+        "code-review",
+        "tdd",
+        "debugging",
+        "architecture",
+        "vue",
+        "react",
+        "nextjs",
+        "svelte",
+        "angular",
+        "astro",
+        "nuxt"
+      ],
+      "category": "development",
+      "tags": [
+        "ai-agents",
+        "code-generation",
+        "code-review",
+        "testing",
+        "development",
+        "security",
+        "architecture"
+      ]
     }
-  ],
-  "requirements": {
-    "nodeVersion": ">=18"
-  },
-  "support": {
-    "documentation": "https://specialistagent.com.br/",
-    "issues": "https://github.com/HerbertJulio/specialist-agent/issues"
-  },
-  "install": "npx specialist-agent init"
+  ]
 }
