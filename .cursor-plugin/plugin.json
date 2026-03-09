@@ -4,8 +4,7 @@
   "displayName": "Specialist Agent",
   "description": "Your AI development team. 35 agents and 24 skills for building, reviewing, debugging, and shipping production code.",
   "author": {
-    "name": "Herbert Julio",
-    "url": "https://github.com/HerbertJulio"
+    "name": "Herbert Julio"
   },
   "repository": "https://github.com/HerbertJulio/specialist-agent",
   "homepage": "https://specialistagent.com.br/",
@@ -23,11 +22,13 @@
     "tdd",
     "debugging"
   ],
-  "categories": [
-    "AI",
-    "Development",
-    "Code Generation",
-    "Testing"
+  "category": "AI",
+  "tags": [
+    "ai-agents",
+    "code-generation",
+    "code-review",
+    "testing",
+    "development"
   ],
   "agents": "./agents",
   "skills": "./skills",
