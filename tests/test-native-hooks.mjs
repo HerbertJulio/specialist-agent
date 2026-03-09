@@ -11,9 +11,10 @@
  *   node tests/test-native-hooks.mjs --verbose    # With details
  */
 
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync, mkdirSync, writeFileSync, rmSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { tmpdir } from 'os';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -286,8 +287,14 @@ if (secConfig) {
 
 setSection('MCP Discovery');
 
-// Test discovery with project root (has .mcp.json with context7)
-const discovery = discoverMCPs(ROOT);
+// Create a temp directory with .mcp.json fixture (since .mcp.json is gitignored)
+const mcpFixtureDir = join(tmpdir(), 'specialist-agent-mcp-test-' + Date.now());
+mkdirSync(mcpFixtureDir, { recursive: true });
+writeFileSync(join(mcpFixtureDir, '.mcp.json'), JSON.stringify({
+  mcpServers: { context7: { type: 'http', url: 'https://mcp.context7.com/mcp' } }
+}));
+
+const discovery = discoverMCPs(mcpFixtureDir);
 assert(Array.isArray(discovery.configured), 'discoverMCPs returns configured array');
 assert(discovery.configured.includes('context7'), 'Detects context7 from .mcp.json');
 assert(typeof discovery.agentCapabilities === 'object', 'Returns agentCapabilities map');
@@ -301,6 +308,9 @@ if (discovery.agentCapabilities['@builder']) {
 if (discovery.agentCapabilities['@doctor']) {
   assert(discovery.agentCapabilities['@doctor'].includes('context7'), '@doctor is enhanced by context7');
 }
+
+// Cleanup fixture
+rmSync(mcpFixtureDir, { recursive: true, force: true });
 
 // Test discovery with non-existent directory
 const emptyDiscovery = discoverMCPs('/non-existent-path-12345');
