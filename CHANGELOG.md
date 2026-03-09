@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.11.1](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.11.0...specialist-agent-v2.11.1) (2026-03-09)
+
+
+### Bug Fixes
+
+* make package.json optional in CLI init ([#67](https://github.com/HerbertJulio/specialist-agent/issues/67)) ([9f8f173](https://github.com/HerbertJulio/specialist-agent/commit/9f8f17381d9a07da17d15e030729b52473ade7f9))
+
 ## [2.11.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.10.0...specialist-agent-v2.11.0) (2026-03-09)
 
 
