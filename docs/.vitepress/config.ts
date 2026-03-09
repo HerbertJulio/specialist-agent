@@ -166,6 +166,7 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'Planejamento', link: '/pt-BR/scenarios/planning' },
                 { text: 'Migração', link: '/pt-BR/scenarios/migration' },
+                { text: 'Workflows', link: '/pt-BR/scenarios/workflows' },
               ],
             },
             {
@@ -333,6 +334,7 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'Planning', link: '/scenarios/planning' },
             { text: 'Migration', link: '/scenarios/migration' },
+            { text: 'Workflows', link: '/scenarios/workflows' },
           ],
         },
         {
