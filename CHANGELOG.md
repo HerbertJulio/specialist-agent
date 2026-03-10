@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.11.4](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.11.3...specialist-agent-v2.11.4) (2026-03-10)
+
+
+### Bug Fixes
+
+* align cursor plugin manifests with marketplace schema ([#75](https://github.com/HerbertJulio/specialist-agent/issues/75)) ([89429bd](https://github.com/HerbertJulio/specialist-agent/commit/89429bd5fae907253e1e45d8e9088f4bc290a246))
+* align plugin manifests and hooks with official Claude Code schema ([#77](https://github.com/HerbertJulio/specialist-agent/issues/77)) ([3d0208d](https://github.com/HerbertJulio/specialist-agent/commit/3d0208ddd23448da11c8394edf7b326e2adad38d))
+
 ## [2.11.3](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.11.2...specialist-agent-v2.11.3) (2026-03-09)
 
 
