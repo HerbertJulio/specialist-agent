@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="bgt" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#0B1929"/>
+      <stop offset="50%" stop-color="#0F2340"/>
+      <stop offset="100%" stop-color="#162D50"/>
+    </linearGradient>
+    <linearGradient id="g1t" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#1E3A5F"/>
+    </linearGradient>
+    <linearGradient id="g2t" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#2B5EA7"/>
+    </linearGradient>
+    <linearGradient id="g3t" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4A7FCF"/>
+      <stop offset="100%" stop-color="#CD7F32"/>
+    </linearGradient>
+    <linearGradient id="hlt" x1="0" y1="0" x2="0.85" y2="0.85">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.12"/>
+      <stop offset="60%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glowt" cx="50%" cy="35%" r="40%">
+      <stop offset="0%" stop-color="#2B5EA7" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0A1628" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="600" fill="url(#bgt)"/>
+  <rect width="1200" height="600" fill="url(#glowt)"/>
+
+  <!-- Ambient dots -->
+  <g>
+    <circle cx="96" cy="90" r="1.5" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="1104" cy="72" r="1.8" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="60" cy="510" r="2.7" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="1140" cy="480" r="2.7" fill="#4A7FCF" opacity="0.15"/>
+    <line x1="96" y1="90" x2="180" y2="270" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
+    <line x1="1104" y1="72" x2="1056" y2="330" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
+  </g>
+
+  <!-- Logo — isometric card stack -->
+  <g transform="translate(600, 155) scale(0.95)">
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g1t)" opacity="0.85" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.15"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.5" letter-spacing="0.5">HOOKS</text>
+    </g>
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 0)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g2t)" opacity="0.9" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.2"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.5" letter-spacing="0.5">SKILLS</text>
+    </g>
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, -30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g3t)" opacity="0.95" stroke="#CD7F32" stroke-width="0.5" stroke-opacity="0.25"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.7" letter-spacing="0.5">AGENTS</text>
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#hlt)"/>
+    </g>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="340" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700" fill="#FFFFFF" letter-spacing="-1">Specialist Agent</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="380" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="21" fill="#7BA3CC">Your AI development team — any framework, any stack</text>
+
+  <!-- Stats row -->
+  <g>
+    <rect x="362" y="409" width="120" height="32" rx="16" fill="#1E3A5F" stroke="#2B5EA7" stroke-width="1" opacity="0.6"/>
+    <text x="422" y="430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#A8C8E8">27+ Agents</text>
+    <rect x="494" y="409" width="110" height="32" rx="16" fill="#1E3A5F" stroke="#2B5EA7" stroke-width="1" opacity="0.6"/>
+    <text x="549" y="430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#A8C8E8">21 Skills</text>
+    <rect x="616" y="409" width="110" height="32" rx="16" fill="#1E3A5F" stroke="#2B5EA7" stroke-width="1" opacity="0.6"/>
+    <text x="671" y="430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#A8C8E8">Lite Mode</text>
+    <rect x="738" y="409" width="100" height="32" rx="16" fill="#1E3A5F" stroke="#2B5EA7" stroke-width="1" opacity="0.6"/>
+    <text x="788" y="430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#A8C8E8">7 Packs</text>
+  </g>
+
+  <!-- Frameworks row -->
+  <g>
+    <rect x="255" y="460" width="90" height="30" rx="15" fill="#DD0031" opacity="0.2" stroke="#DD0031" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="300" y="480" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#DD0031">Angular</text>
+    <rect x="355" y="460" width="90" height="30" rx="15" fill="#FF5D01" opacity="0.2" stroke="#FF5D01" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="400" y="480" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#FF5D01">Astro</text>
+    <rect x="455" y="460" width="90" height="30" rx="15" fill="#CCCCCC" opacity="0.15" stroke="#CCCCCC" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="500" y="480" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#CCCCCC">Next.js</text>
+    <rect x="555" y="460" width="90" height="30" rx="15" fill="#00DC82" opacity="0.2" stroke="#00DC82" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="600" y="480" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#00DC82">Nuxt</text>
+    <rect x="655" y="460" width="90" height="30" rx="15" fill="#61DAFB" opacity="0.2" stroke="#61DAFB" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="700" y="480" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#61DAFB">React</text>
+    <rect x="755" y="460" width="90" height="30" rx="15" fill="#FF3E00" opacity="0.2" stroke="#FF3E00" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="800" y="480" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#FF3E00">SvelteKit</text>
+    <rect x="855" y="460" width="90" height="30" rx="15" fill="#42b883" opacity="0.2" stroke="#42b883" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="900" y="480" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#42b883">Vue 3</text>
+  </g>
+
+  <!-- Platforms row -->
+  <g>
+    <rect x="302" y="511" width="119" height="28" rx="14" fill="#D97706" opacity="0.12" stroke="#D97706" stroke-width="0.5" stroke-opacity="0.25"/>
+    <text x="361.5" y="529.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#D97706" opacity="0.9">Claude Code</text>
+    <rect x="431" y="511" width="80" height="28" rx="14" fill="#00B4D8" opacity="0.12" stroke="#00B4D8" stroke-width="0.5" stroke-opacity="0.25"/>
+    <text x="471" y="529.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#00B4D8" opacity="0.9">Cursor</text>
+    <rect x="521" y="511" width="83" height="28" rx="14" fill="#007ACC" opacity="0.12" stroke="#007ACC" stroke-width="0.5" stroke-opacity="0.25"/>
+    <text x="562.5" y="529.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#007ACC" opacity="0.9">VS Code</text>
+    <rect x="614" y="511" width="92" height="28" rx="14" fill="#06D6A0" opacity="0.12" stroke="#06D6A0" stroke-width="0.5" stroke-opacity="0.25"/>
+    <text x="660" y="529.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#06D6A0" opacity="0.9">Windsurf</text>
+    <rect x="716" y="511" width="80" height="28" rx="14" fill="#EF476F" opacity="0.12" stroke="#EF476F" stroke-width="0.5" stroke-opacity="0.25"/>
+    <text x="756" y="529.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#EF476F" opacity="0.9">Codex</text>
+    <rect x="806" y="511" width="92" height="28" rx="14" fill="#FFD166" opacity="0.12" stroke="#FFD166" stroke-width="0.5" stroke-opacity="0.25"/>
+    <text x="852" y="529.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#FFD166" opacity="0.9">OpenCode</text>
+  </g>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="597" width="1200" height="3" fill="url(#g3t)" opacity="0.6"/>
+</svg>
