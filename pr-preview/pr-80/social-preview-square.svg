@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <linearGradient id="bgs" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#0B1929"/>
+      <stop offset="50%" stop-color="#0F2340"/>
+      <stop offset="100%" stop-color="#162D50"/>
+    </linearGradient>
+    <linearGradient id="g1s" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#1E3A5F"/>
+    </linearGradient>
+    <linearGradient id="g2s" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#2B5EA7"/>
+    </linearGradient>
+    <linearGradient id="g3s" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4A7FCF"/>
+      <stop offset="100%" stop-color="#CD7F32"/>
+    </linearGradient>
+    <linearGradient id="hls" x1="0" y1="0" x2="0.85" y2="0.85">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.12"/>
+      <stop offset="60%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glows" cx="50%" cy="35%" r="40%">
+      <stop offset="0%" stop-color="#2B5EA7" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0A1628" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="1200" fill="url(#bgs)"/>
+  <rect width="1200" height="1200" fill="url(#glows)"/>
+
+  <!-- Ambient dots -->
+  <g>
+    <circle cx="96" cy="180" r="1.6" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="1104" cy="144" r="2.7" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="60" cy="1020" r="2.5" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="1140" cy="960" r="2.6" fill="#4A7FCF" opacity="0.15"/>
+    <line x1="96" y1="180" x2="180" y2="540" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
+    <line x1="1104" y1="144" x2="1056" y2="660" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
+  </g>
+
+  <!-- Logo — isometric card stack (larger for square format) -->
+  <g transform="translate(600, 400) scale(2.2)">
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g1s)" opacity="0.85" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.15"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.5" letter-spacing="0.5">HOOKS</text>
+    </g>
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 0)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g2s)" opacity="0.9" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.2"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.5" letter-spacing="0.5">SKILLS</text>
+    </g>
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, -30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g3s)" opacity="0.95" stroke="#CD7F32" stroke-width="0.5" stroke-opacity="0.25"/>
+      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.7" letter-spacing="0.5">AGENTS</text>
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#hls)"/>
+    </g>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="700" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="84" font-weight="700" fill="#FFFFFF" letter-spacing="-1">Specialist Agent</text>
+
+  <!-- Tagline -->
+  <text x="600" y="770" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" fill="#7BA3CC">Your AI development team</text>
+
+  <!-- URL -->
+  <text x="600" y="1120" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="20" fill="#4A6A8A" letter-spacing="3">specialistagent.com.br</text>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="1196" width="1200" height="4" fill="url(#g3s)" opacity="0.6"/>
+</svg>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="200" viewBox="0 0 960 200">
+  <defs>
+    <linearGradient id="bgb" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#0B1929"/>
+      <stop offset="50%" stop-color="#0F2340"/>
+      <stop offset="100%" stop-color="#162D50"/>
+    </linearGradient>
+    <linearGradient id="g1b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#1E3A5F"/>
+    </linearGradient>
+    <linearGradient id="g2b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#2B5EA7"/>
+    </linearGradient>
+    <linearGradient id="g3b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4A7FCF"/>
+      <stop offset="100%" stop-color="#CD7F32"/>
+    </linearGradient>
+    <linearGradient id="hlb" x1="0" y1="0" x2="0.85" y2="0.85">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.12"/>
+      <stop offset="60%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glowb" cx="50%" cy="35%" r="40%">
+      <stop offset="0%" stop-color="#2B5EA7" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0A1628" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="200" rx="12" fill="url(#bgb)"/>
+  <rect width="960" height="200" rx="12" fill="url(#glowb)"/>
+
+  <!-- Logo — isometric card stack (compact for banner) -->
+  <g transform="translate(100, 100) scale(0.52)">
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g1b)" opacity="0.85" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.15"/>
+    </g>
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 0)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g2b)" opacity="0.9" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.2"/>
+    </g>
+    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, -30)">
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g3b)" opacity="0.95" stroke="#CD7F32" stroke-width="0.5" stroke-opacity="0.25"/>
+      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#hlb)"/>
+    </g>
+  </g>
+
+  <!-- Title -->
+  <text x="195" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="46" font-weight="700" fill="#FFFFFF" letter-spacing="-0.5">Specialist Agent</text>
+
+  <!-- Tagline -->
+  <text x="195" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#7BA3CC">Your AI development team — any framework, any stack</text>
+
+  <!-- URL -->
+  <text x="195" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#4A6A8A" letter-spacing="2">specialistagent.com.br</text>
+
+  <!-- Right side accent -->
+  <rect x="957" y="0" width="3" height="200" rx="0" fill="url(#g3b)" opacity="0.4"/>
+</svg>
