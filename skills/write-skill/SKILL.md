@@ -130,11 +130,15 @@ Before writing the skill, test what happens WITHOUT it:
 Write a skill that addresses the specific failures from RED:
 
 ```markdown
-1. Create skills/[name]/SKILL.md
-2. Address ONLY the failures observed in baseline
-3. Don't add hypothetical cases
-4. Test again WITH the skill loaded
-5. Verify the agent now behaves correctly
+1. Check for duplicate skills BEFORE creating:
+   - Search existing skills by name: find skills/ -name "SKILL.md" | head -30
+   - Search by keywords in descriptions: grep -l "[keyword]" skills/*/SKILL.md
+   - If a similar skill exists, EXTEND it instead of creating a new one
+2. Create skills/[name]/SKILL.md
+3. Address ONLY the failures observed in baseline
+4. Don't add hypothetical cases
+5. Test again WITH the skill loaded
+6. Verify the agent now behaves correctly
 ```
 
 ### REFACTOR: Close Loopholes
@@ -157,12 +161,13 @@ Before deploying the skill:
 - [ ] Description starts with "Use when..."
 - [ ] Description does NOT summarize workflow
 - [ ] Name uses only lowercase, numbers, hyphens
+- [ ] No duplicate skill exists with same name or overlapping purpose
 
 ### Content
 - [ ] Clear overview with core principle
 - [ ] Workflow with numbered steps
 - [ ] Verification Protocol section
-- [ ] Anti-Rationalization table
+- [ ] Anti-Rationalization table (5+ entries)
 - [ ] Rules section
 - [ ] Output format section
 
@@ -172,10 +177,17 @@ Before deploying the skill:
 - [ ] Concise (< 500 words for frequently-loaded skills)
 - [ ] Keywords for search throughout
 
+### Pack Awareness (if writing for a framework pack)
+- [ ] Skill placed in packs/[framework]/skills/[name]/SKILL.md
+- [ ] Examples use framework-specific patterns (not generic)
+- [ ] Test commands match framework tooling (Vitest for Vue/React, Jest for Angular, etc.)
+- [ ] References pack's ARCHITECTURE.md for conventions
+
 ### Testing
 - [ ] Baseline tested WITHOUT skill (RED)
 - [ ] Agent complies WITH skill (GREEN)
 - [ ] Rationalizations addressed (REFACTOR)
+- [ ] Passes validation: node tests/validate-agents.mjs --strict
 ```
 
 ## Anti-Rationalization

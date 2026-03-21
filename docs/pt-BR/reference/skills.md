@@ -1,6 +1,11 @@
 # Referencia de Skills
 
-24 workflows repetíveis. Cada skill é um comando slash que guia seu assistente de IA por um processo estruturado.
+32 workflows repetíveis. Cada skill é um comando slash que guia seu assistente de IA por um processo estruturado.
+
+::: tip Catálogo Interativo
+Navegue por todas as skills com busca e filtros no
+[catálogo interativo](/pt-BR/catalog).
+:::
 
 ## Planejamento
 
@@ -27,8 +32,12 @@
 |-------|-----------|---------|
 | `/verify` | Verificar com evidência antes de marcar como concluído | `/verify` |
 | `/codereview` | Code review paralelo com múltiplos revisores | `/codereview src/modules/checkout/` |
-| `/audit` | Auditoria multi-domínio (segurança, performance, arquitetura) | `/audit src/` |
+| `/audit` | Auditoria multi-domínio (segurança, performance, arquitetura, observabilidade) | `/audit src/` |
 | `/health` | Score de saúde do projeto em múltiplas dimensões | `/health` |
+| `/grill` | Desafio adversarial de código - stress-test com vetores de ataque | `/grill src/services/auth.ts` |
+| `/design-review` | Auditoria de design frontend (consistência, acessibilidade, responsivo, UX) | `/design-review src/components/` |
+| `/seo-audit` | Auditoria técnica de SEO (meta tags, dados estruturados, CWV, crawlability) | `/seo-audit src/app/` |
+| `/improve-architecture` | Melhoria incremental de arquitetura (deps circulares, acoplamento) | `/improve-architecture src/modules/` |
 
 ## Workflow
 
@@ -38,6 +47,7 @@
 | `/finish` | Finalizar branch com testes, lint, commit | `/finish` |
 | `/worktree` | Isolamento com git worktree para trabalho paralelo | `/worktree create feature/auth` |
 | `/learn` | Aprender padrões enquanto constrói | `/learn como esse fluxo de auth funciona` |
+| `/autopilot` | Desenvolvimento autônomo iterativo com PRD e rastreamento de progresso | `/autopilot docs/PRD-auth.md --max-iterations=10` |
 
 ## Migração
 
@@ -45,6 +55,14 @@
 |-------|-----------|---------|
 | `/migrate-framework` | Migrar entre frameworks (Vue para React, etc.) | `/migrate-framework from vue to react` |
 | `/migrate-architecture` | Migrar entre padrões de arquitetura | `/migrate-architecture to hexagonal` |
+
+## Produto & Marketing
+
+| Skill | O que faz | Exemplo |
+|-------|-----------|---------|
+| `/prd` | Documento de requisitos com user stories e decomposição em issues | `/prd implementar notificações em tempo real` |
+| `/copywriting` | Copy de marketing com variantes A/B e frameworks de conversão | `/copywriting landing page SaaS para devs` |
+| `/cro` | Auditoria de otimização de conversão com hipóteses A/B | `/cro src/app/pricing/` |
 
 ## Conhecimento
 

@@ -2,7 +2,7 @@
 name: orchestrator
 description: "Use when a task requires coordinating multiple agents, managing dependencies between subtasks, or sequencing work across domains."
 model: haiku
-tools: Read, Write, Edit, Bash, Glob, Grep, Task
+tools: Read, Write, Edit, Bash, Glob, Grep, Agent, TodoWrite
 ---
 
 # @orchestrator (Lite) - Multi-Agent Coordination

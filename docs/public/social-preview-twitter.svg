@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  
   <defs>
     <linearGradient id="bgt" x1="0" y1="0" x2="0.3" y2="1">
       <stop offset="0%" stop-color="#0B1929"/>
@@ -17,59 +18,60 @@
       <stop offset="0%" stop-color="#4A7FCF"/>
       <stop offset="100%" stop-color="#CD7F32"/>
     </linearGradient>
-    <linearGradient id="hlt" x1="0" y1="0" x2="0.85" y2="0.85">
-      <stop offset="0%" stop-color="#fff" stop-opacity="0.12"/>
-      <stop offset="60%" stop-color="#fff" stop-opacity="0"/>
+    <linearGradient id="shinet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
     </linearGradient>
     <radialGradient id="glowt" cx="50%" cy="35%" r="40%">
       <stop offset="0%" stop-color="#2B5EA7" stop-opacity="0.15"/>
       <stop offset="100%" stop-color="#0A1628" stop-opacity="0"/>
     </radialGradient>
+    <filter id="shadowt" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
   </defs>
 
   <!-- Background -->
   <rect width="1200" height="600" fill="url(#bgt)"/>
   <rect width="1200" height="600" fill="url(#glowt)"/>
 
-  <!-- Ambient dots -->
-  <g>
-    <circle cx="96" cy="90" r="1.5" fill="#4A7FCF" opacity="0.15"/>
-    <circle cx="1104" cy="72" r="1.8" fill="#4A7FCF" opacity="0.15"/>
-    <circle cx="60" cy="510" r="2.7" fill="#4A7FCF" opacity="0.15"/>
-    <circle cx="1140" cy="480" r="2.7" fill="#4A7FCF" opacity="0.15"/>
+  
+  <g><circle cx="96" cy="90" r="2.2" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="1104" cy="72" r="2.5" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="60" cy="510" r="3.0" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="1140" cy="480" r="1.6" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="180" cy="270" r="2.6" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="1056" cy="330" r="2.7" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="36" cy="330" r="2.0" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="1164" cy="210" r="2.0" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="144" cy="450" r="2.1" fill="#4A7FCF" opacity="0.15"/>
+    <circle cx="1020" cy="150" r="2.5" fill="#4A7FCF" opacity="0.15"/>
     <line x1="96" y1="90" x2="180" y2="270" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
     <line x1="1104" y1="72" x2="1056" y2="330" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
+    <line x1="60" y1="510" x2="144" y2="450" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
+    <line x1="1140" y1="480" x2="1020" y2="150" stroke="#4A7FCF" stroke-width="0.5" opacity="0.06"/>
   </g>
 
-  <!-- Logo — isometric card stack -->
-  <g transform="translate(600, 155) scale(0.95)">
-    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 30)">
-      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g1t)" opacity="0.85" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.15"/>
-      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.5" letter-spacing="0.5">HOOKS</text>
-    </g>
-    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, 0)">
-      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g2t)" opacity="0.9" stroke="#4A7FCF" stroke-width="0.5" stroke-opacity="0.2"/>
-      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.5" letter-spacing="0.5">SKILLS</text>
-    </g>
-    <g transform="matrix(0.707,-0.405,0.707,0.405, 0, -30)">
-      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#g3t)" opacity="0.95" stroke="#CD7F32" stroke-width="0.5" stroke-opacity="0.25"/>
-      <text x="42" y="42" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#fff" opacity="0.7" letter-spacing="0.5">AGENTS</text>
-      <rect x="-55" y="-55" width="110" height="110" rx="14" fill="url(#hlt)"/>
-    </g>
+  
+  <g transform="translate(505, 80) scale(4.5)" filter="url(#shadowt)">
+    <path d="M16 26 L2 19 L16 12 L30 19 Z" fill="url(#g1t)" opacity="0.9"/>
+    <path d="M16 21 L2 14 L16 7 L30 14 Z" fill="url(#g2t)" opacity="0.9"/>
+    <path d="M16 16 L2 9 L16 2 L30 9 Z" fill="url(#g3t)" opacity="0.95"/>
+    <path d="M16 2 L2 9 L16 16 Z" fill="#fff" opacity="0.15"/>
   </g>
 
   <!-- Title -->
-  <text x="600" y="340" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700" fill="#FFFFFF" letter-spacing="-1">Specialist Agent</text>
+  <text x="600" y="335" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700" fill="#FFFFFF" letter-spacing="-1">Specialist Agent</text>
 
   <!-- Subtitle -->
-  <text x="600" y="380" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="21" fill="#7BA3CC">Your AI development team — any framework, any stack</text>
+  <text x="600" y="378" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="21" fill="#7BA3CC">Your AI development team - any framework, any stack</text>
 
   <!-- Stats row -->
   <g>
     <rect x="362" y="409" width="120" height="32" rx="16" fill="#1E3A5F" stroke="#2B5EA7" stroke-width="1" opacity="0.6"/>
-    <text x="422" y="430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#A8C8E8">27+ Agents</text>
+    <text x="422" y="430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#A8C8E8">36+ Agents</text>
     <rect x="494" y="409" width="110" height="32" rx="16" fill="#1E3A5F" stroke="#2B5EA7" stroke-width="1" opacity="0.6"/>
-    <text x="549" y="430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#A8C8E8">21 Skills</text>
+    <text x="549" y="430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#A8C8E8">32 Skills</text>
     <rect x="616" y="409" width="110" height="32" rx="16" fill="#1E3A5F" stroke="#2B5EA7" stroke-width="1" opacity="0.6"/>
     <text x="671" y="430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#A8C8E8">Lite Mode</text>
     <rect x="738" y="409" width="100" height="32" rx="16" fill="#1E3A5F" stroke="#2B5EA7" stroke-width="1" opacity="0.6"/>

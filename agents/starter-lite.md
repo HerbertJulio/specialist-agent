@@ -2,7 +2,7 @@
 name: starter
 description: "Use when creating a new project from scratch - any frontend, backend, and database combination."
 model: haiku
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch
 ---
 
 # Starter (Lite)

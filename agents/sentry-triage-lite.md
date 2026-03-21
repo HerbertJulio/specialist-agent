@@ -2,7 +2,7 @@
 name: sentry-triage
 description: "Use when triaging Sentry errors, analyzing recent issues, checking if fixes already exist, and creating prioritized fix PRs automatically."
 model: haiku
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, WebFetch
 ---
 
 # @sentry-triage (Lite)

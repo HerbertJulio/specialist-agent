@@ -3,99 +3,64 @@ name: recall
 description: "Use when you need to retrieve a past decision, preference, or convention that was saved with /remember."
 user-invocable: true
 argument-hint: "[topic or 'all']"
-allowed-tools: Read
+allowed-tools: Read, Glob
 ---
 
-# /recall - Query Session Memory
+# /recall - Query Project Memory
 
-Recall decisions, preferences, and lessons from previous sessions.
+Recall decisions, preferences, and lessons from previous sessions using Claude Code's native auto-memory system.
 
 **Query:** $ARGUMENTS
 
 ## Workflow
 
-### Step 1: Load Memory
+### Step 1: Load Memory Index
 
-```javascript
-const memoryFile = '.claude/session-memory.json';
+Read `MEMORY.md` from the memory directory. This file is automatically loaded into conversation context, so it may already be available.
 
-if (!exists(memoryFile)) {
-  return "No session memory found. Use /remember to save memories.";
-}
-
-const memory = JSON.parse(read(memoryFile));
-```
+Memory directory: `.claude/projects/<project-hash>/memory/`
 
 ### Step 2: Process Query
 
 #### If "all" or empty:
-Show full memory summary.
+Show full memory summary by reading all memory files listed in MEMORY.md.
 
 #### If specific topic:
-Search in:
-1. decisions[].topic
-2. preferences keys
-3. patterns.avoided
-4. patterns.preferred
-5. lessons[].issue
+Search memory file names, descriptions, and content for matches.
 
-### Step 3: Format Output
+### Step 3: Read Relevant Files
+
+For matched memories, read the full `.md` file to get details including Why and How to apply.
 
 ## Output Formats
 
 ### Full Memory (/recall all)
 ```
 ══════════════════════════════════════════════
-           📝 PROJECT MEMORY
+           PROJECT MEMORY
 ══════════════════════════════════════════════
 
-Project: [name]
-Last updated: [date]
-
 ──────────────────────────────────────────────
-           DECISIONS (N)
+           DECISIONS & CONTEXT (project)
 ──────────────────────────────────────────────
 
-• [Topic]: [Decision]
-  Reason: [Why]
-  Date: [When]
-
-• [Topic]: [Decision]
-  Reason: [Why]
-  Date: [When]
+- [Topic]: [Decision]
+  Why: [Reason]
+  How to apply: [Guidance]
 
 ──────────────────────────────────────────────
-           PREFERENCES
+           PREFERENCES & LESSONS (feedback)
 ──────────────────────────────────────────────
 
-Code Style:
-  • Quotes: [value]
-  • Indent: [value]
-  • Semicolons: [value]
-
-Naming:
-  • Components: [convention]
-  • Files: [convention]
+- [Rule or preference]
+  Why: [Reason]
+  How to apply: [When/where]
 
 ──────────────────────────────────────────────
-           PATTERNS
+           REFERENCES
 ──────────────────────────────────────────────
 
-✓ Preferred:
-  • [pattern]
-  • [pattern]
-
-✗ Avoided:
-  • [pattern]
-  • [pattern]
-
-──────────────────────────────────────────────
-           LESSONS LEARNED (N)
-──────────────────────────────────────────────
-
-• Issue: [what happened]
-  Solution: [how to fix]
-  Prevention: [rule]
+- [Resource]: [Where to find it]
 
 ══════════════════════════════════════════════
 ```
@@ -106,16 +71,14 @@ Naming:
 
 Found 2 related memories:
 
-📌 Decision: State Management
+Decision: State Management (project)
    Use Zustand instead of Redux
-   Reason: Simpler API, less boilerplate
-   Decided: 2024-01-15
+   Why: Simpler API, less boilerplate
+   How to apply: All new state should use Zustand
 
-📌 Pattern (Avoid): Redux
-   We avoid Redux in this project
-
-Related:
-  • See also: "React Query" decision
+Pattern (feedback):
+   Never use Redux in this project
+   Why: Team consensus on simplicity
 ```
 
 ### No Results
@@ -125,8 +88,8 @@ Related:
 No memories found for "[topic]".
 
 Suggestions:
-  • Try /recall all to see all memories
-  • Use /remember to add new memories
+  - Try /recall all to see all memories
+  - Use /remember to add new memories
 ```
 
 ## Query Examples
@@ -136,15 +99,14 @@ Suggestions:
 /recall all                # Show all memories
 /recall state management   # Search for topic
 /recall testing           # Search for topic
-/recall decisions         # Show only decisions
-/recall preferences       # Show only preferences
-/recall patterns          # Show patterns
-/recall lessons           # Show lessons learned
+/recall decisions         # Show only project-type memories
+/recall preferences       # Show only feedback-type memories
+/recall references        # Show only reference-type memories
 ```
 
 ## Rules
 
-1. **Fuzzy match** - "state" matches "State Management"
-2. **Show context** - Include reason and date
+1. **Fuzzy match** - "state" matches "state-management-decision"
+2. **Show context** - Include Why and How to apply
 3. **Suggest related** - Link to similar memories
-4. **Handle empty** - Graceful message if no memory
+4. **Handle empty** - Graceful message if no memory exists

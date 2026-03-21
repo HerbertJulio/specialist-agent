@@ -41,7 +41,7 @@ Voce instala os agentes no seu projeto. Quando precisa de algo, chama o agente c
 | **Workflow** | 9 | Planejar, executar, testar, pair programming |
 | **Engenharia** | 17 | API, seguranca, dados, DevOps, arquitetura |
 | **Negocios** | 3 | Marketing, produto, suporte |
-| **Automacao** | 1 | Triagem Sentry, correcao automatica de erros em producao |
+| **Automacao** | 2 | Triagem Sentry, builds autonomos |
 
 ## Skills
 
@@ -65,7 +65,7 @@ Skills sao workflows repetiveis que voce invoca com um comando de barra:
 | Profundidade de review | Superficial | Review 3-em-1 (qualidade + seguranca + arquitetura) |
 | Ops em producao | Manual | @sentry-triage faz triagem automatica |
 | Agentes de negocio | Nao | @marketing, @product, @support |
-| Fluxos repetitivos | Manual | 24 skills (/plan, /tdd, /autofix, ...) |
+| Fluxos repetitivos | Manual | 32 skills (/plan, /tdd, /autopilot, ...) |
 | Multi-plataforma | Varia | 6 plataformas suportadas |
 
 ## Packs de Frameworks
@@ -88,5 +88,5 @@ Funciona em: **Claude Code**, **Cursor**, **VS Code**, **Windsurf**, **Codex**, 
 ## Proximos Passos
 
 - [Quick Start](/pt-BR/guide/quick-start) — Instale e use seu primeiro agente
-- [Catalogo de Agentes](/pt-BR/reference/agents) — Todos os 35 agentes
-- [Referencia de Skills](/pt-BR/reference/skills) — Todas as 24 skills
+- [Catálogo de Agentes](/pt-BR/catalog) — Navegue por todos os 36 agentes
+- [Referencia de Skills](/pt-BR/reference/skills) — Todas as 32 skills

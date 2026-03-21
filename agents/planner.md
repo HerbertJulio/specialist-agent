@@ -1,7 +1,12 @@
 ---
 name: planner
 description: "Use when starting a feature that involves multiple files, unclear requirements, or architectural decisions - before writing any code."
-tools: Read, Glob, Grep, Task
+tools: Read, Glob, Grep, Agent
+effort: high
+memory: project
+skills:
+  - plan
+  - brainstorm
 color: "#7c3aed"
 ---
 
@@ -51,10 +56,11 @@ Assess the task and classify it:
 ## Workflow
 
 ### Phase 1: Assessment (All Tasks)
-```
+```markdown
 1. READ the request carefully
 2. SEARCH for affected files:
-   - Glob for file patterns
+   - Use Agent tool with subagent_type: Explore for broad codebase analysis
+   - Glob for specific file patterns
    - Grep for usage patterns
    - Read key files
 3. CLASSIFY complexity (trivial/simple/medium/complex)
@@ -254,13 +260,13 @@ Teams that skip planning for "simple" tasks consistently underestimate by 2-3x. 
 
 ## Integration with @executor
 
-For MEDIUM and COMPLEX tasks, pass to @executor with:
-```json
-{
-  "plan": "[the plan]",
-  "tasks": ["task1", "task2", ...],
-  "dependencies": {"task2": ["task1"]},
-  "checkpoints": ["after-task-2", "after-task-4"],
-  "estimatedTokens": 15000
+For MEDIUM and COMPLEX tasks, delegate to @executor via Agent tool with:
+
+```markdown
+Agent call: {
+  prompt: "Execute this plan: [plan content]. Tasks: [...]. Dependencies: {...}.",
+  model: "sonnet"  // or opus for complex plans
 }
 ```
+
+The Agent tool ensures @executor gets fresh context with the complete plan.

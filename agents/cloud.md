@@ -1,7 +1,8 @@
 ---
 name: cloud
 description: "Use when designing cloud infrastructure, setting up IaC, configuring serverless functions, or planning cloud architecture."
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch
+effort: high
 color: "#6366f1"
 ---
 

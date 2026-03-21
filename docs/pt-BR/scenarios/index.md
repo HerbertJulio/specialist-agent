@@ -69,6 +69,15 @@ Exemplos práticos de como usar o Specialist Agent no seu dia a dia.
 | [Padrões legados para modernos](/pt-BR/scenarios/migration#modernize) | @migrator | variável |
 | [Migração de framework](/pt-BR/scenarios/migration#framework) | @migrator | variável |
 
+### Autopilot
+
+| Cenário | Agent | Tempo |
+|---------|-------|-------|
+| [MVP build noturno](/pt-BR/scenarios/autopilot#mvp-overnight) | @autopilot | noturno |
+| [Migração de banco de dados](/pt-BR/scenarios/autopilot#db-migration) | @autopilot | 2-3h |
+| [Build em DevContainer](/pt-BR/scenarios/autopilot#devcontainer) | @autopilot | 2-3h |
+| [Worktrees paralelas](/pt-BR/scenarios/autopilot#parallel-worktrees) | @autopilot | noturno |
+
 ## Por Função na Equipe
 
 ### Desenvolvedor Frontend

@@ -1,7 +1,8 @@
 ---
 name: devops
 description: "Use when setting up Docker, Kubernetes, CI/CD pipelines, monitoring, or deployment infrastructure."
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch
+effort: high
 color: "#f97316"
 ---
 

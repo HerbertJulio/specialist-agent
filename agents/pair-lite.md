@@ -2,7 +2,7 @@
 name: pair
 description: "Use when wanting to code collaboratively, think through problems out loud, or get continuous feedback while developing."
 model: haiku
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, Agent
 ---
 
 # @pair (Lite) - Pair Programming

@@ -3,12 +3,12 @@ name: remember
 description: "Use when making a decision, choosing a convention, or learning a lesson that should persist across sessions."
 user-invocable: true
 argument-hint: "[what to remember]"
-allowed-tools: Read, Write
+allowed-tools: Read, Write, Glob
 ---
 
-# /remember - Save to Session Memory
+# /remember - Save to Project Memory
 
-Save decisions, preferences, and lessons that persist across sessions.
+Save decisions, preferences, and lessons that persist across sessions using Claude Code's native auto-memory system.
 
 **Input:** $ARGUMENTS
 
@@ -17,103 +17,53 @@ Save decisions, preferences, and lessons that persist across sessions.
 ### Step 1: Parse Input
 
 Detect type of memory:
-- **Decision**: "Use X instead of Y because Z"
-- **Preference**: "Always use single quotes"
-- **Pattern avoid**: "Never use any types"
-- **Pattern prefer**: "Prefer composition over inheritance"
-- **Lesson**: "API changed and broke app. Solution: version contracts"
+- **Decision** → type: `project` (e.g., "Use X instead of Y because Z")
+- **Preference** → type: `feedback` (e.g., "Always use single quotes")
+- **Pattern avoid** → type: `feedback` (e.g., "Never use any types")
+- **Pattern prefer** → type: `feedback` (e.g., "Prefer composition over inheritance")
+- **Lesson** → type: `feedback` (e.g., "API changed and broke app. Solution: version contracts")
+- **Project context** → type: `project` (e.g., "Merge freeze starts March 5")
+- **External resource** → type: `reference` (e.g., "Bugs tracked in Linear project INGEST")
 
-### Step 2: Load Existing Memory
+### Step 2: Create Memory File
 
-```javascript
-const memoryFile = '.claude/session-memory.json';
-let memory = {};
+Write a markdown file to the memory directory with frontmatter:
 
-if (exists(memoryFile)) {
-  memory = JSON.parse(read(memoryFile));
-} else {
-  memory = {
-    version: "1.0",
-    projectId: getProjectName(),
-    created: new Date().toISOString(),
-    decisions: [],
-    preferences: {},
-    context: {},
-    patterns: { avoided: [], preferred: [] },
-    lessons: []
-  };
-}
+```markdown
+---
+name: [kebab-case-topic-name]
+description: [one-line description for relevance matching]
+type: [project | feedback | reference]
+---
+
+[Memory content]
+
+**Why:** [reason or context]
+**How to apply:** [when/where this applies]
 ```
 
-### Step 3: Add to Memory
+Memory directory: `.claude/projects/<project-hash>/memory/`
 
-#### For Decisions:
-```json
-{
-  "id": "d001",
-  "date": "2024-01-15",
-  "topic": "[extracted topic]",
-  "decision": "[what was decided]",
-  "reason": "[why]",
-  "agent": "[current agent or 'user']"
-}
-```
+### Step 3: Update Memory Index
 
-#### For Preferences:
-```json
-{
-  "preferences": {
-    "[category]": {
-      "[key]": "[value]"
-    }
-  }
-}
-```
+Add an entry to `MEMORY.md` in the memory directory. Keep it concise - just a link and brief description.
 
-#### For Patterns:
-```json
-{
-  "patterns": {
-    "avoided": ["[pattern]"],
-    "preferred": ["[pattern]"]
-  }
-}
-```
+### Step 4: Check for Duplicates
 
-#### For Lessons:
-```json
-{
-  "lessons": [{
-    "date": "2024-01-15",
-    "issue": "[what happened]",
-    "solution": "[how to fix]",
-    "preventionRule": "[how to prevent]"
-  }]
-}
-```
-
-### Step 4: Save Memory
-
-```javascript
-memory.updated = new Date().toISOString();
-write(memoryFile, JSON.stringify(memory, null, 2));
-```
+Before creating a new file, check if a memory on the same topic already exists. If yes, UPDATE the existing file instead of creating a duplicate.
 
 ## Output
 
 ```
 ──── /remember ────
 
-✓ Saved to session memory
+Saved to project memory
 
-Type: [Decision | Preference | Pattern | Lesson]
+Type: [Decision | Preference | Pattern | Lesson | Context | Reference]
 Topic: [topic]
 Content: [what was saved]
 
-This will be recalled in future sessions.
-
-Memory file: .claude/session-memory.json
-Total memories: [N] decisions, [N] preferences, [N] patterns, [N] lessons
+This will be recalled in future sessions via MEMORY.md.
 ```
 
 ## Examples
@@ -125,14 +75,12 @@ Total memories: [N] decisions, [N] preferences, [N] patterns, [N] lessons
 
 Output:
 ```
-✓ Saved to session memory
+Saved to project memory
 
-Type: Decision
+Type: Decision (project)
 Topic: State Management
 Content: Use Zustand instead of Redux
-Reason: Simpler
-
-This will be recalled in future sessions.
+Reason: Simpler API, less boilerplate
 ```
 
 ### Remember a Preference
@@ -152,7 +100,9 @@ This will be recalled in future sessions.
 
 ## Rules
 
-1. **Extract key info** - Don't store raw text
-2. **Categorize correctly** - Decision vs preference vs pattern
+1. **Extract key info** - Don't store raw text, structure with Why/How to apply
+2. **Categorize correctly** - Use correct memory type (project, feedback, reference)
 3. **No duplicates** - Update existing if same topic
-4. **No secrets** - Never store credentials
+4. **No secrets** - Never store credentials or PII
+5. **Convert dates** - Use absolute dates, not relative ("2026-03-05" not "Thursday")
+6. **Keep MEMORY.md under 200 lines** - Be concise in the index

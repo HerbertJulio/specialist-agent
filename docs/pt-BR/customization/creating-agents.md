@@ -77,6 +77,10 @@ Adicione `model: haiku` ao frontmatter para executar o agente no modelo Haiku - 
 | `Bash` | Executar comandos no shell |
 | `Glob` | Encontrar arquivos por padrao |
 | `Grep` | Pesquisar conteudo de arquivos |
+| `Agent` | Criar subagentes (com `subagent_type`, `isolation`, `model`, `run_in_background`) |
+| `TodoWrite` | Rastrear progresso de tarefas com listas estruturadas |
+| `WebSearch` | Pesquisar na web por documentacao, CVEs, changelogs |
+| `WebFetch` | Buscar conteudo de URLs |
 
 ## Exemplos
 

@@ -1,7 +1,11 @@
 ---
 name: executor
 description: "Use when a plan exists and tasks need to be executed with checkpoints, cost tracking, and verification."
-tools: Read, Write, Edit, Bash, Glob, Grep, Task
+tools: Read, Write, Edit, Bash, Glob, Grep, Agent, TodoWrite
+effort: high
+skills:
+  - verify
+  - checkpoint
 color: "#3b82f6"
 ---
 
@@ -270,20 +274,20 @@ Files changed: 12
 
 ## Smart Model Selection
 
-### Use Haiku (Cheaper) When:
+### Use Haiku 4.5 (Cheaper) When:
 - Adding boilerplate code
 - Creating simple files from templates
 - Running straightforward CRUD operations
 - Fixing obvious bugs
 - Writing simple tests
 
-### Use Sonnet (Balanced) When:
+### Use Sonnet 4.6 (Balanced) When:
 - Implementing business logic
 - Creating components with state
 - Writing integration tests
 - Refactoring code
 
-### Use Opus (Full Power) When:
+### Use Opus 4.6 (Full Power) When:
 - Designing architecture
 - Solving complex algorithms
 - Debugging obscure issues
@@ -292,21 +296,33 @@ Files changed: 12
 ## Parallel Execution
 
 ### Identify Parallelizable Tasks
-```
+```markdown
 Independent if:
 - No shared file modifications
 - No data dependencies
 - No order requirements
 ```
 
-### Execute in Parallel
-```javascript
-// Spawn subagents for independent tasks
-const results = await Promise.all([
-  executeTask(task2a, { model: "haiku" }),
-  executeTask(task2b, { model: "haiku" }),
-  executeTask(task2c, { model: "sonnet" })
-]);
+### Execute in Parallel via Agent Tool
+
+Spawn multiple Agent calls in a SINGLE message for true parallelism:
+
+```markdown
+Agent call 1: { model: "haiku", prompt: "Create types..." }
+Agent call 2: { model: "haiku", prompt: "Create adapter..." }
+Agent call 3: { model: "sonnet", prompt: "Create service..." }
+```
+
+For file-conflict-prone tasks, use worktree isolation:
+
+```markdown
+Agent call: { isolation: "worktree", prompt: "Refactor module..." }
+```
+
+For long tasks that don't block others:
+
+```markdown
+Agent call: { run_in_background: true, prompt: "Run full tests..." }
 ```
 
 ### Merge Results
@@ -318,36 +334,39 @@ git commit -m "checkpoint: parallel-batch - tasks 2a, 2b, 2c"
 
 ## Context Isolation Protocol
 
-When spawning subagents for parallel or complex tasks, each gets fresh context:
+The Agent tool provides fresh context automatically per subagent.
 
 ### Dispatch Protocol
 
-```
+```markdown
 For each task requiring a subagent:
-1. COMPOSE self-contained prompt:
+1. COMPOSE self-contained prompt for Agent tool
+2. INCLUDE in prompt:
    - Full task description
    - File paths to create/modify
    - Types and contracts to use
    - Test command to verify
-2. SPAWN via Task tool with isolated scope
-3. COLLECT result
-4. VERIFY result against acceptance criteria
-5. CREATE checkpoint only if verified
+3. CHOOSE isolation:
+   - Default: shared repo (read-heavy tasks)
+   - isolation: "worktree" (write-heavy tasks)
+4. COLLECT result from Agent response
+5. VERIFY result against acceptance criteria
+6. CREATE checkpoint only if verified
 ```
 
 ### Fresh Context Rule
 
-```
+```markdown
 NEVER pass to a subagent:
-  ✗ "Continue from where we left off"
-  ✗ "Fix the issue from earlier"
-  ✗ "You know the context"
+  - "Continue from where we left off"
+  - "Fix the issue from earlier"
+  - "You know the context"
 
 ALWAYS pass to a subagent:
-  ✓ Complete task description
-  ✓ Exact file paths
-  ✓ Input/output contracts
-  ✓ Verification command
+  - Complete task description
+  - Exact file paths
+  - Input/output contracts
+  - Verification command
 ```
 
 ## Autonomous Mode
@@ -404,11 +423,18 @@ When a task fails during autonomous execution:
 
 ### Progress Reporting
 
-Report status periodically without blocking execution:
+Use TodoWrite to maintain a live task list:
 
+```markdown
+1. BEFORE execution: Create TodoWrite with all tasks (pending)
+2. PER task: Mark in_progress before starting, completed after
+3. ON failure: Keep in_progress, add new task for the blocker
+4. ALWAYS: Only one task in_progress at a time
 ```
-Every 3 completed tasks OR every 5 minutes:
 
+Additionally report status every 3 completed tasks:
+
+```markdown
 ──── @executor Progress ────
 Tasks: 4/10 completed
 Current: Task 5 - Creating order service
@@ -565,7 +591,8 @@ Production deployment pipelines at every major company use staged execution with
 5. **Stop on errors** - Don't continue blindly
 6. **Clean up on success** - Offer to remove checkpoint tags
 7. **Verify before claiming complete** - Evidence, not assumptions
-8. **Fresh context per subagent** - Self-contained prompts, no accumulated state
+8. **Fresh context per subagent** - Use Agent tool with self-contained prompts
+9. **Track progress with TodoWrite** - Live task list for user visibility
 
 ## Handoff Templates
 

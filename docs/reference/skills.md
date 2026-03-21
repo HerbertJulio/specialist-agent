@@ -1,6 +1,11 @@
 # Skills Reference
 
-24 repeatable workflows. Each skill is a slash command that guides your AI assistant through a structured process.
+32 repeatable workflows. Each skill is a slash command that guides your AI assistant through a structured process.
+
+::: tip Interactive Catalog
+Browse all skills with search and filters in the
+[interactive catalog](/catalog).
+:::
 
 ## Planning
 
@@ -27,8 +32,12 @@
 |-------|-------------|---------|
 | `/verify` | Verify claims with evidence before marking complete | `/verify` |
 | `/codereview` | Multi-reviewer parallel code review | `/codereview src/modules/checkout/` |
-| `/audit` | Multi-domain code audit (security, performance, architecture) | `/audit src/` |
+| `/audit` | Multi-domain code audit (security, performance, architecture, observability) | `/audit src/` |
 | `/health` | Project health score across multiple dimensions | `/health` |
+| `/grill` | Adversarial code challenge - stress-test with attack vectors | `/grill src/services/auth.ts` |
+| `/design-review` | Frontend design audit (consistency, accessibility, responsive, UX) | `/design-review src/components/` |
+| `/seo-audit` | SEO technical audit (meta tags, structured data, CWV, crawlability) | `/seo-audit src/app/` |
+| `/improve-architecture` | Incremental architecture improvement (circular deps, coupling) | `/improve-architecture src/modules/` |
 
 ## Workflow
 
@@ -38,6 +47,7 @@
 | `/finish` | Finalize branch with tests, lint, commit | `/finish` |
 | `/worktree` | Git worktree isolation for parallel work | `/worktree create feature/auth` |
 | `/learn` | Learn patterns while building | `/learn how this auth flow works` |
+| `/autopilot` | Autonomous iterative development with PRD and progress tracking | `/autopilot docs/PRD-auth.md --max-iterations=10` |
 
 ## Migration
 
@@ -45,6 +55,14 @@
 |-------|-------------|---------|
 | `/migrate-framework` | Migrate between frameworks (Vue to React, etc.) | `/migrate-framework from vue to react` |
 | `/migrate-architecture` | Migrate between architecture patterns | `/migrate-architecture to hexagonal` |
+
+## Product & Marketing
+
+| Skill | What it does | Example |
+|-------|-------------|---------|
+| `/prd` | Product requirements with user stories and issue decomposition | `/prd implement real-time notifications` |
+| `/copywriting` | Marketing copy with A/B variants and conversion frameworks | `/copywriting SaaS landing page for developers` |
+| `/cro` | Conversion rate optimization audit with A/B hypotheses | `/cro src/app/pricing/` |
 
 ## Knowledge
 

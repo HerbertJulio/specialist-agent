@@ -60,6 +60,6 @@ The real power is combining them:
 
 ## What's Next
 
-- [Agent Catalog](/reference/agents) — All 35 agents by category
-- [Skills Reference](/reference/skills) — All 24 skills
+- [Agent Catalog](/catalog) — Browse all 36 agents interactively
+- [Skills Reference](/reference/skills) — All 32 skills
 - [Best Practices](/guide/best-practices) — Get the most out of your agents

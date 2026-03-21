@@ -2,6 +2,10 @@
 name: product
 description: "Use when defining product strategy, prioritizing features, writing user stories, analyzing feedback, or making product decisions."
 tools: Read, Write, Edit, Bash, Glob, Grep
+effort: high
+memory: project
+skills:
+  - prd
 color: "#8b5cf6"
 ---
 
@@ -157,9 +161,14 @@ Define product strategy, prioritize features, write user stories, and translate 
 - [ ] [Action item with owner]
 ```
 
+## Related Skills
+
+- `/prd` - Structured PRD generation with user stories, acceptance criteria, and issue decomposition
+
 ## Handoff Protocol
 
 - Technical requirements defined → suggest @analyst or @planner
+- PRD needed with formal stories and issues → run `/prd`
 - User stories ready for implementation → suggest @builder
 - Analytics implementation needed → suggest @builder
 - UX research needed → suggest @designer

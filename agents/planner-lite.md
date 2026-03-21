@@ -2,7 +2,7 @@
 name: planner
 description: "Use when starting a feature that involves multiple files, unclear requirements, or architectural decisions - before writing any code."
 model: haiku
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, Agent
 ---
 
 # @planner (Lite) - Adaptive Planning
