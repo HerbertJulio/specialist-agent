@@ -41,7 +41,7 @@ You install agents into your project. When you need something done, you call the
 | **Workflow** | 9 | Plan, execute, test, pair program |
 | **Engineering** | 17 | API, security, data, DevOps, architecture |
 | **Business** | 3 | Marketing, product, support |
-| **Automation** | 1 | Sentry triage, auto-fix production errors |
+| **Automation** | 2 | Sentry triage, autonomous builds |
 
 ## Skills
 
@@ -65,7 +65,7 @@ Skills are repeatable workflows you invoke with a slash command:
 | Code review depth | Surface-level | 3-in-1 review (quality + security + architecture) |
 | Production ops | Manual | @sentry-triage auto-triages errors |
 | Business agents | No | @marketing, @product, @support |
-| Repeatable workflows | Manual | 24 skills (/plan, /tdd, /autofix, ...) |
+| Repeatable workflows | Manual | 32 skills (/plan, /tdd, /autopilot, ...) |
 | Multi-platform | Varies | 6 platforms supported |
 
 ## Framework Packs
@@ -88,5 +88,5 @@ Works on: **Claude Code**, **Cursor**, **VS Code**, **Windsurf**, **Codex**, **O
 ## What's Next
 
 - [Quick Start](/guide/quick-start) — Install and use your first agent
-- [Agent Catalog](/reference/agents) — Browse all 35 agents
-- [Skills Reference](/reference/skills) — All 24 skills
+- [Agent Catalog](/catalog) — Browse all 36 agents interactively
+- [Skills Reference](/reference/skills) — All 32 skills

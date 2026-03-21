@@ -1,7 +1,8 @@
 ---
 name: starter
 description: "Use when creating a new project from scratch - any frontend, backend, and database combination."
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch
+effort: medium
 color: "#2563eb"
 ---
 

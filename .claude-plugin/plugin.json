@@ -1,7 +1,7 @@
 {
   "name": "specialist-agent",
-  "version": "2.10.0",
-  "description": "Your AI development team. 35 agents and 24 skills for building, reviewing, debugging, and shipping production code. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt.",
+  "version": "2.11.3",
+  "description": "Your AI development team. 36 agents and 32 skills for building, reviewing, debugging, and shipping production code. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt.",
   "author": {
     "name": "Herbert Julio",
     "email": "herbert@specialistagent.com.br",

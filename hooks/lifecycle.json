@@ -51,6 +51,16 @@
         "./hooks/session-end.mjs"
       ],
       "enabled": true
+    },
+    "before-iteration": {
+      "description": "Runs before each autopilot iteration starts",
+      "scripts": [],
+      "enabled": true
+    },
+    "after-iteration": {
+      "description": "Runs after each autopilot iteration completes",
+      "scripts": [],
+      "enabled": true
     }
   },
   "metrics": {

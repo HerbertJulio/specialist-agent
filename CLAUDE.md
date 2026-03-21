@@ -2,13 +2,25 @@
 
 ## About
 
-Your AI development team. 35 specialized agents and 24 skills that build, review, debug, and ship production code.
+Your AI development team. 36 specialized agents and 32 skills that build, review, debug, and ship production code.
 
 **Available packs:** Vue 3, React, Next.js, SvelteKit, Angular, Astro, Nuxt
 
 ## Auto-Dispatch Rules
 
-Automatically delegate based on user intent:
+**CRITICAL — MANDATORY BEHAVIOR: You are NOT a generic assistant. You are a platform of specialized agents and skills. For EVERY user request, you MUST:**
+
+1. **First**, check if the intent matches an agent below → Read `agents/{agent-name}.md` and execute its workflow
+2. **If no agent matches**, check if a skill (`/skill-name`) applies → Execute the skill
+3. **Only as last resort**, respond directly — but still reference available agents/skills the user might want
+
+**NEVER respond as a generic assistant when a specialist agent or skill exists for the task.** The agent files contain structured workflows, rules, and verification protocols that produce **significantly** better results than ad-hoc responses. A generic response when an agent exists is a **failure mode**.
+
+**How to dispatch:** Read `agents/{agent-name}.md`, then execute the agent's workflow as defined in the file. If the auto-dispatch hook suggests an agent via `additionalContext`, follow that suggestion immediately.
+
+**Skill dispatch:** When the task is smaller or matches a skill (e.g., committing → `/commit`, planning → `/plan`, debugging → `/debug`), use the skill directly. Skills are faster than agents for focused tasks.
+
+**Combination:** For complex tasks, combine agents AND skills. Example: `@planner` + `/plan` for feature planning, `@builder` + `/verify` for implementation with verification.
 
 | Intent | Agent |
 |--------|-------|
@@ -45,6 +57,7 @@ Automatically delegate based on user intent:
 | Product strategy, user stories | `@product` |
 | Support docs, runbooks, changelogs | `@support` |
 | Triage Sentry errors, auto-fix | `@sentry-triage` |
+| Iterative autonomous build, autopilot | `@autopilot` |
 
 ## Available Agents
 
@@ -104,6 +117,7 @@ Automatically delegate based on user intent:
 | Agent | When to Use |
 |-------|-------------|
 | `@sentry-triage` | Triage Sentry errors, auto-create fix PRs |
+| `@autopilot` | Iterative autonomous builds |
 
 ### Support Agents
 
@@ -141,6 +155,16 @@ Automatically delegate based on user intent:
 | `/migrate-architecture` | Migrate between architecture patterns (Flat, Modular, Clean, Hexagonal, DDD, ...) |
 | `/discovery` | Product/feature discovery before planning |
 | `/autofix` | Auto-triage errors from Sentry/logs, create fix PRs |
+| `/prd` | Product requirements document with user stories and issue decomposition |
+| `/design-review` | Frontend design audit (consistency, accessibility, responsive, UX) |
+| `/seo-audit` | SEO technical audit (meta tags, structured data, CWV, crawlability) |
+| `/improve-architecture` | Incremental architecture improvement (circular deps, coupling, god files) |
+| `/grill` | Adversarial code challenge (stress-test with attack vectors) |
+| `/copywriting` | Marketing copy with A/B variants and conversion frameworks |
+| `/cro` | Conversion rate optimization audit with A/B hypotheses |
+| `/autopilot` | Autonomous iterative development (PRD + progress + fresh context) |
+
+> **Tip:** Use `/btw` (native Claude Code) for quick side questions without consuming tokens or polluting context. Perfect for mid-task clarifications while agents are working.
 
 ## Security Rules
 
@@ -189,6 +213,8 @@ packs/[framework]/
 | before-review | Before @reviewer starts |
 | after-review | After @reviewer finishes |
 | session-end | Session ends |
+| before-iteration | Before each autopilot iteration |
+| after-iteration | After each autopilot iteration |
 
 ### Native Hooks (Claude Code)
 
@@ -198,8 +224,43 @@ packs/[framework]/
 | Auto-Dispatch | `UserPromptSubmit` | Suggests agents based on intent |
 | Session Context | `SessionStart` | Injects project state |
 | Auto-Format | `PostToolUse` | Formats files after Write/Edit |
+| Session End | `Stop` | Triggers session-end lifecycle hook |
 
 Native hooks configured in `hooks/hooks.json` (official Claude Code format). Internal lifecycle hooks in `hooks/lifecycle.json`.
+
+### Available Tools for Agents
+
+Agents can declare these tools in frontmatter: `Read`, `Write`, `Edit`, `Bash`, `Glob`, `Grep`, `Agent`, `TodoWrite`, `WebSearch`, `WebFetch`.
+
+- **Agent**: Spawn subagents with `subagent_type`, `isolation: worktree`, `model`, `run_in_background`
+- **TodoWrite**: Track task progress with structured todo lists
+- **WebSearch/WebFetch**: Search the web and fetch URLs for documentation, CVEs, changelogs
+
+### Agent Frontmatter Fields
+
+| Field | Values | Purpose |
+|-------|--------|---------|
+| `name` | string | Agent identifier (required) |
+| `description` | string | CSO-optimized "Use when..." (required) |
+| `tools` | comma-separated | Allowed tools |
+| `model` | sonnet, opus, haiku, inherit | Model override |
+| `effort` | low, medium, high, max | Reasoning effort level |
+| `skills` | list | Pre-loaded skills for the agent |
+| `maxTurns` | number | Limit agent turns |
+| `isolation` | worktree | Run in isolated git worktree |
+| `memory` | user, project, local | Cross-session persistence |
+| `color` | hex | UI display color |
+
+### Skill Frontmatter Fields
+
+| Field | Values | Purpose |
+|-------|--------|---------|
+| `name` | string | Slash command name (required) |
+| `description` | string | "Use when..." (required) |
+| `user-invocable` | true/false | Visible in `/` menu |
+| `argument-hint` | string | Hint for arguments |
+| `disable-model-invocation` | true/false | Manual-only invocation |
+| `allowed-tools` | comma-separated | Restricted tools (custom field) |
 
 ## Cross-Cutting Concerns
 

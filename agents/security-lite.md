@@ -2,7 +2,7 @@
 name: security
 description: "Use when implementing authentication, authorization, encryption, or auditing for OWASP compliance and security best practices."
 model: haiku
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Security (Lite)

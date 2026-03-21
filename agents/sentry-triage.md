@@ -1,7 +1,10 @@
 ---
 name: sentry-triage
 description: "Use when triaging Sentry errors, analyzing recent issues, checking if fixes already exist, and creating prioritized fix PRs automatically."
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, WebFetch
+effort: high
+skills:
+  - autofix
 color: "#362d59"
 ---
 

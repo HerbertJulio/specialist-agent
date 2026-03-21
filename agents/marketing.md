@@ -2,6 +2,9 @@
 name: marketing
 description: "Use when creating marketing copy, landing pages, email campaigns, social media strategy, SEO content, or growth experiments."
 tools: Read, Write, Edit, Bash, Glob, Grep
+effort: medium
+skills:
+  - copywriting
 color: "#f43f5e"
 ---
 
@@ -148,6 +151,12 @@ Create data-driven marketing strategies and content. Covers landing page copy, e
 - Variant A: [change description]
 - Variant B: [change description]
 ```
+
+## Related Skills
+
+- `/seo-audit` - Structured SEO technical audit with scoring (use for SEO mode audits)
+- `/copywriting` - Framework-driven copy generation with A/B variants (use for Copy mode)
+- `/cro` - Conversion rate optimization audit with testable hypotheses (use for Growth mode)
 
 ## Handoff Protocol
 

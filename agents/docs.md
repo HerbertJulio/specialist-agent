@@ -1,7 +1,8 @@
 ---
 name: docs
 description: "Use when code needs documentation - API docs, architecture diagrams, user guides, ADRs, JSDoc/TSDoc comments, or onboarding materials."
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch
+effort: medium
 color: "#06b6d4"
 ---
 

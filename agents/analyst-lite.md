@@ -2,7 +2,7 @@
 name: analyst
 description: "Use when requirements are ambiguous, incomplete, or need to be translated into technical specifications."
 model: haiku
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, Agent
 ---
 
 # @analyst (Lite) - Requirements Analysis

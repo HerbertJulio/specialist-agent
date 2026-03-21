@@ -2,8 +2,8 @@
   "$schema": "https://windsurf.io/schemas/plugin-v1.json",
   "id": "specialist-agent",
   "name": "Specialist Agent",
-  "version": "2.10.0",
-  "description": "Your AI development team. 35 agents and 24 skills that build, review, debug, and ship production code.",
+  "version": "2.11.3",
+  "description": "Your AI development team. 36 agents and 32 skills that build, review, debug, and ship production code.",
   "author": {
     "name": "Herbert Julio",
     "email": "herbertjulio@gmail.com",
@@ -175,26 +175,188 @@
       "name": "@sentry-triage",
       "description": "Triage Sentry errors, auto-create fix PRs.",
       "file": "agents/sentry-triage.md"
+    },
+    {
+      "id": "analyst",
+      "name": "@analyst",
+      "description": "Requirements to technical specs.",
+      "file": "agents/analyst.md"
+    },
+    {
+      "id": "orchestrator",
+      "name": "@orchestrator",
+      "description": "Coordinate multiple agents.",
+      "file": "agents/orchestrator.md"
+    },
+    {
+      "id": "explorer",
+      "name": "@explorer",
+      "description": "Deep codebase exploration.",
+      "file": "agents/explorer.md"
+    },
+    {
+      "id": "memory",
+      "name": "@memory",
+      "description": "Cross-session decision persistence.",
+      "file": "agents/memory.md"
+    },
+    {
+      "id": "architect",
+      "name": "@architect",
+      "description": "Architecture migration (DDD, Clean, Hexagonal).",
+      "file": "agents/architect.md"
+    },
+    {
+      "id": "ripple",
+      "name": "@ripple",
+      "description": "Cascading effect analysis.",
+      "file": "agents/ripple.md"
+    },
+    {
+      "id": "marketing",
+      "name": "@marketing",
+      "description": "Landing pages, copy, SEO, growth.",
+      "file": "agents/marketing.md"
+    },
+    {
+      "id": "product",
+      "name": "@product",
+      "description": "Roadmaps, specs, PRDs, user stories.",
+      "file": "agents/product.md"
+    },
+    {
+      "id": "support",
+      "name": "@support",
+      "description": "Help docs, FAQs, runbooks.",
+      "file": "agents/support.md"
+    },
+    {
+      "id": "starter",
+      "name": "@starter",
+      "description": "Scaffold new projects from scratch.",
+      "file": "agents/starter.md"
+    },
+    {
+      "id": "doctor",
+      "name": "@doctor",
+      "description": "Systematic 4-phase debugging.",
+      "file": "packs/{framework}/agents/doctor.md"
+    },
+    {
+      "id": "migrator",
+      "name": "@migrator",
+      "description": "Modernize legacy code.",
+      "file": "packs/{framework}/agents/migrator.md"
+    },
+    {
+      "id": "autopilot",
+      "name": "@autopilot",
+      "description": "Iterative autonomous builds with PRD and progress tracking.",
+      "file": "agents/autopilot.md"
     }
   ],
   "skills": [
     {
+      "id": "brainstorm",
+      "name": "/brainstorm",
+      "description": "Socratic brainstorming before planning",
+      "file": "skills/brainstorm/SKILL.md"
+    },
+    {
       "id": "plan",
       "name": "/plan",
-      "description": "Plan a feature",
+      "description": "Adaptive feature planning",
       "file": "skills/plan/SKILL.md"
+    },
+    {
+      "id": "discovery",
+      "name": "/discovery",
+      "description": "Feasibility evaluation with GO/NO-GO",
+      "file": "skills/discovery/SKILL.md"
+    },
+    {
+      "id": "estimate",
+      "name": "/estimate",
+      "description": "Estimate token cost before starting",
+      "file": "skills/estimate/SKILL.md"
     },
     {
       "id": "tdd",
       "name": "/tdd",
-      "description": "Test-driven development",
+      "description": "Test-driven development cycle",
       "file": "skills/tdd/SKILL.md"
     },
     {
       "id": "debug",
       "name": "/debug",
-      "description": "Debug an issue",
+      "description": "4-phase systematic debugging",
       "file": "skills/debug/SKILL.md"
+    },
+    {
+      "id": "autofix",
+      "name": "/autofix",
+      "description": "Auto-triage errors, create fix PRs",
+      "file": "skills/autofix/SKILL.md"
+    },
+    {
+      "id": "lint",
+      "name": "/lint",
+      "description": "Lint and auto-fix",
+      "file": "skills/lint/SKILL.md"
+    },
+    {
+      "id": "commit",
+      "name": "/commit",
+      "description": "Smart conventional commits",
+      "file": "skills/commit/SKILL.md"
+    },
+    {
+      "id": "verify",
+      "name": "/verify",
+      "description": "Proof-based verification",
+      "file": "skills/verify/SKILL.md"
+    },
+    {
+      "id": "codereview",
+      "name": "/codereview",
+      "description": "Multi-reviewer parallel code review",
+      "file": "skills/codereview/SKILL.md"
+    },
+    {
+      "id": "audit",
+      "name": "/audit",
+      "description": "Multi-domain audit (security, perf, arch)",
+      "file": "skills/audit/SKILL.md"
+    },
+    {
+      "id": "health",
+      "name": "/health",
+      "description": "Project health score (0-100)",
+      "file": "skills/health/SKILL.md"
+    },
+    {
+      "id": "grill",
+      "name": "/grill",
+      "description": "Adversarial code challenge",
+      "file": "skills/grill/SKILL.md"
+    },
+    {
+      "id": "design-review",
+      "name": "/design-review",
+      "description": "Frontend design audit",
+      "file": "skills/design-review/SKILL.md"
+    },
+    {
+      "id": "seo-audit",
+      "name": "/seo-audit",
+      "description": "SEO technical audit",
+      "file": "skills/seo-audit/SKILL.md"
+    },
+    {
+      "id": "improve-architecture",
+      "name": "/improve-architecture",
+      "description": "Incremental architecture improvement",
+      "file": "skills/improve-architecture/SKILL.md"
     },
     {
       "id": "checkpoint",
@@ -203,28 +365,28 @@
       "file": "skills/checkpoint/SKILL.md"
     },
     {
-      "id": "health",
-      "name": "/health",
-      "description": "Project health score",
-      "file": "skills/health/SKILL.md"
+      "id": "finish",
+      "name": "/finish",
+      "description": "Finalize branch with metrics",
+      "file": "skills/finish/SKILL.md"
     },
     {
-      "id": "remember",
-      "name": "/remember",
-      "description": "Save decisions",
-      "file": "skills/remember/SKILL.md"
+      "id": "worktree",
+      "name": "/worktree",
+      "description": "Git worktree isolation",
+      "file": "skills/worktree/SKILL.md"
     },
     {
-      "id": "recall",
-      "name": "/recall",
-      "description": "Recall decisions",
-      "file": "skills/recall/SKILL.md"
+      "id": "learn",
+      "name": "/learn",
+      "description": "Learning mode, explains while building",
+      "file": "skills/learn/SKILL.md"
     },
     {
-      "id": "tutorial",
-      "name": "/tutorial",
-      "description": "Interactive tutorial",
-      "file": "skills/tutorial/SKILL.md"
+      "id": "autopilot",
+      "name": "/autopilot",
+      "description": "Autonomous iterative development",
+      "file": "skills/autopilot/SKILL.md"
     },
     {
       "id": "migrate-framework",
@@ -233,10 +395,58 @@
       "file": "skills/migrate-framework/SKILL.md"
     },
     {
-      "id": "autofix",
-      "name": "/autofix",
-      "description": "Auto-triage errors, prioritize, create fix PRs",
-      "file": "skills/autofix/SKILL.md"
+      "id": "migrate-architecture",
+      "name": "/migrate-architecture",
+      "description": "Migrate architecture patterns",
+      "file": "skills/migrate-architecture/SKILL.md"
+    },
+    {
+      "id": "prd",
+      "name": "/prd",
+      "description": "Product requirements with user stories",
+      "file": "skills/prd/SKILL.md"
+    },
+    {
+      "id": "copywriting",
+      "name": "/copywriting",
+      "description": "Marketing copy with A/B variants",
+      "file": "skills/copywriting/SKILL.md"
+    },
+    {
+      "id": "cro",
+      "name": "/cro",
+      "description": "Conversion rate optimization audit",
+      "file": "skills/cro/SKILL.md"
+    },
+    {
+      "id": "remember",
+      "name": "/remember",
+      "description": "Save decisions to memory",
+      "file": "skills/remember/SKILL.md"
+    },
+    {
+      "id": "recall",
+      "name": "/recall",
+      "description": "Query saved decisions",
+      "file": "skills/recall/SKILL.md"
+    },
+    {
+      "id": "onboard",
+      "name": "/onboard",
+      "description": "Codebase onboarding",
+      "file": "skills/onboard/SKILL.md"
+    },
+    {
+      "id": "tutorial",
+      "name": "/tutorial",
+      "description": "Interactive guided tutorial",
+      "file": "skills/tutorial/SKILL.md"
+    },
+    {
+      "id": "write-skill",
+      "name": "/write-skill",
+      "description": "Create or improve custom skills",
+      "file": "skills/write-skill/SKILL.md"
     }
   ],
   "profiles": {

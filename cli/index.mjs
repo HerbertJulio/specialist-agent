@@ -273,7 +273,7 @@ if (args.includes('--help') || args.includes('-h')) {
   console.log('  Usage: specialist-agent <command> [options]')
   console.log()
   console.log('  Commands:')
-  console.log(`    init                    ${DIM}Install 35 agents and 24 skills (works on empty projects too)${NC}`)
+  console.log(`    init                    ${DIM}Install 36 agents and 32 skills (works on empty projects too)${NC}`)
   console.log(`    detect                  ${DIM}Detect architecture, monorepo, and suggest migrations${NC}`)
   console.log(`    create-agent <name>     ${DIM}Create a custom agent from template${NC}`)
   console.log(`    list                    ${DIM}List installed agents, skills, and memory${NC}`)

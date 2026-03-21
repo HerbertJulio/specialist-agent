@@ -85,7 +85,54 @@ Check for performance issues:
 | Network | Missing caching, redundant API calls |
 | Assets | Unoptimized images, missing lazy loading |
 
-### Step 5: Dependency Audit
+### Step 5: Observability Audit
+
+Check for production readiness observability:
+
+| Check | What to Look For |
+|-------|------------------|
+| Structured logging | JSON format, consistent fields (timestamp, level, service, traceId) |
+| Error tracking | Errors captured with context (user, request, stack trace) |
+| Health endpoints | `/health` or equivalent exposed by every service |
+| Metrics | RED metrics (Rate, Errors, Duration) for critical operations |
+| Correlation IDs | Trace/request IDs propagated across service boundaries |
+| Sensitive data | NO passwords, tokens, PII, credit cards in logs |
+
+```bash
+# Check for structured logging
+grep -rn "console\.log\|console\.error\|console\.warn" $TARGET --include="*.ts" --include="*.tsx" 2>/dev/null | grep -v "node_modules\|test\|spec" | head -15
+
+# Check for health endpoints
+grep -rn "health\|healthcheck\|readiness\|liveness" $TARGET --include="*.ts" --include="*.tsx" 2>/dev/null | head -10
+
+# Check for sensitive data in logs
+grep -rn "console\.\|logger\.\|log\." $TARGET --include="*.ts" 2>/dev/null | grep -i "password\|token\|secret\|credit\|ssn" | head -10
+```
+
+### Step 6: Accessibility Audit (if frontend detected)
+
+If the project contains frontend code (`.tsx`, `.vue`, `.svelte`, `.astro`), check:
+
+| Check | Criteria |
+|-------|----------|
+| Alt text | All images have descriptive alt attributes |
+| Form labels | All inputs have associated labels or aria-label |
+| Heading hierarchy | Single H1, logical H2-H6, no skipped levels |
+| Keyboard navigation | Interactive elements accessible via keyboard |
+| Color contrast | Text meets WCAG AA 4.5:1 ratio |
+| ARIA usage | Correct roles, states, properties |
+
+```bash
+# Detect frontend code
+FRONTEND_FILES=$(find $TARGET -name "*.tsx" -o -name "*.vue" -o -name "*.svelte" -o -name "*.astro" 2>/dev/null | grep -v node_modules | head -5)
+if [ -n "$FRONTEND_FILES" ]; then
+  echo "Frontend detected - running accessibility checks"
+  grep -rn "<img" $TARGET --include="*.tsx" --include="*.vue" 2>/dev/null | grep -v "alt=" | head -10
+  grep -rn "<input\|<select" $TARGET --include="*.tsx" --include="*.vue" 2>/dev/null | grep -v "aria-label\|id=" | head -10
+fi
+```
+
+### Step 7: Dependency Audit
 
 Check dependency health:
 
@@ -102,9 +149,20 @@ Run if available:
 npx depcheck --json 2>/dev/null || true
 ```
 
-### Step 6: Report Generation
+### Step 8: Report Generation & Scoring
 
 Compile findings into a structured report with severity ratings.
+
+**Scoring formula per domain (0-100):**
+- Start at 100
+- CRITICAL finding: -25 points
+- HIGH finding: -15 points
+- MEDIUM finding: -10 points
+- LOW finding: -5 points
+- INFO: -0 points
+- Minimum: 0
+
+**Overall score** = average of all domain scores (weighted: Security 30%, Architecture 25%, Performance 20%, Observability 15%, Dependencies 10%).
 
 ## Severity Levels
 
@@ -120,7 +178,7 @@ Compile findings into a structured report with severity ratings.
 
 **Before claiming audit is complete:**
 
-1. All 4 audit domains were checked (security, architecture, performance, dependencies)
+1. All domains were checked (security, architecture, performance, observability, dependencies, and accessibility if frontend)
 2. Every finding has a severity level
 3. Every CRITICAL/HIGH finding has a specific remediation step
 4. Automated tools were run where available (npm audit, eslint, depcheck)
@@ -135,10 +193,12 @@ Compile findings into a structured report with severity ratings.
 | "Dependencies are up to date" | Did you run `npm audit`? Check for unused deps? |
 | "Performance seems okay" | Did you check for N+1 queries, memory leaks, bundle size? |
 | "The codebase is too large to audit fully" | Scope down to critical paths (auth, payments, data). Never skip security. |
+| "Observability is a nice-to-have" | Production without observability is flying blind. You can't fix what you can't see. |
+| "Accessibility doesn't apply to us" | Internal tools have users with disabilities too. And legal requirements don't have exemptions. |
 
 ## Rules
 
-1. **Check all 4 domains** - Skipping one defeats the purpose
+1. **Check all domains** - Skipping one defeats the purpose (security, architecture, performance, observability, dependencies + accessibility if frontend)
 2. **Run automated tools** - Never skip `npm audit` or linting if available
 3. **Severity must be justified** - Every rating needs evidence
 4. **Remediation is required** - Findings without fix suggestions are useless
@@ -152,12 +212,14 @@ Compile findings into a structured report with severity ratings.
 Target: [path or module]
 Scope: [X files, Y lines]
 
-Security:     [X critical, Y high, Z medium]
-Architecture: [X high, Y medium]
-Performance:  [X high, Y medium]
-Dependencies: [X vulnerable, Y outdated, Z unused]
+Security:      [score]/100 - [X critical, Y high, Z medium]
+Architecture:  [score]/100 - [X high, Y medium]
+Performance:   [score]/100 - [X high, Y medium]
+Observability: [score]/100 - [X high, Y medium]
+Dependencies:  [score]/100 - [X vulnerable, Y outdated, Z unused]
+Accessibility: [score]/100 - [N findings] (if frontend)
 
-Overall Score: [0-100]
+Overall Score: [0-100] (weighted average)
 Risk Level: [CRITICAL | HIGH | MEDIUM | LOW]
 
 Top Findings:

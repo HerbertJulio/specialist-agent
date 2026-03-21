@@ -60,6 +60,6 @@ O verdadeiro poder esta em combinar:
 
 ## Proximo Passo
 
-- [Catalogo de Agentes](/pt-BR/reference/agents) — Todos os 35 agentes por categoria
-- [Referencia de Skills](/pt-BR/reference/skills) — Todas as 24 skills
+- [Catálogo de Agentes](/pt-BR/catalog) — Navegue por todos os 36 agentes
+- [Referencia de Skills](/pt-BR/reference/skills) — Todas as 32 skills
 - [Boas Praticas](/pt-BR/guide/best-practices) — Tire o maximo dos seus agentes

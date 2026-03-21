@@ -106,11 +106,41 @@ Risky assumptions to address: [list]
 
 **BLOCKED** until at least 5 assumptions are identified and tested.
 
+### Step 3.5: Competitive Analysis (Optional)
+
+Before generating alternatives, check how others solved similar problems:
+
+1. **Scan for existing solutions:**
+   - "How do popular open-source projects handle this?"
+   - "What patterns do competing products use?"
+   - "Are there established libraries that solve this out of the box?"
+2. **Document findings:**
+
+```markdown
+## Competitive Analysis
+
+| Solution | Approach | Pros | Cons | Applicable? |
+|----------|----------|------|------|------------|
+| [lib/product 1] | [how they solved it] | [pros] | [cons] | [yes/partial/no] |
+| [lib/product 2] | [how they solved it] | [pros] | [cons] | [yes/partial/no] |
+```
+
+Skip this step if the problem is purely internal or domain-specific with no external parallels.
+
 ### Step 4: Alternative Generation - Explore Options
 
-Generate multiple approaches:
+Generate multiple approaches using ideation frameworks:
 
-1. **Produce at least 3 alternatives:**
+**Choose a framework to stimulate thinking:**
+
+| Framework | When to Use | How It Works |
+|-----------|-------------|-------------|
+| **First Principles** | Complex technical problems | Decompose to ground truths → rebuild from scratch. "What is fundamentally true here?" |
+| **SCAMPER** | Improving existing solutions | **S**ubstitute, **C**ombine, **A**dapt, **M**odify, **P**ut to other use, **E**liminate, **R**everse |
+| **How Might We** | Reframing constraints | Turn every constraint into an opportunity. "We can't do X" → "How might we achieve the goal without X?" |
+| **Inversion** | When stuck | Ask "How would we guarantee failure?" then invert each answer |
+
+1. **Apply the chosen framework** to generate at least 3 alternatives:
    - **Approach A** - The obvious solution
    - **Approach B** - The simpler alternative
    - **Approach C** - The scalable/future-proof option
@@ -141,12 +171,28 @@ Recommendation: Approach [X] because [rationale]
 
 ### Step 5: Convergence - Synthesize and Validate
 
-Present the design for approval in digestible sections:
+Present the design for approval using a **Decision Matrix** for objective comparison:
 
-1. **Synthesize chosen approach** into a design summary
+1. **Build Decision Matrix** - Score each approach on weighted criteria:
+
+```markdown
+## Decision Matrix
+
+| Criteria | Weight | Approach A | Approach B | Approach C |
+|----------|--------|-----------|-----------|-----------|
+| Effort | 25% | 7 | 9 | 4 |
+| Risk | 20% | 6 | 8 | 5 |
+| Impact | 30% | 8 | 6 | 9 |
+| Alignment | 15% | 7 | 7 | 8 |
+| Maintainability | 10% | 6 | 8 | 7 |
+| **Weighted Score** | | **7.05** | **7.35** | **6.55** |
+
+Winner: Approach [X] (score: [N])
+```
+
 2. **Present in sections** - Each section gets user approval:
    - Section 1: Problem & scope (approve?)
-   - Section 2: Technical approach (approve?)
+   - Section 2: Technical approach with decision matrix rationale (approve?)
    - Section 3: Data model / API design (approve?)
    - Section 4: Key decisions & trade-offs (approve?)
 3. **Document final design** - Ready for `/plan` handoff
@@ -159,7 +205,7 @@ Present the design for approval in digestible sections:
 [approved summary]
 
 ### Section 2: Technical Approach ✓
-[approved summary]
+[approved summary + decision matrix winner]
 
 ### Section 3: Data Model ✓
 [approved summary]
@@ -168,7 +214,7 @@ Present the design for approval in digestible sections:
 [approved summary]
 ```
 
-## Integration with @planner
+## Integration with Other Skills
 
 ```
 IF @planner classifies task as COMPLEX:
@@ -180,6 +226,11 @@ IF user says "skip brainstorming" or "just plan":
 
 IF /brainstorm output exists:
   → @planner uses it as foundation (don't re-ask questions)
+
+IF /discovery was already run:
+  → Import discovery output (problem statement, personas, constraints)
+  → Skip Step 1 (Discovery) - already done
+  → Start from Step 2 (Clarification)
 ```
 
 ## Verification Protocol
@@ -202,6 +253,8 @@ IF /brainstorm output exists:
 | "Too many options will paralyze" | 3 options with clear pros/cons ENABLE informed decisions. Analysis paralysis comes from unclear options, not from having them. |
 | "The user already decided" | Clarify what they DECIDED vs what they ASSUMED. Often they assumed more than they decided. |
 | "Questions will frustrate the user" | Users prefer upfront questions over rework later. Frustration comes from building the wrong thing. |
+| "We don't have competitors to analyze" | Every problem has prior art. Open-source libraries, competing products, or academic papers. Search before inventing. |
+| "Frameworks are overkill for brainstorming" | Frameworks prevent blank-page paralysis and ensure coverage. SCAMPER takes 5 minutes and reveals options you'd miss. |
 
 ## Rules
 

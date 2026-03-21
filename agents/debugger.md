@@ -2,6 +2,9 @@
 name: debugger
 description: "Use when encountering any bug, test failure, unexpected behavior, or error - before proposing fixes."
 tools: Read, Write, Edit, Bash, Glob, Grep
+effort: high
+skills:
+  - debug
 color: "#6d28d9"
 ---
 

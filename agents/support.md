@@ -2,6 +2,7 @@
 name: support
 description: "Use when creating support documentation, help center content, runbooks, incident response procedures, or customer-facing knowledge base articles."
 tools: Read, Write, Edit, Bash, Glob, Grep
+effort: medium
 color: "#0ea5e9"
 ---
 

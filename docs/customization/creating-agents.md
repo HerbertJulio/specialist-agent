@@ -77,6 +77,10 @@ Add `model: haiku` to the frontmatter to run the agent on the Haiku model - sign
 | `Bash` | Run shell commands |
 | `Glob` | Find files by pattern |
 | `Grep` | Search file contents |
+| `Agent` | Spawn subagents (with `subagent_type`, `isolation`, `model`, `run_in_background`) |
+| `TodoWrite` | Track task progress with structured todo lists |
+| `WebSearch` | Search the web for documentation, CVEs, changelogs |
+| `WebFetch` | Fetch content from URLs |
 
 ## Examples
 

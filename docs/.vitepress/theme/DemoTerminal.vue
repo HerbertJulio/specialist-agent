@@ -35,7 +35,7 @@ const sceneGroups: SubScene[][] = [
         { text: '', type: 'output', delay: 200 },
         { text: '  Installing specialist-agent...', type: 'dim', delay: 600 },
         { text: '  ✓ 35 agents configured', type: 'success', delay: 400 },
-        { text: '  ✓ 24 skills available', type: 'success', delay: 300 },
+        { text: '  ✓ 31 skills available', type: 'success', delay: 300 },
         { text: '  ✓ Next.js pack applied', type: 'success', delay: 300 },
         { text: '', type: 'output', delay: 200 },
         { text: '  Ready! Try: Use @builder to create a module', type: 'highlight', delay: 0 },
