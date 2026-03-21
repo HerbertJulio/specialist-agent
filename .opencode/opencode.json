@@ -136,6 +136,51 @@
       "description": "Cascading impact analysis of changes",
       "mode": "primary",
       "tools": { "write": false, "edit": false, "bash": true }
+    },
+    "orchestrator": {
+      "description": "Coordinate multiple agents on complex tasks",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "memory": {
+      "description": "Cross-session decision persistence",
+      "mode": "primary",
+      "tools": { "write": true, "edit": false, "bash": false }
+    },
+    "starter": {
+      "description": "Scaffold new projects from scratch",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "migrator": {
+      "description": "Modernize legacy code safely",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "marketing": {
+      "description": "Landing pages, copy, SEO, growth strategies",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": false }
+    },
+    "product": {
+      "description": "Roadmaps, specs, PRDs, user stories",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": false }
+    },
+    "support": {
+      "description": "Help docs, FAQs, runbooks, changelogs",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": false }
+    },
+    "sentry-triage": {
+      "description": "Triage Sentry errors, auto-create fix PRs",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
+    },
+    "autopilot": {
+      "description": "Iterative autonomous builds with PRD and progress tracking",
+      "mode": "primary",
+      "tools": { "write": true, "edit": true, "bash": true }
     }
   }
 }

@@ -2,7 +2,7 @@
 name: ripple-lite
 description: "Use when you need to understand the cascading impact of a code change - who depends on it, what breaks, and what needs updating."
 model: haiku
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, Agent
 ---
 
 # @ripple - Cascading Effect Analyzer (Lite)

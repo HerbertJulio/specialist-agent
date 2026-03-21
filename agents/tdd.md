@@ -2,6 +2,9 @@
 name: tdd
 description: "Use when implementing any feature or bugfix where correctness matters - before writing implementation code."
 tools: Read, Write, Edit, Bash, Glob, Grep
+effort: high
+skills:
+  - tdd
 color: "#8b5cf6"
 ---
 

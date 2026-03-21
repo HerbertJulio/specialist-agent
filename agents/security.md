@@ -1,7 +1,10 @@
 ---
 name: security
 description: "Use when implementing authentication, authorization, encryption, or auditing for OWASP compliance and security best practices."
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch
+effort: high
+skills:
+  - audit
 color: "#dc2626"
 ---
 

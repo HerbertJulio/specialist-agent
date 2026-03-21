@@ -2,7 +2,7 @@
 name: cloud
 description: "Use when designing cloud infrastructure, setting up IaC, configuring serverless functions, or planning cloud architecture."
 model: haiku
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Cloud (Lite)

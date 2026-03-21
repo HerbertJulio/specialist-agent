@@ -1,6 +1,10 @@
 # Catalogo de Agentes
 
-35 agentes especializados organizados por dominio. Cada agente e um especialista na sua area — chame o certo para o trabalho.
+36 agentes especializados organizados por dominio. Cada agente e um especialista na sua area — chame o certo para o trabalho.
+
+::: tip Catálogo Interativo
+Navegue por todos os agentes e skills com busca, filtros e detalhes no [catálogo interativo](/pt-BR/catalog).
+:::
 
 ## Agentes Core
 
@@ -71,6 +75,7 @@ Automatizar operacoes repetitivas — triagem de erros, monitoramento de produca
 | Agente | Descricao | Exemplo |
 |--------|-----------|---------|
 | `@sentry-triage` | Buscar erros do Sentry, cruzar com PRs, priorizar por severidade, criar PRs de correcao automaticamente | "Use @sentry-triage para verificar erros das ultimas 24h" |
+| `@autopilot` | Builds autonomos iterativos com PRD e rastreamento de progresso | "Use @autopilot para construir a feature de docs/PRD-auth.md" |
 
 ## Agentes Especificos de Framework
 
@@ -96,3 +101,24 @@ Todo agente tem dois modos:
 | Lite | Haiku | Menor custo, respostas mais rapidas |
 
 Escolha durante a instalacao: `npx specialist-agent init`
+
+## Frontmatter de Agentes
+
+Agentes suportam campos avancados de frontmatter para integracao com Claude Code:
+
+| Campo | Valores | Proposito |
+|-------|---------|-----------|
+| `name` | string | Identificador do agente (obrigatorio) |
+| `description` | string | CSO-optimized "Use when..." (obrigatorio) |
+| `tools` | separados por virgula | Ferramentas permitidas |
+| `model` | sonnet, opus, haiku, inherit | Override de modelo |
+| `effort` | low, medium, high, max | Nivel de esforco de raciocinio |
+| `skills` | lista | Skills pre-carregadas para o agente |
+| `memory` | user, project, local | Persistencia cross-session |
+| `maxTurns` | numero | Limitar turnos do agente |
+| `isolation` | worktree | Executar em git worktree isolado |
+| `color` | hex | Cor de exibicao na UI |
+
+::: tip
+`effort`, `memory`, `skills`, `maxTurns` e `isolation` sao oficialmente suportados pelo Claude Code 2.1.75+. Agentes de plugins nao podem usar `hooks`, `mcpServers` ou `permissionMode` por seguranca.
+:::

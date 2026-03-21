@@ -1,7 +1,11 @@
 ---
 name: analyst
 description: "Use when requirements are ambiguous, incomplete, or need to be translated into technical specifications."
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, Agent
+effort: high
+memory: project
+skills:
+  - prd
 color: "#5b21b6"
 ---
 

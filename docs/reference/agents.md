@@ -1,6 +1,10 @@
 # Agent Catalog
 
-35 specialized agents organized by domain. Each agent is an expert in its area — call the right one for the job.
+36 specialized agents organized by domain. Each agent is an expert in its area — call the right one for the job.
+
+::: tip Interactive Catalog
+Browse all agents and skills with search, filters, and details in the [interactive catalog](/catalog).
+:::
 
 ## Core Agents
 
@@ -71,6 +75,7 @@ Automate repetitive ops — error triage, production monitoring, fix workflows.
 | Agent | Description | Example |
 |-------|-------------|---------|
 | `@sentry-triage` | Pull Sentry errors, cross-reference PRs, prioritize by severity, auto-create fix PRs | "Use @sentry-triage to check errors from the last 24h" |
+| `@autopilot` | Iterative autonomous builds with PRD and progress tracking | "Use @autopilot to build the feature from docs/PRD-auth.md" |
 
 ## Framework-Specific Agents
 
@@ -96,3 +101,24 @@ Every agent has two modes:
 | Lite | Haiku | Lower cost, faster responses |
 
 Choose during installation: `npx specialist-agent init`
+
+## Agent Frontmatter
+
+Agents support advanced frontmatter fields for Claude Code integration:
+
+| Field | Values | Purpose |
+|-------|--------|---------|
+| `name` | string | Agent identifier (required) |
+| `description` | string | CSO-optimized "Use when..." (required) |
+| `tools` | comma-separated | Allowed tools |
+| `model` | sonnet, opus, haiku, inherit | Model override |
+| `effort` | low, medium, high, max | Reasoning effort level |
+| `skills` | list | Pre-loaded skills for the agent |
+| `memory` | user, project, local | Cross-session persistence |
+| `maxTurns` | number | Limit agent turns |
+| `isolation` | worktree | Run in isolated git worktree |
+| `color` | hex | UI display color |
+
+::: tip
+`effort`, `memory`, `skills`, `maxTurns`, and `isolation` are officially supported by Claude Code 2.1.75+. Plugin agents cannot use `hooks`, `mcpServers`, or `permissionMode` for security reasons.
+:::

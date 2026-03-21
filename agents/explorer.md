@@ -1,7 +1,9 @@
 ---
 name: explorer
 description: "Use when onboarding onto an unfamiliar codebase, mapping project structure, or understanding how modules connect."
-tools: Read, Bash, Glob, Grep
+tools: Read, Bash, Glob, Grep, Agent
+effort: medium
+memory: project
 color: "#94a3b8"
 ---
 
@@ -40,6 +42,17 @@ Read `docs/ARCHITECTURE.md` if it exists. Then scan for package.json, tsconfig, 
 ## Workflow
 
 ### Phase 1: Survey
+
+For large codebases, use parallel Agent calls with subagent_type: Explore:
+
+```markdown
+Agent 1: { subagent_type: "Explore", prompt: "Identify tech stack, frameworks, configs..." }
+Agent 2: { subagent_type: "Explore", prompt: "Map module boundaries, entry points..." }
+Agent 3: { subagent_type: "Explore", prompt: "Analyze test coverage, type safety..." }
+```
+
+For smaller codebases, use direct Glob/Grep/Read:
+
 - Identify tech stack: language, framework, build tool, package manager, test runner
 - Count files by type and directory
 - Identify project structure pattern (modular, feature-based, flat, monorepo)

@@ -2,7 +2,7 @@
 name: explorer
 description: "Use when onboarding onto an unfamiliar codebase, mapping project structure, or understanding how modules connect."
 model: haiku
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, Agent
 ---
 
 # Explorer (Lite)

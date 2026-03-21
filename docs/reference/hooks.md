@@ -13,6 +13,8 @@ Hooks are lifecycle scripts that run at key moments during your development sess
 | `after-review` | After `@reviewer` finishes | Record verdict, save review history, suggest next steps |
 | `on-error` | Agent encounters error | Log error, suggest recovery, provide guidance |
 | `session-end` | Session ends | Generate summary, save history, calculate costs |
+| `before-iteration` | Before each `@autopilot` iteration | Inject fresh context, validate PRD progress |
+| `after-iteration` | After each `@autopilot` iteration | Track iteration metrics, update progress log |
 
 ---
 
@@ -150,7 +152,7 @@ Runs when a new Claude Code session starts.
 1. **Validates project setup** - checks for `.claude/` directory and `CLAUDE.md`
 2. **Initializes metrics** - creates `.claude/metrics/current-session.json` with empty counters
 3. **Creates restore point** - tags current git commit as `restore-point/session-{timestamp}`
-4. **Loads session memory** - displays recent decisions from `.claude/session-memory.json`
+4. **Loads session memory** - displays recent decisions from project memory
 
 **Configuration:**
 
@@ -635,6 +637,7 @@ In addition to the lifecycle hooks above, Specialist Agent provides **4 native h
 | Auto-Dispatch | `UserPromptSubmit` | Suggests the best agent based on your prompt |
 | Session Context | `SessionStart` | Injects project state when session starts |
 | Auto-Format | `PostToolUse` | Formats files after Write/Edit operations |
+| Session End | `Stop` | Triggers session-end lifecycle hook |
 
 ### Installation
 

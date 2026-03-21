@@ -1,7 +1,7 @@
 ---
 name: docs-lite
 description: "Use when code needs documentation - API docs, README, architecture guides, onboarding materials, or JSDoc comments."
-tools: Read, Write, Edit, Glob
+tools: Read, Write, Edit, Glob, WebSearch, WebFetch
 model: haiku
 ---
 

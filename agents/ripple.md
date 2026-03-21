@@ -1,7 +1,10 @@
 ---
 name: ripple
 description: "Use when you need to understand the cascading impact of a code change - who depends on it, what breaks, and what needs updating."
-tools: Read, Bash, Glob, Grep
+tools: Read, Bash, Glob, Grep, Agent
+effort: high
+skills:
+  - verify
 color: "#eab308"
 ---
 

@@ -41,8 +41,24 @@ function countSkillDirs(dir) {
 
 // ── Collect stats ──
 
-const genericAgents = countMdFiles(path.join(ROOT, 'agents'), true);
+const coreAgents = countMdFiles(path.join(ROOT, 'agents'), true);
 const genericSkills = countSkillDirs(path.join(ROOT, 'skills'));
+
+// Count unique pack-specific agents (e.g., builder, reviewer, doctor, migrator)
+const packAgentNames = new Set();
+const packsRoot = path.join(ROOT, 'packs');
+if (fs.existsSync(packsRoot)) {
+  for (const pack of fs.readdirSync(packsRoot, { withFileTypes: true }).filter(d => d.isDirectory())) {
+    const agentsDir = path.join(packsRoot, pack.name, 'agents');
+    if (fs.existsSync(agentsDir)) {
+      for (const f of fs.readdirSync(agentsDir).filter(f => f.endsWith('.md') && !f.includes('-lite'))) {
+        const name = f.replace('.md', '');
+        if (!fs.existsSync(path.join(ROOT, 'agents', f))) packAgentNames.add(name);
+      }
+    }
+  }
+}
+const genericAgents = coreAgents + packAgentNames.size;
 
 const packsDir = path.join(ROOT, 'packs');
 const packNames = fs.existsSync(packsDir)

@@ -190,4 +190,4 @@ See [Editing Patterns](/customization/editing-patterns) for examples of common c
 - [Best Practices](/guide/best-practices) - Tips for getting the most out of Specialist Agent
 - [Quick Start](/guide/quick-start) - Get up and running
 - [Performance & Cost](/guide/benchmark) - Understand token usage
-- [All Agents](/reference/agents) - Full reference catalog
+- [All Agents](/catalog) - Browse the interactive catalog

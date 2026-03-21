@@ -70,26 +70,49 @@ Once installed, use agents by mentioning them:
 
 ## Available Agents
 
-### Framework-Agnostic
+### Core
 - `@starter` - Create new projects from scratch
-- `@explorer` - Explore unfamiliar codebases
+- `@builder` - Build modules, components, services (pack-specific)
+- `@reviewer` - Unified 3-in-1 code review (pack-specific)
+- `@doctor` - Bug investigation (pack-specific)
+- `@migrator` - Legacy code migration (pack-specific)
+
+### Workflow
 - `@planner` - Adaptive task planning
 - `@executor` - Cost-aware task execution
 - `@tdd` - Test-Driven Development enforcer
 - `@debugger` - Systematic 4-phase debugging
+- `@pair` - Real-time pair programming
+- `@analyst` - Requirements to technical specs
+- `@orchestrator` - Coordinate multiple agents
+
+### Engineering
+- `@api` - REST/GraphQL API design
+- `@perf` - Performance optimization
+- `@i18n` - Internationalization
+- `@docs` - Documentation generation
+- `@refactor` - Code refactoring
+- `@deps` - Dependency management
+- `@explorer` - Deep codebase exploration
 - `@finance` - Payment and billing systems
 - `@cloud` - Cloud architecture and IaC
-- `@security` - Authentication and security
+- `@security` - Authentication and OWASP
 - `@designer` - UI/UX and design systems
 - `@data` - Database and caching
 - `@devops` - Docker, K8s, CI/CD
 - `@tester` - Test strategies and coverage
+- `@legal` - GDPR, LGPD compliance
+- `@architect` - Architecture migration
+- `@ripple` - Cascading effect analysis
 
-### Pack-Specific
-- `@builder` - Create modules, components, services
-- `@reviewer` - Unified 3-in-1 code review
-- `@doctor` - Bug investigation
-- `@migrator` - Legacy code migration
+### Business
+- `@marketing` - Landing pages, copy, SEO, growth
+- `@product` - Roadmaps, specs, PRDs
+- `@support` - Help docs, FAQs, runbooks
+
+### Automation
+- `@sentry-triage` - Triage Sentry errors, auto-fix
+- `@autopilot` - Iterative autonomous builds
 
 ## Skills
 
