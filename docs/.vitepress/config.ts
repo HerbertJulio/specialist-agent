@@ -12,7 +12,7 @@ const gaHead: Array<[string, Record<string, string>] | [string, Record<string, s
 
 export default withMermaid(defineConfig({
   title: 'Specialist Agent',
-  description: 'Your AI development team - 35 agents and 24 skills',
+  description: 'Your AI development team - 36 agents and 32 skills',
   base: (process.env.VITEPRESS_BASE || '/') as `/${string}/`,
   sitemap: {
     hostname: 'https://specialistagent.com.br',
@@ -23,7 +23,7 @@ export default withMermaid(defineConfig({
 
     // Open Graph - Facebook, LinkedIn, WhatsApp
     ['meta', { property: 'og:title', content: 'Specialist Agent - Your AI Development Team' }],
-    ['meta', { property: 'og:description', content: '35 specialized AI agents and 24 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode across 7 framework packs.' }],
+    ['meta', { property: 'og:description', content: '36 specialized AI agents and 32 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode across 7 framework packs.' }],
     ['meta', { property: 'og:image', content: 'https://specialistagent.com.br/social-preview.svg' }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
@@ -38,12 +38,12 @@ export default withMermaid(defineConfig({
     // Twitter / X
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'Specialist Agent - Your AI Development Team' }],
-    ['meta', { name: 'twitter:description', content: '35 AI agents and 24 skills that build, review, debug, and ship production code. Any framework, any stack.' }],
+    ['meta', { name: 'twitter:description', content: '36 AI agents and 32 skills that build, review, debug, and ship production code. Any framework, any stack.' }],
     ['meta', { name: 'twitter:image', content: 'https://specialistagent.com.br/social-preview-twitter.svg' }],
     ['meta', { name: 'twitter:image:alt', content: 'Specialist Agent - AI agents for any framework, any stack' }],
 
     // SEO
-    ['meta', { name: 'description', content: '35 specialized AI agents and 24 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt.' }],
+    ['meta', { name: 'description', content: '36 specialized AI agents and 32 skills that build, review, debug, and ship production code. Works with Claude Code, Cursor, VS Code, Windsurf, Codex, and OpenCode. Supports Vue, React, Next.js, SvelteKit, Angular, Astro, and Nuxt.' }],
     ['meta', { name: 'keywords', content: 'ai agents, claude code, specialist agent, code review, debugging, development tools, ai coding assistant, cursor ai, vscode ai, windsurf, codex, opencode, vue, react, nextjs, sveltekit, angular, astro, nuxt, tdd, pair programming, code generation' }],
     ['meta', { name: 'author', content: 'Herbert Julio' }],
     ['meta', { name: 'robots', content: 'index, follow' }],
@@ -60,12 +60,13 @@ export default withMermaid(defineConfig({
       label: 'Português',
       lang: 'pt-BR',
       link: 'https://specialistagent.com.br/pt-BR/',
-      description: 'Seu time de desenvolvimento AI - 35 agentes e 24 skills',
+      description: 'Seu time de desenvolvimento AI - 36 agentes e 32 skills',
       themeConfig: {
         nav: [
           { text: 'Guia', link: '/pt-BR/guide/introduction' },
           { text: 'Cenários', link: '/pt-BR/scenarios/' },
           { text: 'Referência', link: '/pt-BR/reference/agents' },
+          { text: 'Catálogo', link: '/pt-BR/catalog' },
           {
             text: 'Ecossistema',
             items: [
@@ -226,6 +227,7 @@ export default withMermaid(defineConfig({
                 { text: 'Planejamento', link: '/pt-BR/scenarios/planning' },
                 { text: 'Migração', link: '/pt-BR/scenarios/migration' },
                 { text: 'Workflows', link: '/pt-BR/scenarios/workflows' },
+                { text: 'Autopilot', link: '/pt-BR/scenarios/autopilot' },
               ],
             },
             {
@@ -298,6 +300,7 @@ export default withMermaid(defineConfig({
       { text: 'Guide', link: '/guide/introduction' },
       { text: 'Scenarios', link: '/scenarios/' },
       { text: 'Reference', link: '/reference/agents' },
+      { text: 'Catalog', link: '/catalog' },
       {
         text: 'Ecosystem',
         items: [
@@ -458,6 +461,7 @@ export default withMermaid(defineConfig({
             { text: 'Planning', link: '/scenarios/planning' },
             { text: 'Migration', link: '/scenarios/migration' },
             { text: 'Workflows', link: '/scenarios/workflows' },
+            { text: 'Autopilot', link: '/scenarios/autopilot' },
           ],
         },
         {

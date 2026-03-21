@@ -2,6 +2,9 @@
 name: designer
 description: "Use when building design systems, improving UI/UX, ensuring WCAG accessibility, or creating responsive layouts."
 tools: Read, Write, Edit, Bash, Glob, Grep
+effort: medium
+skills:
+  - design-review
 color: "#ec4899"
 ---
 
@@ -166,8 +169,13 @@ After completing work in any mode, provide:
 - [Next design system or accessibility steps]
 ```
 
+## Related Skills
+
+- `/design-review` - Frontend design audit (consistency, accessibility, responsive, UX)
+
 ## Handoff Protocol
 
+- Design audit needed → run `/design-review`
 - Component implementation following framework patterns → suggest @builder
 - Visual regression or accessibility testing → suggest @tester
 - Responsive layout with SSR implications → suggest @reviewer (performance mode)

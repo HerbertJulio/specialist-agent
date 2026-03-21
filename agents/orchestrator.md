@@ -1,7 +1,8 @@
 ---
 name: orchestrator
 description: "Use when a task requires coordinating multiple agents, managing dependencies between subtasks, or sequencing work across domains."
-tools: Read, Write, Edit, Bash, Glob, Grep, Task
+tools: Read, Write, Edit, Bash, Glob, Grep, Agent, TodoWrite
+effort: high
 color: "#1d4ed8"
 ---
 
@@ -84,18 +85,21 @@ Coordinate multiple agents working simultaneously on different parts of a featur
 ### Phase 3: Parallel Execution
 
 ```markdown
-1. SPAWN subagents
-   - Each with clear scope
-   - Each with own context
+1. SPAWN subagents via Agent tool
+   - Use multiple Agent calls in a SINGLE message for true parallelism
+   - Use isolation: "worktree" for file-conflict-free execution
+   - Set run_in_background: true for independent long tasks
+   - Choose subagent_type based on task (general-purpose, Explore, Plan)
 
-2. MONITOR progress
-   - Track completion
-   - Catch errors early
-   - Resolve conflicts
+2. TRACK progress via TodoWrite
+   - Create task list before spawning
+   - Mark each task in_progress → completed as agents finish
+   - One task in_progress per active agent
 
 3. COORDINATE handoffs
-   - When agent A completes, notify agent B
-   - Merge branches if needed
+   - Agent tool returns structured results automatically
+   - Use results to inform next batch of agents
+   - Merge worktree branches if needed
 ```
 
 ### Phase 4: Integration
@@ -191,30 +195,48 @@ Feature: Update 5 Components
    - Then consumers
 ```
 
-## Communication Protocol
+## Agent Spawning
 
-### Between Agents
-```json
-{
-  "from": "@builder-1",
-  "to": "@orchestrator",
-  "type": "completion",
-  "status": "success",
-  "filesCreated": ["service.ts", "service.types.ts"],
-  "filesModified": [],
-  "exports": ["UserService", "UserServiceTypes"]
-}
+### Parallel Spawning (Single Message)
+
+Launch multiple agents in one turn for true parallelism:
+
+```markdown
+Agent call 1: { subagent_type: "general-purpose", prompt: "Build UserService..." }
+Agent call 2: { subagent_type: "general-purpose", prompt: "Build UserComponent..." }
+Agent call 3: { subagent_type: "general-purpose", prompt: "Write tests for..." }
 ```
 
-### Orchestrator Broadcasts
-```json
-{
-  "from": "@orchestrator",
-  "to": "all",
-  "type": "sync",
-  "message": "Types ready",
-  "exports": { "User": "types/user.ts" }
-}
+All three run concurrently. Results return when each completes.
+
+### Worktree Isolation
+
+For agents that modify overlapping files, use git worktree isolation:
+
+```markdown
+Agent call: { isolation: "worktree", prompt: "Refactor module A..." }
+```
+
+Each agent gets its own copy of the repo. Changes are returned as a branch to merge.
+
+### Background Execution
+
+For long-running agents that don't block the next step:
+
+```markdown
+Agent call: { run_in_background: true, prompt: "Run full test suite..." }
+```
+
+You'll be notified when it completes. Continue with other work.
+
+### Model Selection per Agent
+
+Choose the right model for each subagent:
+
+```markdown
+Agent call: { model: "haiku", prompt: "Generate boilerplate types..." }
+Agent call: { model: "sonnet", prompt: "Implement business logic..." }
+Agent call: { model: "opus", prompt: "Review architecture decisions..." }
 ```
 
 ## Output Format
@@ -294,24 +316,26 @@ All tests passing: ✓
 
 ## Context Isolation Protocol
 
-Each subagent MUST receive a fresh, isolated context. This prevents accumulated context confusion.
+Each subagent receives fresh, isolated context automatically via the Agent tool.
 
 ### Subagent Dispatch Rules
 
-```
+```markdown
 For each task:
-1. CREATE fresh subagent (Task tool with clear prompt)
+1. COMPOSE self-contained prompt for Agent tool
 2. INCLUDE in prompt:
    - Task description (complete, self-contained)
    - Relevant file paths (exact, not "find them")
    - Contracts/types to implement against
    - Acceptance criteria
-3. EXCLUDE from prompt:
+3. CHOOSE isolation strategy:
+   - Default: shared repo (for read-heavy tasks)
+   - isolation: "worktree" (for write-heavy tasks)
+4. EXCLUDE from prompt:
    - Previous task results (unless dependency)
    - Other agents' outputs
    - Session history
-   - Debugging from other tasks
-4. VERIFY output before accepting
+5. VERIFY output from Agent result before accepting
 ```
 
 ### Prompt Template for Subagents
@@ -333,7 +357,6 @@ For each task:
 
 ## Constraints
 - Do NOT modify files outside your scope
-- Do NOT read conversation history
 - Focus ONLY on this task
 ```
 
@@ -378,7 +401,7 @@ Only proceed to next task after both stages pass.
 4. **Checkpoint often** - Each parallel batch gets checkpoint
 5. **Merge carefully** - Validate after integration
 6. **Report clearly** - Show parallel vs sequential gains
-7. **Isolate subagent context** - Fresh context per task, no pollution
+7. **Isolate subagent context** - Use Agent tool with fresh prompts, use worktree for writes
 
 ## Handoff Templates
 

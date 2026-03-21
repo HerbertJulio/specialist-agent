@@ -12,6 +12,18 @@ Implement the feature using strict TDD methodology.
 
 **Target:** $ARGUMENTS
 
+## When to Use
+
+- Implementing a new function, service, or module where correctness is critical
+- Fixing a bug that needs a regression test to prove it's fixed
+- Building business logic (calculations, validations, state machines)
+- When code handles money, auth, or sensitive data
+- Refactoring existing code that lacks test coverage
+- NOT for: quick prototypes or throwaway code
+- NOT for: pure UI layout changes with no logic
+- NOT for: configuration changes (env vars, build config)
+- NOT for: code that already has comprehensive tests (just add to existing suite)
+
 ## Iron Law
 
 ```
@@ -32,6 +44,33 @@ For each behavior to implement:
 └───────┘      └───────┘      └──────────┘
 ```
 
+### Step 0: Detect Test Runner
+
+Auto-detect the project's test runner before starting:
+
+```bash
+# Detect test runner from package.json or config files
+if [ -f "vitest.config.ts" ] || [ -f "vitest.config.js" ] || grep -q '"vitest"' package.json 2>/dev/null; then
+  TEST_CMD="npx vitest run"
+  TEST_FILTER="--testNamePattern"
+elif [ -f "jest.config.ts" ] || [ -f "jest.config.js" ] || grep -q '"jest"' package.json 2>/dev/null; then
+  TEST_CMD="npx jest"
+  TEST_FILTER="--testNamePattern"
+elif [ -f "playwright.config.ts" ] || [ -f "playwright.config.js" ]; then
+  TEST_CMD="npx playwright test"
+  TEST_FILTER="--grep"
+elif grep -q '"mocha"' package.json 2>/dev/null; then
+  TEST_CMD="npx mocha"
+  TEST_FILTER="--grep"
+else
+  TEST_CMD="npm test --"
+  TEST_FILTER="--testNamePattern"
+fi
+echo "Test runner: $TEST_CMD"
+```
+
+Use the detected `$TEST_CMD` and `$TEST_FILTER` throughout all cycles.
+
 ### Step 1: RED - Write Failing Test
 
 1. **Create/open test file**
@@ -50,7 +89,7 @@ For each behavior to implement:
    ```
 3. **Run test:**
    ```bash
-   npm test -- --testNamePattern="[test name]"
+   $TEST_CMD $TEST_FILTER="[test name]"
    ```
 4. **Verify FAILS** - Capture output showing failure
 5. **BLOCKED** if test passes (wrong test or code exists)
@@ -64,7 +103,7 @@ For each behavior to implement:
 
 2. **Run test:**
    ```bash
-   npm test -- --testNamePattern="[test name]"
+   $TEST_CMD $TEST_FILTER="[test name]"
    ```
 3. **Verify PASSES** - Capture output showing success
 4. **BLOCKED** if test fails (fix before continuing)
@@ -78,10 +117,14 @@ For each behavior to implement:
 
 2. **Run ALL tests:**
    ```bash
-   npm test
+   $TEST_CMD
    ```
 3. **Verify ALL PASS**
-4. **Commit cycle:**
+4. **Check coverage change** (if coverage tool is available):
+   ```bash
+   $TEST_CMD --coverage 2>/dev/null | grep -A 5 "Stmts\|Lines\|%" || true
+   ```
+5. **Commit cycle:**
    ```bash
    git add -A && git commit -m "feat: [behavior] (TDD cycle N)"
    ```
@@ -145,6 +188,8 @@ Coverage: [if available]
 | "I'll write tests after" | Tests written after implementation verify your bias, not correctness. |
 | "The test framework isn't set up" | Set it up. That's part of the task. |
 | "Just this once I'll skip RED" | "Just this once" is how every shortcut becomes a habit. |
+| "The existing tests are enough" | Enough for what? New behavior needs new tests. Existing tests verify old assumptions. |
+| "I'll test the integration, not the unit" | Integration tests verify wiring. Unit tests verify logic. You need both. Start with unit. |
 
 ## Rules
 

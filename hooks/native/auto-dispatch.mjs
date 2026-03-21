@@ -61,6 +61,7 @@ const INTENT_MAP = {
 
   // Automation agents
   'sentry-triage': { phrases: ['sentry error', 'triage errors', 'sentry issue', 'error triage', 'fix sentry'], keywords: ['sentry', 'triage', 'error tracking', 'alert'], weight: 2 },
+  autopilot:      { phrases: ['autopilot', 'autonomous loop', 'overnight build', 'iterative build', 'batch build loop', 'ralf loop', 'ralph loop'], keywords: ['autopilot', 'autonomous build', 'overnight', 'iterative build', 'ralf', 'ralph'], weight: 2 },
 
   // Support agents
   scout:      { phrases: ['analyze project', 'project analysis', 'quick scan'], keywords: ['analyze', 'scan', 'overview', 'analysis'], weight: 1 },
@@ -107,6 +108,7 @@ const AGENT_DESCRIPTIONS = {
   product: 'defines product strategy, user stories, roadmaps, and feature prioritization',
   support: 'generates knowledge base articles, runbooks, changelogs, and FAQs',
   'sentry-triage': 'triages Sentry errors, prioritizes by impact, and auto-creates fix PRs',
+  autopilot: 'runs iterative autonomous builds with PRD and progress tracking',
 };
 
 // ── Intent Matching Engine (exported for testing) ───────────
@@ -183,11 +185,14 @@ async function main() {
 
   if (match) {
     outputJson({
-      additionalContext: `Specialist Agent suggests: @${match.agent} — ${match.description}. Mention @${match.agent} in your prompt to activate it. Agents provide domain expertise, structured workflows, and verification — always prefer them over generic prompts.`,
+      additionalContext: `AUTO-DISPATCH: Read agents/${match.agent}.md and follow its workflow NOW. Agent @${match.agent} — ${match.description}. Do NOT respond as a generic assistant — the agent file has structured phases, rules, and verification that produce better results.`,
     });
   } else {
     outputJson({
-      additionalContext: 'Tip: Specialist Agent has 35 agents for this project. Use @builder to create, @reviewer to review, @doctor to debug, @planner to plan, @tdd for test-driven development. Agents deliver better results than generic prompts.',
+      additionalContext: `SPECIALIST AGENT REMINDER: You are NOT a generic assistant. You are a platform of 36+ agents and 32+ skills. Before responding, check if any agent or skill fits this task:
+AGENTS: @builder (create), @reviewer (review), @doctor (debug), @planner (plan), @tdd (test-first), @pair (collaborate), @analyst (specs), @architect (architecture), @security (audit), @devops (deploy), @data (database), @api (endpoints), @perf (optimize), @docs (document), @refactor (clean), @deps (dependencies), @marketing (growth), @product (strategy).
+SKILLS: /plan (plan feature), /debug (debug issue), /commit (smart commit), /audit (code audit), /codereview (parallel review), /tdd (test-driven), /brainstorm (ideation), /verify (verify work), /health (project score), /estimate (cost), /prd (product requirements), /design-review (UI audit), /seo-audit (SEO), /grill (stress-test), /autopilot (autonomous build).
+Read the matching agent file from agents/ or execute the skill. Generic responses when a specialist exists is a FAILURE MODE.`,
     });
   }
 

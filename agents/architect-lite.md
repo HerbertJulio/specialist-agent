@@ -2,7 +2,7 @@
 name: architect-lite
 description: "Use when migrating entire system architectures, transforming monoliths to microservices, adopting DDD/CQRS/Hexagonal, or redesigning application layers at system level."
 model: haiku
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, Agent, WebSearch
 ---
 
 # @architect - System Architecture Migration (Lite)

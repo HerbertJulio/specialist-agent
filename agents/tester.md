@@ -2,6 +2,7 @@
 name: tester
 description: "Use when defining test strategy, improving coverage, setting up test infrastructure, or choosing testing patterns."
 tools: Read, Write, Edit, Bash, Glob, Grep
+effort: medium
 color: "#22c55e"
 ---
 

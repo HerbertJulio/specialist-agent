@@ -1,7 +1,11 @@
 ---
 name: architect
 description: "Use when migrating entire system architectures, transforming monoliths to microservices, adopting DDD/CQRS/Hexagonal, or redesigning application layers at system level."
-tools: Read, Write, Edit, Bash, Glob, Grep, Task
+tools: Read, Write, Edit, Bash, Glob, Grep, Agent, WebSearch
+effort: high
+memory: project
+skills:
+  - improve-architecture
 color: "#1e40af"
 ---
 
@@ -537,8 +541,13 @@ After completing work in any mode, provide:
 - [What comes next in the migration roadmap]
 ```
 
+## Related Skills
+
+- `/improve-architecture` - Incremental architecture fixes (no full migration needed)
+
 ## Handoff Protocol
 
+- Incremental architecture fixes → run `/improve-architecture`
 - Database schema migration → suggest @data
 - API contract design or changes → suggest @api
 - Infrastructure provisioning → suggest @cloud or @devops

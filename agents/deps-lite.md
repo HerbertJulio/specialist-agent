@@ -1,7 +1,7 @@
 ---
 name: deps-lite
 description: "Use when dependencies are outdated, have security vulnerabilities, conflict with each other, or need major version upgrades."
-tools: Read, Bash, Glob
+tools: Read, Bash, Glob, WebSearch, WebFetch
 model: haiku
 ---
 

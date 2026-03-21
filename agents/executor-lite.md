@@ -2,7 +2,7 @@
 name: executor
 description: "Use when a plan exists and tasks need to be executed with checkpoints, cost tracking, and verification."
 model: haiku
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Bash, Glob, Grep, Agent, TodoWrite
 ---
 
 # @executor (Lite) - Task Execution

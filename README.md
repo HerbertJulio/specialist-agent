@@ -4,7 +4,7 @@
 
 <h1 align="center">Specialist Agent</h1>
 
-<p align="center">Your AI development team. 35 agents. 24 skills. Ship faster.</p>
+<p align="center">Your AI development team. 36 agents. 32 skills. Ship faster.</p>
 
 <p align="center">
   <a href="https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml"><img src="https://github.com/HerbertJulio/specialist-agent/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
@@ -97,6 +97,7 @@ Autonomous triage and resolution.
 | Agent | What it does | Example |
 |-------|-------------|---------|
 | `@sentry-triage` | Pull Sentry errors, cross-reference PRs, prioritize, auto-fix | `"Triage today's Sentry errors"` |
+| `@autopilot` | Iterative autonomous builds with PRD and progress tracking | `"Build the dashboard module overnight"` |
 
 ---
 
@@ -129,8 +130,12 @@ Slash commands that trigger repeatable workflows.
 |-------|-------------|
 | `/verify` | Proof-based verification before completion |
 | `/codereview` | Multi-reviewer parallel code review |
-| `/audit` | Multi-domain audit: security + perf + arch + deps |
+| `/audit` | Multi-domain audit: security + perf + arch + observability + deps |
 | `/health` | Project health score (0-100) |
+| `/grill` | Adversarial code challenge with attack vectors |
+| `/design-review` | Frontend design audit (consistency, a11y, responsive, UX) |
+| `/seo-audit` | SEO technical audit (meta, structured data, CWV) |
+| `/improve-architecture` | Incremental architecture improvement |
 
 **Workflow**
 
@@ -140,6 +145,7 @@ Slash commands that trigger repeatable workflows.
 | `/finish` | Finalize branch with metrics |
 | `/worktree` | Git worktree isolation for parallel tasks |
 | `/learn` | Learning mode, explains while building |
+| `/autopilot` | Autonomous iterative development (PRD + progress + fresh context) |
 
 **Migration**
 
@@ -147,6 +153,14 @@ Slash commands that trigger repeatable workflows.
 |-------|-------------|
 | `/migrate-framework` | Migrate between frameworks |
 | `/migrate-architecture` | Migrate architecture patterns (MVC, Clean, DDD, Hexagonal) |
+
+**Product & Marketing**
+
+| Skill | What it does |
+|-------|-------------|
+| `/prd` | Product requirements with user stories and issues |
+| `/copywriting` | Marketing copy with A/B variants |
+| `/cro` | Conversion rate optimization audit |
 
 **Knowledge**
 
@@ -157,6 +171,8 @@ Slash commands that trigger repeatable workflows.
 | `/onboard` | Codebase onboarding for new developers |
 | `/tutorial` | Interactive guided tutorial |
 | `/write-skill` | Create or improve custom skills |
+
+> **Tip:** Use `/btw` (native Claude Code) for quick side questions without consuming tokens or polluting context. Perfect for mid-task clarifications while agents are working.
 
 ---
 

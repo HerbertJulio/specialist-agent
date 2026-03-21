@@ -84,6 +84,8 @@ function validateAgent(filePath) {
   const isLite = fileName.includes('-lite') || filePath.includes('agents-lite');
   let fileErrors = 0;
 
+  const isCommunity = filePath.includes('community');
+
   // Required frontmatter
   if (!meta.name) {
     report(filePath, 'ERROR', 'Missing "name" in frontmatter');
@@ -92,6 +94,20 @@ function validateAgent(filePath) {
   if (!meta.description) {
     report(filePath, 'ERROR', 'Missing "description" in frontmatter');
     fileErrors++;
+  }
+
+  // Community agents must have author and author-url
+  if (isCommunity) {
+    if (!meta.author) {
+      report(filePath, 'ERROR', 'Community agent must have "author" in frontmatter');
+      fileErrors++;
+    }
+    if (!meta['author-url']) {
+      report(filePath, 'ERROR', 'Community agent must have "author-url" in frontmatter');
+      fileErrors++;
+    } else if (!/^https?:\/\//.test(meta['author-url'])) {
+      report(filePath, 'WARN', `"author-url" should be a valid URL. Got: "${meta['author-url']}"`);
+    }
   }
 
   // CSO check
@@ -146,6 +162,7 @@ function validateAgent(filePath) {
 function validateSkill(filePath) {
   totalFiles++;
   const { meta, content } = extractFrontmatter(filePath);
+  const isCommunity = filePath.includes('community');
   let fileErrors = 0;
 
   // Required frontmatter
@@ -156,6 +173,20 @@ function validateSkill(filePath) {
   if (!meta.description) {
     report(filePath, 'ERROR', 'Missing "description" in frontmatter');
     fileErrors++;
+  }
+
+  // Community skills must have author and author-url
+  if (isCommunity) {
+    if (!meta.author) {
+      report(filePath, 'ERROR', 'Community skill must have "author" in frontmatter');
+      fileErrors++;
+    }
+    if (!meta['author-url']) {
+      report(filePath, 'ERROR', 'Community skill must have "author-url" in frontmatter');
+      fileErrors++;
+    } else if (!/^https?:\/\//.test(meta['author-url'])) {
+      report(filePath, 'WARN', `"author-url" should be a valid URL. Got: "${meta['author-url']}"`);
+    }
   }
 
   // CSO check
@@ -205,9 +236,10 @@ console.log('══════════════════════�
 if (filter === 'all' || filter === 'agents') {
   console.log('── Agents ──\n');
 
-  // Framework-agnostic agents
+  // Framework-agnostic agents + community
   const agentDirs = [
     path.join(ROOT, 'agents'),
+    path.join(ROOT, 'community', 'agents'),
     ...['nextjs', 'react', 'vue', 'svelte', 'angular', 'astro', 'nuxt'].flatMap(fw => [
       path.join(ROOT, 'packs', fw, 'agents'),
       path.join(ROOT, 'packs', fw, 'agents-lite')
@@ -225,9 +257,10 @@ if (filter === 'all' || filter === 'agents') {
 if (filter === 'all' || filter === 'skills') {
   console.log('\n── Skills ──\n');
 
-  // Generic skills
+  // Generic skills + community
   const skillDirs = [
     path.join(ROOT, 'skills'),
+    path.join(ROOT, 'community', 'skills'),
     ...['nextjs', 'react', 'vue', 'svelte', 'angular', 'astro', 'nuxt'].map(fw =>
       path.join(ROOT, 'packs', fw, 'skills')
     )

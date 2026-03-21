@@ -159,9 +159,20 @@ Merge findings from all 3 perspectives:
 
 1. **Deduplicate** - Remove findings flagged by multiple perspectives (keep highest severity)
 2. **Cross-reference** - A security finding that also lacks tests is escalated one severity level
-3. **Assign severity** - Every finding gets a severity level (see table below)
-4. **Sort** - CRITICAL first, then HIGH, MEDIUM, LOW
-5. **Group** - By file, then by severity within each file
+3. **YAGNI Check** - For every new abstraction, interface, or utility introduced in the change:
+   - Is it used in more than one place RIGHT NOW? (not "will be useful later")
+   - Does it add configurability that isn't required by the current spec?
+   - Does it introduce a layer of indirection without clear benefit?
+   - Flag unnecessary abstractions as MEDIUM (over-engineering)
+4. **Observability Check** - For code touching critical paths (auth, payments, data, API):
+   - Structured logging present? (not just `console.log`)
+   - Error tracking with context? (user, request, stack trace)
+   - Health check endpoint if it's a new service?
+   - Correlation IDs propagated across boundaries?
+   - Flag missing observability as MEDIUM (or HIGH for auth/payments)
+5. **Assign severity** - Every finding gets a severity level (see table below)
+6. **Sort** - CRITICAL first, then HIGH, MEDIUM, LOW
+7. **Group** - By file, then by severity within each file
 
 ### Step 4: Verdict
 
@@ -189,6 +200,8 @@ Apply verdict rules based on the consolidated findings. The verdict is final and
 - A security finding without a corresponding test → severity +1 level
 - A finding that recurs from a previous review → severity +1 level
 - A finding in auth, payments, or PII handling → minimum severity HIGH
+- A change touching observability/monitoring code without corresponding tests → severity +1 level
+- A new abstraction used in only one place → flag as YAGNI (MEDIUM)
 
 ## Verification Protocol
 

@@ -8,8 +8,8 @@ npx specialist-agent init
 
 Interactive CLI that:
 - Detects your framework or lets you start with an empty project
-- Installs 35 agents (Full or Lite mode)
-- Configures 24 skills
+- Installs 36 agents (Full or Lite mode)
+- Configures 32 skills
 - Sets up native hooks (security guard, auto-dispatch, auto-format)
 
 ## Cursor

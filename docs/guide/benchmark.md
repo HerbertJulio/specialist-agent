@@ -139,5 +139,5 @@ Track costs as you work.
 ## What's Next?
 
 - [FAQ](/guide/faq) - Common questions answered
-- [All Agents](/reference/agents) - Browse the full catalog
+- [All Agents](/catalog) - Browse the interactive catalog
 - [Token Reference](/reference/tokens) - Detailed token estimates
