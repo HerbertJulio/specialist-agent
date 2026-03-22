@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.12.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.11.4...specialist-agent-v2.12.0) (2026-03-21)
+
+
+### Features
+
+* add autopilot agent, 8 new skills, Claude Code 2.1.75 alignment ([c9456cf](https://github.com/HerbertJulio/specialist-agent/commit/c9456cfcc22d94b001a3deda9a7f6c509f107c0f))
+* add autopilot agent, 8 new skills, Claude Code 2.1.75 alignment ([#82](https://github.com/HerbertJulio/specialist-agent/issues/82)) ([c9456cf](https://github.com/HerbertJulio/specialist-agent/commit/c9456cfcc22d94b001a3deda9a7f6c509f107c0f))
+
 ## [2.11.4](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.11.3...specialist-agent-v2.11.4) (2026-03-10)
 
 
