@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.13.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.12.0...specialist-agent-v2.13.0) (2026-03-22)
+
+
+### Features
+
+* add autopilot bash script for full context reset ([#84](https://github.com/HerbertJulio/specialist-agent/issues/84)) ([68b9c7b](https://github.com/HerbertJulio/specialist-agent/commit/68b9c7bb18fc86610ef0d2959de345ad0338e558))
+
 ## [2.12.0](https://github.com/HerbertJulio/specialist-agent/compare/specialist-agent-v2.11.4...specialist-agent-v2.12.0) (2026-03-21)
 
 
