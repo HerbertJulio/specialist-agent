@@ -1,9 +1,7 @@
 ---
 name: audit
-description: "Use when you need a comprehensive code audit covering security, performance, architecture, and dependencies before a release, major refactor, or compliance review."
-user-invocable: true
-argument-hint: "[path or module]"
-allowed-tools: Read, Bash, Glob, Grep
+description: "Performs a multi-domain code audit that scans for security vulnerabilities (OWASP Top 10), identifies performance bottlenecks (N+1 queries, memory leaks, bundle size), evaluates architectural integrity (circular dependencies, layer violations), checks dependency health (CVEs, outdated, unused packages), assesses observability readiness, and generates a scored report with line-level findings. Use for code review, vulnerability scan, tech debt assessment, pre-release check, dependency audit, compliance review (SOC2, ISO 27001), or when onboarding to an unfamiliar codebase."
+allowed-tools: Read, Bash(npm audit:*), Bash(npx eslint:*), Bash(npx depcheck:*), Bash(grep:*), Bash(find:*), Glob, Grep
 ---
 
 # /audit - Multi-Agent Code Audit
@@ -41,49 +39,59 @@ Read the project structure. Identify:
 
 ### Step 2: Security Audit
 
-Check for OWASP Top 10 vulnerabilities:
+Scan for OWASP Top 10 using these detection strategies:
 
-| Check | What to Look For |
-|-------|------------------|
-| Injection | SQL/NoSQL injection, command injection, XSS |
-| Auth | Hardcoded secrets, weak JWT config, missing CSRF |
-| Access Control | Missing auth checks, IDOR, privilege escalation |
-| Cryptography | Weak algorithms, plaintext passwords, missing encryption |
-| Configuration | Debug mode in production, verbose errors, default credentials |
-| Dependencies | Known CVEs in packages |
-| Data Exposure | Sensitive data in logs, responses, or error messages |
-
-Run if available:
 ```bash
+# Injection: unsanitized user input in queries/commands
+grep -rn "execute\|query\|exec(" $TARGET --include="*.ts" --include="*.js" 2>/dev/null | grep -v node_modules | head -20
+
+# Hardcoded secrets: API keys, passwords, tokens in source
+grep -rn "password\s*=\|api_key\s*=\|secret\s*=\|Bearer\s" $TARGET --include="*.ts" --include="*.js" --include="*.env*" 2>/dev/null | grep -v node_modules | head -15
+
+# Missing auth: route handlers without auth middleware
+grep -rn "app\.\(get\|post\|put\|delete\)\|router\.\(get\|post\|put\|delete\)" $TARGET --include="*.ts" --include="*.js" 2>/dev/null | grep -v "auth\|guard\|middleware\|protect" | head -15
+
+# Dependency vulnerabilities
 npm audit --json 2>/dev/null || true
 npx eslint --format json $TARGET 2>/dev/null || true
 ```
 
+Flag: injection paths, hardcoded credentials, unprotected routes, weak crypto (`md5`, `sha1`), debug/verbose configs, sensitive data in error responses.
+
 ### Step 3: Architecture Audit
 
-Check structural integrity:
+Detect structural issues with concrete checks:
 
-| Check | Criteria |
-|-------|----------|
-| Layer separation | Services don't import from components |
-| Circular dependencies | No import cycles |
-| Naming conventions | Consistent file/function naming |
-| Type safety | TypeScript strict mode, no `any` abuse |
-| Error handling | Try/catch at boundaries, custom error classes |
-| API contracts | DTOs/schemas at boundaries |
+```bash
+# Circular dependencies: find mutual imports between modules
+grep -rn "^import.*from\s" $TARGET --include="*.ts" --include="*.js" 2>/dev/null | grep -v node_modules > /tmp/imports.txt
+# Cross-reference: if A imports B and B imports A → cycle
+
+# TypeScript `any` abuse
+grep -rn ": any\b\|as any\b" $TARGET --include="*.ts" --include="*.tsx" 2>/dev/null | grep -v node_modules | wc -l
+
+# Layer violations: components importing from services or DB layers
+grep -rn "from.*repository\|from.*database\|from.*prisma" $TARGET --include="*.tsx" --include="*.vue" 2>/dev/null | grep -v node_modules | head -10
+```
+
+Also check: naming consistency, error handling at boundaries (try/catch in controllers/handlers), and API contract validation (DTOs/schemas).
 
 ### Step 4: Performance Audit
 
-Check for performance issues:
+Detect performance anti-patterns:
 
-| Check | What to Look For |
-|-------|------------------|
-| Bundle size | Large imports, missing tree-shaking |
-| N+1 queries | Database calls in loops |
-| Memory leaks | Uncleaned listeners, subscriptions, timers |
-| Rendering | Unnecessary re-renders, missing memoization |
-| Network | Missing caching, redundant API calls |
-| Assets | Unoptimized images, missing lazy loading |
+```bash
+# N+1 queries: DB calls inside loops (for/forEach/map with await)
+grep -rn "for\|forEach\|\.map(" $TARGET --include="*.ts" --include="*.js" -A 3 2>/dev/null | grep -E "await.*find|await.*query|await.*get" | head -10
+
+# Memory leaks: event listeners or intervals without cleanup
+grep -rn "addEventListener\|setInterval\|subscribe(" $TARGET --include="*.ts" --include="*.tsx" 2>/dev/null | grep -v "removeEventListener\|clearInterval\|unsubscribe" | grep -v node_modules | head -10
+
+# Large imports: barrel imports that prevent tree-shaking
+grep -rn "import.*from ['\"]lodash['\"]" $TARGET --include="*.ts" --include="*.js" 2>/dev/null | grep -v "lodash/" | head -5
+```
+
+Also check: missing memoization in React (`useMemo`/`useCallback`), redundant API calls, missing lazy loading for images/routes.
 
 ### Step 5: Observability Audit
 
@@ -183,18 +191,6 @@ Compile findings into a structured report with severity ratings.
 3. Every CRITICAL/HIGH finding has a specific remediation step
 4. Automated tools were run where available (npm audit, eslint, depcheck)
 5. Report includes line-level references for each finding
-
-## Anti-Rationalization
-
-| Excuse | Reality |
-|--------|---------|
-| "No security issues found" | Absence of evidence is not evidence of absence. Did you check all OWASP categories? |
-| "Architecture looks fine" | Did you trace actual imports, or just scan filenames? |
-| "Dependencies are up to date" | Did you run `npm audit`? Check for unused deps? |
-| "Performance seems okay" | Did you check for N+1 queries, memory leaks, bundle size? |
-| "The codebase is too large to audit fully" | Scope down to critical paths (auth, payments, data). Never skip security. |
-| "Observability is a nice-to-have" | Production without observability is flying blind. You can't fix what you can't see. |
-| "Accessibility doesn't apply to us" | Internal tools have users with disabilities too. And legal requirements don't have exemptions. |
 
 ## Rules
 
