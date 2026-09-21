@@ -33,7 +33,7 @@
     "generate:preview": "node scripts/generate-social-preview.mjs"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.4.2",
+    "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^20.4.2",
     "husky": "^9.1.7",
     "mermaid": "^11.12.3",
