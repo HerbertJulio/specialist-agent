@@ -36,7 +36,7 @@
     "@commitlint/cli": "^20.4.2",
     "@commitlint/config-conventional": "^20.4.2",
     "husky": "^9.1.7",
-    "mermaid": "^11.12.3",
+    "mermaid": "^12.0.0",
     "vitepress": "^1.6.3",
     "vitepress-plugin-mermaid": "^2.0.17"
   },
